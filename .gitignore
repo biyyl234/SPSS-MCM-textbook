@@ -1,0 +1,47 @@
+# LaTeX 辅助文件
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.xdv
+
+# 临时文件
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# 系统文件
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Python缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# 爬取过程中的临时数据（保留最终交付文件）
+case_progress.json
+algorithms_raw.json
+merge_data.py
+analyze.py
+analyze_cases.py
+export_cases.py
+fix_json.py
+fix_json2.py
+dedupe*.py
+check*.py
+
+# 图片缓存目录（URL有时效性，不保留）
+case_images/

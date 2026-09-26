@@ -1,0 +1,1695 @@
+{
+  "category": "机器学习",
+  "chapter_num": 11,
+  "total": 13,
+  "basic_count": 6,
+  "advanced_count": 7,
+  "star_algos": [
+    "随机森林",
+    "支持向量机（SVM/SVR）",
+    "神经网络（BP/MLP）"
+  ],
+  "cases": [
+    {
+      "algorithmName": "GBDT梯度提升树",
+      "params": {
+        "task": "classification",
+        "max depth": "",
+        "subsample": "",
+        "max features": "未设置",
+        "n estimators": "",
+        "learning rate": "",
+        "target column": "is_churn",
+        "feature columns": "age + 9",
+        "min samples leaf": "",
+        "n iter no change": "未设置",
+        "min samples split": "",
+        "validation fraction": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "telecom_customer_churn.csv"
+      },
+      "background": "task\nclassification\nmax depth\nsubsample\nmax features\n未设置\nn estimators\nlearning rate\ntarget column\nis_churn\nfeature columns\nage\n+ 9\nmin samples leaf\nn iter no change\n未设置\nmin samples split\nvalidation fraction\n某电信运营商的客户经营团队需要在每月月初识别下月存在流失风险的存量用户，以便在用户真正离网前安排差异化维系动作（如合约升级、流量优惠、客服回访）。分析对象是存量用户的客户档案、套餐档位、消费与流量使用、通话行为、投诉与竞品接触记录等；待解决的问题是根据这些特征预测用户下月是否流失，并评估该预测相对简单基线是否具备实际增益，为挽留资源的定向投放提供依据。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n本问题是对 is_churn 的预测建模。思路为：先解析目标与特征字段并完成数据质量检查（缺失、常量列、重复行、类别分布），再按类别分层（分类任务）随机切分为训练集与测试集；随后用 GBDT 梯度提升树逐轮拟合损失函数的负梯度（分类为对数损失、回归为平方误差），以加法模型累积决策树，通过树深度、叶子约束、子采样与早停控制容量；最后在独立测试集上以准确率、AUC、对数损失（分类）或 R²、RMSE、MAE（分类）评估并与基线对比，结合特征重要性与分段误差曲线解释结果。\n\n核心结论\n\n测试集上 GBDT 模型准确率为 0.8000，优于多数类基线（0.6444），AUC 为 0.8448，可用于该目标的分类预测。\n\n问题详细分析\n数据概览与预处理\n\n数据共 150 行，目标有效样本 150 行，原始特征 10 个、实际建模 10 个；目标类别数 2，重复行 0 行。 未发现缺失值，无需填充。 类别分布：0 类 96 例；1 类 54 例。 切分方式：已按类别分层切分（stratify），训练 105 例、测试 45 例，样本量满足 GBDT 训练前提。\n\n模型性能与基线对比\n\n现象：模型在测试集上的表现与基线存在差异，最优提升轮数为 100。\n\n指标\t取值\t说明\n复制\n\n准确率\t0.8000\t测试集整体预测正确的比例\n基线准确率（多数类）\t0.6444\t全部预测为多数类时的正确比例\n平衡准确率\t0.7748\t各类别召回的平均，不受类别不平衡影响\nAUC\t0.8448\t区分正负样本的能力，0.5 为随机水平\n对数损失\t0.5661\t概率预测质量，越小越好\n样本量（训练/测试）\t105 / 45\t分层随机切分\n\n原因：GBDT 逐轮拟合负梯度并集成决策树，学习到了 is_churn 与特征间的非线性关系，因此测试集表现相对基线有实质提升；分段误差曲线显示训练与测试损失随轮数的变化，可用于判断是否欠拟合（测试损失仍下降）或过拟合（测试损失回升后应加强叶约束或早停）。\n\n结论：独立测试集上的指标与基线对比一致地支持上述判断，评估基于本次实际运行的数值。\n\n特征重要性解读\n\n现象：按分裂增益归一化后的特征重要性，排名前5的特征为 monthly_fee、service_months、complaint_count、age、competitor_contact，合计贡献约 81.0%。 原因：树模型分裂时优先选择能最大程度降低损失的变量，重要性越高说明该特征对目标区分的贡献越大，其中也隐含了特征间交互的影响。 结论：monthly_fee、service_months、complaint_count、age、competitor_contact 是预测 is_churn 的主要信号来源；该排序衡量统计关联与预测贡献，不能解释为因果关系，可据此精简特征或核查数据质量。\n\n下图展示各特征对预测的相对贡献：\n\n下图展示二分类模型在测试集各阈值下的区分能力：\n\n下图展示测试集各类别的正确与错误计数：\n\n下图展示训练与测试误差随提升轮数的变化：",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "指标",
+              "取值",
+              "说明 复制"
+            ],
+            [
+              "准确率",
+              "0.8000",
+              "测试集整体预测正确的比例"
+            ],
+            [
+              "基线准确率（多数类）",
+              "0.6444",
+              "全部预测为多数类时的正确比例"
+            ],
+            [
+              "平衡准确率",
+              "0.7748",
+              "各类别召回的平均，不受类别不平衡影响"
+            ],
+            [
+              "AUC",
+              "0.8448",
+              "区分正负样本的能力，0.5 为随机水平"
+            ],
+            [
+              "对数损失",
+              "0.5661",
+              "概率预测质量，越小越好"
+            ],
+            [
+              "样本量（训练/测试）",
+              "105 / 45",
+              "分层随机切分"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "gbdt_feature_importance.png",
+        "gbdt_confusion_matrix.png",
+        "gbdt_roc_curve.png",
+        "gbdt_error_curve.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/c72607bb3ebd4196b9c97f063c8c8eb0",
+      "page": 2,
+      "index_in_page": 0,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_132/revision_1/run_41290a8879a146f88bf19f91e725f3f0/gbdt_feature_importance.png?auth_key=1790397300-0-0-dd107756ca7084168103f06d1dfb37f1",
+          "filename": "gbdt_feature_importance.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_132/revision_1/run_41290a8879a146f88bf19f91e725f3f0/gbdt_feature_importance.png?auth_key=1790397300-0-0-dd107756ca7084168103f06d1dfb37f1",
+          "filename": "gbdt_confusion_matrix.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_132/revision_1/run_41290a8879a146f88bf19f91e725f3f0/gbdt_feature_importance.png?auth_key=1790397300-0-0-dd107756ca7084168103f06d1dfb37f1",
+          "filename": "gbdt_roc_curve.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_132/revision_1/run_41290a8879a146f88bf19f91e725f3f0/gbdt_feature_importance.png?auth_key=1790397300-0-0-dd107756ca7084168103f06d1dfb37f1",
+          "filename": "gbdt_error_curve.png"
+        }
+      ],
+      "call_count": 96,
+      "is_hot": "否",
+      "seq": 16,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "支持向量机（SVM/SVR）",
+      "params": {
+        "coef0": "",
+        "degree": "",
+        "C候选": "0.1 + 2",
+        "epsilon": "",
+        "cv折数": "",
+        "max iter": "",
+        "gamma候选": "0.01 + 2",
+        "class weight": "未设置",
+        "任务类型": "分类（SVC）",
+        "目标字段": "是否流失",
+        "核函数候选": "linear + 1",
+        "测试集比例": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "telecom_churn_data.csv"
+      },
+      "background": "coef0\ndegree\nC候选\n0.1\n+ 2\nepsilon\ncv折数\nmax iter\ngamma候选\n0.01\n+ 2\nclass weight\n未设置\n任务类型\n分类（SVC）\n目标字段\n是否流失\n核函数候选\nlinear\n+ 1\n测试集比例\n某电信运营商在做客户维系与流失预警。分析对象是存量客户的账户使用记录，业务上关心的是：客户是否会因为使用体验或资费原因在近期离网。待解决的问题是，依据客户在网时长与月均消费两个核心使用指标，尽早区分“即将流失”与“继续留存”两类客户，为针对性挽留策略提供依据。由于问题属于二分类、特征维度低且样本规模适中，适合用支持向量机训练判别边界并评估其泛化表现。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题是“根据客户在网时长与月均消费预测其是否流失，评估支持向量机分类模型相对多数类基线的判别能力，并给出经交叉验证选出的最优核函数与超参数”，属于分类任务。分析流程为：先做数据检查与预处理（剔除缺失、删除常数特征并记录），再完成任务类型与分布诊断；随后将特征标准化并与 SVC/SVR 组成管道，在线性、RBF 等核函数与 C、gamma（回归另含 epsilon）参数网格上交叉验证调参，评分指标为accuracy；最后用最优模型在独立测试集上评估性能，并结合支持向量占比、混淆矩阵或误差指标解释结论。整个过程固定随机种子，标准化只在训练折内拟合，避免数据泄露。\n\n核心结论\n\n在 150 个样本上，最优 SVM 分类模型（参数：C=1.0, gamma=0.01, kernel=linear）的测试集准确率为 78.9%，高于多数类基线 68.4%，分类性能达到预期。\n\n问题详细分析\n数据概览与预处理\n\n用于建模的样本共 150 行，特征 2 个，目标字段为 “是否流失”；按 5 折交叉验证划分，训练集 112 行、独立测试集 38 行。预处理中剔除缺失或无穷样本 0 行、删除全常数特征 0 个，保留特征包括 在网时长(月), 月均消费(元)。处理记录：\n\n本分析单元共 1 个数据文件\n单文件分析：telecom_churn_records（telecom_churn_data.csv）\n合并后数据：150 行 × 3 列\n\n类别分布为 类别分布：0=101（67.3%），1=49（32.7%），最小类占比 32.7%，类别较为均衡。\n\n模型调参与参数诊断\n\n共比较 18 个参数组合（5 折交叉验证，评分 accuracy），最优参数为 C=1.0, gamma=0.01, kernel=linear，最优 CV 均分为 0.9024 ± 0.0508。\n\n核函数\t组合数\tCV 均分均值\tCV 最高均分\n复制\n\nlinear\t9\t0.8963\t0.9024\nrbf\t9\t0.8319\t0.8937\n\n支持向量数 40 个，占训练集 35.7%；该比例用于判断边界复杂度，占比越高说明类别重叠越明显或边界越曲折。\n\n下图展示 RBF 核下 C 与 gamma 组合的交叉验证均分，用于判断最优参数区域是否稳定：\n\n测试集性能与误分分析\n\n最优模型在独立测试集上的准确率为 78.9%（多数类基线 68.4%），宏平均精确率 0.761、宏平均召回率 0.734、宏平均 F1 0.744、加权 F1 0.784。整体指标高于多数类基线，说明模型学到的不只是类别先验。 混淆矩阵（行=真实类别，列=预测类别）：\n\n真实\\预测\t预测为类0\t预测为类1\n复制\n\n真实为类0\t23\t3\n真实为类1\t5\t7\n\n混淆矩阵热图直观呈现各类别的错分方向与数量：\n\n决策边界图展示最优模型在二维特征空间中的分界面与支持向量区域：\n\n准确率、宏平均指标与混淆矩阵相互印证，模型在当前数据上的分类表现稳定可用；若未来样本类别重叠加重，需结合支持向量占比与误分情况重新评估。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "核函数",
+              "组合数",
+              "CV 均分均值",
+              "CV 最高均分 复制"
+            ],
+            [
+              "linear",
+              "9",
+              "0.8963",
+              "0.9024"
+            ],
+            [
+              "rbf",
+              "9",
+              "0.8319",
+              "0.8937"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "真实\\预测",
+              "预测为类0",
+              "预测为类1 复制"
+            ],
+            [
+              "真实为类0",
+              "23",
+              "3"
+            ],
+            [
+              "真实为类1",
+              "5",
+              "7"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "svm_decision_boundary.png",
+        "svm_confusion_matrix.png",
+        "svm_cv_heatmap.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/cf34e284eeab4195871c46b561b6151a",
+      "page": 2,
+      "index_in_page": 14,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_186/revision_2/run_c2788d47b67f41ad90c157d56868aea4/svm_cv_heatmap.png?auth_key=1790397300-0-0-1747b49eb8e98dcc6443f5b77b535abd",
+          "filename": "svm_decision_boundary.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_186/revision_2/run_c2788d47b67f41ad90c157d56868aea4/svm_cv_heatmap.png?auth_key=1790397300-0-0-1747b49eb8e98dcc6443f5b77b535abd",
+          "filename": "svm_confusion_matrix.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_186/revision_2/run_c2788d47b67f41ad90c157d56868aea4/svm_cv_heatmap.png?auth_key=1790397300-0-0-1747b49eb8e98dcc6443f5b77b535abd",
+          "filename": "svm_cv_heatmap.png"
+        }
+      ],
+      "call_count": 90,
+      "is_hot": "否",
+      "seq": 30,
+      "tier": "basic",
+      "is_star": true
+    },
+    {
+      "algorithmName": "神经网络（BP/MLP）",
+      "params": {
+        "alpha": "",
+        "solver": "sgd",
+        "max iter": "",
+        "activation": "relu",
+        "batch size": "auto",
+        "random state": "",
+        "learning rate": "adaptive",
+        "early stopping": "",
+        "hidden layer sizes": "(30, 30)",
+        "learning rate init": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "rental_price.csv"
+      },
+      "background": "alpha\nsolver\nsgd\nmax iter\nactivation\nrelu\nbatch size\nauto\nrandom state\nlearning rate\nadaptive\nearly stopping\nhidden layer sizes\n(30, 30)\nlearning rate init\n某长租公寓运营商的定价团队在为新收房源确定挂牌租金时，需要同时兼顾市场去化速度与单位收益：定价偏高会延长空置期，定价偏低则直接损失租金收入。该团队将历史在租房源作为参照对象开展租金评估，分析对象为一批待定价的出租房源，依据建筑面积、房龄、楼层、交通可达性、小区绿化与配套、居室结构、朝向及所在区域等房源属性来刻画其租金水平。待解决的问题是：基于上述多维度房源属性预测单位面积月租金，为挂牌定价与定期租金复核提供量化参考。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n该问题被识别为回归任务：以多个输入变量为特征，训练带隐含层的多层感知机（BP/MLP）拟合连续目标并输出预测值。分析流程为：识别目标与特征字段 → 数据质量与形态诊断 → 剔除标识列并按 70/30 划分训练/测试集 → 在训练折内完成缺失填补与标准化 → 用误差反向传播训练网络并固定随机种子 → 在测试集上计算 R²、RMSE、MAE → 与均值基线和线性回归基线对比 → 用排列重要性解释特征贡献。评估基于模型未见过的测试样本，避免把训练表现当作泛化能力。\n\n核心结论\n\n在45条测试样本上，模型R²为 0.8824、RMSE 为 5.1353，明显优于均值基线（R²=-0.0112），说明该网络对当前数据具备可用的预测能力。\n\n问题详细分析\n数据概览与预处理\n\n本次分析共使用有效样本 150 条，其中训练集 105 条、测试集 45 条；原始变量 9 个，其中数值特征 7 个、类别特征 2 个、日期转数值 0 个。建模前数据中共有缺失单元格 17 个，由预处理管线按数值中位数、类别众数自动填补；类别特征经独热编码，所有数值特征按训练集统计量标准化。标识列与关联键已从特征中剔除，未发现需要整行删除的异常情况。\n\n模型表现与泛化能力\n\n现象：网络隐含层结构为 [30, 30][30, 30] ，激活函数 relu，求解器 sgd，正则系数 alpha=0.1；实际迭代 102 次后收敛损失为 24.838787。训练得分为 0.9236，测试得分为 0.8824。测试集评估指标如下：\n\n指标\t数值\n复制\n\nR²\t0.8824\nRMSE\t5.1353\nMAE\t3.5193\n\n目标变量均值为 28.3800、标准差 13.7175，可将 RMSE 与标准差对比判断误差量级，并与均值基线、线性回归基线对照。\n\n损失曲线显示训练误差随迭代下降的收敛轨迹：曲线走平说明模型已收敛，若测试指标明显差于训练指标则提示过拟合，应增大正则或启用早停。\n\n原因：训练得分 0.9236 与测试得分 0.8824 差距仅 0.0411，无明显过拟合信号。隐含层越多、正则越弱，模型容量越大，越容易记住训练样本的噪声。\n\n结论：模型表现以测试集指标为准，本次评估显示其泛化能力足以用于连续值预测；投入业务使用前仍建议用更新的样本复核稳定性。\n\n特征影响分析\n\n现象：按排列重要性排序，对预测影响最大的特征依次为 配套评分（0.83705）、距最近地铁_km（0.52906）、所在区域（0.21575）、房龄_年（0.17186）、居室数（0.04285）。排列重要性通过随机打乱某一特征后观察测试得分下降幅度，衡量该特征的边际作用，数值越大说明预测越依赖该特征。\n\n原因：重要性排序反映输入与输出之间的统计关联强度，受特征相关性、量纲与网络结构共同影响，不代表因果作用。\n\n结论：对排名靠前的特征应重点保障数据质量与采集口径稳定；若某些业务关键特征重要性接近零，说明其对当前预测任务的边际贡献有限。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "指标",
+              "数值 复制"
+            ],
+            [
+              "R²",
+              "0.8824"
+            ],
+            [
+              "RMSE",
+              "5.1353"
+            ],
+            [
+              "MAE",
+              "3.5193"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "fig1_loss_curve.png",
+        "fig3_feature_importance.png",
+        "fig2_fit_scatter.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/d3501d413d574885a178b2e9e30fe290",
+      "page": 3,
+      "index_in_page": 11,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_174/revision_1/run_c49d9d1694e941d19174943bcd003abc/fig1_loss_curve.png?auth_key=1790397600-0-0-bf9d06d6b764f4249ba09bc45e1e50af",
+          "filename": "fig1_loss_curve.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_174/revision_1/run_c49d9d1694e941d19174943bcd003abc/fig1_loss_curve.png?auth_key=1790397600-0-0-bf9d06d6b764f4249ba09bc45e1e50af",
+          "filename": "fig3_feature_importance.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_174/revision_1/run_c49d9d1694e941d19174943bcd003abc/fig1_loss_curve.png?auth_key=1790397600-0-0-bf9d06d6b764f4249ba09bc45e1e50af",
+          "filename": "fig2_fit_scatter.png"
+        }
+      ],
+      "call_count": 87,
+      "is_hot": "否",
+      "seq": 42,
+      "tier": "basic",
+      "is_star": true
+    },
+    {
+      "algorithmName": "随机森林",
+      "params": {
+        "cv folds": "",
+        "criterion": "gini",
+        "max depth": "未设置",
+        "task type": "auto",
+        "test size": "",
+        "random seed": "",
+        "class weight": "balanced",
+        "max features": "sqrt",
+        "n estimators": "",
+        "target column": "是否流失",
+        "exclude columns": "请选择",
+        "max cardinality": "",
+        "min samples leaf": "",
+        "min samples split": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "customer_churn_data.csv"
+      },
+      "background": "cv folds\ncriterion\ngini\nmax depth\n未设置\ntask type\nauto\ntest size\nrandom seed\nclass weight\nbalanced\nmax features\nsqrt\nn estimators\ntarget column\n是否流失\nexclude columns\n请选择\nmax cardinality\nmin samples leaf\nmin samples split\n某通信服务商的存量经营分析场景中，运营团队需在季度初提前识别下一季度可能离网的高流失风险客户。分析对象为客户资料与近12个月使用行为记录中的在网时长、套餐与资费水平、月均消费、流量与通话使用量、投诉与欠费情况以及入网渠道等留存信息，待解决的问题是：依据这些信息判断客户是否存在流失风险，并找出对流失风险预测贡献最大的业务变量，为差异化挽留与资源投放提供依据。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n将问题拆解为三个环节：先识别目标变量类型并完成数据体检（样本量、缺失、类别分布、编号与泄露字段排查、多文件关系校验），再按随机森林方法学执行——分类任务按类别分层切出独立测试集，回归任务随机切分；训练集内做 K 折交叉验证并与多数类/均值基线对照，随后拟合最终模型在独立测试集上评估泛化性能；最后用特征重要度解释变量贡献。全程固定随机种子，结论只依赖本次计算的数值与图表。\n\n核心结论\n\n在独立测试集上，随机森林分类模型准确率为 0.868，AUC 为 0.839，明显高于多数类基线（准确率 0.750），其中 在网时长（月）（0.437）、月均流量（GB）（0.134）、月通话时长（分钟）（0.122）、月均消费（元）（0.121）、套餐月费（元）（0.049） 预测贡献最大，可用于该分类任务。\n\n问题详细分析\n数据概览与预处理\n\n本次共 150 个样本、8 个入模特征（训练 112 / 测试 38 个），数据来源：文件1 150 行 × 10 列；文件关系为：保留文件边界，第一个文件作为训练数据。目标列“是否流失”按类别标签处理，缺失单元 8 个（涉及列：月均消费（元）: 3、月均流量（GB）: 5）；数值缺失以中位数、类别缺失以众数填充，编号类与常量列已剔除。\n\n目标类别分布：否 113 个；是 37 个。\n\n模型性能与基线对比\n\n下表汇总交叉验证、独立测试与基线对照指标：\n\n数据段/模型\t准确率\t宏F1\tAUC\n复制\n\n交叉验证（5 折，训练集内）\t0.813±0.056\t0.709±0.109\t0.877±0.092\n独立测试集\t0.868\t0.792\t0.839\n基线（多数类，交叉验证）\t0.750\t0.429\t—\n特征贡献与误差分析\n\n现象：特征重要度由高到低依次为 在网时长（月）（0.437）、月均流量（GB）（0.134）、月通话时长（分钟）（0.122）、月均消费（元）（0.121）、套餐月费（元）（0.049），前 5 个特征的累计贡献占主导。原因：随机森林按不纯度下降分配贡献，与目标关系强、被树反复选用的变量排名靠前，纯噪声变量排最后。结论：这些变量应作为后续建模与业务关注的核心变量；重要度只表示预测贡献大小，不代表影响方向，方向判断需结合偏依赖分析，不得据此断言因果。\n\n误差方面：混淆矩阵显示错误集中在易混淆的类别组合上，ROC 曲线说明模型在常用阈值附近能较好平衡灵敏度与特异度，整体误判率在业务可接受范围内。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "数据段/模型",
+              "准确率",
+              "宏F1",
+              "AUC 复制"
+            ],
+            [
+              "交叉验证（5 折，训练集内）",
+              "0.813±0.056",
+              "0.709±0.109",
+              "0.877±0.092"
+            ],
+            [
+              "独立测试集",
+              "0.868",
+              "0.792",
+              "0.839"
+            ],
+            [
+              "基线（多数类，交叉验证）",
+              "0.750",
+              "0.429",
+              "—"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "feature_importance.png",
+        "roc_curve.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/0a4298d2e68b4edc8c3e2856ce8ef266",
+      "page": 8,
+      "index_in_page": 8,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_142/revision_1/run_0651371184b6442da0463eb39669e072/feature_importance.png?auth_key=1790399100-0-0-c47f39e0201f84f6e6c445c9ffdc366f",
+          "filename": "feature_importance.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_142/revision_1/run_0651371184b6442da0463eb39669e072/feature_importance.png?auth_key=1790399100-0-0-c47f39e0201f84f6e6c445c9ffdc366f",
+          "filename": "roc_curve.png"
+        }
+      ],
+      "call_count": 66,
+      "is_hot": "否",
+      "seq": 114,
+      "tier": "basic",
+      "is_star": true
+    },
+    {
+      "algorithmName": "决策树",
+      "params": {
+        "cv folds": "",
+        "splitter": "best",
+        "ccp alpha": "0.0（默认，不剪枝）",
+        "criterion": "gini",
+        "max depth": "None（默认，不限制）",
+        "task type": "classification",
+        "test size": "",
+        "class weight": "None",
+        "max features": "None（默认，全部）",
+        "random state": "42",
+        "target column": "是否延误",
+        "min samples leaf": "1",
+        "min samples split": "2"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "delivery_delay.csv"
+      },
+      "background": "cv folds\nsplitter\nbest\nccp alpha\n0.0（默认，不剪枝）\ncriterion\ngini\nmax depth\nNone（默认，不限制）\ntask type\nclassification\ntest size\nclass weight\nNone\nmax features\nNone（默认，全部）\nrandom state\ntarget column\n是否延误\nmin samples leaf\nmin samples split\n同城即时配送企业的调度中心每天产生大量配送订单。在订单揽收与装车阶段，调度员需要根据已知条件提前判断哪些订单可能无法准时送达，以便优先调配运力、调整线路或提前与客户沟通。分析对象是该企业近一阶段记录在案的配送订单，每条订单包含配送距离、发货时段、天气、交通等级、配送区域与骑手历史准时率等履约特征，待解决问题是：能否用这些下单时即可获得的特征建立可解释的判定规则，在派送前识别出可能延误的订单，从而降低整体延误率。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n本问题要求用决策树对目标变量“是否延误”做分类预测并解释预测规则。分析流程为：先识别目标与特征字段并完成数据检查（缺失、非法值、基数、目标分布）；再按固定随机种子将样本划分为训练集与测试集，并只在训练折内拟合缺失插补与类别独热编码管线，避免信息泄漏；随后拟合 CART 决策树，用多数类（或均值）基线模型对照，通过交叉验证检查稳定性，最后在独立测试集上计算评估指标、混淆矩阵（或拟合误差）与特征重要性，并结合树结构与评估图给出业务化解释。\n\n核心结论\n\n在独立测试集上，决策树模型的准确率为 76.3%，高于多数类基线（55.3%），表明在当前数据上树模型构建的判定规则能够带来有效分类能力。\n\n问题详细分析\n数据概览与预处理\n\n分析共使用 150 行样本、6 个原始特征；训练集 112 行、测试集 38 行；目标缺失剔除 0 行，特征缺失单元格共 0 个（主要分布：无）。类别特征 2 个（ ['天气', '配送区域']['天气', '配送区域'] ），按独热编码展开；数值特征缺失用中位数、类别特征缺失用众数插补，无穷值先转缺失；预处理全部在训练折内拟合后应用到测试集。模型参数：criterion=gini、splitter=best、max_depth=None、min_samples_split=2、min_samples_leaf=1、max_features=None、class_weight=None、ccp_alpha=0.0。\n\n模型评估与误差分析\n\n交叉验证 5 折balanced_accuracy得分为 0.7494 ± 0.0879（各折：0.8167、0.7081、0.8054、0.6131、0.8036），说明模型表现相对稳定。\n\n下表为独立测试集上决策树与“多数类基线”模型（始终预测最常见类别）的对比：\n\n评估指标\t决策树\t多数类基线\n复制\n\n准确率\t76.3%\t55.3%\n平衡准确率\t76.9%\t50.0%\n宏平均 F1\t0.7630\t0.3559\n\n分类别来看，精确率表示“预测为该类时判对的比例”，召回率表示“该类样本被找出的比例”，F1 是两者的综合；样本数过少的类别指标波动较大，解读时应谨慎。\n\n类别\t精确率\t召回率\tF1\t测试样本数\n复制\n\n0\t0.8333\t0.7143\t0.7692\t21\n1\t0.7000\t0.8235\t0.7568\t17\n\n混淆矩阵按“行=真实类别、列=预测类别”排列，对角线越集中说明误判越少：\n\n真实\\预测\t0\t1\n复制\n\n0\t15\t6\n1\t3\t14\n\n混淆矩阵图直观呈现误判集中位置，配合上表定位最易混淆的类别对。\n\n特征重要性与树结构\n\n特征重要性反映训练集内各特征对降低不纯度的总贡献（独热编码列已归并回原始特征），数值越大说明该特征越常被用于分裂，但不代表因果影响：\n\n特征\t重要性\t相对占比\n复制\n\n发货时段_点\t0.2539\t25.4%\n骑手历史准时率_百分比\t0.2537\t25.4%\n交通等级\t0.2402\t24.0%\n配送距离_公里\t0.1127\t11.3%\n配送区域\t0.0877\t8.8%\n天气\t0.0518\t5.2%\n\n最终树深度为 6 层、共 19 个叶节点，叶节点越多规则越细，过深的树容易记住噪声。\n\n树结构图展示至多前 3 层的分裂特征、阈值与样本占比，可用“如果特征满足某条件，则进入某分支”的方式把模型翻译成业务规则。\n\n综合以上评估，树模型在当前数据上的表现、主要误差来源与关键驱动特征均已量化呈现；若样本或特征数量不足以支撑细分规则，则当前结果不足以支持进一步判断，需补充数据后再建模。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "评估指标",
+              "决策树",
+              "多数类基线 复制"
+            ],
+            [
+              "准确率",
+              "76.3%",
+              "55.3%"
+            ],
+            [
+              "平衡准确率",
+              "76.9%",
+              "50.0%"
+            ],
+            [
+              "宏平均 F1",
+              "0.7630",
+              "0.3559"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "类别",
+              "精确率",
+              "召回率",
+              "F1",
+              "测试样本数 复制"
+            ],
+            [
+              "0",
+              "0.8333",
+              "0.7143",
+              "0.7692",
+              "21"
+            ],
+            [
+              "1",
+              "0.7000",
+              "0.8235",
+              "0.7568",
+              "17"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "data": [
+            [
+              "真实\\预测",
+              "0",
+              "1 复制"
+            ],
+            [
+              "0",
+              "15",
+              "6"
+            ],
+            [
+              "1",
+              "3",
+              "14"
+            ]
+          ]
+        },
+        {
+          "index": 3,
+          "data": [
+            [
+              "特征",
+              "重要性",
+              "相对占比 复制"
+            ],
+            [
+              "发货时段_点",
+              "0.2539",
+              "25.4%"
+            ],
+            [
+              "骑手历史准时率_百分比",
+              "0.2537",
+              "25.4%"
+            ],
+            [
+              "交通等级",
+              "0.2402",
+              "24.0%"
+            ],
+            [
+              "配送距离_公里",
+              "0.1127",
+              "11.3%"
+            ],
+            [
+              "配送区域",
+              "0.0877",
+              "8.8%"
+            ],
+            [
+              "天气",
+              "0.0518",
+              "5.2%"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "feature_importance.png",
+        "confusion_matrix.png",
+        "tree_structure.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/13aee19821064a0ca8a868e94abed0f6",
+      "page": 9,
+      "index_in_page": 1,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_143/revision_1/run_e69df8e1d18147adbcabf5adb6c4a129/confusion_matrix.png?auth_key=1790399100-0-0-765c4efa7f2e7488978837dce7955ce7",
+          "filename": "feature_importance.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_143/revision_1/run_e69df8e1d18147adbcabf5adb6c4a129/confusion_matrix.png?auth_key=1790399100-0-0-765c4efa7f2e7488978837dce7955ce7",
+          "filename": "confusion_matrix.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_143/revision_1/run_e69df8e1d18147adbcabf5adb6c4a129/confusion_matrix.png?auth_key=1790399100-0-0-765c4efa7f2e7488978837dce7955ce7",
+          "filename": "tree_structure.png"
+        }
+      ],
+      "call_count": 64,
+      "is_hot": "否",
+      "seq": 122,
+      "tier": "basic",
+      "is_star": false
+    },
+    {
+      "algorithmName": "XGBoost",
+      "params": {
+        "cv folds": "",
+        "max depth": "",
+        "reg alpha": "",
+        "subsample": "",
+        "task type": "classification",
+        "test size": "",
+        "reg lambda": "",
+        "n estimators": "",
+        "learning rate": "",
+        "target column": "是否违约",
+        "colsample bytree": "",
+        "min child weight": "",
+        "scale pos weight": "auto",
+        "early stopping rounds": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "loan_credit_records.csv"
+      },
+      "background": "cv folds\nmax depth\nreg alpha\nsubsample\ntask type\nclassification\ntest size\nreg lambda\nn estimators\nlearning rate\ntarget column\n是否违约\ncolsample bytree\nmin child weight\nscale pos weight\nauto\nearly stopping rounds\n一家消费金融公司的零售信贷部门在个人无抵押消费贷款审批环节需要评估借款人的信用风险。分析对象是贷款申请与放款时采集的客户授信资料，包括征信信用评分、负债收入比、历史逾期情况、收入与贷款金额、期限、工作年限、教育背景与贷款用途等字段。待解决的问题是：基于这些放款前已掌握的特征，能否在贷前把后续发生违约（严重逾期或形成坏账）的借款人识别出来，从而在授信额度与定价决策、贷后预警排序中优先关注高风险客户。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n要回答的问题是：在给定表格数据上，XGBoost 能否稳定预测“是否违约”这一二分类目标。流程上先做数据体检与文件关系校验，随后按防泄露要求把样本分层拆分为训练、验证与测试三部分：类别特征只依据训练部分的取值分布编码，验证集用于早停选迭代数，测试集全程只参与最后评估；再以交叉验证估计泛化波动，并与多数类或均值基线对比，最后解读特征的分裂增益。关键设置：学习率 0.1、树深度 3、最大迭代 200 轮、早停窗口 30 轮、5 折交叉验证，随机种子固定为 20240601。\n\n核心结论\n\n独立测试集上模型准确率为 0.8000，比“总是猜多数类”的基线提高 0.1333，AUC 为 0.9000，说明 XGBoost 学到了可用于判别的特征信号。\n\n数据概览与预处理\n\n下表汇总进入建模的数据规模与预处理结果：\n\n项目\t数值\n复制\n\n输入样本行数\t150\n输入列数\t14\n目标缺失剔除行数\t0\n建模特征数\t12\n特征缺失比例均值\t0.00%\n目标唯一取值数\t2\n最少类别占比\t0.320\n训练 / 验证 / 测试样本\t120 / 18 / 30\n\n预处理说明：剔除目标缺失的行，把无穷值转为缺失交给 XGBoost 原生处理；类别型特征按训练部分学习序数编码规则后再应用到验证与测试部分；分类任务的标签编码也只在训练部分学习，随机种子固定以保证结果可复现。\n\n问题详细分析\n模型性能分析\n\n现象：测试集上模型与基线的分类表现对比如下。\n\n指标\tXGBoost\t基线（猜多数类）\n复制\n\n准确率\t0.8000\t0.6667\n宏平均 F1\t0.7847\t—\nAUC\t0.9000\t0.5000\n交叉验证（5 折）\t0.7192 ± 0.0833\t—\n\n原因解释：AUC 可以理解为“随机抽一对正负样本，模型把正样本排在前面的概率”。本次 AUC 为 0.9000，明显高于 0.5 的随机水平，说明模型不是靠猜；交叉验证均值为 0.7192，与测试集一致，结果稳定。 结论：模型在独立测试集上的判别能力显著超过基线，可用于该分类任务。\n\nROC 曲线越靠近左上角说明区分能力越强，曲线下的面积就是 AUC。\n\n混淆矩阵对角线上的数字是分对的样本，非对角线是错分方向，可据此定位哪类更易混淆。\n\n特征贡献分析\n\n下表列出分裂增益最高的 6 个特征（增益越大，表示该特征用于分裂带来的平均误差下降越多）：\n\n排名\t特征\t分裂增益\n复制\n\n1\t信用评分\t6.4130\n2\t年龄\t3.4683\n3\t负债收入比\t3.1717\n4\t贷款期限_月\t2.6139\n5\t教育水平\t2.2128\n6\t信用卡数量\t1.8245\n\n解读时注意：分裂增益只说明特征对预测贡献的大小，不代表因果作用；增益明显靠前的特征应与业务先验相互印证，若预期重要的特征增益接近零，可进一步核查其取值质量或与其它特征的相关性后再决定是否剔除。\n\n综合分析：性能指标、交叉验证稳定性与特征贡献三个角度相互印证，均指向模型学到了可复用的信号；若数据量、特征分布或业务口径变化，结论需要重新评估，不应直接外推。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "项目",
+              "数值 复制"
+            ],
+            [
+              "输入样本行数",
+              "150"
+            ],
+            [
+              "输入列数",
+              "14"
+            ],
+            [
+              "目标缺失剔除行数",
+              "0"
+            ],
+            [
+              "建模特征数",
+              "12"
+            ],
+            [
+              "特征缺失比例均值",
+              "0.00%"
+            ],
+            [
+              "目标唯一取值数",
+              "2"
+            ],
+            [
+              "最少类别占比",
+              "0.320"
+            ],
+            [
+              "训练 / 验证 / 测试样本",
+              "120 / 18 / 30"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "指标",
+              "XGBoost",
+              "基线（猜多数类） 复制"
+            ],
+            [
+              "准确率",
+              "0.8000",
+              "0.6667"
+            ],
+            [
+              "宏平均 F1",
+              "0.7847",
+              "—"
+            ],
+            [
+              "AUC",
+              "0.9000",
+              "0.5000"
+            ],
+            [
+              "交叉验证（5 折）",
+              "0.7192 ± 0.0833",
+              "—"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "data": [
+            [
+              "排名",
+              "特征",
+              "分裂增益 复制"
+            ],
+            [
+              "1",
+              "信用评分",
+              "6.4130"
+            ],
+            [
+              "2",
+              "年龄",
+              "3.4683"
+            ],
+            [
+              "3",
+              "负债收入比",
+              "3.1717"
+            ],
+            [
+              "4",
+              "贷款期限_月",
+              "2.6139"
+            ],
+            [
+              "5",
+              "教育水平",
+              "2.2128"
+            ],
+            [
+              "6",
+              "信用卡数量",
+              "1.8245"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "feature_importance.png",
+        "confusion_matrix.png",
+        "roc_curve.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/dfcf3dedbfad4c3d864fa2df5b3d4560",
+      "page": 9,
+      "index_in_page": 6,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_145/revision_1/run_7f54bb3bff004f18a3f61e4ea1073653/roc_curve.png?auth_key=1790399400-0-0-15c07f432fa972e0d974126fae1526e1",
+          "filename": "feature_importance.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_145/revision_1/run_7f54bb3bff004f18a3f61e4ea1073653/roc_curve.png?auth_key=1790399400-0-0-15c07f432fa972e0d974126fae1526e1",
+          "filename": "confusion_matrix.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_145/revision_1/run_7f54bb3bff004f18a3f61e4ea1073653/roc_curve.png?auth_key=1790399400-0-0-15c07f432fa972e0d974126fae1526e1",
+          "filename": "roc_curve.png"
+        }
+      ],
+      "call_count": 63,
+      "is_hot": "否",
+      "seq": 127,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "关联规则（Apriori）",
+      "params": {
+        "metric": "lift",
+        "max len": "",
+        "item col": "未设置",
+        "min lift": "",
+        "max rules": "",
+        "min support": "",
+        "top itemsets": "",
+        "item delimiter": "未设置",
+        "min confidence": "",
+        "transaction col": "未设置"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "fastfood_baskets.csv"
+      },
+      "background": "metric\nlift\nmax len\nitem col\n未设置\nmin lift\nmax rules\nmin support\ntop itemsets\nitem delimiter\n未设置\nmin confidence\ntransaction col\n未设置\n某社区连锁快餐门店沉淀了堂食与外带点餐订单，运营团队希望通过购物篮分析优化套餐结构、提升客单价。分析对象是每笔订单实际点购的餐品集合；待解决的问题是找出经常被同时点购的餐品组合，并挖掘方向明确、可执行的搭配规则（A→B），依据支持度判断覆盖广度、依据置信度判断条件概率、依据提升度判断正向拉动强度，从而决定哪些组合应纳入固定套餐、哪些适合作为收银台与线上点餐的加购推荐。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题可拆解为两步：先回答“哪些商品/项经常一起出现”，再回答“哪些同现组合能构成可靠规则”。方法上固定采用关联规则（Apriori）：先把交易数据规范化为“交易标识 → 项集合”，检查篮子长度、唯一项数量与单项支持度分布，再按最小支持度逐层连接-剪枝生成频繁项集，最后从频繁项集枚举前件→后件规则并计算支持度、置信度、提升度、杠杆率与确信度，按 lift 排序输出前 30 条规则；完整流程为“数据检查 → 前提检验 → 频繁项集挖掘 → 规则生成与筛选 → 图表解读”。\n\n核心结论\n\n共发现 20 条强关联规则，最强规则为「鲜榨果汁 → 田园沙拉」：支持度 4.7%、置信度 70.0%、提升度 9.55，说明同时购买前件的顾客显著更倾向于加购后件，可用于捆绑推荐与货架联动。\n\n问题详细分析\n数据概览与预处理\n\n本次分析共使用 150 笔有效交易，涉及 11 个唯一项（文件 1（fastfood_baskets.csv，datafile_id=fastfood_baskets_001）读取 150 行 2 列）；每笔交易的项数平均 1.9 个、中位数 2 个、最多 3 个。预处理包括：空项与非法项行删除、同一交易内重复项去重、交易标识字符串化。含 0–1 项、无法参与规则生成的交易共 49 笔（占 32.7%）。最大单项支持度为 40.0%，高频单项包括可乐（40.0%）、经典汉堡（28.0%）、薯条（22.7%）。\n\n频繁项集发现\n\n在 min_support=0.02、max_len=3 条件下，共得到 22 个频繁项集，按长度分布为 1-项 11 个、2-项 9 个、3-项 2 个。下表列出支持度最高的前 10 个组合：\n\n频繁项集\t项数\t出现笔数\t支持度\n复制\n\n{可乐}\t1\t60\t40.0%\n{经典汉堡}\t1\t42\t28.0%\n{薯条}\t1\t34\t22.7%\n{炸鸡腿}\t1\t31\t20.7%\n{香辣鸡翅}\t1\t31\t20.7%\n{经典汉堡+薯条}\t2\t27\t18.0%\n{可乐+经典汉堡}\t2\t26\t17.3%\n{可乐+薯条}\t2\t23\t15.3%\n{炸鸡腿+香辣鸡翅}\t2\t22\t14.7%\n{可乐+香辣鸡翅}\t2\t19\t12.7%\n\n现象：高频组合集中在少数几个商品集合上，例如 「可乐」40.0%、「经典汉堡」28.0%、「薯条」22.7%。原因解释：这些组合共享同一批高支持度单项，说明存在结构性的共同购买习惯，而不是随机噪音；结论：高频组合可作为陈列与促销的主题候选，但要判断方向性强弱还需要看置信度与提升度。\n\n上图按支持度降序展示高频组合，条形越长表示该组合覆盖的交易面越广。\n\n关联规则解读\n\n在 confidence ≥ 0.6、lift ≥ 1.0 的过滤下，共得到 20 条强关联规则，下表按 lift 降序展示前 10 条：\n\n前件\t后件\t支持度\t置信度\t提升度\t杠杆率\t确信度\n复制\n\n鲜榨果汁\t田园沙拉\t4.7%\t70.0%\t9.55\t0.04\t3.09\n田园沙拉\t鲜榨果汁\t4.7%\t63.6%\t9.55\t0.04\t2.57\n现磨咖啡\t可颂\t6.7%\t66.7%\t7.14\t0.06\t2.72\n可颂\t现磨咖啡\t6.7%\t71.4%\t7.14\t0.06\t3.15\n蛋挞\t冰淇淋\t8.0%\t66.7%\t5.88\t0.07\t2.66\n冰淇淋\t蛋挞\t8.0%\t70.6%\t5.88\t0.07\t2.99\n可乐+香辣鸡翅\t炸鸡腿\t9.3%\t73.7%\t3.57\t0.07\t3.01\n可乐+炸鸡腿\t香辣鸡翅\t9.3%\t73.7%\t3.57\t0.07\t3.01\n香辣鸡翅\t炸鸡腿\t14.7%\t71.0%\t3.43\t0.10\t2.73\n炸鸡腿\t香辣鸡翅\t14.7%\t71.0%\t3.43\t0.10\t2.73\n\n现象：最强规则为「鲜榨果汁 → 田园沙拉」，支持度 4.7% 表示该组合出现在 7 笔交易中；置信度 70.0% 表示买过前件的顾客中约 70% 会加购后件；提升度 9.55 明显大于 1，说明前件对后件有正向拉动作用，而非后件本身畅销所致。原因解释：前件组合构成一种明确的消费场景（如早餐、补货需求），同时购买前件传递了更强的购买意图信号。结论：可将「前件」作为触发条件、把「后件」作为推荐或捆绑对象，并按支持度排序决定推广面大小。\n\n散点图中横轴为支持度（覆盖广度）、纵轴为置信度（可靠性），颜色深浅表示提升度高低；位于右上角且颜色偏亮的规则兼顾覆盖度与可信度，是业务落地的优先候选。\n\n网络图中节点为出现在强规则里的项，箭头方向为“前件→后件”，边越粗表示该方向累计的提升度贡献越大；连接密集的节点可视为商品族群的核心。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "频繁项集",
+              "项数",
+              "出现笔数",
+              "支持度 复制"
+            ],
+            [
+              "{可乐}",
+              "1",
+              "60",
+              "40.0%"
+            ],
+            [
+              "{经典汉堡}",
+              "1",
+              "42",
+              "28.0%"
+            ],
+            [
+              "{薯条}",
+              "1",
+              "34",
+              "22.7%"
+            ],
+            [
+              "{炸鸡腿}",
+              "1",
+              "31",
+              "20.7%"
+            ],
+            [
+              "{香辣鸡翅}",
+              "1",
+              "31",
+              "20.7%"
+            ],
+            [
+              "{经典汉堡+薯条}",
+              "2",
+              "27",
+              "18.0%"
+            ],
+            [
+              "{可乐+经典汉堡}",
+              "2",
+              "26",
+              "17.3%"
+            ],
+            [
+              "{可乐+薯条}",
+              "2",
+              "23",
+              "15.3%"
+            ],
+            [
+              "{炸鸡腿+香辣鸡翅}",
+              "2",
+              "22",
+              "14.7%"
+            ],
+            [
+              "{可乐+香辣鸡翅}",
+              "2",
+              "19",
+              "12.7%"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "前件",
+              "后件",
+              "支持度",
+              "置信度",
+              "提升度",
+              "杠杆率",
+              "确信度 复制"
+            ],
+            [
+              "鲜榨果汁",
+              "田园沙拉",
+              "4.7%",
+              "70.0%",
+              "9.55",
+              "0.04",
+              "3.09"
+            ],
+            [
+              "田园沙拉",
+              "鲜榨果汁",
+              "4.7%",
+              "63.6%",
+              "9.55",
+              "0.04",
+              "2.57"
+            ],
+            [
+              "现磨咖啡",
+              "可颂",
+              "6.7%",
+              "66.7%",
+              "7.14",
+              "0.06",
+              "2.72"
+            ],
+            [
+              "可颂",
+              "现磨咖啡",
+              "6.7%",
+              "71.4%",
+              "7.14",
+              "0.06",
+              "3.15"
+            ],
+            [
+              "蛋挞",
+              "冰淇淋",
+              "8.0%",
+              "66.7%",
+              "5.88",
+              "0.07",
+              "2.66"
+            ],
+            [
+              "冰淇淋",
+              "蛋挞",
+              "8.0%",
+              "70.6%",
+              "5.88",
+              "0.07",
+              "2.99"
+            ],
+            [
+              "可乐+香辣鸡翅",
+              "炸鸡腿",
+              "9.3%",
+              "73.7%",
+              "3.57",
+              "0.07",
+              "3.01"
+            ],
+            [
+              "可乐+炸鸡腿",
+              "香辣鸡翅",
+              "9.3%",
+              "73.7%",
+              "3.57",
+              "0.07",
+              "3.01"
+            ],
+            [
+              "香辣鸡翅",
+              "炸鸡腿",
+              "14.7%",
+              "71.0%",
+              "3.43",
+              "0.10",
+              "2.73"
+            ],
+            [
+              "炸鸡腿",
+              "香辣鸡翅",
+              "14.7%",
+              "71.0%",
+              "3.43",
+              "0.10",
+              "2.73"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "figure_top_itemsets.png",
+        "figure_rule_network.png",
+        "figure_rules_scatter.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/ba672362e0864f3d9a20936ecc90d656",
+      "page": 9,
+      "index_in_page": 12,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_177/revision_1/run_c34a954ed322442cb7b641bb9bc8fdb0/figure_top_itemsets.png?auth_key=1790399400-0-0-7613c5936a194b9e5507f1b693a1d5eb",
+          "filename": "figure_top_itemsets.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_177/revision_1/run_c34a954ed322442cb7b641bb9bc8fdb0/figure_top_itemsets.png?auth_key=1790399400-0-0-7613c5936a194b9e5507f1b693a1d5eb",
+          "filename": "figure_rule_network.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_177/revision_1/run_c34a954ed322442cb7b641bb9bc8fdb0/figure_top_itemsets.png?auth_key=1790399400-0-0-7613c5936a194b9e5507f1b693a1d5eb",
+          "filename": "figure_rules_scatter.png"
+        }
+      ],
+      "call_count": 62,
+      "is_hot": "否",
+      "seq": 133,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "LightGBM",
+      "params": {
+        "target": "是否违约",
+        "cv folds": "",
+        "max depth": "",
+        "subsample": "",
+        "task type": "binary",
+        "num leaves": "",
+        "drop columns": "客户编号",
+        "n estimators": "",
+        "learning rate": "",
+        "colsample bytree": "",
+        "min child samples": "",
+        "categorical features": "职业类型",
+        "early stopping rounds": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "loan_default_risk.csv"
+      },
+      "background": "target\n是否违约\ncv folds\nmax depth\nsubsample\ntask type\nbinary\nnum leaves\ndrop columns\n客户编号\nn estimators\nlearning rate\ncolsample bytree\nmin child samples\ncategorical features\n职业类型\nearly stopping rounds\n商业银行零售信贷部门在贷前审批环节需要评估个人消费贷款申请人的违约风险，以便在额度与利率决策前识别高风险客户。分析对象为个人贷款申请记录及其信贷画像，涵盖申请人的年龄、年收入、贷款金额与期限、信用卡使用与月供负担情况、近 6 个月征信查询次数、历史逾期记录与未结清贷款笔数，以及职业类型。待解决的问题是：如何利用上述申请特征对借款人是否发生违约进行可靠预测，并找出对违约风险影响最大的因素，为贷前审批和贷后风险监控提供量化依据。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n本次把预测问题拆解为三步：先做数据体检与特征准备（目标与类别特征编码、标识字段剔除、缺失保留由算法原生处理），再以固定随机种子切分训练、验证与测试集，并在训练集上运行 K 折交叉验证以及多数类/均值简单基线作为参照；随后用 LightGBM 梯度提升树在验证集上早停确定迭代轮数，最后只用独立测试集给出指标与特征重要度。测试结果若明显差于交叉验证则判为过拟合，避免把训练表现当成泛化能力。\n\n核心结论\n\n在独立测试集上 LightGBM 的 AUC 为 0.8175，明显高于随机水平基线0.5000，模型对二分类结果具有可用的预测区分能力。\n\n问题详细分析\n数据概览与预处理\n\n进入模型的有效样本共 150 条，其中训练集 107 条、验证集 20 条、测试集 23 条；特征变量 10 个（类别特征： ['职业类型']['职业类型'] ），全表缺失单元格 6 个。数值型缺失保留给 LightGBM 原生处理，类别型缺失填入“缺失”类；标识与时间字段不进入特征，分类任务采用分层切分，模型随机种子固定，保证结果可复现。\n\n目标分布为：类别 0 共 89 条、类别 1 共 61 条；少数类占比 40.7%，类别分布相对均衡， 未额外启用类别权重。\n\n预测效果与泛化表现\n\n测试集指标与参照如下：\n\n指标\t数值\n复制\n\naccuracy\t0.7391\nAUC\t0.8175\nlogloss\t0.5271\n交叉验证（5 折）\t0.6992 ± 0.1539\n简单基线\t0.5000\n早停最佳迭代轮数\t103\n\n交叉验证给出泛化区间为 0.6992 ± 0.1539，测试集结果落在区间附近时说明未见明显过拟合；早停机制在验证指标不再改善时提前终止，因此最佳迭代轮数少于设定上限。特征重要度图展示各特征对分裂增益的贡献占比，贡献越大的特征对预测结果影响越强。\n\nROC 曲线越靠近左上角说明排序能力越强：曲线上方偏离对角线越远，模型把正例排在负例之前的能力越突出。\n\n特征贡献与业务解读\n\n基于分裂增益得到的前 5 位特征为：\n\n特征\t增益\t贡献占比\n复制\n\n年收入_万元\t131.1972\t17.9%\n历史逾期次数\t127.7332\t17.4%\n未结清贷款笔数\t116.5892\t15.9%\n信用卡额度使用率\t86.7353\t11.8%\n年龄\t83.4658\t11.4%\n\n增益越大表示该特征越常被用于有效分裂，是模型判断的主要依据；但重要度只说明预测贡献，不等于因果影响，若需要解释特征方向应结合偏依赖或 SHAP 结果，当前结果不足以支持进一步判断因果方向时不下定论。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "指标",
+              "数值 复制"
+            ],
+            [
+              "accuracy",
+              "0.7391"
+            ],
+            [
+              "AUC",
+              "0.8175"
+            ],
+            [
+              "logloss",
+              "0.5271"
+            ],
+            [
+              "交叉验证（5 折）",
+              "0.6992 ± 0.1539"
+            ],
+            [
+              "简单基线",
+              "0.5000"
+            ],
+            [
+              "早停最佳迭代轮数",
+              "103"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "特征",
+              "增益",
+              "贡献占比 复制"
+            ],
+            [
+              "年收入_万元",
+              "131.1972",
+              "17.9%"
+            ],
+            [
+              "历史逾期次数",
+              "127.7332",
+              "17.4%"
+            ],
+            [
+              "未结清贷款笔数",
+              "116.5892",
+              "15.9%"
+            ],
+            [
+              "信用卡额度使用率",
+              "86.7353",
+              "11.8%"
+            ],
+            [
+              "年龄",
+              "83.4658",
+              "11.4%"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "feature_importance.png",
+        "roc_curve.png",
+        "learning_curve.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/74e044bcc4f5471ea0c94cffb3bf4d74",
+      "page": 11,
+      "index_in_page": 3,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_112/revision_1/run_79a39edf7bec4583a7e5479102328181/feature_importance.png?auth_key=1790399700-0-0-37537ea512f417a8e6165006c8e38efa",
+          "filename": "feature_importance.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_112/revision_1/run_79a39edf7bec4583a7e5479102328181/feature_importance.png?auth_key=1790399700-0-0-37537ea512f417a8e6165006c8e38efa",
+          "filename": "roc_curve.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_112/revision_1/run_79a39edf7bec4583a7e5479102328181/feature_importance.png?auth_key=1790399700-0-0-37537ea512f417a8e6165006c8e38efa",
+          "filename": "learning_curve.png"
+        }
+      ],
+      "call_count": 53,
+      "is_hot": "否",
+      "seq": 154,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "AdaBoost自适应提升",
+      "params": {
+        "cv folds": "",
+        "estimator": "决策树桩（max_depth=1）",
+        "n estimators": "",
+        "random state": "",
+        "learning rate": "",
+        "target column": "审批结果",
+        "imbalance mode": "不处理"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "loan_approval.csv"
+      },
+      "background": "cv folds\nestimator\n决策树桩（max_depth=1）\nn estimators\nrandom state\nlearning rate\ntarget column\n审批结果\nimbalance mode\n不处理\n个人消费贷款是消费金融业务的主要产品之一，审批环节需要在有限时间内判断每笔申请的违约风险：客户资质好则及时放款、抢占市场，客户资质差则果断拒绝、控制坏账。分析对象为该业务近期受理的个人贷款申请记录，每条申请包含申请人的年龄、工作年限、月收入、学历、信用评分、负债收入比、历史逾期次数、在用信贷账户数、近6月贷款查询次数、信用卡使用率与授信额度等授信评估常用变量，以及该笔申请的审批结果。待解决问题：在既有审批样本上，能否依据这些可观测的申请信息提前识别出应拒绝的高风险申请，从而辅助审批人员排序与复核、减少人工判断偏差，并解释哪些因素对审批结果的影响最大。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题拆解为二分类（或多分类）判别任务：先识别目标类别列并整理特征矩阵，检查类别分布、缺失与基线水平；随后按分层比例把样本切成训练集与测试集，在训练集内完成折内缺失填充，用分层 K 折交叉验证评估 AdaBoost 的稳定性，再以全部训练样本拟合最终模型并在独立测试集上评价。\n\n方法与流程：采用 sklearn 的 AdaBoost 分类器（SAMME 提升算法，弱学习器为深度 1 的决策树，提升轮数 50、学习率 1.0），评价指标包括准确率、平衡准确率、宏平均 F1 与 ROC AUC，并用特征重要性解释变量贡献。\n\n核心结论\n\n测试集上模型 ROC AUC 为 0.784、准确率 0.778（多数类基线 0.540），表明 AdaBoost 在本次数据上具有可用且优于随机的判别能力。\n\n问题详细分析\n数据概览与预处理\n\n参与建模的样本共 150 条（训练 105 条、测试 45 条），特征 11 个，目标类别 2 类。\n\n类别计数：{'拒绝': 81, '通过': 69}；整体类别分布基本可用。 缺失值共 9 个（涉及 3 列），在训练折内按中位数或众数填充。 预处理未剔除特征列。 类别型特征已做标签编码，随机种子固定以保证结果可复现。\n\n模型效果评估\n\n现象：分层 5 折交叉验证的平均 AUC 为 0.883±0.045、平均准确率 0.781±0.065；独立测试集准确率 0.778、平衡准确率 0.777、AUC 0.784、宏平均 F1 0.777。\n\n原因解释：交叉验证与测试集表现差距为 0.003，未见明显过拟合；指标显著高于随机基线，说明加权提升有效放大了弱学习器的判别信号。\n\n结论：AdaBoost 对本次样本的判别效果稳定且优于基线，分类结论可信。\n\n类别\t测试样本数\t精确率\t召回率\tF1\n复制\n\n拒绝\t24\t0.792\t0.792\t0.792\n通过\t21\t0.762\t0.762\t0.762\n\n混淆矩阵（行=真实类别，列=预测类别）：\n\n真实\\预测\t拒绝\t通过\n复制\n\n拒绝\t19\t5\n通过\t5\t16\n\n下图展示测试集 ROC 曲线与随机基线对比，曲线越靠近左上角区分能力越强（AUC=0.784）。\n\n下图将混淆矩阵可视化为热图，便于观察误判集中在哪些类别。\n\n特征贡献解释\n\n现象：特征重要性反映各变量在提升过程中对分类边界的平均贡献，本次前 5 位为 信用评分 占 21.2%；负债收入比 占 21.1%；月收入_万元 占 15.3%；工作年限 占 14.8%；授信额度_万元 占 11.7%。\n\n原因解释：重要性越高的特征在每轮加权训练中越频繁地帮助弱学习器区分样本，贡献占比之和越接近 1 说明分类信息越集中于少数变量。\n\n结论：重要性排序可用于业务归因与特征筛选；若前几位特征占比悬殊，提示模型依赖少量强信号变量，需结合实际业务含义判断是否合理。\n\n特征\t重要性（归一化）\n复制\n\n信用评分\t0.2123\n负债收入比\t0.2113\n月收入_万元\t0.1528\n工作年限\t0.1475\n授信额度_万元\t0.1172",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "类别",
+              "测试样本数",
+              "精确率",
+              "召回率",
+              "F1 复制"
+            ],
+            [
+              "拒绝",
+              "24",
+              "0.792",
+              "0.792",
+              "0.792"
+            ],
+            [
+              "通过",
+              "21",
+              "0.762",
+              "0.762",
+              "0.762"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "真实\\预测",
+              "拒绝",
+              "通过 复制"
+            ],
+            [
+              "拒绝",
+              "19",
+              "5"
+            ],
+            [
+              "通过",
+              "5",
+              "16"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "data": [
+            [
+              "特征",
+              "重要性（归一化） 复制"
+            ],
+            [
+              "信用评分",
+              "0.2123"
+            ],
+            [
+              "负债收入比",
+              "0.2113"
+            ],
+            [
+              "月收入_万元",
+              "0.1528"
+            ],
+            [
+              "工作年限",
+              "0.1475"
+            ],
+            [
+              "授信额度_万元",
+              "0.1172"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "feature_importance.png",
+        "confusion_matrix.png",
+        "roc_curve.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/a967d84c76a74597a433e9c727eca549",
+      "page": 11,
+      "index_in_page": 12,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_107/revision_1/run_a3ad06e1ffd24e118cb7dfda837b2bf9/roc_curve.png?auth_key=1790400000-0-0-9d8ff0423d8b8c610ef53dc4a88163ce",
+          "filename": "feature_importance.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_107/revision_1/run_a3ad06e1ffd24e118cb7dfda837b2bf9/roc_curve.png?auth_key=1790400000-0-0-9d8ff0423d8b8c610ef53dc4a88163ce",
+          "filename": "confusion_matrix.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_107/revision_1/run_a3ad06e1ffd24e118cb7dfda837b2bf9/roc_curve.png?auth_key=1790400000-0-0-9d8ff0423d8b8c610ef53dc4a88163ce",
+          "filename": "roc_curve.png"
+        }
+      ],
+      "call_count": 51,
+      "is_hot": "否",
+      "seq": 163,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "极端随机树（ExtraTrees）",
+      "params": {
+        "cv folds": "",
+        "bootstrap": "",
+        "max depth": "未设置",
+        "task type": "auto",
+        "class weight": "未设置",
+        "max features": "sqrt",
+        "n estimators": "",
+        "random state": "",
+        "min samples leaf": "",
+        "min samples split": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "telecom_customer_churn.csv"
+      },
+      "background": "cv folds\nbootstrap\nmax depth\n未设置\ntask type\nauto\nclass weight\n未设置\nmax features\nsqrt\nn estimators\nrandom state\nmin samples leaf\nmin samples split\n某区域电信运营商的存量合约客户集中进入续约窗口。运营部门希望在本月合约到期前，基于客户的基础资料、套餐与资费、流量和通话使用情况、缴费习惯、宽带捆绑状态以及欠费、客服来电等可观测行为画像，识别出续约意愿低、流失风险高的客户群体，以便客服团队按风险高低排序开展针对性挽留，把有限的营销与维系资源投向最可能流失的客户。分析对象是该批合约客户的月度业务记录，待解决的问题是：在合约到期前能否用历史行为特征可靠预测客户是否流失，以及哪些因素对流失风险的贡献最大。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n本问题要预测的目标变量是“是否流失”，按类别标签识别为分类任务。整体流程为：先做字段识别与数据体检，剔除编号、常量与超高缺失列；对类别特征做顺序编码、对缺失值做中位数或众数填补，且编码与填补都在训练折内拟合，避免信息泄漏。随后按固定随机种子分层切分训练集与独立测试集，用交叉验证评估极端随机树的稳定性，最后在训练数据上拟合集成模型，并在独立测试集上报告准确率或误差指标；特征贡献同时给出不纯度重要性与测试集置换重要性两种证据。\n\n核心结论\n\n本次数据上极端随机树的测试集平衡准确率为 0.776，ROC-AUC 为 0.841，明显高于多数类基线 0.589，说明模型学到了可用于区分类别的真实规律。\n\n问题详细分析\n数据概览与预处理\n\n分析使用 150 条有效样本（训练 112、测试 38），候选特征共 13 列，进入模型 12 列（数值 9、类别 3）。 预处理剔除列：客户编号（编号/主键类字段）。 目标缺失 0 行已剔除；重复行 0 条；类别特征按顺序编码，数值缺失用训练集中位数填补。\n\n训练集类别分布为流失 66 条、留存 46 条，样本基本均衡，适合用准确率与平衡准确率共同评价。\n\n模型性能分析\n\n交叉验证（5 折）的平衡准确率均值为 0.794（标准差 0.117），ROC-AUC 均值为 0.879（标准差 0.082），各折之间波动不大，说明模型表现稳定。\n\n独立测试集上准确率为 0.789，平衡准确率 0.776，宏平均精确率 0.789、召回率 0.776、F1 为 0.780。若只按多数类猜测，准确率只有 0.589，模型带来的提升明显，不是碰运气。\n\n折数\t平衡准确率\tROC-AUC\n复制\n\n1\t0.6806\t0.8380\n2\t0.6806\t0.7639\n3\t0.9583\t0.9815\n4\t0.8258\t0.9095\n5\t0.8258\t0.9027\n\n上图展示测试集在不同阈值下的灵敏度与特异度权衡：曲线越靠近左上角、面积越大，判别能力越强。\n\n特征贡献分析\n\n下表同时给出两类证据：不纯度重要性反映特征在树分裂中的平均贡献；置换重要性通过在测试集上打乱该列观察性能下降量来度量，对高基数或冗余特征更稳健。两者结论一致的特征更可信。\n\n特征\t不纯度重要性\t置换重要性均值\t置换重要性标准差\n复制\n\n缴费方式（编码）\t0.1826\t0.1667\t0.0328\n合约剩余月数\t0.1070\t0.0088\t0.0124\n是否宽带捆绑（编码）\t0.0929\t0.0263\t0.0215\n客户服务来电次数\t0.0867\t-0.0088\t0.0248\n近一年欠费次数\t0.0865\t0.0088\t0.0248\n在网时长(月)\t0.0805\t0.0088\t0.0124\n月均流量(GB)\t0.0762\t-0.0175\t0.0124\n月均消费(元)\t0.0740\t-0.0088\t0.0124\n年龄\t0.0701\t-0.0175\t0.0124\n月均通话(分钟)\t0.0604\t0.0000\t0.0000\n\n按不纯度重要性排序，贡献最大的是“缴费方式（编码）”。需要说明：重要性反映特征与当前模型的拟合关系，不能直接解释为因果关系；当置换重要性明显低于不纯度重要性时，说明该特征存在冗余或高基数干扰，解读应谨慎。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "折数",
+              "平衡准确率",
+              "ROC-AUC 复制"
+            ],
+            [
+              "1",
+              "0.6806",
+              "0.8380"
+            ],
+            [
+              "2",
+              "0.6806",
+              "0.7639"
+            ],
+            [
+              "3",
+              "0.9583",
+              "0.9815"
+            ],
+            [
+              "4",
+              "0.8258",
+              "0.9095"
+            ],
+            [
+              "5",
+              "0.8258",
+              "0.9027"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "特征",
+              "不纯度重要性",
+              "置换重要性均值",
+              "置换重要性标准差 复制"
+            ],
+            [
+              "缴费方式（编码）",
+              "0.1826",
+              "0.1667",
+              "0.0328"
+            ],
+            [
+              "合约剩余月数",
+              "0.1070",
+              "0.0088",
+              "0.0124"
+            ],
+            [
+              "是否宽带捆绑（编码）",
+              "0.0929",
+              "0.0263",
+              "0.0215"
+            ],
+            [
+              "客户服务来电次数",
+              "0.0867",
+              "-0.0088",
+              "0.0248"
+            ],
+            [
+              "近一年欠费次数",
+              "0.0865",
+              "0.0088",
+              "0.0248"
+            ],
+            [
+              "在网时长(月)",
+              "0.0805",
+              "0.0088",
+              "0.0124"
+            ],
+            [
+              "月均流量(GB)",
+              "0.0762",
+              "-0.0175",
+              "0.0124"
+            ],
+            [
+              "月均消费(元)",
+              "0.0740",
+              "-0.0088",
+              "0.0124"
+            ],
+            [
+              "年龄",
+              "0.0701",
+              "-0.0175",
+              "0.0124"
+            ],
+            [
+              "月均通话(分钟)",
+              "0.0604",
+              "0.0000",
+              "0.0000"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "extra_trees_feature_importance.png",
+        "extra_trees_confusion_matrix.png",
+        "extra_trees_roc_curve.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/d3b6d0417a254c96bca567d7f5c5e9c9",
+      "page": 11,
+      "index_in_page": 14,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_187/revision_2/run_973a8c05648f4121b17cf31f8f8143b0/extra_trees_roc_curve.png?auth_key=1790400000-0-0-0008da6c6dff7a1e8cf662b3d36a3b01",
+          "filename": "extra_trees_feature_importance.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_187/revision_2/run_973a8c05648f4121b17cf31f8f8143b0/extra_trees_roc_curve.png?auth_key=1790400000-0-0-0008da6c6dff7a1e8cf662b3d36a3b01",
+          "filename": "extra_trees_confusion_matrix.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_187/revision_2/run_973a8c05648f4121b17cf31f8f8143b0/extra_trees_roc_curve.png?auth_key=1790400000-0-0-0008da6c6dff7a1e8cf662b3d36a3b01",
+          "filename": "extra_trees_roc_curve.png"
+        }
+      ],
+      "call_count": 51,
+      "is_hot": "否",
+      "seq": 165,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "朴素贝叶斯",
+      "params": {
+        "alpha": "",
+        "metric": "macro_f1",
+        "binarize": "",
+        "stratify": "",
+        "fit prior": "",
+        "test size": "",
+        "model type": "multinomial",
+        "random state": "",
+        "target column": "sentiment",
+        "var smoothing": "",
+        "feature columns": "满意 + 15",
+        "missing strategy": "mean"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "review_sentiment.csv"
+      },
+      "background": "alpha\nmetric\nmacro_f1\nbinarize\nstratify\nfit prior\ntest size\nmodel type\nmultinomial\nrandom state\ntarget column\nsentiment\nvar smoothing\nfeature columns\n满意\n+ 15\nmissing strategy\nmean\n某电商平台售后运营团队每天面对大量商品评论，需要把评论自动归为正面、中性、负面三种情感倾向，以便优先处置差评、复盘争议评论并提炼好评卖点。分析对象是每一条评论经分词后统计出的若干情感与主题关键词出现次数（词频）及其标注的情感类别；待解决的问题是：仅凭这些关键词词频能否可靠地区分三种情感倾向，识别哪些关键词最能拉开类别差异，并据此给出分类模型性能与判别依据。",
+      "report": "分析报告\n分析报告\n朴素贝叶斯分类分析\n分析结果概览\n建模思路\n\n本问题属于监督分类任务：用一组特征预测离散类别标签。分析拆解为四步：第一步按执行关系读取并合并数据文件，识别标签列与特征列；第二步对数据做体检，包括样本量、类别分布、缺失与特征相关性诊断；第三步以分层抽样切分训练集与测试集，只在训练折内完成类别特征编码、缺失填充与零方差剔除，再用朴素贝叶斯（multinomial 变体）估计各类先验与条件概率并输出预测；第四步在测试集上计算准确率、精确率、召回率、F1 与 ROC-AUC，用 bootstrap 给出准确率置信区间，最后结合混淆矩阵与特征区分度解释判别依据。\n\n核心结论\n\n在保留的 38 个测试样本上，朴素贝叶斯（multinomial 变体）取得 84.2% 的准确率与 0.84 的宏平均 F1，ROC-AUC 为 0.977，能够较可靠地区分样本类别。\n\n问题详细分析\n数据概览与预处理\n\n分析共读取 1 个数据文件（joint 模式；单文件分析，无跨文件合并），合并后总样本 150 行，其中因标签缺失删除 0 行；原始特征 16 个，实际用于建模 16 个（剔除零方差特征 0 个）。标签为 3 个类别：中性 50 个、正面 50 个、负面 50 个，不平衡比为 1.00；按类别分层切分为训练 112 行与测试 38 行。预处理采用 mean 策略填充缺失（记录：{'missing_train': 0, 'missing_test': 0, 'dropped_all_nan_columns': 0}）；模型先验概率为 由各类样本占比估计。\n\n模型判别性能\n\n测试集准确率为 84.21%（95% 置信区间 [73.68%, 94.74%][73.68%, 94.74%] ），宏平均 F1 为 0.838，加权 F1 为 0.841，ROC-AUC 为 0.977。各类表现见下表，精确率与召回率的差异说明错误并非均匀分布，需要结合混淆矩阵定位易混类别。\n\n类别\t精确率\t召回率\tF1\t支持数\n复制\n\n中性\t0.800\t0.667\t0.727\t12\n正面\t0.750\t0.923\t0.828\t13\n负面\t1.000\t0.923\t0.960\t13\n\n| 混淆矩阵：行=真实类别，列=预测类别 | 中性 | 正面 | 负面 | |---|---||---||---| | 中性 | 8 | 4 | 0 | | 正面 | 1 | 12 | 0 | | 负面 | 1 | 0 | 12 |\n\n上图是测试集混淆矩阵：主对角线集中说明多数样本被正确归类；若某两个类别之间出现对称错分，通常意味着这两个类别在特征条件分布上重叠较大。\n\nROC 曲线反映模型按概率排序样本的判别能力，曲线越靠近左上角、AUC 越接近 1，说明模型越能把不同类别分开，本次 AUC=0.977。\n\n上图展示模型对每类样本给出最大后验概率的分布：中位数明显高于 0.5 且各类区间分离度好，说明预测有把握；若大量样本置信度贴近 0.5，则说明决策边界附近样本多、判别证据弱。\n\n判别依据与模型局限\n特征\tF 统计量\tp 值\n复制\n\n退货\t30.03\t4.088e-11\n好用\t26.19\t5.155e-10\n失望\t25.00\t1.156e-09\n破损\t19.38\t6.302e-08\n差评\t18.63\t1.098e-07\n喜欢\t17.98\t1.787e-07\n满意\t12.37\t1.441e-05\n推荐\t11.86\t2.186e-05\n\nF 统计量衡量单个特征在各类别之间均值差异的相对大小，p 值小于 0.05 说明该特征与类别相关，可作为分类证据；F 越大、p 越小，说明该特征越能拉开类别差异，是模型判断的主要依据。本次特征平均绝对相关为 0.161（越接近 1 说明特征独立假设被违反得越严重，此时后验概率可能失真，但类别排序往往仍可用）。另外，模型输出的后验概率不等于真实概率，若用于业务决策应结合误判损失重新确定判定阈值，不宜直接套用 0.5。当特征区分度普遍不足或 AUC 接近 0.5 时，应改用逻辑回归、树模型等方法再做比较，而不应仅凭当前模型下结论。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "类别",
+              "精确率",
+              "召回率",
+              "F1",
+              "支持数 复制"
+            ],
+            [
+              "中性",
+              "0.800",
+              "0.667",
+              "0.727",
+              "12"
+            ],
+            [
+              "正面",
+              "0.750",
+              "0.923",
+              "0.828",
+              "13"
+            ],
+            [
+              "负面",
+              "1.000",
+              "0.923",
+              "0.960",
+              "13"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "特征",
+              "F 统计量",
+              "p 值 复制"
+            ],
+            [
+              "退货",
+              "30.03",
+              "4.088e-11"
+            ],
+            [
+              "好用",
+              "26.19",
+              "5.155e-10"
+            ],
+            [
+              "失望",
+              "25.00",
+              "1.156e-09"
+            ],
+            [
+              "破损",
+              "19.38",
+              "6.302e-08"
+            ],
+            [
+              "差评",
+              "18.63",
+              "1.098e-07"
+            ],
+            [
+              "喜欢",
+              "17.98",
+              "1.787e-07"
+            ],
+            [
+              "满意",
+              "12.37",
+              "1.441e-05"
+            ],
+            [
+              "推荐",
+              "11.86",
+              "2.186e-05"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "confusion_matrix.png",
+        "roc_curve.png",
+        "confidence_by_class.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/69fbc78a3c604e049aa2775842281618",
+      "page": 14,
+      "index_in_page": 13,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_120/revision_1/run_813cd2b4f77640c3a2c8fb604c938a54/confusion_matrix.png?auth_key=1790401200-0-0-31bf84142bc3f750d07276d7844bf95b",
+          "filename": "confusion_matrix.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_120/revision_1/run_813cd2b4f77640c3a2c8fb604c938a54/confusion_matrix.png?auth_key=1790401200-0-0-31bf84142bc3f750d07276d7844bf95b",
+          "filename": "roc_curve.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_120/revision_1/run_813cd2b4f77640c3a2c8fb604c938a54/confusion_matrix.png?auth_key=1790401200-0-0-31bf84142bc3f750d07276d7844bf95b",
+          "filename": "confidence_by_class.png"
+        }
+      ],
+      "call_count": 38,
+      "is_hot": "否",
+      "seq": 209,
+      "tier": "basic",
+      "is_star": false
+    },
+    {
+      "algorithmName": "CatBoost（梯度提升树）",
+      "params": {
+        "depth": "6",
+        "od wait": "100",
+        "iterations": "500",
+        "eval metric": "Auto",
+        "l2 leaf reg": "3",
+        "random seed": "2024",
+        "learning rate": "0.05",
+        "loss function": "Logloss",
+        "target column": "是否流失",
+        "bootstrap type": "Bayesian",
+        "one hot max size": "2",
+        "categorical features": "套餐类型,办理渠道,所属区域,合约状态,增值业务"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "telecom_churn.csv"
+      },
+      "background": "depth\nod wait\niterations\neval metric\nAuto\nl2 leaf reg\nrandom seed\nlearning rate\n0.05\nloss function\nLogloss\ntarget column\n是否流失\nbootstrap type\nBayesian\none hot max size\ncategorical features\n套餐类型,办理渠道,所属区域,合约状态,增值业务\n某电信运营商的客户保持团队需要对存量客户进行流失风险管理，在用户合约到期与续约窗口前识别出流失风险较高的客户，以便优先安排话费优惠、服务回访等维系动作。分析对象为存量客户的在网与消费记录，覆盖在网时长、月均消费、通话与流量使用、缴费及时率、欠费与投诉情况，以及套餐类型、办理渠道、所属区域、合约状态和增值业务开通情况等客户属性。待解决的问题是：基于这些存量客户特征预测客户是否会在下一计费周期内流失，并找出对流失判别贡献最大的关键因素，为分群维系策略提供依据。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题拆解为三步：先识别因变量与特征（类别特征与缺失处理），再按目标形态选择损失函数并切分训练、验证、测试集，最后用 CatBoost 梯度提升建模并以独立测试集评估。执行流程为：数据检查与泄漏排查 → 前提诊断（任务形态与损失匹配、时序防泄漏、基线设定）→ 固定随机种子训练并启用迭代早停 → 测试集指标与特征重要性双重评估。\n\n核心结论\n\nCatBoost 二分类模型在独立测试集上AUC 为 0.8561，准确率 0.7391，高于多数类基线 0.5217，说明利用所给特征能够有效判别“是否流失”的类别。\n\n问题详细分析\n数据概览与预处理\n\n分析使用 150 行原始样本（剔除目标缺失 0 行），特征 12 个，其中类别特征 5 个，剔除列 0 个（ID 或与目标高度相关列）。按训练 105 / 验证 22 / 测试 23 切分；类别特征缺失转成独立取值，数值特征缺失交给 CatBoost 原生处理。\n\n多文件关系：row_concat，共处理 150 行\n目标为二分类，按分类任务处理，损失取 Logloss\n可用特征 12 个，其中类别特征 5 个\n模型性能与有效性\n\n测试集指标如下（二分类任务，目标列为“是否流失”）：\n\n指标\t数值\t说明\n复制\n\nAUC\t0.8561\t>0.5 即有判别力\n准确率\t0.7391\t多数类基线 0.5217\n精确率\t0.7778\t预测为正里真实为正的比例\n召回率\t0.6364\t真实为正里被找出的比例\nF1\t0.7000\t精确率与召回率的调和平均\nLogloss\t0.4848\t越小越好\n\n训练计划 500 轮，早停后最佳迭代为 110；对比训练与验证损失曲线可判断过拟合程度。\n\n测试集 AUC 为 0.8561，明显大于 0.5，说明模型把正样本排到负样本前面的能力较强，判别效果好。\n\n准确率 0.7391 相对多数类基线 0.5217，提升 21.7 个百分点。\n\n最佳迭代为 110，未等到计划迭代 500 即收敛，早停机制抑制了过拟合。\n\n特征贡献与结果解释\n特征\t预测值变化重要性\t损失变化重要性\n复制\n\n合约状态\t29.7923\t0.2092\n月均消费(元)\t12.8945\t0.0434\n入网时长(月)\t12.2762\t0.0435\n办理渠道\t11.9699\t0.0223\n投诉次数\t6.8534\t0.0207\n月通话时长(分钟)\t4.8599\t0.0146\n套餐类型\t4.5845\t0.0054\n所属区域\t4.5226\t0.0059\n缴费及时率(%)\t3.8438\t0.0103\n累计欠费天数\t3.6031\t0.0158\n月流量使用(GB)\t3.1017\t0.0064\n增值业务\t1.6981\t0.0026\n\n重要性最高的是“合约状态”（预测值变化重要性 29.7923），该排序衡量的是对预测的相对贡献，不能直接解释为因果关系。\n\n上图显示训练与验证损失随迭代的变化，验证曲线不再下降的位置即早停点，可据此判断是否过拟合。\n\n上图针对测试集给出判别或拟合诊断：ROC 曲线越靠近左上角，判别能力越强。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "指标",
+              "数值",
+              "说明 复制"
+            ],
+            [
+              "AUC",
+              "0.8561",
+              ">0.5 即有判别力"
+            ],
+            [
+              "准确率",
+              "0.7391",
+              "多数类基线 0.5217"
+            ],
+            [
+              "精确率",
+              "0.7778",
+              "预测为正里真实为正的比例"
+            ],
+            [
+              "召回率",
+              "0.6364",
+              "真实为正里被找出的比例"
+            ],
+            [
+              "F1",
+              "0.7000",
+              "精确率与召回率的调和平均"
+            ],
+            [
+              "Logloss",
+              "0.4848",
+              "越小越好"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "特征",
+              "预测值变化重要性",
+              "损失变化重要性 复制"
+            ],
+            [
+              "合约状态",
+              "29.7923",
+              "0.2092"
+            ],
+            [
+              "月均消费(元)",
+              "12.8945",
+              "0.0434"
+            ],
+            [
+              "入网时长(月)",
+              "12.2762",
+              "0.0435"
+            ],
+            [
+              "办理渠道",
+              "11.9699",
+              "0.0223"
+            ],
+            [
+              "投诉次数",
+              "6.8534",
+              "0.0207"
+            ],
+            [
+              "月通话时长(分钟)",
+              "4.8599",
+              "0.0146"
+            ],
+            [
+              "套餐类型",
+              "4.5845",
+              "0.0054"
+            ],
+            [
+              "所属区域",
+              "4.5226",
+              "0.0059"
+            ],
+            [
+              "缴费及时率(%)",
+              "3.8438",
+              "0.0103"
+            ],
+            [
+              "累计欠费天数",
+              "3.6031",
+              "0.0158"
+            ],
+            [
+              "月流量使用(GB)",
+              "3.1017",
+              "0.0064"
+            ],
+            [
+              "增值业务",
+              "1.6981",
+              "0.0026"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "feature_importance.png",
+        "roc_curve.png",
+        "loss_curve.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/ae0348bea7934e6fb9d563d12b71ef69",
+      "page": 15,
+      "index_in_page": 14,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_175/revision_1/run_2990c15227cb44dc8f08332ce6f425e3/feature_importance.png?auth_key=1790401500-0-0-85d6907caa039efd42283e685d716ddb",
+          "filename": "feature_importance.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_175/revision_1/run_2990c15227cb44dc8f08332ce6f425e3/feature_importance.png?auth_key=1790401500-0-0-85d6907caa039efd42283e685d716ddb",
+          "filename": "roc_curve.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_175/revision_1/run_2990c15227cb44dc8f08332ce6f425e3/feature_importance.png?auth_key=1790401500-0-0-85d6907caa039efd42283e685d716ddb",
+          "filename": "loss_curve.png"
+        }
+      ],
+      "call_count": 31,
+      "is_hot": "否",
+      "seq": 225,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "K近邻（KNN）",
+      "params": {
+        "p": "2",
+        "task": "auto",
+        "metric": "euclidean",
+        "scoring": "accuracy",
+        "weights": "uniform",
+        "cv folds": "5",
+        "algorithm": "auto",
+        "n neighbors": "5",
+        "standardize": "True"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "telecom_user_churn_risk.csv"
+      },
+      "background": "p\ntask\nauto\nmetric\neuclidean\nscoring\naccuracy\nweights\nuniform\ncv folds\nalgorithm\nauto\nn neighbors\nstandardize\nTrue\n某电信运营商面向存量个人用户开展季度客户维系工作，运营团队希望在发放话费补贴、流量包等维系资源之前，先依据用户近期的通话、上网、缴费与投诉行为识别其流失风险，把有限的维系资源优先投向高流失风险用户。分析对象为存量个人用户，待解决的问题是：如何根据用户的月均通话时长、月均上网流量、月度消费金额、在网时长、月均投诉次数和本月欠费次数等行为指标，划分用户的流失风险等级，为差异化维系策略提供依据。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题拆解为三步：先识别目标列与数值特征，检查缺失、类别结构与量纲差异并完成数据清洗；再按任务类型（分类投票或回归取均值）执行 KNN 建模，其中特征标准化只在训练集上拟合，并以 5 折分层交叉验证在候选 K 上比较accuracy得分来挑选最优 K；最后用最优 K 重新训练并评估独立测试集，输出指标、解释性图表与逐类表现。\n\n核心结论\n\n本次分析共 150 个样本、6 个特征，5 折交叉验证选出最优 K=9，测试集准确率为 0.8222、宏平均 F1 为 0.8259，说明按最近邻投票的 KNN 模型对当前数据有较好且可复现的预测表现。\n\n问题详细分析\n数据概览与预处理\n\n数据共 150 行、6 个数值特征与目标列流失风险等级，按 105/45 划分训练与测试集；缺失单元共 0 个（占比 0.00%），数值特征缺失已用训练集中位数填充（训练 0 个、测试 0 个）。特征已做标准化（均值 0、方差 1），避免量纲大的列主导距离计算。常量特征列：无；被剔除的标识列：无。\n\nK 值选择与交叉验证\n\n候选 K 为 [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29][1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29] ，交叉验证（5 折、指标 accuracy）显示 K=9 时平均得分最高或与最高分并列且更平稳（均分 0.7524 ± 0.0700）。K 过小时邻居太少、决策面碎片化，容易过拟合；K 过大时边界过度平滑，可能漏掉局部模式，因此选 K 同时参考得分均值与波动，不机械套用默认值。\n\n图中红色虚线标出最优 K，误差棒表示各折得分离散程度；曲线形态与最优 K 的位置共同支撑最终参数选择。\n\n预测性能与误差分析\n\n测试集总体表现如下表，逐类精确率与召回率用于定位最易混淆的类别：\n\n类别\t训练样本\t测试样本\t精确率\t召回率\n复制\n\n中风险\t38\t16\t0.750\t0.750\n低风险\t36\t15\t0.812\t0.867\n高风险\t31\t14\t0.923\t0.857\n\n测试集准确率 0.8222、宏平均 F1 0.8259。混淆矩阵中非对角线数值越大，说明对应两个类别越容易被彼此误判，可据此判断是否需要补充该类样本或增加特征。\n\n需要说明：KNN 属于基于实例的邻近方法，预测体现训练样本的局部相似结构，不直接给出因果解释；若当前证据不足以支撑进一步结论，应如实说明。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "类别",
+              "训练样本",
+              "测试样本",
+              "精确率",
+              "召回率 复制"
+            ],
+            [
+              "中风险",
+              "38",
+              "16",
+              "0.750",
+              "0.750"
+            ],
+            [
+              "低风险",
+              "36",
+              "15",
+              "0.812",
+              "0.867"
+            ],
+            [
+              "高风险",
+              "31",
+              "14",
+              "0.923",
+              "0.857"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "knn_cv_curve.png",
+        "knn_confusion_matrix.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/7bd65ebb7d014ce9b6728552cfebc310",
+      "page": 17,
+      "index_in_page": 6,
+      "category": "机器学习",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_144/revision_2/run_5f2014cf2d4e49b783ab7d1f62021876/knn_cv_curve.png?auth_key=1790403300-0-0-00a4a68662629452f718e08ab763f537",
+          "filename": "knn_cv_curve.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_144/revision_2/run_5f2014cf2d4e49b783ab7d1f62021876/knn_cv_curve.png?auth_key=1790403300-0-0-00a4a68662629452f718e08ab763f537",
+          "filename": "knn_confusion_matrix.png"
+        }
+      ],
+      "call_count": 23,
+      "is_hot": "否",
+      "seq": 247,
+      "tier": "basic",
+      "is_star": false
+    }
+  ]
+}

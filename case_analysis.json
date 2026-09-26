@@ -1,0 +1,342 @@
+{
+  "total_cases": 252,
+  "param_stats": {
+    "mean": 8.924603174603174,
+    "median": 9.0,
+    "min": 1,
+    "max": 16,
+    "dist": {
+      "8": 32,
+      "12": 17,
+      "9": 48,
+      "10": 52,
+      "3": 1,
+      "11": 16,
+      "5": 14,
+      "4": 4,
+      "7": 31,
+      "13": 11,
+      "6": 18,
+      "16": 2,
+      "15": 1,
+      "1": 1,
+      "14": 4
+    }
+  },
+  "data_stats": {
+    "mean": 150,
+    "median": 150.0,
+    "min": 150,
+    "max": 150
+  },
+  "report_stats": {
+    "mean": 2272.027777777778,
+    "median": 1691.0,
+    "min": 750,
+    "max": 18606
+  },
+  "table_stats": {
+    "mean": 2.1666666666666665,
+    "median": 2.0,
+    "dist": {
+      "2": 97,
+      "4": 19,
+      "1": 68,
+      "3": 57,
+      "5": 5,
+      "0": 4,
+      "6": 2
+    }
+  },
+  "image_stats": {
+    "mean": 2.6904761904761907,
+    "median": 3.0,
+    "dist": {
+      "4": 19,
+      "3": 134,
+      "2": 97,
+      "1": 1,
+      "5": 1
+    }
+  },
+  "top_params": [
+    [
+      "alpha",
+      62
+    ],
+    [
+      "显著性水平",
+      32
+    ],
+    [
+      "随机种子",
+      18
+    ],
+    [
+      "置信水平",
+      17
+    ],
+    [
+      "缺失值处理",
+      16
+    ],
+    [
+      "significance level",
+      16
+    ],
+    [
+      "method",
+      14
+    ],
+    [
+      "target column",
+      13
+    ],
+    [
+      "random seed",
+      13
+    ],
+    [
+      "standardize",
+      12
+    ],
+    [
+      "max iter",
+      12
+    ],
+    [
+      "cv folds",
+      11
+    ],
+    [
+      "tol",
+      10
+    ],
+    [
+      "ci level",
+      9
+    ],
+    [
+      "y column",
+      9
+    ],
+    [
+      "group column",
+      9
+    ],
+    [
+      "value column",
+      9
+    ],
+    [
+      "alternative",
+      9
+    ],
+    [
+      "random state",
+      9
+    ],
+    [
+      "maxiter",
+      9
+    ],
+    [
+      "time column",
+      9
+    ],
+    [
+      "confidence level",
+      8
+    ],
+    [
+      "missing strategy",
+      8
+    ],
+    [
+      "max features",
+      8
+    ],
+    [
+      "effect size",
+      8
+    ],
+    [
+      "id column",
+      8
+    ],
+    [
+      "feature columns",
+      7
+    ],
+    [
+      "missing handling",
+      7
+    ],
+    [
+      "row standardize",
+      7
+    ],
+    [
+      "最大迭代次数",
+      7
+    ]
+  ],
+  "category_stats": {
+    "问卷研究": {
+      "count": 22,
+      "avg_params": 9.045454545454545,
+      "avg_data": 150,
+      "avg_report": 1854.8181818181818,
+      "avg_tables": 2.4545454545454546,
+      "avg_images": 2.6363636363636362
+    },
+    "聚类与降维": {
+      "count": 9,
+      "avg_params": 9,
+      "avg_data": 150,
+      "avg_report": 1526.4444444444443,
+      "avg_tables": 2.111111111111111,
+      "avg_images": 3
+    },
+    "综合评价": {
+      "count": 24,
+      "avg_params": 7.625,
+      "avg_data": 150,
+      "avg_report": 4020.0416666666665,
+      "avg_tables": 2.2083333333333335,
+      "avg_images": 2.6666666666666665
+    },
+    "医学统计": {
+      "count": 24,
+      "avg_params": 8.875,
+      "avg_data": 150,
+      "avg_report": 2063.0416666666665,
+      "avg_tables": 2,
+      "avg_images": 2.375
+    },
+    "差异比较": {
+      "count": 18,
+      "avg_params": 8.5,
+      "avg_data": 150,
+      "avg_report": 1595.6666666666667,
+      "avg_tables": 2.1666666666666665,
+      "avg_images": 2.611111111111111
+    },
+    "回归分析": {
+      "count": 24,
+      "avg_params": 9.083333333333334,
+      "avg_data": 150,
+      "avg_report": 1943.4583333333333,
+      "avg_tables": 2,
+      "avg_images": 2.5833333333333335
+    },
+    "时间序列与计量经济": {
+      "count": 28,
+      "avg_params": 10,
+      "avg_data": 150,
+      "avg_report": 1622.2857142857142,
+      "avg_tables": 2.3214285714285716,
+      "avg_images": 2.75
+    },
+    "质量控制": {
+      "count": 14,
+      "avg_params": 8.285714285714286,
+      "avg_data": 150,
+      "avg_report": 1580.4285714285713,
+      "avg_tables": 2.0714285714285716,
+      "avg_images": 2.5
+    },
+    "描述性统计": {
+      "count": 9,
+      "avg_params": 7.444444444444445,
+      "avg_data": 150,
+      "avg_report": 1449.3333333333333,
+      "avg_tables": 2.2222222222222223,
+      "avg_images": 2.6666666666666665
+    },
+    "Meta分析": {
+      "count": 8,
+      "avg_params": 8.25,
+      "avg_data": 150,
+      "avg_report": 10548.625,
+      "avg_tables": 2.25,
+      "avg_images": 3
+    },
+    "规划求解": {
+      "count": 14,
+      "avg_params": 8.357142857142858,
+      "avg_data": 150,
+      "avg_report": 2135.9285714285716,
+      "avg_tables": 1.7857142857142858,
+      "avg_images": 2.7857142857142856
+    },
+    "机器学习": {
+      "count": 13,
+      "avg_params": 11.384615384615385,
+      "avg_data": 150,
+      "avg_report": 1359.4615384615386,
+      "avg_tables": 2,
+      "avg_images": 2.923076923076923
+    },
+    "试验设计": {
+      "count": 9,
+      "avg_params": 7.666666666666667,
+      "avg_data": 150,
+      "avg_report": 2258.222222222222,
+      "avg_tables": 1.5555555555555556,
+      "avg_images": 2.7777777777777777
+    },
+    "功效分析": {
+      "count": 6,
+      "avg_params": 9.666666666666666,
+      "avg_data": 150,
+      "avg_report": 1518.1666666666667,
+      "avg_tables": 2.8333333333333335,
+      "avg_images": 2.8333333333333335
+    },
+    "空间计量": {
+      "count": 10,
+      "avg_params": 9.9,
+      "avg_data": 150,
+      "avg_report": 1757.3,
+      "avg_tables": 2.2,
+      "avg_images": 3
+    },
+    "文本分析": {
+      "count": 8,
+      "avg_params": 9.875,
+      "avg_data": 150,
+      "avg_report": 1784.125,
+      "avg_tables": 2.5,
+      "avg_images": 3.125
+    },
+    "相关分析": {
+      "count": 6,
+      "avg_params": 7.5,
+      "avg_data": 150,
+      "avg_report": 1489.1666666666667,
+      "avg_tables": 2.3333333333333335,
+      "avg_images": 2.1666666666666665
+    },
+    "预测模型": {
+      "count": 6,
+      "avg_params": 9.666666666666666,
+      "avg_data": 150,
+      "avg_report": 2312.5,
+      "avg_tables": 2.5,
+      "avg_images": 2.6666666666666665
+    }
+  },
+  "report_keywords": {
+    "分析结果概览": 252,
+    "建模思路": 252,
+    "核心结论": 252,
+    "问题详细分析": 252,
+    "建议": 42,
+    "局限性": 0,
+    "假设检验": 6,
+    "模型诊断": 9,
+    "拟合优度": 17,
+    "显著性": 103
+  }
+}

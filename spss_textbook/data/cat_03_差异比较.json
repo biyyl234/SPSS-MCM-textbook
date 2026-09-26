@@ -1,0 +1,2679 @@
+{
+  "category": "差异比较",
+  "chapter_num": 3,
+  "total": 18,
+  "basic_count": 6,
+  "advanced_count": 12,
+  "star_algos": [
+    "独立样本T检验",
+    "方差分析（单因素/多因素）",
+    "卡方检验"
+  ],
+  "cases": [
+    {
+      "algorithmName": "方差齐性检验",
+      "params": {
+        "alpha": "",
+        "layout": "auto",
+        "method": "auto"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "filling_lines_netcontent.csv"
+      },
+      "background": "alpha\nlayout\nauto\nmethod\nauto\n某饮品生产企业拥有 4 条 PET 瓶灌装生产线（灌装1线至灌装4线），采用同一灌装标准，目标净含量均为 500 mL。为把控灌装质量，质检部门按生产批次从每条生产线抽取成品并记录其实际净含量（mL），据此评估各线灌装精度与过程稳定性。业务上需要回答两类问题：一是各生产线净含量的波动幅度（离散程度/方差）是否一致，若某条线波动明显大于其他线，往往提示该线灌装机构磨损、压力不稳或阀门异常，需优先排查设备；二是波动是否一致也决定了后续比较各线平均净含量时能否直接采用普通方差分析，还是必须改用 Welch 校正等不依赖方差齐性的方法。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n本次问题是：检验 4 条灌装生产线成品净含量（mL）的组间方差是否齐性（离散程度是否一致）；若方差不齐，指出哪条线波动最大，并给出后续比较各线平均净含量时应采用的分析方法建议。方差齐性检验要回答的是“不同组的总体方差是否相等”：先按分组字段把数据整理成若干独立样本组并完成数据检查；随后做逐组正态性诊断（Bartlett 的前提），并识别常数（零方差）风险组；依据前提检验结果选择方法——全部组近似正态且无常数风险组时用 Bartlett 检验，否则使用以中位数为中心的 Brown–Forsythe 检验（Levene 族稳健形式）；然后计算检验统计量与 P 值，按 P<α（α=0.0500）规则作出拒绝与否的决策；最后结合各组标准差与图形解释差异方向，并为后续的组间比较（常规 ANOVA 或 Welch 校正、Games–Howell、非参数方法）给出衔接建议。\n\n核心结论\n\n在显著性水平 0.0500 下，4 组数据间的方差存在显著差异（Bartlett 检验，P 值 = 1.15e-19），数据不满足方差齐性，后续组间比较应采用 Welch 校正、Games–Howell 或非参数方法。\n\n问题详细分析\n数据概览与预处理\n\n本次分析涉及 1 个数据文件（row_concat 关系），纵向合并 1 个文件：150 → 150 行。字段解析采用 long 布局（分组字段：生产线；数值字段： ['净含量_mL']['净含量_ml'] ）。共识别 4 组、有效样本 150 个，剔除缺失或非法值 0 个；各组观测保持独立，未做删改。\n\n项目\t数值\n复制\n\n组数\t4\n有效样本总量\t150\n剔除缺失/非法值\t0\n各组样本量\t灌装1线=45、灌装2线=40、灌装3线=35、灌装4线=30\n正态性诊断\t全部组近似正态\n常数风险组\t无\n\n各组描述统计如下：\n\n组名\t样本量\t均值\t标准差\t方差\t正态性检验\t正态性 P 值\t正态近似\n复制\n\n灌装1线\t45\t499.7800\t1.8420\t3.3930\tShapiro-Wilk\t0.5121\t近似正态\n灌装2线\t40\t500.0800\t1.8777\t3.5257\tShapiro-Wilk\t0.5447\t近似正态\n灌装3线\t35\t500.8886\t2.0202\t4.0810\tShapiro-Wilk\t0.7474\t近似正态\n灌装4线\t30\t499.1833\t6.3997\t40.9566\tShapiro-Wilk\t0.6338\t近似正态\n各组离散程度的直观比较\n\n从描述统计看，灌装4线 的标准差最大（6.3997），约为最小标准差组 灌装1线（1.8420）的 3.47 倍。箱线图直接展示了各组中位数与散布范围的差异：离散最宽的组箱体与须线明显更长，说明该组取值波动更大；标准差对比图把这种差异量化为具体数值，避免仅凭图形做主观判断；绝对偏差箱线图进一步显示各组观测围绕组中位数的典型偏离幅度，为检验统计量的来源提供直观证据。\n\n检验结论与后续分析建议\n检验项目\t结果\n复制\n\n请求/实际方法\tauto / Bartlett 检验\n统计量\tBartlett 卡方统计量 = 91.3069\n自由度\tdf1 = 3\nP 值\t1.15e-19\n显著性水平 α\t0.0500\n决策\t拒绝原假设：各组方差不齐（存在显著离散程度差异）\n\n检验的 P 值 = 1.15e-19，小于显著性水平 α，说明“各组方差相等”这一假设与数据不符：组间离散程度的差异不太可能由抽样波动造成，方差齐性前提不成立。\n\n由于方差不齐成立，直接使用普通 ANOVA 或独立样本 t 检验可能扭曲第一类错误与检验功效，后续组间比较建议改用 Welch 校正方差分析、Games–Howell 事后比较或 Kruskal–Wallis 等不依赖方差齐性假设的方法，并注意各组样本量不平衡对结论稳健性的影响。\n\n备注：auto 分支：各组近似正态且无常数风险组，选 Bartlett（功效更高）",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "项目",
+              "数值 复制"
+            ],
+            [
+              "组数",
+              "4"
+            ],
+            [
+              "有效样本总量",
+              "150"
+            ],
+            [
+              "剔除缺失/非法值",
+              "0"
+            ],
+            [
+              "各组样本量",
+              "灌装1线=45、灌装2线=40、灌装3线=35、灌装4线=30"
+            ],
+            [
+              "正态性诊断",
+              "全部组近似正态"
+            ],
+            [
+              "常数风险组",
+              "无"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "组名",
+              "样本量",
+              "均值",
+              "标准差",
+              "方差",
+              "正态性检验",
+              "正态性 P 值",
+              "正态近似 复制"
+            ],
+            [
+              "灌装1线",
+              "45",
+              "499.7800",
+              "1.8420",
+              "3.3930",
+              "Shapiro-Wilk",
+              "0.5121",
+              "近似正态"
+            ],
+            [
+              "灌装2线",
+              "40",
+              "500.0800",
+              "1.8777",
+              "3.5257",
+              "Shapiro-Wilk",
+              "0.5447",
+              "近似正态"
+            ],
+            [
+              "灌装3线",
+              "35",
+              "500.8886",
+              "2.0202",
+              "4.0810",
+              "Shapiro-Wilk",
+              "0.7474",
+              "近似正态"
+            ],
+            [
+              "灌装4线",
+              "30",
+              "499.1833",
+              "6.3997",
+              "40.9566",
+              "Shapiro-Wilk",
+              "0.6338",
+              "近似正态"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "data": [
+            [
+              "检验项目",
+              "结果 复制"
+            ],
+            [
+              "请求/实际方法",
+              "auto / Bartlett 检验"
+            ],
+            [
+              "统计量",
+              "Bartlett 卡方统计量 = 91.3069"
+            ],
+            [
+              "自由度",
+              "df1 = 3"
+            ],
+            [
+              "P 值",
+              "1.15e-19"
+            ],
+            [
+              "显著性水平 α",
+              "0.0500"
+            ],
+            [
+              "决策",
+              "拒绝原假设：各组方差不齐（存在显著离散程度差异）"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "fig_group_boxplot.png",
+        "fig_deviation_boxplot.png",
+        "fig_group_scale.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/4785c9aa30044696bb4e665de75f48eb",
+      "page": 1,
+      "index_in_page": 4,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_51/revision_1/run_706f0b29c615437d862bed17311db5bf/fig_group_boxplot.png?auth_key=1790396700-0-0-1e6a0a404e56805c16f0a358bd3cfe9a",
+          "filename": "fig_group_boxplot.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_51/revision_1/run_706f0b29c615437d862bed17311db5bf/fig_group_boxplot.png?auth_key=1790396700-0-0-1e6a0a404e56805c16f0a358bd3cfe9a",
+          "filename": "fig_deviation_boxplot.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_51/revision_1/run_706f0b29c615437d862bed17311db5bf/fig_group_boxplot.png?auth_key=1790396700-0-0-1e6a0a404e56805c16f0a358bd3cfe9a",
+          "filename": "fig_group_scale.png"
+        }
+      ],
+      "call_count": 99,
+      "is_hot": "否",
+      "seq": 6,
+      "tier": "basic",
+      "is_star": false
+    },
+    {
+      "algorithmName": "Kruskal-Wallis检验（多样本秩和）",
+      "params": {
+        "alpha": "",
+        "effect size": "epsilon2",
+        "group column": "分拨中心",
+        "value column": "单件分拣耗时(秒)",
+        "wide columns": "请选择",
+        "min group size": "",
+        "missing values": "drop",
+        "n permutations": "",
+        "multiple comparison": "bonferroni"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "sorting_time_by_center.csv"
+      },
+      "background": "alpha\neffect size\nepsilon2\ngroup column\n分拨中心\nvalue column\n单件分拣耗时(秒)\nwide columns\n请选择\nmin group size\nmissing values\ndrop\nn permutations\nmultiple comparison\nbonferroni\n某快递企业下设华东、华南、华北三个区域分拨中心，均承担同类型标准快件的分拣任务。质量管理团队希望了解三个分拨中心在单件分拣耗时上是否处于同一水平，进而判断各中心的分拣效率是否存在差异，为排班安排、设备检修和效率改进的资源配置提供依据。分拣耗时受包裹体积、设备状态与人员熟练度影响，呈右偏分布且偶有耗时突增的离群记录，不适合直接套用依赖正态假设的均值比较。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题拆解：判断多个独立组的观测是否来自同一分布位置。先把数据清洗成“组别—观测值”长表并核对设计，再做 Kruskal-Wallis 秩和检验回答“组间是否存在差异”，主检验显著时用 Dunn 两两比较定位差异组，以 ε² 量化差异大小。方法不依赖正态性与方差齐性，对偏态、有序评分与含离群值的数据稳健；完整流程为：数据检查 → 分组描述与秩信息 → 分布形态诊断 → 主检验 → 事后比较 → 图表与结论。\n\n核心结论\n\n在显著性水平 0.05 下，3 组的单件分拣耗时(秒)分布位置存在显著差异（H=65.5738，P=<0.001），其中 华东中心组与华北中心组、华东中心组与华南中心组、华北中心组与华南中心组 的差异在校正后仍显著。\n\n问题详细分析\n数据概览与预处理\n\n本次分析共 150 个有效观测，来自 3 个独立组（分组列 分拨中心、观测列 单件分拣耗时(秒)）。 数据无缺失，未做行删除。 各组样本量、位置统计与平均秩如下：\n\n组别\tn\t中位数\tQ1\tQ3\t均值\t标准差\t偏度\t平均秩\n复制\n\n华东中心\t50\t48.0000\t45.5000\t52.4750\t49.5840\t5.9958\t1.6417\t107.6300\n华北中心\t50\t37.6500\t35.2250\t42.7000\t38.4940\t4.5389\t0.4152\t37.9100\n华南中心\t50\t44.7000\t39.8500\t48.2750\t45.3900\t6.9543\t0.9606\t80.9600\n组间差异与效应解释\n\n主检验结果：H 统计量 = 65.5738，自由度 = 2，P 值 = <0.001。P 值小于显著性水平 0.05 表示组间差异具有统计意义（P 越小，组间差异由抽样波动造成的可能性越低）。 效应量 ε² = 0.4325，表示组间秩差异约占总体秩差异的 43.2%，按常用参考属于大效应。\n\n上图按组展示观测值分布：箱体位置反映中位数水平，散点暴露离群值，用于佐证秩检验对位置差异的判断。\n\n上图把各组换算到混合排序的秩尺度：平均秩越高说明该组整体水平越高，误差线越短代表该组位置的估计越稳定。\n\n差异定位（Dunn 两两比较） ：主检验显著只说明至少有一组不同，还需看具体是哪几组不同。 校正后仍显著的组对：华东中心组与华北中心组之间，前者秩水平高于后者；华东中心组与华南中心组之间，前者秩水平高于后者；华北中心组与华南中心组之间，前者秩水平低于后者。\n\n组对A\t组对B\t秩均值差(A-B)\tZ\t原始P值\t校正后P值\t是否显著\n复制\n\n华东中心\t华北中心\t69.7200\t8.0243\t1.021e-15\t3.064e-15\t是\n华东中心\t华南中心\t26.6700\t3.0695\t0.0021\t0.0064\t是\n华北中心\t华南中心\t-43.0500\t-4.9548\t7.242e-07\t2.173e-06\t是\n\n热图颜色越深表示校正后 P 值越小，该组对的差异越可信。\n\n稳健性与局限\n\n分布形态诊断：Levene 检验 P = 0.089，各组离散程度接近，把差异解释为位置（中位数）差异较稳妥。 并列观测占比约 46.7%，H 统计量已做并列秩修正。 该检验针对组间独立样本的非参数比较，结论支持“分布位置存在差异”的统计推断，不构成因果关系证明；样本来自非随机抽样或测量误差较大时，仍需谨慎外推。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "组别",
+              "n",
+              "中位数",
+              "Q1",
+              "Q3",
+              "均值",
+              "标准差",
+              "偏度",
+              "平均秩 复制"
+            ],
+            [
+              "华东中心",
+              "50",
+              "48.0000",
+              "45.5000",
+              "52.4750",
+              "49.5840",
+              "5.9958",
+              "1.6417",
+              "107.6300"
+            ],
+            [
+              "华北中心",
+              "50",
+              "37.6500",
+              "35.2250",
+              "42.7000",
+              "38.4940",
+              "4.5389",
+              "0.4152",
+              "37.9100"
+            ],
+            [
+              "华南中心",
+              "50",
+              "44.7000",
+              "39.8500",
+              "48.2750",
+              "45.3900",
+              "6.9543",
+              "0.9606",
+              "80.9600"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "组对A",
+              "组对B",
+              "秩均值差(A-B)",
+              "Z",
+              "原始P值",
+              "校正后P值",
+              "是否显著 复制"
+            ],
+            [
+              "华东中心",
+              "华北中心",
+              "69.7200",
+              "8.0243",
+              "1.021e-15",
+              "3.064e-15",
+              "是"
+            ],
+            [
+              "华东中心",
+              "华南中心",
+              "26.6700",
+              "3.0695",
+              "0.0021",
+              "0.0064",
+              "是"
+            ],
+            [
+              "华北中心",
+              "华南中心",
+              "-43.0500",
+              "-4.9548",
+              "7.242e-07",
+              "2.173e-06",
+              "是"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "fig_group_boxplot.png",
+        "fig_pairwise_pvalues.png",
+        "fig_rank_ci.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/57d1102287ac4497923ea70c0af67317",
+      "page": 2,
+      "index_in_page": 1,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_6/revision_1/run_83a035bf54254ba2928515aa76218086/fig_group_boxplot.png?auth_key=1790397300-0-0-91f71fc222d27c04f7ac268d3843dbca",
+          "filename": "fig_group_boxplot.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_6/revision_1/run_83a035bf54254ba2928515aa76218086/fig_group_boxplot.png?auth_key=1790397300-0-0-91f71fc222d27c04f7ac268d3843dbca",
+          "filename": "fig_pairwise_pvalues.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_6/revision_1/run_83a035bf54254ba2928515aa76218086/fig_group_boxplot.png?auth_key=1790397300-0-0-91f71fc222d27c04f7ac268d3843dbca",
+          "filename": "fig_rank_ci.png"
+        }
+      ],
+      "call_count": 95,
+      "is_hot": "否",
+      "seq": 17,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "卡方检验",
+      "params": {
+        "alpha": "",
+        "pairwise": "bonferroni",
+        "test type": "independence",
+        "效应量": "Cramér's V",
+        "col column": "支付方式",
+        "row column": "门店业态",
+        "effect size": "cramers_v",
+        "low expected": "自动",
+        "检验类型": "独立性检验",
+        "连续性校正": "不校正",
+        "显著性水平α": "",
+        "事后两两比较": "Bonferroni校正",
+        "期望频数不足处理": "自动：小表用Fisher、大表保守结论"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "retail_payment_choice.csv"
+      },
+      "background": "alpha\npairwise\nbonferroni\ntest type\nindependence\n效应量\nCramér's V\ncol column\n支付方式\nrow column\n门店业态\neffect size\ncramers_v\nlow expected\n自动\n检验类型\n独立性检验\n连续性校正\n不校正\n显著性水平α\n事后两两比较\nBonferroni校正\n期望频数不足处理\n自动：小表用Fisher、大表保守结论\n某全国连锁零售企业运营着社区店、标准超市与大卖场三种门店业态。为评估收银资源配置与移动支付推广策略，企业委托对三类门店的顾客进行结账抽样回访，逐一记录其所属门店业态与实际使用的支付方式（移动支付、银行卡、现金）。运营团队希望知道：门店业态不同，顾客对支付方式的偏好结构是否随之不同，若存在差异，其差异强度有多大、主要由哪类门店与哪种支付方式之间的偏离造成。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题拆解为“两个分类变量是否相互独立、各组类别分布是否一致”。先检查缺失、稀疏类别与期望频数前提（全部格子≥5，允许 20% 格子低于 5 但不低于 1），满足时执行 Pearson 卡方检验（不做连续性校正），2×2 表期望不足自动改用 Fisher 精确检验；显著后以 Cramér's V 衡量关联强度，用调整后残差与组内占比定位差异来源，组数较多时再做带校正的两两比较。\n\n核心结论\n\n门店业态与支付方式的关联/分布差异具有统计意义（χ²=27.759，df=4，p=<0.001，Cramér's V=0.304，中等效应）。\n\n问题详细分析\n数据概览与预处理\n\n本次分析共使用 150 条观测记录，检验类型为独立性检验，显著性水平 α=0.05。 多文件关系：单文件分析，未做合并。 行变量为“门店业态”（3 类），列变量为“支付方式”（3 类）；剔除含缺失的整行后有效样本 n=150。交叉表中空行 0、空列 0，无结构性问题；期望频数最小值 13.8，低于 5 的格子占 0%（满足近似前提）。\n\n交叉表结构与组间差异\n\n观察频数交叉表（n=150）：\n\n项目\t现金\t移动支付\t银行卡\t合计\n复制\n\n大卖场\t20\t7\t30\t57\n标准超市\t13\t23\t13\t49\n社区店\t14\t24\t6\t44\n\n各组内结果分布占比（%，行百分比）：\n\n项目\t现金\t移动支付\t银行卡\t合计\n复制\n\n大卖场\t35.1\t12.3\t52.6\t100.0\n标准超市\t26.5\t46.9\t26.5\t100.0\n社区店\t31.8\t54.5\t13.6\t100.0\n差异来源、效应量与局限\n\n采用 Pearson 卡方（未做连续性校正）：χ²=27.759（df=4），p=<0.001；效应量 Cramér's V=0.304，属中等效应。p 值小意味着在“两变量无关联”的假设下，出现当前或更大偏离的可能性很低，即关联具有统计意义；关联强弱与方向需结合效应量和组内占比判断，不能把显著等同于影响大。 调整后残差绝对值≥2 的格子是差异的主要来源：“大卖场×移动支付”（残差 -4.74）、“大卖场×银行卡”（残差 +4.08）、“社区店×银行卡”（残差 -3.20）、“社区店×移动支付”（残差 +3.05）。 组间两两比较（已校正）：大卖场 vs 标准超市校正p=<0.001（显著）；大卖场 vs 社区店校正p=<0.001（显著）；标准超市 vs 社区店校正p=0.9148（不显著）。 样本量 150 与类别合并方式会影响功效与结论外推；前提未满足或证据不足时，当前结果不足以支持进一步判断。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "项目",
+              "现金",
+              "移动支付",
+              "银行卡",
+              "合计 复制"
+            ],
+            [
+              "大卖场",
+              "20",
+              "7",
+              "30",
+              "57"
+            ],
+            [
+              "标准超市",
+              "13",
+              "23",
+              "13",
+              "49"
+            ],
+            [
+              "社区店",
+              "14",
+              "24",
+              "6",
+              "44"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "项目",
+              "现金",
+              "移动支付",
+              "银行卡",
+              "合计 复制"
+            ],
+            [
+              "大卖场",
+              "35.1",
+              "12.3",
+              "52.6",
+              "100.0"
+            ],
+            [
+              "标准超市",
+              "26.5",
+              "46.9",
+              "26.5",
+              "100.0"
+            ],
+            [
+              "社区店",
+              "31.8",
+              "54.5",
+              "13.6",
+              "100.0"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "adjusted_residuals_heatmap.png",
+        "percent_stacked_bars.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/409dfdf741314408bf1140db018cfcfe",
+      "page": 2,
+      "index_in_page": 11,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_18/revision_1/run_ab79c35aebe841c2b8cb66e951847faa/percent_stacked_bars.png?auth_key=1790397300-0-0-7a5645c854215bbedb6c8fa4622f6c09",
+          "filename": "adjusted_residuals_heatmap.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_18/revision_1/run_ab79c35aebe841c2b8cb66e951847faa/percent_stacked_bars.png?auth_key=1790397300-0-0-7a5645c854215bbedb6c8fa4622f6c09",
+          "filename": "percent_stacked_bars.png"
+        }
+      ],
+      "call_count": 91,
+      "is_hot": "否",
+      "seq": 27,
+      "tier": "basic",
+      "is_star": true
+    },
+    {
+      "algorithmName": "独立样本T检验",
+      "params": {
+        "alpha": "0.05",
+        "ci level": "0.95",
+        "equal var": "auto",
+        "group col": "班组",
+        "value col": "拣货效率(件/小时)",
+        "alternative": "two-sided",
+        "effect size": "cohens_d",
+        "random seed": "42",
+        "outlier report": "iqr",
+        "normality check": "shapiro",
+        "homogeneity check": "levene"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "warehouse_picking_efficiency.csv"
+      },
+      "background": "alpha\n0.05\nci level\n0.95\nequal var\nauto\ngroup col\n班组\nvalue col\n拣货效率(件/小时)\nalternative\ntwo-sided\neffect size\ncohens_d\nrandom seed\noutlier report\niqr\nnormality check\nshapiro\nhomogeneity check\nlevene\n某仓储物流中心同时设有白班与夜班两条拣货班组，拣货员在各自班次内独立完成作业，互不交叉、互不配对。运营负责人希望比较两个班组的人均拣货效率是否存在差异，以判断是否需要对某一班次的人员排布或作业流程进行针对性调整。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n本问题关心两个独立群体的某项连续指标均值是否存在差异，属于两独立样本均值比较。分析流程：先确认设计（分组互斥且不配对）并识别因变量与分组字段；清洗数据并核查缺失、非法值与离群值；逐组做正态性检验，再按需做方差齐性检验；据此选择合并方差 t 检验、Welch 校正 t 检验或非参数替代方法；最后计算均值差置信区间与效应量，并用图形与文字给出结论。问题为：白班与夜班拣货员的人均拣货效率（件/小时）均值是否存在显著差异？若存在，差异方向与幅度如何？。\n\n核心结论\n\n检验结果：P=<0.0001 < alpha=0.0500，两组均值差异具有统计学意义。\n\n问题详细分析\n数据概览与预处理\n\n本次分析共 150 行原始记录，使用分组与因变量 2 个核心字段；因缺失、非数值或非有限值共剔除 0 行，最终有效样本 150 行（夜班 75 行、白班 75 行）。离群值按 IQR（1.5倍四分位距） 标准仅作个数报告，未默认删除。\n\n组别\t样本量\t均值\t标准差\t中位数\n复制\n\n夜班\t75\t19.8028\t2.2917\t19.5900\n白班\t75\t21.6456\t2.0553\t21.9000\n\n上图展示两组原始分布：箱体位置与散点范围直观反映组间差异与离散程度。\n\n组间均值差异检验\n\n现象：夜班 的均值约为 19.8028，白班 的均值约为 21.6456，表面相差 1.8428，需要通过检验判断该差距是否超出抽样波动。\n\n原因：逐组正态性检验结果为 夜班 组 P=0.4355；白班 组 P=0.7826，正态性前提成立；方差齐性 levene 检验统计量=0.3167，P=0.5745，未拒绝方差齐性假设。据此选择主检验方法以控制错误率。\n\n方法\t统计量\t自由度\tP值\t均值差\t置信区间\t效应量\n复制\n\n独立样本T检验（合并方差，Student）\tt=-5.1844\t148.0\t<0.0001\t-1.8428\t[-2.4311, -1.2545][-2.4311, -1.2545]\tCohen's d=-0.8466（大效应）\n\n结论：两组差异具有统计意义。 方向上看，白班 的均值更高；均值差（夜班−白班）的 95% 置信区间为 [-2.4311, -1.2545][-2.4311, -1.2545] ，区间不包含 0，与显著性结论一致。\n\n上图的点代表组间均值差，横线为其置信区间；区间与 0 线的相对位置直接支撑显著性结论。\n\n效应量与差异方向\n\n效应量 Cohen's d 为 -0.8466，属于大效应。效应量不受样本量影响，|值|≈0.2、0.5、0.8 分别对应小、中、大效应；P 值只说明差异是否可信，效应量才说明差异是否可观。\n\n结合方向与幅度：方向上看，白班 的均值更高，均值差为 -1.8428（因变量原始单位）。本设计属组间比较，显著差异不代表个体层面的因果结论。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "组别",
+              "样本量",
+              "均值",
+              "标准差",
+              "中位数 复制"
+            ],
+            [
+              "夜班",
+              "75",
+              "19.8028",
+              "2.2917",
+              "19.5900"
+            ],
+            [
+              "白班",
+              "75",
+              "21.6456",
+              "2.0553",
+              "21.9000"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "方法",
+              "统计量",
+              "自由度",
+              "P值",
+              "均值差",
+              "置信区间",
+              "效应量 复制"
+            ],
+            [
+              "独立样本T检验（合并方差，Student）",
+              "t=-5.1844",
+              "148.0",
+              "<0.0001",
+              "-1.8428",
+              "[-2.4311, -1.2545][-2.4311, -1.2545]",
+              "Cohen's d=-0.8466（大效应）"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "mean_diff_ci.png",
+        "group_distribution.png",
+        "group_mean_ci.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/736271f43b374cf9a74afd9efae20bac",
+      "page": 5,
+      "index_in_page": 11,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_12/revision_1/run_cb31e8055e74433381b31823a9178695/group_distribution.png?auth_key=1790397900-0-0-4c98cd987ecf9ee7ab1c6f63c4c185aa",
+          "filename": "mean_diff_ci.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_12/revision_1/run_cb31e8055e74433381b31823a9178695/group_distribution.png?auth_key=1790397900-0-0-4c98cd987ecf9ee7ab1c6f63c4c185aa",
+          "filename": "group_distribution.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_12/revision_1/run_cb31e8055e74433381b31823a9178695/group_distribution.png?auth_key=1790397900-0-0-4c98cd987ecf9ee7ab1c6f63c4c185aa",
+          "filename": "group_mean_ci.png"
+        }
+      ],
+      "call_count": 79,
+      "is_hot": "否",
+      "seq": 72,
+      "tier": "basic",
+      "is_star": true
+    },
+    {
+      "algorithmName": "单样本T检验",
+      "params": {
+        "mu0": "",
+        "alpha": "",
+        "alternative": "two-sided",
+        "value column": "net_content_ml",
+        "outlier policy": "inspect",
+        "normality check": "auto",
+        "fallback wilcoxon": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "fill_line_net_content.csv"
+      },
+      "background": "mu0\nalpha\nalternative\ntwo-sided\nvalue column\nnet_content_ml\noutlier policy\ninspect\nnormality check\nauto\nfallback wilcoxon\n某饮料生产企业的灌装线执行定量包装净含量日常质量监控。瓶身标示净含量为 500 mL，质量部门按生产时间顺序从当日连续生产的成品中抽取单瓶实测净含量并逐一记录，用于掌握该灌装线当日的实际灌装水平。现需要判断当日抽检瓶装水的实际净含量总体均值是否等于标示净含量 500 mL，据此决定灌装计量设备是否需要校准或调整。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n分析问题为“该灌装线当日抽检产品的实测净含量（mL）总体均值是否等于标示净含量 500 mL？”。该问题拆解为两步：先核验单组连续指标是否满足均值检验的前提，再把“均值是否等于参照值”转化为单样本均值检验。流程为：按数据关系读取并合并各文件 → 检查缺失、类型与离群点 → 用Shapiro-Wilk核验正态前提 → 小样本偏离正态时回退符号秩检验，否则执行单样本T检验 → 计算统计量、P 值与均值 95% 置信区间，并以 Cohen's d 衡量差异实际大小，最后结合样本量与效应量给出综合结论。\n\n核心结论\n\n在 α=0.05 下，样本均值与参照值 500 的差异具有统计意义：样本均值（497.3）低于参照值 500（P=<0.001，α=0.05）。\n\n问题详细分析\n数据概览与预处理\n\n单文件分析：fill_line_net_content，行数 150。目标列“net_content_ml”共获得 150 个有效数值观测参与检验。正态性检验（Shapiro-Wilk）的 P 值为 0.2378，数据近似服从正态分布。按 IQR 规则初查发现 2 个可疑离群值，已先核查来源而不默认删除。\n\n描述统计\t数值\n复制\n\n有效样本量 n\t150\n样本均值\t497.3\n样本标准差\t3.818\n中位数\t497.3\n标准误\t0.3118\n均值与参照值差异分析\n\n现象上，样本均值为 497.3，与参照值 500 相差 -2.68。采用双侧（均值≠参照值）的单样本均值检验，主要结果如下。\n\n| 检验方法 | 单样本T检验 | | 参照值 μ0 | 500 | | 检验方向 | 双侧（均值≠参照值） | | 有效样本量 n | 150 | | 样本均值 | 497.3 | | 样本标准差 | 3.818 | | 均值与参照值之差 | -2.68 | | 检验统计量 | -8.597（df=149） | | P 值 | <0.001 | | 显著性水平 α | 0.05 | | 均值 95% 置信区间 | [496.7, 497.9][496.7, 497.9] | | Cohen's d 效应量 | -0.702（中等效应） | | 统计结论 | 差异具有统计意义 |\n\n原因解释：t 统计量衡量均值差相对抽样误差的大小；P 值表示“总体均值恰好等于参照值”这一零假设下出现当前或更极端样本的可能性。本次 P=<0.001，小于显著性水平 α=0.05，因此拒绝零假设，认为样本均值与参照值的差异具有统计意义。图中可见样本均值 95% 置信区间为 [496.7, 497.9][496.7, 497.9] ，参照值没有落入区间，与显著性判断一致。Cohen's d 为 -0.702，属于中等效应，反映差异在实际意义上的大小。\n\n结论：在 α=0.05 下，样本均值与参照值 500 的差异具有统计意义：样本均值（497.3）低于参照值 500。统计显著并不自动代表实际重要，建议结合效应量与业务标准综合判断。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "描述统计",
+              "数值 复制"
+            ],
+            [
+              "有效样本量 n",
+              "150"
+            ],
+            [
+              "样本均值",
+              "497.3"
+            ],
+            [
+              "样本标准差",
+              "3.818"
+            ],
+            [
+              "中位数",
+              "497.3"
+            ],
+            [
+              "标准误",
+              "0.3118"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "one_sample_mean_ci.png",
+        "one_sample_distribution.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/8ef3ac1ab1014457bcd6833a0d217cce",
+      "page": 6,
+      "index_in_page": 9,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_91/revision_1/run_26efdb78890a48c0a974128fcc9da52c/one_sample_distribution.png?auth_key=1790398200-0-0-dc2e2da546f62ff5a82bee02e69df4e7",
+          "filename": "one_sample_mean_ci.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_91/revision_1/run_26efdb78890a48c0a974128fcc9da52c/one_sample_distribution.png?auth_key=1790398200-0-0-dc2e2da546f62ff5a82bee02e69df4e7",
+          "filename": "one_sample_distribution.png"
+        }
+      ],
+      "call_count": 75,
+      "is_hot": "否",
+      "seq": 85,
+      "tier": "basic",
+      "is_star": false
+    },
+    {
+      "algorithmName": "配对样本T检验",
+      "params": {
+        "alpha": "",
+        "id column": "默认：自动识别含id/编号语义的配对标识列",
+        "alternative": "默认：two-sided（双侧检验，检验均值差是否为零）",
+        "effect size": "默认：计算Cohen's dz并按效应大小分级解释",
+        "pair layout": "默认：two_columns（宽表，一行一对、两列分别存前测与后测测量值）",
+        "time column": "默认：自动识别时间/条件列（恰好两个水平）",
+        "time values": "默认：自动按取值排序区分前后两水平",
+        "value columns": "默认：自动识别两个连续数值测量列",
+        "normality test": "默认：Shapiro-Wilk（n≤5000）",
+        "nonparametric fallback": "默认：启用（差值显著非正态且样本量较小时，自动改用配对Wilcoxon符号秩检验作为稳健结果）"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "hotel_service_training_paired.csv"
+      },
+      "background": "alpha\nid column\n默认：自动识别含id/编号语义的配对标识列\nalternative\n默认：two-sided（双侧检验，检验均值差是否为零）\neffect size\n默认：计算Cohen's dz并按效应大小分级解释\npair layout\n默认：two_columns（宽表，一行一对、两列分别存前测与后测测量值）\ntime column\n默认：自动识别时间/条件列（恰好两个水平）\ntime values\n默认：自动按取值排序区分前后两水平\nvalue columns\n默认：自动识别两个连续数值测量列\nnormality test\n默认：Shapiro-Wilk（n≤5000）\nnonparametric fallback\n默认：启用（差值显著非正态且样本量较小时，自动改用配对Wilcoxon符号秩检验作为稳健结果）\n某连锁酒店集团为提升前台服务质量，对前台一线员工实施标准化宾客服务培训。为客观评估培训成效，集团对同一批参加培训的前台员工，在培训开始前与培训结束后分别安排一次难度与内容一致的服务规范考核（百分制），每位员工的两次成绩构成一个配对。现需要判断培训后的考核成绩相比培训前是否出现显著提升，以决定是否将该培训模式继续向全集团推广。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n本次分析围绕问题“同一批前台员工培训后的服务规范考核成绩是否显著高于培训前？即逐对差值（培训后−培训前）的均值是否显著不为零。”展开。问题被拆解为四个环节：第一，核对成对记录是否一一对应并识别两个配对测量列（必要时按配对ID与时间水平把长表展开为宽表）；第二，检查缺失、类型与异常值，统计有效配对样本量；第三，对逐对差值做正态性诊断，满足前提时执行配对样本T检验，不满足且样本量较小时切换配对Wilcoxon符号秩检验；第四，结合均值差、置信区间、效应量与图形解释差异的方向、大小和统计意义。\n\n核心结论\n\n配对样本T检验显示配对均值差为4.37（95%CI [3.27, 5.47][3.27, 5.47] ），P=<0.001小于显著性水平α（α=0.05），差异具有统计显著性，后测/条件2测量均值更高。\n\n问题详细分析\n数据概览与预处理\n\n本次分析读取 1 个数据文件（hotel_service_training_paired.csv），输入共 150 行；用于配对检验的两个测量变量均为连续数值变量，另有配对标识等辅助变量。数据检查发现 0 对记录因单侧缺失被剔除，最终有效配对样本量 n=150。\n\n预处理说明：数值类型校验通过后，按配对标识把同一对象的两次测量对齐为前测/条件1与后测/条件2两列，差值定义为后测减前测；异常值先核对原始记录而非直接删除。\n\n输入为单个文件，按文件内部结构识别配对测量列\n配对两列识别：前测/条件1=培训前成绩，后测/条件2=培训后成绩\n描述统计\t前测/条件1\t后测/条件2\n复制\n\n均值\t70.87\t75.24\n标准差\t8.01\t10.86\n配对差异检验结果\n\n现象：前测/条件1均值为70.87，后测/条件2均值为75.24，逐对差值的均值为4.373（差值标准差6.806，中位差4.400）。\n\n检验指标\t数值\n复制\n\n检验方法\t配对样本T检验\n有效配对样本量\t150\n检验统计量\tt=7.869，df=149，双侧P=<0.001\n均值差95%置信区间\t[3.275, 5.471][3.275, 5.471]\n效应量 Cohen's dz\t0.642（中等效应）\n前后测量相关系数\t0.781\n\n解释：P值<0.001表示在“真实均值差为0”的假设下出现当前（或更极端）样本结果的概率，该概率小于显著性水平α，说明观察到的差异由偶然波动造成的可能性很低，更可能真实存在。后测/条件2测量均值更高，均值差95%置信区间不包含0，与显著性判断相互印证。效应量Cohen's dz=0.642（中等效应），反映差异的实际大小（值得关注）。\n\n结论：前后（或两条件）测量存在统计上显著的差异，后测/条件2测量均值更高。\n\n前提条件与稳健性核查\n\n现象：对逐对差值进行前提诊断，Shapiro-Wilk统计量为0.9967，P=0.9849，差值可视为近似正态。\n\n解释：差值通过正态性诊断，满足配对样本T检验的前提。置信区间与效应量的引入避免了只看P值的缺陷，因为P值受样本量影响，而区间和效应量刻画差异的大小与不确定性。\n\n结论：方法选择与结论一致，无需额外稳健性修正。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "描述统计",
+              "前测/条件1",
+              "后测/条件2 复制"
+            ],
+            [
+              "均值",
+              "70.87",
+              "75.24"
+            ],
+            [
+              "标准差",
+              "8.01",
+              "10.86"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "检验指标",
+              "数值 复制"
+            ],
+            [
+              "检验方法",
+              "配对样本T检验"
+            ],
+            [
+              "有效配对样本量",
+              "150"
+            ],
+            [
+              "检验统计量",
+              "t=7.869，df=149，双侧P=<0.001"
+            ],
+            [
+              "均值差95%置信区间",
+              "[3.275, 5.471][3.275, 5.471]"
+            ],
+            [
+              "效应量 Cohen's dz",
+              "0.642（中等效应）"
+            ],
+            [
+              "前后测量相关系数",
+              "0.781"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "paired_mean_diff_ci.png",
+        "paired_scatter.png",
+        "paired_diff_distribution.png",
+        "paired_diff_qq.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/bdff5f74b8f94c688353579f4d65f794",
+      "page": 8,
+      "index_in_page": 14,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_54/revision_1/run_45ad0703b8174393a2f290a9dc4c9fc5/paired_diff_distribution.png?auth_key=1790399100-0-0-81a163777544ede2438fe02257b20b7d",
+          "filename": "paired_mean_diff_ci.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_54/revision_1/run_45ad0703b8174393a2f290a9dc4c9fc5/paired_diff_distribution.png?auth_key=1790399100-0-0-81a163777544ede2438fe02257b20b7d",
+          "filename": "paired_scatter.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_54/revision_1/run_45ad0703b8174393a2f290a9dc4c9fc5/paired_diff_distribution.png?auth_key=1790399100-0-0-81a163777544ede2438fe02257b20b7d",
+          "filename": "paired_diff_distribution.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_54/revision_1/run_45ad0703b8174393a2f290a9dc4c9fc5/paired_diff_distribution.png?auth_key=1790399100-0-0-81a163777544ede2438fe02257b20b7d",
+          "filename": "paired_diff_qq.png"
+        }
+      ],
+      "call_count": 64,
+      "is_hot": "否",
+      "seq": 120,
+      "tier": "basic",
+      "is_star": false
+    },
+    {
+      "algorithmName": "配对样本Wilcoxon符号秩检验",
+      "params": {
+        "method": "auto",
+        "min pairs": "",
+        "correction": "",
+        "alternative": "two-sided",
+        "effect size": "r",
+        "zero method": "wilcox",
+        "confidence level": "",
+        "significance level": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "paired_diameter_measurement.csv"
+      },
+      "background": "method\nauto\nmin pairs\ncorrection\nalternative\ntwo-sided\neffect size\nr\nzero method\nwilcox\nconfidence level\nsignificance level\n某精密机械制造企业的质量部门拟以自动化测量设备替代人工量具完成轴类零件外径检验。为确认新旧测量系统读数是否一致，对同一批次150件轴类零件，每件零件均由基准量具与自动化设备各测量一次关键外径，形成同一对象在两种测量条件下的配对数据。由于外径测量存在个别离散较大的读数且差值分布未知，不依赖正态性假设的配对样本Wilcoxon符号秩检验适用于此类比较。待解决问题：两套设备的外径读数是否存在系统性偏差，偏差方向与量级如何，是否需要据此对自动化设备的读数进行校准补偿。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题拆解为两层：先判断两条件（如训练前后、方法A与方法B）的配对测量是否存在 系统性差异，再判断差异的方向与量级是否具有实际意义。配对数据在个体内部高度相关， 逐对求差可消除个体基线差异。分析先核对配对结构与有效样本量，核查差值分布形态； 随后执行配对样本 Wilcoxon 符号秩检验——对非零差值的绝对值排序并赋予符号，比较正、 负符号秩和是否失衡，得到统计量 W 与 P 值；同时用固定种子 bootstrap 计算差值中位数 置信区间，用秩和计算配对秩双列效应量 r，最后结合图形解释差异的方向与大小。\n\n核心结论\n\n两条件总体位置差异具有统计学意义（差值中位数 0.01，P = <0.001）。\n\n问题详细分析\n数据概览与预处理\n\n本次问题为：“比较同一批轴类零件分别由基准量具与自动化设备测得外径的配对差异（差值=自动化设备读数−基准量具读数），检验两套测量系统的外径读数是否存在统计学上显著的差异，并评估差异的方向、量级与一致性。”。保持文件边界，选用含完整测量列的文件 1 个 两个测量列分别为 基准量具读数(mm) 与 自动化设备读数(mm)，差值方向 = 自动化设备读数(mm) − 基准量具读数(mm)。原始配对行数为 150，因任一测量列缺失而整对删除 0 行， 最终纳入 150 对有效数据；零差值 12 个 （占比 8.0%）。前提诊断方面，差值偏度为 -0.30、Shapiro-Wilk P 值为 0.229， 结合差值分布图判断差值未呈现严重不对称，符合符号秩检验对差值近似对称的要求； 异常差值已回查原始记录，未做默认剔除。\n\n描述统计\t有效样本\t数值\n复制\n\n差值mean_diff\t150\t0.01\n差值median_diff\t150\t0.01\n差值std_diff\t150\t0.01\n主检验与效应量分析\n\n检验 P 值为 <0.001，小于设定的显著性水平 0.05，两条件的总体位置差异具有统计学意义；差值的总体方向为上升（测量2 大于 测量1）。\n\n项目\t结果\n复制\n\n有效配对样本量\t150\n零差值个数（占比）\t12（8.0%）\n检验方向\t双侧\n有效计算方法\tasymptotic\nWilcoxon 统计量 W\t816.500\nP 值\t<0.001\n差值中位数\t0.01\n95% 置信区间\t[0.00, 0.01][0.00, 0.01]\n配对秩双列效应量 r\t0.830\n结论\t两条件总体位置差异具有统计学意义\n\nW 统计量反映正、负符号秩和的失衡程度，P 值为 <0.001，采用 asymptotic 方法计算（并列差值存在、 零差值按 wilcox 处理、连续校正开启）。 效应量 r = 0.830，表示正负符号秩和的相对失衡程度，|r| 越接近 1 说明配对差异方向越一致。较小 P 值意味着：若两条件总体位置没有差异，出现当前这种符号秩失衡（或更极端情况）的概率很低，因此差异更可能真实存在。\n\n差值分布图展示逐对差值的整体形态：多数差值位于零线右侧，与差值中位数 0.01 的方向一致，分布近似对称，支撑检验前提与结论。\n\n配对散点图中，位于 y=x 无差异线上方的点表示 自动化设备读数(mm) 大于 基准量具读数(mm)；点列偏离对角线的集中 方向与中位数差方向一致，未见个别极端点单独主导结论。\n\n置信区间图显示差值中位数及 95% 置信区间 [0.00, 0.01][0.00, 0.01] 。区间不包含零，与检验结论相互印证；若区间几乎整体位于 业务认为重要的阈值一侧，差异才具有实际意义，否则即使统计显著也只作弱结论。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "描述统计",
+              "有效样本",
+              "数值 复制"
+            ],
+            [
+              "差值mean_diff",
+              "150",
+              "0.01"
+            ],
+            [
+              "差值median_diff",
+              "150",
+              "0.01"
+            ],
+            [
+              "差值std_diff",
+              "150",
+              "0.01"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "项目",
+              "结果 复制"
+            ],
+            [
+              "有效配对样本量",
+              "150"
+            ],
+            [
+              "零差值个数（占比）",
+              "12（8.0%）"
+            ],
+            [
+              "检验方向",
+              "双侧"
+            ],
+            [
+              "有效计算方法",
+              "asymptotic"
+            ],
+            [
+              "Wilcoxon 统计量 W",
+              "816.500"
+            ],
+            [
+              "P 值",
+              "<0.001"
+            ],
+            [
+              "差值中位数",
+              "0.01"
+            ],
+            [
+              "95% 置信区间",
+              "[0.00, 0.01][0.00, 0.01]"
+            ],
+            [
+              "配对秩双列效应量 r",
+              "0.830"
+            ],
+            [
+              "结论",
+              "两条件总体位置差异具有统计学意义"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "diff_distribution.png",
+        "median_ci.png",
+        "paired_scatter.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/839bdcdcc34a48658d3b6bb466a014a8",
+      "page": 9,
+      "index_in_page": 10,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_10/revision_1/run_d4b1a8e8697040a78227e4af81fbf15c/diff_distribution.png?auth_key=1790399400-0-0-9dd02089620eca8d071ca6f281f6e6ae",
+          "filename": "diff_distribution.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_10/revision_1/run_d4b1a8e8697040a78227e4af81fbf15c/diff_distribution.png?auth_key=1790399400-0-0-9dd02089620eca8d071ca6f281f6e6ae",
+          "filename": "median_ci.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_10/revision_1/run_d4b1a8e8697040a78227e4af81fbf15c/diff_distribution.png?auth_key=1790399400-0-0-9dd02089620eca8d071ca6f281f6e6ae",
+          "filename": "paired_scatter.png"
+        }
+      ],
+      "call_count": 62,
+      "is_hot": "否",
+      "seq": 131,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "Z检验（均值/比率）",
+      "params": {
+        "alpha": "",
+        "test type": "proportion_one_sample",
+        "correction": "",
+        "null value": "",
+        "alternative": "two_sided",
+        "sigma known": "",
+        "group column": "未设置",
+        "value column": "on_time",
+        "min sample size": "",
+        "population sigma": "未设置"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "east_city_parcel_tracking.csv"
+      },
+      "background": "alpha\ntest type\nproportion_one_sample\ncorrection\nnull value\nalternative\ntwo_sided\nsigma known\ngroup column\n未设置\nvalue column\non_time\nmin sample size\npopulation sigma\n未设置\n某快递公司城市分拨中心近期接到多起“同城件未按承诺时效送达”的客户投诉，运营部门对调整路由后的东城同城线路进行了连续跟踪，逐件记录包裹是否在当日承诺时效内完成签收。当前需要判断该线路的当日准时签收率是否仍达到公司对外承诺的 90% 服务基准，以决定是继续沿用现有路由安排，还是需要排查分拣、车辆调度与派送环节并启动整改。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n本问题回答“调整路由后的东城同城线路，其包裹当日准时签收率是否仍等于公司承诺的 90% 服务基准（显著性水平 α=0.05）？”。分析分三步：第一步识别检验对象，单样本比率 Z 检验把 on_time 作为观测来源、以 基准 p0=0.9 作为比较基准（或比较两组水平）；第二步开展前提诊断，核对样本量是否达到大样本/正态近似要求、比率检验的期望频数是否充足以及数据缺失与异常情况；第三步计算 Z 统计量与 P 值，按 α=0.05 判定是否拒绝原假设，并用 95% 置信区间与效应量支撑结论。\n\n核心结论\n\n单样本比率 Z 检验在 α=0.05 水平下拒绝原假设，样本比率与基准 p0=0.9的差异具有统计显著性：观测统计量为 0.8400，P 值 = 0.0143，效应量 = -0.1795。\n\n问题详细分析\n数据概览与预处理\n\n本次分析使用 1 个数据文件（row_concat 关系模式，匹配率 1.0000，行数由 150 变为 150），共纳入 150 个有效观测，分析列主要为 on_time；缺失合计 0，异常值（均值±5 倍标准差之外）合计 0 个。预处理只剔除缺失与不可解析值，未删除异常观测，异常值先保留并核查。\n\n样本\t样本量\t均值/比率\t标准差\t异常值\n复制\n\n样本\t150\t0.8400\t0.3678\t0\n假设检验结果解读\n\n现象：单样本比率 Z 检验得到 Z 统计量 = -2.4495，P 值 = 0.0143；效应量 -0.1795（Cohen h（观测比率与基准比率经反正弦变换之差））；95% 置信区间 [0.7813, 0.8987][0.7813, 0.8987] 。 原因：P 值 已小于显著性水平 α，说明观测偏离超出随机波动可解释的范围；置信区间与效应量共同刻画偏离幅度与估计精度，避免只凭显著性下结论。 结论：单样本比率 Z 检验在 α=0.05 水平下拒绝原假设，样本比率与基准 p0=0.9的差异具有统计显著性。大样本条件下微小差异也可能显著，建议结合效应量与业务含义判断实际重要性。\n\n检验项目\t数值\n复制\n\n原假设\t基准 p0=0.9\nZ 统计量\t-2.4495\nP 值\t0.0143\n显著性水平 α\t0.05\n效应量\t-0.1795（Cohen h（观测比率与基准比率经反正弦变换之差））\n95% 置信区间\t[0.7813, 0.8987][0.7813, 0.8987]\n统计结论\t拒绝原假设\n\n上图给出数据分布（或组间比率）与比较基准的相对位置，是 Z 统计量方向的直观证据。\n\n上图显示点估计与 95% 置信区间：区间不包含基准线说明偏离达到统计显著性，区间宽度反映估计精度。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "样本",
+              "样本量",
+              "均值/比率",
+              "标准差",
+              "异常值 复制"
+            ],
+            [
+              "样本",
+              "150",
+              "0.8400",
+              "0.3678",
+              "0"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "检验项目",
+              "数值 复制"
+            ],
+            [
+              "原假设",
+              "基准 p0=0.9"
+            ],
+            [
+              "Z 统计量",
+              "-2.4495"
+            ],
+            [
+              "P 值",
+              "0.0143"
+            ],
+            [
+              "显著性水平 α",
+              "0.05"
+            ],
+            [
+              "效应量",
+              "-0.1795（Cohen h（观测比率与基准比率经反正弦变换之差））"
+            ],
+            [
+              "95% 置信区间",
+              "[0.7813, 0.8987][0.7813, 0.8987]"
+            ],
+            [
+              "统计结论",
+              "拒绝原假设"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "ztest_distribution.png",
+        "ztest_estimate_ci.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/2657ac7dd062433ea211b29c8bd1df30",
+      "page": 9,
+      "index_in_page": 14,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_9/revision_1/run_72215c50052249a494a66e2a49db0b73/ztest_distribution.png?auth_key=1790399400-0-0-42c537908b33d6efed6246966f217153",
+          "filename": "ztest_distribution.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_9/revision_1/run_72215c50052249a494a66e2a49db0b73/ztest_distribution.png?auth_key=1790399400-0-0-42c537908b33d6efed6246966f217153",
+          "filename": "ztest_estimate_ci.png"
+        }
+      ],
+      "call_count": 61,
+      "is_hot": "否",
+      "seq": 135,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "Friedman检验",
+      "params": {
+        "data format": "wide",
+        "random seed": "",
+        "value column": "value",
+        "value columns": "请选择",
+        "missing policy": "fail",
+        "subject column": "门店编号",
+        "condition column": "condition",
+        "posthoc adjustment": "bonferroni",
+        "significance level": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "store_display_sales.csv"
+      },
+      "background": "data format\nwide\nrandom seed\nvalue column\nvalue\nvalue columns\n请选择\nmissing policy\nfail\nsubject column\n门店编号\ncondition column\ncondition\nposthoc adjustment\nbonferroni\nsignificance level\n某连锁零售企业计划评估四套货架陈列方案（常规陈列、端架陈列、入口堆头、收银台专区）对门店周销售额的影响。为消除不同门店规模带来的干扰，四套方案按四个试点档期在同一批门店中轮换试行，每个门店均在四套方案下各留一次单周销售额记录，构成同一分析对象（门店）在四种陈列条件下的重复测量。业务上需要回答：这四套陈列方案带来的门店周销售额在区组内排序上是否存在系统性差异，以及差异主要出现在哪些方案之间，以便决定最终推广方案。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题输入：同一批门店在四种货架陈列方案下的周销售额是否存在显著差异？若存在，显著差异集中在哪些方案之间？本问题拆解为四步：先确认数据形态（宽表或受试者-处理-数值长表）并完成字段识别；再做数据检查与前提诊断（类型、缺失、重复区组、常量列、并列秩比例）；随后在每一个区组（同一受试者）内部对各处理测量值排序取平均秩，用 Friedman 检验比较各处理平均秩是否一致，得到统计量 Q、自由度与 P 值，并用 Kendall 协同系数 W 衡量处理间排序的整体一致性；最后在整体显著时执行配对 Wilcoxon 两两事后比较并校正 P 值，定位差异来源。\n\n核心结论\n\nP值=8.937e-47<α=0.05，检验拒绝原假设：至少有两个处理条件下的测量结果存在显著差异；平均秩最高的为“收银台专区”（平均秩 3.49），最低的为“常规陈列”（平均秩 1.47），差异方向见事后比较。\n\n问题详细分析\n数据概览与预处理\n\n共纳入 150 个完整区组（受试者）、4 个处理（相关样本），原始区组数为 150。缺失情况为 {'常规陈列': 0, '端架陈列': 0, '入口堆头': 0, '收银台专区': 0}，按缺失策略删除了 0 个区组；含并列秩的区组比例 0.0%。Friedman 检验不要求正态性，但要求区组完整、区组内测量可排序，上述条件均已核验。\n\n各处理的中位数与平均秩如下（平均秩越高表示该处理在区组内普遍排位靠前）：\n\n处理条件\t缺失数\t中位数\t平均秩\n复制\n\n常规陈列\t0\t24.25\t1.473\n端架陈列\t0\t25.74\t2.087\n入口堆头\t0\t27.34\t2.947\n收银台专区\t0\t29.21\t3.493\n处理差异检验\n\n现象：各处理平均秩差异跨度达 2.02 个位次，最高为“收银台专区”（平均秩 3.49），最低为“常规陈列”（平均秩 1.47）。\n\n原因解释：由于每个区组内先排序后比较，Friedman 检验不受测量值分布形态影响，只回答“各处理在区组内的排名水平是否一致”。本次 Q=217.000（df=3），P=8.937e-47，小于显著性水平 α=0.05，即各处理平均秩的差异不太可能由随机波动造成。\n\n结论：处理条件之间存在具有统计意义的差异，P 值越小表明这种排序差异越难由随机波动解释。\n\n下图直接展示检验依据——各处理平均秩及每个受试者的秩点分布：\n\n原始测量值分布（箱线图与个体散点）用于核对数据形态并预览差异方向：\n\n事后比较与效应量\n\n整体差异显著后，用配对 Wilcoxon 符号秩检验逐对比较，并对 P 值做bonferroni 校正（α=0.05），结果如下：\n\n比较对\t中位数差\t平均秩差\tWilcoxon W\t原始P值\t校正P值\t是否显著\n复制\n\n常规陈列 vs 端架陈列\t+1.49\t+1.44\t2442\t1.518e-09\t9.108e-09\t显著\n常规陈列 vs 入口堆头\t+3.095\t+3.31\t607.5\t2.437e-21\t1.462e-20\t显著\n常规陈列 vs 收银台专区\t+4.965\t+4.521\t204.5\t1.305e-24\t7.831e-24\t显著\n端架陈列 vs 入口堆头\t+1.605\t+1.87\t1828\t6.228e-13\t3.737e-12\t显著\n端架陈列 vs 收银台专区\t+3.475\t+3.081\t590.5\t1.794e-21\t1.077e-20\t显著\n入口堆头 vs 收银台专区\t+1.87\t+1.211\t3136\t2.144e-06\t1.286e-05\t显著\n\n显著的两两差异集中在：“端架陈列”高于“常规陈列”、“入口堆头”高于“常规陈列”、“收银台专区”高于“常规陈列”、“入口堆头”高于“端架陈列”、“收银台专区”高于“端架陈列”、“收银台专区”高于“入口堆头”，其余比较对差异不足以排除随机波动。\n\n校正 P 值热图可直观定位显著比较对（红色越深越显著）：\n\n整体效应量 Kendall W=0.482，取值 0–1，表示各受试者内处理排序的一致性程度：中等。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "处理条件",
+              "缺失数",
+              "中位数",
+              "平均秩 复制"
+            ],
+            [
+              "常规陈列",
+              "0",
+              "24.25",
+              "1.473"
+            ],
+            [
+              "端架陈列",
+              "0",
+              "25.74",
+              "2.087"
+            ],
+            [
+              "入口堆头",
+              "0",
+              "27.34",
+              "2.947"
+            ],
+            [
+              "收银台专区",
+              "0",
+              "29.21",
+              "3.493"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "比较对",
+              "中位数差",
+              "平均秩差",
+              "Wilcoxon W",
+              "原始P值",
+              "校正P值",
+              "是否显著 复制"
+            ],
+            [
+              "常规陈列 vs 端架陈列",
+              "+1.49",
+              "+1.44",
+              "2442",
+              "1.518e-09",
+              "9.108e-09",
+              "显著"
+            ],
+            [
+              "常规陈列 vs 入口堆头",
+              "+3.095",
+              "+3.31",
+              "607.5",
+              "2.437e-21",
+              "1.462e-20",
+              "显著"
+            ],
+            [
+              "常规陈列 vs 收银台专区",
+              "+4.965",
+              "+4.521",
+              "204.5",
+              "1.305e-24",
+              "7.831e-24",
+              "显著"
+            ],
+            [
+              "端架陈列 vs 入口堆头",
+              "+1.605",
+              "+1.87",
+              "1828",
+              "6.228e-13",
+              "3.737e-12",
+              "显著"
+            ],
+            [
+              "端架陈列 vs 收银台专区",
+              "+3.475",
+              "+3.081",
+              "590.5",
+              "1.794e-21",
+              "1.077e-20",
+              "显著"
+            ],
+            [
+              "入口堆头 vs 收银台专区",
+              "+1.87",
+              "+1.211",
+              "3136",
+              "2.144e-06",
+              "1.286e-05",
+              "显著"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "fig2_mean_ranks.png",
+        "fig3_posthoc_pvalues.png",
+        "fig1_condition_distribution.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/730c2e6f3adb453a91c6978cac4ac720",
+      "page": 10,
+      "index_in_page": 13,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_13/revision_2/run_024b16cb002f46b191a9459385dbc92c/fig2_mean_ranks.png?auth_key=1790399700-0-0-83c32786950d0bf5ef4ab40bc4654cc5",
+          "filename": "fig2_mean_ranks.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_13/revision_2/run_024b16cb002f46b191a9459385dbc92c/fig2_mean_ranks.png?auth_key=1790399700-0-0-83c32786950d0bf5ef4ab40bc4654cc5",
+          "filename": "fig3_posthoc_pvalues.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_13/revision_2/run_024b16cb002f46b191a9459385dbc92c/fig2_mean_ranks.png?auth_key=1790399700-0-0-83c32786950d0bf5ef4ab40bc4654cc5",
+          "filename": "fig1_condition_distribution.png"
+        }
+      ],
+      "call_count": 56,
+      "is_hot": "否",
+      "seq": 149,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "多元方差分析（MANOVA）",
+      "params": {
+        "因变量": "知识掌握 + 3",
+        "事后比较": "执行",
+        "分组变量": "授课方式",
+        "随机种子": "42",
+        "显著性水平": "0.05",
+        "标准化方式": "不标准化",
+        "前提检验阈值": "0.05"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "manova_teaching_data.csv"
+      },
+      "background": "因变量\n知识掌握\n+ 3\n事后比较\n执行\n分组变量\n授课方式\n随机种子\n显著性水平\n0.05\n标准化方式\n不标准化\n前提检验阈值\n0.05\n某培训机构同一门课程采用线下大班、线上小班与混合项目制三种授课方式。课程结束后使用统一的结业测评，从知识掌握、应用技能、沟通协作、学习体验四个维度对学员进行评分（各 0–100 分）。业务上需要判断三种授课方式下学员在这四个测评维度构成的整体表现上是否存在显著差异，若存在，进一步定位差异主要由哪些维度、以什么方向驱动，从而为课程设计与班型投放提供依据。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题拆解为三层：先确认数据是否满足多元方差分析的前提（组内多元正态、协方差齐性、样本充足），再比较各组的多个因变量组成的均值向量是否存在整体差异（MANOVA 主检验，同时报告四种多元统计量），最后在整体显著时做受保护的单变量方差分析（Bonferroni 校正）与 Tukey 事后两两比较，并借助典型判别根解释差异主要由哪些因变量驱动。分析流程为：数据检查与缺失处理 → 前提诊断与分支处理 → MANOVA 主检验 → 单变量与事后跟进 → 判别解释与图表验证，结论只依据本次样本的数值证据。\n\n核心结论\n\n整体来看，授课方式 各组在 知识掌握、应用技能、沟通协作、学习体验 上的均值向量存在统计显著差异（Pillai 迹=1.009，F=36.88，p=<0.001），差异由哪些指标驱动见下文的单变量与典型载荷分析。\n\n问题详细分析\n数据概览与预处理\n\n分析使用 150 行有效样本（原始 150 行，因缺失剔除 0 行），共 4 个因变量（知识掌握、应用技能、沟通协作、学习体验）和 1 个分组变量（授课方式，水平数 3）。各组样本量：混合项目制组 50 例；线上小班组 50 例；线下大班组 50 例。 预处理包括数值类型转换、按行剔除因变量或分组缺失样本、各组样本量核查（每组须大于因变量个数）。因变量保持原量纲，未额外标准化。\n\n整体差异检验\n\n前提诊断结果：逐因变量 Shapiro-Wilk（残差） 均未发现显著偏离正态； Box's M 协方差齐性近似检验 p=0.443，未发现协方差阵不齐； Levene 检验未发现方差不齐。\n\nMANOVA 主检验结果（原假设：各组均值向量相等）：\n\n效应\t检验\t统计量\tF\t自由度\tp 值\t显著性\n复制\n\n授课方式\tWilks\t0.243\t37.099\t8, 288\t0.000\t是\n授课方式\tPillai\t1.009\t36.884\t8, 290\t0.000\t是\n授课方式\tHotelling\t2.087\t37.417\t8, 203.402\t0.000\t是\n授课方式\tRoy\t1.275\t46.211\t4, 145\t0.000\t是\n\n以对异方差较稳健的 Pillai 迹为主：p=<0.001，小于显著性水平 0.050，整体差异统计显著；Pillai 迹数值 1.009 可看作多变量效应量的参考。\n\n上图按分组给出每个因变量的均值与 95% 置信区间，用于直观判断差异方向：区间重叠少、分离明显的指标对整体差异贡献更大。\n\n单变量与事后比较\n\n整体显著后进入受保护的单变量方差分析，Bonferroni 校正阈值为 0.0125（显著性水平 0.050 ÷ 因变量数 4）：\n\n因变量\t效应\tF\t自由度\tp 值\t偏η²\tBonferroni 显著\n复制\n\n知识掌握\t授课方式\t13.779\t2\t0.000\t0.158\t是\n应用技能\t授课方式\t16.384\t2\t0.000\t0.182\t是\n沟通协作\t授课方式\t54.016\t2\t0.000\t0.424\t是\n学习体验\t授课方式\t35.039\t2\t0.000\t0.323\t是\n\n对通过校正的因变量进一步做 Tukey 两两比较：\n\n因变量\t组对\t均值差\t95% 下限\t95% 上限\t校正 p 值\t显著\n复制\n\n知识掌握\t混合项目制 vs 线上小班\t-3.830\t-7.673\t0.013\t0.051\t否\n知识掌握\t混合项目制 vs 线下大班\t4.676\t0.833\t8.519\t0.013\t是\n知识掌握\t线上小班 vs 线下大班\t8.506\t4.663\t12.349\t0.000\t是\n应用技能\t混合项目制 vs 线上小班\t4.334\t0.508\t8.160\t0.022\t是\n应用技能\t混合项目制 vs 线下大班\t-4.910\t-8.736\t-1.084\t0.008\t是\n应用技能\t线上小班 vs 线下大班\t-9.244\t-13.070\t-5.418\t0.000\t是\n沟通协作\t混合项目制 vs 线上小班\t-11.936\t-15.565\t-8.307\t0.000\t是\n沟通协作\t混合项目制 vs 线下大班\t-15.106\t-18.735\t-11.477\t0.000\t是\n沟通协作\t线上小班 vs 线下大班\t-3.170\t-6.799\t0.459\t0.100\t否\n学习体验\t混合项目制 vs 线上小班\t7.224\t3.680\t10.768\t0.000\t是\n学习体验\t混合项目制 vs 线下大班\t-5.254\t-8.798\t-1.710\t0.002\t是\n学习体验\t线上小班 vs 线下大班\t-12.478\t-16.022\t-8.934\t0.000\t是\n\n典型判别根显示组间差异在各维度上的分配： 第 1 个根：贡献率 61%，典型相关 0.75，主要载荷在 学习体验（载荷 0.75）、应用技能（载荷 0.56）、知识掌握（载荷 -0.51）；第 2 个根：贡献率 39%，典型相关 0.67，主要载荷在 沟通协作（载荷 -0.97）。\n\n上图用前两个判别维度展示各组的分离情况，点群分开越明显，说明该方向上组间差异越大。\n\n以上数值、样本量与图表均由本次代码输出得到，前提诊断未发现明显问题。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "效应",
+              "检验",
+              "统计量",
+              "F",
+              "自由度",
+              "p 值",
+              "显著性 复制"
+            ],
+            [
+              "授课方式",
+              "Wilks",
+              "0.243",
+              "37.099",
+              "8, 288",
+              "0.000",
+              "是"
+            ],
+            [
+              "授课方式",
+              "Pillai",
+              "1.009",
+              "36.884",
+              "8, 290",
+              "0.000",
+              "是"
+            ],
+            [
+              "授课方式",
+              "Hotelling",
+              "2.087",
+              "37.417",
+              "8, 203.402",
+              "0.000",
+              "是"
+            ],
+            [
+              "授课方式",
+              "Roy",
+              "1.275",
+              "46.211",
+              "4, 145",
+              "0.000",
+              "是"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "因变量",
+              "效应",
+              "F",
+              "自由度",
+              "p 值",
+              "偏η²",
+              "Bonferroni 显著 复制"
+            ],
+            [
+              "知识掌握",
+              "授课方式",
+              "13.779",
+              "2",
+              "0.000",
+              "0.158",
+              "是"
+            ],
+            [
+              "应用技能",
+              "授课方式",
+              "16.384",
+              "2",
+              "0.000",
+              "0.182",
+              "是"
+            ],
+            [
+              "沟通协作",
+              "授课方式",
+              "54.016",
+              "2",
+              "0.000",
+              "0.424",
+              "是"
+            ],
+            [
+              "学习体验",
+              "授课方式",
+              "35.039",
+              "2",
+              "0.000",
+              "0.323",
+              "是"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "data": [
+            [
+              "因变量",
+              "组对",
+              "均值差",
+              "95% 下限",
+              "95% 上限",
+              "校正 p 值",
+              "显著 复制"
+            ],
+            [
+              "知识掌握",
+              "混合项目制 vs 线上小班",
+              "-3.830",
+              "-7.673",
+              "0.013",
+              "0.051",
+              "否"
+            ],
+            [
+              "知识掌握",
+              "混合项目制 vs 线下大班",
+              "4.676",
+              "0.833",
+              "8.519",
+              "0.013",
+              "是"
+            ],
+            [
+              "知识掌握",
+              "线上小班 vs 线下大班",
+              "8.506",
+              "4.663",
+              "12.349",
+              "0.000",
+              "是"
+            ],
+            [
+              "应用技能",
+              "混合项目制 vs 线上小班",
+              "4.334",
+              "0.508",
+              "8.160",
+              "0.022",
+              "是"
+            ],
+            [
+              "应用技能",
+              "混合项目制 vs 线下大班",
+              "-4.910",
+              "-8.736",
+              "-1.084",
+              "0.008",
+              "是"
+            ],
+            [
+              "应用技能",
+              "线上小班 vs 线下大班",
+              "-9.244",
+              "-13.070",
+              "-5.418",
+              "0.000",
+              "是"
+            ],
+            [
+              "沟通协作",
+              "混合项目制 vs 线上小班",
+              "-11.936",
+              "-15.565",
+              "-8.307",
+              "0.000",
+              "是"
+            ],
+            [
+              "沟通协作",
+              "混合项目制 vs 线下大班",
+              "-15.106",
+              "-18.735",
+              "-11.477",
+              "0.000",
+              "是"
+            ],
+            [
+              "沟通协作",
+              "线上小班 vs 线下大班",
+              "-3.170",
+              "-6.799",
+              "0.459",
+              "0.100",
+              "否"
+            ],
+            [
+              "学习体验",
+              "混合项目制 vs 线上小班",
+              "7.224",
+              "3.680",
+              "10.768",
+              "0.000",
+              "是"
+            ],
+            [
+              "学习体验",
+              "混合项目制 vs 线下大班",
+              "-5.254",
+              "-8.798",
+              "-1.710",
+              "0.002",
+              "是"
+            ],
+            [
+              "学习体验",
+              "线上小班 vs 线下大班",
+              "-12.478",
+              "-16.022",
+              "-8.934",
+              "0.000",
+              "是"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "fig2_group_boxplots.png",
+        "fig1_group_means.png",
+        "fig3_canonical_scores.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/a93643871e30400a873b63a65786d7d7",
+      "page": 12,
+      "index_in_page": 1,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_28/revision_1/run_1a3a268a306a4617b9a460da5355a48f/fig1_group_means.png?auth_key=1790400000-0-0-d8923ca0ca737dc4de01d185a1d91230",
+          "filename": "fig2_group_boxplots.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_28/revision_1/run_1a3a268a306a4617b9a460da5355a48f/fig1_group_means.png?auth_key=1790400000-0-0-d8923ca0ca737dc4de01d185a1d91230",
+          "filename": "fig1_group_means.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_28/revision_1/run_1a3a268a306a4617b9a460da5355a48f/fig1_group_means.png?auth_key=1790400000-0-0-d8923ca0ca737dc4de01d185a1d91230",
+          "filename": "fig3_canonical_scores.png"
+        }
+      ],
+      "call_count": 50,
+      "is_hot": "否",
+      "seq": 167,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "Mood中位数检验",
+      "params": {
+        "ties": "below",
+        "alpha": "",
+        "figures": "box_dot + 1",
+        "correction": "",
+        "do pairwise": "",
+        "group column": "干线线路",
+        "value column": "配送时长_小时"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "delivery_duration_routes.csv"
+      },
+      "background": "ties\nbelow\nalpha\nfigures\nbox_dot\n+ 1\ncorrection\ndo pairwise\ngroup column\n干线线路\nvalue column\n配送时长_小时\n某快递运营企业对其三条跨省干线（华东干线、华北干线、西南干线）进行配送时效对标分析。干线配送时长指包裹自揽收网点发车至目的地派送网点签收所经过的时间，受中转环节、路况与天气影响，时长分布右偏且存在个别极端延误。运营部门需要判断三条干线的配送时长中位数位置是否一致，以决定是否需要针对特定线路单独制定时效考核目标，并希望判断不被个别极端延误个案左右。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n待回答的问题是“华东干线、华北干线、西南干线三条跨省干线的包裹配送时长中位数是否存在显著差异？”。数据按“组别 + 数值”组织成若干独立样本，Mood 中位数检验不依赖正态与方差齐性假定，先以全体有效观测的中位数（合并中位数）为分界，把每个观测划入“低于或等于”与“高于”两侧形成 2×k 计数表，再检验各组两侧比例的差异是否显著超出随机波动。主要流程为：① 识别分组与数值字段并按执行关系校验多文件结构；② 检查有效样本量与分布形态并评估卡方近似的适用性；③ 执行 median_test得到卡方统计量、自由度和 P 值；④ 依据 α 判断显著性并用各组中位数与高于比例解释方向；⑤ 组数大于 2 且主检验显著时做两两比较（Bonferroni 校正）。共 3 个组、150 个有效观测参与检验。\n\n核心结论\n\n在 α=0.05 水平上，3 个组的中位数位置差异具有统计显著性（P=0.02149），至少有一组与其余组不同。\n\n问题详细分析\n数据概览与预处理\n\n按分组字段“干线线路”解析出 3 个组，有效观测 150 行，剔除缺失与非法取值后保留 150 个有效观测；全体观测的中位数（合并中位数）为 21.200，检验将等于合并中位数的观测按 ties=below 规则归入低侧。\n\n组\t样本量\t中位数\tQ1\tQ3\t高于合并中位数比例\t离群点\n复制\n\n华北干线\t50\t27.250\t19.250\t35.850\t66.0%\t3\n西南干线\t50\t20.200\t14.825\t25.650\t42.0%\t3\n华东干线\t50\t18.500\t14.350\t23.700\t42.0%\t2\njoint：保留 1 个文件边界完成联合分析，共 150 行观测\n组间中位数差异检验\n\n下表是各组相对合并中位数的 2×k 计数表（第一行为高于合并中位数的观测数，第二行为低于或等于合并中位数的观测数）：\n\n相对合并中位数的位置\t华北干线\t西南干线\t华东干线\n复制\n\n高于\t33\t21\t21\n低于或等于\t17\t29\t29\n\nMood 中位数检验给出卡方统计量 χ²=7.680（自由度 2），P 值 0.02149，计数表期望频数最低为 25.00，低于 5 的格子占 0%，卡方近似基本可靠。\n\n图中箱体显示各组中位数与四分位范围，散点为组内观测，虚线为全体样本的合并中位数。它直观呈现“哪一组更偏向高于或低于总体中位数”：高于合并中位数的比例最高的是“华北干线”，最低的是“西南干线”。\n\n综合计数表与 P 值：P 值越小说明各组落在合并中位数两侧的比例差异越不像随机波动。差异具有统计意义，至少一个组的中位数位置偏离其余组，结合各组高于比例可判断差异方向。\n\n稳健性与补充分析\n\n主检验显著且组数大于 2，进一步做两两 Mood 中位数检验并对 3 对比较作 Bonferroni 校正，结果如下：\n\n组对\t卡方\t原始 P 值\t校正 P 值\t是否显著\n复制\n\n华北干线 vs 西南干线\t6.760\t0.009322\t0.02797\t显著\n华北干线 vs 华东干线\t6.760\t0.009322\t0.02797\t显著\n西南干线 vs 华东干线\t0.360\t0.5485\t1\t不显著\n\nMood 中位数检验只利用观测相对合并中位数的方向，会损失幅度信息；此处同时报告各组中位数与四分位距以弥补位置信息。诊断中按 1.5 倍四分位距识别出的离群观测未删除，因为本方法对离群稳健。若数据近似正态且方差齐，可考虑使用Kruskal-Wallis 或单因素 ANOVA 获得更高检验功效，本结果不构成方法切换依据。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "组",
+              "样本量",
+              "中位数",
+              "Q1",
+              "Q3",
+              "高于合并中位数比例",
+              "离群点 复制"
+            ],
+            [
+              "华北干线",
+              "50",
+              "27.250",
+              "19.250",
+              "35.850",
+              "66.0%",
+              "3"
+            ],
+            [
+              "西南干线",
+              "50",
+              "20.200",
+              "14.825",
+              "25.650",
+              "42.0%",
+              "3"
+            ],
+            [
+              "华东干线",
+              "50",
+              "18.500",
+              "14.350",
+              "23.700",
+              "42.0%",
+              "2"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "相对合并中位数的位置",
+              "华北干线",
+              "西南干线",
+              "华东干线 复制"
+            ],
+            [
+              "高于",
+              "33",
+              "21",
+              "21"
+            ],
+            [
+              "低于或等于",
+              "17",
+              "29",
+              "29"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "data": [
+            [
+              "组对",
+              "卡方",
+              "原始 P 值",
+              "校正 P 值",
+              "是否显著 复制"
+            ],
+            [
+              "华北干线 vs 西南干线",
+              "6.760",
+              "0.009322",
+              "0.02797",
+              "显著"
+            ],
+            [
+              "华北干线 vs 华东干线",
+              "6.760",
+              "0.009322",
+              "0.02797",
+              "显著"
+            ],
+            [
+              "西南干线 vs 华东干线",
+              "0.360",
+              "0.5485",
+              "1",
+              "不显著"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "mood_median_contingency.png",
+        "mood_median_groups.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/f059a9dd4d154211aae3c85e095a7d39",
+      "page": 12,
+      "index_in_page": 11,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_30/revision_1/run_b475eda2851149f98deb4beb294f69dd/mood_median_groups.png?auth_key=1790400300-0-0-0547dcdac139e0eeb4925e3a3c733fa1",
+          "filename": "mood_median_contingency.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_30/revision_1/run_b475eda2851149f98deb4beb294f69dd/mood_median_groups.png?auth_key=1790400300-0-0-0547dcdac139e0eeb4925e3a3c733fa1",
+          "filename": "mood_median_groups.png"
+        }
+      ],
+      "call_count": 47,
+      "is_hot": "否",
+      "seq": 177,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "协方差分析",
+      "params": {
+        "alpha": "0.05",
+        "group column": "促销方案",
+        "target column": "活动周销售额",
+        "normality check": "开启",
+        "covariate center": "总体均值中心化",
+        "missing strategy": "整行删除",
+        "covariate columns": "门店面积 + 1",
+        "homogeneity check": "开启",
+        "interaction alpha": "0.05",
+        "interaction check": "开启",
+        "multiple comparison": "bonferroni"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "retail_promotion_sales.csv"
+      },
+      "background": "alpha\n0.05\ngroup column\n促销方案\ntarget column\n活动周销售额\nnormality check\n开启\ncovariate center\n总体均值中心化\nmissing strategy\n整行删除\ncovariate columns\n门店面积\n+ 1\nhomogeneity check\n开启\ninteraction alpha\n0.05\ninteraction check\n开启\nmultiple comparison\nbonferroni\n某连锁零售企业为评估三种促销陈列方案（方案A：常规货架陈列；方案B：端架主题陈列；方案C：收银台与入口组合陈列）的短期销售带动效果，抽取下属门店开展为期一周的方案对比。由于门店历史经营条件存在差异，三种方案的门店在门店面积与促销前日均客流上并不均衡（方案B门店整体面积偏大、客流偏高），若直接比较促销周销售额，会把门店禀赋差异混入方案效果。需要在校正门店面积、促销前日均客流两个连续协变量的影响后，比较三种方案活动周销售额的调整均值是否存在显著差异，并进一步判断差异方向与幅度。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题是要在剔除协变量（门店面积、促销前日均客流）的影响后，比较 3 个组在因变量“活动周销售额”上的差异。采用协方差分析（ANCOVA）：先把因变量对分组与协变量建立线性模型 y ~ group + x，逐项核查组内线性、斜率同质性（组别与协变量交互是否显著）、残差正态性与方差齐性；前提通过后用 type II 方差分析检验分组主效应，在协变量总体均值处计算各组调整均值，并对调整均值做两两比较，用 bonferroni 法校正 P 值，配合偏η²评价效应大小。分析依次产出前提检验证据、方差分析表、调整均值表、两两比较表和证据图，供结论追溯。\n\n核心结论\n\n控制门店面积、促销前日均客流后，方案C的活动周销售额显著高于方案A（调整均值差=4.41，校正 P=5.41e-21；分组主效应 F=63.9，P=1.29e-20）。\n\n问题详细分析\n数据概览与预处理\n\n原始数据 150 行，含缺失 0 行、重复删除 0 行，实际建模 150 行；分析共涉及 4 个变量（分组“促销方案”、因变量“活动周销售额”、协变量 2 个）。各组样本量：方案A组50行、方案B组50行、方案C组50行。协变量在建模时做了中心化，缺失按策略整行删除，异常值先核查、不默认剔除。\n\n组别\t样本量\t调整均值\t95% 置信区间\n复制\n\n方案A\t50\t4.175\t3.686 ~ 4.664\n方案B\t50\t5.009\t4.328 ~ 5.69\n方案C\t50\t8.585\t7.944 ~ 9.227\n前提检验结果\n\n各组内因变量与协变量的相关系数：方案A r=0.296、方案B r=0.33、方案C r=0.35，结合散点与组内拟合线，线性关系基本成立。 斜率同质性检验（组别×协变量交互，type II ANOVA）：F=0.0538，P=0.948，阈值 0.05。交互不显著，各组斜率可视为平行，满足标准 ANCOVA 前提。 残差正态性（Shapiro-Wilk（残差））：P=0.972，可以认为残差近似正态。 方差齐性 Levene 检验：P=0.456，各组方差未见显著差异。 |学生化残差|>3 的观测共 1 个，已核查、未默认剔除。\n\n以下两图分别对应前提诊断与核心比较：\n\n调整均值与组间比较\n\n方差分析表（type II）：\n\n来源\tSS\tdf\tF\tP\n复制\n\n分组\t384.7\t2\t63.85\t<0.001\n协变量:门店面积\t254.4\t1\t84.46\t<0.001\n协变量:促销前日均客流\t1351\t1\t448.6\t<0.001\n残差\t436.8\t145\t-\t-\n\n偏η²（效应量，表示该来源解释的变异比例）：分组 0.468、协变量:门店面积 0.368、协变量:促销前日均客流 0.756。\n\n调整均值两两比较（校正方法：bonferroni，显著性阈值 0.05）：\n\n比较（组2−组1）\t均值差\t标准误\tt\t原始P\t校正P\n复制\n\n方案B − 方案A\t0.834\t0.4409\t1.892\t0.061\t0.182\n方案C − 方案A\t4.411\t0.3924\t11.24\t<0.001\t<0.001\n方案C − 方案B\t3.577\t0.5714\t6.259\t<0.001\t<0.001\n\n综上：ANCOVA 分组主效应 F(2,145)=63.9，P=1.29e-20。控制门店面积、促销前日均客流后，方案C的活动周销售额显著高于方案A（调整均值差=4.41，校正 P=5.41e-21；分组主效应 F=63.9，P=1.29e-20）。 调整均值（在协变量门店面积、促销前日均客流总体均值处）：方案A=4.17；方案B=5.01；方案C=8.59。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "组别",
+              "样本量",
+              "调整均值",
+              "95% 置信区间 复制"
+            ],
+            [
+              "方案A",
+              "50",
+              "4.175",
+              "3.686  ~  4.664"
+            ],
+            [
+              "方案B",
+              "50",
+              "5.009",
+              "4.328  ~  5.69"
+            ],
+            [
+              "方案C",
+              "50",
+              "8.585",
+              "7.944  ~  9.227"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "来源",
+              "SS",
+              "df",
+              "F",
+              "P 复制"
+            ],
+            [
+              "分组",
+              "384.7",
+              "2",
+              "63.85",
+              "<0.001"
+            ],
+            [
+              "协变量:门店面积",
+              "254.4",
+              "1",
+              "84.46",
+              "<0.001"
+            ],
+            [
+              "协变量:促销前日均客流",
+              "1351",
+              "1",
+              "448.6",
+              "<0.001"
+            ],
+            [
+              "残差",
+              "436.8",
+              "145",
+              "-",
+              "-"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "data": [
+            [
+              "比较（组2−组1）",
+              "均值差",
+              "标准误",
+              "t",
+              "原始P",
+              "校正P 复制"
+            ],
+            [
+              "方案B − 方案A",
+              "0.834",
+              "0.4409",
+              "1.892",
+              "0.061",
+              "0.182"
+            ],
+            [
+              "方案C − 方案A",
+              "4.411",
+              "0.3924",
+              "11.24",
+              "<0.001",
+              "<0.001"
+            ],
+            [
+              "方案C − 方案B",
+              "3.577",
+              "0.5714",
+              "6.259",
+              "<0.001",
+              "<0.001"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "fig_scatter_lines.png",
+        "fig_resid_qq.png",
+        "fig_adjusted_means.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/35ed83c26a9c4495a09833e93eea8487",
+      "page": 13,
+      "index_in_page": 13,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_19/revision_1/run_72aa27d3a921461c97e7707b7b3a0e14/fig_scatter_lines.png?auth_key=1790400600-0-0-972de1eb1cf691fb4cb253746a4c925a",
+          "filename": "fig_scatter_lines.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_19/revision_1/run_72aa27d3a921461c97e7707b7b3a0e14/fig_scatter_lines.png?auth_key=1790400600-0-0-972de1eb1cf691fb4cb253746a4c925a",
+          "filename": "fig_resid_qq.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_19/revision_1/run_72aa27d3a921461c97e7707b7b3a0e14/fig_scatter_lines.png?auth_key=1790400600-0-0-972de1eb1cf691fb4cb253746a4c925a",
+          "filename": "fig_adjusted_means.png"
+        }
+      ],
+      "call_count": 42,
+      "is_hot": "否",
+      "seq": 194,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "游程检验",
+      "params": {
+        "值列": "灌装净含量(ml)",
+        "排序列": "批次号",
+        "切点方法": "中位数",
+        "检验方向": "双侧",
+        "检验模式": "单样本随机性检验",
+        "概率算法": "自动",
+        "并列值策略": "保留原始顺序",
+        "显著性水平": "",
+        "连续性校正": "启用",
+        "切点等值处理": "归为低位组",
+        "自定义切点值": "",
+        "精确法样本上限": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "fill_weight_monitor.csv"
+      },
+      "background": "值列\n灌装净含量(ml)\n排序列\n批次号\n切点方法\n中位数\n检验方向\n双侧\n检验模式\n单样本随机性检验\n概率算法\n自动\n并列值策略\n保留原始顺序\n显著性水平\n连续性校正\n启用\n切点等值处理\n归为低位组\n自定义切点值\n精确法样本上限\n某饮料灌装车间的质量巡检记录按生产批次顺序登记每批灌装净含量（单位：毫升）。质量管理人员需要判断连续批次的灌装量波动是否属于正常随机波动：若波动随机，说明灌装工序处于受控状态；若序列呈现同号成串聚集或随时间漂移，则提示灌装阀、压力调节或物料温度可能存在缓慢变化，应进一步排查设备与工艺。游程检验用于分析按生产批次顺序排列的灌装净含量序列是否存在非随机模式。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n本问题关注一条有序观测（灌装净含量(ml)）是否存在非随机波动模式。分析拆解为三步：先检查序列完整性并确定高低分组方式（二分类直接编码，连续值按切点转为高位/低位）；再统计游程数 R，与随机排列下的期望游程比较，判断游程是否偏少或偏多；最后用组合精确分布或正态近似计算 P 值并解释实际含义。对连续数据补充切点敏感性诊断，检查结论是否依赖切点选择。\n\n核心结论\n\n观测序列存在显著的非随机模式，游程偏少（同号成串、倾向聚集或正相关）（P=<0.0001，α=0.05）\n\n问题详细分析\n数据概览与预处理\n\n原始样本 150 条（缺失 0 条），值列“灌装净含量(ml)”按排序列“批次号”排序后进入检验；数据转为高位/低位二值序列，切点：中位数 = 499.9，低位 75 条、高位 75 条。\n\n检验结果分析\n\n现象：观测游程数为 8 个，随机期望约 76 个，Z 统计量 -11.06，P 值 <0.0001，按 α=0.05 判定为显著。\n\n原因解释：较小的 P 值表示“序列纯属随机排列”这一解释与数据相符的可能性很低。观测游程数明显少于随机期望，说明同号观测成串聚集；明显多于随机期望则说明系统交替。 本次检验方向为双侧，采用正态近似（含连续性校正）。\n\n检验汇总如下表所示。\n\n指标\t数值\n复制\n\n有效样本量 n\t150\n低位组计数 n1\t75\n高位组计数 n2\t75\n观测游程数 R\t8\n随机期望 E(R)\t76\n标准差 SD\t6.103\nZ 统计量\t-11.06\nP 值\t<0.0001\n推断方法\t正态近似（含连续性校正）\n检验方向\t双侧\n游程方向\t游程偏少（同号成串、倾向聚集或正相关）\n\n上图展示灌装净含量(ml)的原始走势与游程分段，与表中的 R、E(R) 数值相互印证，用于判断非随机模式的形态。\n\n稳健性与补充观察\n\n为检查结论是否依赖切点选择，下面给出不同切点下的检验结果（P<α 记“显著”）：\n\n切点\t低位 n1\t高位 n2\t游程 R\tZ\tP\t判定\n复制\n\n25% 分位 = 499\t39\t111\t14\t-9.434\t<0.0001\t显著\n中位数 = 499.9\t75\t75\t8\t-11.06\t<0.0001\t显著\n75% 分位 = 500.6\t112\t38\t18\t-8.518\t<0.0001\t显著\n均值 = 499.8\t72\t78\t8\t-11.06\t<0.0001\t显著\n\n上图比较不同切点下 Z 统计量的变化，用于判断检验结论对切点选择是否稳健。\n\n总体而言，本次结论由上述游程统计量与图表证据支持；如需进一步定位非随机模式的来源，可结合自相关或周期分析继续诊断。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "指标",
+              "数值 复制"
+            ],
+            [
+              "有效样本量 n",
+              "150"
+            ],
+            [
+              "低位组计数 n1",
+              "75"
+            ],
+            [
+              "高位组计数 n2",
+              "75"
+            ],
+            [
+              "观测游程数 R",
+              "8"
+            ],
+            [
+              "随机期望 E(R)",
+              "76"
+            ],
+            [
+              "标准差 SD",
+              "6.103"
+            ],
+            [
+              "Z 统计量",
+              "-11.06"
+            ],
+            [
+              "P 值",
+              "<0.0001"
+            ],
+            [
+              "推断方法",
+              "正态近似（含连续性校正）"
+            ],
+            [
+              "检验方向",
+              "双侧"
+            ],
+            [
+              "游程方向",
+              "游程偏少（同号成串、倾向聚集或正相关）"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "切点",
+              "低位 n1",
+              "高位 n2",
+              "游程 R",
+              "Z",
+              "P",
+              "判定 复制"
+            ],
+            [
+              "25% 分位 = 499",
+              "39",
+              "111",
+              "14",
+              "-9.434",
+              "<0.0001",
+              "显著"
+            ],
+            [
+              "中位数 = 499.9",
+              "75",
+              "75",
+              "8",
+              "-11.06",
+              "<0.0001",
+              "显著"
+            ],
+            [
+              "75% 分位 = 500.6",
+              "112",
+              "38",
+              "18",
+              "-8.518",
+              "<0.0001",
+              "显著"
+            ],
+            [
+              "均值 = 499.8",
+              "72",
+              "78",
+              "8",
+              "-11.06",
+              "<0.0001",
+              "显著"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "figure_cut_sensitivity.png",
+        "figure_run_sequence.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/94cce45978594973806bf9a69ca6aad0",
+      "page": 14,
+      "index_in_page": 2,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_22/revision_1/run_255d4083d1374e22ac21eb657b0fc94d/figure_run_sequence.png?auth_key=1790400900-0-0-2f361179759b69cce21c82894949fa09",
+          "filename": "figure_cut_sensitivity.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_22/revision_1/run_255d4083d1374e22ac21eb657b0fc94d/figure_run_sequence.png?auth_key=1790400900-0-0-2f361179759b69cce21c82894949fa09",
+          "filename": "figure_run_sequence.png"
+        }
+      ],
+      "call_count": 40,
+      "is_hot": "否",
+      "seq": 198,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "方差分析（单因素/多因素）",
+      "params": {
+        "alpha": "0.05",
+        "因素列名": "商圈类型,促销方案",
+        "因变量列名": "日均营业额_万元",
+        "平方和类型": "II 型（默认，非平衡设计稳健）",
+        "效应量类型": "eta² 与 partial eta²",
+        "正态性检验": "Shapiro-Wilk（默认，小样本组内检验）",
+        "多重比较方法": "Tukey HSD（默认，方差齐时）",
+        "方差齐性检验": "Levene（默认，对非正态稳健）",
+        "非参数灵敏度检验": "Kruskal-Wallis（默认，单因素非正态时执行）"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "anova_business_data.csv"
+      },
+      "background": "alpha\n0.05\n因素列名\n商圈类型,促销方案\n因变量列名\n日均营业额_万元\n平方和类型\nII 型（默认，非平衡设计稳健）\n效应量类型\neta² 与 partial eta²\n正态性检验\nShapiro-Wilk（默认，小样本组内检验）\n多重比较方法\nTukey HSD（默认，方差齐时）\n方差齐性检验\nLevene（默认，对非正态稳健）\n非参数灵敏度检验\nKruskal-Wallis（默认，单因素非正态时执行）\n某连锁饮品品牌在三类商圈（购物中心、写字楼、社区）经营直营门店，并计划在下一季度统一推行三种促销方案（常规经营、满减活动、会员专享）。管理层以门店日均营业额作为衡量指标，需要判断商圈类型与促销方案各自及其组合对营业额的影响是否显著，并据此决定促销资源应统一投放还是按商圈差异化配置。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n针对问题“不同商圈类型与促销方案对门店日均营业额的影响是否存在显著差异？促销方案的效果是否会因商圈类型不同而变化（即是否存在交互效应）？应优先推广哪类商圈与促销方案的组合？”：\n\n本问题拆解为：日均营业额_万元的组间差异是否真实存在、差异落在哪些组对、差异有多大。先检查各单元格样本与前提条件，用最小二乘模型对因素编码并对因变量建模（含交互项），按所选平方和类型分解各主效应与交互效应的 F 检验；交互显著时结合单元格均值和交互图解读，必要时对单元格均值做事后比较，并报告偏 eta² 效应量。\n\n核心结论\n\n在显著性水平 α=0.05 下，日均营业额_万元存在显著的交互效应（显著来源：商圈类型、促销方案、商圈类型 × 促销方案），因素间效应需结合单元格均值与交互图解读。\n\n问题详细分析\n数据概览与预处理\n\n本分析共使用 150 条有效记录，剔除缺失或非法值 0 行；因变量为 日均营业额_万元，因素为商圈类型、促销方案（多因素设计）。水平构成：商圈类型=写字楼 / 促销方案=会员专享（n=17），商圈类型=写字楼 / 促销方案=常规经营（n=17），商圈类型=写字楼 / 促销方案=满减活动（n=17），商圈类型=社区 / 促销方案=会员专享（n=16），商圈类型=社区 / 促销方案=常规经营（n=16），商圈类型=社区 / 促销方案=满减活动（n=16），商圈类型=购物中心 / 促销方案=会员专享（n=17），商圈类型=购物中心 / 促销方案=常规经营（n=17），商圈类型=购物中心 / 促销方案=满减活动（n=17）。正态性检验最小 P 为 0.063，各水平基本满足正态；Levene 检验 P=0.202，方差齐。\n\n组别/水平\t样本量\t均值\t标准差\t95% 置信区间\n复制\n\n商圈类型=写字楼 / 促销方案=会员专享\t17\t13.453\t1.568\t12.647 ~ 14.259\n商圈类型=写字楼 / 促销方案=常规经营\t17\t10.201\t1.104\t9.634 ~ 10.769\n商圈类型=写字楼 / 促销方案=满减活动\t17\t11.735\t1.401\t11.015 ~ 12.456\n商圈类型=社区 / 促销方案=会员专享\t16\t9.745\t0.990\t9.218 ~ 10.272\n商圈类型=社区 / 促销方案=常规经营\t16\t8.963\t0.775\t8.550 ~ 9.376\n商圈类型=社区 / 促销方案=满减活动\t16\t10.008\t0.873\t9.542 ~ 10.473\n商圈类型=购物中心 / 促销方案=会员专享\t17\t12.216\t1.240\t11.578 ~ 12.854\n商圈类型=购物中心 / 促销方案=常规经营\t17\t11.735\t1.266\t11.084 ~ 12.386\n商圈类型=购物中心 / 促销方案=满减活动\t17\t13.723\t1.208\t13.102 ~ 14.344\n\n注：置信区间为 t 分布近似；样本量越小组间估计越不稳定。\n\n主效应与交互效应检验\n\n采用OLS 平方和分解（2 型）对多因素模型分解平方和：\n\n效应来源\t类型\t统计量\t自由度\tP 值\t显著\tpartial eta²\n复制\n\n商圈类型\t主效应\tF=83.726\tdf=(2, 141)\tP<0.001\t是\t0.543\n促销方案\t主效应\tF=27.477\tdf=(2, 141)\tP<0.001\t是\t0.280\n商圈类型 × 促销方案\t交互项\tF=10.348\tdf=(4, 141)\tP<0.001\t是\t0.227\n\nP 值小于 α 表示该效应在统计上显著；partial eta² 衡量该效应单独解释的变异比例。\n\n模型残差正态性检验 P=0.351，残差基本满足正态假设。\n\n事后比较与单元格差异\n\n单元格均值 Tukey HSD（平衡设计，交互显著）的结果如下（已做多重比较校正）：\n\n比较对象\t均值差\t95% 置信区间\t校正 P 值\t显著\n复制\n\n商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=写字楼 / 促销方案=常规经营\t-3.252\t-4.536 ~ -1.968\t0.0000\t是\n商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=写字楼 / 促销方案=满减活动\t-1.718\t-3.001 ~ -0.434\t0.0014\t是\n商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=社区 / 促销方案=会员专享\t-3.708\t-5.012 ~ -2.404\t0.0000\t是\n商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=社区 / 促销方案=常规经营\t-4.490\t-5.794 ~ -3.186\t0.0000\t是\n商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=社区 / 促销方案=满减活动\t-3.445\t-4.749 ~ -2.142\t0.0000\t是\n商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=会员专享\t-1.237\t-2.521 ~ 0.047\t0.0685\t否\n商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=常规经营\t-1.718\t-3.001 ~ -0.434\t0.0014\t是\n商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=满减活动\t0.270\t-1.014 ~ 1.554\t0.9991\t否\n商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=写字楼 / 促销方案=满减活动\t1.534\t0.250 ~ 2.818\t0.0073\t是\n商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=社区 / 促销方案=会员专享\t-0.456\t-1.760 ~ 0.848\t0.9730\t否\n商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=社区 / 促销方案=常规经营\t-1.238\t-2.542 ~ 0.066\t0.0770\t否\n商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=社区 / 促销方案=满减活动\t-0.194\t-1.497 ~ 1.110\t0.9999\t否\n商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=会员专享\t2.015\t0.731 ~ 3.299\t0.0001\t是\n商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=常规经营\t1.534\t0.250 ~ 2.818\t0.0073\t是\n商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=满减活动\t3.522\t2.238 ~ 4.806\t0.0000\t是\n商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=社区 / 促销方案=会员专享\t-1.990\t-3.294 ~ -0.687\t0.0001\t是\n商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=社区 / 促销方案=常规经营\t-2.772\t-4.076 ~ -1.468\t0.0000\t是\n商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=社区 / 促销方案=满减活动\t-1.728\t-3.032 ~ -0.424\t0.0017\t是\n商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=会员专享\t0.481\t-0.803 ~ 1.764\t0.9596\t否\n商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=常规经营\t-0.000\t-1.284 ~ 1.284\t1.0000\t否\n商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=满减活动\t1.988\t0.704 ~ 3.271\t0.0001\t是\n商圈类型=社区 / 促销方案=会员专享 与 商圈类型=社区 / 促销方案=常规经营\t-0.782\t-2.105 ~ 0.541\t0.6411\t否\n商圈类型=社区 / 促销方案=会员专享 与 商圈类型=社区 / 促销方案=满减活动\t0.263\t-1.061 ~ 1.586\t0.9994\t否\n商圈类型=社区 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=会员专享\t2.471\t1.167 ~ 3.775\t0.0000\t是\n商圈类型=社区 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=常规经营\t1.990\t0.687 ~ 3.294\t0.0001\t是\n商圈类型=社区 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=满减活动\t3.978\t2.674 ~ 5.282\t0.0000\t是\n商圈类型=社区 / 促销方案=常规经营 与 商圈类型=社区 / 促销方案=满减活动\t1.044\t-0.279 ~ 2.368\t0.2476\t否\n商圈类型=社区 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=会员专享\t3.253\t1.949 ~ 4.557\t0.0000\t是\n商圈类型=社区 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=常规经营\t2.772\t1.468 ~ 4.076\t0.0000\t是\n商圈类型=社区 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=满减活动\t4.760\t3.456 ~ 6.064\t0.0000\t是\n商圈类型=社区 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=会员专享\t2.208\t0.905 ~ 3.512\t0.0000\t是\n商圈类型=社区 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=常规经营\t1.728\t0.424 ~ 3.032\t0.0017\t是\n商圈类型=社区 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=满减活动\t3.715\t2.412 ~ 5.019\t0.0000\t是\n商圈类型=购物中心 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=常规经营\t-0.481\t-1.764 ~ 0.803\t0.9596\t否\n商圈类型=购物中心 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=满减活动\t1.507\t0.223 ~ 2.791\t0.0092\t是\n商圈类型=购物中心 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=满减活动\t1.988\t0.704 ~ 3.271\t0.0001\t是\n\n图 1：各分组观测分布（箱线图与散点）\n\n图 2：残差正态性 Q-Q 图\n\n图 3：交互作用图",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "组别/水平",
+              "样本量",
+              "均值",
+              "标准差",
+              "95% 置信区间 复制"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=会员专享",
+              "17",
+              "13.453",
+              "1.568",
+              "12.647  ~  14.259"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=常规经营",
+              "17",
+              "10.201",
+              "1.104",
+              "9.634  ~  10.769"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=满减活动",
+              "17",
+              "11.735",
+              "1.401",
+              "11.015  ~  12.456"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=会员专享",
+              "16",
+              "9.745",
+              "0.990",
+              "9.218  ~  10.272"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=常规经营",
+              "16",
+              "8.963",
+              "0.775",
+              "8.550  ~  9.376"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=满减活动",
+              "16",
+              "10.008",
+              "0.873",
+              "9.542  ~  10.473"
+            ],
+            [
+              "商圈类型=购物中心 / 促销方案=会员专享",
+              "17",
+              "12.216",
+              "1.240",
+              "11.578  ~  12.854"
+            ],
+            [
+              "商圈类型=购物中心 / 促销方案=常规经营",
+              "17",
+              "11.735",
+              "1.266",
+              "11.084  ~  12.386"
+            ],
+            [
+              "商圈类型=购物中心 / 促销方案=满减活动",
+              "17",
+              "13.723",
+              "1.208",
+              "13.102  ~  14.344"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "效应来源",
+              "类型",
+              "统计量",
+              "自由度",
+              "P 值",
+              "显著",
+              "partial eta² 复制"
+            ],
+            [
+              "商圈类型",
+              "主效应",
+              "F=83.726",
+              "df=(2, 141)",
+              "P<0.001",
+              "是",
+              "0.543"
+            ],
+            [
+              "促销方案",
+              "主效应",
+              "F=27.477",
+              "df=(2, 141)",
+              "P<0.001",
+              "是",
+              "0.280"
+            ],
+            [
+              "商圈类型 × 促销方案",
+              "交互项",
+              "F=10.348",
+              "df=(4, 141)",
+              "P<0.001",
+              "是",
+              "0.227"
+            ]
+          ]
+        },
+        {
+          "index": 2,
+          "data": [
+            [
+              "比较对象",
+              "均值差",
+              "95% 置信区间",
+              "校正 P 值",
+              "显著 复制"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=写字楼 / 促销方案=常规经营",
+              "-3.252",
+              "-4.536  ~  -1.968",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=写字楼 / 促销方案=满减活动",
+              "-1.718",
+              "-3.001  ~  -0.434",
+              "0.0014",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=社区 / 促销方案=会员专享",
+              "-3.708",
+              "-5.012  ~  -2.404",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=社区 / 促销方案=常规经营",
+              "-4.490",
+              "-5.794  ~  -3.186",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=社区 / 促销方案=满减活动",
+              "-3.445",
+              "-4.749  ~  -2.142",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=会员专享",
+              "-1.237",
+              "-2.521  ~  0.047",
+              "0.0685",
+              "否"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=常规经营",
+              "-1.718",
+              "-3.001  ~  -0.434",
+              "0.0014",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=满减活动",
+              "0.270",
+              "-1.014  ~  1.554",
+              "0.9991",
+              "否"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=写字楼 / 促销方案=满减活动",
+              "1.534",
+              "0.250  ~  2.818",
+              "0.0073",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=社区 / 促销方案=会员专享",
+              "-0.456",
+              "-1.760  ~  0.848",
+              "0.9730",
+              "否"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=社区 / 促销方案=常规经营",
+              "-1.238",
+              "-2.542  ~  0.066",
+              "0.0770",
+              "否"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=社区 / 促销方案=满减活动",
+              "-0.194",
+              "-1.497  ~  1.110",
+              "0.9999",
+              "否"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=会员专享",
+              "2.015",
+              "0.731  ~  3.299",
+              "0.0001",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=常规经营",
+              "1.534",
+              "0.250  ~  2.818",
+              "0.0073",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=满减活动",
+              "3.522",
+              "2.238  ~  4.806",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=社区 / 促销方案=会员专享",
+              "-1.990",
+              "-3.294  ~  -0.687",
+              "0.0001",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=社区 / 促销方案=常规经营",
+              "-2.772",
+              "-4.076  ~  -1.468",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=社区 / 促销方案=满减活动",
+              "-1.728",
+              "-3.032  ~  -0.424",
+              "0.0017",
+              "是"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=会员专享",
+              "0.481",
+              "-0.803  ~  1.764",
+              "0.9596",
+              "否"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=常规经营",
+              "-0.000",
+              "-1.284  ~  1.284",
+              "1.0000",
+              "否"
+            ],
+            [
+              "商圈类型=写字楼 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=满减活动",
+              "1.988",
+              "0.704  ~  3.271",
+              "0.0001",
+              "是"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=会员专享 与 商圈类型=社区 / 促销方案=常规经营",
+              "-0.782",
+              "-2.105  ~  0.541",
+              "0.6411",
+              "否"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=会员专享 与 商圈类型=社区 / 促销方案=满减活动",
+              "0.263",
+              "-1.061  ~  1.586",
+              "0.9994",
+              "否"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=会员专享",
+              "2.471",
+              "1.167  ~  3.775",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=常规经营",
+              "1.990",
+              "0.687  ~  3.294",
+              "0.0001",
+              "是"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=满减活动",
+              "3.978",
+              "2.674  ~  5.282",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=常规经营 与 商圈类型=社区 / 促销方案=满减活动",
+              "1.044",
+              "-0.279  ~  2.368",
+              "0.2476",
+              "否"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=会员专享",
+              "3.253",
+              "1.949  ~  4.557",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=常规经营",
+              "2.772",
+              "1.468  ~  4.076",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=满减活动",
+              "4.760",
+              "3.456  ~  6.064",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=会员专享",
+              "2.208",
+              "0.905  ~  3.512",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=常规经营",
+              "1.728",
+              "0.424  ~  3.032",
+              "0.0017",
+              "是"
+            ],
+            [
+              "商圈类型=社区 / 促销方案=满减活动 与 商圈类型=购物中心 / 促销方案=满减活动",
+              "3.715",
+              "2.412  ~  5.019",
+              "0.0000",
+              "是"
+            ],
+            [
+              "商圈类型=购物中心 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=常规经营",
+              "-0.481",
+              "-1.764  ~  0.803",
+              "0.9596",
+              "否"
+            ],
+            [
+              "商圈类型=购物中心 / 促销方案=会员专享 与 商圈类型=购物中心 / 促销方案=满减活动",
+              "1.507",
+              "0.223  ~  2.791",
+              "0.0092",
+              "是"
+            ],
+            [
+              "商圈类型=购物中心 / 促销方案=常规经营 与 商圈类型=购物中心 / 促销方案=满减活动",
+              "1.988",
+              "0.704  ~  3.271",
+              "0.0001",
+              "是"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "anova_group_box.png",
+        "anova_qq_plot.png",
+        "anova_interaction.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/894f81b818cc4d6fb40587503909a39b",
+      "page": 14,
+      "index_in_page": 3,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_57/revision_1/run_cec3b5a2a7e0460d8b700d6f15d11f66/anova_group_box.png?auth_key=1790400900-0-0-316c07fe8406625b257f45fa3d08be91",
+          "filename": "anova_group_box.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_57/revision_1/run_cec3b5a2a7e0460d8b700d6f15d11f66/anova_group_box.png?auth_key=1790400900-0-0-316c07fe8406625b257f45fa3d08be91",
+          "filename": "anova_qq_plot.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_57/revision_1/run_cec3b5a2a7e0460d8b700d6f15d11f66/anova_group_box.png?auth_key=1790400900-0-0-316c07fe8406625b257f45fa3d08be91",
+          "filename": "anova_interaction.png"
+        }
+      ],
+      "call_count": 40,
+      "is_hot": "否",
+      "seq": 199,
+      "tier": "basic",
+      "is_star": true
+    },
+    {
+      "algorithmName": "事后多重比较",
+      "params": {
+        "效应量输出": "报告效应量Cohen d",
+        "显著性水平": "0.05",
+        "全局前置检验": "默认：仅全局检验显著才做两两比较（ANOVA/Welch）",
+        "方差齐性检验方法": "Levene（默认，稳健）",
+        "齐性时的两两比较方法": "Tukey HSD",
+        "方差不齐时的两两比较方法": "Games-Howell"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "promotion_spend.csv"
+      },
+      "background": "效应量输出\n报告效应量Cohen d\n显著性水平\n0.05\n全局前置检验\n默认：仅全局检验显著才做两两比较（ANOVA/Welch）\n方差齐性检验方法\nLevene（默认，稳健）\n齐性时的两两比较方法\nTukey HSD\n方差不齐时的两两比较方法\nGames-Howell\n某连锁零售企业面向会员发放四类促销方案（无优惠、满减券、折扣券、无门槛券），运营部门希望评估不同方案下会员单次消费金额是否存在整体差异；若整体存在差异，还需定位究竟是哪些方案组合之间存在显著差异，以便判断满减、折扣与无门槛券的拉动效果是否可靠地区分开，避免在多重比较下把偶然波动误判为方案效果。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题拆解为三步：先核对样本量与缺失，确定分组、数值字段并描述各组；再依次做正态性与方差齐性检验，并用全局方差分析判断组间整体差异；最后仅在整体显著时进入两两比较，按方差齐性选择校正方法（齐性用 Tukey HSD/LSD/Bonferroni/Holm/Scheffé，不齐用 Games-Howell/Tamhane T2/Welch+Bonferroni），输出校正后 P、均值差置信区间与效应量 Cohen d，据此定位具体差异组。\n\n核心结论\n\n整体检验显著（单因素方差分析（ANOVA），P≈1.64e-11），校正后两两比较定位到显著差异组对：无优惠与折扣券、满减券与折扣券、无门槛券与无优惠 等4对。\n\n问题详细分析\n数据概览与预处理\n\npromotion_spend.csv：原始 150 行，有效 150 行，剔除缺失或非法值 0 行，共 4 组\n\n组别\t样本量\t均值\t标准差\n复制\n\n无优惠\t38\t116.1\t11.6\n满减券\t38\t121.7\t11.69\n无门槛券\t37\t134\t14.18\n折扣券\t37\t136.2\t13.76\n整体差异与前提检验\n\npromotion_spend.csv ：无优惠：Shapiro–Wilk P=0.9786（近似正态）；满减券：Shapiro–Wilk P=0.875（近似正态）；无门槛券：Shapiro–Wilk P=0.9017（近似正态）；折扣券：Shapiro–Wilk P=0.06751（近似正态）。\n\nLevene 方差齐性检验统计量=0.6168，P=0.6052，判定为方差齐；全局检验采用 单因素方差分析（ANOVA），F=21.32，P=1.639e-11，整体差异显著。\n\n两两比较与效应量\n\npromotion_spend.csv ：采用 Tukey HSD（α=0.05）。校正后 P 小于 α 表示该组对差异具有统计意义；均值差置信区间不含 0 也支持同样结论。共比较 6 个组对，其中 4 对显著，效应量 d 的常见口径为 0.2/0.5/0.8 对应小/中/大效应。\n\n组对\t均值差\t标准误\t校正后P\t95%置信区间\tCohen d（95%CI）\t显著\n复制\n\n无优惠 vs 折扣券\t-20.1\t2.97\t1.723e-09\t[-27.8, -12.4][-27.8, -12.4]\t-1.58 [-2.11, -1.05][-2.11, -1.05]\t是\n无门槛券 vs 折扣券\t-2.19\t2.99\t0.8842\t[-9.95, 5.58][-9.95, 5.58]\t-0.156 [-0.62, 0.31][-0.62, 0.31]\t否\n满减券 vs 折扣券\t-14.6\t2.97\t1.417e-05\t[-22.3, -6.86][-22.3, -6.86]\t-1.14 [-1.64, -0.65][-1.64, -0.65]\t是\n无门槛券 vs 无优惠\t17.9\t2.97\t7.431e-08\t[10.2, 25.6][10.2, 25.6]\t1.38 [0.87, 1.90][0.87, 1.90]\t是\n满减券 vs 无优惠\t5.52\t2.95\t0.2437\t[-2.14, 13.2][-2.14, 13.2]\t0.474 [0.01, 0.94][0.01, 0.94]\t否\n满减券 vs 无门槛券\t-12.4\t2.97\t0.0002957\t[-20.1, -4.67][-20.1, -4.67]\t-0.954 [-1.44, -0.47][-1.44, -0.47]\t是\n\n上图（promotion_spend_csv_group_means.png）展示各组均值与 95% 置信区间并叠加原始观测点：区间分离明显的组对通常对应显著差异，同时可核查数据离散与异常情况。\n\n上图（promotion_spend_csv_pairwise_forest.png）中红色代表校正后显著的组对：红点所在横线不跨越 0 线表示该组对均值差可靠地不为 0，灰色横线则差异证据不足；横线长短反映估计精度，与正文表格结论一致。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "组别",
+              "样本量",
+              "均值",
+              "标准差 复制"
+            ],
+            [
+              "无优惠",
+              "38",
+              "116.1",
+              "11.6"
+            ],
+            [
+              "满减券",
+              "38",
+              "121.7",
+              "11.69"
+            ],
+            [
+              "无门槛券",
+              "37",
+              "134",
+              "14.18"
+            ],
+            [
+              "折扣券",
+              "37",
+              "136.2",
+              "13.76"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "组对",
+              "均值差",
+              "标准误",
+              "校正后P",
+              "95%置信区间",
+              "Cohen d（95%CI）",
+              "显著 复制"
+            ],
+            [
+              "无优惠 vs 折扣券",
+              "-20.1",
+              "2.97",
+              "1.723e-09",
+              "[-27.8, -12.4][-27.8, -12.4]",
+              "-1.58   [-2.11, -1.05][-2.11, -1.05]",
+              "是"
+            ],
+            [
+              "无门槛券 vs 折扣券",
+              "-2.19",
+              "2.99",
+              "0.8842",
+              "[-9.95, 5.58][-9.95, 5.58]",
+              "-0.156   [-0.62, 0.31][-0.62, 0.31]",
+              "否"
+            ],
+            [
+              "满减券 vs 折扣券",
+              "-14.6",
+              "2.97",
+              "1.417e-05",
+              "[-22.3, -6.86][-22.3, -6.86]",
+              "-1.14   [-1.64, -0.65][-1.64, -0.65]",
+              "是"
+            ],
+            [
+              "无门槛券 vs 无优惠",
+              "17.9",
+              "2.97",
+              "7.431e-08",
+              "[10.2, 25.6][10.2, 25.6]",
+              "1.38   [0.87, 1.90][0.87, 1.90]",
+              "是"
+            ],
+            [
+              "满减券 vs 无优惠",
+              "5.52",
+              "2.95",
+              "0.2437",
+              "[-2.14, 13.2][-2.14, 13.2]",
+              "0.474   [0.01, 0.94][0.01, 0.94]",
+              "否"
+            ],
+            [
+              "满减券 vs 无门槛券",
+              "-12.4",
+              "2.97",
+              "0.0002957",
+              "[-20.1, -4.67][-20.1, -4.67]",
+              "-0.954   [-1.44, -0.47][-1.44, -0.47]",
+              "是"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "promotion_spend_csv_pairwise_forest.png",
+        "promotion_spend_csv_group_means.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/4350b2b5d2f64c7fa0feb7bb986ba3ca",
+      "page": 14,
+      "index_in_page": 5,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_89/revision_2/run_83f324b2ebfd4b4c9f80868fdbcaea0b/promotion_spend_csv_group_means.png?auth_key=1790400900-0-0-605312fb5b764ccd058c45557e5df422",
+          "filename": "promotion_spend_csv_pairwise_forest.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_89/revision_2/run_83f324b2ebfd4b4c9f80868fdbcaea0b/promotion_spend_csv_group_means.png?auth_key=1790400900-0-0-605312fb5b764ccd058c45557e5df422",
+          "filename": "promotion_spend_csv_group_means.png"
+        }
+      ],
+      "call_count": 40,
+      "is_hot": "否",
+      "seq": 201,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "独立样本Mann-Whitney U检验",
+      "params": {
+        "alpha": "",
+        "method": "auto",
+        "alternative": "two-sided",
+        "use continuity": "",
+        "bootstrap replications": ""
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "customer_service_times.csv"
+      },
+      "background": "alpha\nmethod\nauto\nalternative\ntwo-sided\nuse continuity\nbootstrap replications\n某零售企业客户服务中心下设人工热线与在线工单两条独立的售后处理通道。运营团队需要评估两条通道在承接并完结售后请求上的效率差异，以便调整坐席排班与工单流转策略。分析对象为两条通道各自受理并完结的售后工单，每条工单的处理时长以小时计量；待解决问题是判断两条通道处理时长的总体分布位置是否一致，若不一致则明确哪条通道整体耗时更短、差异幅度有多大。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题拆解为两步：先确认两组为独立样本并核对样本量与数据质量，再通过秩和比较回答两组总体位置是否不同。因数据偏态或不满足正态假定，选用对分布形态稳健的 Mann-Whitney U 检验：将两组观测混合排序得到秩和，计算 U1、U2 与 Z 近似，依据 p 与显著性水平 α=0.05 判断是否拒绝原假设，并以秩双列效应量 r、概率优超 A 和中位数差自助置信区间量化差异大小与不确定性。\n\n核心结论\n\n两组总体分布位置存在显著差异，在线工单通道的分布位置更高（p=3.205e-08）。\n\n问题详细分析\n数据概览与预处理\n\n共 150 条有效观测参与检验（组1 n=75，组2 n=75），剔除缺失或非法记录 0 条；测量列解析为数值，未删除离群值。数据布局为 grouped，relation_mode=joint，多文件关系诊断：{}。\n\n组别\t样本量\t均值\t中位数\tIQR\t偏度\n复制\n\n人工热线通道\t75\t5.54\t4.6\t3.15\t1.61\n在线工单通道\t75\t9.67\t8.7\t6.9\t1.2\n\n正态性诊断：两组 Shapiro-Wilk p 分别为 3.365e-07 与 5.575e-05，结合偏度判断数据偏态，故秩检验更稳妥；两组形状相似，结果按位置（中位数）差异解释。\n\n组间位置差异检验\n\n合并排序得 U1=1341、U2=4284，Z 近似 -5.531；采用双侧检验、method=auto，p=3.205e-08。p 的含义是：若两组总体位置真实相同，出现当前或更极端秩差异的概率为 3.205e-08。p≤α=0.05，因此拒绝原假设。\n\n图中箱体位置与散点分布反映两组观测范围与重叠情况，支持上述判断。\n\n效应量与稳健性\n\n秩双列效应量 r=0.5232（|r| 越大差异越强），概率优超 A=0.2384；中位数差（人工热线通道−在线工单通道）=-4.1，固定种子自助 2000 次的 95% 置信区间为 [-5.7, -2.3][-5.7, -2.3] ，不包含 0，位置差异方向稳定。\n\nECDF 曲线显示两组累积比例随测量值上升的先后顺序，在线工单通道的分布位置更高；合并排序中结的数量为 58，样本量下渐近近似可靠。综上，结果以秩证据为准，支持组间存在可解释的位置差异。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "组别",
+              "样本量",
+              "均值",
+              "中位数",
+              "IQR",
+              "偏度 复制"
+            ],
+            [
+              "人工热线通道",
+              "75",
+              "5.54",
+              "4.6",
+              "3.15",
+              "1.61"
+            ],
+            [
+              "在线工单通道",
+              "75",
+              "9.67",
+              "8.7",
+              "6.9",
+              "1.2"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "fig_ecdf.png",
+        "fig_boxstrip.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/e67f95c22bf745f89db0f641ee2c2991",
+      "page": 14,
+      "index_in_page": 9,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_4/revision_1/run_dab7ed3291154dd5a420d19de33e3478/fig_boxstrip.png?auth_key=1790400900-0-0-f2090d965096925e9463168fc6ae4b68",
+          "filename": "fig_ecdf.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_4/revision_1/run_dab7ed3291154dd5a420d19de33e3478/fig_boxstrip.png?auth_key=1790400900-0-0-f2090d965096925e9463168fc6ae4b68",
+          "filename": "fig_boxstrip.png"
+        }
+      ],
+      "call_count": 39,
+      "is_hot": "否",
+      "seq": 205,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "等价性检验",
+      "params": {
+        "alpha": "",
+        "delta": "",
+        "paired": "",
+        "group a": "灌装线A",
+        "group b": "灌装线B",
+        "group col": "灌装线",
+        "value col": "净含量_ml",
+        "delta type": "absolute"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "filling_line_equivalence.csv"
+      },
+      "background": "alpha\ndelta\npaired\ngroup a\n灌装线A\ngroup b\n灌装线B\ngroup col\n灌装线\nvalue col\n净含量_ml\ndelta type\nabsolute\n某饮料生产企业同时运行两条同规格灌装线，生产 500 ml 规格的果汁饮品，其中灌装线A为长期运行的既有线，灌装线B为近期验收的新线。企业质量部门需对两条灌装线的灌装一致性作等效性确认：若两条线所灌装产品的平均净含量之差不超过业务规定的等价界 ±3.0 ml，则视为两线灌装水平等效，可共用同一套过程控制目标与验收标准；否则须对两条线分别设定控制限并单独管控。为此按随机抽样方式分别从两条灌装线抽检成品瓶并记录每瓶净含量，比较两组的平均净含量是否落入预设等价界内。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n问题拆解为两步：先核对两组数据的样本条件与分布前提，再判断“均值差是否小到可忽略”。传统显著性检验只能回答“有没有差异”，无法证明两组等效，因此本分析采用双单侧检验（TOST）思路：按业务容忍度把等价界预设为 Δ，分别检验“均值差不低于 −Δ”与“不高于 +Δ”，两侧同时通过才判等价，并用 90% 置信区间作镜像证据。完整流程为：字段与文件关系检查 → 缺失与异常核查 → 正态性与方差诊断 → TOST 双侧检验与置信区间 → 稳健性解读 → 汇总证据与结论。\n\n核心结论\n\n在等价界 ±3（绝对界，与数据同单位） 下，两组均值差的 90% 置信区间 [-0.2537, 0.5636][-0.2537, 0.5636] 完全落入 (±3) 内，且 TOST P=1.854e-22<0.05，判定两组具有统计意义上的等价性。\n\n问题详细分析\n数据概览与预处理\n\n本次分析共 150 个观测值（灌装线A 75 个、灌装线B 75 个），来自 文件数：1；合并方式：单文件分析（filling_line_equivalence.csv）。未发现缺失值（两组完整）。两组均为连续数值变量，异常值先核查记录再决定去留，本组数据未删除异常值；两组按独立样本处理，采用 Welch 双单侧检验（不要求方差齐），没有擅自把独立样本改作配对或反之。\n\n对象\t样本量\t均值\t标准差\n复制\n\n灌装线A\t75\t499.9217\t1.3672\n灌装线B\t75\t500.0767\t1.6434\n等价检验结果与解读\n\n均值差为 0.1549（灌装线B 减 灌装线A），标准误 0.2469，90% 置信区间为 [-0.2537, 0.5636][-0.2537, 0.5636] 。置信区间刻画均值差“最坏可能”的范围：它完全落在等价界带内时，即使计入抽样误差，两组差异也不会超过业务可接受的最大偏差。\n\n双单侧检验给出下限侧 p1=0.0000、上限侧 p2=0.0000，TOST 双侧 P 值取二者较大者 = 0.0000。通俗地说，该 P 值小于 0.05 时，有充分证据排除“差异超过等价界”的可能；P 值较大只表示证据不足，不等于两组相等。\n\n判定：在等价界 ±3（绝对界，与数据同单位） 下，两组均值差的 90% 置信区间 [-0.2537, 0.5636][-0.2537, 0.5636] 完全落入 (±3) 内，且 TOST P=1.854e-22<0.05，判定两组具有统计意义上的等价性。\n\n指标\t数值\n复制\n\n方法\tWelch 双单侧检验（Welch TOST）\n均值差 d\t0.1549\n标准误 SE\t0.2469\n自由度 df\t143.3\n等价界 Δ\t±3（绝对界，与数据同单位）\n90% 置信区间\t[-0.2537, 0.5636][-0.2537, 0.5636]\n单侧检验 p1（下限侧）\t0.0000\n单侧检验 p2（上限侧）\t0.0000\nTOST 双侧 P 值\t0.0000\n检验水准 α\t0.05\n稳健性与前提诊断\n\n正态性诊断（检验水准 0.01）：\n\n灌装线A：Shapiro-Wilk P=0.9621，n=75，诊断结论为“通过（近似正态）”。\n灌装线B：Shapiro-Wilk P=0.3017，n=75，诊断结论为“通过（近似正态）”。\n\n方差齐性：未提示方差异质性（Welch 稳健）。\n\n稳健性说明：正态与方差诊断未提示明显问题，t 近似结果可信。判定结论只针对本次设定的等价界 Δ（±3（绝对界，与数据同单位））；若更换 Δ，判定结果可能改变，解读时必须以界值定义为准。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "对象",
+              "样本量",
+              "均值",
+              "标准差 复制"
+            ],
+            [
+              "灌装线A",
+              "75",
+              "499.9217",
+              "1.3672"
+            ],
+            [
+              "灌装线B",
+              "75",
+              "500.0767",
+              "1.6434"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "指标",
+              "数值 复制"
+            ],
+            [
+              "方法",
+              "Welch 双单侧检验（Welch TOST）"
+            ],
+            [
+              "均值差 d",
+              "0.1549"
+            ],
+            [
+              "标准误 SE",
+              "0.2469"
+            ],
+            [
+              "自由度 df",
+              "143.3"
+            ],
+            [
+              "等价界 Δ",
+              "±3（绝对界，与数据同单位）"
+            ],
+            [
+              "90% 置信区间",
+              "[-0.2537, 0.5636][-0.2537, 0.5636]"
+            ],
+            [
+              "单侧检验 p1（下限侧）",
+              "0.0000"
+            ],
+            [
+              "单侧检验 p2（上限侧）",
+              "0.0000"
+            ],
+            [
+              "TOST 双侧 P 值",
+              "0.0000"
+            ],
+            [
+              "检验水准 α",
+              "0.05"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "equivalence_interval.png",
+        "group_distribution.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/1ba935d0306b48ab93968f122a4bd755",
+      "page": 16,
+      "index_in_page": 2,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_5/revision_1/run_e42c5f6f5f274942aaf035a62e04309f/equivalence_interval.png?auth_key=1790401800-0-0-13ef45cd521084b5de3d3b0743bd5c2f",
+          "filename": "equivalence_interval.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_5/revision_1/run_e42c5f6f5f274942aaf035a62e04309f/equivalence_interval.png?auth_key=1790401800-0-0-13ef45cd521084b5de3d3b0743bd5c2f",
+          "filename": "group_distribution.png"
+        }
+      ],
+      "call_count": 30,
+      "is_hot": "否",
+      "seq": 228,
+      "tier": "advanced",
+      "is_star": false
+    },
+    {
+      "algorithmName": "单样本Wilcoxon符号秩检验",
+      "params": {
+        "参考值": "",
+        "变量选择": "自动识别",
+        "备择假设": "双侧",
+        "检验方法": "自动",
+        "随机种子": "",
+        "零值处理": "wilcox",
+        "显著性水平": "",
+        "连续性校正": "开启"
+      },
+      "caseData": {
+        "count": 150,
+        "filename": "bag_netweight_qc.csv"
+      },
+      "background": "参考值\n变量选择\n自动识别\n备择假设\n双侧\n检验方法\n自动\n随机种子\n零值处理\nwilcox\n显著性水平\n连续性校正\n开启\n某食品生产企业对当日包装下线的一批袋装产品开展净含量质量核查。该产品包装上标注的净含量为 500 g，灌装与包装环节以克为单位进行重量控制，实际净含量会围绕标称值产生随机波动。品控部门按包装顺序抽检复称了 150 袋，关心这批产品净含量的中心位置是否系统偏离标称值——若中心显著低于 500 g 会带来短斤缺两的合规风险，显著高于 500 g 则意味着成本损耗，两种情况都提示需要对灌装/称量设备进行校准。需要解决的问题是：在不假定净含量服从正态分布的前提下，判断该批样本净含量中位数是否显著偏离标称净含量 500 g。",
+      "report": "分析报告\n分析报告\n分析结果概览\n建模思路\n\n把问题拆解为“样本中位数是否等于参考值 μ0=500”的单样本位置检验，问题背景：该批 150 袋产品的净含量（g）中位数是否显著偏离标称净含量 500 g？请用单样本 Wilcoxon 符号秩检验（双侧、α=0.05）给出统计判断，并说明差异的方向与大小。数据先按分析单元关系合并与清洗，再做正态性与对称性诊断以确认非参数方法适用；随后采用单样本 Wilcoxon 符号秩检验计算正负秩和 W+、W− 与 P 值，并用秩双列效应量、伪中位数（Hodges-Lehmann）及其置信区间衡量差异方向与大小，最后依据 α 阈值给出结论。完整流程为：数据检查 → 前提诊断 → 符号秩检验 → 效应量与区间估计 → 图表佐证 → 结果解释。\n\n核心结论\n\n在显著性水平 α=0.05 下，双侧检验的 P 值为 <0.001，小于 α，拒绝原假设：net_weight_g 的中位数位置显著偏离参考值 500，且样本位置高于参考值。\n\n问题详细分析\n数据概览与预处理\n\nsingle：单文件分析单元（relation_mode=single）。\n\n分析变量\t有效样本量 n\t缺失/剔除\t零差个数\t样本中位数\t中位数差\t差值偏度\tShapiro-Wilk P\t异常点\n复制\n\nnet_weight_g\t150\t0\t0\t500.710\t0.710\t+0.32\t0.0481\t7\n\n数据清洗只剔除缺失与非有限值，不默认删除异常点；异常值先核查来源，再评估其对结论的影响。\n\n检验结果与效应量\n分析变量\tW+\tW−\t统计量 W\tZ\tP 值\t效应量 r\t伪中位数\t约95%CI\t判定\n复制\n\nnet_weight_g\t8321.0\t3004.0\t3004.0\t+4.99\t<0.001\t+0.469\t500.765\t500.48 ~ 501.06\t拒绝 H0\n\n差值分布图（fig1_diff_distribution.png）展示各观测相对参考值的偏离形态：以 0 为基准，右侧条形代表高于参考值的观测。核密度曲线形态可直观核验对称性与正态偏离，支持“选用非参数方法是否恰当”的判断。\n\n伪中位数区间图（fig3_hl_ci.png）把点估计与不确定性画在同一把尺上：伪中位数为 500.76，约95%置信区间为 500.48 ~ 501.06，参考值 500 位于区间之外，区间整体位于参考值一侧，与“拒绝原假设”的判断一致。\n\n适用性诊断与稳健性\n\n变量 net_weight_g：Shapiro-Wilk 检验 P 值为 0.0481，显著偏离正态，选用非参数方法恰当；差值分布大致对称，检验结论可理解为中位数位置；并列秩约 36 处，P 值按并列校正与渐近近似计算；IQR 规则识别异常点 7 个，结论按原数据计算，若异常点源于记录错误可剔除后复核。在 双侧 备择假设与 α=0.05 下，P 值 <0.001 的判定如上表。 提示：IQR 规则识别 7 个异常点，请先核查来源。",
+      "tables": [
+        {
+          "index": 0,
+          "data": [
+            [
+              "分析变量",
+              "有效样本量 n",
+              "缺失/剔除",
+              "零差个数",
+              "样本中位数",
+              "中位数差",
+              "差值偏度",
+              "Shapiro-Wilk P",
+              "异常点 复制"
+            ],
+            [
+              "net_weight_g",
+              "150",
+              "0",
+              "0",
+              "500.710",
+              "0.710",
+              "+0.32",
+              "0.0481",
+              "7"
+            ]
+          ]
+        },
+        {
+          "index": 1,
+          "data": [
+            [
+              "分析变量",
+              "W+",
+              "W−",
+              "统计量 W",
+              "Z",
+              "P 值",
+              "效应量 r",
+              "伪中位数",
+              "约95%CI",
+              "判定 复制"
+            ],
+            [
+              "net_weight_g",
+              "8321.0",
+              "3004.0",
+              "3004.0",
+              "+4.99",
+              "<0.001",
+              "+0.469",
+              "500.765",
+              "500.48   ~   501.06",
+              "拒绝 H0"
+            ]
+          ]
+        }
+      ],
+      "outputFiles": [
+        "fig2_sample_vs_reference.png",
+        "fig1_diff_distribution.png",
+        "fig3_hl_ci.png"
+      ],
+      "url": "https://dabbit-ai.com/algorithm-cases/9c2fd3178a2f4e2b832d8a438bf92313",
+      "page": 16,
+      "index_in_page": 9,
+      "category": "差异比较",
+      "images": [
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_29/revision_1/run_698bffc2710d46de8a4093a0c174abbb/fig1_diff_distribution.png?auth_key=1790403000-0-0-d04839a2da8f6305396a15c1fe4cbe90",
+          "filename": "fig2_sample_vs_reference.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_29/revision_1/run_698bffc2710d46de8a4093a0c174abbb/fig1_diff_distribution.png?auth_key=1790403000-0-0-d04839a2da8f6305396a15c1fe4cbe90",
+          "filename": "fig1_diff_distribution.png"
+        },
+        {
+          "src": "https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_29/revision_1/run_698bffc2710d46de8a4093a0c174abbb/fig1_diff_distribution.png?auth_key=1790403000-0-0-d04839a2da8f6305396a15c1fe4cbe90",
+          "filename": "fig3_hl_ci.png"
+        }
+      ],
+      "call_count": 27,
+      "is_hot": "否",
+      "seq": 235,
+      "tier": "advanced",
+      "is_star": false
+    }
+  ]
+}

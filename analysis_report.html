@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Dabbit AI SPSS工具箱 - 253种算法详尽分析报告</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; line-height: 1.8; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 40px; border-radius: 12px; margin-bottom: 30px; }
+  .header h1 { font-size: 28px; margin-bottom: 10px; }
+  .header .subtitle { font-size: 14px; opacity: 0.8; }
+  .header .meta { margin-top: 15px; font-size: 13px; opacity: 0.7; }
+  .section { background: #fff; border-radius: 10px; padding: 30px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .section h2 { font-size: 20px; color: #1a1a2e; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid #e8ecf1; }
+  .section h3 { font-size: 16px; color: #16213e; margin: 20px 0 12px; }
+  .section p { margin-bottom: 12px; font-size: 14px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 20px 0; }
+  .stat-card { background: linear-gradient(135deg, #f8f9ff 0%, #eef1ff 100%); border-radius: 8px; padding: 20px; text-align: center; border-left: 4px solid #4a6cf7; }
+  .stat-card .number { font-size: 32px; font-weight: 700; color: #1a1a2e; }
+  .stat-card .label { font-size: 13px; color: #666; margin-top: 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  th { background: #1a1a2e; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
+  td { padding: 9px 12px; border-bottom: 1px solid #eee; }
+  tr:hover { background: #f8f9ff; }
+  .highlight { background: #fff8e1; padding: 2px 6px; border-radius: 3px; font-weight: 600; }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; margin: 2px; }
+  .tag-blue { background: #e3f2fd; color: #1565c0; }
+  .tag-green { background: #e8f5e9; color: #2e7d32; }
+  .tag-orange { background: #fff3e0; color: #e65100; }
+  .tag-red { background: #ffebee; color: #c62828; }
+  .tag-purple { background: #f3e5f5; color: #6a1b9a; }
+  .insight-box { background: #f0f4ff; border-left: 4px solid #4a6cf7; padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .insight-box .title { font-weight: 700; color: #1a1a2e; margin-bottom: 8px; font-size: 14px; }
+  .insight-box p { font-size: 13px; margin-bottom: 6px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+  .chart-placeholder { background: #f8f9fa; border: 1px dashed #ddd; border-radius: 8px; padding: 30px; text-align: center; color: #999; font-size: 13px; margin: 16px 0; }
+  ul { margin: 10px 0 10px 24px; }
+  li { margin-bottom: 6px; font-size: 14px; }
+  .footer { text-align: center; padding: 20px; color: #999; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>Dabbit AI SPSS工具箱 — 253种算法详尽分析报告</h1>
+  <div class="subtitle">全面爬取与多维度深度分析</div>
+  <div class="meta">数据来源：https://dabbit-ai.com/algorithm-toolbox ｜ 爬取时间：2026年9月26日 ｜ 算法总数：253种</div>
+</div>
+
+<!-- 一、总体概览 -->
+<div class="section">
+  <h2>一、总体概览</h2>
+  <p>Dabbit AI SPSS工具箱是一个集成了统计学与数学方法的在线分析平台，覆盖数据挖掘、建模分析与多元统计领域。本次完整爬取了平台全部<strong>253种算法</strong>，涵盖18个分类，并从分类分布、调用量、案例覆盖、技术领域、关键词语义等多个维度展开详尽分析。</p>
+  
+  <div class="stats-grid">
+    <div class="stat-card"><div class="number">253</div><div class="label">算法总数</div></div>
+    <div class="stat-card"><div class="number">18</div><div class="label">算法分类</div></div>
+    <div class="stat-card"><div class="number">15,853</div><div class="label">总调用量</div></div>
+    <div class="stat-card"><div class="number">62.7</div><div class="label">平均调用量</div></div>
+    <div class="stat-card"><div class="number">99.6%</div><div class="label">案例覆盖率</div></div>
+    <div class="stat-card"><div class="number">4</div><div class="label">热门标记算法</div></div>
+  </div>
+
+  <div class="insight-box">
+    <div class="title">核心发现</div>
+    <p>1. <strong>案例覆盖率极高（99.6%）</strong>：253个算法中252个提供了"算法案例"，仅"算法自动选择器"无案例，平台在教学辅助方面做得非常完善。</p>
+    <p>2. <strong>调用量分布集中</strong>：64.4%的算法调用量集中在50-100区间，呈现典型的正态分布特征。</p>
+    <p>3. <strong>"一超多强"格局</strong>：算法自动选择器（322次）远超其他算法，是第二名的3.16倍，智能推荐功能是平台核心入口。</p>
+    <p>4. <strong>传统统计方法为主</strong>：经典统计推断+回归建模占比41.1%，机器学习仅占5.1%，平台定位偏向学术统计而非AI建模。</p>
+  </div>
+</div>
+
+<!-- 二、分类分布分析 -->
+<div class="section">
+  <h2>二、分类分布分析</h2>
+  <p>平台将253种算法划分为18个分类，各分类数量差异显著。</p>
+  
+  <h3>2.1 分类数量排行</h3>
+  <table>
+    <tr><th>排名</th><th>分类</th><th>算法数</th><th>占比</th><th>总调用量</th><th>平均调用量</th><th>案例率</th></tr>
+    <tr><td>1</td><td>时间序列与计量经济</td><td>28</td><td>11.1%</td><td>1,508</td><td>53.9</td><td>100%</td></tr>
+    <tr><td>2</td><td>综合评价</td><td>24</td><td>9.5%</td><td>1,508</td><td>62.8</td><td>100%</td></tr>
+    <tr><td>3</td><td>医学统计</td><td>24</td><td>9.5%</td><td>1,490</td><td>62.1</td><td>100%</td></tr>
+    <tr><td>4</td><td>回归分析</td><td>24</td><td>9.5%</td><td>1,514</td><td>63.1</td><td>100%</td></tr>
+    <tr><td>5</td><td>问卷研究</td><td>22</td><td>8.7%</td><td>1,341</td><td>61.0</td><td>100%</td></tr>
+    <tr><td>6</td><td>差异比较</td><td>18</td><td>7.1%</td><td>1,037</td><td>57.6</td><td>100%</td></tr>
+    <tr><td>7</td><td>质量控制</td><td>14</td><td>5.5%</td><td>960</td><td>68.6</td><td>100%</td></tr>
+    <tr><td>8</td><td>规划求解</td><td>14</td><td>5.5%</td><td>954</td><td>68.1</td><td>100%</td></tr>
+    <tr><td>9</td><td>机器学习</td><td>13</td><td>5.1%</td><td>775</td><td>59.6</td><td>100%</td></tr>
+    <tr><td>10</td><td>描述性统计</td><td>10</td><td>4.0%</td><td>976</td><td>97.6</td><td>90%</td></tr>
+    <tr><td>11</td><td>空间计量</td><td>10</td><td>4.0%</td><td>643</td><td>64.3</td><td>100%</td></tr>
+    <tr><td>12</td><td>聚类与降维</td><td>9</td><td>3.6%</td><td>592</td><td>65.8</td><td>100%</td></tr>
+    <tr><td>13</td><td>试验设计</td><td>9</td><td>3.6%</td><td>573</td><td>63.7</td><td>100%</td></tr>
+    <tr><td>14</td><td>Meta分析</td><td>8</td><td>3.2%</td><td>461</td><td>57.6</td><td>100%</td></tr>
+    <tr><td>15</td><td>文本分析</td><td>8</td><td>3.2%</td><td>423</td><td>52.9</td><td>100%</td></tr>
+    <tr><td>16</td><td>功效分析</td><td>6</td><td>2.4%</td><td>393</td><td>65.5</td><td>100%</td></tr>
+    <tr><td>17</td><td>相关分析</td><td>6</td><td>2.4%</td><td>349</td><td>58.2</td><td>100%</td></tr>
+    <tr><td>18</td><td>预测模型</td><td>6</td><td>2.4%</td><td>356</td><td>59.3</td><td>100%</td></tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="title">分类分布洞察</div>
+    <p><strong>四大主力分类</strong>：时间序列与计量经济（28）、综合评价/医学统计/回归分析（各24）合计100种，占比39.5%，反映平台用户以<strong>社科实证研究（经济/管理）和医学统计</strong>为核心群体。</p>
+    <p><strong>小众分类</strong>：功效分析、相关分析、预测模型各仅6种，属于辅助性工具。</p>
+    <p><strong>案例覆盖率</strong>：除描述性统计为90%外，其余17个分类均为100%，平台内容建设非常完整。</p>
+  </div>
+</div>
+
+<!-- 三、调用量深度分析 -->
+<div class="section">
+  <h2>三、调用量深度分析</h2>
+  
+  <h3>3.1 TOP 20 热门算法</h3>
+  <table>
+    <tr><th>排名</th><th>算法名称</th><th>调用量</th><th>所属分类</th><th>热门标记</th></tr>
+    <tr><td>1</td><td>算法自动选择器</td><td><span class="highlight">322</span></td><td>描述性统计</td><td>是</td></tr>
+    <tr><td>2</td><td>组内评分者信度（rwg）</td><td>102</td><td>问卷研究</td><td>否</td></tr>
+    <tr><td>3</td><td>二阶聚类（两步聚类）</td><td>100</td><td>聚类与降维</td><td>否</td></tr>
+    <tr><td>4</td><td>SBM模型</td><td>100</td><td>综合评价</td><td>否</td></tr>
+    <tr><td>5</td><td>森林图</td><td>100</td><td>医学统计</td><td>否</td></tr>
+    <tr><td>6</td><td>方差齐性检验</td><td>99</td><td>差异比较</td><td>否</td></tr>
+    <tr><td>7</td><td>分位数回归</td><td>98</td><td>回归分析</td><td>否</td></tr>
+    <tr><td>8</td><td>基准回归</td><td>98</td><td>时间序列与计量经济</td><td>否</td></tr>
+    <tr><td>9</td><td>Z-MR控制图</td><td>98</td><td>质量控制</td><td>否</td></tr>
+    <tr><td>10</td><td>参数分布分析（可靠性分析）</td><td>98</td><td>质量控制</td><td>否</td></tr>
+    <tr><td>11</td><td>正态性检验</td><td>97</td><td>描述性统计</td><td>否</td></tr>
+    <tr><td>12</td><td>平均值Meta分析</td><td>97</td><td>Meta分析</td><td>否</td></tr>
+    <tr><td>13</td><td>割平面法</td><td>97</td><td>规划求解</td><td>否</td></tr>
+    <tr><td>14</td><td>熵值法</td><td>96</td><td>综合评价</td><td>否</td></tr>
+    <tr><td>15</td><td>共线性分析（VIF诊断）</td><td>96</td><td>回归分析</td><td>否</td></tr>
+    <tr><td>16</td><td>GBDT梯度提升树</td><td>96</td><td>机器学习</td><td>否</td></tr>
+    <tr><td>17</td><td>Kruskal-Wallis检验</td><td>95</td><td>差异比较</td><td>否</td></tr>
+    <tr><td>18</td><td>Deming回归</td><td>95</td><td>回归分析</td><td>否</td></tr>
+    <tr><td>19</td><td>对应分析</td><td>95</td><td>问卷研究</td><td>否</td></tr>
+    <tr><td>20</td><td>U控制图（单位缺陷数图）</td><td>95</td><td>质量控制</td><td>否</td></tr>
+  </table>
+
+  <h3>3.2 BOTTOM 20 冷门算法</h3>
+  <table>
+    <tr><th>排名</th><th>算法名称</th><th>调用量</th><th>所属分类</th></tr>
+    <tr><td>1</td><td>调节作用（调节效应）分析</td><td><span class="highlight">0</span></td><td>问卷研究</td></tr>
+    <tr><td>2</td><td>调节中介作用（有调节的中介）</td><td><span class="highlight">0</span></td><td>问卷研究</td></tr>
+    <tr><td>3</td><td>中心复合设计（CCD）</td><td>20</td><td>试验设计</td></tr>
+    <tr><td>4</td><td>内点法</td><td>22</td><td>规划求解</td></tr>
+    <tr><td>5</td><td>新词发现</td><td>22</td><td>文本分析</td></tr>
+    <tr><td>6</td><td>GMM估计</td><td>22</td><td>时间序列与计量经济</td></tr>
+    <tr><td>7</td><td>K近邻（KNN）</td><td>23</td><td>机器学习</td></tr>
+    <tr><td>8</td><td>差分分析</td><td>23</td><td>时间序列与计量经济</td></tr>
+    <tr><td>9</td><td>OR/HR值Meta分析</td><td>24</td><td>Meta分析</td></tr>
+    <tr><td>10</td><td>秩和比法（RSR）</td><td>24</td><td>综合评价</td></tr>
+    <tr><td>11</td><td>Lasso回归</td><td>24</td><td>回归分析</td></tr>
+    <tr><td>12</td><td>剂量反应分析（LD50）</td><td>25</td><td>医学统计</td></tr>
+    <tr><td>13</td><td>Kendall协调系数（W）</td><td>26</td><td>相关分析</td></tr>
+    <tr><td>14</td><td>内容效度</td><td>26</td><td>问卷研究</td></tr>
+    <tr><td>15</td><td>线性回归（最小二乘法）</td><td>26</td><td>回归分析</td></tr>
+    <tr><td>16</td><td>卡方拟合优度检验</td><td>27</td><td>医学统计</td></tr>
+    <tr><td>17</td><td>共同方法偏差检验（Harman）</td><td>27</td><td>问卷研究</td></tr>
+    <tr><td>18</td><td>零膨胀负二项回归</td><td>27</td><td>回归分析</td></tr>
+    <tr><td>19</td><td>单样本Wilcoxon符号秩检验</td><td>27</td><td>差异比较</td></tr>
+    <tr><td>20</td><td>逐步回归</td><td>27</td><td>回归分析</td></tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="title">调用量洞察</div>
+    <p><strong>头部效应显著</strong>：TOP1算法自动选择器（322次）是TOP20门槛（95次）的3.4倍，智能推荐是用户首选入口。</p>
+    <p><strong>零调用算法</strong>：调节作用分析和调节中介作用分析调用量为0，这两个算法可能是近期新上线或功能未完善。</p>
+    <p><strong>冷门算法特征</strong>：BOTTOM20多为细分专业方法（GMM、内点法、CCD、LD50等），受众较窄；而"线性回归（最小二乘法）"仅26次调用，可能因为用户更倾向使用"基准回归"（98次）等更具场景化的入口。</p>
+    <p><strong>质量控制分类表现突出</strong>：TOP20中有3个质量控制算法（Z-MR控制图、参数分布分析、U控制图），该分类平均调用量68.6排名第二，说明工业质量分析是平台的重要应用场景。</p>
+  </div>
+
+  <h3>3.3 调用量区间分布</h3>
+  <table>
+    <tr><th>调用量区间</th><th>算法数量</th><th>占比</th><th>累计占比</th></tr>
+    <tr><td>0-10</td><td>2</td><td>0.8%</td><td>0.8%</td></tr>
+    <tr><td>10-30</td><td>22</td><td>8.7%</td><td>9.5%</td></tr>
+    <tr><td>30-50</td><td>61</td><td>24.1%</td><td>33.6%</td></tr>
+    <tr><td>50-70</td><td>66</td><td>26.1%</td><td>59.7%</td></tr>
+    <tr><td>70-100</td><td>97</td><td>38.3%</td><td>98.0%</td></tr>
+    <tr><td>100-150</td><td>4</td><td>1.6%</td><td>99.6%</td></tr>
+    <tr><td>150-200</td><td>0</td><td>0.0%</td><td>99.6%</td></tr>
+    <tr><td>200-500</td><td>1</td><td>0.4%</td><td>100%</td></tr>
+  </table>
+  <p>调用量呈典型的<strong>右偏正态分布</strong>，98%的算法调用量在100以下，中位数约为65次。</p>
+</div>
+
+<!-- 四、各分类调用量对比 -->
+<div class="section">
+  <h2>四、各分类调用量效能对比</h2>
+  <p>将各分类按平均调用量排序，分析不同领域的用户活跃度差异。</p>
+  <table>
+    <tr><th>排名</th><th>分类</th><th>平均调用量</th><th>算法数</th><th>总调用量</th><th>活跃度评级</th></tr>
+    <tr><td>1</td><td>描述性统计</td><td><span class="highlight">97.6</span></td><td>10</td><td>976</td><td><span class="tag tag-red">极高</span></td></tr>
+    <tr><td>2</td><td>质量控制</td><td>68.6</td><td>14</td><td>960</td><td><span class="tag tag-orange">高</span></td></tr>
+    <tr><td>3</td><td>规划求解</td><td>68.1</td><td>14</td><td>954</td><td><span class="tag tag-orange">高</span></td></tr>
+    <tr><td>4</td><td>聚类与降维</td><td>65.8</td><td>9</td><td>592</td><td><span class="tag tag-orange">高</span></td></tr>
+    <tr><td>5</td><td>功效分析</td><td>65.5</td><td>6</td><td>393</td><td><span class="tag tag-orange">高</span></td></tr>
+    <tr><td>6</td><td>空间计量</td><td>64.3</td><td>10</td><td>643</td><td><span class="tag tag-blue">中高</span></td></tr>
+    <tr><td>7</td><td>试验设计</td><td>63.7</td><td>9</td><td>573</td><td><span class="tag tag-blue">中高</span></td></tr>
+    <tr><td>8</td><td>回归分析</td><td>63.1</td><td>24</td><td>1514</td><td><span class="tag tag-blue">中高</span></td></tr>
+    <tr><td>9</td><td>综合评价</td><td>62.8</td><td>24</td><td>1508</td><td><span class="tag tag-blue">中高</span></td></tr>
+    <tr><td>10</td><td>医学统计</td><td>62.1</td><td>24</td><td>1490</td><td><span class="tag tag-blue">中高</span></td></tr>
+    <tr><td>11</td><td>问卷研究</td><td>61.0</td><td>22</td><td>1341</td><td><span class="tag tag-blue">中高</span></td></tr>
+    <tr><td>12</td><td>机器学习</td><td>59.6</td><td>13</td><td>775</td><td><span class="tag tag-green">中等</span></td></tr>
+    <tr><td>13</td><td>预测模型</td><td>59.3</td><td>6</td><td>356</td><td><span class="tag tag-green">中等</span></td></tr>
+    <tr><td>14</td><td>相关分析</td><td>58.2</td><td>6</td><td>349</td><td><span class="tag tag-green">中等</span></td></tr>
+    <tr><td>15</td><td>Meta分析</td><td>57.6</td><td>8</td><td>461</td><td><span class="tag tag-green">中等</span></td></tr>
+    <tr><td>16</td><td>差异比较</td><td>57.6</td><td>18</td><td>1037</td><td><span class="tag tag-green">中等</span></td></tr>
+    <tr><td>17</td><td>时间序列与计量经济</td><td>53.9</td><td>28</td><td>1508</td><td><span class="tag tag-purple">偏低</span></td></tr>
+    <tr><td>18</td><td>文本分析</td><td>52.9</td><td>8</td><td>423</td><td><span class="tag tag-purple">偏低</span></td></tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="title">分类效能洞察</div>
+    <p><strong>描述性统计"虚高"</strong>：平均97.6主要由算法自动选择器（322次）拉动，剔除后该分类平均约72.7，仍属较高水平。</p>
+    <p><strong>"小而精"分类</strong>：功效分析（6种，均65.5）、聚类与降维（9种，均65.8）虽然算法数量少，但单个算法调用量高，说明这些是用户的刚需工具。</p>
+    <p><strong>"大而散"分类</strong>：时间序列与计量经济（28种，均53.9）算法数量最多但平均调用量最低，说明该领域方法过于细分，单个方法受众有限。</p>
+    <p><strong>文本分析待提升</strong>：平均52.9排名末位，8个算法中"新词发现"仅22次，文本挖掘功能可能不是平台用户的核心需求。</p>
+  </div>
+</div>
+
+<!-- 五、技术领域归类分析 -->
+<div class="section">
+  <h2>五、技术领域归类分析</h2>
+  <p>突破平台原有18分类框架，按方法论本质将253种算法重新归类为14个技术领域。</p>
+  <table>
+    <tr><th>技术领域</th><th>算法数</th><th>占比</th><th>代表算法</th></tr>
+    <tr><td>经典统计推断</td><td>59</td><td>23.3%</td><td>t检验、卡方检验、方差分析、正态性检验、非参数检验</td></tr>
+    <tr><td>回归与建模</td><td>45</td><td>17.8%</td><td>线性回归、Logistic回归、Cox回归、分位数回归、Lasso</td></tr>
+    <tr><td>时间序列与计量</td><td>22</td><td>8.7%</td><td>ARIMA、GARCH、VAR、DID、协整检验、面板模型</td></tr>
+    <tr><td>机器学习</td><td>13</td><td>5.1%</td><td>GBDT、SVM、神经网络、随机森林、KNN、决策树</td></tr>
+    <tr><td>多元统计</td><td>13</td><td>5.1%</td><td>主成分分析、因子分析、聚类分析、判别分析、对应分析</td></tr>
+    <tr><td>医学与生存分析</td><td>12</td><td>4.7%</td><td>Cox回归、ROC曲线、生存分析、诊断试验、Meta分析</td></tr>
+    <tr><td>综合评价与决策</td><td>11</td><td>4.3%</td><td>熵值法、TOPSIS、DEA、层次分析、模糊综合评价</td></tr>
+    <tr><td>质量控制与可靠性</td><td>10</td><td>4.0%</td><td>控制图、过程能力分析、可靠性分析、失效模式分析</td></tr>
+    <tr><td>试验设计</td><td>10</td><td>4.0%</td><td>全析因设计、正交设计、响应面、田口设计、均匀设计</td></tr>
+    <tr><td>问卷与测量</td><td>9</td><td>3.6%</td><td>信度分析、效度分析、项目分析、ICC、rwg</td></tr>
+    <tr><td>文本与数据挖掘</td><td>9</td><td>3.6%</td><td>文本情感分析、词频统计、共词分析、社会网络</td></tr>
+    <tr><td>功效与样本量</td><td>7</td><td>2.8%</td><td>均值差功效、回归功效、广义模型功效、样本量估算</td></tr>
+    <tr><td>描述与探索</td><td>5</td><td>2.0%</td><td>描述性统计、频数分析、数据探索、列联分析</td></tr>
+    <tr><td>优化与运筹</td><td>5</td><td>2.0%</td><td>线性规划、遗传算法、模拟退火、粒子群、动态规划</td></tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="title">技术领域洞察</div>
+    <p><strong>传统统计为绝对主体</strong>：经典统计推断+回归建模合计104种，占41.1%，平台核心是<strong>统计学教学与科研辅助</strong>，而非AI算法平台。</p>
+    <p><strong>计量经济学特色鲜明</strong>：时间序列与计量22种（8.7%），包含DID、工具变量、GMM、面板模型等社科实证研究利器，目标用户明确指向经济/管理学科研究者。</p>
+    <p><strong>机器学习占比有限</strong>：仅13种（5.1%），且GBDT（96次）是唯一进入TOP20的ML算法，说明用户更多将ML作为补充工具而非主力。</p>
+    <p><strong>工业工程覆盖全面</strong>：质量控制（10）+试验设计（10）+优化运筹（5）合计25种，覆盖工业工程全链条，是平台的另一大特色。</p>
+  </div>
+</div>
+
+<!-- 六、关键词与语义分析 -->
+<div class="section">
+  <h2>六、关键词与语义分析</h2>
+  
+  <h3>6.1 算法名称高频关键词</h3>
+  <table>
+    <tr><th>关键词</th><th>出现次数</th><th>占比</th><th>关键词</th><th>出现次数</th><th>占比</th></tr>
+    <tr><td>分析</td><td>65</td><td>25.7%</td><td>空间</td><td>10</td><td>4.0%</td></tr>
+    <tr><td>回归</td><td>29</td><td>11.5%</td><td>相关</td><td>10</td><td>4.0%</td></tr>
+    <tr><td>模型</td><td>28</td><td>11.1%</td><td>算法</td><td>8</td><td>3.2%</td></tr>
+    <tr><td>检验</td><td>27</td><td>10.7%</td><td>方差</td><td>8</td><td>3.2%</td></tr>
+    <tr><td>系数</td><td>8</td><td>3.2%</td><td>设计</td><td>8</td><td>3.2%</td></tr>
+    <tr><td>Meta</td><td>7</td><td>2.8%</td><td>样本</td><td>7</td><td>2.8%</td></tr>
+    <tr><td>功效</td><td>7</td><td>2.8%</td><td>控制图</td><td>6</td><td>2.4%</td></tr>
+    <tr><td>聚类</td><td>5</td><td>2.0%</td><td>卡方</td><td>4</td><td>1.6%</td></tr>
+  </table>
+
+  <h3>6.2 算法描述高频词</h3>
+  <table>
+    <tr><th>高频词</th><th>出现次数</th><th>占比</th><th>高频词</th><th>出现次数</th><th>占比</th></tr>
+    <tr><td>检验</td><td>100</td><td>39.5%</td><td>评估</td><td>17</td><td>6.7%</td></tr>
+    <tr><td>分类</td><td>38</td><td>15.0%</td><td>预测</td><td>15</td><td>5.9%</td></tr>
+    <tr><td>解</td><td>21</td><td>8.3%</td><td>均值</td><td>12</td><td>4.7%</td></tr>
+    <tr><td>效应</td><td>20</td><td>7.9%</td><td>一致性</td><td>12</td><td>4.7%</td></tr>
+    <tr><td>差异</td><td>19</td><td>7.5%</td><td>估计</td><td>11</td><td>4.3%</td></tr>
+  </table>
+
+  <div class="insight-box">
+    <div class="title">语义洞察</div>
+    <p><strong>"检验"是核心动作</strong>：39.5%的算法描述包含"检验"，说明假设检验是平台最核心的功能定位，这与经典统计推断占比最高一致。</p>
+    <p><strong>"分析"命名泛滥</strong>：25.7%的算法名称包含"分析"，命名缺乏区分度，用户可能需要依赖描述来辨别具体功能。</p>
+    <p><strong>"回归"家族庞大</strong>：29种算法名称含"回归"，是最大的算法家族，涵盖线性、Logistic、Cox、分位数、Deming、Lasso等十余种变体。</p>
+  </div>
+</div>
+
+<!-- 七、平台定位与用户画像推断 -->
+<div class="section">
+  <h2>七、平台定位与用户画像推断</h2>
+  
+  <h3>7.1 平台定位</h3>
+  <ul>
+    <li><strong>学术统计辅助工具</strong>：以经典统计方法为核心（41.1%），案例覆盖率99.6%，定位为"傻瓜式"统计分析平台，降低统计软件使用门槛。</li>
+    <li><strong>社科实证研究利器</strong>：时间序列与计量经济（28种）+问卷研究（22种）+综合评价（24种）合计74种，占29.2%，深度覆盖经济/管理/社会学实证研究全流程。</li>
+    <li><strong>医学统计专业平台</strong>：医学统计24种+Meta分析8种，包含Cox回归、ROC、生存分析、森林图等医学研究必备工具。</li>
+    <li><strong>工业工程全链条</strong>：质量控制+试验设计+规划求解合计37种，覆盖从实验设计到质量监控到优化求解的工业工程完整链路。</li>
+  </ul>
+
+  <h3>7.2 核心用户画像</h3>
+  <div class="two-col">
+    <div>
+      <h4>主要用户群体</h4>
+      <ul>
+        <li><strong>高校社科研究生</strong>：经济学、管理学、社会学专业，需要做DID、面板回归、中介效应、问卷信效度等分析</li>
+        <li><strong>医学研究者</strong>：临床医生、公共卫生研究者，需要生存分析、ROC、Meta分析</li>
+        <li><strong>工业工程师</strong>：质量管控、工艺优化人员，使用控制图、试验设计、可靠性分析</li>
+        <li><strong>数据分析师</strong>：需要快速完成统计检验和建模的职场人士</li>
+      </ul>
+    </div>
+    <div>
+      <h4>用户行为特征</h4>
+      <ul>
+        <li>高度依赖"算法自动选择器"（322次），说明大量用户不确定该用什么方法</li>
+        <li>偏好场景化入口（"基准回归"98次 vs "线性回归"26次）</li>
+        <li>基础检验高频使用（正态性检验97、方差齐性99）</li>
+        <li>细分专业方法使用率低（GMM 22、内点法22、CCD 20）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 八、优势与不足 -->
+<div class="section">
+  <h2>八、平台优势与改进建议</h2>
+  
+  <h3>8.1 核心优势</h3>
+  <ul>
+    <li><strong>算法覆盖全面</strong>：253种算法覆盖18个分类，从基础描述统计到高级计量经济、从质量控制到文本挖掘，广度在同类产品中领先。</li>
+    <li><strong>案例教学完善</strong>：99.6%的算法提供案例，极大降低学习门槛，适合教学场景。</li>
+    <li><strong>智能推荐入口</strong>：算法自动选择器调用量最高，有效解决了"不知道用什么方法"的痛点。</li>
+    <li><strong>场景化命名</strong>：如"基准回归""共同方法偏差检验"等，贴近学术论文实际需求，而非纯技术命名。</li>
+    <li><strong>零代码操作</strong>：上传数据+描述需求即可分析，适合非统计专业用户。</li>
+  </ul>
+
+  <h3>8.2 改进建议</h3>
+  <ul>
+    <li><strong>激活零调用算法</strong>：调节作用分析、调节中介作用分析调用量为0，建议检查功能是否可用，并增加引导入口。</li>
+    <li><strong>整合重复功能</strong>："线性回归（最小二乘法）"（26次）与"基准回归"（98次）功能重叠，建议合并或明确区分场景。</li>
+    <li><strong>提升文本分析</strong>：该分类平均调用量最低（52.9），可考虑增加更实用的文本挖掘功能或优化现有算法。</li>
+    <li><strong>机器学习深化</strong>：仅13种ML算法且平均调用量59.6，可增加XGBoost、LightGBM、聚类评估等热门方法。</li>
+    <li><strong>细分方法引导</strong>：时间序列分类算法最多但平均调用量最低，建议增加方法选择向导，帮助用户匹配具体场景。</li>
+  </ul>
+</div>
+
+<!-- 九、数据文件说明 -->
+<div class="section">
+  <h2>九、爬取数据文件说明</h2>
+  <p>本次爬取生成以下数据文件，均保存在项目目录中：</p>
+  <table>
+    <tr><th>文件名</th><th>格式</th><th>内容说明</th><th>记录数</th></tr>
+    <tr><td>algorithms_raw.json</td><td>JSON</td><td>原始爬取数据（名称、描述、调用量、案例、热门、页码）</td><td>253</td></tr>
+    <tr><td>category_map.json</td><td>JSON</td><td>分类到算法列表的映射</td><td>18分类</td></tr>
+    <tr><td>algorithms_merged.json</td><td>JSON</td><td>合并分类后的完整数据</td><td>253</td></tr>
+    <tr><td>algorithms_merged.csv</td><td>CSV</td><td>合并分类后的完整数据（Excel可直接打开）</td><td>253</td></tr>
+    <tr><td>analysis_result.json</td><td>JSON</td><td>分析结果统计数据</td><td>-</td></tr>
+    <tr><td>analysis_report.html</td><td>HTML</td><td>本分析报告</td><td>-</td></tr>
+  </table>
+</div>
+
+<div class="footer">
+  <p>Dabbit AI SPSS工具箱算法分析报告 ｜ 数据爬取与分析完成于2026年9月26日</p>
+  <p>本报告基于公开页面数据生成，仅供参考</p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,452 @@
+% 第13章 质量控制
+\chapter{质量控制}
+
+\begin{chapteroverview}
+\textbf{这个分类是干什么的？}
+
+质量控制（QC）用统计方法监控生产/服务过程是否\textbf{稳定受控}，以及产品质量是否\textbf{满足规格要求}。核心工具是控制图（判断过程是否有异常波动）和过程能力指数（判断波动是否在可接受范围内）。它回答两个问题：过程稳不稳？产品合不合格？
+
+\textbf{美赛什么题型常用？}
+
+美赛工业/制造类题目（如生产流程优化、产品质量改进、供应链可靠性）中非常实用。控制图和过程能力分析是六西格玛管理的核心方法。可靠性分析（寿命分布、加速试验）在设备维护、产品寿命预测类题目中也会用到。
+
+\textbf{学习路径建议}
+
+先学\textbf{帕累托图}（抓关键少数问题）和\textbf{Xbar-R控制图}（最常用的计量型控制图），再学\textbf{过程能力分析}（判断过程能不能满足规格）。I-MR控制图用于单值数据，然后了解属性控制图（C图、U图）和测量系统分析（量具R\&R）。SPSS可通过"分析 → 控制图"菜单操作部分功能。
+\end{chapteroverview}
+
+\section{基础级算法}
+
+%% ========== 帕累托图 ==========
+\basicalgo{{\starmark}帕累托图}{pareto_chart}
+
+\begin{algointro}
+帕累托图基于"80/20法则"——80\%的问题是由20\%的原因造成的。它把各类问题按贡献大小从高到低排序，用柱状图加累计折线，帮你找出"关键少数"原因，把改进资源集中在最值得的地方。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 客户投诉分析：哪些故障原因造成了大部分损失？
+    \item 产品缺陷分类：哪些缺陷类型最需要改进？
+    \item 成本分析：哪些成本项占了大部分费用？
+    \item 美赛中需要"抓重点"的问题分析环节
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+帕累托图就是"排排队、算累计"：
+
+\begin{itemize}
+    \item 把所有原因按损失金额（或发生次数）\textbf{从大到小排序}
+    \item 画柱状图：柱子越高=该原因损失越大
+    \item 叠加累计百分比折线：从第一个柱子开始累加
+    \item 在累计80\%处画一条线——线左边的就是"A类关键原因"
+\end{itemize}
+
+这就像医生看病：不是所有症状都要治，先看哪个病最严重、最花钱，集中力量先治它。
+
+\textbf{ABC分级}：累计0--80\%为A类（关键少数，优先改进），80--95\%为B类（次要），95--100\%为C类（一般）。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在Dabbit AI SPSS工具箱中选择"帕累托图"
+    \item 上传数据：类别字段选"客诉原因"，数值字段选"损失金额（元）"
+    \item 汇总方式选"求和"，累计判定线设为0.80
+    \item 勾选"ABC分级"，阈值80/95
+    \item 勾选"尾部合并"：占比小于2\%的小类别合并为"其他"
+    \item 点击运行，输出排序表与帕累托图
+\end{enumerate}
+
+\textbf{SPSS对应操作}：也可先用 \textbf{分析 → 描述统计 → 频率} 排序，再用图形手工绘制帕累托图。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \item \textbf{排序表}：每个类别的数值、占比、累计占比、ABC分级
+    \item \textbf{关键少数}：累计首次达到80\%需要几个类别（如前4个类别占82.9\%）
+    \item \textbf{A类类别}：应优先改进（如显示屏异常35.8\%、主板失效22.8\%）
+    \item \textbf{集中度}：前20\%类别贡献了多少（如3个类别占75.1\%）——如果贡献分散，说明不能简单套用80/20法则
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}需要从众多问题原因中找出主要矛盾时。
+
+\textbf{什么时候不用？}各类别贡献均匀分散时（前80\%需要很多类别），说明没有"关键少数"，需全面改进。
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：只看发生次数不看损失金额——小问题发生次数多但损失小，大问题次数少但损失大，应按金额排序
+    \item \textbf{坑2}：把尾部小类别单独画很多小柱子——应合并为"其他"
+\end{itemize}
+
+\textbf{和柱状图的区别}：普通柱状图不排序、无累计线；帕累托图专为"抓重点"设计。
+\end{algonotes}
+
+%% ========== Xbar-R控制图 ==========
+\basicalgo{Xbar-R控制图}{xbar_r_chart}
+
+\begin{algointro}
+Xbar-R控制图是\textbf{最常用的计量型控制图}——Xbar图监控子组均值的波动（过程位置是否偏移），R图监控子组内极差（过程波动是否稳定）。两者配合使用，判断生产过程是否处于统计受控状态。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 批量生产过程的质量监控（每2小时抽5件测外径）
+    \item 判断工序是否稳定、有没有异常时段
+    \item 为日常监控建立控制限基准
+    \item 美赛工业类题目中的过程稳定性分析
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+把连续生产按时间分成小子组（如每2小时为一组，每组5件），画两张图：
+
+\begin{itemize}
+    \item \textbf{Xbar图（均值图）}：每组算一个均值，打点在图上。如果均值突然偏移，说明过程中心漂移了（如刀具磨损、原料换批）
+    \item \textbf{R图（极差图）}：每组内最大值减最小值，反映组内波动。如果R变大，说明过程波动加剧了（如设备松动）
+\end{itemize}
+
+控制限不是规格限，而是根据\textbf{过程自身波动}算出来的：中心线CL=均值均值，UCL=$\bar{\bar{X}}+A_2\bar{R}$，LCL=$\bar{\bar{X}}-A_2\bar{R}$。点在限内随机散布=受控；有点超限或连续同侧=失控信号。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item SPSS菜单：\textbf{分析 → 质量控制 → 控制图}
+    \item 选择"Xbar-R"图，观测值字段选"外径测量值"，子组标识选"批次号"
+    \item 规格上下限分别填入（如USL=50.20，LSL=49.80）
+    \item $\sigma$估计方法选"极差法"
+    \item 判异规则：单点超限、连续9点同侧、连续6点趋势
+    \item 试运行阶段勾选"剔除特殊原因点后重算"
+    \item 点击确定
+\end{enumerate}
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{中心线与控制限}：Xbar图CL≈50.0，UCL≈50.06，LCL≈49.94
+    \item \textbf{判异信号}：有点超出控制限→该子组存在特殊原因，需回溯该时段
+    \item \textbf{受控判定}：试运行阶段剔除特殊原因点后，两图均无判异信号→过程受控，可固化控制限
+    \item \textbf{过程能力}：同时输出Cp=1.49, Cpk=1.49（见过程能力分析）
+\end{itemize}
+
+\textbf{注意}：控制限≠规格限！控制限是过程"自然波动"的范围，规格限是客户要求的范围。受控不代表满足规格。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}计量型数据，且能按时间合理分组（每组2--9件），子组内不应有特殊原因。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 每件产品只有一个测量值、无法分组→用I-MR控制图
+    \item 计数型数据（缺陷数/不合格率）→用C图/U图/P图
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：把子组设得太大——子组应短时间内抽样，组内只有普通原因波动
+    \item \textbf{坑2}：看到超限点就盲目调整工艺——先调查原因（设备/原料/人员），确认特殊原因后再调
+\end{itemize}
+
+\textbf{和I-MR的区别}：Xbar-R需要\textbf{子组}（每组多件），I-MR用于\textbf{单值}（每批只有一个数据）。
+\end{algonotes}
+
+%% ========== I-MR控制图 ==========
+\basicalgo{I-MR控制图}{imr_chart}
+
+\begin{algointro}
+I-MR控制图用于\textbf{每次只有一个测量值}的场景——比如每批药品只测一个含量值。I图（单值图）监控每个测量值，MR图（移动极差图）用相邻两个值的差来估计短期波动。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 每批产品只测一个关键指标（如药品含量、炉温）
+    \item 单件小批量生产（无法凑子组）
+    \item 连续采样的过程监控
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+既然每组只有一个值，怎么估计波动？用\textbf{相邻两个值的差}（移动极差MR）：
+
+\begin{itemize}
+    \item \textbf{I图（Individual）}：把每个测量值直接打点，中心线=均值，控制限$\bar{x}\pm E_2\bar{MR}$
+    \item \textbf{MR图（Moving Range）}：$MR_i = |x_i - x_{i-1}|$，相邻两点差值。MR图监控短期波动是否突然变大
+\end{itemize}
+
+$E_2$是常数（span=2时约2.66）。就像虽然不知道"组内方差"，但用"今天和昨天的差别"来估计日常波动幅度。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在Dabbit AI SPSS工具箱中选择"I-MR控制图"
+    \item 测量值列自动识别唯一数值列
+    \item 移动极差跨度设为2（相邻两点差）
+    \item $\sigma$估计选"移动极差法"
+    \item 判异规则选"仅超限判异"
+    \item 点击运行
+\end{enumerate}
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{I图}：CL=100，UCL=100.3，LCL=99.68——超出限的点为失控信号
+    \item \textbf{MR图}：CL=0.119，UCL=0.389——MR超限说明相邻两次测量间波动骤增
+    \item \textbf{信号定位}：如第48批I图和MR图同时超限，说明该批有异常
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}单件测量、无法分组的连续数据。
+
+\textbf{常见坑}：数据有自相关（相邻值不独立）时，MR估计的$\sigma$会不准，控制限失真。
+\end{algonotes}
+
+%% ========== 过程能力分析 ==========
+\basicalgo{{\starmark}过程能力分析}{process_capability}
+
+\begin{algointro}
+过程能力分析回答一个核心问题：\textbf{这个过程生产的产品，能不能稳定落在规格范围内？}它用Cp、Cpk等指数量化"过程波动"和"规格要求"的差距，是六西格玛管理的核心工具。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 产线是否能满足客户规格要求（如净含量490--510g）
+    \item 新设备/新工艺投用前的能力评估
+    \item 客户投诉增多时诊断是中心偏移还是波动过大
+    \item 美赛工业题中"过程是否合格"的定量回答
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+想象一条传送带不断产出瓶子，有的装多了有的装少了。规格要求490--510g，目标500g。
+
+\begin{itemize}
+    \item \textbf{Cp（过程潜力）}：规格宽度 $\div$ 过程波动宽度 = $(USL-LSL)/(6\sigma_w)$。只看"波动够不够小"，不管中心对不对
+    \item \textbf{Cpk（过程能力）}：min($CPU, CPL$)，其中 $CPU=(USL-\mu)/(3\sigma_w)$，$CPL=(\mu-LSL)/(3\sigma_w)$。同时考虑波动大小\textbf{和}中心是否对齐
+    \item \textbf{Pp/Ppk}：用长期总标准差$\sigma_o$计算，反映实际表现（含组间漂移）
+\end{itemize}
+
+\textbf{判断标准}：
+\begin{itemize}
+    \item $Cpk \geq 1.33$：能力充分，放心生产
+    \item $1.0 \leq Cpk < 1.33$：能力尚可，需监控
+    \item $Cpk < 1.0$：能力不足，必须改进
+\end{itemize}
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在Dabbit AI SPSS工具箱中选择"过程能力分析"
+    \item 上传子组数据，测量值字段选"净含量\_g"，子组字段选"批次"
+    \item 填入规格上下限（LSL=490, USL=510）和目标值（500）
+    \item 正态性检验选Shapiro-Wilk，$\alpha=0.05$
+    \item 非正态时用百分位数法构造Pp/Ppk
+    \item 先运行控制图确认过程受控，再读能力指数
+    \item 点击运行
+\end{enumerate}
+
+\textbf{前提}：过程必须先\textbf{统计受控}（控制图无判异），否则Cp/Cpk没有意义！
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{正态性}：$p=0.48 \geq 0.05$→数据近似正态，可用Cp/Cpk
+    \item \textbf{Cp=1.51, Cpk=1.49}→能力充分（1.33--1.67区间），可稳定满足规格
+    \item \textbf{Pp=1.47, Ppk=1.45}→长期能力略低于短期，说明有轻微组间漂移
+    \item \textbf{超差率}：约11 ppm（百万分之11），即每百万件约11件超出规格
+    \item \textbf{直方图}：叠加规格线和均值线，直观看分布是否在规格内
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}过程受控后，评估是否满足客户规格要求。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 过程尚未受控（控制图有判异点）→先解决特殊原因，再谈能力
+    \item 数据严重非正态→需Box-Cox变换或用百分位数法
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：Cp很高但Cpk低→说明波动小但中心偏了，调中心即可
+    \item \textbf{坑2}：Cp和Cpk都低→波动太大，必须改进工艺减小变异
+    \item \textbf{坑3}：忽略过程受控前提直接算Cpk→失控过程的Cpk不可信
+\end{itemize}
+
+\textbf{Cp vs Cpk}：Cp只看波动宽度，Cpk同时看波动和中心。Cpk永远$\leq$ Cp，两者差距大说明中心偏移。
+\end{algonotes}
+
+\section{进阶级算法速览}
+
+%% ========== Z-MR控制图 ==========
+\advancedalgo{Z-MR控制图（标准值-移动极差图）}{zmr_chart}
+
+\begin{algobrief}
+\textbf{一句话}：已知标准均值和标准差时用的单值-移动极差控制图，适合单件小批量生产。
+
+\textbf{美赛场景区}：精密阀芯逐件加工的外径监控，无法按子组凑数据。
+
+\textbf{核心原理}：与I-MR类似，但中心线直接用给定的标准值mu0而非样本均值，$\sigma$也用已知标准值。MR图监控相邻件波动。
+
+\textbf{操作要点}：指定mu和sigma，MR步长2，Nelson规则1（单点超限即判异）。
+
+\textbf{结果关键}：X图超限2点、MR图超限2点→过程存在特殊原因需调查。
+
+\textbf{注意}：Z-MR与I-MR的区别在于中心线用标准值还是样本估计值。
+\end{algobrief}
+
+%% ========== 参数分布分析（可靠性分析） ==========
+\advancedalgo{参数分布分析（可靠性分析）}{reliability_distribution}
+
+\begin{algobrief}
+\textbf{一句话}：判断设备寿命服从什么分布（威布尔/指数/对数正态），估计平均寿命和B10可靠寿命。
+
+\textbf{美赛场景区}：水泵、电容器等设备的预防性更换周期决策；可靠性工程。
+
+\textbf{核心原理}：对威布尔、指数、正态、对数正态四种分布分别做极大似然估计，用AIC选最优。威布尔形状参数$\beta>1$=磨损失效，$\beta\approx1$=随机失效，$\beta<1$=早期失效。B10寿命=90\%产品仍未失效的时间。
+
+\textbf{操作要点}：候选分布auto自动选择，删失事件值设1，Bootstrap重复999次，评估分位数0.50。
+
+\textbf{结果关键}：最优分布威布尔，$\beta=2.59$（磨损期），B10=4721小时，MTTF=10005小时。
+
+\textbf{注意}：数据含右删失（还没坏的设备）时不能直接算均值，必须用生存分析方法。
+\end{algobrief}
+
+%% ========== U控制图 ==========
+\advancedalgo{U控制图（单位缺陷数图）}{u_chart}
+
+\begin{algobrief}
+\textbf{一句话}：监控\textbf{不等样本量}下的单位缺陷率——每批抽检数量不同，但要看每单位缺陷数是否稳定。
+
+\textbf{美赛场景区}：汽车漆面缺陷监控（每天抽检台数不同）。
+
+\textbf{核心原理}：缺陷数服从泊松分布，$u_i=c_i/n_i$为第i批单位缺陷数。控制限随$n_i$变化（$UCL=\bar{u}+3\sqrt{\bar{u}/n_i}$），所以是阶梯状的。
+
+\textbf{操作要点}：缺陷数列、检验单位数列、分组列指定；3$\sigma$控制限；过离散时启用Laney修正。
+
+\textbf{结果关键}：中心线$\bar{u}$=0.66（剔除失控后），7个子组失控，过程未受控。
+
+\textbf{注意}：U图用于等单位数不固定的计数数据；样本量固定时用C图。
+\end{algobrief}
+
+%% ========== 属性一致性分析 ==========
+\advancedalgo{属性一致性分析}{attribute_agreement}
+
+\begin{algobrief}
+\textbf{一句话}：评估多名检验员对同一样本的判定是否一致（如零件合格/返修/报废的目视检验）。
+
+\textbf{美赛场景区}：质量检验系统的可靠性评估，判断检验员之间、检验员与标准之间是否一致。
+
+\textbf{核心原理}：用一致率和Kappa系数衡量。Kappa扣除了"碰巧一致"的部分：$Kappa=(P_o-P_e)/(1-P_e)$。$Kappa>0.75$良好，$0.4$--$0.75$中等，$<0.4$差。
+
+\textbf{操作要点}：指定样本列、评价人列、判定列、标准列；Bootstrap 1000次算置信区间。
+
+\textbf{结果关键}：总体一致率90\%，Kappa=0.74（良好）；评价人丙一致率仅76\%需培训。
+
+\textbf{注意}：Kappa为0说明一致率和随机猜差不多；Kappa=1说明完全一致。
+\end{algobrief}
+
+%% ========== C控制图 ==========
+\advancedalgo{C控制图（缺陷数图）}{c_chart}
+
+\begin{algobrief}
+\textbf{一句话}：监控\textbf{固定检查单元}上的缺陷总数——每块电路板的焊接缺陷数是否稳定。
+
+\textbf{美赛场景区}：SMT贴片车间AOI检测的缺陷数监控。
+
+\textbf{核心原理}：缺陷数服从泊松分布，中心线$\bar{c}$，控制限$\bar{c}\pm3\sqrt{\bar{c}}$。样本量固定时用C图，不固定用U图。
+
+\textbf{操作要点}：指定缺陷数列，3$\sigma$控制限，游程检验判随机性。
+
+\textbf{结果关键}：中心线$\bar{c}=4.35$，UCL=10.6，第118块板缺陷15个超限→失控。
+
+\textbf{注意}：C图和U图的区别——C图要求每个检查单元大小相同。
+\end{algobrief}
+
+%% ========== 加速寿命试验ALT ==========
+\advancedalgo{加速寿命试验（ALT）}{alt}
+
+\begin{algobrief}
+\textbf{一句话}：在高温/高压等加速条件下做寿命试验，外推正常使用条件下的产品寿命。
+
+\textbf{美赛场景区}：电容器、LED等长寿命产品的可靠性评估——常温下要几十年才坏，等不起。
+
+\textbf{核心原理}：用威布尔分布描述寿命，用阿伦尼斯模型描述温度对寿命的加速效应（温度越高寿命越短）。在几个高温水平做试验，拟合模型后外推到常温。
+
+\textbf{操作要点}：分布weibull，加速模型arrhenius，应力单位℃，目标B10寿命。
+
+\textbf{结果关键}：40℃下B10寿命约28560小时；125℃比40℃加速349倍。
+
+\textbf{注意}：外推距离越远越不可靠——正常温度离试验温度越远，置信区间越宽。
+\end{algobrief}
+
+%% ========== 量具R&R分析 ==========
+\advancedalgo{量具R\&R分析（重复性与再现性）}{gauge_rr}
+
+\begin{algobrief}
+\textbf{一句话}：评估测量系统本身准不准——同一人反复测同一零件的波动（重复性）和不同人测同一件的差异（再现性）。
+
+\textbf{美赛场景区}：新购量具投入使用前的验证；六西格玛DMAIC的Measure阶段。
+
+\textbf{核心原理}：总波动=零件间真实差异+测量系统波动（GRR）。用ANOVA分解方差，\%GRR<10\%优秀，10--30\%有条件接受，>30\%不可用。ndc（可区分类别数）$\geq$5才算合格。
+
+\textbf{操作要点}：3个检验员、10个零件、每人每件测5次；完整交叉ANOVA；研究变差倍数6。
+
+\textbf{结果关键}：\%GRR=14.32\%（有条件接受），ndc=9（可区分），零件间占97.95\%。
+
+\textbf{注意}：如果零件间差异太小（抽样范围窄），\%GRR会被放大失真，应扩大抽样范围。
+\end{algobrief}
+
+%% ========== 量具线性与偏倚研究 ==========
+\advancedalgo{量具线性与偏倚研究}{gauge_linearity}
+
+\begin{algobrief}
+\textbf{一句话}：检查量具读数是否整体偏高/偏低（偏倚），以及偏差是否随量程变化（线性）。
+
+\textbf{美赛场景区}：推拉力计、卡尺等量具的校准验证。
+
+\textbf{核心原理}：在量程内选多个标准件，重复测量。每个水平做t检验看平均偏倚是否为0；再对偏倚vs参考值做线性回归，看斜率是否显著。\%线性$<$10\%良好。
+
+\textbf{操作要点}：参考值列、测量值列指定；每水平重复多次；$\alpha=0.05$。
+
+\textbf{结果关键}：偏倚随参考值线性上升（\%线性≈11.2\%），有条件接受，建议校准。
+
+\textbf{注意}：偏倚是常数偏移（截距），线性是偏差随量程变化（斜率）。
+\end{algobrief}
+
+%% ========== Xbar-S控制图 ==========
+\advancedalgo{Xbar-S控制图（均值-标准差图）}{xbar_s_chart}
+
+\begin{algobrief}
+\textbf{一句话}：Xbar-R的升级版——用子组标准差S代替极差R估计波动，子组较大（$n>10$）时更准确。
+
+\textbf{美赛场景区}：饮料灌装净含量监控，子组大小3--7不等。
+
+\textbf{核心原理}：与Xbar-R类似，但用$c_4$常数从子组标准差估计$\sigma$，控制限随子组大小逐组计算。
+
+\textbf{操作要点}：子组容量3--7，合并估计$\sigma$，判异规则=超限+连续7点同侧。
+
+\textbf{结果关键}：Xbar图失控（2个超限+9个游程），S图受控→均值偏移问题。
+
+\textbf{注意}：子组小（$n<10$）用R图即可，子组大用S图更精确。
+\end{algobrief}
+
+%% ========== 公差区间 ==========
+\advancedalgo{公差区间}{tolerance_interval}
+
+\begin{algobrief}
+\textbf{一句话}：估计"未来95\%的产品测量值落在什么范围内"——比均值$\pm$标准差更严格的区间。
+
+\textbf{美赛场景区}：注塑件孔径和翘曲量的正常波动范围估计。
+
+\textbf{核心原理}：置信区间估计的是"均值在哪"，公差区间估计的是"\textbf{未来个体值}覆盖范围"。正态时用$\bar{x}\pm k\cdot s$（k比z大），非正态时用顺序统计量的非参数法。
+
+\textbf{操作要点}：覆盖比例95\%，置信水平95\%，双侧；正态性auto判断。
+
+\textbf{结果关键}：孔径正态法区间[9.94, 10.09]mm；翘曲量非正态区间[0.018, 0.364]mm。
+
+\textbf{注意}：公差区间比预测区间更宽——它要覆盖"未来大量个体"而非"单个预测"。
+\end{algobrief}
