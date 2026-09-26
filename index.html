@@ -44,10 +44,12 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
     
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -65,7 +67,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#spss" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -86,7 +88,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
     <a href="." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
       
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              首页
+              🏠 首页
             
           </span>
         </div>
@@ -121,7 +125,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -131,7 +135,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="teal"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -164,6 +168,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
         
         <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
           
@@ -210,435 +219,6 @@
       
         
           
-            
-<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-    
-  
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
-        
-  
-  
-    
-  
-  首页
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="preface/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  前言
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch01/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第1章 描述性统计
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch02/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第2章 相关分析
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch03/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第3章 差异比较
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch04/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第4章 回归分析
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch05/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第5章 聚类与降维
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch06/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第6章 时间序列与计量经济
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch07/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第7章 预测模型
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch08/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第8章 综合评价
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch09/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第9章 问卷研究
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch10/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第10章 医学统计
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch11/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第11章 机器学习
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch12/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第12章 规划求解
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch13/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第13章 质量控制
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch14/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第14章 空间计量
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch15/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第15章 试验设计
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch16/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第16章 Meta分析
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch17/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第17章 文本分析
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="ch18/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  第18章 功效分析
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="appendix_a/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  附录A 美赛真题题型与算法速查表
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="appendix_b/" class="md-tabs__link">
-        
-  
-  
-    
-  
-  附录B 优秀论文模型拆解
-
-      </a>
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -652,12 +232,10 @@
                     
 
 
-  
-
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
       
@@ -695,8 +273,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -705,7 +281,7 @@
   <span class="md-ellipsis">
     
   
-    首页
+    🏠 首页
   
 
     
@@ -723,7 +299,7 @@
   <span class="md-ellipsis">
     
   
-    首页
+    🏠 首页
   
 
     
@@ -738,8 +314,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="目录">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -760,10 +334,21 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 18大分类导航
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⭐ 星标算法
+        ⭐ 美赛必学核心算法
       
     </span>
   </a>
@@ -774,7 +359,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📚 附录
+        🚀 学习路径建议
       
     </span>
   </a>
@@ -785,7 +370,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 快速开始
+        📚 附录资源
       
     </span>
   </a>
@@ -814,7 +399,7 @@
   <span class="md-ellipsis">
     
   
-    前言
+    📝 前言
   
 
     
@@ -829,6 +414,68 @@
     
       
       
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📊 入门基础
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📊 入门基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -841,7 +488,7 @@
   <span class="md-ellipsis">
     
   
-    第1章 描述性统计
+    📊 第1章 描述性统计
   
 
     
@@ -853,9 +500,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -868,7 +516,7 @@
   <span class="md-ellipsis">
     
   
-    第2章 相关分析
+    🔗 第2章 相关分析
   
 
     
@@ -880,9 +528,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -895,7 +544,7 @@
   <span class="md-ellipsis">
     
   
-    第3章 差异比较
+    ⚖️ 第3章 差异比较
   
 
     
@@ -907,9 +556,83 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📈 核心建模
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📈 核心建模
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -922,7 +645,7 @@
   <span class="md-ellipsis">
     
   
-    第4章 回归分析
+    📈 第4章 回归分析
   
 
     
@@ -934,9 +657,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -949,7 +673,7 @@
   <span class="md-ellipsis">
     
   
-    第5章 聚类与降维
+    🎯 第5章 聚类与降维
   
 
     
@@ -961,9 +685,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -976,7 +701,7 @@
   <span class="md-ellipsis">
     
   
-    第6章 时间序列与计量经济
+    📉 第6章 时间序列与计量经济
   
 
     
@@ -988,9 +713,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1003,7 +729,7 @@
   <span class="md-ellipsis">
     
   
-    第7章 预测模型
+    🔮 第7章 预测模型
   
 
     
@@ -1015,9 +741,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1030,7 +757,7 @@
   <span class="md-ellipsis">
     
   
-    第8章 综合评价
+    🏆 第8章 综合评价
   
 
     
@@ -1042,9 +769,79 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🎯 专题方法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🎯 专题方法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -1057,7 +854,7 @@
   <span class="md-ellipsis">
     
   
-    第9章 问卷研究
+    📋 第9章 问卷研究
   
 
     
@@ -1069,9 +866,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1084,7 +882,7 @@
   <span class="md-ellipsis">
     
   
-    第10章 医学统计
+    🏥 第10章 医学统计
   
 
     
@@ -1096,9 +894,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1111,7 +910,7 @@
   <span class="md-ellipsis">
     
   
-    第11章 机器学习
+    🤖 第11章 机器学习
   
 
     
@@ -1123,9 +922,87 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🚀 高级应用
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🚀 高级应用
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -1138,7 +1015,7 @@
   <span class="md-ellipsis">
     
   
-    第12章 规划求解
+    🧮 第12章 规划求解
   
 
     
@@ -1150,9 +1027,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1165,7 +1043,7 @@
   <span class="md-ellipsis">
     
   
-    第13章 质量控制
+    ✅ 第13章 质量控制
   
 
     
@@ -1177,9 +1055,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1192,7 +1071,7 @@
   <span class="md-ellipsis">
     
   
-    第14章 空间计量
+    🗺️ 第14章 空间计量
   
 
     
@@ -1204,9 +1083,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1219,7 +1099,7 @@
   <span class="md-ellipsis">
     
   
-    第15章 试验设计
+    🧪 第15章 试验设计
   
 
     
@@ -1231,9 +1111,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1246,7 +1127,7 @@
   <span class="md-ellipsis">
     
   
-    第16章 Meta分析
+    🔬 第16章 Meta分析
   
 
     
@@ -1258,9 +1139,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1273,7 +1155,7 @@
   <span class="md-ellipsis">
     
   
-    第17章 文本分析
+    📝 第17章 文本分析
   
 
     
@@ -1285,9 +1167,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1300,7 +1183,7 @@
   <span class="md-ellipsis">
     
   
-    第18章 功效分析
+    📐 第18章 功效分析
   
 
     
@@ -1312,9 +1195,77 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 附录
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 附录
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
@@ -1327,7 +1278,7 @@
   <span class="md-ellipsis">
     
   
-    附录A 美赛真题题型与算法速查表
+    📋 附录A 题型速查表
   
 
     
@@ -1339,9 +1290,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -1354,7 +1306,7 @@
   <span class="md-ellipsis">
     
   
-    附录B 优秀论文模型拆解
+    🏅 附录B 论文拆解
   
 
     
@@ -1363,6 +1315,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -1387,146 +1347,305 @@
   
 
 
-<h1 id="spss">SPSS算法实战：数模美赛快速入门教材<a class="headerlink" href="#spss" title="Permanent link">&para;</a></h1>
-<div class="admonition note">
-<p class="admonition-title">教材简介</p>
-<p>本教材面向<strong>大一数模美赛新手</strong>，基于252个真实SPSS算法案例编写，覆盖18个统计分析分类，每个算法包含"一句话讲清、美赛适用场景、通俗原理、SPSS操作步骤、结果怎么看、注意事项&amp;决策指引"六大模块，帮助你快速掌握美赛最常用的统计建模方法。</p>
+  <h1>🏠 首页</h1>
+
+<div class="hero">
+
+# SPSS算法实战
+## 数模美赛快速入门教材
+
+<div class="hero-badges">
+<span class="badge">📚 252个算法全覆盖</span>
+<span class="badge">🎯 18大统计分类</span>
+<span class="badge">⭐ 美赛高频模型</span>
+<span class="badge">📝 36篇获奖论文拆解</span>
 </div>
+
+<div class="hero-actions">
+<a class="btn btn-primary" href="ch01/">🚀 开始学习</a>
+<a class="btn btn-outline" href="appendix_a/">📋 题型速查表</a>
+</div>
+
+</div>
+
+<div class="stats-row">
+<div class="stat-card"><div class="stat-num">252</div><div class="stat-label">SPSS算法</div></div>
+<div class="stat-card"><div class="stat-num">18</div><div class="stat-label">统计分类</div></div>
+<div class="stat-card"><div class="stat-num">6</div><div class="stat-label">模块讲解</div></div>
+<div class="stat-card"><div class="stat-num">36</div><div class="stat-label">论文拆解</div></div>
+<div class="stat-card"><div class="stat-num">301</div><div class="stat-label">页PDF教材</div></div>
+</div>
+
+<hr />
 <h2 id="_1">📖 教材结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>每个算法都包含 <strong>六大模块</strong>，结构清晰、一目了然：</p>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>用大白话告诉你这个算法是干啥的，30秒搞懂用途</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<p>什么题型、什么问题用它，拿到题目就能对号入座</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>生活类比 + 公式文字说明，大一学生也能看懂</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>具体到点哪个菜单、选什么变量、参数怎么填</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>输出表格中每个关键指标什么意思、怎么判断好坏</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p>什么时候用、什么时候不用、常见坑、相似算法区别</p>
+</div>
+<hr />
+<h2 id="18">📊 18大分类导航<a class="headerlink" href="#18" title="Permanent link">&para;</a></h2>
+<div class="category-grid">
+
+<a class="category-card" href="ch01/">
+<div class="card-icon">📊</div>
+<div class="card-title">第1章 描述性统计</div>
+<div class="card-count">9个算法</div>
+<div class="card-desc">数据画像、频数分析、正态性检验</div>
+</a>
+
+<a class="category-card" href="ch02/">
+<div class="card-icon">🔗</div>
+<div class="card-title">第2章 相关分析</div>
+<div class="card-count">6个算法</div>
+<div class="card-desc">Pearson/Spearman相关、偏相关</div>
+</a>
+
+<a class="category-card" href="ch03/">
+<div class="card-icon">⚖️</div>
+<div class="card-title">第3章 差异比较</div>
+<div class="card-count">18个算法</div>
+<div class="card-desc">T检验、卡方、方差分析、非参数检验</div>
+</a>
+
+<a class="category-card" href="ch04/">
+<div class="card-icon">📈</div>
+<div class="card-title">第4章 回归分析</div>
+<div class="card-count">24个算法</div>
+<div class="card-desc">线性/逻辑/分层/逐步回归</div>
+</a>
+
+<a class="category-card" href="ch05/">
+<div class="card-icon">🎯</div>
+<div class="card-title">第5章 聚类与降维</div>
+<div class="card-count">9个算法</div>
+<div class="card-desc">K-Means、层次聚类、PCA、因子分析</div>
+</a>
+
+<a class="category-card" href="ch06/">
+<div class="card-icon">📉</div>
+<div class="card-title">第6章 时间序列与计量经济</div>
+<div class="card-count">28个算法</div>
+<div class="card-desc">ARIMA、DID、面板模型、GMM</div>
+</a>
+
+<a class="category-card" href="ch07/">
+<div class="card-icon">🔮</div>
+<div class="card-title">第7章 预测模型</div>
+<div class="card-count">6个算法</div>
+<div class="card-desc">灰色预测、指数平滑、Prophet</div>
+</a>
+
+<a class="category-card" href="ch08/">
+<div class="card-icon">🏆</div>
+<div class="card-title">第8章 综合评价</div>
+<div class="card-count">24个算法</div>
+<div class="card-desc">AHP、熵值法、TOPSIS、模糊综合</div>
+</a>
+
+<a class="category-card" href="ch09/">
+<div class="card-icon">📋</div>
+<div class="card-title">第9章 问卷研究</div>
+<div class="card-count">22个算法</div>
+<div class="card-desc">信度、效度、中介、调节、SEM</div>
+</a>
+
+<a class="category-card" href="ch10/">
+<div class="card-icon">🏥</div>
+<div class="card-title">第10章 医学统计</div>
+<div class="card-count">24个算法</div>
+<div class="card-desc">ROC、生存分析、Cox回归</div>
+</a>
+
+<a class="category-card" href="ch11/">
+<div class="card-icon">🤖</div>
+<div class="card-title">第11章 机器学习</div>
+<div class="card-count">13个算法</div>
+<div class="card-desc">决策树、随机森林、SVM、神经网络</div>
+</a>
+
+<a class="category-card" href="ch12/">
+<div class="card-icon">🧮</div>
+<div class="card-title">第12章 规划求解</div>
+<div class="card-count">14个算法</div>
+<div class="card-desc">遗传算法、粒子群、线性规划</div>
+</a>
+
+<a class="category-card" href="ch13/">
+<div class="card-icon">✅</div>
+<div class="card-title">第13章 质量控制</div>
+<div class="card-count">14个算法</div>
+<div class="card-desc">控制图、过程能力、帕累托图</div>
+</a>
+
+<a class="category-card" href="ch14/">
+<div class="card-icon">🗺️</div>
+<div class="card-title">第14章 空间计量</div>
+<div class="card-count">10个算法</div>
+<div class="card-desc">Moran指数、空间滞后/误差模型</div>
+</a>
+
+<a class="category-card" href="ch15/">
+<div class="card-icon">🧪</div>
+<div class="card-title">第15章 试验设计</div>
+<div class="card-count">9个算法</div>
+<div class="card-desc">正交设计、响应面、全析因</div>
+</a>
+
+<a class="category-card" href="ch16/">
+<div class="card-icon">🔬</div>
+<div class="card-title">第16章 Meta分析</div>
+<div class="card-count">8个算法</div>
+<div class="card-desc">合并效应量、异质性检验、森林图</div>
+</a>
+
+<a class="category-card" href="ch17/">
+<div class="card-icon">📝</div>
+<div class="card-title">第17章 文本分析</div>
+<div class="card-count">8个算法</div>
+<div class="card-desc">词频、情感分析、LDA主题模型</div>
+</a>
+
+<a class="category-card" href="ch18/">
+<div class="card-icon">📐</div>
+<div class="card-title">第18章 功效分析</div>
+<div class="card-count">6个算法</div>
+<div class="card-desc">样本量估算、检验效能</div>
+</a>
+
+</div>
+
+<hr />
+<h2 id="_2">⭐ 美赛必学核心算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>带⭐标记的是美赛最高频的算法，建议优先掌握：</p>
 <table>
 <thead>
 <tr>
-<th>分类</th>
-<th>算法数</th>
-<th>核心内容</th>
+<th>领域</th>
+<th>核心算法</th>
+<th>章节</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>第1章 描述性统计</td>
-<td>9</td>
-<td>数据画像、频数分析、正态性检验</td>
+<td>数据探索</td>
+<td>⭐ 描述性统计</td>
+<td><a href="ch01/">第1章</a></td>
 </tr>
 <tr>
-<td>第2章 相关分析</td>
-<td>6</td>
-<td>Pearson/Spearman相关、偏相关</td>
+<td>差异检验</td>
+<td>⭐ 独立样本T检验、⭐ 卡方检验、⭐ 方差分析</td>
+<td><a href="ch03/">第3章</a></td>
 </tr>
 <tr>
-<td>第3章 差异比较</td>
-<td>18</td>
-<td>T检验、卡方、方差分析、非参数检验</td>
+<td>回归建模</td>
+<td>⭐ 线性回归、⭐ 逻辑回归</td>
+<td><a href="ch04/">第4章</a></td>
 </tr>
 <tr>
-<td>第4章 回归分析</td>
-<td>24</td>
-<td>线性/逻辑/分层/逐步回归</td>
+<td>降维分群</td>
+<td>⭐ 主成分分析、⭐ K-Means聚类</td>
+<td><a href="ch05/">第5章</a></td>
 </tr>
 <tr>
-<td>第5章 聚类与降维</td>
-<td>9</td>
-<td>K-Means、层次聚类、PCA、因子分析</td>
+<td>计量经济</td>
+<td>⭐ DID双重差分、⭐ 面板模型</td>
+<td><a href="ch06/">第6章</a></td>
 </tr>
 <tr>
-<td>第6章 时间序列与计量经济</td>
-<td>28</td>
-<td>ARIMA、DID、面板模型、GMM</td>
+<td>时间预测</td>
+<td>⭐ ARIMA</td>
+<td><a href="ch07/">第7章</a></td>
 </tr>
 <tr>
-<td>第7章 预测模型</td>
-<td>6</td>
-<td>灰色预测、指数平滑、 Prophet</td>
+<td>综合评价</td>
+<td>⭐ 熵值法、⭐ AHP、⭐ TOPSIS</td>
+<td><a href="ch08/">第8章</a></td>
 </tr>
 <tr>
-<td>第8章 综合评价</td>
-<td>24</td>
-<td>AHP、熵值法、TOPSIS、模糊综合</td>
+<td>问卷分析</td>
+<td>⭐ 信度分析、⭐ 效度分析、⭐ 结构方程模型</td>
+<td><a href="ch09/">第9章</a></td>
 </tr>
 <tr>
-<td>第9章 问卷研究</td>
-<td>22</td>
-<td>信度、效度、中介、调节、SEM</td>
+<td>机器学习</td>
+<td>⭐ 随机森林、⭐ SVM、⭐ 神经网络</td>
+<td><a href="ch11/">第11章</a></td>
 </tr>
 <tr>
-<td>第10章 医学统计</td>
-<td>24</td>
-<td>ROC、生存分析、Cox回归</td>
+<td>智能优化</td>
+<td>⭐ 遗传算法、⭐ 粒子群</td>
+<td><a href="ch12/">第12章</a></td>
 </tr>
 <tr>
-<td>第11章 机器学习</td>
-<td>13</td>
-<td>决策树、随机森林、SVM、神经网络</td>
+<td>空间分析</td>
+<td>⭐ Moran指数、⭐ 空间滞后模型</td>
+<td><a href="ch14/">第14章</a></td>
 </tr>
 <tr>
-<td>第12章 规划求解</td>
-<td>14</td>
-<td>遗传算法、粒子群、线性规划</td>
-</tr>
-<tr>
-<td>第13章 质量控制</td>
-<td>14</td>
-<td>控制图、过程能力、帕累托图</td>
-</tr>
-<tr>
-<td>第14章 空间计量</td>
-<td>10</td>
-<td>Moran指数、空间滞后/误差模型</td>
-</tr>
-<tr>
-<td>第15章 试验设计</td>
-<td>9</td>
-<td>正交设计、响应面、全析因</td>
-</tr>
-<tr>
-<td>第16章 Meta分析</td>
-<td>8</td>
-<td>合并效应量、异质性检验、森林图</td>
-</tr>
-<tr>
-<td>第17章 文本分析</td>
-<td>8</td>
-<td>词频、情感分析、LDA主题模型</td>
-</tr>
-<tr>
-<td>第18章 功效分析</td>
-<td>6</td>
-<td>样本量估算、检验效能</td>
+<td>文本挖掘</td>
+<td>⭐ 文本情感分析、⭐ LDA主题分析</td>
+<td><a href="ch17/">第17章</a></td>
 </tr>
 </tbody>
 </table>
-<h2 id="_2">⭐ 星标算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>带⭐标记的算法是美赛最常用的核心方法，建议优先掌握：</p>
-<ul>
-<li><strong>描述性统计</strong> ⭐ — 拿到数据第一步</li>
-<li><strong>Pearson相关分析</strong> ⭐ — 变量间关系</li>
-<li><strong>独立样本T检验</strong> ⭐、<strong>卡方检验</strong> ⭐、<strong>方差分析</strong> ⭐ — 组间差异</li>
-<li><strong>线性回归</strong> ⭐、<strong>逻辑回归</strong> ⭐ — 建模核心</li>
-<li><strong>主成分分析</strong> ⭐、<strong>K-Means聚类</strong> ⭐ — 降维分群</li>
-<li><strong>DID双重差分</strong> ⭐、<strong>面板模型</strong> ⭐、<strong>基准回归</strong> ⭐ — 计量经济</li>
-<li><strong>ARIMA</strong> ⭐ — 时间序列预测</li>
-<li><strong>熵值法</strong> ⭐、<strong>AHP</strong> ⭐、<strong>TOPSIS</strong> ⭐ — 综合评价三件套</li>
-<li><strong>信度分析</strong> ⭐、<strong>效度分析</strong> ⭐、<strong>结构方程模型</strong> ⭐ — 问卷研究</li>
-<li><strong>ROC曲线</strong> ⭐、<strong>Cox回归</strong> ⭐ — 医学统计</li>
-<li><strong>随机森林</strong> ⭐、<strong>SVM</strong> ⭐、<strong>神经网络</strong> ⭐ — 机器学习</li>
-<li><strong>遗传算法</strong> ⭐、<strong>粒子群</strong> ⭐ — 智能优化</li>
-<li><strong>Moran指数</strong> ⭐、<strong>空间滞后模型</strong> ⭐ — 空间计量</li>
-<li><strong>正交实验</strong> ⭐、<strong>响应面</strong> ⭐ — 试验设计</li>
-<li><strong>二分类Meta分析</strong> ⭐ — 证据合并</li>
-<li><strong>文本情感分析</strong> ⭐、<strong>LDA主题分析</strong> ⭐ — 文本挖掘</li>
-<li><strong>功效分析之均值差</strong> ⭐ — 样本量设计</li>
-</ul>
-<h2 id="_3">📚 附录<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>附录A</strong>：美赛A-F六大题型与算法速查表</li>
-<li><strong>附录B</strong>：36篇获奖优秀论文模型拆解（2020-2025年C题+E题）</li>
-</ul>
-<h2 id="_4">🚀 快速开始<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="_3">🚀 学习路径建议<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">新手推荐路线</p>
 <ol>
-<li>从<strong>第1章描述性统计</strong>开始，了解数据探索的基础</li>
-<li>按<strong>第3章差异比较 → 第4章回归分析 → 第8章综合评价</strong>的顺序学习核心方法</li>
-<li>结合<strong>附录B</strong>的优秀论文拆解，理解模型在真实比赛中的组合运用</li>
-<li>遇到不确定用什么方法时，查阅<strong>附录A</strong>的题型速查表</li>
+<li><strong>第1章 描述性统计</strong> — 拿到数据第一步，学会看数据</li>
+<li><strong>第3章 差异比较</strong> — T检验/卡方/方差，组间比较必备</li>
+<li><strong>第4章 回归分析</strong> — 建模核心，线性+逻辑回归</li>
+<li><strong>第8章 综合评价</strong> — AHP/熵值法/TOPSIS，评价类题目神器</li>
+<li><strong>第6章 时间序列</strong> — ARIMA，预测类题目常用</li>
+<li><strong>第11章 机器学习</strong> — 随机森林/SVM，大数据题加分项</li>
+<li><strong>附录B 论文拆解</strong> — 看获奖论文怎么组合模型</li>
 </ol>
+</div>
+<hr />
+<h2 id="_4">📚 附录资源<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<div class="category-grid">
+
+<a class="category-card" href="appendix_a/">
+<div class="card-icon">📋</div>
+<div class="card-title">附录A 题型速查表</div>
+<div class="card-desc">A-F六大题型对应算法速查，拿到题目直接定位</div>
+</a>
+
+<a class="category-card" href="appendix_b/">
+<div class="card-icon">🏅</div>
+<div class="card-title">附录B 优秀论文拆解</div>
+<div class="card-desc">2020-2025年36篇获奖论文，模型组合逻辑深度分析</div>
+</a>
+
+</div>
+
+<hr />
+<div class="admonition info">
+<p class="admonition-title">关于本教材</p>
+<p>本教材基于252个真实SPSS算法案例编写，所有操作步骤和案例数值均来自实际数据分析场景。面向大一数模美赛新手，假设只有高中数学基础，专业术语均有通俗解释。</p>
+</div>
 
 
 
@@ -1563,6 +1682,10 @@
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
+    <div class="md-copyright__highlight">
+      Copyright © 2026 SPSS-MCM-textbook | 基于252个真实SPSS案例编写
+    </div>
+  
   
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
@@ -1584,7 +1707,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "content.code.copy", "content.code.annotate", "toc.follow", "toc.integrate"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
       <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
