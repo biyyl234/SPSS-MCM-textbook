@@ -1,0 +1,339 @@
+% 第16章 Meta分析
+\chapter{Meta分析}
+
+\begin{chapteroverview}
+\textbf{这个分类是干什么的？}
+
+Meta分析（元分析）是一种"站在巨人肩膀上"的统计方法。当同一个问题已经有很多人各自做过研究、结论却大小不一时，Meta分析不重新做实验，而是把这些\textbf{已发表的研究结果}当成数据，用一套加权的数学方法把它们"合并"成一个更可靠的总体结论。它回答的核心问题是：\textbf{把所有同类研究放在一起看，效应到底有多大？各研究结论一致吗？结论会不会被个别研究带偏？}
+
+\textbf{美赛什么题型常用？}
+
+Meta分析在美赛中不是高频题，但在两类场景下非常加分：
+\begin{itemize}
+    \item \textbf{文献综述与证据合成}：E题（环境科学）、F题（政策）中，题目往往要求你"综合已有研究/报告的估计值"，比如把各地不同研究报告的某政策减排效果、某疾病发生率合并成一个区域总体估计。
+    \item \textbf{多来源数据合并}：当你手里有多份独立统计（如各城市的相关系数、各试点的发生率），需要汇总出一个带置信区间的总体数字时，Meta分析就是最规范的做法。
+\end{itemize}
+
+\textbf{学习路径建议}
+
+先吃透\textbf{平均值Meta分析}和\textbf{二分类数据Meta分析}两个明星算法——它们覆盖了"连续结局"和"事件结局"两种最常见的数据形态，异质性判断、固定/随机效应模型选择、森林图这些核心概念都在这两个算法里讲透。再了解\textbf{相关系数Meta分析}。进阶部分的\textbf{一般倒方差法}是"万能底座"（只要别人给的是效应值加标准误就能合并），\textbf{单个率Meta分析}、\textbf{连续性数据Meta分析（SMD）}、\textbf{OR/HR值Meta分析}是它的特化版本，\textbf{P值合并}则用于"只有p值、没有效应量"的尴尬情形。
+\end{chapteroverview}
+
+\section{基础级算法}
+
+%% ========== 平均值Meta分析 ==========
+\basicalgo{{\starmark}平均值Meta分析}{meta_mean}
+
+\begin{algointro}
+平均值Meta分析，就是把多项研究里"两组均值之差"加权合并成一个总的平均差值。比如有150项研究都测了"运动康复组 vs 常规组的6分钟步行距离"，每个研究算出一个差值，Meta分析把它们按精度加权平均，告诉你综合来看干预到底提升了多少米。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 多项研究都报告了\textbf{两组的均值、标准差、样本量}，且结局\textbf{量纲一致}（都是米、mmHg、分），要合并组间差异
+    \item 美赛E/F题中，汇总各地区/各试点报告的政策前后均值差异，估计总体效应
+    \item 需要给出"合并效应量 + 置信区间 + 是否显著"的循证结论时
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+想象你要给一场有很多评委打分的比赛算总分。有的评委很专业（样本量大、打分很稳），有的评委只是随手一看（样本量小、波动大）。合理的做法不是简单平均，而是\textbf{让专业评委权重更高}。这就是Meta分析的核心思想。
+
+\begin{itemize}
+    \item \textbf{效应量MD（均数差）}：每个研究贡献一个"干预组均值$-$对照组均值"。量纲一致时直接用MD，单位和原始结局一样（米、分）。
+    \item \textbf{逆方差加权}：权重 $w_i = 1/v_i$，其中$v_i$是该研究效应量的方差。样本越大、标准差越小，方差越小，权重越大。
+    \item \textbf{异质性}：各研究结果如果只是围绕同一个真值随机波动，叫"同质"；如果研究之间真的不一样，叫"异质"。用三个指标判断：
+    \begin{itemize}
+        \item Cochran $Q$检验：$Q$的$p<0.10$提示有异质性；
+        \item $I^2$：总变异中有多少百分比来自研究间差异，$<25\%$低、$50\%$中等、$>75\%$高；
+        \item $\tau^2$：研究间方差的绝对大小。
+    \end{itemize}
+    \item \textbf{固定效应 vs 随机效应}：异质小（$p\geq0.10$且$I^2<50\%$）用固定效应（假设大家都在测同一个真值）；异质大改用随机效应（承认研究间有真差异，额外加上$\tau^2$，区间更宽更稳）。
+\end{itemize}
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在Dabbit AI SPSS工具箱中选择"平均值Meta分析"（SPSS原生无此模块，需借助工具箱或R扩展）
+    \item 数据按"宽表两臂"布局：每个研究一行，录入两组各自的\textbf{样本量$n$、均值、标准差}
+    \item 设置参数：显著性水准$\alpha=0.05$；效应量选\textbf{MD（均数差）}，仅结局量纲一致时用
+    \item 合并模型选\textbf{auto}：由$Q$检验$p$值与$I^2$自动决定固定/随机效应
+    \item $\tau^2$估计选\textbf{DL（DerSimonian-Laird矩法）}；结局方向设为\textbf{high\_is\_better}（数值越大越优）
+    \item 勾选输出森林图、漏斗图、留一法敏感性分析、Egger发表偏倚检验
+    \item 点击运行，查看合并结果与异质性诊断
+\end{enumerate}
+
+\textbf{默认参数参考}：$\alpha=0.05$，模型auto自动选择，$\tau^2$用DL法，效应量MD，结局越大越优。
+\end{algosposs}
+
+\begin{algoresult}
+以某运动康复案例为例（150项研究，结局为6分钟步行距离，单位米）：
+
+\begin{itemize}
+    \item \textbf{异质性表}：$Q=241.48$（$df=149$，$p<0.001$），$I^2=38.3\%$，$\tau^2=62.83$。因$Q$检验$p<0.10$，自动选用\textbf{随机效应模型}。
+    \item \textbf{合并效应（核心）}：随机效应合并$MD=31.55$，$95\%CI=(29.39,\ 33.70)$，$Z=28.65$，$p<0.001$。\textbf{置信区间不含0}，说明干预显著提升了步行距离。
+    \item \textbf{预测区间}：$15.73\sim47.36$，表示再做一项同类研究，其真实效应大概率落在此范围，比置信区间宽，体现了研究间差异。
+    \item \textbf{森林图}：每个研究是一个方块（大小=权重）加横线（=置信区间），底部菱形是合并效应。菱形不跨过0线即显著。
+    \item \textbf{敏感性分析}：逐篇剔除后合并值围绕31.55波动，方向不反转，说明结果稳健。
+    \item \textbf{发表偏倚}：Egger回归截距$p<0.10$提示可能有小样本偏倚，结论需谨慎。
+\end{itemize}
+
+\textbf{怎么判断好坏}：合并$p<0.05$且置信区间不跨0为"显著"；$I^2$越高说明研究越不一致，合并值只能解释为"平均趋势"，不能当成唯一真值。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}多项研究都给了两组均值与标准差、且结局单位一致，要合并出一个总体均值差时。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 各研究结局\textbf{量纲/量表不统一}时（如一个用米、一个用评分），不能用MD，要用标准化均数差SMD（见进阶"连续性数据Meta分析"）。
+    \item 手里只有别人报告的效应值和标准误、没有原始两组均值时，用"一般倒方差Meta分析"。
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：异质性很大还硬用固定效应模型，导致置信区间过窄、过度自信。异质时务必上随机效应。
+    \item \textbf{坑2}：忽略发表偏倚。只搜到阳性结果的研究会让合并效应被夸大，一定要看漏斗图/Egger检验。
+    \item \textbf{坑3}：把Meta分析当成简单平均。不加权的平均会让小样本研究和大样本研究"一人一票"，严重失真。
+\end{itemize}
+
+\textbf{和相似算法的区别}
+\begin{itemize}
+    \item vs \textbf{连续性数据Meta分析（SMD）}：本算法用原始单位的MD，要求各研究结局量纲一致；SMD把结果标准化成无量纲数，适合量表不同的研究。
+    \item vs \textbf{独立样本t检验}：t检验是\textbf{一次实验内}两组比均值；Meta分析是\textbf{跨多个研究}把多个均值差合并。
+\end{itemize}
+\end{algonotes}
+
+%% ========== 相关系数Meta分析 ==========
+\basicalgo{相关系数Meta分析}{meta_corr}
+
+\begin{algointro}
+相关系数Meta分析，就是把多项研究各自报告的"两个变量之间的相关系数$r$"合并成一个更可靠的总体相关估计。比如150项研究都测了"组织支持感 vs 工作投入"的相关，有的报0.2、有的报0.5，Meta分析告诉你综合起来到底有多相关。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 多项研究分别报告了\textbf{同一对变量的相关系数$r$和样本量$n$}，结论强弱不一
+    \item 美赛中需要综合多项实证研究，判断两个变量是否稳定相关、相关多强
+    \item 用于文献综述中"某关系是否稳健"的定量总结
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+相关系数$r$有个毛病：它的分布在接近$\pm1$时很歪，不能直接拿来加权平均。所以要先做一个"扶正"变换。
+
+\begin{itemize}
+    \item \textbf{Fisher z变换}：把$r$转成近似正态的 $z = \frac{1}{2}\ln\frac{1+r}{1-r}$。在$z$尺度上做加权合并、算置信区间，最后再反变换回$r$方便解释。
+    \item \textbf{权重}：每个研究的方差约为 $1/(n-3)$，样本量$n$越大权重越高。
+    \item \textbf{异质性与模型}：同样用$Q$、$I^2$判断。案例中$Q=298.13$（$p<0.001$），$I^2=50.0\%$，研究间差异明显，故用随机效应。
+    \item \textbf{效应强弱解读}：$|r|$约0.1弱、0.3中等、0.5以上强。
+\end{itemize}
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在工具箱中选择"相关系数Meta分析"
+    \item 数据每研究一行，录入\textbf{样本量$n$}和\textbf{相关系数$r$}两列
+    \item 输入效应量选\textbf{r}；合并模型选\textbf{随机效应}；置信水平95\%
+    \item $\tau^2$估计选DerSimonian-Laird；最小纳入研究数设为2
+    \item 勾选\textbf{Egger发表偏倚检验}与\textbf{留一法敏感性分析}
+    \item Knapp-Hartung小样本校正默认关闭（研究数很多时可不开）
+    \item 运行并查看合并$r$、置信区间与异质性
+\end{enumerate}
+
+\textbf{默认参数参考}：随机效应模型，95\%置信，DL法估计$\tau^2$，Egger与留一法开启。
+\end{algosposs}
+
+\begin{algoresult}
+以"组织支持感 vs 工作投入"案例为例（150项研究，合计样本11828）：
+
+\begin{itemize}
+    \item \textbf{合并结果（核心）}：随机效应合并 $r=0.322$，$95\%CI=(0.297,\ 0.346)$，$Z=23.62$，$p<0.001$。属\textbf{中等强度正相关}，显著但不等于因果。
+    \item \textbf{异质性}：$Q=298.13$（$p<0.001$），$I^2=50.0\%$，$\tau^2=0.0132$，研究间差异明显超出抽样误差。
+    \item \textbf{发表偏倚}：Egger截距检验不显著，未发现明显小研究效应。
+    \item \textbf{敏感性}：剔除任意一篇后合并$r$在$0.319\sim0.325$间波动，方向与显著性不变，结论稳健。
+\end{itemize}
+
+\textbf{怎么看}：置信区间不含0即相关显著；区间越窄估计越准。务必记住——\textbf{相关不等于因果}。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}多篇文献都报告了同一对变量的相关系数及其样本量时。
+
+\textbf{什么时候不用？}研究报告的是回归系数、OR等其他效应量时，应改用对应的Meta方法，不能硬塞进来。
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：直接对$r$做加权平均，跳过Fisher z变换，导致两端的研究权重失真。
+    \item \textbf{坑2}：把显著的合并$r$解读成"一个变量导致另一个"，相关Meta分析只能说明关联稳定。
+    \item \textbf{坑3}：纳入了样本量$n\leq3$或$r$越界的脏数据，导致方差算错。
+\end{itemize}
+
+\textbf{和相似算法的区别}
+\begin{itemize}
+    \item vs \textbf{第2章相关分析}：那是在\textbf{一份数据集}里算两个变量的相关；本算法是\textbf{跨多项研究}把多个相关系数合并。
+    \item vs \textbf{一般倒方差Meta分析}：本算法专门处理$r$（自动做Fisher z变换）；倒方差法更通用，只要给效应值和标准误即可。
+\end{itemize}
+\end{algonotes}
+
+%% ========== 二分类数据Meta分析 ==========
+\basicalgo{{\starmark}二分类数据Meta分析}{meta_binary}
+
+\begin{algointro}
+二分类数据Meta分析，合并的是"事件/没事件"这种结局。比如每个研究都报了"试验组多少人发生了静脉血栓、对照组多少人发生"，Meta分析把它们合并成一个总的风险比（OR或RR），回答干预到底把风险降了多少。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 多项研究都是\textbf{两臂对照}，结局是\textbf{二分类事件}（发生/未发生、达标/未达标）
+    \item 美赛中合并各试点的政策实施率、发生率、合格率等事件型结果
+    \item 需要估计"干预 vs 对照"的\textbf{风险倍数}并判断是否显著
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+二分类结局的效应量不能直接减人数，要用"比值"。
+
+\begin{itemize}
+    \item \textbf{OR（比值比）}：试验组事件 odds 除以对照组事件 odds。$OR<1$表示试验组事件更少（好事）；$OR=1$表示两组无差别。
+    \item \textbf{对数尺度合并}：OR是偏态的，要先取$\ln(OR)$再合并，算完置信区间再取指数还原。
+    \item \textbf{异质性与模型}：$Q$检验$p<0.10$或$I^2>50\%$时用随机效应（$\tau^2$用DL估计），否则用固定效应，两个模型结果都会报告。
+    \item \textbf{亚组分析}：可按地区/人群分组，用$Q_b$检验组间差异。
+    \item \textbf{零事件校正}：某组0事件时OR算不出来，用0.5连续性校正。
+\end{itemize}
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在工具箱中选择"二分类数据Meta分析"
+    \item 数据每研究一行，录入两组各自的\textbf{事件数}与\textbf{总例数}；如有分组列（地区）一并录入
+    \item 效应量选\textbf{OR}；置信水平0.95；Q检验显著性水准0.10
+    \item 合并模型选\textbf{按异质性自动选择}；随机效应$\tau^2$用DL法
+    \item 零事件校正选\textbf{0.5连续性校正}；发表偏倚用Egger回归
+    \item 亚组分析选"自动识别分组列并分析"；勾选留一法敏感性分析
+    \item 运行并查看固定/随机两模型结果、亚组表与森林图、漏斗图
+\end{enumerate}
+
+\textbf{默认参数参考}：效应量OR，异质性阈值$I^2=50\%$，零事件0.5校正，Egger检验。
+\end{algosposs}
+
+\begin{algoresult}
+以"新型口服抗凝药预防术后VTE"案例为例（150项研究，多地区医疗中心）：
+
+\begin{itemize}
+    \item \textbf{合并效应（核心）}：随机效应 $OR=0.614$，$95\%CI=(0.575,\ 0.656)$，$p<0.001$。意思是\textbf{试验组事件风险约为对照组的0.61倍}，即风险下降约39\%，显著有效。固定效应$OR=0.631$作对照。
+    \item \textbf{异质性}：$Q=272.96$（$p<0.001$），$I^2=45.4\%$，$\tau^2=0.0749$。按自动规则（$p<0.10$）选随机效应。
+    \item \textbf{预测区间}：$0.358\sim1.055$，比置信区间宽，体现研究间差异。
+    \item \textbf{亚组分析}：$Q_b=66.10$（$p<0.001$），说明华北/华东/华南/西南各地区效应确有差别，合并成一个总效应会掩盖地区差异。
+    \item \textbf{森林图}：无效应线在$OR=1$处，合并菱形不跨过1线即显著；在1线左侧表示试验组更优。
+    \item \textbf{敏感性}：剔除任意一篇后OR仍在$0.61\sim0.62$，结论稳健。
+\end{itemize}
+
+\textbf{怎么看}：OR的95\%CI\textbf{不含1}即显著；$OR<1$试验组事件少（如干预好），$OR>1$试验组事件多。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}两臂对照、结局为"事件发生与否"时，这是医学/政策评价最常见的Meta场景。
+
+\textbf{什么时候不用？}结局是连续数值（如血压、评分）时，用平均值Meta分析；只给了OR和置信区间的现成数据，用"OR/HR值Meta分析"。
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：把OR当RR读。OR是"比值比"，当事件率高时OR会比RR夸大，解读时要说清是比值比。
+    \item \textbf{坑2}：忽略零事件研究。某组0事件会让OR无穷大，必须做0.5连续性校正或剔除。
+    \item \textbf{坑3}：异质性明显还不做亚组分析，一个总效应掩盖了地区/人群差异。
+\end{itemize}
+
+\textbf{和相似算法的区别}
+\begin{itemize}
+    \item vs \textbf{单个率Meta分析}：本算法是\textbf{两组对照}（算OR/RR）；单个率Meta分析只合并\textbf{一组自身的发生率}，没有对照。
+    \item vs \textbf{OR/HR值Meta分析}：本算法从\textbf{事件数/总例数}现场算OR；后者直接吃别人已算好的OR和置信区间。
+\end{itemize}
+\end{algonotes}
+
+\section{进阶级算法速览}
+
+%% ========== 一般倒方差Meta分析 ==========
+\advancedalgo{一般倒方差Meta分析}{meta_invvar}
+
+\begin{algobrief}
+\textbf{一句话}：最通用的Meta合并底座——只要每个研究给了"效应值"和"标准误"两列，不管它是均差、回归系数还是对数OR，都能按 $1/SE^2$ 加权合并。
+
+\textbf{美赛场景区}：各研究报告的效应形式五花八门（有的给均差、有的给回归系数），但都附带标准误，需要统一合并出总体净效应。
+
+\textbf{核心原理}：以标准误平方的倒数 $w_i=1/SE_i^2$ 为权重，先算固定效应下的Cochran $Q$，结合$I^2$、$\tau^2$决定固定/随机效应（DL法估计$\tau^2$），再加权合并并做$Z$检验。若输入是对数尺度，取指数还原成OR/HR/RR。
+
+\textbf{操作要点}：工具箱选"一般倒方差Meta分析"；指定效应值列effect、标准误列se、研究标签列study；默认随机效应、双侧检验、95\%置信、异质性水准0.10。
+
+\textbf{结果关键}：合并效应值及其95\%CI、$p$值（CI不含0即显著）；案例中合并值4.20（CI 3.88$\sim$4.52，$p<0.001$），$I^2=67.1\%$异质性较高。配合去一法与Egger检验查稳健性与小样本偏倚。
+
+\textbf{注意}：这是其他Meta算法的"母版"——平均值、二分类、SMD都是它在特定数据布局下的特化。当你拿不到原始两组数据、只有别人报告的效应估计时，就用它。
+\end{algobrief}
+
+%% ========== 单个率Meta分析 ==========
+\advancedalgo{单个率Meta分析}{meta_single_rate}
+
+\begin{algobrief}
+\textbf{一句话}：只有一组数据（没有对照组）时，把多家单位各自报告的"发生率/阳性率"合并成一个总体率。
+
+\textbf{美赛场景区}：评估区域医院感染率、某病总体患病率、某政策整体覆盖率——各单位只报"事件数/总数"，想得到区域平均水平。
+
+\textbf{核心原理}：率本身在接近0或100\%时不正态，先做Freeman-Tukey双反正弦（或logit）变换，再加权合并，最后回变换到百分比刻度。随机效应先估$\tau^2$再加权，并用$Q$、$I^2$、Egger、留一法评估异质性与偏倚。
+
+\textbf{操作要点}：工具箱选"单个率Meta分析"；每研究录事件数与样本量；变换选freeman\_tukey，模型random，$\tau^2$用DL；留一法与Egger自动。
+
+\textbf{结果关键}：案例（150家医院）合并感染率3.7\%（95\%CI 3.4\%$\sim$4.0\%），预测区间1.1\%$\sim$7.9\%；$I^2=90\%$异质性极高，说明各医院差异很大，合并值只是平均水平。
+
+\textbf{注意}：异质性极高时，"一个总率"意义有限，更该做的是找出率为何在医院间差异这么大（按规模/地区分层）。
+\end{algobrief}
+
+%% ========== 连续性数据Meta分析（SMD） ==========
+\advancedalgo{连续性数据Meta分析}{meta_smd}
+
+\begin{algobrief}
+\textbf{一句话}：当各研究的连续结局\textbf{量表或单位不统一}时，不用原始均差，而用标准化均数差（SMD，Hedges g）把结果放到同一把尺子上再合并。
+
+\textbf{美赛场景区}：各研究用不同工具测量同一构念（一个用mmHg、一个用评分），要合并它们的干预效应大小。
+
+\textbf{核心原理}：$SMD = $两组均差$/$合并标准差，并做小样本校正得Hedges g，这样量纲消失、可跨研究比较。$|g|$约0.2小、0.5中、0.8大。固定与随机效应（DL）各算一遍，用$Q$、$I^2$、$\tau^2$诊异质，Egger查小样本偏倚。
+
+\textbf{操作要点}：工具箱选"连续性数据Meta分析"；效应量类型选SMD-Hedges g；随机效应-DL为主并报告固定效应；输出森林图+漏斗图；异质性阈值50\%。
+
+\textbf{结果关键}：案例（低钠盐对收缩压）随机效应 $SMD=-0.458$（CI $-0.498\sim-0.418$，$p<0.001$），属中等效应，干预组血压更低；$I^2=67.4\%$异质性偏高。
+
+\textbf{注意}：本算法与基础"平均值Meta分析"的唯一区别就是效应量——结局单位一致用MD（可解释为多少米/mmHg），单位/量表不同用SMD（只说效应大小，不说实际单位）。
+\end{algobrief}
+
+%% ========== P值合并 ==========
+\advancedalgo{P值合并}{meta_pvalue}
+
+\begin{algobrief}
+\textbf{一句话}：当你手头只有一堆研究的\textbf{p值}（连效应量、原始数据都没有），把这些p值合并成一个"整体证据是否显著"的结论。
+
+\textbf{美赛场景区}：文献只报告了各检验的p值和方向，想据此判断"综合起来到底有没有效应"。这是信息最匮乏时的无奈之选。
+
+\textbf{核心原理}：常用三套方法——Fisher卡方合并（把$-2\ln p$求和，服从卡方）、Stouffer z合并（可加权，还能利用方向）、Tippett最小p合并。配合KS诊断p值分布、留一法查是否被单一研究主导。
+
+\textbf{操作要点}：工具箱选"P值合并"；指定p值列、方向列、权重列（可空）；方法选all（同时跑Fisher/Stouffer加权/Tippett）；显著性水准0.05。
+
+\textbf{结果关键}：案例（150项研究）Fisher合并$p=3.3\times10^{-52}<0.05$，整体显著偏离无效假设；Stouffer两尾$p=8.8\times10^{-89}$支持正向为主。剔除任一研究结论方向不变。
+
+\textbf{注意}：P值合并只能告诉你"整体是否有效应"，\textbf{既不估计效应有多大，也不量化异质性}，更不能当结论性的效应量来写。它是最后手段，能用效应量合并就别用它。
+\end{algobrief}
+
+%% ========== OR/HR值Meta分析 ==========
+\advancedalgo{OR/HR值Meta分析}{meta_or_hr}
+
+\begin{algobrief}
+\textbf{一句话}：当别人已经把每项研究的OR（比值比）或HR（风险比）连同95\%置信区间算好给你时，直接拿这些"成品效应"做加权合并。
+
+\textbf{美赛场景区}：观察性流行病学证据合成，如"睡眠不足 vs 2型糖尿病风险"——各研究报告的是OR及CI，要合并平均关联强度。
+
+\textbf{核心原理}：把OR/HR取对数，由CI反推标准误，按逆方差$1/SE^2$加权；用$Q$、$I^2$、$\tau^2$选固定/随机效应（DL）；输出合并OR、预测区间，Egger查发表偏倚，留一法查稳健性。注意观察性研究只能谈关联、不能谈因果。
+
+\textbf{操作要点}：工具箱选"OR/HR值Meta分析"；录效应值or、区间上下限ci\_low/ci\_high、样本量n；模型auto、95\%CI、$\alpha=0.05$、异质性水准0.10；开Egger、留一法、预测区间。
+
+\textbf{结果关键}：案例（睡眠不足与糖尿病）合并$OR=1.24$（CI 1.19$\sim$1.28，$p<0.001$），睡眠不足者糖尿病风险高约24\%；$I^2=90.6\%$异质性很高，用随机效应；预测区间0.81$\sim$1.89；Egger $p=0.115$无明显偏倚。
+
+\textbf{注意}：合并OR/HR的解读务必标注"观察性证据、关联不等于因果"。$I^2$很高时，结论只是各研究的平均关联，要解释差异来源需做亚组或Meta回归。
+\end{algobrief}

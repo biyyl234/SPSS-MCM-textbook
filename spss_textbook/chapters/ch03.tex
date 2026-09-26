@@ -1,0 +1,654 @@
+% 第3章 差异比较
+\chapter{差异比较}
+
+\begin{chapteroverview}
+\textbf{这个分类是干什么的？}
+
+差异比较回答的是\textbf{"两组或多组之间真的有差别，还是只是随机波动？"}比如：新版包装是不是真的卖得更好？A班和B班平均分差那几分是实力差距还是运气？它是所有假设检验的核心——用一个$p$值告诉你"观察到的差异，有多大可能是碰巧"。
+
+\textbf{美赛什么题型常用？}
+
+美赛中只要出现"实验组vs对照组""不同地区/方案/人群"的对比，几乎都要做差异检验。C题里比较不同政策效果、不同客群表现；A/B题里验证参数变化前后系统输出是否不同。论文"结果分析""模型验证"部分常出现t检验、方差分析、卡方检验。
+
+\textbf{学习路径建议}
+先搞清楚\textbf{数据是啥类型}再选方法：连续变量比较两组用\textbf{t检验}，比较三组及以上用\textbf{方差分析}；分类变量用\textbf{卡方检验}；比较前先看\textbf{方差齐性}和正态性——不满足就换\textbf{非参数检验}（Wilcoxon、Mann-Whitney、Kruskal-Wallis、Friedman）。最后再了解事后多重比较、协方差分析等进阶工具。
+\end{chapteroverview}
+
+\section{基础级算法}
+
+%% ========== 方差齐性检验 ==========
+\basicalgo{方差齐性检验}{levene_homog}
+
+\begin{algointro}
+方差齐性检验就是看\textbf{几组数据的"波动幅度"是不是一样大}。本案例比较4条灌装生产线净含量的波动：是不是某条线特别不稳定。它本身是个"体检项"，却决定了你后面能不能用普通t检验和方差分析。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 做独立样本t检验、方差分析之前，必须先过这一关
+    \item 质量管理中比较几条生产线/几台设备的稳定性
+    \item 美赛中判断各组数据离散程度是否一致，决定后续用哪种检验
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+两个班平均分都是80，一个班分数挤在75--85，另一个班从60到100都有——虽然均值一样，但\textbf{稳定性}天差地别。方差齐性检验就是比"挤不挤"。
+
+\begin{itemize}
+    \item \textbf{原假设}：各组方差相等（波动一致）
+    \item \textbf{Levene检验}：把每个数据点到本组中位数的距离拿出来，再对这些"距离"做一次方差分析。它对非正态比较稳健，是默认推荐
+    \item \textbf{Bartlett检验}：要求各组都近似正态，检验更灵敏但扛不住偏态
+\end{itemize}
+
+本案例4条线标准差分别为1.84、1.88、2.02、6.40——第4条线波动是其他线的3倍多，一眼就不齐。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 点击菜单 \textbf{分析 → 描述统计 → 探索}
+    \item 将因变量（\textbf{净含量}）选入\textbf{因变量列表}，分组变量（\textbf{生产线}）选入\textbf{因子列表}
+    \item 点击右侧\textbf{绘制}按钮，勾选\textbf{含莱文检验的分布水平图}
+    \item 点击\textbf{继续}，再\textbf{确定}
+\end{enumerate}
+
+\textbf{另一种方式}：在独立样本t检验、单因素ANOVA对话框里直接点\textbf{选项}，勾选"方差齐性Levene检验"，会自动附带输出。
+
+\textbf{默认参数参考}：显著性水平$\alpha=0.05$，方法自动选择（各组正态用Bartlett，否则用Brown-Forsythe/Levene）。本案例各组正态、自动选用Bartlett，统计量91.31。
+\end{algosposs}
+
+\begin{algoresult}
+输出"方差齐性检验"表，看Levene（或Bartlett）那一行的\textbf{显著性}：
+\begin{itemize}
+    \item $p>0.05$：方差齐，可以放心用普通t检验/方差分析
+    \item $p<0.05$：方差不齐。本案例Bartlett $p=1.15\times10^{-19}\ll0.05$，方差不齐，灌装4线（标准差6.40）明显是"问题线"
+\end{itemize}
+
+\textbf{方差不齐怎么办？}
+\begin{itemize}
+    \item 两组比较：用\textbf{Welch校正t检验}（SPSS独立样本t检验表里自动给出"不假定等方差"那一行）
+    \item 多组比较：用\textbf{Welch校正方差分析}或\textbf{Games-Howell}事后比较
+    \item 或直接改用非参数方法（Kruskal-Wallis）
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}任何要比较多组均值的参数检验（t检验、ANOVA）之前。
+
+\textbf{什么时候不用？}非参数检验（Mann-Whitney、Kruskal-Wallis）不要求方差齐性，可以跳过。
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：方差不齐还硬用普通ANOVA，导致$p$值失真
+    \item \textbf{坑2}：样本量悬殊时方差不齐后果更严重（如一组45个、一组30个），更要警惕
+\end{itemize}
+
+\textbf{和相似算法的区别}：它和正态性检验是参数检验前的\textbf{两道并列安检}——一个查波动齐不齐，一个查分布正不正态，两道都过才能上普通t检验/ANOVA。
+\end{algonotes}
+
+%% ========== 卡方检验 ==========
+\basicalgo{{\starmark}卡方检验}{chi_square}
+
+\begin{algointro}
+卡方检验用来判断\textbf{两个分类变量是否有关系}。本案例看"门店业态（社区店/超市/大卖场）"和"支付方式（现金/移动/银行卡）"是不是相互独立——不同店的人付钱习惯真的不一样吗？
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 两个都是分类变量，想看它们是否相关
+    \item 问卷数据：性别与偏好、地区与选择是否有关
+    \item 美赛C题中分析离散类别之间的关联结构
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+先做一个\textbf{交叉表}：行是门店业态，列是支付方式，格子里是人数。如果两变量无关，那么"各店用移动支付的比例"应该\textbf{差不多}。
+
+卡方统计量$\chi^2=\sum\frac{(O-E)^2}{E}$里：
+\begin{itemize}
+    \item $O$是格子里\textbf{实际}人数
+    \item $E$是"假如无关"时\textbf{期望}的人数
+    \item 实际和期望差得越远，$\chi^2$越大，$p$越小，越说明两变量\textbf{不独立}
+\end{itemize}
+
+本案例$\chi^2=27.76$（自由度$df=4$），$p<0.001$，说明业态和支付方式确实有关。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 点击菜单 \textbf{分析 → 描述统计 → 交叉表}
+    \item 行变量选\textbf{门店业态}，列变量选\textbf{支付方式}
+    \item 点击\textbf{统计量}，勾选\textbf{卡方}和\textbf{Phi和Cramér's V}
+    \item 点击\textbf{单元格}，勾选\textbf{实测}、\textbf{期望}、\textbf{实测/期望/行}百分比
+    \item 点击\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数参考}：独立性检验，效应量用Cramér's V，不做连续性校正；期望频数不足时自动处理（小表用Fisher精确检验）；事后两两比较用Bonferroni校正。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{卡方检验表}：看Pearson卡方那行的$p$值。本案例$\chi^2=27.76$，$df=4$，$p<0.001$，两变量显著相关
+    \item \textbf{Cramér's V}：衡量关联强度，本案例0.304，属\textbf{中等效应}（0.1以下弱、0.3中等、0.5以上强）。注意：$p$只说明相关存不存在，效应量才说明关系大不大
+    \item \textbf{调整后残差}：绝对值$\geq 2$的格子是差异主要来源。本案例大卖场用银行卡特别多（残差+4.08）、用移动支付特别少（残差$-4.74$）
+    \item \textbf{行百分比}：大卖场52.6\%用银行卡，社区店54.5\%用移动支付——差异一目了然
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}两个无序分类变量，想知道是否独立。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 期望频数低于5的格子超过20\%时，卡方近似不准，要改用Fisher精确检验
+    \item 同一批人被重复测量（配对设计）时，普通卡方不适用，用McNemar/Cochran's Q
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：把$p<0.05$当成"关系很强"。大样本下很弱的关系也显著，必须看Cramér's V
+    \item \textbf{坑2}：相关不等于因果，也不代表方向
+\end{itemize}
+
+\textbf{和相似算法的区别}
+\begin{itemize}
+    \item vs \textbf{列联分析}：列联分析侧重交叉表描述，这里侧重卡方检验本身
+    \item vs \textbf{相关分析}：相关分析用于连续变量，卡方用于分类变量
+\end{itemize}
+\end{algonotes}
+
+%% ========== 独立样本T检验 ==========
+\basicalgo{{\starmark}独立样本T检验}{indep_ttest}
+
+\begin{algointro}
+独立样本t检验比较\textbf{两个互不搭界的群体}的均值是否真有差别。本案例比较白班和夜班拣货员的人均拣货效率，看差那1.8件/小时是真差距还是运气。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 两组独立样本（如实验组/对照组、男生/女生、两个城市）比较均值
+    \item 美赛A/B验证题：新方案组和旧方案组的关键指标差异
+    \item 论文"组间差异检验"的标配
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+夜班均值19.80，白班21.65，差1.84。但两组人本身就有波动，这点差距会不会只是抽样碰巧？
+
+t统计量本质是：\textbf{均值差 ÷ 抽样误差}。
+\begin{itemize}
+    \item 这个比值越大（$|t|$越大），说明差异相对于随机波动越突出
+    \item 本案例$t=-5.18$，$df=148$，$p<0.0001$，说明白班确实显著更快
+\end{itemize}
+
+\textbf{效应量Cohen's $d$}：$d=-0.85$。$|d|\approx 0.2$小效应、0.5中、0.8大。$p$受样本量影响，效应量才告诉你"差距值不值得关心"。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 点击菜单 \textbf{分析 → 比较均值 → 独立样本T检验}
+    \item 检验变量选\textbf{拣货效率}，分组变量选\textbf{班组}
+    \item 点击\textbf{定义组}，输入组1、组2的取值（如1=夜班，2=白班）
+    \item 点击\textbf{选项}，置信区间填95\%
+    \item 点击\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数参考}：$\alpha=0.05$，双侧检验，效应量Cohen's d，正态性Shapiro，方差齐性Levene，离群值按IQR报告不删除。
+\end{algosposs}
+
+\begin{algoresult}
+输出两张表：
+\begin{itemize}
+    \item \textbf{组统计量表}：两组各$n=75$，夜班均值19.80、白班21.65
+    \item \textbf{独立样本检验表}是核心，分两行：
+    \begin{itemize}
+        \item 先看\textbf{Levene方差齐性}：本案例$p=0.575>0.05$，方差齐，所以看\textbf{第一行"假设方差相等"}
+        \item 若Levene $p<0.05$，改看第二行"不假设方差相等"（Welch校正）
+        \item 看$t$那行的\textbf{显著性（双侧）}：本案例$p<0.0001$，差异显著
+        \item \textbf{均值差}：$-1.84$（夜班$-$白班），95\%置信区间$[-2.43,\ -1.25]$不含0，与显著结论一致
+    \end{itemize}
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}两个独立组、一个连续因变量，比均值。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 三组及以上比较：用方差分析，别反复做两两t检验（会放大假阳性）
+    \item 同一组人前后两次测量：用配对样本t检验
+    \item 数据严重非正态：用Mann-Whitney U检验
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：不看Levene就直接读第一行结果。方差不齐时第一行是错的
+    \item \textbf{坑2}：多组两两分别做t检验，$p$值失真——必须做多重比较校正
+\end{itemize}
+
+\textbf{和相似算法的区别}
+\begin{itemize}
+    \item vs \textbf{配对样本t检验}：独立=两组不同人；配对=同一批人前后两次
+    \item vs \textbf{方差分析}：两组用t检验，三组及以上用ANOVA
+\end{itemize}
+\end{algonotes}
+
+%% ========== 单样本T检验 ==========
+\basicalgo{单样本T检验}{one_sample_ttest}
+
+\begin{algointro}
+单样本t检验把\textbf{一组数据的均值}和\textbf{一个已知标准值}比。本案例：瓶身标500mL，当天抽测均值497.3mL，到底是灌装线偏了，还是抽测碰巧？
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 产品实际指标 vs 标称值/国家标准，判断是否达标
+    \item 某群体均值是否等于某个理论值（如全国平均水平）
+    \item 美赛中验证模型输出是否与设定目标一致
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+抽测150瓶均值497.3mL，比标称500少2.7mL。但抽样总有波动，这2.7mL是"真偏了"还是"运气"？
+
+t统计量=$(\bar{x}-\mu_0)/$标准误，即\textbf{样本均值离标准值有多远，用抽样误差做单位来量}。
+\begin{itemize}
+    \item 本案例$t=-8.60$，$df=149$，$p<0.001$，远小于0.05
+    \item 95\%置信区间$[496.7,\ 497.9]$，标准值500\textbf{没落在区间里}，再次印证偏了
+\end{itemize}
+
+Cohen's $d=-0.70$，中等效应——偏差在统计上显著，实际也值得调校。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 点击菜单 \textbf{分析 → 比较均值 → 单样本T检验}
+    \item 检验变量选\textbf{净含量 net\_content\_ml}
+    \item 在\textbf{检验值}框输入标准值\textbf{500}
+    \item 点击\textbf{选项}，置信区间95\%
+    \item 点击\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数参考}：双侧检验（均值$\neq$标准值），正态性自动检测（Shapiro），离群值先核查不删。本案例$n=150$，样本均值497.3，标准差3.82。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{单样本统计量表}：$n=150$，均值497.3，标准差3.82，标准误0.31
+    \item \textbf{单样本检验表}：看\textbf{检验值=500}那行
+    \begin{itemize}
+        \item $t=-8.60$，$df=149$，双侧$p<0.001$——显著不等于500
+        \item \textbf{均值差值}$=-2.68$
+        \item 95\%置信区间$[496.7,\ 497.9]$：因为不含500，所以拒绝"均值=500"
+    \end{itemize}
+\end{itemize}
+
+\textbf{判断}：$p<0.05$且置信区间不含检验值，就说明样本均值和标准值有真实差距。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}手里一组数据，想跟一个既定标准/目标/历史均值比。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 小样本且严重非正态时，改用单样本Wilcoxon符号秩检验
+    \item 要比的是两个组（不是一个标准值），用独立样本t检验
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：只看$p$不看效应量。大样本下差0.1mL也$p<0.05$，但实际无所谓
+    \item \textbf{坑2}：忘记填检验值，默认填成0会得到莫名其妙的结果
+\end{itemize}
+
+\textbf{和相似算法的区别}：单样本=一组比标准值；独立样本t=两组互相比；配对t=同一组前后比。
+\end{algonotes}
+
+%% ========== 配对样本T检验 ==========
+\basicalgo{配对样本T检验}{paired_ttest}
+
+\begin{algointro}
+配对样本t检验比的是\textbf{同一批人（或同一对象）前后两次测量}的差值是否不为零。本案例：同一批前台员工培训前70.9分、培训后75.2分，培训到底有没有用？
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 同一组对象"前测--后测"，看干预（培训/用药/新流程）是否有效
+    \item 配对设计实验：同一个体左右眼、前后两次测量
+    \item 美赛中评估政策/方案实施前后指标变化
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+直接拿后测均值75.2和前测70.9比，混进了"人与人本来就不同"的噪声。配对t的聪明之处是\textbf{先给每个人算差值}（后$-$前），再看这堆差值的均值是不是显著不为0。
+
+\begin{itemize}
+    \item 本案例差值均值$=4.37$，差值标准差6.81
+    \item $t=7.87$，$df=149$，$p<0.001$，培训确实有效
+    \item 95\%置信区间$[3.28,\ 5.47]$不含0；Cohen's $d_z=0.64$，中等效应
+\end{itemize}
+
+\textbf{注意}：要检验的是\textbf{差值}是否正态，不是前后两次单独正态。本案例差值Shapiro $p=0.985$，通过。前后测相关0.781——相关越高，配对设计越划算。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 数据整理成一行一对：一列\textbf{培训前成绩}，一列\textbf{培训后成绩}
+    \item 点击菜单 \textbf{分析 → 比较均值 → 配对样本T检验}
+    \item 同时选中两列，作为\textbf{成对变量}Pair 1
+    \item 点击\textbf{选项}，置信区间95\%
+    \item 点击\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数参考}：双侧检验，效应量Cohen's $d_z$，差值正态性Shapiro；差值非正态且样本小时自动切换Wilcoxon符号秩。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{配对样本统计量}：前测均值70.87，后测75.24
+    \item \textbf{配对样本相关系数}：$r=0.781$，前后强相关（合理，因为是同一批人）
+    \item \textbf{配对样本检验}是核心：
+    \begin{itemize}
+        \item 差值均值$=4.37$，$t=7.87$，$p<0.001$——后测显著更高
+        \item 差值95\%置信区间$[3.28,\ 5.47]$不含0
+    \end{itemize}
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}同一对象前后两次（或配对对象）测量，看差值。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 两组是不同的人、互不配对：用独立样本t检验
+    \item 差值严重非正态、样本又小：改用配对Wilcoxon符号秩检验
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：把配对数据当成独立两组做独立样本t检验，浪费了配对信息、降低检验功效
+    \item \textbf{坑2}：前后测之间隔了太久，混入其他干扰因素（如同一批人还接受了别的培训）
+\end{itemize}
+
+\textbf{和相似算法的区别}：它是"控制了个体差异"的t检验——因为每个人都和自己比，自动消除了人本身的底子差异。
+\end{algonotes}
+
+%% ========== 方差分析 ==========
+\basicalgo{{\starmark}方差分析（单因素/多因素）}{anova}
+
+\begin{algointro}
+方差分析（ANOVA）比的是\textbf{三个及以上组}的均值是否全相等，还能看多个因素\textbf{各自的影响}以及\textbf{因素之间的搭配（交互作用）}。本案例研究商圈类型和促销方案如何影响门店日均营业额。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 三组及以上组间均值比较（如三种促销、三个地区、四种配方）
+    \item 想看两个因素各自及搭配效果（如"促销效果是否因商圈而异"）
+    \item 美赛C题中多因素对结果的影响分解
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+方差分析名字叫"方差"，比的却是均值——它的思路是：\textbf{把总的波动拆成"组间差异"和"组内随机波动"两部分}。
+
+\begin{itemize}
+    \item $F$统计量 = 组间差异 ÷ 组内差异
+    \item $F$越大（$p$越小），越说明各组均值真不一样，而不是随机波动
+    \item 本案例：商圈类型$F=83.7$，促销方案$F=27.5$，两者交互$F=10.35$，都$p<0.001$
+\end{itemize}
+
+\textbf{交互作用}是关键概念：促销方案的效果\textbf{因商圈不同而不同}就叫有交互。比如"满减"在购物中心最赚钱、在社区店一般——这时就不能笼统说"哪种促销最好"，得说"在哪种商圈配哪种促销"。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 单因素ANOVA：\textbf{分析 → 比较均值 → 单因素ANOVA}，因变量进"因变量列表"，分组进"因子"；点\textbf{事后多重比较}勾Tukey
+    \item 多因素/含交互：\textbf{分析 → 一般线性模型 → 单变量}
+    \item 因变量选\textbf{日均营业额}，固定因子选\textbf{商圈类型}、\textbf{促销方案}
+    \item 点\textbf{模型}选"全因子"（自动含主效应和交互项）
+    \item 点\textbf{事后比较}选商圈、促销，勾\textbf{Tukey HSD}
+    \item 点\textbf{选项}勾"描述统计""方差齐性检验""效应量估计"
+    \item 点击\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数参考}：$\alpha=0.05$，II型平方和（非平衡设计稳健），效应量eta$^2$与偏eta$^2$，方差齐性用Levene，非参数灵敏度用Kruskal-Wallis。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{方差齐性Levene}：本案例$p=0.202>0.05$，方差齐，可用普通ANOVA
+    \item \textbf{主体间效应检验表}是核心：
+    \begin{itemize}
+        \item 商圈类型$F=83.7$，$p<0.001$，偏$\eta^2=0.543$（商圈解释了54\%的营业额变异，影响很大）
+        \item 促销方案$F=27.5$，$p<0.001$，偏$\eta^2=0.280$
+        \item \textbf{交互项}$F=10.35$，$p<0.001$——存在交互，必须结合单元格均值解读
+    \end{itemize}
+    \item \textbf{事后Tukey HSD}：具体哪两组不同。本案例"写字楼+会员专享"均值13.45最高，显著高于多数组合
+    \item \textbf{怎么看}：主效应$p<0.05$说明该因素重要；交互$p<0.05$说明不能孤立看主效应，要画交互图看"哪组搭配最好"
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}三组及以上均值比较，或多因素影响分解。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 只有两组：用t检验即可
+    \item 方差不齐且样本悬殊：用Welch-ANOVA或Kruskal-Wallis
+    \item 数据严重非正态：改用Kruskal-Wallis（非参数版ANOVA）
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：ANOVA整体显著就完事。必须做事后多重比较，才知道\textbf{到底哪两组不同}
+    \item \textbf{坑2}：忽略交互作用。交互显著时直接解释主效应会闹笑话
+    \item \textbf{坑3}：多组反复做两两t检验，人为放大假阳性
+\end{itemize}
+
+\textbf{和相似算法的区别}：t检验只能比两组；ANOVA能一次比多组还能拆因素和交互。非正态的"ANOVA替代"是Kruskal-Wallis。
+\end{algonotes}
+
+\section{进阶级算法速览}
+
+%% ========== Kruskal-Wallis ==========
+\advancedalgo{Kruskal-Wallis检验（多样本秩和）}{kruskal_wallis}
+
+\begin{algobrief}
+\textbf{一句话}：方差分析的\textbf{非参数版}——比较三组及以上独立样本的\textbf{分布/中位数}是否不同，不要求正态。
+
+\textbf{美赛场景区}：数据偏态严重（如耗时、收入、评分）时多组比较；如不同分拨中心的单件分拣耗时差异。
+
+\textbf{核心原理}：把所有数据混在一起排序编秩，比较各组的平均秩是否差很多。$H$统计量近似卡方分布。本案例分组变量为分拨中心、指标为单件分拣耗时秒数；$p<0.05$说明各组耗时分布不全相同。
+
+\textbf{操作要点}：\textbf{分析 → 非参数检验 → 独立样本}，选Kruskal-Wallis；效应量用$\varepsilon^2$；显著后用Bonferroni校正做两两比较。
+
+\textbf{结果关键}：看Kruskal-Wallis的$p$值；显著后看各组平均秩，秩越高组数值越大。
+
+\textbf{注意}：它是"升级版Mann-Whitney"。两组时它就等价于Mann-Whitney U；正态且方差齐时，普通ANOVA更有检验功效。
+\end{algobrief}
+
+%% ========== 配对Wilcoxon ==========
+\advancedalgo{配对样本Wilcoxon符号秩检验}{wilcoxon_paired}
+
+\begin{algobrief}
+\textbf{一句话}：配对样本t检验的\textbf{非参数版}——同一批人前后两次测量，但差值严重非正态时用它。
+
+\textbf{美赛场景区}：前后测差值明显偏态（如治疗前后的康复评分）；小样本+非正态配对数据。
+
+\textbf{核心原理}：不算差值本身，而是给差值的绝对值编秩，再按差值正负号分组，比较正负秩和是否平衡。本案例判断干预后指标是否显著变化。
+
+\textbf{操作要点}：\textbf{分析 → 非参数检验 → 相关样本}，选Wilcoxon符号秩；双侧检验，效应量$r$。
+
+\textbf{结果关键}：$p<0.05$说明前后测量有显著的系统性升降；结合差值中位数判断方向。
+
+\textbf{注意}：当配对差值近似正态时，配对t检验更灵敏；它是差值非正态时的稳健替代，不是首选。
+\end{algobrief}
+
+%% ========== Z检验 ==========
+\advancedalgo{Z检验（均值/比率）}{z_test}
+
+\begin{algobrief}
+\textbf{一句话}：大样本下用正态分布做的均值或比率检验——样本量大到$n\geq30$时，t分布近似正态，可用更简单的$Z$检验。
+
+\textbf{美赛场景区}：大样本下比较两总体比率（如两城市移动支付使用率）；比例类指标的假设检验。
+
+\textbf{核心原理}：大样本时统计量近似标准正态$N(0,1)$，$Z=\frac{\text{样本统计量}-\text{参数}}{\text{标准误}}$。$|Z|>1.96$对应$\alpha=0.05$双侧显著。
+
+\textbf{操作要点}：工具箱选"Z检验（均值/比率）"，明确是单样本还是两样本、均值还是比率；$\alpha=0.05$。
+
+\textbf{结果关键}：$|Z|>1.96$（双侧0.05）或$>2.58$（0.01）即显著；同时报告置信区间。
+
+\textbf{注意}：小样本仍用t检验。Z检验和t检验结论在大样本时几乎一致，区别主要在小样本。
+\end{algobrief}
+
+%% ========== Friedman ==========
+\advancedalgo{Friedman检验}{friedman}
+
+\begin{algobrief}
+\textbf{一句话}：随机区组/重复测量设计下的\textbf{非参数ANOVA}——同一批对象接受\textbf{三个及以上}条件，比较是否有差异。
+
+\textbf{美赛场景区}：同一组被试在多种方案/多个时间点下的评分比较；如五位评委对四款产品的排序一致性检验。
+
+\textbf{核心原理}：在\textbf{每个对象内部}给各条件编秩，再汇总各条件的秩和。本案例为三水平及以上的重复测量设计，$p<0.05$说明各条件分布不全相同。
+
+\textbf{操作要点}：\textbf{分析 → 非参数检验 → 相关样本}，选Friedman；显著后做事后两两比较。
+
+\textbf{结果关键}：Friedman卡方统计量的$p$值；显著后用Wilcoxon两两比较并Bonferroni校正。
+
+\textbf{注意}：它是\textbf{配对版Kruskal-Wallis}。两个配对条件时用Wilcoxon符号秩；三个及以上配对条件用Friedman。
+\end{algobrief}
+
+%% ========== MANOVA ==========
+\advancedalgo{多元方差分析（MANOVA）}{manova}
+
+\begin{algobrief}
+\textbf{一句话}：同时考察一个（多个）分组因素对\textbf{多个相关因变量}的整体影响。
+
+\textbf{美赛场景区}：比较不同组在"销量+满意度+复购率"等多个相关指标上的综合差异；避免多个单变量ANOVA放大假阳性。
+
+\textbf{核心原理}：把多个因变量当一个整体向量，用Wilks' Lambda等统计量检验组间质心是否不同。本案例输出Wilks' $\Lambda$、$F$近似和$p$值。
+
+\textbf{操作要点}：\textbf{分析 → 一般线性模型 → 多变量}，多个因变量同时入框，固定因子放分组变量。
+
+\textbf{结果关键}：先看多变量检验表的Wilks' $\Lambda$及其$p$；显著后再回头看各单变量ANOVA表，定位差异来自哪个因变量。
+
+\textbf{注意}：要求因变量多元正态、协方差阵齐性（Box's M检验）。它是"一揽子"检验，显著了还得拆到单变量层面解释。
+\end{algobrief}
+
+%% ========== Mood中位数 ==========
+\advancedalgo{Mood中位数检验}{mood_median}
+
+\begin{algobrief}
+\textbf{一句话}：最稳健的多组中位数比较——只看每组落在总中位数之上/之下的个数，用卡方判断各组中位数是否相同。
+
+\textbf{美赛场景区}：数据有极端值、严重偏态，连Kruskal-Wallis都嫌不稳时的兜底方法。
+
+\textbf{核心原理}：求所有数据的共同中位数，数每组有多少个点在它上面/下面，列成列联表做卡方检验。
+
+\textbf{操作要点}：工具箱选"Mood中位数检验"，指定分组变量和数值变量；$\alpha=0.05$。
+
+\textbf{结果关键}：卡方$p<0.05$说明各组中位数不全相等；它检验的是中位数位置，不是分布形状。
+
+\textbf{注意}：检验功效低（浪费了秩信息），是\textbf{最保守}的方法——只有数据特别脏时才用，优先Kruskal-Wallis。
+\end{algobrief}
+
+%% ========== 协方差分析 ==========
+\advancedalgo{协方差分析（ANCOVA）}{ancova}
+
+\begin{algobrief}
+\textbf{一句话}：方差分析+回归的混血——比较组间均值差异时，\textbf{顺手扣掉一个连续干扰变量（协变量）}的影响。
+
+\textbf{美赛场景区}：比较各班成绩时扣掉"入学基础分"；比较各方案效果时扣掉"初始水平"。
+
+\textbf{核心原理}：先把因变量对协变量做回归，用\textbf{校正后}的组均值再做ANOVA。本案例在比较组别差异前，先消除协变量造成的基线不平衡。
+
+\textbf{操作要点}：\textbf{分析 → 一般线性模型 → 单变量}，固定因子放分组，\textbf{协变量}框放干扰变量。
+
+\textbf{结果关键}：先看"组别"效应校正后是否仍显著；若校正后差异消失，说明原差异主要来自协变量而非分组本身。
+
+\textbf{注意}：前提是\textbf{各组与协变量回归斜率平行}（无交互），否则不能直接用。
+\end{algobrief}
+
+%% ========== 游程检验 ==========
+\advancedalgo{游程检验}{runs_test}
+
+\begin{algobrief}
+\textbf{一句话}：判断一串按顺序排列的数据是不是\textbf{随机出现}的——有没有人为规律或趋势。
+
+\textbf{美赛场景区}：检验抽样是否随机；检验残差序列是否随机（回归假设）；判断比赛/股票涨跌是否随机游走。
+
+\textbf{核心原理}：以中位数（或某阈值）为界把数据分正负，数连续同号的"游程"个数。游程太少=有聚类/趋势，太多=有周期振荡，都说明不随机。
+
+\textbf{操作要点}：\textbf{分析 → 非参数检验 → 游程检验}，选检验变量，临界值选"中位数"。
+
+\textbf{结果关键}：$p>0.05$说明序列随机；$p<0.05$说明存在系统性模式。
+
+\textbf{注意}：它检验的是\textbf{随机性}，不是均值差异——别和单样本t检验搞混。
+\end{algobrief}
+
+%% ========== 事后多重比较 ==========
+\advancedalgo{事后多重比较（Post Hoc）}{posthoc}
+
+\begin{algobrief}
+\textbf{一句话}：ANOVA告诉你"至少两组不同"之后，再\textbf{逐对比较}找出到底是哪几对不同，同时控制假阳性。
+
+\textbf{美赛场景区}：三四种促销/配方/地区之间两两找差异；是方差分析的"后半程"必备。
+
+\textbf{核心原理}：两两比较会累积假阳性（3组就3次比较、假阳性率涨到14\%），事后比较用Tukey HSD、Bonferroni等方法给$p$值"打折"，把总体错误率压回0.05。
+
+\textbf{操作要点}：单因素ANOVA对话框点\textbf{事后多重比较}，方差齐选\textbf{Tukey}，不齐选\textbf{Games-Howell}。
+
+\textbf{结果关键}："多重比较表"中标注*或校正$p<0.05$的组别对，就是真正有差异的对；同列字母法（a/b/c）更直观。
+
+\textbf{注意}：\textbf{必须在ANOVA整体显著之后再做}。整体不显著却硬做两两比较是"钓鱼"。
+\end{algobrief}
+
+%% ========== Mann-Whitney U ==========
+\advancedalgo{独立样本Mann-Whitney U检验}{mannwhitney_u}
+
+\begin{algobrief}
+\textbf{一句话}：独立样本t检验的\textbf{非参数版}——两组独立样本，但数据非正态时，比两组分布/位置是否不同。
+
+\textbf{美赛场景区}：两组偏态数据（如金额、耗时、严重度评分）的比较；不满足t检验正态前提时。
+
+\textbf{核心原理}：把两组数据混在一起编秩，比较两组的秩和。$U$统计量对应的$p<0.05$说明两组分布位置不同。
+
+\textbf{操作要点}：\textbf{分析 → 非参数检验 → 独立样本}，选Mann-Whitney U；两组按分组变量定义。
+
+\textbf{结果关键}：看Mann-Whitney U（或Z）的渐近显著性；结合两组平均秩判断哪组整体更高。
+
+\textbf{注意}：两组独立+非正态时用它；三组及以上用Kruskal-Wallis。数据正态时t检验更灵敏。
+\end{algobrief}
+
+%% ========== 等价性检验 ==========
+\advancedalgo{等价性检验（TOST）}{equivalence_test}
+
+\begin{algobrief}
+\textbf{一句话}：反过来证明"两组\textbf{没有实质差别}"——普通t检验不显著只能说"没检出差异"，等价检验才能说"确实差不多"。
+
+\textbf{美赛场景区}：证明新方案不比老方案差（等效）；证明两测量方法结果一致；环保/医药的"非劣效"论证。
+
+\textbf{核心原理}：预先设定一个"可接受差异边界$\pm\Delta$"，做两次单侧检验（TOST）：只有当均值差的置信区间\textbf{整个落在$[-\Delta,\Delta]$内}，才判定等价。
+
+\textbf{操作要点}：工具箱选"等价性检验"，设定等价界值$\Delta$（结合业务意义，不能随便定）。
+
+\textbf{结果关键}：均值差的90\%置信区间完全落在等价带内，才结论"等价"；若区间跨出边界，则不能宣称等效。
+
+\textbf{注意}：它和普通检验逻辑相反——\textbf{显著才算数}。$p<0.05$才说明等价，不是$p>0.05$。
+\end{algobrief}
+
+%% ========== 单样本Wilcoxon ==========
+\advancedalgo{单样本Wilcoxon符号秩检验}{wilcoxon_onesample}
+
+\begin{algobrief}
+\textbf{一句话}：单样本t检验的\textbf{非参数版}——一组数据的中位数是否等于某个标准值，但数据非正态时用。
+
+\textbf{美赛场景区}：小样本+偏态数据（如收入、反应时间）检验中位数是否达标/等于目标。
+
+\textbf{核心原理}：计算每个观测与标准值之差，给差值绝对值编秩，按正负号分两组比较秩和。
+
+\textbf{操作要点}：\textbf{分析 → 非参数检验 → 单样本}，选Wilcoxon符号秩，输入检验值。
+
+\textbf{结果关键}：$p<0.05$说明样本中位数与标准值有显著差异；结合正/负秩方向判断偏高还是偏低。
+
+\textbf{注意}：它检验的是\textbf{中位数/分布位置}，不是均值。数据近似正态时，单样本t检验更有功效。
+\end{algobrief}

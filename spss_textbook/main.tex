@@ -1,0 +1,193 @@
+% !TEX program = xelatex
+% ============================================================
+% SPSS算法实战：数模美赛快速入门教材
+% 主文档 - 使用 xelatex + ctex 编译
+% ============================================================
+\documentclass[12pt,a4paper,openany,fontset=none]{ctexbook}
+
+% ---------- 中文字体配置（统一使用宋体 SimSun） ----------
+\usepackage{fontspec}
+\setCJKmainfont{SimSun}[AutoFakeBold=2.5]
+\setCJKsansfont{SimSun}[AutoFakeBold=2.5]
+\setCJKmonofont{SimSun}
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+
+% ---------- 基础宏包 ----------
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{etoolbox}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,}
+
+% ---------- 超链接 ----------
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!60!black,
+    urlcolor=blue!60!black,
+    bookmarksnumbered=true,
+}
+
+% ---------- 颜色定义 ----------
+\definecolor{algoBlue}{RGB}{30,100,180}
+\definecolor{algoGreen}{RGB}{30,130,80}
+\definecolor{algoOrange}{RGB}{200,120,30}
+\definecolor{algoRed}{RGB}{180,50,50}
+\definecolor{algoPurple}{RGB}{120,60,150}
+\definecolor{algoTeal}{RGB}{20,120,120}
+\definecolor{lightGray}{RGB}{245,245,245}
+\definecolor{boxBlue}{RGB}{230,240,252}
+\definecolor{boxGreen}{RGB}{230,248,235}
+\definecolor{boxOrange}{RGB}{253,243,230}
+\definecolor{boxRed}{RGB}{252,235,235}
+\definecolor{boxPurple}{RGB}{243,235,250}
+\definecolor{boxTeal}{RGB}{230,247,247}
+
+% ---------- 章节标题样式 ----------
+\titleformat{\chapter}[display]
+    {\normalfont\bfseries\huge\color{algoBlue}}
+    {\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-20pt}{30pt}
+
+\titleformat{\section}
+    {\normalfont\bfseries\Large\color{algoBlue!80!black}}
+    {\thesection}{1em}{}
+
+\titleformat{\subsection}
+    {\normalfont\bfseries\large\color{algoBlue!70!black}}
+    {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+    {\normalfont\bfseries\normalsize\color{algoBlue!60!black}}
+    {\thesubsubsection}{1em}{}
+
+% ---------- 自定义模块环境 ----------
+\newtcolorbox{algointro}{colback=boxBlue,colframe=algoBlue,boxrule=0.5pt,arc=3pt,left=8pt,right=8pt,top=6pt,bottom=6pt,title={\textbf{\textcolor{white}{一句话讲清}}},colbacktitle=algoBlue,fonttitle=\bfseries}
+\newtcolorbox{algoscene}{colback=boxGreen,colframe=algoGreen,boxrule=0.5pt,arc=3pt,left=8pt,right=8pt,top=6pt,bottom=6pt,title={\textbf{\textcolor{white}{美赛适用场景}}},colbacktitle=algoGreen,fonttitle=\bfseries}
+\newtcolorbox{algoprinciple}{colback=boxPurple,colframe=algoPurple,boxrule=0.5pt,arc=3pt,left=8pt,right=8pt,top=6pt,bottom=6pt,title={\textbf{\textcolor{white}{通俗原理}}},colbacktitle=algoPurple,fonttitle=\bfseries}
+\newtcolorbox{algosposs}{colback=boxOrange,colframe=algoOrange,boxrule=0.5pt,arc=3pt,left=8pt,right=8pt,top=6pt,bottom=6pt,title={\textbf{\textcolor{white}{SPSS操作步骤}}},colbacktitle=algoOrange,fonttitle=\bfseries}
+\newtcolorbox{algoresult}{colback=boxTeal,colframe=algoTeal,boxrule=0.5pt,arc=3pt,left=8pt,right=8pt,top=6pt,bottom=6pt,title={\textbf{\textcolor{white}{结果怎么看}}},colbacktitle=algoTeal,fonttitle=\bfseries}
+\newtcolorbox{algonotes}{colback=boxRed,colframe=algoRed,boxrule=0.5pt,arc=3pt,left=8pt,right=8pt,top=6pt,bottom=6pt,title={\textbf{\textcolor{white}{注意事项 \& 决策指引}}},colbacktitle=algoRed,fonttitle=\bfseries}
+\newtcolorbox{algobrief}{colback=lightGray,colframe=gray!60,boxrule=0.5pt,arc=3pt,left=8pt,right=8pt,top=6pt,bottom=6pt,title={\textbf{\textcolor{white}{进阶算法速览}}},colbacktitle=gray!70,fonttitle=\bfseries}
+\newtcolorbox{chapteroverview}{colback=boxBlue!50,colframe=algoBlue,boxrule=1pt,arc=4pt,left=10pt,right=10pt,top=8pt,bottom=8pt,title={\textbf{\textcolor{white}{本章导览}}},colbacktitle=algoBlue!80,fonttitle=\bfseries\large}
+
+% ---------- 算法标题命令 ----------
+% 基础算法标题：\basicalgo{算法名称}{序号}
+\newcommand{\basicalgo}[2]{
+    \subsection[#1]{#1 \hfill \small \textcolor{gray}{基础级}}
+    \label{algo:#2}
+}
+
+% 进阶算法标题：\advancedalgo{算法名称}{序号}
+\newcommand{\advancedalgo}[2]{
+    \subsection[#1]{#1 \hfill \small \textcolor{gray!70}{进阶级}}
+    \label{algo:#2}
+}
+
+% 星标命令
+\newcommand{\starmark}{\textcolor{algoOrange}{$\bigstar$}\,}
+
+% ---------- 列表样式 ----------
+\setlist[itemize]{leftmargin=*, itemsep=2pt, topsep=4pt}
+\setlist[enumerate]{leftmargin=*, itemsep=2pt, topsep=4pt}
+
+% ---------- 页眉页脚 ----------
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small \leftmark}
+\fancyhead[R]{\small \thepage}
+\fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ---------- 目录设置 ----------
+\setcounter{tocdepth}{2}
+\setlength{\cftbeforechapskip}{8pt}
+
+% ---------- 表格样式辅助 ----------
+\newcommand{\tableheader}[1]{\rowcolor{algoBlue!15}\textbf{#1}}
+
+% ============================================================
+% 文档开始
+% ============================================================
+\begin{document}
+
+% ---------- 封面 ----------
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Huge\bfseries\textcolor{algoBlue}{SPSS算法实战}\par}
+\vspace{0.5cm}
+{\LARGE\bfseries\textcolor{algoBlue!80}{数模美赛快速入门教材}\par}
+\vspace{1cm}
+{\Large 覆盖18大分类 · 252个算法 · 从入门到实战\par}
+\vspace{2cm}
+\begin{tikzpicture}[remember picture, overlay]
+    \draw[algoBlue!30, line width=2pt] (current page.west) ++(0,-2) -- ++(3,0);
+    \draw[algoBlue!30, line width=2pt] (current page.east) ++(0,-2) -- ++(-3,0);
+\end{tikzpicture}
+\vspace{3cm}
+{\large\itshape 写给大一数模新手的SPSS算法百科全书\par}
+\vspace{0.5cm}
+{\large 2026年9月\par}
+\vfill
+{\small 基于Dabbit AI SPSS算法工具箱252个真实案例编写\par}
+\end{titlepage}
+
+% ---------- 前言 ----------
+\frontmatter
+\chapter*{前言}
+\addcontentsline{toc}{chapter}{前言}
+\input{chapters/preface}
+
+% ---------- 目录 ----------
+\tableofcontents
+\cleardoublepage
+
+% ---------- 正文 ----------
+\mainmatter
+
+%% 各章节由子任务生成，按顺序 include
+\input{chapters/ch01}
+\input{chapters/ch02}
+\input{chapters/ch03}
+\input{chapters/ch04}
+\input{chapters/ch05}
+\input{chapters/ch06}
+\input{chapters/ch07}
+\input{chapters/ch08}
+\input{chapters/ch09}
+\input{chapters/ch10}
+\input{chapters/ch11}
+\input{chapters/ch12}
+\input{chapters/ch13}
+\input{chapters/ch14}
+\input{chapters/ch15}
+\input{chapters/ch16}
+\input{chapters/ch17}
+\input{chapters/ch18}
+
+% ---------- 附录 ----------
+\appendix
+\input{appendix/appendix_a}
+\input{appendix/appendix_b}
+
+\end{document}

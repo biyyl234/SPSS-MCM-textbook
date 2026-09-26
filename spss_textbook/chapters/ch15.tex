@@ -1,0 +1,345 @@
+% 第15章 试验设计
+\chapter{试验设计}
+
+\begin{chapteroverview}
+\textbf{这个分类是干什么的？}
+
+试验设计（DOE）解决一个问题：\textbf{怎么用最少的试验次数，找到最优工艺参数组合}。比如化工生产中，温度、时间、催化剂用量都影响收率——怎么安排试验才能既省钱又高效地找到最佳配方？试验设计用统计方法科学安排试验点，系统地分析各因素的主效应、交互作用，最后预测最优条件。
+
+\textbf{美赛什么题型常用？}
+
+美赛实验/化工/材料类题目中非常实用——只要题目涉及"调参数找最优"（反应温度、时间、配比），就用试验设计。正交设计用少量试验筛选因素，响应面分析精确找最优点。SPSS通过"分析 → 试验设计"菜单可完成部分操作。
+
+\textbf{学习路径建议}
+
+先学\textbf{全析因设计}（理解因素与交互作用的基础），再学\textbf{正交实验设计}（用少量试验做多因素筛选，美赛高频），然后学\textbf{响应面分析}（精确寻优）。CCD和BBD是响应面的两种常用设计方案。部分析因和Plackett-Burman用于早期因子筛选。
+\end{chapteroverview}
+
+\section{基础级算法}
+
+%% ========== 全析因设计 ==========
+\basicalgo{全析因设计}{full_factorial}
+
+\begin{algointro}
+全析因设计就是\textbf{所有因素的所有水平组合都做一遍试验}。比如2个温度水平$\times$3个时间水平$=$6个组合，每个组合重复几次。它能最完整地估计主效应和交互作用，但因素多了试验次数爆炸。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 因素少（$\leq$4个）、水平少（$\leq$3个）的精细试验
+    \item 需要研究因素间交互作用时
+    \item 美赛中因素少但要搞清楚每个因素影响时
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+想象做蛋糕：烤温有高/中/低3档，时间有60/90/120/150/180分钟5档。全析因就是$3\times5=15$种组合\textbf{全部做一遍}。
+
+然后用方差分析（ANOVA）分解响应的变异：
+\begin{itemize}
+    \item \textbf{主效应}：温度单独的影响有多大？时间单独的影响有多大？
+    \item \textbf{交互作用}：温度高时延长时间更好，还是温度低时延长时间更好？如果折线图交叉明显，说明有交互
+\end{itemize}
+
+关键洞察：当交互显著时，不能单独看"温度越高越好"——因为温度的效果取决于时间水平。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item SPSS菜单：\textbf{分析 → 试验设计 → 析因}
+    \item 响应变量选"抗折强度"，因素选"烧成温度"和"保温时间"
+    \item 模型选全模型（主效应+所有交互）
+    \item 多重比较选Tukey HSD
+    \item ANOVA类型选III型
+    \item 点击确定
+\end{enumerate}
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{方差分析表}：烧成温度$F=111$（$p<0.001$）、保温时间$F=26$（$p<0.001$）、交互$F=6.2$（$p<0.001$）
+    \item \textbf{偏$\eta^2$}：温度0.62（解释62\%变异）、时间0.44、交互0.27
+    \item \textbf{交互作用图}：折线明显交叉→交互显著，不能单独下结论
+    \item \textbf{最优组合}：1300℃$\times$180min，均值38.48
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}因素少（$\leq$4个）、水平少，且需要完整研究交互作用。
+
+\textbf{什么时候不用？}因素多（$\geq$5个）——全析因试验次数呈指数增长（$2^5=32$次还能接受，$2^7=128$次就太多了），改用部分析因或正交设计。
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：忽略交互作用只看主效应——交互显著时主效应会误导
+    \item \textbf{坑2}：不做重复试验——没有重复就无法估计误差，无法做ANOVA
+\end{itemize}
+\end{algonotes}
+
+%% ========== 正交实验设计（田口设计） ==========
+\basicalgo{{\starmark}正交实验设计（田口设计）}{orthogonal_design}
+
+\begin{algointro}
+正交实验设计用\textbf{正交表}安排试验——因素很多（如6个参数各5个水平），但不用做$5^6=15625$次，只做25次就能系统估计各因素的主效应。它是美赛中\textbf{最常用的实验设计方法}。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 注塑工艺优化：6个参数（料温、模温、保压、注射速度、冷却时间、背压）各5水平
+    \item 化工配方筛选：多个因素各多个水平，试验成本高
+    \item 美赛中"多因素参数优化"类题目
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+正交表的巧妙之处在于\textbf{均衡分散、整齐可比}：
+
+\begin{itemize}
+    \item 任意两个因素的水平组合\textbf{均匀出现}——每个因素的每个水平都和其他因素的每个水平搭配过相同次数
+    \item 这样每个因素的效应可以\textbf{独立估计}，不受其他因素干扰
+    \item 虽然只做了25次（而非$5^6=15625$次），但信息效率很高
+\end{itemize}
+
+\textbf{分析步骤}：
+\begin{enumerate}
+    \item \textbf{极差分析}：算每个因素各水平的响应均值，极差R越大=该因素影响越大
+    \item \textbf{方差分析}：检验因素是否显著，算贡献率
+    \item \textbf{选优}：显著因素取最优水平组合，非显著因素按成本选
+\end{enumerate}
+
+就像田忌赛马：不需要每匹马都和每匹马赛一遍，用巧妙的对阵安排就能比较出马的优劣。
+\end{algoprinciple}
+
+\begin{algosposs}
+在\textbf{Dabbit AI SPSS工具箱}中操作（SPSS也可通过"分析 → 试验设计 → 正交设计"实现）：
+
+\begin{enumerate}
+    \item 上传试验数据，因素列自动识别，响应列自动识别
+    \item 信噪比类型选"望大特性"（拉伸强度越大越好）
+    \item 优水平选择基准选"信噪比优先"（不仅均值高，还要波动小）
+    \item 显著性水平0.05
+    \item 点击运行，输出极差分析表和方差分析表
+\end{enumerate}
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{极差排序}：料筒温度R=6.46$>$保压压力3.58$>$模具温度3.75$>$冷却时间3.48$>$注射速度1.61$>$背压0.34
+    \item \textbf{方差分析}：料筒温度贡献率48.6\%（最关键），背压不显著（$p=0.31$）
+    \item \textbf{最优组合}：料温260℃、模温70℃、保压40MPa、注射速度70\%、冷却35s
+    \item \textbf{预测响应}：约63.27MPa（需验证试验确认）
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}因素多（3--7个）、水平数相同、试验成本高、只需估计主效应。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 需要研究交互作用——正交表主效应可能和交互混叠
+    \item 因素水平不等——需用混合水平正交表
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：把预测最优组合直接当最终结论——必须追加\textbf{验证试验}确认
+    \item \textbf{坑2}：忽略信噪比，只看均值——田口方法的核心是"稳健性"，不仅要均值高，还要波动小
+\end{itemize}
+
+\textbf{和全析因的区别}：正交设计用少量试验换高效筛选，但不能估计高阶交互；全析因信息完整但试验多。
+\end{algonotes}
+
+%% ========== 响应面分析 ==========
+\basicalgo{{\starmark}响应面分析}{rsm}
+
+\begin{algointro}
+响应面分析（RSM）在正交/筛选找到关键因素后，用\textbf{二次多项式}拟合"因素→响应"的曲面，然后在曲面上找最优点。它不仅知道"哪个因素重要"，还能精确算出"最佳参数是多少"。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 化工浸提工艺优化：温度、时间、液料比三因素找最大得率
+    \item 食品配方优化：蛋糕比容最大化
+    \item 美赛中已经筛选出关键因素，需要精确寻优时
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+先用正交/PB设计筛选出3--5个关键因素，然后用CCD或BBD设计安排试验点，拟合二次模型：
+
+\[ y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + \varepsilon \]
+
+\begin{itemize}
+    \item \textbf{线性项}：因素增大，响应线性增大/减小
+    \item \textbf{平方项}：存在最优点（开口向下=极大值，开口向上=极小值）
+    \item \textbf{交互项}：两个因素联合作用
+\end{itemize}
+
+然后对二次模型求导找驻点，用二阶导数矩阵（Hessian）的特征值判断是极大点、极小点还是鞍点。等高线图和3D响应面图直观展示最优点位置。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item SPSS菜单：\textbf{分析 → 试验设计 → 响应面}
+    \item 响应列选"茶多酚得率"，因素选"浸提温度、浸提时间、液料比"
+    \item 设计类型选CCD（中心复合设计）
+    \item 优化目标选maximize（最大化得率）
+    \item 模型简化开启（自动剔除不显著项）
+    \item 点击确定
+\end{enumerate}
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{模型$R^2=0.98$}，失拟检验$p=0.51$（不显著=模型充分）
+    \item \textbf{最优条件}：温度83.8℃、时间51.7min、液料比25.8
+    \item \textbf{预测响应}：得率83.54\%（95\%置信区间83.2--83.9）
+    \item \textbf{曲面类型}：所有特征值为负→极大值点
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}已经筛选出3--5个关键因素，需要精确找最优点。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 还不知道哪些因素重要——先做PB/正交筛选
+    \item 因素太多（$>$5个）——二次模型参数太多
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：不做失拟检验直接用模型预测——失拟显著说明二次模型不够
+    \item \textbf{坑2}：驻点在试验域外——此时不能报驻点值，应在边界上找最优
+\end{itemize}
+
+\textbf{和正交设计的区别}：正交设计\textbf{筛选因素}（哪个重要），响应面\textbf{精确寻优}（最佳值是多少）。两者是接力关系。
+\end{algonotes}
+
+%% ========== 中心复合设计（CCD） ==========
+\basicalgo{中心复合设计（CCD）}{ccd}
+
+\begin{algointro}
+CCD是响应面最常用的试验设计方案——在2水平全因子点（立方点）基础上，加轴向点（星号点）和中心点，共三类点。它能拟合完整的二次模型。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 植物提取工艺优化（5个因素）
+    \item 任何需要响应面建模且因素数$2\leq k\leq5$时
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+CCD由三部分组成：
+\begin{itemize}
+    \item \textbf{立方点}：$2^k$个全因子点（各因素高低水平组合）
+    \item \textbf{轴向点}：$2k$个点（一个因素取$\pm\alpha$，其他取0）——用来估计平方项
+    \item \textbf{中心点}：重复多次（估计纯误差和失拟）
+\end{itemize}
+
+$\alpha$选"可旋转"模式时，各方向预测方差相等，是最常用选择。
+\end{algoprinciple}
+
+\begin{algosposs}
+在Dabbit AI工具箱中选择"中心复合设计"，指定各因素的高低水平，$\alpha$模式选rotatable，响应列选yield\_pct。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item 模型$R^2=0.99$，失拟检验不显著
+    \item 最优编码条件换算为实际工艺参数（如温度66.3℃、时间36.2min等）
+    \item 预测响应87.59（95\%预测区间86.3--88.9）
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{CCD vs BBD}：CCD有轴向点（试验范围比因子范围大），适合想探索边界外的情况；BBD没有角点，试验次数更少但不探索极端组合。
+\end{algonotes}
+
+\section{进阶级算法速览}
+
+%% ========== 均匀设计 ==========
+\advancedalgo{均匀设计}{uniform_design}
+
+\begin{algobrief}
+\textbf{一句话}：中国数学家方开泰、王元提出的试验设计方法——让试验点在因素空间中\textbf{均匀散布}，用极少试验覆盖整个多维空间。
+
+\textbf{美赛场景区}：化工工艺4因素150水平，试验代价极高，无法做全因子。
+
+\textbf{核心原理}：与正交表"整齐可比"不同，均匀设计追求"均匀散布"——每个因素的每个水平只出现一次，点在空间中均匀分布。配合二次回归模型预测最优组合。
+
+\textbf{操作要点}：因素数和试验次数匹配均匀表，二次模型=主效应+平方项，优化方向最大化响应。
+
+\textbf{结果关键}：CD2（中心化L2偏差）越小越均匀；二次模型$R^2=0.996$预测最优参数。
+
+\textbf{注意}：均匀设计点散布均匀但没有重复，无法估计纯误差，需配合建模使用。
+\end{algobrief}
+
+%% ========== 拉丁方设计 ==========
+\advancedalgo{拉丁方设计}{latin_square}
+
+\begin{algobrief}
+\textbf{一句话}：用$k\times k$方阵同时控制两个无关变量（如工位、时段），只关心处理因素（如配方）的差异。
+
+\textbf{美赛场景区}：涂装产线5种配方对比，但5个工位和5个时段都有系统差异，需要同时扣除两类干扰。
+
+\textbf{核心原理}：每个处理在每行每列恰好出现一次——就像数独，行=工位、列=时段、数字=配方。这样工位和时段的系统偏差被区组吸收，误差更纯净。
+
+\textbf{操作要点}：指定行区组、列区组、处理因素、因变量；Tukey HSD多重比较。
+
+\textbf{结果关键}：处理$F=113$（$p<0.001$），F3配方最好（均值5.98），F4最差（4.61）。
+
+\textbf{注意}：拉丁方要求行、列、处理水平数相等；不能估计行×列交互。
+\end{algobrief}
+
+%% ========== Box-Behnken设计（BBD） ==========
+\advancedalgo{Box-Behnken设计（BBD）}{bbd}
+
+\begin{algobrief}
+\textbf{一句话}：响应面的另一种设计方案——没有角点，只取边中点和中心点，试验次数比CCD少。
+
+\textbf{美赛场景区}：蛋糕配方优化（加水量、打发时间、焙烤温度3因素）。
+
+\textbf{核心原理}：BBD的点在边的中点（两因素取端点、第三因素取中心），不做极端角点组合——适合"极端组合不安全/不现实"的场景（如温度太高会烤糊）。
+
+\textbf{操作要点}：3因素BBD只需15次试验（加中心点重复），拟合二次响应面。
+
+\textbf{结果关键}：比容最优条件（加水43.7\%、打发9.8min、温度172℃），预测比容3.81mL/g。
+
+\textbf{注意}：BBD不探索角点——如果最优点在角上附近，BBD会漏掉。CCD和BBD根据实际选择。
+\end{algobrief}
+
+%% ========== 部分析因设计 ==========
+\advancedalgo{部分析因设计}{fractional_factorial}
+
+\begin{algobrief}
+\textbf{一句话}：全析因的"1/2"或"1/4"——$2^{k-p}$设计，用部分试验筛选主效应，牺牲高阶交互换试验次数。
+
+\textbf{美赛场景区}：7个两水平因子全因子需128次太贵，用$2^{7-3}=16$次筛选关键因子。
+
+\textbf{核心原理}：分辨率IV设计——主效应不与二阶交互混叠，但二阶交互之间互相混叠。用Lenth伪标准误判断哪些因子显著。
+
+\textbf{操作要点}：模型项选main，显著性方法选Lenth，响应列选收率。
+
+\textbf{结果关键}：7个因子中3个显著（温度、催化剂量、养晶时间），R$^2$=0.84。
+
+\textbf{注意}：部分析因是筛选设计——目的是"找到关键少数"，不是精确寻优。显著因子后续做响应面。
+\end{algobrief}
+
+%% ========== Plackett-Burman设计 ==========
+\advancedalgo{Plackett-Burman设计}{pb_design}
+
+\begin{algobrief}
+\textbf{一句话}：最经济的因子筛选设计——$N$次试验最多筛$N-1$个两水平因子，专门用来从很多候选因子中快速找出关键的。
+
+\textbf{美赛场景区}：8个工艺因子（温度、时间、催化剂量等）想快速找出4个关键的。
+
+\textbf{核心原理}：PB设计是分辨率III——主效应可能与二阶交互混叠，但用极少试验就能估计所有主效应。效应$=$高水平均值$-$低水平均值。
+
+\textbf{操作要点}：因子列选8个两水平因子，响应列选收率，显著性规则auto。
+
+\textbf{结果关键}：8个因子中4个显著（温度+3.9、时间-3.6、催化剂量+3.0、保温时间+1.9）。
+
+\textbf{注意}：PB是纯筛选设计——找到显著因子后，下一步要做全因子或响应面，不能直接当最终结论。
+\end{algobrief}

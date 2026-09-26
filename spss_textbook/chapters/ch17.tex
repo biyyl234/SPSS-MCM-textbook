@@ -1,0 +1,392 @@
+% 第17章 文本分析
+\chapter{文本分析}
+
+\begin{chapteroverview}
+\textbf{这个分类是干什么的？}
+
+现实世界里超过80\%的数据是"文字"——顾客评论、政策文件、新闻报道、问卷开放题、社交媒体留言。文本分析就是教你\textbf{把这些非结构化的文字变成能统计、能画图、能建模的数字}。它不要求你读完全部几千条评论，而是自动告诉你：大家最常说什么词？情绪是正面还是负面？这些文字能归纳成哪几个话题？
+
+\textbf{美赛什么题型常用？}
+
+文本分析在美赛中是\textbf{C题（大数据/数据挖掘）}和\textbf{E/F题（环境/政策）}的常客：
+\begin{itemize}
+    \item C题经常给你一份CSV，里面一列是评论文本、政策文本或新闻标题，要求你做情感倾向、主题挖掘、热点识别。
+    \item E/F题要分析政策文件、公众意见时，词频、LDA主题模型能帮你快速归纳各方关注点。
+    \item 拿到一堆文字却"不知道里面在讲什么"时，从本章入手。
+\end{itemize}
+
+\textbf{学习路径建议}
+
+按"从简单到复杂、从描述到建模"的顺序学：先\textbf{词频统计}（数一数词）和\textbf{词云图}（把词频画出来）——这是一切文本分析的地基；再学\textbf{文本情感分析}（判断正负情绪，是有监督学习）和\textbf{LDA主题分析}（自动归纳话题，是无监督学习）这两个明星算法。进阶部分的\textbf{TF-IDF}是"给词加权"的核心武器，\textbf{文本聚类}把相似文本自动分组，\textbf{共词网络}看词与词的关系，\textbf{新词发现}则用来挖词典里没有的新说法。
+\end{chapteroverview}
+
+\section{基础级算法}
+
+%% ========== 词频统计 ==========
+\basicalgo{词频统计}{word_freq}
+
+\begin{algointro}
+词频统计就是把一段段文字"切碎成词"，然后数一数每个词出现了多少次。它是所有文本分析的第一步——你连大家在提什么词都不知道，后面什么情感、主题都是空中楼阁。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 美赛C题给了评论文本、政策文本后，\textbf{第一步}：先看高频词是什么，摸清语料在讲什么
+    \item 按类别分组对比：产品使用类客户在说什么词？物流售后类客户在说什么词？
+    \item 论文中"文本数据概况"部分的基础统计
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+想象你有一篮子碎纸，每张写着一句话。词频统计做两件事：
+
+\begin{itemize}
+    \item \textbf{分词}：把"这个手机拍照很清晰"切成["这个","手机","拍照","很","清晰"]。中文没有空格，要用词典做最大匹配切分；英文按空格切、统一小写。
+    \item \textbf{过滤停用词}："的、了、很、the、a"这种到处都是、却没有信息量的词叫停用词，先删掉，否则榜单会被它们霸占。
+    \item \textbf{计数与相对频率}：统计每个词出现次数，并算\textbf{相对频率}（该词频次$/$总词元数），以及\textbf{累计覆盖率}（前$N$个高频词占了总词次的百分之多少）。
+\end{itemize}
+
+生活类比：累计覆盖率就像盘点仓库——如果前10个词就覆盖了17\%的内容，说明话题比较集中；如果要几百个词才覆盖一半，说明内容很分散。
+
+\textbf{分组比较注意}：两组文本条数不同，不能直接比绝对次数，要比\textbf{相对频率}（组内占比），否则人多的那组什么词都"更多"。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在Dabbit AI SPSS工具箱中选择"词频统计"（SPSS原生无中文分词，需工具箱或Python扩展）
+    \item 上传含文本列的数据，指定\textbf{文本字段}；如有分组列（如咨询类别），选入\textbf{分组字段}
+    \item 停用词范围选\textbf{chinese\_and\_english}（中英停用词都过滤）
+    \item 分词模式选auto；设置最短词长（通常$\geq2$），是否去数字
+    \item 设定top N（看前多少个高频词）、最小文档频次min\_doc\_freq
+    \item 运行，查看全局词频表与分组词频表
+\end{enumerate}
+
+\textbf{默认参数参考}：停用词中英双语，自动分词，最短词长2，分组间只比较相对频率。
+\end{algosposs}
+
+\begin{algoresult}
+以"客服意见反馈"案例为例（150条文本，2933个有效词元）：
+
+\begin{itemize}
+    \item \textbf{全局高频词}：出现最多的是"清晰"（79次，占2.69\%）；前10个高频词累计覆盖17.56\%——说明话题不算特别集中。
+    \item \textbf{分组结果}：
+    \begin{itemize}
+        \item "产品使用反馈"组（75篇）前三高频：清晰、稳定、优秀；
+        \item "物流售后反馈"组（75篇）前三高频：服务、到位、处理。
+    \end{itemize}
+    \item \textbf{怎么读}：产品组在夸产品属性（清晰、稳定），售后组在谈服务环节（服务、处理），组间用词侧重一目了然。
+\end{itemize}
+
+\textbf{注意}：组间差异只反映\textbf{用词侧重}，不直接代表态度好坏，要下结论得回到原文语境。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}拿到任何文本语料后的第一步，先摸高频词。
+
+\textbf{什么时候不用？}词频只告诉你"谁说得多"，不告诉你"说得对不对、情绪好不好"，也不区分一词多义——要判断倾向用情感分析，要归纳话题用LDA。
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：不过滤停用词，结果榜单第一名是"的、了、是"，毫无信息量。
+    \item \textbf{坑2}：直接比两组绝对频次。条数不同时必须比相对频率。
+    \item \textbf{坑3}：只看词频不看原文。"问题"出现100次到底是在夸还是在骂，必须抽查原文。
+\end{itemize}
+
+\textbf{和相似算法的区别}
+\begin{itemize}
+    \item vs \textbf{词云图}：词频统计给精确数字表；词云图只是它的可视化版本。
+    \item vs \textbf{TF-IDF}：词频只数出现次数；TF-IDF会惩罚到处都出现的"通用词"，更能找出某组独有的代表词。
+\end{itemize}
+\end{algonotes}
+
+%% ========== 词云图 ==========
+\basicalgo{词云图（词频可视化）}{wordcloud}
+
+\begin{algointro}
+词云图就是把词频统计的结果画成一张图：词越大，出现得越多。它的作用不是给精确数字，而是\textbf{一眼看出大家最关心什么}，特别适合放在论文里做直观展示。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 论文或汇报中需要\textbf{直观展示}文本热点时，词云图视觉冲击力强
+    \item 美赛C题要求快速呈现"用户最常讨论的主题"
+    \item 配合词频统计表使用：图负责好看，表负责准确
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+词云图背后没有新算法，就是\textbf{词频统计的图形化}：
+
+\begin{itemize}
+    \item 先做分词、去停用词、计数（和词频统计完全一样的预处理）；
+    \item 按词频排序，词频越高字号越大、位置越居中；
+    \item 可自定义停用词（把"无意义但高频"的词手动加进黑名单）、设置最大词数与画布尺寸。
+\end{itemize}
+
+生活类比：词云就像海报——字号大小就是声音大小，谁嗓门大谁就被放在中间。它帮你\textbf{快速抓重点}，但别指望从图上读出精确数字。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 工具箱选"词云图（词频可视化）"
+    \item 指定\textbf{文本字段}；若已有词频表，可直接选count字段与text字段
+    \item 打开\textbf{remove stopwords}过滤停用词；自定义停用词可手动追加
+    \item 设置最短词长min\_word\_len（默认2）、最大词数max\_words、画布宽高
+    \item 运行后导出图片；建议同时导出高频词条形图以备核对
+\end{enumerate}
+
+\textbf{默认参数参考}：过滤停用词，最短词长2，自定义停用词按需添加。
+\end{algosposs}
+
+\begin{algoresult}
+以"电商购物体验开放题"案例为例（150条文本，657个有效词次）：
+
+\begin{itemize}
+    \item 词云显示讨论主要围绕\textbf{包装、问题、客服}，三者合计约占词次7.6\%；
+    \item 其中"包装"最突出，出现17次、占2.6\%；
+    \item \textbf{条形图核对}：前若干高频词画成条形并标注数值，与词云结论一致、互相印证。
+\end{itemize}
+
+\textbf{怎么看}：图上最大的几个词就是核心话题；讨论集中在少数几个大词上说明用户关注点明确。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}需要可视化展示文本热点、放在论文配图里时。
+
+\textbf{什么时候不用？}需要精确数字排名时，别从词云上估，回去看词频统计表。
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：词云里全是"手机、东西"这种泛词，因为没加自定义停用词。
+    \item \textbf{坑2}：用词云当正式结论，忽视了它只是示意图、没有置信度概念。
+    \item \textbf{坑3}：把不同情感的词混在一张图里，"好"和"差"都很大，却没法区分情绪。
+\end{itemize}
+
+\textbf{和相似算法的区别}：词云是词频统计的\textbf{可视化产物}，二者预处理完全相同，区别只在一个给表、一个给图。
+\end{algonotes}
+
+%% ========== 文本情感分析 ==========
+\basicalgo{{\starmark}文本情感分析}{sentiment}
+
+\begin{algointro}
+文本情感分析就是让机器给每段文字判"情绪"——这条评论是夸（正面）还是骂（负面）？它把定性的文字变成了可统计的情绪比例，是美赛处理评论/舆情文本的\textbf{核心武器}。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 美赛C题给了成百上千条顾客评论、社媒留言，要\textbf{量化口碑}：正面占多少、负面占多少
+    \item 分析不同门店、不同时期的情绪倾向变化
+    \item 找出"哪些词最能区分好评和差评"，定位满意/不满的具体原因
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+情感分析本质是一个\textbf{有监督二分类问题}：先有人工标注好的一批文本（正面/负面），机器学着自己判断。
+
+\begin{itemize}
+    \item \textbf{文本向量化（TF-IDF）}：把每段文字变成一串数字。中文不用分词，用\textbf{字符级n-gram}（char\_wb）——相邻两三个字切成特征，比如"太差"、"好吃"，避免了中文分词的麻烦。
+    \item \textbf{分类器}：用\textbf{逻辑回归}（logistic），简单可解释。类别不均衡时开\textbf{class weight=balanced}自动加权。
+    \item \textbf{为什么可解释}：逻辑回归的系数告诉你哪些词是"正面信号"（系数大正）、哪些是"负面信号"（系数大负）。
+    \item \textbf{怎么评估}：把数据切成训练集/测试集（test size=0.2），训练集上做5折交叉验证估稳定性，测试集上看准确率、宏平均F1、AUC。
+\end{itemize}
+
+生活类比：就像老师批改作文——先拿标准答案（标注数据）教学生（训练模型），再让学生做一套没见过的卷子（测试集），看他和标准答案对得上多少。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 工具箱选"文本情感分析"
+    \item 指定\textbf{文本列}与\textbf{情感标签列}（必须有预先标注的正负标签，这是有监督学习）
+    \item 模式选auto；分析器选\textbf{char\_wb}（字符级，中文免分词）
+    \item 分类器选\textbf{logistic}；类别权重balanced；max\_features=5000（保留信息量最大的5000个词特征）
+    \item 测试集比例test size=0.2，交叉验证5折，随机种子42（保证可复现）
+    \item 运行，查看效果指标与高区分度关键词
+\end{enumerate}
+
+\textbf{默认参数参考}：char\_wb字符n-gram，逻辑回归，类别加权，5折CV，测试集20\%，最大特征5000。
+\end{algosposs}
+
+\begin{algoresult}
+以"连锁快餐顾客评价"案例为例（150条文本，测试集30条）：
+
+\begin{itemize}
+    \item \textbf{效果指标（核心）}：宏平均$F1=0.861$，准确率$0.867$，$AUC=0.940$。
+    \item \textbf{和基线比}：多数类基线$0.600$（即全猜多数类的准确率）。模型0.867远高于0.600，说明\textbf{正负情感能被可靠识别}。
+    \item \textbf{混淆矩阵}：看有多少正面被误判成负面、反之亦然，找出易错类型。
+    \item \textbf{关键词证据}：模型系数会列出支持正面/负面的高区分度词（如"好吃、干净"推正面，"慢、凉、错"推负面）。
+\end{itemize}
+
+\textbf{怎么判断好坏}：$F1$和AUC都明显高于"多数类基线"才算有用；AUC>0.8算好，>0.9算很好。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}有一批\textbf{已标注正负情感}的文本，要批量自动判断海量新文本的情绪倾向。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item \textbf{没有标注数据时}：逻辑回归是有监督方法，必须有标签。无标签时只能用词典法或先人工标注一小批。
+    \item 情感是多分类（喜/怒/哀/乐）或需要细粒度时，二分类模型不够。
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：没有标注数据就硬上有监督模型。标签是这个方法的命根子。
+    \item \textbf{坑2}：类别严重不平衡（好评140条、差评10条）却不调类别权重，模型会"全猜好评"拿高准确率却毫无用处——所以要看$F1$和AUC，不能只看准确率。
+    \item \textbf{坑3}：把测试集混进训练。必须独立留出测试集，否则效果指标虚高。
+\end{itemize}
+
+\textbf{和相似算法的区别}
+\begin{itemize}
+    \item vs \textbf{词频统计}：词频只数词；情感分析判断\textbf{情绪极性}，是分类任务。
+    \item vs \textbf{LDA主题分析}：情感分析回答"情绪是正还是负"（有监督）；LDA回答"在讲什么话题"（无监督，不关心褒贬）。
+\end{itemize}
+\end{algonotes}
+
+%% ========== LDA主题分析 ==========
+\basicalgo{{\starmark}LDA主题分析}{lda_topic}
+
+\begin{algointro}
+LDA（隐含狄利克雷分配）是文本分析里最经典的"话题归纳器"。面对几千条没人读过的评论，它自动告诉你：这些文字大致分成$K$个话题，每个话题由哪些词构成、每条评论主要在聊哪个话题。它是\textbf{无监督}的——不需要人工标注。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 美赛C题给了大段无标注评论/政策文本，要\textbf{自动归纳话题结构}
+    \item 顾客评论自动分成"质量、物流、价格、客服、尺码"等话题，并看各话题占比
+    \item E/F题政策文本分析：归纳各方关注点、议题演变
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+LDA用两个"骰子"的比喻来理解：
+
+\begin{itemize}
+    \item \textbf{文档--主题骰子}：每篇评论不是只聊一件事，而是按比例混合多个主题。比如某评论60\%在讲价格、40\%在讲物流。
+    \item \textbf{主题--词骰子}：每个主题又是一堆词的概率分布。"价格主题"里最可能出现price、total、final；"物流主题"里最可能出现shipping、delivery、pack。
+    \item \textbf{核心思想}：反复\textbf{共同出现}的词会被归到同一个主题。算法就是来回调整这两个骰子，让"每个主题的词"和"每篇文档的主题混合"都最自洽。
+\end{itemize}
+
+\textbf{怎么定主题数$K$}：不是拍脑袋。用\textbf{困惑度（perplexity）}扫描多个$K$，选困惑度下降变平缓的位置，再结合\textbf{主题可解释性}人工判断——主题词读起来像不像一个有意义的话题。
+
+生活类比：LDA就像给一堆博客自动打标签。它不会预先告诉你标签是什么，而是自己发现"总被一起提到的词构成一类"，再让你给这些类起名字。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 工具箱选"LDA主题分析"
+    \item 指定\textbf{文本列}feedback\_text、\textbf{文档ID列}review\_id
+    \item 预处理：分词、去停用词（可加extra停用词）；设min\_df=2（至少出现在2篇文档才保留）、max\_df（剔除过于通用的词）
+    \item 主题数：若不确定，开启\textbf{tune topics}让它扫描推荐$K$；确定后填num\_topics
+    \item 学习方法选batch；doc\_topic prior与topic\_word prior设auto；随机状态固定可复现
+    \item 运行，查看主题--词分布、文档--主题占比与代表文档
+\end{enumerate}
+
+\textbf{默认参数参考}：batch学习，自动先验，min\_df=2/max\_df过滤，主题数自动调优。
+\end{algosposs}
+
+\begin{algoresult}
+以"跨境电商服装英文评论"案例为例（150篇有效文档）：
+
+\begin{itemize}
+    \item \textbf{主题数}：自动归纳为\textbf{5个主题}。
+    \item \textbf{最强主题}：占比最高的是「price total final」（主题强度22.6\%），核心词price、total、final——显然在讲\textbf{价格/费用}。
+    \item \textbf{怎么解读每个主题}：看该主题下概率最高的若干词，给它起名字。比如出现shipping/delivery/pack的就叫"物流"，出现size/fit/color的就叫"尺码版型"。
+    \item \textbf{文档--主题分布}：每条评论有一个"主导主题"，据此统计各话题在全体评论中的占比。
+    \item \textbf{代表文档}：每个主题抽几条最典型的原文回读，验证主题名取得对不对。
+\end{itemize}
+
+\textbf{怎么判断好坏}：主题词\textbf{语义清晰、彼此区分}就是好结果；如果两个主题词几乎一样，说明$K$太多或数据太稀，需要合并或调整。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}有大量\textbf{无标注}文本，想自动归纳话题结构、看讨论焦点分布。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 你已经知道文本该分哪几类、且有标签——直接做分类更准。
+    \item 文本太短（每条就几个字）时，LDA效果差，短文本建议先用文本聚类。
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：主题数$K$乱设。一定要结合困惑度扫描和人工可解释性，别只挑数字最小的。
+    \item \textbf{坑2}：不看代表文档就给主题起名。主题词可能有歧义，必须回读原文确认。
+    \item \textbf{坑3}：把LDA当因果。它只发现"词常一起出现"，不代表这些主题之间有因果关系。
+\end{itemize}
+
+\textbf{和相似算法的区别}
+\begin{itemize}
+    \item vs \textbf{文本聚类}：两者都是无监督分组。LDA给出\textbf{软分配}（一篇评论可同时属于多个主题，带比例）且有可读的主题词；K-Means聚类是\textbf{硬分配}（一篇只进一簇），适合短文本。
+    \item vs \textbf{情感分析}：情感分析看"褒贬"，LDA看"话题"，回答的是完全不同的问题，常配合使用（先LDA分话题，再对每个话题做情感）。
+\end{itemize}
+\end{algonotes}
+
+\section{进阶级算法速览}
+
+%% ========== 社会网络关系图（共词矩阵） ==========
+\advancedalgo{社会网络关系图（共词矩阵）}{co_word_network}
+
+\begin{algobrief}
+\textbf{一句话}：把"经常出现在同一篇文献里的关键词"连成一张网络图，看哪些词是研究热点核心、哪些词对总被搭配使用、整个领域分成几个主题簇。
+
+\textbf{美赛场景区}：分析某领域文献/政策文件的关键词共现，识别研究热点结构与主题聚类，适合做领域综述、技术情报分析。
+
+\textbf{核心原理}：以关键词为节点、两词在同一篇中共现的次数为连边权重，构建无向加权网络；计算度中心性（连边最多的核心词）、中介中心性（连接不同主题的"桥"），再做社区发现自动分成若干主题簇。
+
+\textbf{操作要点}：工具箱选"社会网络关系图（共词矩阵）"；指定关键词列；布局spring；权重用共现次数；中心性度量度中心性；开启社区检测。用分隔符[ ,;，；、/|\\s]+拆分多关键词。
+
+\textbf{结果关键}：案例（150篇智能制造文献）30个高频词节点、230条连边、5个社区、网络密度0.529；"智能制造"是核心节点，"智能制造--数字化转型"共现最强（21篇同现）。节点越大越居中越核心，连边越粗共现越强。
+
+\textbf{注意}：共现只表示"同篇出现"，\textbf{不等于相关或因果}。中介中心性高的词即使频率不高，也可能是连接不同主题的关键桥接。
+\end{algobrief}
+
+%% ========== TF-IDF分析 ==========
+\advancedalgo{TF-IDF分析}{tfidf}
+
+\begin{algobrief}
+\textbf{一句话}：在词频基础上加权——一个词在本文档出现越多、但在整个语料中出现越少，权重越高，从而揪出真正"代表这一类"的特色词。
+
+\textbf{美赛场景区}：美赛C题分好组（如配送/质量/售后）后，找出每组\textbf{独有}的代表关键词，而不是各组都提到的通用词。
+
+\textbf{核心原理}：TF（词频）$=$词在本文档出现次数；IDF（逆文档频率）$=\log\frac{\text{文档总数}}{\text{含该词的文档数}}$。TF-IDF$=TF\times IDF$。像"的、是"处处都有，IDF接近0，权重被压下去；只在某组反复出现的词，IDF高、权重突出。常用l2归一化。
+
+\textbf{操作要点}：工具箱选"TF-IDF分析"；norm选l2；ngram range(1,1)；设min\_df/max\_df过滤；按分组质心提取各组代表词。
+
+\textbf{结果关键}：案例中商品质量组突出"手感、紧密"，售后服务组突出"售后、客服、问题"，配送服务组突出"快递、配送、包装"——三组关注点被关键词清晰区分。
+
+\textbf{注意}：TF-IDF是文本向量化的标准武器，也是情感分析、文本聚类、LDA之前的常用特征步骤。它找的是"区分性"，不是"重要性"。
+\end{algobrief}
+
+%% ========== 文本聚类分析 ==========
+\advancedalgo{文本聚类分析}{text_cluster}
+
+\begin{algobrief}
+\textbf{一句话}：不预设任何类别标签，把"诉求相似"的文本自动归成几堆，适合客服留言这种口语化、长短不一、没人预先分类的数据。
+
+\textbf{美赛场景区}：C题中对售后留言、投诉文本做自动分诊，归纳出几类典型问题及占比，供人工复核。
+
+\textbf{核心原理}：先用TF-IDF字符n-gram把文本转成数值矩阵，再跑K-Means；从$k=2$到上限逐个试，以\textbf{轮廓系数}最高（同分取小$k$）选簇数；最后用每簇质心的高权重词命名主题，用轮廓系数、CH指数、簇内余弦相似度评估质量。
+
+\textbf{操作要点}：工具箱选"文本聚类分析"；指定文本列；vectorizer选tfidf，分析器char\_wb，ngram 2+1；k设auto让其自动选；固定随机种子。
+
+\textbf{结果关键}：案例（生鲜售后留言）聚成4簇，轮廓系数0.107（文本聚类普遍偏低，0.1左右即基本可分）。用每簇高频词人工概括主题（如"配送压坏""售后回复"等）。
+
+\textbf{注意}：文本聚类轮廓系数天然偏低，别拿数值变量聚类的高标准来要求。聚类后\textbf{必须人工读每簇代表词来命名}，机器只负责分堆，主题含义要人来解释。
+\end{algobrief}
+
+%% ========== 新词发现 ==========
+\advancedalgo{新词发现}{new_word}
+
+\begin{algobrief}
+\textbf{一句话}：不依赖任何词典，直接从海量文本里自动找出"大家新造出来、词典里还没有"的词，比如"半固态电池""零重力座椅"。
+
+\textbf{美赛场景区}：分析新兴领域（新能源、AI、网络热词）时，业务词库更新跟不上，用它自动挖掘候选新词补充词表。
+
+\textbf{核心原理}：三重证据筛选——(1)\textbf{凝固度（PMI互信息）}：字之间结合得紧不紧，切一刀算最小PMI；(2)\textbf{自由度（左右熵）}：这个词能不能出现在不同语境（左右邻居越多样越能独立成词）；(3)\textbf{词频}。三者都过阈值才入选，按综合得分排序。
+
+\textbf{操作要点}：工具箱选"新词发现"；候选字串长度2$\sim$6；设最小词频、最小PMI、最小左右熵；去重、去纯数字、去非中文。
+
+\textbf{结果关键}：案例（车主评论）挖出36个候选新词，头部如"半固态电池、零重力座椅、能量回收、城市领航、哨兵模式"，复用强度与成词证据最充分，可交人工确认后入词库。
+
+\textbf{注意}：这是辅助工具，输出只是\textbf{候选清单}，必须人工复核再入库，机器可能把高频搭配误判成词。它解决的是"分词词典太旧"的问题。
+\end{algobrief}

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dabbit AI SPSS算法工具箱 - 252个算法案例详尽分析报告</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f5f7fa; color: #333; line-height: 1.8; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; margin-bottom: 30px; }
+.header h1 { font-size: 28px; margin-bottom: 10px; }
+.header p { font-size: 16px; opacity: 0.9; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+.stat-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center; }
+.stat-card .number { font-size: 32px; font-weight: bold; color: #667eea; }
+.stat-card .label { font-size: 14px; color: #666; margin-top: 5px; }
+.section { background: white; padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.section h2 { font-size: 22px; color: #333; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #667eea; display: inline-block; }
+.section h3 { font-size: 18px; color: #555; margin: 20px 0 15px; }
+.chart { width: 100%; height: 400px; margin: 20px 0; }
+.chart-wide { height: 500px; }
+table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 14px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee; }
+th { background: #f8f9fa; font-weight: 600; color: #555; }
+tr:hover { background: #f8f9fa; }
+.highlight { background: #fff3cd; padding: 2px 6px; border-radius: 3px; }
+.insight { background: #e8f4fd; border-left: 4px solid #2196f3; padding: 15px 20px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+.insight strong { color: #1976d2; }
+.tag { display: inline-block; background: #e3f2fd; color: #1976d2; padding: 2px 10px; border-radius: 12px; font-size: 12px; margin: 2px; }
+.tag-green { background: #e8f5e9; color: #388e3c; }
+.tag-orange { background: #fff3e0; color: #f57c00; }
+.tag-red { background: #ffebee; color: #d32f2f; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+.footer { text-align: center; padding: 30px; color: #999; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<h1>Dabbit AI SPSS算法工具箱 - 算法案例详尽分析报告</h1>
+<p>基于252个算法案例的全量爬取数据 | 涵盖18个分类 | 数据采集时间：2026年9月</p>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card"><div class="number">252</div><div class="label">算法案例总数</div></div>
+<div class="stat-card"><div class="number">18</div><div class="label">技术分类</div></div>
+<div class="stat-card"><div class="number">8.9</div><div class="label">平均参数量</div></div>
+<div class="stat-card"><div class="number">2272</div><div class="label">平均报告字数</div></div>
+<div class="stat-card"><div class="number">2.2</div><div class="label">平均表格数</div></div>
+<div class="stat-card"><div class="number">2.7</div><div class="label">平均图片数</div></div>
+</div>
+
+<div class="section">
+<h2>一、数据概览与完整性验证</h2>
+<p>本次爬取覆盖了Dabbit AI算法工具箱中全部253个算法，其中<strong>252个算法提供了完整的案例页面</strong>（仅"算法自动选择器"无案例按钮）。每个案例页面包含以下核心元素：</p>
+<table>
+<tr><th>元素类型</th><th>字段名</th><th>完整率</th><th>说明</th></tr>
+<tr><td>算法名称</td><td>algorithmName</td><td>100%</td><td>案例页标题</td></tr>
+<tr><td>默认参数</td><td>params</td><td>100%</td><td>参数名+参数值键值对</td></tr>
+<tr><td>案例数据</td><td>caseData</td><td>100%</td><td>数据条数+CSV文件名</td></tr>
+<tr><td>案例背景</td><td>background</td><td>100%</td><td>业务场景描述</td></tr>
+<tr><td>分析报告</td><td>report</td><td>100%</td><td>完整分析报告全文</td></tr>
+<tr><td>数据表格</td><td>tables</td><td>98.4%</td><td>4个案例无表格</td></tr>
+<tr><td>输出文件</td><td>outputFiles</td><td>100%</td><td>生成的图片文件名列表</td></tr>
+<tr><td>图片资源</td><td>images</td><td>100%</td><td>图片URL+文件名</td></tr>
+<tr><td>分类归属</td><td>category</td><td>100%</td><td>18个技术分类</td></tr>
+<tr><td>案例URL</td><td>url</td><td>100%</td><td>algorithm-cases/{uuid}</td></tr>
+</table>
+<div class="insight">
+<strong>数据质量结论：</strong>252个案例数据完整性极高，所有核心字段100%覆盖。仅4个案例（1.6%）未包含数据表格，主要为描述性统计类和简单检验类算法。所有案例均使用统一的150条示例数据，确保了案例之间的可比性。
+</div>
+</div>
+
+<div class="section">
+<h2>二、参数量分布分析</h2>
+<p>算法案例的默认参数数量反映了算法的复杂度和可配置程度。统计显示，参数量呈现近似正态分布。</p>
+<div class="chart" id="chart_param_dist"></div>
+<div class="two-col">
+<div>
+<h3>参数数量统计</h3>
+<table>
+<tr><th>指标</th><th>数值</th></tr>
+<tr><td>平均参数量</td><td>8.9个</td></tr>
+<tr><td>中位数</td><td>9个</td></tr>
+<tr><td>最少参数</td><td>1个（算法自动选择器）</td></tr>
+<tr><td>最多参数</td><td>16个</td></tr>
+<tr><td>众数区间</td><td>9-10个（100个案例，39.7%）</td></tr>
+</table>
+</div>
+<div>
+<h3>参数复杂度分级</h3>
+<table>
+<tr><th>复杂度等级</th><th>参数范围</th><th>案例数</th><th>占比</th></tr>
+<tr><td><span class="tag tag-green">简单</span></td><td>1-5个</td><td>20</td><td>7.9%</td></tr>
+<tr><td><span class="tag">中等</span></td><td>6-10个</td><td>181</td><td>71.8%</td></tr>
+<tr><td><span class="tag tag-orange">复杂</span></td><td>11-15个</td><td>49</td><td>19.4%</td></tr>
+<tr><td><span class="tag tag-red">极复杂</span></td><td>16个+</td><td>2</td><td>0.8%</td></tr>
+</table>
+</div>
+</div>
+<div class="insight">
+<strong>分析发现：</strong>超过70%的算法参数集中在6-10个区间，说明平台在案例设计上倾向于"适度复杂"——既展示了算法的核心可调参数，又避免了参数过多导致用户困惑。机器学习类算法参数最多（平均11.4个），描述性统计类最少（平均7.4个），符合各领域的实际复杂度差异。
+</div>
+</div>
+
+<div class="section">
+<h2>三、高频参数名分析</h2>
+<p>对252个案例的全部参数名进行词频统计，揭示平台参数设计的标准化程度。</p>
+<div class="chart chart-wide" id="chart_top_params"></div>
+<h3>参数命名标准化观察</h3>
+<table>
+<tr><th>参数类型</th><th>高频参数名</th><th>出现次数</th><th>标准化程度</th></tr>
+<tr><td>显著性水平</td><td>alpha / 显著性水平 / significance level</td><td>62+32+16=110</td><td>中等（中英混用）</td></tr>
+<tr><td>随机种子</td><td>随机种子 / random seed / random state</td><td>18+13+9=40</td><td>低（三种写法）</td></tr>
+<tr><td>置信水平</td><td>置信水平 / ci level</td><td>17+9=26</td><td>中等</td></tr>
+<tr><td>缺失值处理</td><td>缺失值处理</td><td>16</td><td>高</td></tr>
+<tr><td>迭代次数</td><td>max iter / maxiter</td><td>12+9=21</td><td>低（两种写法）</td></tr>
+<tr><td>目标列</td><td>target column / y column</td><td>13+9=22</td><td>中等</td></tr>
+</table>
+<div class="insight">
+<strong>改进建议：</strong>参数命名存在中英混用和同义不同名的问题（如alpha/显著性水平/significance level表示同一概念）。建议平台统一参数命名规范，优先使用中文参数名，并对同义参数进行标准化映射，降低用户的学习成本。
+</div>
+</div>
+
+<div class="section">
+<h2>四、案例数据规模分析</h2>
+<div class="two-col">
+<div>
+<h3>数据规模统计</h3>
+<table>
+<tr><th>指标</th><th>数值</th></tr>
+<tr><td>所有案例数据条数</td><td>统一150条</td></tr>
+<tr><td>不同CSV文件数</td><td>242个</td></tr>
+<tr><td>数据复用率</td><td>10个文件被复用2次</td></tr>
+<tr><td>平均背景描述字数</td><td>353字</td></tr>
+</table>
+</div>
+<div>
+<h3>高频复用数据文件</h3>
+<table>
+<tr><th>CSV文件名</th><th>使用次数</th></tr>
+<tr><td>retail_store_operations.csv</td><td>2</td></tr>
+<tr><td>production_plan_model.csv</td><td>2</td></tr>
+<tr><td>telecom_customer_churn.csv</td><td>2</td></tr>
+<tr><td>store_panel.csv</td><td>2</td></tr>
+<tr><td>candidate_projects.csv</td><td>2</td></tr>
+<tr><td>hospital_satisfaction.csv</td><td>2</td></tr>
+</table>
+</div>
+</div>
+<div class="insight">
+<strong>数据设计特点：</strong>所有案例统一使用150条数据，这是一个精心设计的选择——150条数据足以展示算法的统计特性（满足中心极限定理的样本量要求），又不会因数据量过大导致运行时间过长。242个不同的CSV文件说明平台为每个算法量身定制了示例数据，仅10个文件在相关算法间复用（如门店运营数据用于多种分析方法）。
+</div>
+</div>
+
+<div class="section">
+<h2>五、分析报告结构与内容深度分析</h2>
+<p>所有252个案例的分析报告均遵循统一的四段式结构，体现了平台高度标准化的内容生产流程。</p>
+<div class="chart" id="chart_report_structure"></div>
+<h3>报告标准结构（100%覆盖）</h3>
+<table>
+<tr><th>章节</th><th>覆盖率</th><th>内容定位</th></tr>
+<tr><td><strong>分析结果概览</strong></td><td>100%</td><td>核心发现的摘要总结，让用户快速获取结论</td></tr>
+<tr><td><strong>建模思路</strong></td><td>100%</td><td>方法选择依据、数据处理流程、模型构建逻辑</td></tr>
+<tr><td><strong>核心结论</strong></td><td>100%</td><td>基于分析结果的关键发现和业务解读</td></tr>
+<tr><td><strong>问题详细分析</strong></td><td>100%</td><td>深入的技术细节、统计指标解读、图表说明</td></tr>
+</table>
+<h3>报告字数分布</h3>
+<div class="chart" id="chart_report_length"></div>
+<div class="two-col">
+<div>
+<h3>报告字数统计</h3>
+<table>
+<tr><th>指标</th><th>数值</th></tr>
+<tr><td>平均字数</td><td>2,272字</td></tr>
+<tr><td>中位数</td><td>1,691字</td></tr>
+<tr><td>最短报告</td><td>750字</td></tr>
+<tr><td>最长报告</td><td>18,606字</td></tr>
+</table>
+</div>
+<div>
+<h3>报告内容关键词</h3>
+<table>
+<tr><th>关键词</th><th>出现案例数</th><th>占比</th></tr>
+<tr><td>显著性</td><td>103</td><td>40.9%</td></tr>
+<tr><td>建议</td><td>42</td><td>16.7%</td></tr>
+<tr><td>拟合优度</td><td>17</td><td>6.7%</td></tr>
+<tr><td>模型诊断</td><td>9</td><td>3.6%</td></tr>
+<tr><td>假设检验</td><td>6</td><td>2.4%</td></tr>
+<tr><td>局限性</td><td>0</td><td>0%</td></tr>
+</table>
+</div>
+</div>
+<div class="insight">
+<strong>内容深度评估：</strong>报告平均2272字，属于中等偏长的分析文档。Meta分析类报告最长（平均10,549字），因为需要包含森林图解读、异质性分析、发表偏倚检验等多个子模块。值得注意的是，<strong>没有任何案例包含"局限性"章节</strong>，这是一个明显的内容缺口——客观的分析报告应当说明方法的适用边界和结果的局限性。此外，仅16.7%的报告包含明确的"建议"部分，可进一步加强业务落地指导。
+</div>
+</div>
+
+<div class="section">
+<h2>六、表格与图片输出分析</h2>
+<div class="two-col">
+<div class="chart" id="chart_table_dist"></div>
+<div class="chart" id="chart_image_dist"></div>
+</div>
+<h3>输出资源统计</h3>
+<table>
+<tr><th>资源类型</th><th>平均数量</th><th>中位数</th><th>最少</th><th>最多</th><th>无输出案例数</th></tr>
+<tr><td>数据表格</td><td>2.2个</td><td>2个</td><td>0个</td><td>6个</td><td>4个（1.6%）</td></tr>
+<tr><td>可视化图片</td><td>2.7张</td><td>3张</td><td>1张</td><td>5张</td><td>0个（0%）</td></tr>
+</table>
+<div class="insight">
+<strong>可视化设计评估：</strong>100%的案例至少包含1张可视化图片，且53.2%的案例包含3张图片，说明平台非常重视结果的可视化呈现。图片数量集中在2-3张（91.7%），既保证了关键结果的图形化展示，又避免了图片过多导致信息过载。表格数量相对较少，平均2.2个，主要用于展示精确的统计指标。
+</div>
+</div>
+
+<div class="section">
+<h2>七、按技术分类的案例特征对比</h2>
+<p>18个技术分类在参数量、报告深度、输出资源等维度呈现显著差异。</p>
+<div class="chart chart-wide" id="chart_category_radar"></div>
+<div class="chart chart-wide" id="chart_category_compare"></div>
+<h3>各分类详细指标</h3>
+<table>
+<tr><th>分类</th><th>案例数</th><th>平均参数</th><th>平均报告字数</th><th>平均表格</th><th>平均图片</th><th>复杂度评级</th></tr>
+<tr><td>时间序列与计量经济</td><td>28</td><td>10.0</td><td>1,622</td><td>2.3</td><td>2.8</td><td><span class="tag tag-orange">高</span></td></tr>
+<tr><td>综合评价</td><td>24</td><td>7.6</td><td>4,020</td><td>2.2</td><td>2.7</td><td><span class="tag">中</span></td></tr>
+<tr><td>医学统计</td><td>24</td><td>8.9</td><td>2,063</td><td>2.0</td><td>2.4</td><td><span class="tag">中</span></td></tr>
+<tr><td>回归分析</td><td>24</td><td>9.1</td><td>1,943</td><td>2.0</td><td>2.6</td><td><span class="tag">中</span></td></tr>
+<tr><td>问卷研究</td><td>22</td><td>9.0</td><td>1,855</td><td>2.5</td><td>2.6</td><td><span class="tag">中</span></td></tr>
+<tr><td>差异比较</td><td>18</td><td>8.5</td><td>1,596</td><td>2.2</td><td>2.6</td><td><span class="tag">中</span></td></tr>
+<tr><td>质量控制</td><td>14</td><td>8.3</td><td>1,580</td><td>2.1</td><td>2.5</td><td><span class="tag">中</span></td></tr>
+<tr><td>规划求解</td><td>14</td><td>8.4</td><td>2,136</td><td>1.8</td><td>2.8</td><td><span class="tag">中</span></td></tr>
+<tr><td>机器学习</td><td>13</td><td>11.4</td><td>1,359</td><td>2.0</td><td>2.9</td><td><span class="tag tag-red">极高</span></td></tr>
+<tr><td>空间计量</td><td>10</td><td>9.9</td><td>1,757</td><td>2.2</td><td>3.0</td><td><span class="tag tag-orange">高</span></td></tr>
+<tr><td>聚类与降维</td><td>9</td><td>9.0</td><td>1,526</td><td>2.1</td><td>3.0</td><td><span class="tag">中</span></td></tr>
+<tr><td>描述性统计</td><td>9</td><td>7.4</td><td>1,449</td><td>2.2</td><td>2.7</td><td><span class="tag tag-green">低</span></td></tr>
+<tr><td>试验设计</td><td>9</td><td>7.7</td><td>2,258</td><td>1.6</td><td>2.8</td><td><span class="tag">中</span></td></tr>
+<tr><td>Meta分析</td><td>8</td><td>8.2</td><td>10,549</td><td>2.2</td><td>3.0</td><td><span class="tag tag-orange">高</span></td></tr>
+<tr><td>文本分析</td><td>8</td><td>9.9</td><td>1,784</td><td>2.5</td><td>3.1</td><td><span class="tag tag-orange">高</span></td></tr>
+<tr><td>功效分析</td><td>6</td><td>9.7</td><td>1,518</td><td>2.8</td><td>2.8</td><td><span class="tag">中</span></td></tr>
+<tr><td>相关分析</td><td>6</td><td>7.5</td><td>1,489</td><td>2.3</td><td>2.2</td><td><span class="tag tag-green">低</span></td></tr>
+<tr><td>预测模型</td><td>6</td><td>9.7</td><td>2,312</td><td>2.5</td><td>2.7</td><td><span class="tag">中</span></td></tr>
+</table>
+<div class="insight">
+<strong>分类差异洞察：</strong>
+<br>1. <strong>机器学习</strong>参数最多（11.4个）但报告最短（1,359字），说明这类算法更侧重参数配置和模型性能指标，文字解释相对精简。
+<br>2. <strong>Meta分析</strong>报告最长（10,549字），是平均水平的4.6倍，因为需要覆盖文献筛选、异质性检验、发表偏倚、敏感性分析等完整流程。
+<br>3. <strong>综合评价</strong>报告第二长（4,020字），因为权重计算、方案排序、敏感性分析等环节需要详细说明。
+<br>4. <strong>文本分析</strong>和<strong>空间计量</strong>图片最多（3.0+张），因为这类算法的结果更依赖可视化呈现（词云、热力图、空间分布图等）。
+<br>5. <strong>试验设计</strong>表格最少（1.6个），因为试验设计的结果更多通过交互图和效应图展示。
+</div>
+</div>
+
+<div class="section">
+<h2>八、案例页面URL结构分析</h2>
+<p>所有案例页面采用统一的UUID路由结构：</p>
+<table>
+<tr><th>URL模式</th><th>示例</th><th>说明</th></tr>
+<tr><td>https://dabbit-ai.com/algorithm-cases/{32位uuid}</td><td>/algorithm-cases/36862709ceea41898887a49cba0eb378</td><td>每个算法案例独立UUID</td></tr>
+</table>
+<p>图片资源存储在OSS CDN上，URL格式为：</p>
+<table>
+<tr><th>资源类型</th><th>URL模式</th></tr>
+<tr><td>分析图片</td><td>https://dabbit-ai-oss-cdn.dabbit-ai.com/dabbit-ai-analysis/algorithm_example_case/algorithm_{id}/revision_1/run_{hash}/figure_XX.png?auth_key={timestamp}-0-0-{hash}</td></tr>
+</table>
+<div class="insight">
+<strong>技术架构观察：</strong>案例图片URL包含<code>auth_key</code>参数，说明图片访问有时效性控制（基于时间戳的签名URL）。图片路径中包含<code>revision_1</code>和<code>run_{hash}</code>，表明平台对案例分析结果进行了版本管理和运行实例追踪，这是一个专业的MLOps实践。
+</div>
+</div>
+
+<div class="section">
+<h2>九、平台案例设计质量综合评估</h2>
+<h3>优势与亮点</h3>
+<table>
+<tr><th>维度</th><th>评估</th><th>具体表现</th></tr>
+<tr><td><span class="tag tag-green">数据完整性</span></td><td>优秀</td><td>252个案例100%覆盖核心字段，无缺失</td></tr>
+<tr><td><span class="tag tag-green">结构标准化</span></td><td>优秀</td><td>所有报告统一四段式结构，用户体验一致</td></tr>
+<tr><td><span class="tag tag-green">可视化覆盖</span></td><td>优秀</td><td>100%案例包含图片，平均2.7张</td></tr>
+<tr><td><span class="tag tag-green">数据规模</span></td><td>合理</td><td>统一150条，兼顾统计有效性和运行效率</td></tr>
+<tr><td><span class="tag tag-green">分类覆盖</span></td><td>全面</td><td>18个分类覆盖统计分析全领域</td></tr>
+<tr><td><span class="tag tag-green">参数设计</span></td><td>适度</td><td>平均8.9个参数，避免过度复杂</td></tr>
+</table>
+<h3>待改进方面</h3>
+<table>
+<tr><th>问题</th><th>影响</th><th>建议</th></tr>
+<tr><td><span class="tag tag-red">参数命名不统一</span></td><td>中英混用、同义不同名增加学习成本</td><td>统一中文参数名，建立参数映射表</td></tr>
+<tr><td><span class="tag tag-red">缺少局限性分析</span></td><td>0%案例包含局限性章节，报告客观性不足</td><td>每个案例增加"方法局限性"和"结果解释边界"</td></tr>
+<tr><td><span class="tag tag-orange">建议部分覆盖低</span></td><td>仅16.7%案例有明确建议，业务落地指导不足</td><td>标准化增加"业务建议"章节</td></tr>
+<tr><td><span class="tag tag-orange">报告长度差异大</span></td><td>最短750字 vs 最长18606字，质量不均</td><td>设定报告字数下限和内容检查清单</td></tr>
+<tr><td><span class="tag tag-orange">4个案例无表格</span></td><td>部分简单算法缺少精确数值展示</td><td>为所有算法至少提供1个关键指标表格</td></tr>
+<tr><td><span class="tag">数据复用率低</span></td><td>仅10个文件复用，相关算法数据不一致</td><td>建立主题数据集，相关算法使用同一数据便于对比</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>十、用户学习路径建议</h2>
+<p>基于案例数据的分析，为不同水平的用户推荐学习路径：</p>
+<div class="two-col">
+<div>
+<h3>初学者路径（低复杂度）</h3>
+<table>
+<tr><th>顺序</th><th>算法分类</th><th>代表算法</th><th>平均参数</th></tr>
+<tr><td>1</td><td>描述性统计</td><td>描述性统计、分类汇总</td><td>7.4</td></tr>
+<tr><td>2</td><td>相关分析</td><td>偏相关分析、典型相关分析</td><td>7.5</td></tr>
+<tr><td>3</td><td>综合评价</td><td>层次分析法、TOPSIS法</td><td>7.6</td></tr>
+<tr><td>4</td><td>差异比较</td><td>T检验、方差分析</td><td>8.5</td></tr>
+</table>
+</div>
+<div>
+<h3>进阶用户路径（高复杂度）</h3>
+<table>
+<tr><th>顺序</th><th>算法分类</th><th>代表算法</th><th>平均参数</th></tr>
+<tr><td>1</td><td>回归分析</td><td>线性回归、逻辑回归</td><td>9.1</td></tr>
+<tr><td>2</td><td>时间序列</td><td>ARIMA、VAR模型</td><td>10.0</td></tr>
+<tr><td>3</td><td>空间计量</td><td>空间滞后模型、SDM</td><td>9.9</td></tr>
+<tr><td>4</td><td>机器学习</td><td>随机森林、XGBoost</td><td>11.4</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>十一、总结与核心发现</h2>
+<div class="insight">
+<strong>核心发现1：平台案例体系成熟度高。</strong>252个案例实现了全量覆盖，数据完整性100%，报告结构100%标准化，可视化100%覆盖，这在同类工具中处于领先水平。
+</div>
+<div class="insight">
+<strong>核心发现2：案例设计遵循"适度复杂"原则。</strong>平均8.9个参数、2272字报告、2.2个表格、2.7张图片的配置，在信息充分性和用户友好性之间取得了良好平衡。
+</div>
+<div class="insight">
+<strong>核心发现3：分类差异反映领域特性。</strong>机器学习参数最多但报告最短，Meta分析报告最长，文本分析图片最多——各分类的案例特征与该领域的分析范式高度吻合。
+</div>
+<div class="insight">
+<strong>核心发现4：内容客观性有待加强。</strong>0%的案例包含"局限性"分析，仅16.7%包含明确建议，这是平台从"工具展示"向"专业分析"升级的关键突破口。
+</div>
+<div class="insight">
+<strong>核心发现5：参数标准化是体验优化重点。</strong>同一概念存在多种命名（alpha/显著性水平/significance level），统一命名规范可显著降低用户认知负担。
+</div>
+</div>
+
+<div class="footer">
+<p>本报告基于Dabbit AI算法工具箱252个算法案例的全量爬取数据自动生成</p>
+<p>数据文件：case_progress.json | 分析脚本：analyze_cases.py | 报告生成时间：2026年9月</p>
+</div>
+
+</div>
+
+<script>
+// 1. 参数量分布
+var chart1 = echarts.init(document.getElementById('chart_param_dist'));
+chart1.setOption({
+title: { text: '算法参数量分布', left: 'center', textStyle: { fontSize: 16 } },
+tooltip: { trigger: 'axis', triggerOn: 'mousemove|click', renderMode: 'richText', confine: true },
+grid: { left: '8%', right: '5%', bottom: '10%', containLabel: true },
+xAxis: { type: 'category', name: '参数数量', data: ['1','3','4','5','6','7','8','9','10','11','12','13','14','15','16'] },
+yAxis: { type: 'value', name: '案例数' },
+series: [{ type: 'bar', data: [1,1,4,14,18,31,32,48,52,16,17,11,4,1,2], itemStyle: { color: '#667eea' }, label: { show: true, position: 'top', fontSize: 10 } }]
+});
+
+// 2. 高频参数
+var chart2 = echarts.init(document.getElementById('chart_top_params'));
+chart2.setOption({
+title: { text: 'TOP20高频参数名', left: 'center', textStyle: { fontSize: 16 } },
+tooltip: { trigger: 'axis', triggerOn: 'mousemove|click', renderMode: 'richText', confine: true },
+grid: { left: '20%', right: '8%', bottom: '5%', containLabel: true },
+xAxis: { type: 'value', name: '出现次数' },
+yAxis: { type: 'category', data: ['random state','alternative','value column','group column','y column','ci level','tol','cv folds','max iter','standardize','random seed','target column','method','significance level','缺失值处理','置信水平','随机种子','显著性水平','alpha'].reverse() },
+series: [{ type: 'bar', data: [9,9,9,9,9,9,10,11,12,12,13,13,14,16,16,17,18,32,62].reverse(), itemStyle: { color: '#764ba2' }, label: { show: true, position: 'right', fontSize: 10 } }]
+});
+
+// 3. 报告结构
+var chart3 = echarts.init(document.getElementById('chart_report_structure'));
+chart3.setOption({
+title: { text: '报告标准章节覆盖率', left: 'center', textStyle: { fontSize: 16 } },
+tooltip: { trigger: 'item', triggerOn: 'mousemove|click', renderMode: 'richText', confine: true },
+legend: { bottom: 0 },
+series: [{ type: 'pie', radius: ['40%', '70%'], center: ['50%', '45%'], data: [
+{ value: 252, name: '分析结果概览' },
+{ value: 252, name: '建模思路' },
+{ value: 252, name: '核心结论' },
+{ value: 252, name: '问题详细分析' },
+{ value: 42, name: '建议' },
+{ value: 17, name: '拟合优度' },
+{ value: 9, name: '模型诊断' },
+{ value: 6, name: '假设检验' },
+{ value: 0, name: '局限性' }
+], label: { formatter: '{b}: {d}%' } }]
+});
+
+// 4. 报告字数分布
+var chart4 = echarts.init(document.getElementById('chart_report_length'));
+chart4.setOption({
+title: { text: '报告字数区间分布', left: 'center', textStyle: { fontSize: 16 } },
+tooltip: { trigger: 'axis', triggerOn: 'mousemove|click', renderMode: 'richText', confine: true },
+grid: { left: '8%', right: '5%', bottom: '10%', containLabel: true },
+xAxis: { type: 'category', name: '字数区间', data: ['<1000','1000-1500','1500-2000','2000-3000','3000-5000','5000-10000','>10000'] },
+yAxis: { type: 'value', name: '案例数' },
+series: [{ type: 'bar', data: [15,68,85,52,20,8,4], itemStyle: { color: '#f57c00' }, label: { show: true, position: 'top', fontSize: 10 } }]
+});
+
+// 5. 表格分布
+var chart5 = echarts.init(document.getElementById('chart_table_dist'));
+chart5.setOption({
+title: { text: '表格数量分布', left: 'center', textStyle: { fontSize: 14 } },
+tooltip: { trigger: 'item', triggerOn: 'mousemove|click', renderMode: 'richText', confine: true },
+series: [{ type: 'pie', radius: '60%', data: [
+{ value: 4, name: '0个' },
+{ value: 68, name: '1个' },
+{ value: 97, name: '2个' },
+{ value: 57, name: '3个' },
+{ value: 19, name: '4个' },
+{ value: 5, name: '5个' },
+{ value: 2, name: '6个' }
+], label: { formatter: '{b}: {d}%' } }]
+});
+
+// 6. 图片分布
+var chart6 = echarts.init(document.getElementById('chart_image_dist'));
+chart6.setOption({
+title: { text: '图片数量分布', left: 'center', textStyle: { fontSize: 14 } },
+tooltip: { trigger: 'item', triggerOn: 'mousemove|click', renderMode: 'richText', confine: true },
+series: [{ type: 'pie', radius: '60%', data: [
+{ value: 1, name: '1张' },
+{ value: 97, name: '2张' },
+{ value: 134, name: '3张' },
+{ value: 19, name: '4张' },
+{ value: 1, name: '5张' }
+], label: { formatter: '{b}: {d}%' } }]
+});
+
+// 7. 分类雷达图
+var chart7 = echarts.init(document.getElementById('chart_category_radar'));
+chart7.setOption({
+title: { text: '主要分类多维特征对比（归一化）', left: 'center', textStyle: { fontSize: 16 } },
+tooltip: { triggerOn: 'mousemove|click', renderMode: 'richText', confine: true },
+legend: { bottom: 0, type: 'scroll' },
+radar: { indicator: [
+{ name: '案例数', max: 30 },
+{ name: '参数量', max: 12 },
+{ name: '报告字数', max: 11000 },
+{ name: '表格数', max: 3 },
+{ name: '图片数', max: 3.5 }
+], radius: '60%' },
+series: [{ type: 'radar', data: [
+{ value: [28, 10.0, 1622, 2.3, 2.8], name: '时间序列与计量经济' },
+{ value: [24, 7.6, 4020, 2.2, 2.7], name: '综合评价' },
+{ value: [24, 8.9, 2063, 2.0, 2.4], name: '医学统计' },
+{ value: [24, 9.1, 1943, 2.0, 2.6], name: '回归分析' },
+{ value: [13, 11.4, 1359, 2.0, 2.9], name: '机器学习' },
+{ value: [8, 8.2, 10549, 2.2, 3.0], name: 'Meta分析' }
+] }]
+});
+
+// 8. 分类对比柱状图
+var chart8 = echarts.init(document.getElementById('chart_category_compare'));
+chart8.setOption({
+title: { text: '各分类平均报告字数 vs 平均参数量', left: 'center', textStyle: { fontSize: 16 } },
+tooltip: { trigger: 'axis', triggerOn: 'mousemove|click', renderMode: 'richText', confine: true },
+legend: { bottom: 0 },
+grid: { left: '15%', right: '10%', bottom: '15%', containLabel: true },
+xAxis: { type: 'category', data: ['Meta分析','综合评价','预测模型','试验设计','规划求解','医学统计','回归分析','文本分析','问卷研究','空间计量','时间序列','差异比较','质量控制','功效分析','相关分析','描述性统计','聚类降维','机器学习'], axisLabel: { rotate: 35, fontSize: 10 } },
+yAxis: [
+{ type: 'value', name: '报告字数' },
+{ type: 'value', name: '参数量' }
+],
+series: [
+{ name: '平均报告字数', type: 'bar', data: [10549,4020,2312,2258,2136,2063,1943,1784,1855,1757,1622,1596,1580,1518,1489,1449,1526,1359], itemStyle: { color: '#667eea' } },
+{ name: '平均参数量', type: 'line', yAxisIndex: 1, data: [8.2,7.6,9.7,7.7,8.4,8.9,9.1,9.9,9.0,9.9,10.0,8.5,8.3,9.7,7.5,7.4,9.0,11.4], itemStyle: { color: '#f57c00' }, lineStyle: { width: 2 } }
+]
+});
+
+window.addEventListener('resize', function() {
+chart1.resize(); chart2.resize(); chart3.resize(); chart4.resize();
+chart5.resize(); chart6.resize(); chart7.resize(); chart8.resize();
+});
+</script>
+</body>
+</html>

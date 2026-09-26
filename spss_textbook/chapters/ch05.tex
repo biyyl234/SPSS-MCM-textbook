@@ -1,0 +1,375 @@
+% 第5章 聚类与降维
+\chapter{聚类与降维}
+
+\begin{chapteroverview}
+\textbf{这个分类是干什么的？}
+
+前面的方法都有"标准答案"（因变量、分组标签）。这一章是\textbf{无监督学习}——\textbf{没有标准答案}。聚类是把"长得像"的对象自动归成一群（会员分群、客户分层）；降维是把"十几个互相纠缠的指标"压缩成"两三个综合指标"（主成分、因子），让数据从啰嗦变简洁。
+
+\textbf{美赛什么题型常用？}
+
+C题（大数据题）高频出现：客户分群、城市分类、指标体系构建；A/B题中把高维观测投影到二维做可视化；论文中"综合评价"前常用PCA先把指标浓缩。
+
+\textbf{学习路径建议}
+先学\textbf{K-Means聚类}（最经典）和\textbf{主成分分析PCA}（降维入门）；再认识\textbf{二阶聚类}（能同时处理连续+分类变量）和\textbf{探索性因子分析}（问卷量表维度提炼）；进阶了解分层聚类、DBSCAN、判别分析LDA、MDS和RDA。
+\end{chapteroverview}
+
+\section{基础级算法}
+
+%% ========== K-Means ==========
+\basicalgo{{\starmark}聚类分析（K-Means）}{kmeans}
+
+\begin{algointro}
+K-Means就是\textbf{让计算机自动把样本分成$K$堆}，堆内的人像、堆间的人不像。本案例按会员的消费频次、客单价、活跃天数，把150名会员自动分成3个群体。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 没有标签，想把样本自动分成若干"人群包/客户群"
+    \item 美赛C题客户分群、城市/地区画像、行为模式识别
+    \item 论文中"分群运营""分层管理"的依据
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+想象在桌面上撒一把珠子，要把它们分成$K$堆。
+\begin{enumerate}
+    \item 先随机选$K$个点当"堆心"
+    \item 每个珠子归到离它最近的堆心
+    \item 重新计算每堆的中心（均值），移动堆心
+    \item 重复直到堆心不再移动
+\end{enumerate}
+
+\textbf{关键问题：$K$取几？}本案例在$k=2$到10间试，看\textbf{轮廓系数}——越接近1说明堆内紧、堆间分。结果$k=3$时轮廓系数0.77最高，故选3类。
+
+三类画像：簇0（40\%）活跃高频但客单低；簇1（22.7\%）三项都低（沉默客户）；簇2（37.3\%）客单价高但频次低（高价值低频）。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 点击菜单 \textbf{分析 → 分类 → K-平均值聚类}
+    \item 把参与分群的变量（\textbf{月消费频次、平均客单价、月活跃天数}）选入\textbf{变量}
+    \item "聚类数"填3（也可先用工具箱自动选$K$）
+    \item 点击\textbf{选项}，勾选"初始聚类中心""最终聚类中心""ANOVA表"
+    \item 方法选\textbf{k-means++}初始化，固定随机种子保证可复现
+    \item 点击\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数参考}：先把变量做\textbf{标准化}（消除量纲，否则客单价数值大会主导距离）；$n$\_init多跑几次取最优；$k=3$。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{初始/最终聚类中心}：每堆在各变量上的均值，是"画像"核心
+    \item \textbf{簇数诊断表}：$k=3$时轮廓系数0.77、Calinski-Harabasz=897（比$k=2$的0.63、$k=4$的0.59都高），故定3类
+    \item \textbf{簇规模}：簇0=60（40\%）、簇1=34（22.7\%）、簇2=56（37.3\%）
+    \item \textbf{轮廓系数}$0.77>0.5$：分群结构清晰；若$<0.25$说明边界模糊、分群失败
+    \item 变量贡献eta$^2$：客单价0.93、消费频次0.92、活跃天数0.92——三者都很能区分人群
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}连续变量、想要球形簇、样本量大时。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 不知道$K$且不想猜：用二阶聚类或分层聚类
+    \item 簇形状不规则（月牙形）或有噪声点：K-Means不行，用DBSCAN
+    \item 变量量纲差异大：必须先标准化，否则大数值变量主导
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：不标准化直接聚类，客单价几百块把频次几次的距离全盖住
+    \item \textbf{坑2}：把簇均值差当"显著差异"。K-Means是描述性分群，不是假设检验
+\end{itemize}
+
+\textbf{和相似算法的区别}：K-Means要事先定$K$、是球形簇；二阶聚类自动定$K$还能吃分类变量；DBSCAN能识别噪声和任意形状簇。
+\end{algonotes}
+
+%% ========== 二阶聚类 ==========
+\basicalgo{二阶聚类（两步聚类）}{two_step}
+
+\begin{algointro}
+二阶聚类是\textbf{全自动}的K-Means升级版——\textbf{连续变量和分类变量都能吃}，还能\textbf{自动帮你决定分几类}。本案例混合年消费金额（连续）和性别、会员等级（分类）给健身会员分群。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 聚类变量里\textbf{既有数值又有分类}（K-Means处理不了分类）
+    \item 不想手动试$K$，想让算法自动定最优簇数
+    \item 美赛中混合属性的客户/对象分群
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+它分两步，这也是"两步聚类"名字的由来：
+\begin{enumerate}
+    \item \textbf{阶段一}：逐个扫描样本，把相近的先攒成小"子簇"（像先把散珠子拢成小堆）
+    \item \textbf{阶段二}：用对数似然距离把这些小簇逐层合并，自动试$k=2$到10，用\textbf{BIC/AIC}和\textbf{轮廓系数}选最佳
+\end{enumerate}
+
+本案例试$k=2$--10，轮廓系数在$k=4$处最高0.271，故定4簇。连续变量用欧式距离、分类变量用对数似然距离，所以它能混合两类变量。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 点击菜单 \textbf{分析 → 分类 → 两步聚类}
+    \item 连续变量（\textbf{年消费金额、月均到店次数、单次时长、满意度}）放入"连续变量"
+    \item 分类变量（\textbf{性别、会员等级、到店时段、运动偏好}）放入"分类变量"
+    \item "聚类数"选\textbf{自动确定}，范围2--10
+    \item 点\textbf{输出}勾"聚类质量轮廓图"
+    \item 点击\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数参考}：选择准则auto（轮廓系数优先），连续变量自动标准化，缺失按阈值处理。本案例$n=150$，4连续+4分类变量。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{自动定簇}：$k=4$时轮廓系数0.271（中等质量），BIC曲线佐证
+    \item \textbf{簇规模}：簇0=39、簇1=35、簇2=36、簇3=40，较均衡
+    \item \textbf{连续变量画像}：簇3年消费17063元、到店17.7次——"高价值晚间器械客"；簇1年消费仅1717元、到店2.6次——"低活跃午后团操客"
+    \item \textbf{分类变量画像}：簇3以铂金会员+晚间+器械为主；簇1以普通会员+午后+团体操课为主
+    \item \textbf{变量区分度}：8个变量区分度检验$p$都$<0.01$（性别$p=0.008$），说明它们都在有效分群
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}混合连续+分类变量、想要自动定$K$、样本较大。
+
+\textbf{什么时候不用？}全是连续变量且形状规则，K-Means更直观；簇形状不规则需要噪声识别，用DBSCAN。
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：轮廓系数0.27其实只是"中等"，不要硬说"分群非常好"——按0.25以下弱、0.5以上强的标准诚实报告
+    \item \textbf{坑2}：把常量列或高缺失列塞进聚类，污染距离计算
+\end{itemize}
+
+\textbf{和相似算法的区别}：它=K-Means的自动版+能吃分类变量。K-Means要手定$K$、只吃连续；分层聚类画树状图但不吃混合变量。
+\end{algonotes}
+
+%% ========== PCA ==========
+\basicalgo{{\starmark}主成分分析（PCA）}{pca}
+
+\begin{algointro}
+PCA把\textbf{十几个互相关的指标}压缩成\textbf{两三个互不相关的综合指标}（主成分），用少量维度代表大部分信息。本案例从9个门店经营指标压缩到3个主成分。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 指标太多且互相纠缠，想降维、去共线性
+    \item 综合评价前先浓缩指标；后续聚类/回归前先做特征压缩
+    \item 美赛高维数据可视化、指标体系构建
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+9个指标（客流、销售额、客单价、复购率……）很多在说同一件事。PCA的思路像\textbf{找最佳观察角度}：
+\begin{itemize}
+    \item 第一主成分PC1：数据"波动最大"的方向，本它解释了47.4\%的方差
+    \item 第二主成分PC2：和PC1垂直、又能解释最多剩余波动（20.6\%）
+    \item 第三PC3：再解释18.5\%
+\end{itemize}
+
+前3个累计解释86.6\%——几乎用3个综合指标就装下了原来9个指标的信息。\textbf{适用性前提}：先做Bartlett球度检验（本案例$\chi^2=1035.7$，$p=5\times10^{-194}$，适合降维）和KMO（本案例0.811$>0.6$，适合）。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 点击菜单 \textbf{分析 → 降维 → 因子}
+    \item 把9个数值变量全部选入"变量"框
+    \item 点\textbf{描述}，勾选\textbf{KMO和Bartlett球形检验}
+    \item 点\textbf{抽取}，选"基于特征值$>$1"或固定提取个数
+    \item 点\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数参考}：先做z-score标准化（等效于基于相关矩阵）；选择模式cumulative（累计贡献率到80\%停）；SVD求解器auto。本案例保留3个主成分。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{适用性}：KMO=0.811$>0.6$；Bartlett $p<0.001$——数据适合做PCA
+    \item \textbf{总方差解释表}：看特征值和累计贡献率
+    \begin{itemize}
+        \item PC1特征值4.298，解释47.4\%
+        \item PC2特征值1.865，累计68.0\%
+        \item PC3特征值1.680，累计\textbf{86.6\%}——保留到此为止
+    \end{itemize}
+    \item \textbf{成分矩阵（载荷）}：看每个主成分主要由哪些变量贡献。PC1主要是会员占比(+0.78)、线上占比(+0.74)、客单价(+0.73)——可命名为"会员价值维度"
+    \item \textbf{碎石图}：肘部位置就是该停的地方
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}变量多且相关，想压缩成少数综合指标、消除共线性。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 变量间几乎不相关（KMO$<0.5$）：没有可提取的公共结构
+    \item 需要每个指标都保持可解释性：PCA合成的主成分有时难命名
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：不标准化直接做。量纲大的变量会主导主成分
+    \item \textbf{坑2}：强行解释主成分含义。主成分是数学方向，业务命名要结合载荷判断
+\end{itemize}
+
+\textbf{和相似算法的区别}：PCA是\textbf{无监督}的纯降维；因子分析更进一步找"潜在维度"并做旋转；LDA是有监督的降维（用到类别标签）。
+\end{algonotes}
+
+%% ========== 因子分析 ==========
+\basicalgo{因子分析（探索性）}{exploratory_fa}
+
+\begin{algointro}
+问卷问了15道题，但背后其实只有"菜品、服务、环境"3个\textbf{看不见的维度}。探索性因子分析就是把这些表面题目归并成背后的潜在维度。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 问卷量表开发：一堆题项背后有几个维度
+    \item 检验问卷结构效度、为算维度总分做准备
+    \item 美赛中量表/评价体系的结构提炼
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+顾客给"口味""分量""温度""新鲜度""出品"都打了高分——这5题其实都在测"菜品品质"这个\textbf{潜变量}。因子分析把它们归成一簇。
+
+\begin{itemize}
+    \item \textbf{KMO=0.762}$>0.6$，Bartlett $\chi^2=564.99$（$df=105$，$p=3.8\times10^{-64}$）——适合做
+    \item 按特征值$>$1提取3个公因子，用\textbf{最大方差旋转(varimax)}让载荷结构清晰
+    \item 本案例因子1=服务（服务员态度、响应速度等5题），因子2=菜品（口味、新鲜等5题），因子3=环境（整洁、氛围等5题）
+\end{itemize}
+
+旋转后累计解释方差40.6\%。\textbf{载荷}$\geq0.5$算有效归属。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item \textbf{分析 → 降维 → 因子}
+    \item 把15个题项全部选入变量框
+    \item 点\textbf{描述}勾KMO和Bartlett
+    \item 点\textbf{抽取}：方法选主轴因子法PAF，按特征值$>$1定因子数
+    \item 点\textbf{旋转}：选\textbf{最大方差法varimax}
+    \item 点\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数参考}：提取方法PAF，旋转varimax，有效载荷阈值0.50，特征值$>$1自动定因子数。本案例$n=150$（题项的10倍）。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{适用性}：KMO=0.762，Bartlett $p<0.001$——通过
+    \item \textbf{总方差解释}：3个因子旋转后累计解释40.6\%
+    \item \textbf{旋转后载荷矩阵}是核心：每道题在哪个因子上载荷最高就归哪个因子。本案例15题干净地分进3簇，无交叉载荷
+    \item \textbf{共同度}：每题被公因子解释的比例，偏低（$<0.3$）的题考虑删改
+    \item \textbf{碎石图}：肘部确认3个因子合理
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}问卷/量表题项多，想提炼背后维度。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item KMO$<0.6$或Bartlett不显著：题项间没公共结构
+    \item 只是想压缩维度做回归/聚类：PCA更直接
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：不旋转就硬读载荷。未旋转的因子含义模糊，旋转后才能干净归类
+    \item \textbf{坑2}：样本量太小。经验要求$n$至少是题项数的5--10倍
+\end{itemize}
+
+\textbf{和相似算法的区别}：PCA主成分是变量的线性组合（重在降维）；因子分析假设背后有\textbf{潜变量}（重在找结构）。两者常被混用，但理论出发点不同。
+\end{algonotes}
+
+\section{进阶级算法速览}
+
+%% ========== DBSCAN ==========
+\advancedalgo{DBSCAN密度聚类}{dbscan}
+
+\begin{algobrief}
+\textbf{一句话}：不靠预设簇数，按\textbf{样本密集程度}自动成团，还能把"离群点"标成噪声。
+
+\textbf{美赛场景区}：形状不规则的簇、有异常点的地理/轨迹数据（本案例打车订单的出行模式+异常订单识别）。
+
+\textbf{核心原理}：若某点周围半径eps内有至少min\_samples个点，就把这片稠密区域发展成一个簇；稀疏处的点标记为噪声。本案例eps=0.5、min\_samples=5，分出3簇+16个噪声点，非噪声轮廓系数0.795。
+
+\textbf{操作要点}：工具箱选"DBSCAN密度聚类"，标准化特征；用k-距离图拐点选eps；欧氏距离。
+
+\textbf{结果关键}：簇数自动确定；噪声占比（本案例10.7\%）；非噪声样本轮廓系数；各簇特征均值剖面。
+
+\textbf{注意}：它不需要预设$K$、能识别任意形状和噪声，但对eps和min\_samples敏感，且密度不均时效果打折。
+\end{algobrief}
+
+%% ========== RDA ==========
+\advancedalgo{冗余分析（RDA）}{rda}
+
+\begin{algobrief}
+\textbf{一句话}：研究\textbf{多个响应变量}如何被\textbf{多个解释变量}共同解释的约束排序方法——生态学常用。
+
+\textbf{美赛场景区}：环境因子驱动群落结构；多响应变量受多环境变量影响的分析（本案例水质指标如何驱动藻类丰度）。
+
+\textbf{核心原理}：先对响应矩阵做多元回归得拟合值，再对拟合值做主成分分解得"约束排序轴"。全局置换检验$p=0.001$，$R^2=89.24\%$说明环境变量显著解释了藻类变异。
+
+\textbf{操作要点}：工具箱选"冗余分析RDA"，指定响应变量组和解释变量组；分类解释变量自动哑变量化；置换999次。
+
+\textbf{结果关键}：全局置换检验$p$；各解释变量单独解释率；排序图箭头方向与长度。
+
+\textbf{注意}：它是\textbf{有约束}的PCA。若响应沿环境梯度呈单峰分布，应改用典范对应分析CCA。
+\end{algobrief}
+
+%% ========== LDA ==========
+\advancedalgo{判别分析（LDA）}{lda}
+
+\begin{algobrief}
+\textbf{一句话}：已知历史分组标签，找一条"最佳分界线"把各组分开，并给新样本归类——有监督的分类+降维。
+
+\textbf{美赛场景区}：信用评级、疾病判别、模式识别；用已知类别的指标建立判别规则给新对象分类（本案例企业信用等级判别）。
+
+\textbf{核心原理}：找线性判别函数，使\textbf{组间差异相对组内差异}最大。本案例5个财务指标建判别函数，留一法准确率80.6\%（Kappa=0.708），远高于猜最大类的33.3\%基线。
+
+\textbf{操作要点}：工具箱选"判别分析LDA"，指定分组列和特征列；Box's M检验协方差齐性；留一法交叉验证。
+
+\textbf{结果关键}：Wilks' Lambda（整体判别力）；标准化判别系数（谁最能区分）；混淆矩阵和各类命中率。
+
+\textbf{注意}：它和PCA都降维，但\textbf{LDA用到类别标签}、目标是"分开组"；PCA无标签、目标是"保留方差"。协方差不齐时用二次判别QDA。
+\end{algobrief}
+
+%% ========== MDS ==========
+\advancedalgo{多维尺度分析（MDS）}{mds}
+
+\begin{algobrief}
+\textbf{一句话}：把"谁和谁像、差多远"的抽象关系，画成\textbf{一张二维地图}——点越近越相似。
+
+\textbf{美赛场景区}：品牌/门店感知图；对象间相似性的可视化；无法直接坐标化但知道两两距离时的定位。
+
+\textbf{核心原理}：先算两两距离，再在二维空间摆点，让"图上距离"尽量贴近"原始距离"。本案例150家门店在7个感知维度上，标准化应力0.019（优），前两维解释99\%。
+
+\textbf{操作要点}：工具箱选"多维尺度MDS"，标准化特征，度量MDS，降维到2维，随机种子42。
+
+\textbf{结果关键}：标准化应力$<0.05$为优；Shepard图点贴近对角线；配置图上的点群和孤立点。
+
+\textbf{注意}：它只保留\textbf{远近关系}，不保留绝对坐标和方向。非度量MDS用于只知道排序相似性的数据。
+\end{algobrief}
+
+%% ========== 分层聚类 ==========
+\advancedalgo{分层聚类（系统聚类）}{hierarchical_cluster}
+
+\begin{algobrief}
+\textbf{一句话}：不预先定簇数，像\textbf{族谱}一样把样本一层层两两合并，最后画成一棵树（树状图/谱系图）。
+
+\textbf{美赛场景区}：小样本下想看聚类层次结构；变量少、想直观展示"谁和谁先聚在一起"。
+
+\textbf{核心原理}：先每个样本自成一簇，用ward连接把最像的两簇反复合并。本案例$n=150$、6指标，ward+欧氏距离，轮廓系数在$k=3$处最高0.683，cophenetic系数0.974。
+
+\textbf{操作要点}：\textbf{分析 → 分类 → 系统聚类}，选变量、 ward法、欧氏距离、z-score标准化，输出树状图。
+
+\textbf{结果关键}：树状图在合适高度横切得簇数；轮廓系数曲线选$k$；各簇规模和均值画像。
+
+\textbf{注意}：它\textbf{不需要预跑$K$}，但样本量大时树状图会非常臃肿，大样本更适合K-Means。
+\end{algobrief}

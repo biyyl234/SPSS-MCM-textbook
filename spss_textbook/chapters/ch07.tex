@@ -1,0 +1,298 @@
+% 第7章 预测模型
+\chapter{预测模型}
+
+\begin{chapteroverview}
+\textbf{这个分类是干什么的？}
+
+预测模型回答的是一个向前看的问题：\textbf{基于历史数据，未来会变成什么样？}它把按时间顺序排列的观测（如月度销售额、周订单量、日收益率）当作一个"会自己延续下去的故事"，从中提炼出趋势、季节波动和随机惯性，再外推出未来若干期的数值。与第6章关注"变量之间是什么关系"不同，这一章更关注"这条时间序列本身接下来怎么走"。
+
+\textbf{美赛什么题型常用？}
+
+预测是美赛的高频任务：C题（数据驱动题）几乎每年都要对销量、客流、需求做短期预测；A题连续型问题里也常需要先预测人口、负荷、污染物浓度再做优化。只要题目出现"forecast、predict、estimate future demand、未来趋势"等字样，基本就落到这一章。常见产出包括未来6--12个月的点预测、预测区间和精度评估。
+
+\textbf{学习路径建议}
+
+先学\textbf{灰色预测GM(1,1)}和\textbf{指数平滑}——它们原理直观、对数据量要求低，小样本、趋势型序列很好用；再啃\textbf{ARIMA}（带星标，是时间序列预测的"主力模型"）。进阶部分了解\textbf{SARIMA}（处理明显季节周期）、\textbf{GARCH}（专门预测波动率而非水平值）和\textbf{马尔可夫预测}（预测状态而非数值）。选型时记住一句话：\textbf{先看数据有没有趋势、有没有季节、样本够不够多，再决定用哪个模型。}
+\end{chapteroverview}
+
+\section{基础级算法}
+
+%% ========== 灰色预测GM(1,1) ==========
+\basicalgo{灰色预测GM(1,1)}{grey_gm11}
+
+\begin{algointro}
+灰色预测GM(1,1)是一种专门对付\textbf{小样本、贫信息}的预测方法——只要你有四五个以上连续的、近似单调增长（或下降）的数据点，它就能帮你外推未来。它不要求数据服从什么分布，特别适合数据量不够、用不了复杂统计模型的场景。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 历史数据点很少（比如只有5--15个年度数据），却要做短期外推
+    \item 美赛中刚起步的新兴业务量、新产品销量、某指标逐年爬升的早期预测
+    \item 序列整体近似指数增长/衰减，随机波动不大
+    \item 需要一个计算简单、能快速给出趋势外推参考的方法
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+想象你手里只有几个零散的点，但它们大体在往一个方向走。灰色预测的巧思是：\textbf{不去直接预测那些抖动的原始数，而是先把它们"累加"成一条平滑上升的曲线}。
+
+\begin{itemize}
+    \item \textbf{第一步：累加生成（AGO）}。把原始序列 $x^{(0)}(1),x^{(0)}(2),\ldots$ 逐项累加，得到 $x^{(1)}(k)=\sum_{i=1}^{k}x^{(0)}(i)$。累加会把随机波动"抹平"，让新序列接近一条光滑的指数曲线——就像把起伏的海浪累加后变成缓慢抬升的海平面。
+    \item \textbf{第二步：建一阶微分方程}。假设累加后的曲线服从 $\frac{dx^{(1)}}{dt}+a x^{(1)}=b$，其中 $a$ 叫发展系数（决定增长速度），$b$ 叫灰作用量（内生驱动项），用最小二乘把 $a,b$ 估出来。
+    \item \textbf{第三步：还原预测}。解出微分方程的时间响应式得到 $x^{(1)}$ 的预测，再通过相邻两项相减（累减）还原回原始序列尺度的预测值。
+\end{itemize}
+
+\textbf{精度怎么看}：用平均相对误差、后验差比值 $C$ 和小误差概率 $p$ 评定精度等级（一级最好，二级合格，三级勉强，四级不合格）。$C$ 越小、$p$ 越接近1越好。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在Dabbit AI SPSS工具箱中选择"灰色预测GM(1,1)"
+    \item 上传等间隔的单变量序列（本案例为某生鲜渠道连续150期周订单量）
+    \item 设置参数：
+    \begin{itemize}
+        \item 预测期数 \texttt{n forecast}：5（外推未来5周）
+        \item 级比检验 \texttt{ratio test}：on（自动判断序列是否满足建模条件）
+        \item 精度接受等级 \texttt{accept grade}：二级合格
+        \item 残差修正 \texttt{residual correction}：off（必要时可开GM(1,1)残差修正提高精度）
+    \end{itemize}
+    \item 点击运行，查看拟合值、预测值与精度等级
+\end{enumerate}
+
+\textbf{默认参数参考}：变换方式 auto（自动），平移值 auto，预测5期。若级比落在可覆盖区间外，工具箱会自动做平移处理使序列满足建模条件。
+\end{algosposs}
+
+\begin{algoresult}
+报告重点看三块：
+
+\begin{itemize}
+    \item \textbf{级比检验}：判断原始序列是否落在GM(1,1)的可用区间内。通过则可直接建模；不通过需平移变换。
+    \item \textbf{发展系数 $a$}：$a<0$ 表示增长，$|a|$ 越大增长越快；一般 $-a<0.3$ 适合中短期预测，$0.3<-a<0.5$ 只宜短期预测。
+    \item \textbf{预测值序列与精度}：本案例未来5期周订单量预测约为 14.24、14.38、14.52、14.67、14.81（万件），期末较首期上升约4.1\%。精度达到"二级合格"即可作为短期参考。
+\end{itemize}
+
+\textbf{判断好坏}：平均相对误差小于10\%为一级（好），10\%--20\%为二级（合格），大于20\%就要慎用。外推期数不要太多，GM(1,1)一般只适合预测未来3--5期。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}数据点少（4--20个）、序列单调近似指数、波动小的短期预测。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 序列剧烈震荡、无明显单调趋势时，GM(1,1)会给出误导性的平滑外推
+    \item 样本量足够大（几十个以上）时，ARIMA、指数平滑等统计模型通常更准
+    \item 有明显季节周期时不要单用GM(1,1)
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：跳过级比检验直接建模。级比不合格会让模型系统性失真。
+    \item \textbf{坑2}：把GM(1,1)当长期预测工具。它本质是指数外推，外推期数一多就严重脱离实际。
+\end{itemize}
+
+\textbf{和相似算法的区别}：vs \textbf{指数平滑}——两者都适合短期预测，但灰色预测专为小样本设计、能处理贫信息；指数平滑需要更长的序列且更擅长捕捉季节。vs \textbf{ARIMA}——ARIMA需要较大样本并定阶，灰色预测则"给点数据就能跑"。
+\end{algonotes}
+
+%% ========== 指数平滑 ==========
+\basicalgo{指数平滑}{exp_smoothing}
+
+\begin{algointro}
+指数平滑是一种"越近的数据越重要"的预测方法——它给最近的观测最大权重，越久远的数据权重按指数衰减，从而自动跟踪序列的水平、趋势和季节变化。你只需要把数据交给它，它会自动帮你选最合适的平滑模型。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 有趋势和/或季节波动的月度、季度销售预测（如本案例2012--2024共150个月全渠道销售额）
+    \item 美赛中需要快速给出未来若干期点预测和预测区间时
+    \item 数据量中等（几十个以上）、希望模型自动拟合、不想手动定阶
+    \item 备货、预算编制、排班等需要近期数值参考的场景
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+想象你每天估明天的销售额：\textbf{昨天的实际值比一个月前的数据更有参考价值}。指数平滑就是按这个直觉设计的。
+
+\begin{itemize}
+    \item \textbf{简单指数平滑（一次）}：只适合没有趋势的平稳序列。预测值 $S_t=\alpha y_t+(1-\alpha)S_{t-1}$，其中 $\alpha$ 是平滑系数（0--1），$\alpha$ 越大越信新数据、越小越平滑。
+    \item \textbf{Holt线性趋势（二次）}：在水平之外再加一个趋势分量 $\beta$，适合有上升/下降趋势但没有季节的序列。
+    \item \textbf{Holt-Winters三次}：再加季节分量 $\gamma$，同时刻画趋势和年度季节周期，分加法季节（季节波动幅度恒定）和乘法季节（幅度随水平放大）。
+\end{itemize}
+
+三个参数 $\alpha,\beta,\gamma$ 都由计算机在历史数据上自动优化（最小化预留段预测误差RMSE），你不用手调。本案例序列有明显趋势和年度季节波动，因此自动选中\textbf{三次Holt-Winters加法季节}，得到 $\alpha=0.100,\beta=0.021,\gamma=0.570$。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在Dabbit AI SPSS工具箱中选择"指数平滑"
+    \item 上传含时间列和数值列的月度序列（本案例时间跨度2012年1月--2024年6月，共150个月）
+    \item 设置参数：
+    \begin{itemize}
+        \item 平滑方法 \texttt{平滑方法}：auto（在一次/二次/三次模型间按预留误差自动择优）
+        \item 趋势设定、季节设定：auto（自动诊断）
+        \item 季节周期：auto（月度自动识别为12）
+        \item 参数估计：自动优化；误差指标 RMSE
+        \item 预测步数：12（预测未来12个月）
+    \end{itemize}
+    \item 运行并查看自动选中的模型类型、参数与预测区间
+\end{enumerate}
+
+\textbf{SPSS中对应操作}：\textbf{分析 → 预测 → 创建传统模型}，方法选"指数平滑"，并在"条件"中指定简单/Holt/Winters。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{自动选中的模型}：报告开头会告诉你最终用了哪种平滑（本案例为三次Holt-Winters加法季节），以及 $\alpha,\beta,\gamma$ 三个参数值。
+    \item \textbf{未来各期点预测}：本案例下一期点预测约4082.19万元。
+    \item \textbf{95\%预测区间}：下一期约为 [3989.5, 4176.5]。区间越往后越宽，反映不确定性随预测期数增大。
+    \item \textbf{残差诊断}：若残差自相关检验通过（接近白噪声），说明模型已把可预测的规律都捕捉到了。
+\end{itemize}
+
+\textbf{判断好坏}：比较预留段上的RMSE/MAE，残差无明显自相关即为合格。预测区间覆盖住真实值比例约95\%即说明区间合理。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}有趋势/季节的中短期序列预测，希望自动拟合、少调参。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 需要解释"哪个因素驱动了预测"时——指数平滑是纯外推，不解释因果
+    \item 序列存在突变点或外部冲击（如疫情）时，平滑会反应滞后
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：对有强趋势的序列用简单指数平滑，结果永远追不上实际值。
+    \item \textbf{坑2}：忽略季节周期。月度数据一定要让模型自动识别季节（$m=12$），否则节假日、大促造成的波峰会被误判为噪声。
+\end{itemize}
+
+\textbf{和相似算法的区别}：vs \textbf{ARIMA}——指数平滑"上手快、自动选模型"，但理论框架不如ARIMA完整；ARIMA通过ACF/PACF定阶、更灵活，适合对精度要求更高的场景。两者在很多时候预测精度接近，可对比后择优。
+\end{algonotes}
+
+%% ========== ARIMA模型 ==========
+\basicalgo{{\starmark}ARIMA模型}{arima_model}
+
+\begin{algointro}
+ARIMA是时间序列预测里最经典、最强大的"主力模型"。它把序列拆成三部分：差分让序列平稳（I）、用历史值回归现在（AR）、用历史误差修正现在（MA），三者组合起来捕捉序列的惯性，从而做出有统计依据的预测。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 美赛C题最常用的预测模型之一，用于月度/季度销售额、需求量预测
+    \item 序列有趋势但无明显季节（有季节请用SARIMA，见进阶部分）
+    \item 样本量足够（一般50个观测以上），需要给出带置信区间的短期预测
+    \item 论文中需要严谨地报告定阶过程、残差白噪声检验和回测误差
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+ARIMA写作 $\mathrm{ARIMA}(p,d,q)$，三个数字各管一件事：
+
+\begin{itemize}
+    \item \textbf{$d$（差分阶数，Integrated）}：先对序列做 $d$ 次差分把它变平稳。本案例月销售额持续上升，做1阶差分后平稳，故 $d=1$。
+    \item \textbf{$p$（自回归阶数，AR）}：用\textbf{自身过去 $p$ 期}的值预测现在，即 $y_t$ 受 $y_{t-1},\ldots,y_{t-p}$ 影响。PACF图在 $p$ 阶后截断提示 $p$。
+    \item \textbf{$q$（移动平均阶数，MA）}：用\textbf{过去 $q$ 期的预测误差}修正现在，即 $y_t$ 受 $\varepsilon_{t-1},\ldots,\varepsilon_{t-q}$ 影响。ACF图在 $q$ 阶后截断提示 $q$。
+\end{itemize}
+
+\textbf{定阶直觉}：先靠ACF/PACF图给出候选，再用AIC信息准则在 $(p,q)$ 网格里选最小者——AIC同时奖励拟合好、惩罚参数多，防止过拟合。本案例自动定阶得到 $\mathrm{ARIMA}(0,1,1)$，即一个"一阶差分+一阶移动平均"的简洁模型。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在Dabbit AI SPSS工具箱中选择"ARIMA模型"
+    \item 上传等间隔月度序列（本案例2013年1月--2025年6月共150期月销售额）
+    \item 设置参数：
+    \begin{itemize}
+        \item 阶数 \texttt{order}：auto（在 $(p_{\max},d_{\max},q_{\max})$ 网格内按AIC自动择优）
+        \item 信息准则 \texttt{ic}：aic；趋势项 auto
+        \item 回测期 \texttt{test periods}：auto（留尾滚动回测评估真实误差）
+        \item 预测步数：6（预测未来半年）
+    \end{itemize}
+    \item 运行并查看自动定阶结果、残差诊断与预测区间
+\end{enumerate}
+
+\textbf{SPSS中对应操作}：\textbf{分析 → 预测 → 创建传统模型}，方法选"ARIMA"，在"条件"中手动或自动指定 $p,d,q$。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{最终阶数}：本案例为 ARIMA(0,1,1)。若工具箱给出多个候选，选AIC最小且残差白噪声的。
+    \item \textbf{预测值与区间}：未来6期预测从6876.16变化到6999.92，95\%置信区间由 [6794.75, 6957.57] 逐步放宽到 [6709.97, 7289.87]——越远越不确定。
+    \item \textbf{回测误差}：留尾滚动12步的 RMSE=45.67、MAE=34.09、MAPE=0.50\%。MAPE小于5\%即为精度良好。
+    \item \textbf{残差白噪声检验}：Ljung-Box检验 $p=0.9857>0.05$，说明残差已是随机噪声，模型已无遗漏结构。
+\end{itemize}
+
+\textbf{判断好坏}：残差必须通过白噪声检验（否则说明还有规律没被模型抓住）；MAPE越小越好；预测区间应基本覆盖真实值。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}无明显季节、样本量充足的单变量序列短期预测，是美赛预测的"标配"。
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 有强烈年度季节周期时，普通ARIMA抓不住，要用SARIMA
+    \item 数据点太少（少于20）时定阶不稳，改用灰色预测或指数平滑
+    \item 序列非平稳又无法差分平稳时，考虑协整/向量误差修正（见第6章）
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：对非平稳序列直接建ARIMA。必须先做ADF检验，差分平稳后再定 $p,q$，否则是伪模型。
+    \item \textbf{坑2}：只看AIC选了复杂高阶模型却不做残差白噪声检验。过拟合的模型在样本内很好、样本外很差。
+    \item \textbf{坑3}：外推太多期。ARIMA是短期模型，一般预测3--6期，期数一多区间宽到失去意义。
+\end{itemize}
+
+\textbf{和相似算法的区别}：vs \textbf{指数平滑}——ARIMA有严格统计框架、可做假设检验，指数平滑更"开箱即用"；vs \textbf{SARIMA}——后者多了季节项 $(P,D,Q)_m$，处理月度/季度周期数据。
+\end{algonotes}
+
+\section{进阶级算法速览}
+
+%% ========== GARCH模型 ==========
+\advancedalgo{GARCH模型}{garch_model}
+
+\begin{algobrief}
+\textbf{一句话}：GARCH不预测序列的"数值水平"，而是专门预测它的\textbf{波动率（波动剧烈程度）}，刻画"大波动后面跟着大波动"的聚集现象。
+
+\textbf{美赛场景区}：金融风控中预测股票/收益率的未来波动、计算VaR风险价值；可靠性与信号分析中估计噪声强度。
+
+\textbf{核心原理}：先检验收益率是否存在ARCH效应（波动聚集），再用 $\mathrm{GARCH}(p,q)$ 同时估计均值方程和条件方差方程；波动持续性用 $\alpha+\beta$ 衡量，接近1表示波动会长期延续。本案例 $\alpha+\beta=0.9723$，下一期波动率约0.7218。
+
+\textbf{操作要点}：工具箱选"GARCH"，指定收益率列与日期列，分布默认normal，均值模型常数，置信水平95\%/99\%，自动或手动指定 $p,q$。
+
+\textbf{结果关键}：ARCH检验 $p<0.05$ 确认波动聚集显著；$\alpha,\beta$ 系数显著；标准化残差无残余ARCH效应；输出未来多期波动率与VaR分位数。
+
+\textbf{注意}：GARCH只适用于围绕某均值上下波动的收益率类序列，不要拿去预测销售额水平；SPSS原生支持有限，建议通过SPSS的R扩展（arch包）或Dabbit AI工具箱实现。
+\end{algobrief}
+
+%% ========== 季节性ARIMA（SARIMA） ==========
+\advancedalgo{季节性ARIMA（SARIMA）}{sarima_model}
+
+\begin{algobrief}
+\textbf{一句话}：SARIMA在普通ARIMA基础上增加一组"季节阶数"，专门处理以固定周期（如12个月、4个季度）重复波动的序列。
+
+\textbf{美赛场景区}：月度客运量、月度销量等既含趋势又含年度季节周期的预测，如本案例城轨线路月客运量预测未来12个月。
+
+\textbf{核心原理}：写作 $\mathrm{SARIMA}(p,d,q)(P,D,Q)_m$，其中 $m$ 是季节周期（月度=12），后三个大写阶数管"季节层"的自回归/差分/移动平均。先用季节分解和季节强度判断季节是否存在，再定 $(p,d,q)$ 与 $(P,D,Q)$。本案例为 $\mathrm{SARIMA}(1,1,1)(1,1,1)_{12}$，残差白噪声检验 $p=0.919$。
+
+\textbf{操作要点}：工具箱选"SARIMA"，指定季节周期 $m$，非季节与季节阶数自动或手动设定，外推12期并输出95\%预测区间。
+
+\textbf{结果关键}：残差通过Ljung-Box白噪声检验；首期预测1735.72（万人次），区间[1733.05, 1738.40]，较最近观测上升约2.8\%。
+
+\textbf{注意}：必须有足够多的完整季节周期（至少2--3年月度数据）才能估计季节项；数据太少时季节阶数定不稳，应退回普通指数平滑。
+\end{algobrief}
+
+%% ========== 马尔可夫预测 ==========
+\advancedalgo{马尔可夫预测}{markov_forecast}
+
+\begin{algobrief}
+\textbf{一句话}：马尔可夫预测面对的是"只有有限几种状态"的序列（如设备正常/异常/停机），它通过统计状态之间的转移概率，预测未来各状态出现的可能性。
+
+\textbf{美赛场景区}：设备健康状态、天气等级、市场景气状态、信用等级等离散状态的演进预测；为检修安排、排产预案提供概率依据。
+
+\textbf{核心原理}：先统计相邻时刻的状态转移频次，用最大似然估计一步转移概率矩阵；核心假设是"下一状态只依赖当前状态"（一阶马尔可夫性），用卡方检验验证。之后从当前状态出发逐期乘转移矩阵做多步预测，并求解稳态分布。本案例预测5步后"正常运行"概率约50.8\%，长期稳态约正常52.3\%、轻微异常22.7\%、明显劣化15.9\%。
+
+\textbf{操作要点}：工具箱选"马尔可夫预测"，指定状态列（与可选实体列），初始分布默认取当前状态，预测步数5。
+
+\textbf{结果关键}：马尔可夫性检验 $p<0.05$（转移确实依赖当前状态）；输出多步状态概率与长期稳态分布。
+
+\textbf{注意}：若检验发现转移规律随时间变化（非齐次）或下一状态还依赖更早的历史，则一阶马尔可夫假设不成立，需要用时变或高阶马尔可夫模型；SPSS原生不支持，通过R/Python扩展实现。
+\end{algobrief}

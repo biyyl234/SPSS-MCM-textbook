@@ -1,4 +1,50 @@
+# mkdocs build output
 site/
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.xdv
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# System files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Python cache
 __pycache__/
 *.pyc
-.DS_Store
+*.pyo
+
+# Data processing scripts
+case_progress.json
+algorithms_raw.json
+merge_data.py
+analyze.py
+analyze_cases.py
+export_cases.py
+fix_json.py
+fix_json2.py
+dedupe*.py
+check*.py
+
+# Image cache directory
+case_images/

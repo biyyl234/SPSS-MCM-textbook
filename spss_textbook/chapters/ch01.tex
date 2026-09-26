@@ -1,0 +1,487 @@
+% 第1章 描述性统计
+\chapter{描述性统计}
+
+\begin{chapteroverview}
+\textbf{这个分类是干什么的？}
+
+描述性统计是所有数据分析的起点。它不做预测、不做推断，只回答一个问题：\textbf{你的数据长什么样？}通过计算均值、中位数、标准差、频数等指标，帮你快速了解数据的集中趋势、离散程度和分布形态。
+
+\textbf{美赛什么题型常用？}
+
+几乎所有题目都需要！无论是A题的连续型问题、B题的离散型问题，还是C题的大数据题，拿到数据后的第一步永远是描述性统计。它是后续所有建模的基础——你连数据长什么样都不知道，怎么选模型？
+
+\textbf{学习路径建议}
+
+先学\textbf{描述性统计}和\textbf{频数分析}（数值变量和分类变量的基础画像），再学\textbf{正态性检验}（判断数据分布，决定后续用参数还是非参数方法），最后了解\textbf{数据探索}和\textbf{列联分析}等进阶工具。
+\end{chapteroverview}
+
+\section{基础级算法}
+
+%% ========== 描述性统计 ==========
+\basicalgo{{\starmark}描述性统计}{desc_stats}
+
+\begin{algointro}
+描述性统计就是给你的数据做一次"全面体检"——算出均值、中位数、标准差、最大值、最小值等指标，让你一眼看清数据的"长相"。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 拿到任何数据集后的\textbf{第一步}，必须做！
+    \item 美赛C题（大数据题）中，对题目给出的CSV数据进行初步探索
+    \item 论文中"数据描述"部分的核心内容
+    \item 判断数据是否有异常值、缺失值，决定后续清洗策略
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+想象你是班主任，拿到全班的考试成绩单。你会怎么看？
+
+\begin{itemize}
+    \item \textbf{集中趋势}：平均分多少？（均值）中间水平是多少？（中位数）出现最多的分数是？（众数）——这告诉你班级整体水平
+    \item \textbf{离散程度}：最高分和最低分差多少？（极差）大家分数差距大不大？（标准差、方差）——这告诉你成绩是否稳定
+    \item \textbf{分布形态}：分数是对称的还是偏的？（偏度）是集中在中间还是两头多？（峰度）——这告诉你分布形状
+    \item \textbf{分位数}：前25\%的人考了多少分？（四分位数）——这告诉你数据的分段情况
+\end{itemize}
+
+\textbf{关键公式：}
+\begin{itemize}
+    \item 均值：$\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i$，就是所有数加起来除以个数
+    \item 标准差：$s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2}$，衡量数据偏离均值的平均程度，越大说明数据越分散
+    \item 偏度（Skewness）：大于0表示右偏（长尾在右），小于0表示左偏，接近0表示对称
+    \item 峰度（Kurtosis）：大于3表示尖峰（数据集中在中间），小于3表示平峰
+\end{itemize}
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 打开SPSS，导入数据文件（\textbf{文件 → 打开 → 数据}）
+    \item 点击菜单 \textbf{分析 → 描述统计 → 描述}
+    \item 在弹出的对话框中，将需要分析的变量选入\textbf{变量}框
+    \item 点击右侧\textbf{选项}按钮，勾选需要的统计量：
+    \begin{itemize}
+        \item 集中趋势：均值、中位数、众数
+        \item 离散程度：标准差、方差、极差、最小值、最大值
+        \item 分布形态：偏度、峰度
+        \item 分位数：点击"百分位数"可添加自定义分位点
+    \end{itemize}
+    \item 如有分组变量（如按性别分别统计），先使用 \textbf{数据 → 拆分文件} 按组拆分，再执行上述操作
+    \item 点击\textbf{确定}，输出结果
+\end{enumerate}
+
+\textbf{默认参数参考}：集中趋势选均值+中位数，离散程度选标准差+四分位距，分布形态选偏度+峰度，离群判定倍数1.5。
+\end{algosposs}
+
+\begin{algoresult}
+SPSS会输出一个"描述统计量"表格，每一行是一个变量，每一列是一个指标：
+
+\begin{itemize}
+    \item \textbf{N（样本量）}：有效数据个数。如果远小于总行数，说明缺失值多
+    \item \textbf{均值（Mean）}：平均值。注意：如果数据偏态严重，均值会被极端值拉偏，此时看中位数更可靠
+    \item \textbf{标准差（Std. Deviation）}：越大越分散。一般来说，标准差/均值 $>$ 1 说明离散程度较大
+    \item \textbf{最小值/最大值}：检查是否有不合理的值（如年龄出现200岁）
+    \item \textbf{偏度（Skewness）}：绝对值 $>$ 1 表示严重偏态，此时均值不可靠，应使用中位数
+    \item \textbf{峰度（Kurtosis）}：SPSS中默认输出的是"超额峰度"（已减3），接近0表示正态，正值表示尖峰
+\end{itemize}
+
+\textbf{判断好坏}：描述性统计没有"好坏"之分，关键是通过这些指标\textbf{发现问题}——有没有异常值？数据偏不偏？缺失多不多？这些发现决定了你下一步该怎么做。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}
+\begin{itemize}
+    \item 拿到任何数据后的\textbf{第一步}，没有例外
+    \item 论文中需要报告数据基本情况时
+\end{itemize}
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 不要用描述性统计的结果直接下结论（如"A组均值大于B组，所以A组更好"）——组间差异需要做假设检验（见第3章差异比较）
+    \item 数据严重偏态时，不要只看均值，必须结合中位数
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：忽略缺失值。SPSS默认剔除缺失值后计算，N值会变小，务必注意
+    \item \textbf{坑2}：把分类变量（如性别编码为1、2）当数值变量算均值，得到无意义的"1.5"
+    \item \textbf{坑3}：只看均值不看标准差。两个班平均分都是80，但一个班标准差5，另一个标准差20，差别巨大
+\end{itemize}
+
+\textbf{和相似算法的区别}
+\begin{itemize}
+    \item vs \textbf{频数分析}：描述性统计用于\textbf{数值变量}，频数分析用于\textbf{分类变量}
+    \item vs \textbf{数据探索}：描述性统计只算指标，数据探索还会自动检测异常值、缺失模式等更深入的质量问题
+\end{itemize}
+\end{algonotes}
+
+%% ========== 正态性检验 ==========
+\basicalgo{{\starmark}正态性检验}{normality_test}
+
+\begin{algointro}
+正态性检验就是判断你的数据"长得像不像正态分布（钟形曲线）"。这很重要，因为很多高级统计方法（如t检验、方差分析、线性回归）都要求数据近似正态，不符合的话就得换方法。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 在做t检验、方差分析、线性回归等\textbf{参数检验之前}，必须先做正态性检验
+    \item 美赛中需要验证模型假设时（如回归残差是否正态）
+    \item 判断该用参数方法还是非参数方法（非正态时用非参数检验）
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+想象你在猜一个人的身高。大多数人身高集中在中间（170cm左右），特别高和特别矮的人很少——画出来就是一个钟形曲线，这就是\textbf{正态分布}。
+
+正态性检验的思路是：\textbf{先假设数据服从正态分布，然后看实际数据和正态分布的差距有多大}。如果差距小到可以用"随机误差"解释，就认为是正态的；如果差距太大，就拒绝正态假设。
+
+\textbf{两种常用检验：}
+\begin{itemize}
+    \item \textbf{Shapiro-Wilk检验}：适合小样本（$n \leq 5000$），检验功效更高
+    \item \textbf{Kolmogorov-Smirnov检验（K-S检验）}：适合大样本，对尾部差异更敏感
+\end{itemize}
+
+\textbf{核心概念——p值}：p值 $> 0.05$ 表示"不能拒绝正态假设"，即认为数据正态；p值 $\leq 0.05$ 表示数据显著偏离正态。
+
+\textbf{辅助判断}：除了检验，还要看\textbf{偏度}和\textbf{峰度}，以及\textbf{Q-Q图}（数据点是否大致在一条直线上）。三者结合判断最可靠。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 点击菜单 \textbf{分析 → 描述统计 → 探索}
+    \item 将待检验变量选入\textbf{因变量列表}
+    \item 如有分组变量（如按性别分别检验），选入\textbf{因子列表}
+    \item 点击右侧\textbf{绘制}按钮，勾选\textbf{含检验的正态图}（同时输出Q-Q图和检验结果）
+    \item 点击\textbf{继续}，再点击\textbf{确定}
+\end{enumerate}
+
+\textbf{替代路径}：也可通过 \textbf{分析 → 非参数检验 → 单样本}，选择"正态性检验"。
+
+\textbf{默认参数}：显著性水平 $\alpha=0.05$，方法自动选择（小样本Shapiro-Wilk，大样本K-S）。
+\end{algosposs}
+
+\begin{algoresult}
+输出"正态性检验"表格，包含Shapiro-Wilk和K-S两行：
+
+\begin{itemize}
+    \item \textbf{统计量（Statistic）}：越接近1表示越接近正态
+    \item \textbf{显著性（Sig. / p值）}：\textbf{最关键的指标}
+    \begin{itemize}
+        \item $p > 0.05$：数据服从正态分布，可以使用参数检验
+        \item $p \leq 0.05$：数据不服从正态分布，应考虑非参数检验或数据变换
+    \end{itemize}
+\end{itemize}
+
+同时输出\textbf{正态Q-Q图}：如果数据点大致落在对角线上，说明正态性良好；如果点明显偏离直线（尤其是两端），说明偏离正态。
+
+\textbf{注意}：样本量很大时（如 $n>1000$），即使数据轻微偏离正态，p值也会小于0.05。此时应结合Q-Q图和偏度峰度综合判断，不要只看p值。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}
+\begin{itemize}
+    \item 参数检验（t检验、ANOVA、线性回归等）之前的必做步骤
+    \item 论文中需要报告"数据满足正态性假设"时
+\end{itemize}
+
+\textbf{什么时候不用？}
+\begin{itemize}
+    \item 非参数检验（如Mann-Whitney U、Kruskal-Wallis）不需要正态性假设
+    \item 样本量极大（$n>5000$）时，中心极限定理保证均值近似正态，可不必纠结
+\end{itemize}
+
+\textbf{常见坑}
+\begin{itemize}
+    \item \textbf{坑1}：只看p值不看图。大样本下p值几乎必然显著，应结合Q-Q图判断
+    \item \textbf{坑2}：对回归模型检验原始变量的正态性。回归要求的是\textbf{残差}正态，不是自变量或因变量本身正态
+    \item \textbf{坑3}：数据非正态就放弃。可以尝试对数变换、平方根变换等，变换后可能就正态了
+\end{itemize}
+
+\textbf{数据非正态怎么办？}
+\begin{enumerate}
+    \item 尝试变量变换（对数log、平方根、Box-Cox变换）
+    \item 改用非参数检验方法（见第3章）
+    \item 使用稳健统计方法（如稳健回归）
+\end{enumerate}
+\end{algonotes}
+
+%% ========== 频数分析 ==========
+\basicalgo{频数分析}{freq_analysis}
+
+\begin{algointro}
+频数分析就是数一数每个类别出现了多少次、占百分之多少。比如调查了100个人，其中男52人、女48人，这就是频数分析。它是分类变量的"描述性统计"。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 分析问卷中的单选题、多选题的选项分布
+    \item 美赛中对分类数据（如地区、行业、等级）的分布描述
+    \item 论文中"样本结构"部分的统计
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+频数分析的核心就是两个数：
+\begin{itemize}
+    \item \textbf{频数（Frequency）}：每个类别出现的次数
+    \item \textbf{百分比（Percent）}：每个类别占总数的比例
+\end{itemize}
+
+还可以计算\textbf{累计百分比}，比如"前两个类别合计占75\%"，帮助你快速了解主要类别。
+
+如果有分组变量（如不同性别的满意度分布），还可以做\textbf{分组结构对比}，看不同群体的选择是否有差异。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 点击菜单 \textbf{分析 → 描述统计 → 频率}
+    \item 将分类变量选入\textbf{变量}框
+    \item 点击\textbf{统计量}按钮，可勾选百分位数、集中趋势等（分类变量一般不需要）
+    \item 点击\textbf{图表}按钮，选择\textbf{条形图}或\textbf{饼图}
+    \item 点击\textbf{格式}按钮，可选择按频数升序/降序排列
+    \item 点击\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数}：显示频数、百分比、有效百分比、累计百分比；图表可选条形图+饼图。
+\end{algosposs}
+
+\begin{algoresult}
+输出"频率"表格，包含四列：
+\begin{itemize}
+    \item \textbf{频数}：该类别的实际数量
+    \item \textbf{百分比}：占全部样本（含缺失）的比例
+    \item \textbf{有效百分比}：占有效样本（剔除缺失）的比例——通常看这个
+    \item \textbf{累计百分比}：从上到下累加的比例
+\end{itemize}
+
+\textbf{怎么看}：找到有效百分比最高的类别，那就是"主流"。如果某个类别占比超过50\%，说明数据高度集中；如果各类别比较均匀，说明分布分散。
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{什么时候用？}分类变量的分布描述，尤其是问卷数据。
+
+\textbf{什么时候不用？}数值变量不要用频数分析（除非已经分箱），应该用描述性统计。
+
+\textbf{常见坑}：混淆"百分比"和"有效百分比"，有缺失值时两者不同，论文中应明确说明。
+\end{algonotes}
+
+%% ========== 数据概览 ==========
+\basicalgo{数据概览}{data_overview}
+
+\begin{algointro}
+数据概览是描述性统计的"加强版"——它不仅算统计量，还自动检测数据类型、缺失值、异常值、常量列等问题，给你一份完整的"数据体检报告"。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 拿到一个新数据集，想快速了解整体情况
+    \item 美赛C题大数据分析的第一步数据清洗
+    \item 需要向队友或评委展示数据质量时
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+数据概览从三个层面看数据：
+\begin{enumerate}
+    \item \textbf{结构层}：有多少行、多少列？每列是什么类型（数值/分类/时间/标识）？
+    \item \textbf{质量层}：缺失值有多少？有没有重复行？有没有常量列（所有值都一样）？有没有异常值？
+    \item \textbf{分布层}：数值变量的均值、中位数、标准差；分类变量的各类别占比
+\end{enumerate}
+
+它会综合这些信息给出一个\textbf{数据质量评分}（0-100分），并标出最严重的问题，帮你决定清洗优先级。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在Dabbit AI SPSS工具箱中选择"数据概览"
+    \item 上传数据文件
+    \item 设置参数：概览深度选"标准"，异常值检测倍数1.5，缺失率告警阈值0.2
+    \item 点击运行，获取完整的数据画像报告
+\end{enumerate}
+
+\textbf{SPSS中对应操作}：可结合 \textbf{分析 → 描述统计 → 描述} 和 \textbf{分析 → 报告 → 代码本} 实现类似功能。
+\end{algosposs}
+
+\begin{algoresult}
+报告包含：
+\begin{itemize}
+    \item \textbf{数据集摘要}：行数、列数、文件大小
+    \item \textbf{变量类型分布}：数值型几个、分类型几个、时间型几个
+    \item \textbf{缺失值热力图}：直观展示哪些变量缺失严重
+    \item \textbf{异常值检测}：用IQR法（超过$Q_3+1.5\times IQR$或低于$Q_1-1.5\times IQR$）标记异常值
+    \item \textbf{数据质量评分}：综合评分，低于60分需要重点清洗
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{和描述性统计的区别}：描述性统计只算指标，数据概览还做质量诊断和异常检测，功能更全面。
+
+\textbf{建议}：大型数据集先做数据概览，再对关键变量做详细的描述性统计。
+\end{algonotes}
+
+%% ========== 数据探索（数据质量体检） ==========
+\basicalgo{数据探索（数据质量体检）}{data_exploration}
+
+\begin{algointro}
+数据探索是更深入的"数据质量体检"——它不仅发现问题，还会分析缺失值的模式、异常值的类型、数据的分布特征，给你一份可操作的清洗建议清单。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 数据质量较差、需要系统性清洗时
+    \item 美赛中需要在论文中详细说明数据预处理过程时
+    \item 建模前的最后一道数据质量检查
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+数据探索分两层检查：
+\begin{enumerate}
+    \item \textbf{数据层}：检查文件数量、记录数、变量数，核对多表合并关系
+    \item \textbf{字段层}：逐列检查缺失率、类型解析、取值集中度、异常值
+\end{enumerate}
+
+异常值检测有两种常用方法：
+\begin{itemize}
+    \item \textbf{IQR法}：超过$Q_3+1.5\times IQR$或低于$Q_1-1.5\times IQR$的值（默认1.5倍）
+    \item \textbf{Z分数法}：Z分数绝对值超过阈值（通常为3）的值
+\end{itemize}
+
+最终合成0-100的质量评分，划分优/良/中/差四个等级。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 在工具箱中选择"数据探索（数据质量体检）"
+    \item 上传数据
+    \item 设置参数：异常值方法选"IQR法"，IQR倍数1.5，缺失率告警阈值0.30
+    \item 勾选"全行重复检查"和"标识字段唯一性检查"
+    \item 运行并查看报告
+\end{enumerate}
+\end{algosposs}
+
+\begin{algoresult}
+报告重点关注：
+\begin{itemize}
+    \item \textbf{缺失率超过30\%的变量}：考虑删除或用模型插补
+    \item \textbf{异常值数量和位置}：判断是录入错误还是真实极端值
+    \item \textbf{重复记录}：需要去重
+    \item \textbf{常量列}：所有值相同的变量对建模无意义，可删除
+    \item \textbf{质量评分}：低于60分必须清洗后再建模
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{和数据概览的区别}：数据概览偏"画像"，数据探索偏"诊断+建议"，后者更深入。
+
+\textbf{注意}：异常值不一定是错误，可能是真实的极端情况（如收入数据中的亿万富翁），不要盲目删除，要结合业务判断。
+\end{algonotes}
+
+%% ========== 列联（交叉）分析 ==========
+\basicalgo{列联（交叉）分析}{crosstab}
+
+\begin{algointro}
+列联分析就是把两个分类变量交叉起来看关系——比如"不同会员等级的续订意向有没有差异？"，它会生成一个交叉表，并通过卡方检验判断两个变量是否相关。
+\end{algointro}
+
+\begin{algoscene}
+\begin{itemize}
+    \item 分析两个分类变量之间的关系（如性别 vs 购买偏好）
+    \item 美赛中问卷数据的交叉分析
+    \item 需要判断分类变量之间是否独立时
+\end{itemize}
+\end{algoscene}
+
+\begin{algoprinciple}
+列联分析的核心是\textbf{交叉表}：行是一个变量的类别，列是另一个变量的类别，每个格子里是同时满足两个条件的样本数。
+
+然后用\textbf{卡方独立性检验}判断：如果两个变量无关，那么每个格子的"期望频数"应该是多少？实际频数和期望频数的差异越大，说明两个变量越可能相关。
+
+\textbf{卡方统计量}：$\chi^2 = \sum\frac{(O-E)^2}{E}$，其中O是观测频数，E是期望频数。$\chi^2$越大，p值越小，越可能相关。
+
+\textbf{效应量}：Cramér's V衡量关联强度，0-1之间，越大关联越强（一般0.1以下弱，0.3中等，0.5以上强）。
+\end{algoprinciple}
+
+\begin{algosposs}
+\begin{enumerate}
+    \item 点击菜单 \textbf{分析 → 描述统计 → 交叉表}
+    \item 将一个变量选入\textbf{行}，另一个选入\textbf{列}
+    \item 点击\textbf{统计量}按钮，勾选\textbf{卡方}和\textbf{Phi和Cramér系数}
+    \item 点击\textbf{单元格}按钮，勾选\textbf{观察值}、\textbf{期望值}、\textbf{行百分比}、\textbf{列百分比}
+    \item 点击\textbf{确定}
+\end{enumerate}
+
+\textbf{默认参数}：显著性水平0.05，效应量用Cramér's V，期望频数诊断阈值5（低于5的格子超过20\%时需用Fisher精确检验）。
+\end{algosposs}
+
+\begin{algoresult}
+\begin{itemize}
+    \item \textbf{交叉表}：每个格子显示观测数、期望数、行百分比、列百分比
+    \item \textbf{卡方检验表}：看Pearson卡方的\textbf{渐近显著性（p值）}
+    \begin{itemize}
+        \item $p > 0.05$：两变量独立（无关联）
+        \item $p \leq 0.05$：两变量显著相关
+    \end{itemize}
+    \item \textbf{Cramér's V}：关联强度，0.1以下弱、0.1-0.3中等偏弱、0.3-0.5中等、0.5以上强
+    \item \textbf{调整后标准化残差}：绝对值大于2的格子表示该类别组合显著偏离期望
+\end{itemize}
+\end{algoresult}
+
+\begin{algonotes}
+\textbf{前提条件}：期望频数低于5的格子不能超过20\%，否则应用Fisher精确检验。
+
+\textbf{和卡方检验的关系}：列联分析包含交叉表+卡方检验，第3章的卡方检验侧重检验本身，这里侧重交叉表的解读。
+
+\textbf{注意}：相关不等于因果！列联分析只能说明两个变量有关联，不能说明谁导致谁。
+\end{algonotes}
+
+\section{进阶级算法速览}
+
+%% ========== 个体分布标识 ==========
+\advancedalgo{个体分布标识}{dist_id}
+
+\begin{algobrief}
+\textbf{一句话}：判断一个连续变量最符合哪种概率分布（正态、对数正态、指数、伽玛、威布尔等）。
+
+\textbf{美赛场景区}：可靠性分析中判断设备寿命服从什么分布；金融数据中判断收益率分布。
+
+\textbf{核心原理}：对多种候选分布分别做极大似然估计，用AIC（赤池信息准则）比较拟合优度，AIC最小的分布最优。再用Anderson-Darling检验确认拟合效果。
+
+\textbf{操作要点}：工具箱中选择"个体分布标识"，选分析变量，候选分布集选"常用六种"，显著性水平0.05。
+
+\textbf{结果关键}：看AIC值最小的分布，以及Anderson-Darling检验的p值（$>0.05$表示拟合可接受）。
+
+\textbf{注意}：这是比正态性检验更一般的方法——正态性检验只判断"是不是正态"，个体分布标识会在6种常见分布中帮你找最合适的。
+\end{algobrief}
+
+%% ========== 泊松分布检验 ==========
+\advancedalgo{泊松分布检验}{poisson_test}
+
+\begin{algobrief}
+\textbf{一句话}：判断计数数据（如每小时来电数、每天事故数）是否服从泊松分布。
+
+\textbf{美赛场景区}：排队论问题中判断到达过程是否为泊松过程；运营优化中分析事件发生规律。
+
+\textbf{核心原理}：泊松分布的核心特征是\textbf{均值=方差}。先用离差检验比较方差与均值，再用卡方拟合优度检验比较观测频数与泊松期望频数。
+
+\textbf{操作要点}：选择"泊松分布检验"，检验方法选"离差检验+卡方拟合优度"，显著性水平0.05。
+
+\textbf{结果关键}：离差统计量接近1且p值$>0.05$，卡方检验p值$>0.05$，则服从泊松分布。
+
+\textbf{注意}：如果方差远大于均值（过度离散），应考虑负二项分布；如果方差远小于均值，考虑零膨胀模型。
+\end{algobrief}
+
+%% ========== 分类汇总 ==========
+\advancedalgo{分类汇总}{categorical_summary}
+
+\begin{algobrief}
+\textbf{一句话}：按一个或多个分类变量分组，对数值指标计算汇总统计量（均值、总和、中位数等）。
+
+\textbf{美赛场景区}：按地区/年份汇总经济指标；按实验组别计算因变量的均值和标准差。
+
+\textbf{核心原理}：就是SQL中的GROUP BY操作——先按分组变量拆分数据，再对每组计算统计量。
+
+\textbf{操作要点}：SPSS中通过 \textbf{数据 → 分类汇总} 或 \textbf{分析 → 比较均值 → 均值} 实现。选择分组变量和汇总指标，可选合计行和分组占比。
+
+\textbf{结果关键}：输出分组汇总表，可直接用于论文中的描述性统计表。
+
+\textbf{注意}：分类汇总只做描述，不做组间差异检验。要判断组间差异需用t检验或方差分析（第3章）。
+\end{algobrief}
