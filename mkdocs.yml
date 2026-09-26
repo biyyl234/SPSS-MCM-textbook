@@ -1,0 +1,91 @@
+site_name: SPSS算法实战：数模美赛快速入门教材
+site_url: https://biyyl234.github.io/SPSS-MCM-textbook/
+repo_url: https://github.com/biyyl234/SPSS-MCM-textbook
+repo_name: GitHub
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.copy
+    - toc.follow
+    - toc.integrate
+
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+      toc_depth: 4
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tilde
+  - pymdownx.caret
+  - footnotes
+  - attr_list
+  - md_in_html
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - 首页: index.md
+  - 前言: preface.md
+  - 第1章 描述性统计: ch01.md
+  - 第2章 相关分析: ch02.md
+  - 第3章 差异比较: ch03.md
+  - 第4章 回归分析: ch04.md
+  - 第5章 聚类与降维: ch05.md
+  - 第6章 时间序列与计量经济: ch06.md
+  - 第7章 预测模型: ch07.md
+  - 第8章 综合评价: ch08.md
+  - 第9章 问卷研究: ch09.md
+  - 第10章 医学统计: ch10.md
+  - 第11章 机器学习: ch11.md
+  - 第12章 规划求解: ch12.md
+  - 第13章 质量控制: ch13.md
+  - 第14章 空间计量: ch14.md
+  - 第15章 试验设计: ch15.md
+  - 第16章 Meta分析: ch16.md
+  - 第17章 文本分析: ch17.md
+  - 第18章 功效分析: ch18.md
+  - 附录A 美赛真题题型与算法速查表: appendix_a.md
+  - 附录B 优秀论文模型拆解: appendix_b.md
