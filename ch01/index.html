@@ -1,0 +1,1915 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch01/">
+      
+      
+        <link rel="prev" href="../preface/">
+      
+      
+        <link rel="next" href="../ch02/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第1章 描述性统计 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第1章 描述性统计
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 描述性统计 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 正态性检验 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        频数分析 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数据概览 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数据探索（数据质量体检） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        列联（交叉）分析 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        个体分布标识 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        泊松分布检验 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分类汇总 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">描述性统计<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>描述性统计是所有数据分析的起点。它不做预测、不做推断，只回答一个问题：<strong>你的数据长什么样？</strong>通过计算均值、中位数、标准差、频数等指标，帮你快速了解数据的集中趋势、离散程度和分布形态。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>几乎所有题目都需要！无论是A题的连续型问题、B题的离散型问题，还是C题的大数据题，拿到数据后的第一步永远是描述性统计。它是后续所有建模的基础——你连数据长什么样都不知道，怎么选模型？</p>
+<p><strong>学习路径建议</strong></p>
+<p>先学<strong>描述性统计</strong>和<strong>频数分析</strong>（数值变量和分类变量的基础画像），再学<strong>正态性检验</strong>（判断数据分布，决定后续用参数还是非参数方法），最后了解<strong>数据探索</strong>和<strong>列联分析</strong>等进阶工具。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">⭐ 描述性统计  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>描述性统计就是给你的数据做一次"全面体检"——算出均值、中位数、标准差、最大值、最小值等指标，让你一眼看清数据的"长相"。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>拿到任何数据集后的<strong>第一步</strong>，必须做！</li>
+<li>美赛C题（大数据题）中，对题目给出的CSV数据进行初步探索</li>
+<li>论文中"数据描述"部分的核心内容</li>
+<li>判断数据是否有异常值、缺失值，决定后续清洗策略</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象你是班主任，拿到全班的考试成绩单。你会怎么看？</p>
+<ul>
+<li><strong>集中趋势</strong>：平均分多少？（均值）中间水平是多少？（中位数）出现最多的分数是？（众数）——这告诉你班级整体水平</li>
+<li><strong>离散程度</strong>：最高分和最低分差多少？（极差）大家分数差距大不大？（标准差、方差）——这告诉你成绩是否稳定</li>
+<li><strong>分布形态</strong>：分数是对称的还是偏的？（偏度）是集中在中间还是两头多？（峰度）——这告诉你分布形状</li>
+<li><strong>分位数</strong>：前25%的人考了多少分？（四分位数）——这告诉你数据的分段情况</li>
+</ul>
+<p><strong>关键公式：</strong>
+- 均值：<span class="arithmatex">\(\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i\)</span>，就是所有数加起来除以个数
+- 标准差：<span class="arithmatex">\(s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2}\)</span>，衡量数据偏离均值的平均程度，越大说明数据越分散
+- 偏度（Skewness）：大于0表示右偏（长尾在右），小于0表示左偏，接近0表示对称
+- 峰度（Kurtosis）：大于3表示尖峰（数据集中在中间），小于3表示平峰</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>打开SPSS，导入数据文件（<strong>文件 → 打开 → 数据</strong>）</li>
+<li>点击菜单 <strong>分析 → 描述统计 → 描述</strong></li>
+<li>在弹出的对话框中，将需要分析的变量选入<strong>变量</strong>框</li>
+<li>点击右侧<strong>选项</strong>按钮，勾选需要的统计量：</li>
+<li>集中趋势：均值、中位数、众数</li>
+<li>离散程度：标准差、方差、极差、最小值、最大值</li>
+<li>分布形态：偏度、峰度</li>
+<li>分位数：点击"百分位数"可添加自定义分位点</li>
+<li>如有分组变量（如按性别分别统计），先使用 <strong>数据 → 拆分文件</strong> 按组拆分，再执行上述操作</li>
+<li>点击<strong>确定</strong>，输出结果</li>
+</ol>
+<p><strong>默认参数参考</strong>：集中趋势选均值+中位数，离散程度选标准差+四分位距，分布形态选偏度+峰度，离群判定倍数1.5。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>SPSS会输出一个"描述统计量"表格，每一行是一个变量，每一列是一个指标：</p>
+<ul>
+<li><strong>N（样本量）</strong>：有效数据个数。如果远小于总行数，说明缺失值多</li>
+<li><strong>均值（Mean）</strong>：平均值。注意：如果数据偏态严重，均值会被极端值拉偏，此时看中位数更可靠</li>
+<li><strong>标准差（Std. Deviation）</strong>：越大越分散。一般来说，标准差/均值 <span class="arithmatex">\(&gt;\)</span> 1 说明离散程度较大</li>
+<li><strong>最小值/最大值</strong>：检查是否有不合理的值（如年龄出现200岁）</li>
+<li><strong>偏度（Skewness）</strong>：绝对值 <span class="arithmatex">\(&gt;\)</span> 1 表示严重偏态，此时均值不可靠，应使用中位数</li>
+<li><strong>峰度（Kurtosis）</strong>：SPSS中默认输出的是"超额峰度"（已减3），接近0表示正态，正值表示尖峰</li>
+</ul>
+<p><strong>判断好坏</strong>：描述性统计没有"好坏"之分，关键是通过这些指标<strong>发现问题</strong>——有没有异常值？数据偏不偏？缺失多不多？这些发现决定了你下一步该怎么做。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>
+- 拿到任何数据后的<strong>第一步</strong>，没有例外
+- 论文中需要报告数据基本情况时</p>
+<p><strong>什么时候不用？</strong>
+- 不要用描述性统计的结果直接下结论（如"A组均值大于B组，所以A组更好"）——组间差异需要做假设检验（见第3章差异比较）
+- 数据严重偏态时，不要只看均值，必须结合中位数</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：忽略缺失值。SPSS默认剔除缺失值后计算，N值会变小，务必注意
+- <strong>坑2</strong>：把分类变量（如性别编码为1、2）当数值变量算均值，得到无意义的"1.5"
+- <strong>坑3</strong>：只看均值不看标准差。两个班平均分都是80，但一个班标准差5，另一个标准差20，差别巨大</p>
+<p><strong>和相似算法的区别</strong>
+- vs <strong>频数分析</strong>：描述性统计用于<strong>数值变量</strong>，频数分析用于<strong>分类变量</strong>
+- vs <strong>数据探索</strong>：描述性统计只算指标，数据探索还会自动检测异常值、缺失模式等更深入的质量问题</p>
+</div>
+<h3 id="_4">⭐ 正态性检验  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>正态性检验就是判断你的数据"长得像不像正态分布（钟形曲线）"。这很重要，因为很多高级统计方法（如t检验、方差分析、线性回归）都要求数据近似正态，不符合的话就得换方法。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>在做t检验、方差分析、线性回归等<strong>参数检验之前</strong>，必须先做正态性检验</li>
+<li>美赛中需要验证模型假设时（如回归残差是否正态）</li>
+<li>判断该用参数方法还是非参数方法（非正态时用非参数检验）</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象你在猜一个人的身高。大多数人身高集中在中间（170cm左右），特别高和特别矮的人很少——画出来就是一个钟形曲线，这就是<strong>正态分布</strong>。</p>
+<p>正态性检验的思路是：<strong>先假设数据服从正态分布，然后看实际数据和正态分布的差距有多大</strong>。如果差距小到可以用"随机误差"解释，就认为是正态的；如果差距太大，就拒绝正态假设。</p>
+<p><strong>两种常用检验：</strong>
+- <strong>Shapiro-Wilk检验</strong>：适合小样本（<span class="arithmatex">\(n \leq 5000\)</span>），检验功效更高
+- <strong>Kolmogorov-Smirnov检验（K-S检验）</strong>：适合大样本，对尾部差异更敏感</p>
+<p><strong>核心概念——p值</strong>：p值 <span class="arithmatex">\(&gt; 0.05\)</span> 表示"不能拒绝正态假设"，即认为数据正态；p值 <span class="arithmatex">\(\leq 0.05\)</span> 表示数据显著偏离正态。</p>
+<p><strong>辅助判断</strong>：除了检验，还要看<strong>偏度</strong>和<strong>峰度</strong>，以及<strong>Q-Q图</strong>（数据点是否大致在一条直线上）。三者结合判断最可靠。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 描述统计 → 探索</strong></li>
+<li>将待检验变量选入<strong>因变量列表</strong></li>
+<li>如有分组变量（如按性别分别检验），选入<strong>因子列表</strong></li>
+<li>点击右侧<strong>绘制</strong>按钮，勾选<strong>含检验的正态图</strong>（同时输出Q-Q图和检验结果）</li>
+<li>点击<strong>继续</strong>，再点击<strong>确定</strong></li>
+</ol>
+<p><strong>替代路径</strong>：也可通过 <strong>分析 → 非参数检验 → 单样本</strong>，选择"正态性检验"。</p>
+<p><strong>默认参数</strong>：显著性水平 <span class="arithmatex">\(\alpha=0.05\)</span>，方法自动选择（小样本Shapiro-Wilk，大样本K-S）。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>输出"正态性检验"表格，包含Shapiro-Wilk和K-S两行：</p>
+<ul>
+<li><strong>统计量（Statistic）</strong>：越接近1表示越接近正态</li>
+<li><strong>显著性（Sig. / p值）</strong>：<strong>最关键的指标</strong></li>
+<li><span class="arithmatex">\(p &gt; 0.05\)</span>：数据服从正态分布，可以使用参数检验</li>
+<li><span class="arithmatex">\(p \leq 0.05\)</span>：数据不服从正态分布，应考虑非参数检验或数据变换</li>
+</ul>
+<p>同时输出<strong>正态Q-Q图</strong>：如果数据点大致落在对角线上，说明正态性良好；如果点明显偏离直线（尤其是两端），说明偏离正态。</p>
+<p><strong>注意</strong>：样本量很大时（如 <span class="arithmatex">\(n&gt;1000\)</span>），即使数据轻微偏离正态，p值也会小于0.05。此时应结合Q-Q图和偏度峰度综合判断，不要只看p值。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>
+- 参数检验（t检验、ANOVA、线性回归等）之前的必做步骤
+- 论文中需要报告"数据满足正态性假设"时</p>
+<p><strong>什么时候不用？</strong>
+- 非参数检验（如Mann-Whitney U、Kruskal-Wallis）不需要正态性假设
+- 样本量极大（<span class="arithmatex">\(n&gt;5000\)</span>）时，中心极限定理保证均值近似正态，可不必纠结</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：只看p值不看图。大样本下p值几乎必然显著，应结合Q-Q图判断
+- <strong>坑2</strong>：对回归模型检验原始变量的正态性。回归要求的是<strong>残差</strong>正态，不是自变量或因变量本身正态
+- <strong>坑3</strong>：数据非正态就放弃。可以尝试对数变换、平方根变换等，变换后可能就正态了</p>
+<p><strong>数据非正态怎么办？</strong>
+1. 尝试变量变换（对数log、平方根、Box-Cox变换）
+1. 改用非参数检验方法（见第3章）
+1. 使用稳健统计方法（如稳健回归）</p>
+</div>
+<h3 id="_5">频数分析  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>频数分析就是数一数每个类别出现了多少次、占百分之多少。比如调查了100个人，其中男52人、女48人，这就是频数分析。它是分类变量的"描述性统计"。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>分析问卷中的单选题、多选题的选项分布</li>
+<li>美赛中对分类数据（如地区、行业、等级）的分布描述</li>
+<li>论文中"样本结构"部分的统计</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>频数分析的核心就是两个数：
+- <strong>频数（Frequency）</strong>：每个类别出现的次数
+- <strong>百分比（Percent）</strong>：每个类别占总数的比例</p>
+<p>还可以计算<strong>累计百分比</strong>，比如"前两个类别合计占75%"，帮助你快速了解主要类别。</p>
+<p>如果有分组变量（如不同性别的满意度分布），还可以做<strong>分组结构对比</strong>，看不同群体的选择是否有差异。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 描述统计 → 频率</strong></li>
+<li>将分类变量选入<strong>变量</strong>框</li>
+<li>点击<strong>统计量</strong>按钮，可勾选百分位数、集中趋势等（分类变量一般不需要）</li>
+<li>点击<strong>图表</strong>按钮，选择<strong>条形图</strong>或<strong>饼图</strong></li>
+<li>点击<strong>格式</strong>按钮，可选择按频数升序/降序排列</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数</strong>：显示频数、百分比、有效百分比、累计百分比；图表可选条形图+饼图。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>输出"频率"表格，包含四列：
+- <strong>频数</strong>：该类别的实际数量
+- <strong>百分比</strong>：占全部样本（含缺失）的比例
+- <strong>有效百分比</strong>：占有效样本（剔除缺失）的比例——通常看这个
+- <strong>累计百分比</strong>：从上到下累加的比例</p>
+<p><strong>怎么看</strong>：找到有效百分比最高的类别，那就是"主流"。如果某个类别占比超过50%，说明数据高度集中；如果各类别比较均匀，说明分布分散。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>分类变量的分布描述，尤其是问卷数据。</p>
+<p><strong>什么时候不用？</strong>数值变量不要用频数分析（除非已经分箱），应该用描述性统计。</p>
+<p><strong>常见坑</strong>：混淆"百分比"和"有效百分比"，有缺失值时两者不同，论文中应明确说明。</p>
+</div>
+<h3 id="_6">数据概览  <code>基础级</code><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>数据概览是描述性统计的"加强版"——它不仅算统计量，还自动检测数据类型、缺失值、异常值、常量列等问题，给你一份完整的"数据体检报告"。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>拿到一个新数据集，想快速了解整体情况</li>
+<li>美赛C题大数据分析的第一步数据清洗</li>
+<li>需要向队友或评委展示数据质量时</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>数据概览从三个层面看数据：
+1. <strong>结构层</strong>：有多少行、多少列？每列是什么类型（数值/分类/时间/标识）？
+1. <strong>质量层</strong>：缺失值有多少？有没有重复行？有没有常量列（所有值都一样）？有没有异常值？
+1. <strong>分布层</strong>：数值变量的均值、中位数、标准差；分类变量的各类别占比</p>
+<p>它会综合这些信息给出一个<strong>数据质量评分</strong>（0-100分），并标出最严重的问题，帮你决定清洗优先级。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在Dabbit AI SPSS工具箱中选择"数据概览"</li>
+<li>上传数据文件</li>
+<li>设置参数：概览深度选"标准"，异常值检测倍数1.5，缺失率告警阈值0.2</li>
+<li>点击运行，获取完整的数据画像报告</li>
+</ol>
+<p><strong>SPSS中对应操作</strong>：可结合 <strong>分析 → 描述统计 → 描述</strong> 和 <strong>分析 → 报告 → 代码本</strong> 实现类似功能。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>报告包含：
+- <strong>数据集摘要</strong>：行数、列数、文件大小
+- <strong>变量类型分布</strong>：数值型几个、分类型几个、时间型几个
+- <strong>缺失值热力图</strong>：直观展示哪些变量缺失严重
+- <strong>异常值检测</strong>：用IQR法（超过<span class="arithmatex">\(Q_3+1.5\times IQR\)</span>或低于<span class="arithmatex">\(Q_1-1.5\times IQR\)</span>）标记异常值
+- <strong>数据质量评分</strong>：综合评分，低于60分需要重点清洗</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>和描述性统计的区别</strong>：描述性统计只算指标，数据概览还做质量诊断和异常检测，功能更全面。</p>
+<p><strong>建议</strong>：大型数据集先做数据概览，再对关键变量做详细的描述性统计。</p>
+</div>
+<h3 id="_7">数据探索（数据质量体检）  <code>基础级</code><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>数据探索是更深入的"数据质量体检"——它不仅发现问题，还会分析缺失值的模式、异常值的类型、数据的分布特征，给你一份可操作的清洗建议清单。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>数据质量较差、需要系统性清洗时</li>
+<li>美赛中需要在论文中详细说明数据预处理过程时</li>
+<li>建模前的最后一道数据质量检查</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>数据探索分两层检查：
+1. <strong>数据层</strong>：检查文件数量、记录数、变量数，核对多表合并关系
+1. <strong>字段层</strong>：逐列检查缺失率、类型解析、取值集中度、异常值</p>
+<p>异常值检测有两种常用方法：
+- <strong>IQR法</strong>：超过<span class="arithmatex">\(Q_3+1.5\times IQR\)</span>或低于<span class="arithmatex">\(Q_1-1.5\times IQR\)</span>的值（默认1.5倍）
+- <strong>Z分数法</strong>：Z分数绝对值超过阈值（通常为3）的值</p>
+<p>最终合成0-100的质量评分，划分优/良/中/差四个等级。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在工具箱中选择"数据探索（数据质量体检）"</li>
+<li>上传数据</li>
+<li>设置参数：异常值方法选"IQR法"，IQR倍数1.5，缺失率告警阈值0.30</li>
+<li>勾选"全行重复检查"和"标识字段唯一性检查"</li>
+<li>运行并查看报告</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>报告重点关注：
+- <strong>缺失率超过30%的变量</strong>：考虑删除或用模型插补
+- <strong>异常值数量和位置</strong>：判断是录入错误还是真实极端值
+- <strong>重复记录</strong>：需要去重
+- <strong>常量列</strong>：所有值相同的变量对建模无意义，可删除
+- <strong>质量评分</strong>：低于60分必须清洗后再建模</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>和数据概览的区别</strong>：数据概览偏"画像"，数据探索偏"诊断+建议"，后者更深入。</p>
+<p><strong>注意</strong>：异常值不一定是错误，可能是真实的极端情况（如收入数据中的亿万富翁），不要盲目删除，要结合业务判断。</p>
+</div>
+<h3 id="_8">列联（交叉）分析  <code>基础级</code><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>列联分析就是把两个分类变量交叉起来看关系——比如"不同会员等级的续订意向有没有差异？"，它会生成一个交叉表，并通过卡方检验判断两个变量是否相关。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>分析两个分类变量之间的关系（如性别 vs 购买偏好）</li>
+<li>美赛中问卷数据的交叉分析</li>
+<li>需要判断分类变量之间是否独立时</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>列联分析的核心是<strong>交叉表</strong>：行是一个变量的类别，列是另一个变量的类别，每个格子里是同时满足两个条件的样本数。</p>
+<p>然后用<strong>卡方独立性检验</strong>判断：如果两个变量无关，那么每个格子的"期望频数"应该是多少？实际频数和期望频数的差异越大，说明两个变量越可能相关。</p>
+<p><strong>卡方统计量</strong>：<span class="arithmatex">\(\chi^2 = \sum\frac{(O-E)^2}{E}\)</span>，其中O是观测频数，E是期望频数。<span class="arithmatex">\(\chi^2\)</span>越大，p值越小，越可能相关。</p>
+<p><strong>效应量</strong>：Cramér's V衡量关联强度，0-1之间，越大关联越强（一般0.1以下弱，0.3中等，0.5以上强）。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 描述统计 → 交叉表</strong></li>
+<li>将一个变量选入<strong>行</strong>，另一个选入<strong>列</strong></li>
+<li>点击<strong>统计量</strong>按钮，勾选<strong>卡方</strong>和<strong>Phi和Cramér系数</strong></li>
+<li>点击<strong>单元格</strong>按钮，勾选<strong>观察值</strong>、<strong>期望值</strong>、<strong>行百分比</strong>、<strong>列百分比</strong></li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数</strong>：显著性水平0.05，效应量用Cramér's V，期望频数诊断阈值5（低于5的格子超过20%时需用Fisher精确检验）。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>交叉表</strong>：每个格子显示观测数、期望数、行百分比、列百分比</li>
+<li><strong>卡方检验表</strong>：看Pearson卡方的<strong>渐近显著性（p值）</strong></li>
+<li><span class="arithmatex">\(p &gt; 0.05\)</span>：两变量独立（无关联）</li>
+<li><span class="arithmatex">\(p \leq 0.05\)</span>：两变量显著相关</li>
+<li><strong>Cramér's V</strong>：关联强度，0.1以下弱、0.1-0.3中等偏弱、0.3-0.5中等、0.5以上强</li>
+<li><strong>调整后标准化残差</strong>：绝对值大于2的格子表示该类别组合显著偏离期望</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>前提条件</strong>：期望频数低于5的格子不能超过20%，否则应用Fisher精确检验。</p>
+<p><strong>和卡方检验的关系</strong>：列联分析包含交叉表+卡方检验，第3章的卡方检验侧重检验本身，这里侧重交叉表的解读。</p>
+<p><strong>注意</strong>：相关不等于因果！列联分析只能说明两个变量有关联，不能说明谁导致谁。</p>
+</div>
+<h2 id="_9">进阶级算法速览<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10">个体分布标识  <code>进阶级</code><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：判断一个连续变量最符合哪种概率分布（正态、对数正态、指数、伽玛、威布尔等）。</p>
+<p><strong>美赛场景区</strong>：可靠性分析中判断设备寿命服从什么分布；金融数据中判断收益率分布。</p>
+<p><strong>核心原理</strong>：对多种候选分布分别做极大似然估计，用AIC（赤池信息准则）比较拟合优度，AIC最小的分布最优。再用Anderson-Darling检验确认拟合效果。</p>
+<p><strong>操作要点</strong>：工具箱中选择"个体分布标识"，选分析变量，候选分布集选"常用六种"，显著性水平0.05。</p>
+<p><strong>结果关键</strong>：看AIC值最小的分布，以及Anderson-Darling检验的p值（<span class="arithmatex">\(&gt;0.05\)</span>表示拟合可接受）。</p>
+<p><strong>注意</strong>：这是比正态性检验更一般的方法——正态性检验只判断"是不是正态"，个体分布标识会在6种常见分布中帮你找最合适的。</p>
+</div>
+<h3 id="_11">泊松分布检验  <code>进阶级</code><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：判断计数数据（如每小时来电数、每天事故数）是否服从泊松分布。</p>
+<p><strong>美赛场景区</strong>：排队论问题中判断到达过程是否为泊松过程；运营优化中分析事件发生规律。</p>
+<p><strong>核心原理</strong>：泊松分布的核心特征是<strong>均值=方差</strong>。先用离差检验比较方差与均值，再用卡方拟合优度检验比较观测频数与泊松期望频数。</p>
+<p><strong>操作要点</strong>：选择"泊松分布检验"，检验方法选"离差检验+卡方拟合优度"，显著性水平0.05。</p>
+<p><strong>结果关键</strong>：离差统计量接近1且p值<span class="arithmatex">\(&gt;0.05\)</span>，卡方检验p值<span class="arithmatex">\(&gt;0.05\)</span>，则服从泊松分布。</p>
+<p><strong>注意</strong>：如果方差远大于均值（过度离散），应考虑负二项分布；如果方差远小于均值，考虑零膨胀模型。</p>
+</div>
+<h3 id="_12">分类汇总  <code>进阶级</code><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：按一个或多个分类变量分组，对数值指标计算汇总统计量（均值、总和、中位数等）。</p>
+<p><strong>美赛场景区</strong>：按地区/年份汇总经济指标；按实验组别计算因变量的均值和标准差。</p>
+<p><strong>核心原理</strong>：就是SQL中的GROUP BY操作——先按分组变量拆分数据，再对每组计算统计量。</p>
+<p><strong>操作要点</strong>：SPSS中通过 <strong>数据 → 分类汇总</strong> 或 <strong>分析 → 比较均值 → 均值</strong> 实现。选择分组变量和汇总指标，可选合计行和分组占比。</p>
+<p><strong>结果关键</strong>：输出分组汇总表，可直接用于论文中的描述性统计表。</p>
+<p><strong>注意</strong>：分类汇总只做描述，不做组间差异检验。要判断组间差异需用t检验或方差分析（第3章）。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

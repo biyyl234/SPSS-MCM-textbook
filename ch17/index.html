@@ -1,0 +1,1829 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch17/">
+      
+      
+        <link rel="prev" href="../ch16/">
+      
+      
+        <link rel="next" href="../ch18/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第17章 文本分析 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第17章 文本分析
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        词频统计 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        词云图（词频可视化） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 文本情感分析 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ LDA主题分析 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        社会网络关系图（共词矩阵） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tf-idf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TF-IDF分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文本聚类分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        新词发现 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">文本分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>现实世界里超过80%的数据是"文字"——顾客评论、政策文件、新闻报道、问卷开放题、社交媒体留言。文本分析就是教你<strong>把这些非结构化的文字变成能统计、能画图、能建模的数字</strong>。它不要求你读完全部几千条评论，而是自动告诉你：大家最常说什么词？情绪是正面还是负面？这些文字能归纳成哪几个话题？</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>文本分析在美赛中是<strong>C题（大数据/数据挖掘）</strong>和<strong>E/F题（环境/政策）</strong>的常客：
+- C题经常给你一份CSV，里面一列是评论文本、政策文本或新闻标题，要求你做情感倾向、主题挖掘、热点识别。
+- E/F题要分析政策文件、公众意见时，词频、LDA主题模型能帮你快速归纳各方关注点。
+- 拿到一堆文字却"不知道里面在讲什么"时，从本章入手。</p>
+<p><strong>学习路径建议</strong></p>
+<p>按"从简单到复杂、从描述到建模"的顺序学：先<strong>词频统计</strong>（数一数词）和<strong>词云图</strong>（把词频画出来）——这是一切文本分析的地基；再学<strong>文本情感分析</strong>（判断正负情绪，是有监督学习）和<strong>LDA主题分析</strong>（自动归纳话题，是无监督学习）这两个明星算法。进阶部分的<strong>TF-IDF</strong>是"给词加权"的核心武器，<strong>文本聚类</strong>把相似文本自动分组，<strong>共词网络</strong>看词与词的关系，<strong>新词发现</strong>则用来挖词典里没有的新说法。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">词频统计  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>词频统计就是把一段段文字"切碎成词"，然后数一数每个词出现了多少次。它是所有文本分析的第一步——你连大家在提什么词都不知道，后面什么情感、主题都是空中楼阁。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛C题给了评论文本、政策文本后，<strong>第一步</strong>：先看高频词是什么，摸清语料在讲什么</li>
+<li>按类别分组对比：产品使用类客户在说什么词？物流售后类客户在说什么词？</li>
+<li>论文中"文本数据概况"部分的基础统计</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象你有一篮子碎纸，每张写着一句话。词频统计做两件事：</p>
+<ul>
+<li><strong>分词</strong>：把"这个手机拍照很清晰"切成["这个","手机","拍照","很","清晰"]。中文没有空格，要用词典做最大匹配切分；英文按空格切、统一小写。</li>
+<li><strong>过滤停用词</strong>："的、了、很、the、a"这种到处都是、却没有信息量的词叫停用词，先删掉，否则榜单会被它们霸占。</li>
+<li><strong>计数与相对频率</strong>：统计每个词出现次数，并算<strong>相对频率</strong>（该词频次<span class="arithmatex">\(/\)</span>总词元数），以及<strong>累计覆盖率</strong>（前<span class="arithmatex">\(N\)</span>个高频词占了总词次的百分之多少）。</li>
+</ul>
+<p>生活类比：累计覆盖率就像盘点仓库——如果前10个词就覆盖了17%的内容，说明话题比较集中；如果要几百个词才覆盖一半，说明内容很分散。</p>
+<p><strong>分组比较注意</strong>：两组文本条数不同，不能直接比绝对次数，要比<strong>相对频率</strong>（组内占比），否则人多的那组什么词都"更多"。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在Dabbit AI SPSS工具箱中选择"词频统计"（SPSS原生无中文分词，需工具箱或Python扩展）</li>
+<li>上传含文本列的数据，指定<strong>文本字段</strong>；如有分组列（如咨询类别），选入<strong>分组字段</strong></li>
+<li>停用词范围选<strong>chinese_and_english</strong>（中英停用词都过滤）</li>
+<li>分词模式选auto；设置最短词长（通常<span class="arithmatex">\(\geq2\)</span>），是否去数字</li>
+<li>设定top N（看前多少个高频词）、最小文档频次min_doc_freq</li>
+<li>运行，查看全局词频表与分组词频表</li>
+</ol>
+<p><strong>默认参数参考</strong>：停用词中英双语，自动分词，最短词长2，分组间只比较相对频率。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>以"客服意见反馈"案例为例（150条文本，2933个有效词元）：</p>
+<ul>
+<li><strong>全局高频词</strong>：出现最多的是"清晰"（79次，占2.69%）；前10个高频词累计覆盖17.56%——说明话题不算特别集中。</li>
+<li><strong>分组结果</strong>：</li>
+<li>"产品使用反馈"组（75篇）前三高频：清晰、稳定、优秀；</li>
+<li>"物流售后反馈"组（75篇）前三高频：服务、到位、处理。</li>
+<li><strong>怎么读</strong>：产品组在夸产品属性（清晰、稳定），售后组在谈服务环节（服务、处理），组间用词侧重一目了然。</li>
+</ul>
+<p><strong>注意</strong>：组间差异只反映<strong>用词侧重</strong>，不直接代表态度好坏，要下结论得回到原文语境。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>拿到任何文本语料后的第一步，先摸高频词。</p>
+<p><strong>什么时候不用？</strong>词频只告诉你"谁说得多"，不告诉你"说得对不对、情绪好不好"，也不区分一词多义——要判断倾向用情感分析，要归纳话题用LDA。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不过滤停用词，结果榜单第一名是"的、了、是"，毫无信息量。
+- <strong>坑2</strong>：直接比两组绝对频次。条数不同时必须比相对频率。
+- <strong>坑3</strong>：只看词频不看原文。"问题"出现100次到底是在夸还是在骂，必须抽查原文。</p>
+<p><strong>和相似算法的区别</strong>
+- vs <strong>词云图</strong>：词频统计给精确数字表；词云图只是它的可视化版本。
+- vs <strong>TF-IDF</strong>：词频只数出现次数；TF-IDF会惩罚到处都出现的"通用词"，更能找出某组独有的代表词。</p>
+</div>
+<h3 id="_4">词云图（词频可视化）  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>词云图就是把词频统计的结果画成一张图：词越大，出现得越多。它的作用不是给精确数字，而是<strong>一眼看出大家最关心什么</strong>，特别适合放在论文里做直观展示。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>论文或汇报中需要<strong>直观展示</strong>文本热点时，词云图视觉冲击力强</li>
+<li>美赛C题要求快速呈现"用户最常讨论的主题"</li>
+<li>配合词频统计表使用：图负责好看，表负责准确</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>词云图背后没有新算法，就是<strong>词频统计的图形化</strong>：</p>
+<ul>
+<li>先做分词、去停用词、计数（和词频统计完全一样的预处理）；</li>
+<li>按词频排序，词频越高字号越大、位置越居中；</li>
+<li>可自定义停用词（把"无意义但高频"的词手动加进黑名单）、设置最大词数与画布尺寸。</li>
+</ul>
+<p>生活类比：词云就像海报——字号大小就是声音大小，谁嗓门大谁就被放在中间。它帮你<strong>快速抓重点</strong>，但别指望从图上读出精确数字。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>工具箱选"词云图（词频可视化）"</li>
+<li>指定<strong>文本字段</strong>；若已有词频表，可直接选count字段与text字段</li>
+<li>打开<strong>remove stopwords</strong>过滤停用词；自定义停用词可手动追加</li>
+<li>设置最短词长min_word_len（默认2）、最大词数max_words、画布宽高</li>
+<li>运行后导出图片；建议同时导出高频词条形图以备核对</li>
+</ol>
+<p><strong>默认参数参考</strong>：过滤停用词，最短词长2，自定义停用词按需添加。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>以"电商购物体验开放题"案例为例（150条文本，657个有效词次）：</p>
+<ul>
+<li>词云显示讨论主要围绕<strong>包装、问题、客服</strong>，三者合计约占词次7.6%；</li>
+<li>其中"包装"最突出，出现17次、占2.6%；</li>
+<li><strong>条形图核对</strong>：前若干高频词画成条形并标注数值，与词云结论一致、互相印证。</li>
+</ul>
+<p><strong>怎么看</strong>：图上最大的几个词就是核心话题；讨论集中在少数几个大词上说明用户关注点明确。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>需要可视化展示文本热点、放在论文配图里时。</p>
+<p><strong>什么时候不用？</strong>需要精确数字排名时，别从词云上估，回去看词频统计表。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：词云里全是"手机、东西"这种泛词，因为没加自定义停用词。
+- <strong>坑2</strong>：用词云当正式结论，忽视了它只是示意图、没有置信度概念。
+- <strong>坑3</strong>：把不同情感的词混在一张图里，"好"和"差"都很大，却没法区分情绪。</p>
+<p><strong>和相似算法的区别</strong>：词云是词频统计的<strong>可视化产物</strong>，二者预处理完全相同，区别只在一个给表、一个给图。</p>
+</div>
+<h3 id="_5">⭐ 文本情感分析  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>文本情感分析就是让机器给每段文字判"情绪"——这条评论是夸（正面）还是骂（负面）？它把定性的文字变成了可统计的情绪比例，是美赛处理评论/舆情文本的<strong>核心武器</strong>。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛C题给了成百上千条顾客评论、社媒留言，要<strong>量化口碑</strong>：正面占多少、负面占多少</li>
+<li>分析不同门店、不同时期的情绪倾向变化</li>
+<li>找出"哪些词最能区分好评和差评"，定位满意/不满的具体原因</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>情感分析本质是一个<strong>有监督二分类问题</strong>：先有人工标注好的一批文本（正面/负面），机器学着自己判断。</p>
+<ul>
+<li><strong>文本向量化（TF-IDF）</strong>：把每段文字变成一串数字。中文不用分词，用<strong>字符级n-gram</strong>（char_wb）——相邻两三个字切成特征，比如"太差"、"好吃"，避免了中文分词的麻烦。</li>
+<li><strong>分类器</strong>：用<strong>逻辑回归</strong>（logistic），简单可解释。类别不均衡时开<strong>class weight=balanced</strong>自动加权。</li>
+<li><strong>为什么可解释</strong>：逻辑回归的系数告诉你哪些词是"正面信号"（系数大正）、哪些是"负面信号"（系数大负）。</li>
+<li><strong>怎么评估</strong>：把数据切成训练集/测试集（test size=0.2），训练集上做5折交叉验证估稳定性，测试集上看准确率、宏平均F1、AUC。</li>
+</ul>
+<p>生活类比：就像老师批改作文——先拿标准答案（标注数据）教学生（训练模型），再让学生做一套没见过的卷子（测试集），看他和标准答案对得上多少。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>工具箱选"文本情感分析"</li>
+<li>指定<strong>文本列</strong>与<strong>情感标签列</strong>（必须有预先标注的正负标签，这是有监督学习）</li>
+<li>模式选auto；分析器选<strong>char_wb</strong>（字符级，中文免分词）</li>
+<li>分类器选<strong>logistic</strong>；类别权重balanced；max_features=5000（保留信息量最大的5000个词特征）</li>
+<li>测试集比例test size=0.2，交叉验证5折，随机种子42（保证可复现）</li>
+<li>运行，查看效果指标与高区分度关键词</li>
+</ol>
+<p><strong>默认参数参考</strong>：char_wb字符n-gram，逻辑回归，类别加权，5折CV，测试集20%，最大特征5000。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>以"连锁快餐顾客评价"案例为例（150条文本，测试集30条）：</p>
+<ul>
+<li><strong>效果指标（核心）</strong>：宏平均<span class="arithmatex">\(F1=0.861\)</span>，准确率<span class="arithmatex">\(0.867\)</span>，<span class="arithmatex">\(AUC=0.940\)</span>。</li>
+<li><strong>和基线比</strong>：多数类基线<span class="arithmatex">\(0.600\)</span>（即全猜多数类的准确率）。模型0.867远高于0.600，说明<strong>正负情感能被可靠识别</strong>。</li>
+<li><strong>混淆矩阵</strong>：看有多少正面被误判成负面、反之亦然，找出易错类型。</li>
+<li><strong>关键词证据</strong>：模型系数会列出支持正面/负面的高区分度词（如"好吃、干净"推正面，"慢、凉、错"推负面）。</li>
+</ul>
+<p><strong>怎么判断好坏</strong>：<span class="arithmatex">\(F1\)</span>和AUC都明显高于"多数类基线"才算有用；AUC&gt;0.8算好，&gt;0.9算很好。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>有一批<strong>已标注正负情感</strong>的文本，要批量自动判断海量新文本的情绪倾向。</p>
+<p><strong>什么时候不用？</strong>
+- <strong>没有标注数据时</strong>：逻辑回归是有监督方法，必须有标签。无标签时只能用词典法或先人工标注一小批。
+- 情感是多分类（喜/怒/哀/乐）或需要细粒度时，二分类模型不够。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：没有标注数据就硬上有监督模型。标签是这个方法的命根子。
+- <strong>坑2</strong>：类别严重不平衡（好评140条、差评10条）却不调类别权重，模型会"全猜好评"拿高准确率却毫无用处——所以要看<span class="arithmatex">\(F1\)</span>和AUC，不能只看准确率。
+- <strong>坑3</strong>：把测试集混进训练。必须独立留出测试集，否则效果指标虚高。</p>
+<p><strong>和相似算法的区别</strong>
+- vs <strong>词频统计</strong>：词频只数词；情感分析判断<strong>情绪极性</strong>，是分类任务。
+- vs <strong>LDA主题分析</strong>：情感分析回答"情绪是正还是负"（有监督）；LDA回答"在讲什么话题"（无监督，不关心褒贬）。</p>
+</div>
+<h3 id="lda">⭐ LDA主题分析  <code>基础级</code><a class="headerlink" href="#lda" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>LDA（隐含狄利克雷分配）是文本分析里最经典的"话题归纳器"。面对几千条没人读过的评论，它自动告诉你：这些文字大致分成<span class="arithmatex">\(K\)</span>个话题，每个话题由哪些词构成、每条评论主要在聊哪个话题。它是<strong>无监督</strong>的——不需要人工标注。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛C题给了大段无标注评论/政策文本，要<strong>自动归纳话题结构</strong></li>
+<li>顾客评论自动分成"质量、物流、价格、客服、尺码"等话题，并看各话题占比</li>
+<li>E/F题政策文本分析：归纳各方关注点、议题演变</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>LDA用两个"骰子"的比喻来理解：</p>
+<ul>
+<li><strong>文档--主题骰子</strong>：每篇评论不是只聊一件事，而是按比例混合多个主题。比如某评论60%在讲价格、40%在讲物流。</li>
+<li><strong>主题--词骰子</strong>：每个主题又是一堆词的概率分布。"价格主题"里最可能出现price、total、final；"物流主题"里最可能出现shipping、delivery、pack。</li>
+<li><strong>核心思想</strong>：反复<strong>共同出现</strong>的词会被归到同一个主题。算法就是来回调整这两个骰子，让"每个主题的词"和"每篇文档的主题混合"都最自洽。</li>
+</ul>
+<p><strong>怎么定主题数<span class="arithmatex">\(K\)</span></strong>：不是拍脑袋。用<strong>困惑度（perplexity）</strong>扫描多个<span class="arithmatex">\(K\)</span>，选困惑度下降变平缓的位置，再结合<strong>主题可解释性</strong>人工判断——主题词读起来像不像一个有意义的话题。</p>
+<p>生活类比：LDA就像给一堆博客自动打标签。它不会预先告诉你标签是什么，而是自己发现"总被一起提到的词构成一类"，再让你给这些类起名字。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>工具箱选"LDA主题分析"</li>
+<li>指定<strong>文本列</strong>feedback_text、<strong>文档ID列</strong>review_id</li>
+<li>预处理：分词、去停用词（可加extra停用词）；设min_df=2（至少出现在2篇文档才保留）、max_df（剔除过于通用的词）</li>
+<li>主题数：若不确定，开启<strong>tune topics</strong>让它扫描推荐<span class="arithmatex">\(K\)</span>；确定后填num_topics</li>
+<li>学习方法选batch；doc_topic prior与topic_word prior设auto；随机状态固定可复现</li>
+<li>运行，查看主题--词分布、文档--主题占比与代表文档</li>
+</ol>
+<p><strong>默认参数参考</strong>：batch学习，自动先验，min_df=2/max_df过滤，主题数自动调优。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>以"跨境电商服装英文评论"案例为例（150篇有效文档）：</p>
+<ul>
+<li><strong>主题数</strong>：自动归纳为<strong>5个主题</strong>。</li>
+<li><strong>最强主题</strong>：占比最高的是「price total final」（主题强度22.6%），核心词price、total、final——显然在讲<strong>价格/费用</strong>。</li>
+<li><strong>怎么解读每个主题</strong>：看该主题下概率最高的若干词，给它起名字。比如出现shipping/delivery/pack的就叫"物流"，出现size/fit/color的就叫"尺码版型"。</li>
+<li><strong>文档--主题分布</strong>：每条评论有一个"主导主题"，据此统计各话题在全体评论中的占比。</li>
+<li><strong>代表文档</strong>：每个主题抽几条最典型的原文回读，验证主题名取得对不对。</li>
+</ul>
+<p><strong>怎么判断好坏</strong>：主题词<strong>语义清晰、彼此区分</strong>就是好结果；如果两个主题词几乎一样，说明<span class="arithmatex">\(K\)</span>太多或数据太稀，需要合并或调整。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>有大量<strong>无标注</strong>文本，想自动归纳话题结构、看讨论焦点分布。</p>
+<p><strong>什么时候不用？</strong>
+- 你已经知道文本该分哪几类、且有标签——直接做分类更准。
+- 文本太短（每条就几个字）时，LDA效果差，短文本建议先用文本聚类。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：主题数<span class="arithmatex">\(K\)</span>乱设。一定要结合困惑度扫描和人工可解释性，别只挑数字最小的。
+- <strong>坑2</strong>：不看代表文档就给主题起名。主题词可能有歧义，必须回读原文确认。
+- <strong>坑3</strong>：把LDA当因果。它只发现"词常一起出现"，不代表这些主题之间有因果关系。</p>
+<p><strong>和相似算法的区别</strong>
+- vs <strong>文本聚类</strong>：两者都是无监督分组。LDA给出<strong>软分配</strong>（一篇评论可同时属于多个主题，带比例）且有可读的主题词；K-Means聚类是<strong>硬分配</strong>（一篇只进一簇），适合短文本。
+- vs <strong>情感分析</strong>：情感分析看"褒贬"，LDA看"话题"，回答的是完全不同的问题，常配合使用（先LDA分话题，再对每个话题做情感）。</p>
+</div>
+<h2 id="_6">进阶级算法速览<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">社会网络关系图（共词矩阵）  <code>进阶级</code><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把"经常出现在同一篇文献里的关键词"连成一张网络图，看哪些词是研究热点核心、哪些词对总被搭配使用、整个领域分成几个主题簇。</p>
+<p><strong>美赛场景区</strong>：分析某领域文献/政策文件的关键词共现，识别研究热点结构与主题聚类，适合做领域综述、技术情报分析。</p>
+<p><strong>核心原理</strong>：以关键词为节点、两词在同一篇中共现的次数为连边权重，构建无向加权网络；计算度中心性（连边最多的核心词）、中介中心性（连接不同主题的"桥"），再做社区发现自动分成若干主题簇。</p>
+<p><strong>操作要点</strong>：工具箱选"社会网络关系图（共词矩阵）"；指定关键词列；布局spring；权重用共现次数；中心性度量度中心性；开启社区检测。用分隔符[ ,;，；、/|
+s]+拆分多关键词。</p>
+<p><strong>结果关键</strong>：案例（150篇智能制造文献）30个高频词节点、230条连边、5个社区、网络密度0.529；"智能制造"是核心节点，"智能制造--数字化转型"共现最强（21篇同现）。节点越大越居中越核心，连边越粗共现越强。</p>
+<p><strong>注意</strong>：共现只表示"同篇出现"，<strong>不等于相关或因果</strong>。中介中心性高的词即使频率不高，也可能是连接不同主题的关键桥接。</p>
+</div>
+<h3 id="tf-idf">TF-IDF分析  <code>进阶级</code><a class="headerlink" href="#tf-idf" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：在词频基础上加权——一个词在本文档出现越多、但在整个语料中出现越少，权重越高，从而揪出真正"代表这一类"的特色词。</p>
+<p><strong>美赛场景区</strong>：美赛C题分好组（如配送/质量/售后）后，找出每组<strong>独有</strong>的代表关键词，而不是各组都提到的通用词。</p>
+<p><strong>核心原理</strong>：TF（词频）<span class="arithmatex">\(=\)</span>词在本文档出现次数；IDF（逆文档频率）<span class="arithmatex">\(=\log\frac{文档总数}{含该词的文档数}\)</span>。TF-IDF<span class="arithmatex">\(=TF\times IDF\)</span>。像"的、是"处处都有，IDF接近0，权重被压下去；只在某组反复出现的词，IDF高、权重突出。常用l2归一化。</p>
+<p><strong>操作要点</strong>：工具箱选"TF-IDF分析"；norm选l2；ngram range(1,1)；设min_df/max_df过滤；按分组质心提取各组代表词。</p>
+<p><strong>结果关键</strong>：案例中商品质量组突出"手感、紧密"，售后服务组突出"售后、客服、问题"，配送服务组突出"快递、配送、包装"——三组关注点被关键词清晰区分。</p>
+<p><strong>注意</strong>：TF-IDF是文本向量化的标准武器，也是情感分析、文本聚类、LDA之前的常用特征步骤。它找的是"区分性"，不是"重要性"。</p>
+</div>
+<h3 id="_8">文本聚类分析  <code>进阶级</code><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：不预设任何类别标签，把"诉求相似"的文本自动归成几堆，适合客服留言这种口语化、长短不一、没人预先分类的数据。</p>
+<p><strong>美赛场景区</strong>：C题中对售后留言、投诉文本做自动分诊，归纳出几类典型问题及占比，供人工复核。</p>
+<p><strong>核心原理</strong>：先用TF-IDF字符n-gram把文本转成数值矩阵，再跑K-Means；从<span class="arithmatex">\(k=2\)</span>到上限逐个试，以<strong>轮廓系数</strong>最高（同分取小<span class="arithmatex">\(k\)</span>）选簇数；最后用每簇质心的高权重词命名主题，用轮廓系数、CH指数、簇内余弦相似度评估质量。</p>
+<p><strong>操作要点</strong>：工具箱选"文本聚类分析"；指定文本列；vectorizer选tfidf，分析器char_wb，ngram 2+1；k设auto让其自动选；固定随机种子。</p>
+<p><strong>结果关键</strong>：案例（生鲜售后留言）聚成4簇，轮廓系数0.107（文本聚类普遍偏低，0.1左右即基本可分）。用每簇高频词人工概括主题（如"配送压坏""售后回复"等）。</p>
+<p><strong>注意</strong>：文本聚类轮廓系数天然偏低，别拿数值变量聚类的高标准来要求。聚类后<strong>必须人工读每簇代表词来命名</strong>，机器只负责分堆，主题含义要人来解释。</p>
+</div>
+<h3 id="_9">新词发现  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：不依赖任何词典，直接从海量文本里自动找出"大家新造出来、词典里还没有"的词，比如"半固态电池""零重力座椅"。</p>
+<p><strong>美赛场景区</strong>：分析新兴领域（新能源、AI、网络热词）时，业务词库更新跟不上，用它自动挖掘候选新词补充词表。</p>
+<p><strong>核心原理</strong>：三重证据筛选——(1)<strong>凝固度（PMI互信息）</strong>：字之间结合得紧不紧，切一刀算最小PMI；(2)<strong>自由度（左右熵）</strong>：这个词能不能出现在不同语境（左右邻居越多样越能独立成词）；(3)<strong>词频</strong>。三者都过阈值才入选，按综合得分排序。</p>
+<p><strong>操作要点</strong>：工具箱选"新词发现"；候选字串长度2<span class="arithmatex">\(\sim\)</span>6；设最小词频、最小PMI、最小左右熵；去重、去纯数字、去非中文。</p>
+<p><strong>结果关键</strong>：案例（车主评论）挖出36个候选新词，头部如"半固态电池、零重力座椅、能量回收、城市领航、哨兵模式"，复用强度与成词证据最充分，可交人工确认后入词库。</p>
+<p><strong>注意</strong>：这是辅助工具，输出只是<strong>候选清单</strong>，必须人工复核再入库，机器可能把高频搭配误判成词。它解决的是"分词词典太旧"的问题。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

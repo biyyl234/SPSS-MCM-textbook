@@ -1,0 +1,1809 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch15/">
+      
+      
+        <link rel="prev" href="../ch14/">
+      
+      
+        <link rel="next" href="../ch16/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第15章 试验设计 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第15章 试验设计
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全析因设计 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 正交实验设计（田口设计） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 响应面分析 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ccd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中心复合设计（CCD） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        均匀设计 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        拉丁方设计 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#box-behnkenbbd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Box-Behnken设计（BBD） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        部分析因设计 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plackett-burman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plackett-Burman设计 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">试验设计<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>试验设计（DOE）解决一个问题：<strong>怎么用最少的试验次数，找到最优工艺参数组合</strong>。比如化工生产中，温度、时间、催化剂用量都影响收率——怎么安排试验才能既省钱又高效地找到最佳配方？试验设计用统计方法科学安排试验点，系统地分析各因素的主效应、交互作用，最后预测最优条件。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>美赛实验/化工/材料类题目中非常实用——只要题目涉及"调参数找最优"（反应温度、时间、配比），就用试验设计。正交设计用少量试验筛选因素，响应面分析精确找最优点。SPSS通过"分析 → 试验设计"菜单可完成部分操作。</p>
+<p><strong>学习路径建议</strong></p>
+<p>先学<strong>全析因设计</strong>（理解因素与交互作用的基础），再学<strong>正交实验设计</strong>（用少量试验做多因素筛选，美赛高频），然后学<strong>响应面分析</strong>（精确寻优）。CCD和BBD是响应面的两种常用设计方案。部分析因和Plackett-Burman用于早期因子筛选。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">全析因设计  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>全析因设计就是<strong>所有因素的所有水平组合都做一遍试验</strong>。比如2个温度水平<span class="arithmatex">\(\times\)</span>3个时间水平<span class="arithmatex">\(=\)</span>6个组合，每个组合重复几次。它能最完整地估计主效应和交互作用，但因素多了试验次数爆炸。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>因素少（<span class="arithmatex">\(\leq\)</span>4个）、水平少（<span class="arithmatex">\(\leq\)</span>3个）的精细试验</li>
+<li>需要研究因素间交互作用时</li>
+<li>美赛中因素少但要搞清楚每个因素影响时</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象做蛋糕：烤温有高/中/低3档，时间有60/90/120/150/180分钟5档。全析因就是<span class="arithmatex">\(3\times5=15\)</span>种组合<strong>全部做一遍</strong>。</p>
+<p>然后用方差分析（ANOVA）分解响应的变异：
+- <strong>主效应</strong>：温度单独的影响有多大？时间单独的影响有多大？
+- <strong>交互作用</strong>：温度高时延长时间更好，还是温度低时延长时间更好？如果折线图交叉明显，说明有交互</p>
+<p>关键洞察：当交互显著时，不能单独看"温度越高越好"——因为温度的效果取决于时间水平。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>SPSS菜单：<strong>分析 → 试验设计 → 析因</strong></li>
+<li>响应变量选"抗折强度"，因素选"烧成温度"和"保温时间"</li>
+<li>模型选全模型（主效应+所有交互）</li>
+<li>多重比较选Tukey HSD</li>
+<li>ANOVA类型选III型</li>
+<li>点击确定</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>方差分析表</strong>：烧成温度<span class="arithmatex">\(F=111\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>）、保温时间<span class="arithmatex">\(F=26\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>）、交互<span class="arithmatex">\(F=6.2\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>）</li>
+<li><strong>偏<span class="arithmatex">\(\eta^2\)</span></strong>：温度0.62（解释62%变异）、时间0.44、交互0.27</li>
+<li><strong>交互作用图</strong>：折线明显交叉→交互显著，不能单独下结论</li>
+<li><strong>最优组合</strong>：1300℃<span class="arithmatex">\(\times\)</span>180min，均值38.48</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>因素少（<span class="arithmatex">\(\leq\)</span>4个）、水平少，且需要完整研究交互作用。</p>
+<p><strong>什么时候不用？</strong>因素多（<span class="arithmatex">\(\geq\)</span>5个）——全析因试验次数呈指数增长（<span class="arithmatex">\(2^5=32\)</span>次还能接受，<span class="arithmatex">\(2^7=128\)</span>次就太多了），改用部分析因或正交设计。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：忽略交互作用只看主效应——交互显著时主效应会误导
+- <strong>坑2</strong>：不做重复试验——没有重复就无法估计误差，无法做ANOVA</p>
+</div>
+<h3 id="_4">⭐ 正交实验设计（田口设计）  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>正交实验设计用<strong>正交表</strong>安排试验——因素很多（如6个参数各5个水平），但不用做<span class="arithmatex">\(5^6=15625\)</span>次，只做25次就能系统估计各因素的主效应。它是美赛中<strong>最常用的实验设计方法</strong>。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>注塑工艺优化：6个参数（料温、模温、保压、注射速度、冷却时间、背压）各5水平</li>
+<li>化工配方筛选：多个因素各多个水平，试验成本高</li>
+<li>美赛中"多因素参数优化"类题目</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>正交表的巧妙之处在于<strong>均衡分散、整齐可比</strong>：</p>
+<ul>
+<li>任意两个因素的水平组合<strong>均匀出现</strong>——每个因素的每个水平都和其他因素的每个水平搭配过相同次数</li>
+<li>这样每个因素的效应可以<strong>独立估计</strong>，不受其他因素干扰</li>
+<li>虽然只做了25次（而非<span class="arithmatex">\(5^6=15625\)</span>次），但信息效率很高</li>
+</ul>
+<p><strong>分析步骤</strong>：
+1. <strong>极差分析</strong>：算每个因素各水平的响应均值，极差R越大=该因素影响越大
+1. <strong>方差分析</strong>：检验因素是否显著，算贡献率
+1. <strong>选优</strong>：显著因素取最优水平组合，非显著因素按成本选</p>
+<p>就像田忌赛马：不需要每匹马都和每匹马赛一遍，用巧妙的对阵安排就能比较出马的优劣。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>在<strong>Dabbit AI SPSS工具箱</strong>中操作（SPSS也可通过"分析 → 试验设计 → 正交设计"实现）：</p>
+<ol>
+<li>上传试验数据，因素列自动识别，响应列自动识别</li>
+<li>信噪比类型选"望大特性"（拉伸强度越大越好）</li>
+<li>优水平选择基准选"信噪比优先"（不仅均值高，还要波动小）</li>
+<li>显著性水平0.05</li>
+<li>点击运行，输出极差分析表和方差分析表</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>极差排序</strong>：料筒温度R=6.46<span class="arithmatex">\(&gt;\)</span>保压压力3.58<span class="arithmatex">\(&gt;\)</span>模具温度3.75<span class="arithmatex">\(&gt;\)</span>冷却时间3.48<span class="arithmatex">\(&gt;\)</span>注射速度1.61<span class="arithmatex">\(&gt;\)</span>背压0.34</li>
+<li><strong>方差分析</strong>：料筒温度贡献率48.6%（最关键），背压不显著（<span class="arithmatex">\(p=0.31\)</span>）</li>
+<li><strong>最优组合</strong>：料温260℃、模温70℃、保压40MPa、注射速度70%、冷却35s</li>
+<li><strong>预测响应</strong>：约63.27MPa（需验证试验确认）</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>因素多（3--7个）、水平数相同、试验成本高、只需估计主效应。</p>
+<p><strong>什么时候不用？</strong>
+- 需要研究交互作用——正交表主效应可能和交互混叠
+- 因素水平不等——需用混合水平正交表</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把预测最优组合直接当最终结论——必须追加<strong>验证试验</strong>确认
+- <strong>坑2</strong>：忽略信噪比，只看均值——田口方法的核心是"稳健性"，不仅要均值高，还要波动小</p>
+<p><strong>和全析因的区别</strong>：正交设计用少量试验换高效筛选，但不能估计高阶交互；全析因信息完整但试验多。</p>
+</div>
+<h3 id="_5">⭐ 响应面分析  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>响应面分析（RSM）在正交/筛选找到关键因素后，用<strong>二次多项式</strong>拟合"因素→响应"的曲面，然后在曲面上找最优点。它不仅知道"哪个因素重要"，还能精确算出"最佳参数是多少"。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>化工浸提工艺优化：温度、时间、液料比三因素找最大得率</li>
+<li>食品配方优化：蛋糕比容最大化</li>
+<li>美赛中已经筛选出关键因素，需要精确寻优时</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>先用正交/PB设计筛选出3--5个关键因素，然后用CCD或BBD设计安排试验点，拟合二次模型：</p>
+<div class="arithmatex">\[
+y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + \varepsilon
+\]</div>
+<ul>
+<li><strong>线性项</strong>：因素增大，响应线性增大/减小</li>
+<li><strong>平方项</strong>：存在最优点（开口向下=极大值，开口向上=极小值）</li>
+<li><strong>交互项</strong>：两个因素联合作用</li>
+</ul>
+<p>然后对二次模型求导找驻点，用二阶导数矩阵（Hessian）的特征值判断是极大点、极小点还是鞍点。等高线图和3D响应面图直观展示最优点位置。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>SPSS菜单：<strong>分析 → 试验设计 → 响应面</strong></li>
+<li>响应列选"茶多酚得率"，因素选"浸提温度、浸提时间、液料比"</li>
+<li>设计类型选CCD（中心复合设计）</li>
+<li>优化目标选maximize（最大化得率）</li>
+<li>模型简化开启（自动剔除不显著项）</li>
+<li>点击确定</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>模型<span class="arithmatex">\(R^2=0.98\)</span></strong>，失拟检验<span class="arithmatex">\(p=0.51\)</span>（不显著=模型充分）</li>
+<li><strong>最优条件</strong>：温度83.8℃、时间51.7min、液料比25.8</li>
+<li><strong>预测响应</strong>：得率83.54%（95%置信区间83.2--83.9）</li>
+<li><strong>曲面类型</strong>：所有特征值为负→极大值点</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>已经筛选出3--5个关键因素，需要精确找最优点。</p>
+<p><strong>什么时候不用？</strong>
+- 还不知道哪些因素重要——先做PB/正交筛选
+- 因素太多（<span class="arithmatex">\(&gt;\)</span>5个）——二次模型参数太多</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不做失拟检验直接用模型预测——失拟显著说明二次模型不够
+- <strong>坑2</strong>：驻点在试验域外——此时不能报驻点值，应在边界上找最优</p>
+<p><strong>和正交设计的区别</strong>：正交设计<strong>筛选因素</strong>（哪个重要），响应面<strong>精确寻优</strong>（最佳值是多少）。两者是接力关系。</p>
+</div>
+<h3 id="ccd">中心复合设计（CCD）  <code>基础级</code><a class="headerlink" href="#ccd" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>CCD是响应面最常用的试验设计方案——在2水平全因子点（立方点）基础上，加轴向点（星号点）和中心点，共三类点。它能拟合完整的二次模型。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>植物提取工艺优化（5个因素）</li>
+<li>任何需要响应面建模且因素数<span class="arithmatex">\(2\leq k\leq5\)</span>时</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>CCD由三部分组成：
+- <strong>立方点</strong>：<span class="arithmatex">\(2^k\)</span>个全因子点（各因素高低水平组合）
+- <strong>轴向点</strong>：<span class="arithmatex">\(2k\)</span>个点（一个因素取<span class="arithmatex">\(\pm\alpha\)</span>，其他取0）——用来估计平方项
+- <strong>中心点</strong>：重复多次（估计纯误差和失拟）</p>
+<p><span class="arithmatex">\(\alpha\)</span>选"可旋转"模式时，各方向预测方差相等，是最常用选择。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>在Dabbit AI工具箱中选择"中心复合设计"，指定各因素的高低水平，<span class="arithmatex">\(\alpha\)</span>模式选rotatable，响应列选yield_pct。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li>模型<span class="arithmatex">\(R^2=0.99\)</span>，失拟检验不显著</li>
+<li>最优编码条件换算为实际工艺参数（如温度66.3℃、时间36.2min等）</li>
+<li>预测响应87.59（95%预测区间86.3--88.9）</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>CCD vs BBD</strong>：CCD有轴向点（试验范围比因子范围大），适合想探索边界外的情况；BBD没有角点，试验次数更少但不探索极端组合。</p>
+</div>
+<h2 id="_6">进阶级算法速览<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">均匀设计  <code>进阶级</code><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：中国数学家方开泰、王元提出的试验设计方法——让试验点在因素空间中<strong>均匀散布</strong>，用极少试验覆盖整个多维空间。</p>
+<p><strong>美赛场景区</strong>：化工工艺4因素150水平，试验代价极高，无法做全因子。</p>
+<p><strong>核心原理</strong>：与正交表"整齐可比"不同，均匀设计追求"均匀散布"——每个因素的每个水平只出现一次，点在空间中均匀分布。配合二次回归模型预测最优组合。</p>
+<p><strong>操作要点</strong>：因素数和试验次数匹配均匀表，二次模型=主效应+平方项，优化方向最大化响应。</p>
+<p><strong>结果关键</strong>：CD2（中心化L2偏差）越小越均匀；二次模型<span class="arithmatex">\(R^2=0.996\)</span>预测最优参数。</p>
+<p><strong>注意</strong>：均匀设计点散布均匀但没有重复，无法估计纯误差，需配合建模使用。</p>
+</div>
+<h3 id="_8">拉丁方设计  <code>进阶级</code><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：用<span class="arithmatex">\(k\times k\)</span>方阵同时控制两个无关变量（如工位、时段），只关心处理因素（如配方）的差异。</p>
+<p><strong>美赛场景区</strong>：涂装产线5种配方对比，但5个工位和5个时段都有系统差异，需要同时扣除两类干扰。</p>
+<p><strong>核心原理</strong>：每个处理在每行每列恰好出现一次——就像数独，行=工位、列=时段、数字=配方。这样工位和时段的系统偏差被区组吸收，误差更纯净。</p>
+<p><strong>操作要点</strong>：指定行区组、列区组、处理因素、因变量；Tukey HSD多重比较。</p>
+<p><strong>结果关键</strong>：处理<span class="arithmatex">\(F=113\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>），F3配方最好（均值5.98），F4最差（4.61）。</p>
+<p><strong>注意</strong>：拉丁方要求行、列、处理水平数相等；不能估计行×列交互。</p>
+</div>
+<h3 id="box-behnkenbbd">Box-Behnken设计（BBD）  <code>进阶级</code><a class="headerlink" href="#box-behnkenbbd" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：响应面的另一种设计方案——没有角点，只取边中点和中心点，试验次数比CCD少。</p>
+<p><strong>美赛场景区</strong>：蛋糕配方优化（加水量、打发时间、焙烤温度3因素）。</p>
+<p><strong>核心原理</strong>：BBD的点在边的中点（两因素取端点、第三因素取中心），不做极端角点组合——适合"极端组合不安全/不现实"的场景（如温度太高会烤糊）。</p>
+<p><strong>操作要点</strong>：3因素BBD只需15次试验（加中心点重复），拟合二次响应面。</p>
+<p><strong>结果关键</strong>：比容最优条件（加水43.7%、打发9.8min、温度172℃），预测比容3.81mL/g。</p>
+<p><strong>注意</strong>：BBD不探索角点——如果最优点在角上附近，BBD会漏掉。CCD和BBD根据实际选择。</p>
+</div>
+<h3 id="_9">部分析因设计  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：全析因的"1/2"或"1/4"——<span class="arithmatex">\(2^{k-p}\)</span>设计，用部分试验筛选主效应，牺牲高阶交互换试验次数。</p>
+<p><strong>美赛场景区</strong>：7个两水平因子全因子需128次太贵，用<span class="arithmatex">\(2^{7-3}=16\)</span>次筛选关键因子。</p>
+<p><strong>核心原理</strong>：分辨率IV设计——主效应不与二阶交互混叠，但二阶交互之间互相混叠。用Lenth伪标准误判断哪些因子显著。</p>
+<p><strong>操作要点</strong>：模型项选main，显著性方法选Lenth，响应列选收率。</p>
+<p><strong>结果关键</strong>：7个因子中3个显著（温度、催化剂量、养晶时间），R<span class="arithmatex">\(^2\)</span>=0.84。</p>
+<p><strong>注意</strong>：部分析因是筛选设计——目的是"找到关键少数"，不是精确寻优。显著因子后续做响应面。</p>
+</div>
+<h3 id="plackett-burman">Plackett-Burman设计  <code>进阶级</code><a class="headerlink" href="#plackett-burman" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：最经济的因子筛选设计——<span class="arithmatex">\(N\)</span>次试验最多筛<span class="arithmatex">\(N-1\)</span>个两水平因子，专门用来从很多候选因子中快速找出关键的。</p>
+<p><strong>美赛场景区</strong>：8个工艺因子（温度、时间、催化剂量等）想快速找出4个关键的。</p>
+<p><strong>核心原理</strong>：PB设计是分辨率III——主效应可能与二阶交互混叠，但用极少试验就能估计所有主效应。效应<span class="arithmatex">\(=\)</span>高水平均值<span class="arithmatex">\(-\)</span>低水平均值。</p>
+<p><strong>操作要点</strong>：因子列选8个两水平因子，响应列选收率，显著性规则auto。</p>
+<p><strong>结果关键</strong>：8个因子中4个显著（温度+3.9、时间-3.6、催化剂量+3.0、保温时间+1.9）。</p>
+<p><strong>注意</strong>：PB是纯筛选设计——找到显著因子后，下一步要做全因子或响应面，不能直接当最终结论。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1707 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/appendix_a/">
+      
+      
+        <link rel="prev" href="../ch18/">
+      
+      
+        <link rel="next" href="../appendix_b/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>附录A 美赛真题题型与算法速查表 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              附录A 美赛真题题型与算法速查表
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六大题型与常用算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六大题型与常用算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A题：连续型问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B题：离散型问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C题：大数据 / 数据挖掘
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D题：网络科学
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E题：环境科学
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F题：政策建模
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rightarrow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题类型 \(\rightarrow\) 推荐算法速查表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        推荐建模流程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用提醒
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">美赛真题题型与算法速查表<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>本章是给你的"考场急救手册"。比赛三天，拿到题目往往一时不知道从何下手——这张表就是帮你<strong>先判断题型、再反查该用哪些算法、对应本书哪一章</strong>。建议赛前打印出来贴在桌边。</p>
+<h2 id="_2">六大题型与常用算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>美赛（MCM/ICM）按字母分为六类，特点和常用算法如下。</p>
+<h3 id="a">A题：连续型问题<a class="headerlink" href="#a" title="Permanent link">&para;</a></h3>
+<p>A题常涉及连续变化的物理量、微分方程、连续优化（如流体、扩散、生态、物理过程）。
+<strong>常用算法</strong>：描述性统计（第1章）摸清数据；回归分析（第4章）拟合连续关系；时间序列与计量经济（第6章）处理动态过程；预测模型（第7章）外推；规划求解（第12章）做连续优化。</p>
+<h3 id="b">B题：离散型问题<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
+<p>B题常涉及离散决策、调度、路径、分配、图论优化（如排班、选址、网络流）。
+<strong>常用算法</strong>：规划求解（第12章，整数规划/0-1规划是主力）；聚类与降维（第5章）做分组；相关分析（第2章）找影响因素；差异比较（第3章）验证方案优劣。</p>
+<h3 id="c">C题：大数据 / 数据挖掘<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
+<p>C题给你一个较大的数据集（常含文本列、多变量、多表），要求清洗、探索、建模、预测。这是本书最对口的题型。
+<strong>常用算法</strong>：描述性统计（第1章）起步；相关分析（第2章）与差异比较（第3章）探索关系；回归分析（第4章）与机器学习（第11章）建模预测；<strong>文本分析（第17章）</strong>处理评论/政策文本（词频、情感分析、LDA主题分析）；聚类与降维（第5章）做客户/样本分群；综合评价（第8章）打分排序。</p>
+<h3 id="d">D题：网络科学<a class="headerlink" href="#d" title="Permanent link">&para;</a></h3>
+<p>D题关注节点与连接构成的网络（如社交网络、交通网、传播网络）。
+<strong>常用算法</strong>：<strong>社会网络关系图（共词矩阵，第17章）</strong>的中心性与社区发现思路可迁移；聚类与降维（第5章）做网络社团识别；相关分析（第2章）找节点属性关系；规划求解（第12章）做网络流/最短路。</p>
+<h3 id="e">E题：环境科学<a class="headerlink" href="#e" title="Permanent link">&para;</a></h3>
+<p>E题涉及生态、污染、可持续发展、资源环境，常需综合多方证据、做政策评估。
+<strong>常用算法</strong>：综合评价（第8章）构建环境指标体系；空间计量（第14章）分析区域分布；时间序列（第6章）看趋势；<strong>Meta分析（第16章）</strong>汇总多地区/多研究的环境效应估计；文本分析（第17章）分析政策文件与公众意见。</p>
+<h3 id="f">F题：政策建模<a class="headerlink" href="#f" title="Permanent link">&para;</a></h3>
+<p>F题关注社会经济政策、公平性、伦理，数据常偏宏观、定性与定量混合。
+<strong>常用算法</strong>：综合评价（第8章）做政策效果打分；回归分析（第4章）与机器学习（第11章）找政策影响因素；<strong>Meta分析（第16章）</strong>综合多项政策研究证据；<strong>功效分析（第18章）</strong>论证样本量是否充足；问卷研究（第9章）设计调研。</p>
+<h2 id="rightarrow">问题类型 <span class="arithmatex">\(\rightarrow\)</span> 推荐算法速查表<a class="headerlink" href="#rightarrow" title="Permanent link">&para;</a></h2>
+<p>下表按"你拿到题目后会遇到的典型任务"反查算法。左列是任务信号，右列是首选算法与章节。</p>
+<p>| p{6.2cm} p{2.6cm}}</p>
+<table>
+<thead>
+<tr>
+<th><strong>题目信号 / 任务</strong></th>
+<th><strong>首选算法</strong></th>
+<th><strong>章节</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>题目信号 / 任务</strong></td>
+<td><strong>首选算法</strong></td>
+<td><strong>章节</strong></td>
+</tr>
+<tr>
+<td>拿到任何数据，第一步</td>
+<td>描述性统计、数据概览</td>
+<td>第1章</td>
+</tr>
+<tr>
+<td>数据偏态严重、要不要换方法</td>
+<td>正态性检验</td>
+<td>第1章</td>
+</tr>
+<tr>
+<td>两类样本谁高谁低、差多少</td>
+<td>两独立样本t检验 / Mann-Whitney</td>
+<td>第3章</td>
+</tr>
+<tr>
+<td>三组及以上比较、看组间差异</td>
+<td>单因素方差分析 / Kruskal-Wallis</td>
+<td>第3章</td>
+</tr>
+<tr>
+<td>两个变量是否一起变动、多强</td>
+<td>相关分析（Pearson/Spearman）</td>
+<td>第2章</td>
+</tr>
+<tr>
+<td>用一个或多个变量预测另一变量</td>
+<td>线性回归 / 多元回归</td>
+<td>第4章</td>
+</tr>
+<tr>
+<td>分类预测（是否违约、好评差评）</td>
+<td>逻辑回归 / 机器学习分类</td>
+<td>第11章</td>
+</tr>
+<tr>
+<td>给对象打分排序、选最优方案</td>
+<td>综合评价（AHP/熵权/TOPSIS等）</td>
+<td>第8章</td>
+</tr>
+<tr>
+<td>把样本自动分成几类</td>
+<td>聚类分析（K-Means等）</td>
+<td>第5章</td>
+</tr>
+<tr>
+<td>变量太多、想降维</td>
+<td>主成分分析 / 因子分析</td>
+<td>第5章</td>
+</tr>
+<tr>
+<td>有时间顺序、要预测未来</td>
+<td>时间序列（ARIMA等）</td>
+<td>第6章</td>
+</tr>
+<tr>
+<td>要做更准的数值预测</td>
+<td>机器学习预测模型</td>
+<td>第7、11章</td>
+</tr>
+<tr>
+<td>文本里大家最常说什么词</td>
+<td>词频统计、词云图</td>
+<td>第17章</td>
+</tr>
+<tr>
+<td>评论文本是好评还是差评</td>
+<td>文本情感分析</td>
+<td>第17章</td>
+</tr>
+<tr>
+<td>一大段文字里讲了哪几个话题</td>
+<td>LDA主题分析</td>
+<td>第17章</td>
+</tr>
+<tr>
+<td>想找某类文本独有的关键词</td>
+<td>TF-IDF分析</td>
+<td>第17章</td>
+</tr>
+<tr>
+<td>无标签留言自动分诊归类</td>
+<td>文本聚类分析</td>
+<td>第17章</td>
+</tr>
+<tr>
+<td>各研究结果不一，要合并成总结论</td>
+<td>平均值/二分类/相关系数Meta分析</td>
+<td>第16章</td>
+</tr>
+<tr>
+<td>只有一堆p值，想判断整体是否有效应</td>
+<td>P值合并</td>
+<td>第16章</td>
+</tr>
+<tr>
+<td>规划抽样：要招多少样本才够</td>
+<td>功效分析之均值差/回归</td>
+<td>第18章</td>
+</tr>
+<tr>
+<td>多城市/多区域数据有空间聚集</td>
+<td>空间计量</td>
+<td>第14章</td>
+</tr>
+<tr>
+<td>流程/工序稳定性、合格率监控</td>
+<td>质量控制</td>
+<td>第13章</td>
+</tr>
+<tr>
+<td>实验分组怎么设计最省样本</td>
+<td>试验设计</td>
+<td>第15章</td>
+</tr>
+<tr>
+<td>问卷数据信效度、因子结构</td>
+<td>问卷研究</td>
+<td>第9章</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">推荐建模流程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>拿到题目后，绝大多数数据驱动的题目（尤其C/E/F题）都可以按下面这条主线走，<strong>不要一上来就上复杂模型</strong>：</p>
+<ol>
+<li><strong>第一步：描述性统计（第1章）</strong> 先把数据看透——均值、分布、缺失、异常值。这一步决定你后面能不能用参数方法，论文的"数据描述"部分也靠它。<strong>没有这一步，后面都是空中楼阁。</strong></li>
+<li><strong>第二步：差异比较 / 相关探索（第2、3章）</strong> 看各组之间有没有差别、变量之间有没有关系。这一阶段帮你<strong>发现规律、选对变量</strong>，也为论文的"探索性分析"提供图表。</li>
+<li><strong>第三步：回归 / 评价建模（第4、8章）</strong> 在前两步基础上，建立解释或评价模型：想找影响因素用回归，想打分排序用综合评价。这是论文的<strong>核心模型部分</strong>。</li>
+<li><strong>第四步：预测 / 深化（第7、11、17章）</strong> 题目要求预测未来时，用时间序列或机器学习；有文本数据时，用第17章的词频、情感分析、LDA补充定性洞察。</li>
+<li><strong>贯穿始终：稳健性与敏感性检验</strong> 换个样本量、换个参数结论还成立吗？功效分析（第18章）说明样本够不够，敏感性分析说明结论扎不扎实。<strong>评委最看重这一步。</strong></li>
+</ol>
+<p><strong>一句话口诀</strong>：先描述、再比较、后建模、终预测，每步都做稳健性。</p>
+<h2 id="_4">使用提醒<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ul>
+<li>本表给的是<strong>首选算法</strong>，实际题目常需要2<span class="arithmatex">\(\sim\)</span>3个算法组合使用（如C题：描述统计 <span class="arithmatex">\(\rightarrow\)</span> 回归建模 <span class="arithmatex">\(\rightarrow\)</span> 情感分析 <span class="arithmatex">\(\rightarrow\)</span> 综合评价）。</li>
+<li>选算法前先看<strong>数据类型</strong>：连续数值用回归/方差分析，分类结局用逻辑回归，文本用第17章，多研究证据合并用第16章。</li>
+<li>任何模型跑完都要<strong>回原文/回数据核对</strong>，别迷信输出数字——这是全书反复强调的原则。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

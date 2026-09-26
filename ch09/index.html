@@ -1,0 +1,2229 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch09/">
+      
+      
+        <link rel="prev" href="../ch08/">
+      
+      
+        <link rel="next" href="../ch10/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第9章 问卷研究 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第9章 问卷研究
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        项目分析（区分度分析） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 信度分析 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 效度分析 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        中介效应（含平行/链式中介） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        调节作用（调节效应）分析 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 结构方程模型（SEM） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内容效度 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#harman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        共同方法偏差检验（Harman） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        验证性因子分析（CFA） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        路径分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        调节中介作用（有调节的中介） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rwg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        组内评分者信度（rwg） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对应分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多重响应交叉分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        KANO模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maxdiff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MaxDiff最大差异测量 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cbc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        联合分析（含CBC） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NPS净推荐值分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        价格敏感度分析（PSM） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#turf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Turf组合模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bpto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        品牌价格抵补模型（BPTO） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        价格断裂点模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">问卷研究<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>问卷研究是通过发放量表、收集被试主观评分来测量"态度、满意度、意愿"这类看不见摸不着的构念（construct）的一整套方法。它要回答两个核心问题：你的问卷<strong>靠不靠谱</strong>（信度）、测的是不是你想测的东西（效度）？以及问卷数据之间的<strong>关系结构</strong>是怎样的（谁影响谁、有没有中介和调节）。从发问卷前的项目分析、到回收后的信效度检验、再到用结构方程模型验证理论模型，是一条完整的链条。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>美赛中凡是涉及"人"的主观评价的题目几乎都要用到本章方法：C 题（大数据题）里若带用户评分、满意度、调查数据；B 题中需要做公众偏好、政策接受度分析；以及任何需要设计问卷或解释问卷数据的赛题。尤其<strong>信度分析、效度分析、结构方程模型（SEM）</strong>是问卷类论文的"标配三件套"，评审看到问卷数据却没有报告信效度会直接质疑结论的可靠性。</p>
+<p><strong>学习路径建议</strong></p>
+<p>按真实做问卷的顺序学：先学<strong>项目分析（区分度）</strong>筛掉烂题，再学<strong>信度分析</strong>确认题项内部一致、<strong>效度分析</strong>（探索性因子分析）确认结构合理；然后学<strong>中介效应</strong>和<strong>调节效应</strong>看懂变量间的作用机制；最后用<strong>结构方程模型（SEM）</strong>把测量和关系统一在一个模型里验证理论假设。其余如 KANO、PSM、联合分析、NPS 等是面向特定商业问题的进阶工具，遇到对应题型再查即可。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">项目分析（区分度分析）  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>项目分析又叫区分度分析，是正式发问卷前的"预试体检"——先小范围找一批人填一遍，看每道题能不能把"总分高的人"和"总分低的人"区分开。区分不开的题就是烂题，应该删掉或改掉。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>自编问卷正式大规模发放<strong>之前</strong>的预试环节，必备步骤</li>
+<li>美赛中若题目要求设计问卷或量表，可在方法部分说明"经项目分析删去区分度不足的题项"</li>
+<li>检验李克特量表（Likert）中每一道题的鉴别能力</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象你出了一套考卷，想知道每道题有没有水平区分度。做法很朴素：</p>
+<ul>
+<li>先把所有人按总分从高到低排队，取前 27% 当"高分组"、后 27% 当"低分组"（这是教育测量里的经典切法）</li>
+<li>对每一道题，看高分组和低分组在这道题上的平均分差多少</li>
+<li>如果一道题好学生和差学生得分差不多，说明这道题<strong>没有区分度</strong>，谁答都一样，是废题</li>
+</ul>
+<p><strong>两个核心指标：</strong>
+- <strong>决断值 CR（Critical Ratio）</strong>：就是高分组与低分组在该题上得分差的独立样本 t 值。CR <span class="arithmatex">\(\geq 3.0\)</span> 且 <span class="arithmatex">\(p&lt;0.05\)</span> 表示该题区分力足够
+- <strong>题总相关 r</strong>：该题得分与"剔除本题后总分"的相关。<span class="arithmatex">\(r \geq 0.3\)</span> 且 <span class="arithmatex">\(p&lt;0.05\)</span> 表示该题和整个量表方向一致</p>
+<p>两个指标都达标就保留；都不达标建议删除；介于中间建议修改后保留。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>先处理反向计分题（如本题 1=非常同意、5=非常不同意，需在分析前反转成统一方向）</li>
+<li>在 Dabbit AI SPSS 工具箱中选择"项目分析（区分度分析）"</li>
+<li>选择题项所在列，指定计分类型为 likert，填写反向题编号（如 q6、q11、q16）</li>
+<li>高/低分组比例默认各 27%，CR 阈值默认 3.0，题总相关阈值默认 0.3</li>
+<li>若已有现成总分列可指定，否则由工具自动把所有题项求和构造总分</li>
+<li>点击运行，得到逐题的 CR、p 值、题总相关与"保留/修改/删除"判定</li>
+</ol>
+<p><strong>默认参数参考</strong>：分组比例各 27%，CR 阈值 3.0，题总相关下限 0.3，相关类型自动选择。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>输出一张逐题判定表，关键列：
+- <strong>高分组均值 / 低分组均值</strong>：两组在该题上的平均得分
+- <strong>决断值 CR</strong>：<span class="arithmatex">\(\geq 3.0\)</span> 且 <span class="arithmatex">\(p&lt;0.05\)</span> 为达标
+- <strong>题总相关 r</strong>：<span class="arithmatex">\(\geq 0.3\)</span> 且 <span class="arithmatex">\(p&lt;0.05\)</span> 为达标；若为负说明该题方向可能反了
+- <strong>判定</strong>：工具自动给出"保留 / 建议修改 / 建议删除"</p>
+<p><strong>怎么判断好坏</strong>：大多数题 CR 显著、题总相关达标，说明问卷质量整体不错；若某道题 CR 不显著且题总相关很低（如案例中 q20 的 CR=0.21、r=-0.07），说明这道题谁答都一样，应列入删题清单。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 自编量表预试阶段、正式施测前的删题决策。</p>
+<p><strong>什么时候不用？</strong> 直接使用成熟量表（已有信效度证据）时不必再做项目分析；数据已正式收集完毕、无法再改题时也只能事后报告。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：忘记反转反向题。反向题不反转，题总相关会变成负的，导致好题被误删
+- <strong>坑2</strong>：只看 CR 不看题总相关。CR 高但题总相关低，说明这道题虽然能分组但和量表其他题不同向
+- <strong>坑3</strong>：预试样本太小（如 <span class="arithmatex">\(n&lt;50\)</span>），高低分组各只有十几人，CR 很不稳定</p>
+<p><strong>和相似算法的区别</strong>：项目分析看"单题区分度"，信度分析看"整组题的内部一致性"；前者筛题、后者验表，二者常配合使用。</p>
+</div>
+<h3 id="_4">⭐ 信度分析  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>信度分析回答一个问题：你的量表<strong>稳不稳定、可不可靠</strong>？如果同一批人今天填一遍、下周再填一遍结果差很远，或者同一维度下的题项各说各话，那这个量表就是不可靠的，后面基于它做的任何分析都站不住脚。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>凡是使用李克特量表收集问卷数据的论文，<strong>必须</strong>报告信度系数，否则评审会质疑数据质量</li>
+<li>美赛 C 题中涉及满意度、态度、心理量表数据时，先做信度再做后续建模</li>
+<li>判断量表中哪些题项拖了后腿、需要删除</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>最常用的信度指标是 <strong>Cronbach's <span class="arithmatex">\(\alpha\)</span>（克隆巴赫系数）</strong>。</p>
+<p>打个比方：一个"服务满意度"量表有 10 道题，如果它们真的都在测同一个东西，那顾客在第 1 题打高分、其他题也应该倾向打高分——题目之间应该高度相关。<span class="arithmatex">\(\alpha\)</span> 衡量的就是这种"内部一致性"：</p>
+<ul>
+<li><span class="arithmatex">\(\alpha\)</span> 的大小取决于<strong>题项间平均相关</strong>和<strong>题项数量</strong></li>
+<li><span class="arithmatex">\(\alpha\)</span> 越接近 1，说明题项越是在同测一个构念</li>
+</ul>
+<p><strong>判断标准（很重要，必须背）：</strong>
+- <span class="arithmatex">\(\alpha \geq 0.9\)</span>：优秀
+- <span class="arithmatex">\(0.8 \leq \alpha &lt; 0.9\)</span>：良好
+- <span class="arithmatex">\(0.7 \leq \alpha &lt; 0.8\)</span>：可接受（探索性研究可放宽到 0.6）
+- <span class="arithmatex">\(\alpha &lt; 0.6\)</span>：不佳，需要修订量表</p>
+<p>除 <span class="arithmatex">\(\alpha\)</span> 外，还会算<strong>折半信度</strong>（把题项劈成两半看两半是否一致）和<strong>组合信度 CR</strong>（结构方程框架下的信度指标）。</p>
+<p>另一个关键诊断是<strong>"删除该题项后的 <span class="arithmatex">\(\alpha\)</span>"</strong>：如果删掉某题后整表 <span class="arithmatex">\(\alpha\)</span> 反而上升很多（<span class="arithmatex">\(\Delta\alpha \geq 0.02\)</span>），说明这道题在拖后腿；同时看<strong>修正题总相关</strong>（CITC），低于 0.3 说明该题与其他题关联太弱。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 SPSS 中点击 <strong>分析 → 标度 → 可靠性分析</strong></li>
+<li>将同一维度下的所有题项选入<strong>项</strong>框，模型选择"Alpha"</li>
+<li>点击<strong>统计</strong>按钮，勾选"项"、"标度"、"删除项后的标度"、"相似矩阵"</li>
+<li>多个维度需<strong>分别</strong>计算各自的 <span class="arithmatex">\(\alpha\)</span>（不要把所有题混在一起算）</li>
+<li>在 Dabbit AI 工具箱中可一键同时输出 <span class="arithmatex">\(\alpha\)</span>、折半信度、CR，并用 Bootstrap 1000 次给出 <span class="arithmatex">\(\alpha\)</span> 的 95% 置信区间</li>
+<li>缺失值默认成对删除；<span class="arithmatex">\(\alpha\)</span> 可接受阈值设 0.7，题总相关下限 0.3，删除提升阈值 <span class="arithmatex">\(\Delta\alpha=0.02\)</span></li>
+</ol>
+<p><strong>默认参数参考</strong>：同时计算 Cronbach's <span class="arithmatex">\(\alpha\)</span>、折半信度、组合信度 CR；Bootstrap 1000 次；<span class="arithmatex">\(\alpha\)</span> 阈值 0.7。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>Cronbach's <span class="arithmatex">\(\alpha\)</span></strong>：整表或该维度的核心信度系数。案例中整表 10 题 <span class="arithmatex">\(\alpha=0.865\)</span>，判级"良好"</li>
+<li><strong>Bootstrap 95% 置信区间</strong>：如 <span class="arithmatex">\([0.830, 0.894]\)</span>，区间不跨过 0.7 才能说信度可靠</li>
+<li><strong>删除项后的 <span class="arithmatex">\(\alpha\)</span></strong>：逐题列出删掉该题后的 <span class="arithmatex">\(\alpha\)</span>。若某行删除后 <span class="arithmatex">\(\alpha\)</span> 明显高于整表 <span class="arithmatex">\(\alpha\)</span>，且该题修正题总相关 <span class="arithmatex">\(&lt;0.3\)</span>，则建议考虑删除（案例中"会员优惠力度"删除后 <span class="arithmatex">\(\alpha\)</span> 从 0.865 升到 0.889，CITC 仅 0.148）</li>
+<li><strong>折半信度</strong>：Spearman-Brown 校正后的值，应与 <span class="arithmatex">\(\alpha\)</span> 接近</li>
+</ul>
+<p><strong>判断好坏</strong>：各维度 <span class="arithmatex">\(\alpha\)</span> 都 <span class="arithmatex">\(\geq 0.7\)</span> 即为合格量表；论文中通常报告"各维度 Cronbach's <span class="arithmatex">\(\alpha\)</span> 介于 0.xx--0.xx 之间，均大于 0.7，量表信度良好"。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 任何使用多题项量表的数据，做进一步分析之前必须先报告。</p>
+<p><strong>什么时候不用？</strong> 单题测量（只有一道题）无法算 <span class="arithmatex">\(\alpha\)</span>；分类单选题也不需要信度。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把不同维度的题混在一起算一个 <span class="arithmatex">\(\alpha\)</span>。不同构念的题混算会虚高或虚低，必须<strong>分维度</strong>算
+- <strong>坑2</strong>：<span class="arithmatex">\(\alpha\)</span> 越高越好于是疯狂加题。题越多 <span class="arithmatex">\(\alpha\)</span> 自然越高，但题目冗余无意义；<span class="arithmatex">\(\alpha\)</span> 在 0.8--0.9 最佳
+- <strong>坑3</strong>：看到某题删除后 <span class="arithmatex">\(\alpha\)</span> 升高就盲目删题。是否删题必须结合题项内容和理论，不能只看统计量
+- <strong>坑4</strong>：<span class="arithmatex">\(\alpha\)</span> 只反映内部一致性，<strong>不代表效度高</strong>——大家一致地答错也是一致地错</p>
+<p><strong>和相似算法的区别</strong>：信度分析看"题项是否一致"，效度分析看"题项是否测对了东西"；信度是效度的必要不充分条件。</p>
+</div>
+<h3 id="_5">⭐ 效度分析  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>效度分析回答：你的量表<strong>测准了没有</strong>？你设计量表时以为它在测"工作投入"，数据是否真的支持这一点？效度分析（这里指结构效度，用探索性因子分析 EFA 实现）就是拿数据来验证你预设的维度结构。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>自编或改编量表在正式分析前，<strong>必须</strong>做结构效度检验，与信度分析一起报告</li>
+<li>美赛问卷类论文中，需证明"我们的问卷确实测到了想测的构念"</li>
+<li>探索量表潜在结构，发现哪些题项应该归在同一因子下</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p><strong>探索性因子分析（EFA）</strong>的思想：你设计了 15 道题，预设它们分属"工作投入、职业认同、离职意愿"三个维度。因子分析会把这些题项的相关关系提炼成少数几个"潜在因子"——</p>
+<ul>
+<li>如果数据真的如你所料，那"工作投入"的 5 道题会<strong>扎堆</strong>落在同一个因子上，其他题不沾边</li>
+<li>这 5 道题在该因子上的载荷（loading）应该都 <span class="arithmatex">\(\geq 0.5\)</span></li>
+<li>如果某道题在两个因子上载荷都差不多（交叉载荷），说明这道题归属不清</li>
+</ul>
+<p><strong>两个前提检验（必须先通过才能做因子分析）：</strong>
+- <strong>KMO 检验</strong>：取值 0--1。<span class="arithmatex">\(&gt;0.9\)</span> 极好，<span class="arithmatex">\(0.8\)</span>--<span class="arithmatex">\(0.9\)</span> 很好，<span class="arithmatex">\(0.7\)</span> 以上尚可，<span class="arithmatex">\(&lt;0.5\)</span> 不宜做因子分析
+- <strong>Bartlett 球形检验</strong>：<span class="arithmatex">\(p&lt;0.05\)</span> 表示题项间存在相关，适合提取因子</p>
+<p><strong>关键指标：</strong>
+- <strong>因子载荷</strong>：题项与所属因子的相关，<span class="arithmatex">\(\geq 0.5\)</span> 可接受，<span class="arithmatex">\(\geq 0.7\)</span> 很好
+- <strong>累计方差解释率</strong>：提取的因子加起来能解释多少题项总变异，<span class="arithmatex">\(&gt;50%\)</span> 可接受
+- <strong>共同度（communalities）</strong>：每题被提取因子解释的比例，<span class="arithmatex">\(&gt;0.4\)</span> 为宜</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 SPSS 中点击 <strong>分析 → 降维 → 因子</strong></li>
+<li>将所有题项选入<strong>变量</strong>框</li>
+<li>点击<strong>描述</strong>：勾选"KMO 和 Bartlett 球形检验"</li>
+<li>点击<strong>提取</strong>：方法选"主轴因子"或"主成分"，勾选"碎石图"，按特征值 <span class="arithmatex">\(&gt;1\)</span> 或平行分析确定因子数</li>
+<li>点击<strong>旋转</strong>：选<strong>最大方差法（Varimax）</strong>，使载荷矩阵更易读</li>
+<li>点击<strong>选项</strong>：勾选"按大小排序"、"隐藏小系数"（绝对值 <span class="arithmatex">\(&lt;0.4\)</span> 不显示）</li>
+<li>在 Dabbit AI 工具箱中可直接按预设维度（如"工作投入：投入1--投入5"）校验载荷归属，自动判定交叉载荷</li>
+</ol>
+<p><strong>默认参数参考</strong>：提取方法主轴因子法，旋转 Varimax，因子数 auto（结合特征值 <span class="arithmatex">\(&gt;1\)</span> 与平行分析），主载荷阈值 0.5，次高载荷与主载荷差 <span class="arithmatex">\(\geq 0.2\)</span>。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>KMO 与 Bartlett 表</strong>：KMO 如案例 0.903（"适合做因子分析"），Bartlett <span class="arithmatex">\(\chi^2=1801.88\)</span>、<span class="arithmatex">\(p&lt;0.001\)</span>，两前提都通过</li>
+<li><strong>方差解释表</strong>：各因子特征值与累计解释率。案例中 3 个因子累计解释 73.8%，远高于 50% 参考线</li>
+<li><strong>旋转后载荷矩阵</strong>：每行一题，看载荷最大的那一列是否落在<strong>预设维度</strong>上。案例中投入1--5 全部落在"工作投入"列（载荷 0.82--0.87），无交叉载荷，15/15 题全部达标</li>
+<li><strong>共同度</strong>：每行最后一列，案例均在 0.7 左右，说明每题被因子解释得不错</li>
+</ul>
+<p><strong>判断好坏</strong>：题项按预期归到对应因子、主载荷 <span class="arithmatex">\(\geq 0.5\)</span>、无严重交叉载荷、累计方差解释率 <span class="arithmatex">\(&gt;50%\)</span>，则结构效度良好。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 预试问卷结构效度检验；新量表开发。</p>
+<p><strong>什么时候不用？</strong> 已有成熟量表且样本为验证性用途时，应用<strong>验证性因子分析（CFA）</strong>而非 EFA。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：KMO 或 Bartlett 不通过就强行做因子分析，结果无意义
+- <strong>坑2</strong>：因子数靠"特征值 <span class="arithmatex">\(&gt;1\)</span>"硬定，不结合碎石图和平行分析，常常多提或少提因子
+- <strong>坑3</strong>：题项落在了<strong>没预料到的因子</strong>上却不报告，假装一切正常——这正是效度分析要发现的问题
+- <strong>坑4</strong>：把 EFA 当 CFA 用。EFA 是"让数据说话找结构"，CFA 是"验证预设结构"，预试用 EFA、正式验证用 CFA</p>
+<p><strong>和相似算法的区别</strong>：效度分析（EFA，探索性）与验证性因子分析（CFA，验证性）互补；信度（<span class="arithmatex">\(\alpha\)</span>）回答"一致吗"，效度（因子分析）回答"测对了吗"。</p>
+</div>
+<h3 id="_6">中介效应（含平行/链式中介）  <code>基础级</code><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>中介效应研究"A 是怎么影响 C 的"——不是直接影响，而是 A 先影响 B、B 再影响 C，B 就是中间的"传声筒"（中介变量）。比如"组织支持感"不直接提升"工作绩效"，而是先提升"工作满意度"，满意度高了绩效才好——满意度就是中介。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中需要解释变量间<strong>作用机制/传导路径</strong>时（A 通过什么中间环节影响 C）</li>
+<li>问卷类、管理类、社科类建模中常见，比单纯报告"显著相关"更深入</li>
+<li>可分解总效应为直接效应和间接效应，量化各条路径的贡献比例</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>用生活化的例子理解：你发现"多学习（X）"和"成绩好（Y）"相关，但这是为什么？可能是因为"学习提升了理解深度（M）"，理解深了成绩才好。M 就是中介。</p>
+<ul>
+<li><strong>总效应 c</strong>：X 对 Y 的总影响（不考虑中间环节）</li>
+<li><strong>路径 a</strong>：X 对 M 的影响；<strong>路径 b</strong>：M 对 Y 的影响</li>
+<li><strong>间接效应</strong> <span class="arithmatex">\(= a \times b\)</span>：X 经由 M 传导到 Y 的部分</li>
+<li><strong>直接效应 c'</strong>：去掉 M 的传导后，X 还剩多少直接影响 Y</li>
+<li>关系：<span class="arithmatex">\(c = c' + a \times b\)</span></li>
+</ul>
+<p><strong>平行中介</strong>：有多个中介并列（如满意度 M1、工作投入 M2 同时传导），各算各的 <span class="arithmatex">\(a_i \times b_i\)</span>。<strong>链式中介</strong>：M1 先影响 M2、M2 再影响 Y，形成链条。</p>
+<p><strong>显著性怎么判断</strong>：传统 Sobel 检验功效低，现在主流用 <strong>Bootstrap</strong>——有放回抽样 5000 次，每次重估间接效应，得到 95% 置信区间。<strong>区间不含 0 就说明间接效应显著</strong>。</p>
+<p>若直接效应 <span class="arithmatex">\(c'\)</span> 显著、间接效应也显著 = 部分中介；若 <span class="arithmatex">\(c'\)</span> 不显著只有间接效应 = 完全中介。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 Dabbit AI SPSS 工具箱中选择"中介效应分析"</li>
+<li>选入自变量 X、中介变量 M（可多个）、因变量 Y，控制变量（如任职年限）一并放入</li>
+<li>模型类型选"平行中介"（多个中介并列）或"链式中介"（按顺序传导）</li>
+<li>Bootstrap 方法选百分位法，抽样 5000 次，置信水平 95%</li>
+<li>运行后查看各路径系数与间接效应的 Bootstrap 置信区间</li>
+</ol>
+<p><strong>SPSS 原生对应</strong>：需安装 PROCESS 插件（Hayes），通过 <strong>回归</strong>或语法实现；SPSS 菜单本身不直接提供中介效应检验。</p>
+<p><strong>默认参数参考</strong>：Bootstrap 百分位法，模型 parallel（平行），可纳入控制变量。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>总效应 c</strong>：如案例 <span class="arithmatex">\(0.602\)</span>、<span class="arithmatex">\(p&lt;0.001\)</span>，X 总体上显著影响 Y</li>
+<li><strong>直接效应 c'</strong>：如 <span class="arithmatex">\(0.160\)</span>、<span class="arithmatex">\(p=0.069\)</span>（不显著），说明去掉中介后 X 不再直接影响 Y</li>
+<li><strong>各条间接效应</strong>：X<span class="arithmatex">\(\to\)</span>M1<span class="arithmatex">\(\to\)</span>Y = <span class="arithmatex">\(0.342\)</span>（95%CI <span class="arithmatex">\(0.206\)</span>--<span class="arithmatex">\(0.494\)</span>，不含 0，显著）；X<span class="arithmatex">\(\to\)</span>M2<span class="arithmatex">\(\to\)</span>Y = <span class="arithmatex">\(0.099\)</span>（CI <span class="arithmatex">\(0.023\)</span>--<span class="arithmatex">\(0.185\)</span>，显著）</li>
+<li><strong>总间接效应</strong>：<span class="arithmatex">\(0.441\)</span>，占总效应约 73%，即大部分影响是通过中介传导的</li>
+<li>每条间接效应的 CI<strong>不跨 0</strong> 即显著</li>
+</ul>
+<p><strong>怎么判断</strong>：直接效应不显著 + 间接效应显著 = 完全中介（案例即此情形）；两者都显著 = 部分中介。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 需要揭示"A 经 B 影响 C"的内在机制时。</p>
+<p><strong>什么时候不用？</strong> 只是想预测 Y 或看 X 是否影响 Y 时，普通回归即可，不必硬加中介。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：用横截面问卷数据说"因果中介"。中介分析只能说"统计上的传导路径"，不能证明因果关系
+- <strong>坑2</strong>：中介变量和自变量高度共线却不报告。平行中介需检查 VIF
+- <strong>坑3</strong>：只看间接效应点估计，不看 Bootstrap 置信区间是否跨 0</p>
+<p><strong>和相似算法的区别</strong>：中介效应看"X 通过 M 影响 Y"的<strong>中间通道</strong>；调节效应看"M 改变 X 对 Y 的影响<strong>强度</strong>"，一个是"传话筒"、一个是"放大器"。</p>
+</div>
+<h3 id="_7">调节作用（调节效应）分析  <code>基础级</code><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>调节效应研究"X 对 Y 的影响，会不会因为另一个变量 M 而变强或变弱"？M 是个"放大器/削弱器"。比如"工作自主性提升工作投入"这个关系，在"上级支持感高"的员工身上特别明显、在上级不支持时几乎没用——上级支持感就是调节变量。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中分析"某因素的作用在不同人群/情境下是否不同"时</li>
+<li>问卷研究中探究边界条件："在什么情况下，A 对 B 的作用更强/更弱"</li>
+<li>比主效应分析更精细，能给出差异化建议（如"对高支持感员工应多授权"）</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>调节效应的核心是<strong>交互项</strong> <span class="arithmatex">\(X \times M\)</span>。</p>
+<p>打个比方：自主性（X）对投入（Y）有正向作用，但这个作用的斜率会随上级支持（M）变化。做法：</p>
+<ul>
+<li>先把连续的 X、M 各自<strong>中心化</strong>（减去均值），降低交互项与主效应的共线性</li>
+<li>构造交互项 <span class="arithmatex">\(X \times M\)</span></li>
+<li>回归 $Y = b_0 + b_1 X + b_2 M + b_3 (X \times M) + $ 控制变量</li>
+<li>
+<p>看 <span class="arithmatex">\(b_3\)</span>（交互项系数）是否显著：<span class="arithmatex">\(b_3\)</span> 显著就说明存在调节效应</p>
+</li>
+<li>
+<p><span class="arithmatex">\(b_3 &gt; 0\)</span>：M 越高，X 对 Y 的正向作用<strong>越强</strong>（加强型调节）</p>
+</li>
+<li><span class="arithmatex">\(b_3 &lt; 0\)</span>：M 越高，X 对 Y 的作用<strong>越弱</strong>（削弱型调节）</li>
+</ul>
+<p>交互项显著后，再做<strong>简单斜率检验</strong>：把 M 分成"低（均值 <span class="arithmatex">\(-1\)</span> 个标准差）、中、高（均值 <span class="arithmatex">\(+1\)</span> 个标准差）"三组，分别看每组中 X 对 Y 的斜率，画成两条交互线，直观展示调节方向。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 Dabbit AI SPSS 工具箱中选择"调节效应分析"</li>
+<li>选入自变量 X（工作自主性）、调节变量 M（上级支持感）、因变量 Y（工作投入），控制变量（在职年限）</li>
+<li>中心化方式选"均值中心化"，自动构造交互项</li>
+<li>勾选"简单斜率检验"，分层水平设为均值 <span class="arithmatex">\(\pm 1\)</span> 个标准差</li>
+<li>比较含交互项模型（模型2）与不含交互项模型（模型1）的 <span class="arithmatex">\(\Delta R^2\)</span></li>
+</ol>
+<p><strong>SPSS 原生对应</strong>：通过 <strong>分析 → 回归 → 线性</strong>，手动将 X、M 中心化后相乘生成交互项，再放入回归；简单斜率需用手动语法或 PROCESS 插件。</p>
+<p><strong>默认参数参考</strong>：均值中心化，普通标准误，简单斜率按均值 <span class="arithmatex">\(\pm 1\)</span>SD 分组。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong><span class="arithmatex">\(\Delta R^2\)</span> 与 F 变化检验</strong>：案例中加入交互项后 <span class="arithmatex">\(R^2\)</span> 从 0.332 升到 0.493，<span class="arithmatex">\(\Delta R^2=0.162\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，说明交互项显著提升解释力</li>
+<li><strong>交互项系数 <span class="arithmatex">\(b_3\)</span></strong>：案例 <span class="arithmatex">\(0.387\)</span>、<span class="arithmatex">\(p&lt;0.001\)</span>，显著且为正，即上级支持感越高，自主性对投入的正向带动越强</li>
+<li><strong>简单斜率表</strong>：低支持时 X<span class="arithmatex">\(\to\)</span>Y 斜率仅 <span class="arithmatex">\(0.057\)</span>（不显著）；高支持时斜率 <span class="arithmatex">\(0.861\)</span>（显著）——直观说明"只有上级支持到位，授权才有效"</li>
+<li><strong>VIF</strong>：案例最大 1.037，远低于 10，说明中心化后共线性可控</li>
+</ul>
+<p><strong>怎么判断</strong>：交互项 <span class="arithmatex">\(p&lt;0.05\)</span> 即存在调节；再结合简单斜率方向判断是加强还是削弱。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 探究变量关系的边界条件、异质性效应时。</p>
+<p><strong>什么时候不用？</strong> 只想知道 X 是否影响 Y 时不必加调节；样本量小（如 <span class="arithmatex">\(n&lt;100\)</span>）时交互项检验功效低。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不中心化就构造交互项，导致主效应与交互项严重共线、系数不稳定
+- <strong>坑2</strong>：只报告交互项显著，不做简单斜率、不画交互图，读者看不懂调节方向
+- <strong>坑3</strong>：把调节当因果。调节效应同样是观察性关联</p>
+<p><strong>和相似算法的区别</strong>：调节效应（<span class="arithmatex">\(X \times M\)</span>，M 是放大器）与中介效应（<span class="arithmatex">\(X \to M \to Y\)</span>，M 是传话筒）方向完全不同，可结合成"有调节的中介"。</p>
+</div>
+<h3 id="sem">⭐ 结构方程模型（SEM）  <code>基础级</code><a class="headerlink" href="#sem" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>结构方程模型（Structural Equation Model, SEM）是问卷研究的"集大成者"。它一次性同时做两件事：一是<strong>测量模型</strong>（CFA，验证你的量表题项能否准确测出潜变量），二是<strong>结构模型</strong>（检验潜变量之间谁影响谁的理论路径）。简单说，它把信效度检验和路径分析合并成一个大模型来验证。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>问卷研究论文的<strong>核心方法</strong>，尤其当你有多个潜变量、要验证一套理论假设时</li>
+<li>美赛中涉及"组织支持感<span class="arithmatex">\(\to\)</span>工作投入<span class="arithmatex">\(\to\)</span>离职意向"这类多变量理论模型时</li>
+<li>同时回答"量表好不好"（测量）和"假设成不成立"（结构）两个问题</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>现实中很多概念（如"工作投入""满意度"）是<strong>看不见的潜变量</strong>，只能靠几道题间接测量。SEM 的巧妙之处在于它把这两件事放在一个图里：</p>
+<ul>
+<li><strong>测量模型（外圈）</strong>：每个潜变量由 3--4 道题指标测量（如工作投入 <span class="arithmatex">\(\leftarrow\)</span> we1、we2、we3），这部分本质是 CFA</li>
+<li><strong>结构模型（内圈）</strong>：潜变量之间画箭头表示假设的因果路径（如组织支持感 <span class="arithmatex">\(\to\)</span> 工作投入 <span class="arithmatex">\(\to\)</span> 离职意向）</li>
+</ul>
+<p>模型用<strong>极大似然估计</strong>反复调整，直到模型隐含的协方差矩阵尽可能接近真实数据的协方差矩阵。</p>
+<p><strong>拟合优度指标（必须背的判断标准）：</strong>
+- <span class="arithmatex">\(\chi^2/df\)</span>（卡方自由度比）：<span class="arithmatex">\(\leq 3\)</span> 良好，越小越好
+- CFI、TLI（比较拟合指数）：<span class="arithmatex">\(\geq 0.90\)</span> 可接受，<span class="arithmatex">\(\geq 0.95\)</span> 良好
+- RMSEA（近似误差均方根）：<span class="arithmatex">\(\leq 0.08\)</span> 可接受，<span class="arithmatex">\(\leq 0.05\)</span> 良好
+- SRMR（标准化残差均方根）：<span class="arithmatex">\(\leq 0.08\)</span> 良好</p>
+<p><strong>测量质量指标</strong>：标准化载荷 <span class="arithmatex">\(\geq 0.5\)</span>，组合信度 CR <span class="arithmatex">\(\geq 0.7\)</span>，平均方差抽取 AVE <span class="arithmatex">\(\geq 0.5\)</span>，且 <span class="arithmatex">\(\sqrt{AVE}\)</span> 大于该因子与其他因子的相关（区分效度）。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>SEM 在 SPSS 中需借助 AMOS 模块（画图）或在 Dabbit AI SPSS 工具箱中用代码指定模型</li>
+<li>在工具箱中填写模型设定：测量部分写明"潜变量：题项列表"，结构部分写明"因变量 <span class="arithmatex">\(\sim\)</span> 自变量"</li>
+<li>估计方法选<strong>极大似然（ML）</strong>，适合连续指标</li>
+<li>缺失值处理默认成列删除（listwise），最大迭代 600</li>
+<li>拟合标准选"常规"（<span class="arithmatex">\(\chi^2/df \leq 3\)</span>、CFI <span class="arithmatex">\(\geq 0.90\)</span>、RMSEA <span class="arithmatex">\(\leq 0.08\)</span>、SRMR <span class="arithmatex">\(\leq 0.08\)</span>）</li>
+<li>因子载荷阈值 0.5，信度阈值 0.7，最小样本量建议 200</li>
+</ol>
+<p><strong>SPSS 路径</strong>：<strong>分析 → 降维</strong>只做 EFA；SEM 本身在 SPSS Statistics 原生菜单中不直接提供，需用 AMOS 或扩展模块。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>测量模型拟合</strong>：案例 <span class="arithmatex">\(\chi^2/df=1.10\)</span>、CFI=0.992、RMSEA=0.026、SRMR=0.047，全部达标</li>
+<li><strong>标准化载荷</strong>：各题载荷 0.70--0.86，均 <span class="arithmatex">\(&gt;0.5\)</span>，说明题项很好地测量了对应潜变量</li>
+<li><strong>CR 与 AVE</strong>：各因子 CR <span class="arithmatex">\(&gt;0.8\)</span>、AVE <span class="arithmatex">\(&gt;0.57\)</span>，区分效度（<span class="arithmatex">\(\sqrt{AVE}\)</span> 大于因子相关）全部通过</li>
+<li><strong>结构路径系数</strong>：组织支持感<span class="arithmatex">\(\to\)</span>工作投入 <span class="arithmatex">\(\beta=0.307\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>）；职业成长<span class="arithmatex">\(\to\)</span>工作投入 <span class="arithmatex">\(\beta=0.493\)</span>；工作投入<span class="arithmatex">\(\to\)</span>离职意向 <span class="arithmatex">\(\beta=-0.421\)</span>（负向，投入越高越不想走）</li>
+<li><strong><span class="arithmatex">\(R^2\)</span></strong>：工作投入被解释了 45.5% 的方差，离职意向被解释了 17.8%</li>
+</ul>
+<p><strong>怎么判断</strong>：五项拟合指标全部达标 + 假设路径显著，就说明理论模型得到数据支持。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 有多个潜变量、要同时验证测量质量和理论关系时，是问卷研究的高级形态。</p>
+<p><strong>什么时候不用？</strong> 只有单一因变量、几个观测变量的简单关系，用回归即可；样本量太小（<span class="arithmatex">\(n&lt;100\)</span>）时 SEM 不稳定，建议至少 <span class="arithmatex">\(n=200\)</span>。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：只看 <span class="arithmatex">\(\chi^2\)</span> 不看其他指标。<span class="arithmatex">\(\chi^2\)</span> 对样本量敏感，大样本几乎都显著，必须综合 <span class="arithmatex">\(\chi^2/df\)</span>、CFI、RMSEA、SRMR 一起判断
+- <strong>坑2</strong>：拟合不好就疯狂删题、加相关残差，直到"凑"出好结果——这是过度拟合，失去验证意义
+- <strong>坑3</strong>：把横截面数据的路径系数说成因果。SEM 验证的是"模型与数据拟合"，不是因果证明
+- <strong>坑4</strong>：样本量不够就跑 SEM。案例 <span class="arithmatex">\(n=150\)</span> 已被提示"低于建议值 200"，需谨慎解释</p>
+<p><strong>和相似算法的区别</strong>：SEM = CFA（测量）+ 路径分析（结构）；路径分析只用观测变量、不带测量模型，CFA 只验证测量结构、不检验潜变量间关系。</p>
+</div>
+<h2 id="_8">进阶级算法速览<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">内容效度  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：邀请领域专家逐条判断"题项是否测到了想测的内容"，用 I-CVI/S-CVI 量化条目内容代表性。</p>
+<p><strong>美赛场景区</strong>：自编量表正式使用前，由专家评议题项覆盖面；美赛中设计问卷时可借鉴专家评分思路。</p>
+<p><strong>核心原理</strong>：专家按 1--4 级评题项相关性，评分 <span class="arithmatex">\(\geq 3\)</span> 算"相关"。条目级 I-CVI = 评相关的专家数/专家总数；<span class="arithmatex">\(\geq 6\)</span> 名专家时 I-CVI <span class="arithmatex">\(\geq 0.78\)</span> 达标，<span class="arithmatex">\(3\)</span>--<span class="arithmatex">\(5\)</span> 名时要求 <span class="arithmatex">\(=1.00\)</span>。量表级 S-CVI/Ave <span class="arithmatex">\(\geq 0.90\)</span>、S-CVI/UA <span class="arithmatex">\(\geq 0.80\)</span>。</p>
+<p><strong>操作要点</strong>：工具箱选"内容效度"，评分尺度 1--4，缺失策略 exclude，6 名专家对 25 条条目评分。</p>
+<p><strong>结果关键</strong>：逐题 I-CVI 对照阈值，未达标条目（如案例 Q5、Q17）需修订；S-CVI/Ave 与 S-CVI/UA 判断整体。</p>
+<p><strong>注意</strong>：内容效度是"专家共识"层面的效度，与后续统计导向的结构效度（EFA/CFA）互补，不能互相替代。</p>
+</div>
+<h3 id="harman">共同方法偏差检验（Harman）  <code>进阶级</code><a class="headerlink" href="#harman" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：同一批人、同一时间、自评方式收集的问卷，可能因"共同方法"让变量间相关被人为夸大，Harman 单因子检验筛查这一风险。</p>
+<p><strong>美赛场景区</strong>：问卷全部来自同源自评数据、要做相关/回归分析前的必做筛查。</p>
+<p><strong>核心原理</strong>：对全部题项做无旋转主成分分析，若第一个公因子解释的方差 <span class="arithmatex">\(&lt;50%\)</span>，说明数据没被单一共同因子主导，共同方法偏差不严重。</p>
+<p><strong>操作要点</strong>：工具箱选"Harman 单因子检验"，特征值 <span class="arithmatex">\(&gt;1\)</span> 提取，首因子方差阈值 50%，先看 KMO/Bartlett 是否适合。</p>
+<p><strong>结果关键</strong>：案例首因子解释率 39.0% <span class="arithmatex">\(&lt;50%\)</span>，判定低风险；若首因子 <span class="arithmatex">\(&gt;50%\)</span> 则存在严重共同方法偏差。</p>
+<p><strong>注意</strong>：Harman 只是<strong>粗略筛查</strong>，灵敏度低——没超标不等于没有偏差；严格验证需用标记变量或潜在方法因子法。</p>
+</div>
+<h3 id="cfa">验证性因子分析（CFA）  <code>进阶级</code><a class="headerlink" href="#cfa" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：与 EFA"让数据找结构"相反，CFA 是"拿预设的因子结构去验证数据支不支持"，是正式量表验证的标准方法。</p>
+<p><strong>美赛场景区</strong>：使用成熟量表或已有理论维度时，用 CFA 验证测量结构；常作为 SEM 的第一步。</p>
+<p><strong>核心原理</strong>：用极大似然估计题项在预设因子上的载荷，用 <span class="arithmatex">\(\chi^2/df\)</span>、CFI、TLI、RMSEA、SRMR 判断模型是否复现数据相关结构；再用 CR <span class="arithmatex">\(\geq 0.7\)</span>、AVE <span class="arithmatex">\(\geq 0.5\)</span>、Fornell-Larcker 准则（<span class="arithmatex">\(\sqrt{AVE}&gt;\)</span> 因子相关）检验聚合效度与区分效度。</p>
+<p><strong>操作要点</strong>：工具箱选"验证性因子分析"，写明"因子：题项列表"，缺失 listwise，标准档位判定。</p>
+<p><strong>结果关键</strong>：案例 <span class="arithmatex">\(\chi^2/df=0.78\)</span>、CFI=1.000、RMSEA=0.000，全部载荷显著且 <span class="arithmatex">\(&gt;0.5\)</span>，三维结构获数据支持。</p>
+<p><strong>注意</strong>：CFA 检验的是"预设结构与数据吻合度"，预设错了再完美的拟合也无意义；样本建议 <span class="arithmatex">\(n \geq 200\)</span>。</p>
+</div>
+<h3 id="_10">路径分析  <code>进阶级</code><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：用可观测变量（不带潜变量测量模型）画有向路径图，估计各条直接、间接、总效应。</p>
+<p><strong>美赛场景区</strong>：研究多变量间传导链条（如产品品质 <span class="arithmatex">\(\to\)</span> 感知价值 <span class="arithmatex">\(\to\)</span> 满意度 <span class="arithmatex">\(\to\)</span> 复购意愿）时。</p>
+<p><strong>核心原理</strong>：对每个内生变量做一次回归，按路径追踪法则把影响分解为直接效应、间接效应（路径系数乘积之和）与总效应；间接效应显著性用 Bootstrap 区间检验；整体用 <span class="arithmatex">\(\chi^2\)</span>、CFI、RMSEA、SRMR 评价。</p>
+<p><strong>操作要点</strong>：工具箱选"路径分析"，画定有向无环路径图，标准化系数输出，Bootstrap 2000 次，百分位区间。</p>
+<p><strong>结果关键</strong>：案例价格感知<span class="arithmatex">\(\to\)</span>复购意愿总效应 0.404，其中直接 0.247、间接 0.157（CI <span class="arithmatex">\([0.094,0.228]\)</span> 不含 0）；CFI=0.997、RMSEA=0.050。</p>
+<p><strong>注意</strong>：路径分析是 SEM 的特例（只用观测变量）；间接效应必须看 Bootstrap 区间是否跨 0，不能只看点估计。</p>
+</div>
+<h3 id="_11">调节中介作用（有调节的中介）  <code>进阶级</code><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：中介效应的传导强度本身又被另一个变量 W 调节——"X 经 M 影响 Y"的间接效应，在 W 高低时不一样。</p>
+<p><strong>美赛场景区</strong>：研究更精细的"在哪类人群身上，传导机制更有效"，如高心理资本员工的组织支持转化效率更高。</p>
+<p><strong>核心原理</strong>：先检验无条件中介（<span class="arithmatex">\(a \times b\)</span> 的 Bootstrap 区间），再在被调节路径（如第一阶段 X<span class="arithmatex">\(\to\)</span>M）加入 W 交互项，算<strong>调节中介指数 <span class="arithmatex">\(\omega\)</span></strong>；<span class="arithmatex">\(\omega\)</span> 的 CI 不含 0 即成立，并报告 W 低/中/高三个水平上的条件间接效应。</p>
+<p><strong>操作要点</strong>：工具箱选"有调节的中介"，指定 X/M/Y/W 及被调节路径（第一阶段），均值中心化，Bootstrap 5000 次，探针水平均值 <span class="arithmatex">\(\pm 1\)</span>SD。</p>
+<p><strong>结果关键</strong>：案例 <span class="arithmatex">\(\omega=0.169\)</span>（CI <span class="arithmatex">\([0.094,0.262]\)</span> 不含 0）；低心理资本时间接效应 0.199、高时 0.538，即随 W 升高而增强。</p>
+<p><strong>注意</strong>：观察性数据只能说统计关系，不构成因果；需先有理论依据再指定被调节路径，不能数据挖掘式乱试。</p>
+</div>
+<h3 id="rwg">组内评分者信度（rwg）  <code>进阶级</code><a class="headerlink" href="#rwg" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：当同一组（如同一家门店）有多名评分者对同一对象打分时，检验组内评分是否足够一致、能否聚合为组级得分。</p>
+<p><strong>美赛场景区</strong>：多评委/多观察员打分数据（如门店服务评分、专家打分）聚合成团队/组织层面指标前。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(rwg = 1 - S^2 / \sigma^2_{EU}\)</span>，其中 <span class="arithmatex">\(S^2\)</span> 是组内实际评分方差，<span class="arithmatex">\(\sigma^2_{EU}\)</span> 是"完全随机打分"的期望方差（均匀分布下为 <span class="arithmatex">\((A^2-1)/12\)</span>）。<span class="arithmatex">\(rwg\)</span> 越接近 1 表示评分越一致；<span class="arithmatex">\(\geq 0.70\)</span> 可聚合，负值表示分歧比随机还大。</p>
+<p><strong>操作要点</strong>：工具箱选"组内评分者信度 rwg"，指定分组字段、题项列，量表 1--5 档，阈值 0.70，每组至少 3 人。</p>
+<p><strong>结果关键</strong>：案例 20 组 rwg(j) 均值 0.83、达标率 90%，支持聚合；门店 A19 为负值（-0.81），存在极端分歧不宜聚合。</p>
+<p><strong>注意</strong>：rwg 回答"组内一致性"，与 ICC（组间信度）互补；负值组要回头核查评分标准或数据。</p>
+</div>
+<h3 id="_12">对应分析  <code>进阶级</code><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把两个分类变量的交叉表投影到二维图上，直观展示"哪类人偏好哪类东西"，相似的类别会在图上聚在一起。</p>
+<p><strong>美赛场景区</strong>：分析"会员等级 <span class="arithmatex">\(\times\)</span> 商品偏好""地区 <span class="arithmatex">\(\times\)</span> 品牌选择"等双类别关联，比交叉表更直观。</p>
+<p><strong>核心原理</strong>：对列联表做奇异值分解，把行列类别投影到低维空间，总惯量等于 <span class="arithmatex">\(\chi^2/n\)</span>。同一象限的行列类别关联更强。第一维解释率常过半，前两维累计解释率可达 80% 以上。</p>
+<p><strong>操作要点</strong>：SPSS 中 <strong>分析 → 降维 → 对应分析</strong>，指定行变量与列变量，坐标类型选 principal，维度数 auto。</p>
+<p><strong>结果关键</strong>：案例 <span class="arithmatex">\(\chi^2=67.5\)</span>、<span class="arithmatex">\(p&lt;0.001\)</span>，第一维解释 59.2%；铂金会员与美妆个护同侧、普通会员与生鲜果蔬同侧。</p>
+<p><strong>注意</strong>：对应分析只展示关联结构，不做因果；期望频数小于 5 的格子过多时结论不稳。</p>
+</div>
+<h3 id="_13">多重响应交叉分析  <code>进阶级</code><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：专门处理问卷<strong>多选题</strong>——统计每个选项的普及率，并按分组看不同群体的多选偏好差异。</p>
+<p><strong>美赛场景区</strong>：问卷中"您经常参与哪些项目（可多选）"这类数据的分析，普通频数分析处理不了。</p>
+<p><strong>核心原理</strong>：把多选答案转成"每选项一列 0/1"，算<strong>响应率</strong>（该选项占总选择次数）与<strong>普及率</strong>（多少比例人选了它，可超 100%）；再对每个选项做"组别 <span class="arithmatex">\(\times\)</span> 是否选中"的卡方检验，并用 FDR 校正多重比较。</p>
+<p><strong>操作要点</strong>：SPSS 中 <strong>分析 → 多重响应</strong>定义变量集，再做交叉表；工具箱中直接选响应变量与分组变量。</p>
+<p><strong>结果关键</strong>：案例跑步机有氧普及率 48% 最高；经校正后瑜伽普拉提、游泳等选项组间差异显著，Cramér's V 衡量强度。</p>
+<p><strong>注意</strong>：各选项普及率之和可超过 100%（因为一人可多选），不要当成普通百分比解读。</p>
+</div>
+<h3 id="kano">KANO模型  <code>进阶级</code><a class="headerlink" href="#kano" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把产品功能分成五类——必备型、期望型、魅力型、无差异型、反向型，告诉你哪些功能是"必须有"、哪些是"惊喜点"。</p>
+<p><strong>美赛场景区</strong>：产品/服务功能优先级排序，资源有限时决定先做什么；美赛中涉及用户需求分类、功能规划的题目。</p>
+<p><strong>核心原理</strong>：对每个功能问两道题——"如果有这个功能你感觉如何""如果没有你感觉如何"，按标准 KANO 分类表映射类别。Better=(魅力+期望)/有效数（增加带来的满意提升），Worse=-(期望+必备)/有效数（缺失带来的不满）。</p>
+<p><strong>操作要点</strong>：工具箱选"KANO 模型"，正向反向题同向编码，象限分界用整体均值，平票顺序"必备<span class="arithmatex">\(&gt;\)</span>期望<span class="arithmatex">\(&gt;\)</span>魅力<span class="arithmatex">\(&gt;\)</span>无差异<span class="arithmatex">\(&gt;\)</span>反向"。</p>
+<p><strong>结果关键</strong>：案例"余额变动实时提醒"是必备属性（<span class="arithmatex">\(|Worse|=0.667\)</span>，缺失就不满），"开屏广告"是反向属性（提供反而反感）。</p>
+<p><strong>注意</strong>：优先保障高 <span class="arithmatex">\(|Worse|\)</span> 的必备功能，再投入高 Better 的魅力功能；反向功能应移除。</p>
+</div>
+<h3 id="maxdiff">MaxDiff最大差异测量  <code>进阶级</code><a class="headerlink" href="#maxdiff" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：让受访者在每组几个属性里选出"最喜欢"和"最不喜欢"的，从而排出属性重要性的绝对顺序，避免李克特打分的趋中偏差。</p>
+<p><strong>美赛场景区</strong>：产品属性取舍（如笔记本电脑更看重性能还是续航）、卖点优先级。</p>
+<p><strong>核心原理</strong>：用层次贝叶斯（HB）估计每个属性的相对效用，偏好份额 <span class="arithmatex">\(= \exp(效用)/\sum \exp(效用) \times 100%\)</span>，合计 100%，份额越高越受偏好。</p>
+<p><strong>操作要点</strong>：工具箱选"MaxDiff"，数据为长表（每受访者每任务一行），估计方法 auto（小样本自动 HB），可按城市分组比较。</p>
+<p><strong>结果关键</strong>：案例处理器性能偏好份额 51.2% 居首，键盘手感 1.1% 最易被牺牲；<span class="arithmatex">\(\rho^2=0.296\)</span>、任务命中率 62.7%。</p>
+<p><strong>注意</strong>：MaxDiff 比直接打分更能拉开属性差距，但问卷设计要求属性组合呈正交，否则效用不可识别。</p>
+</div>
+<h3 id="cbc">联合分析（含CBC）  <code>进阶级</code><a class="headerlink" href="#cbc" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把产品拆成品牌、价格、配置等属性水平，让受访者在多个完整产品方案中做选择，反推每个属性水平的效用和重要性。</p>
+<p><strong>美赛场景区</strong>：新品概念测试、属性配置与定价决策；美赛中涉及产品/服务设计权衡的题目。</p>
+<p><strong>核心原理</strong>：用条件 Logit（多项 Logit）估计各属性水平效用，被选概率经指数归一化；属性相对重要性 = 该属性水平效用极差 / 所有属性极差之和。McFadden <span class="arithmatex">\(R^2\)</span> 衡量模型拟合。</p>
+<p><strong>操作要点</strong>：工具箱选"联合分析/CBC"，编码方式 effect，优化器 BFGS，价格可作线性项，输出相对重要性排序。</p>
+<p><strong>结果关键</strong>：案例品牌相对重要性 32.8% 最高，价格每涨 1000 元效用降 1.23；McFadden <span class="arithmatex">\(R^2=0.295\)</span>。</p>
+<p><strong>注意</strong>：样本量通常需要每个属性组合有足够重复；某水平不显著时不能宣称有真实偏好差异。</p>
+</div>
+<h3 id="nps">NPS净推荐值分析  <code>进阶级</code><a class="headerlink" href="#nps" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：用一个 0--10 分的"推荐意愿"问题算净推荐值 <span class="arithmatex">\(NPS=\)</span> 推荐者占比 <span class="arithmatex">\(-\)</span> 贬损者占比，衡量客户口碑。</p>
+<p><strong>美赛场景区</strong>：客户满意度/忠诚度评价；品牌口碑追踪。</p>
+<p><strong>核心原理</strong>：9--10 分为推荐者、7--8 分为被动者、0--6 分为贬损者。$NPS = $ 推荐者% <span class="arithmatex">\(-\)</span> 贬损者%。经验阈值：<span class="arithmatex">\(&gt;0\)</span> 可接受、<span class="arithmatex">\(&gt;50\)</span> 良好、<span class="arithmatex">\(&gt;70\)</span> 优秀。用 Bootstrap 给 CI，分组用三档 <span class="arithmatex">\(\times\)</span> 分组卡方 + Bonferroni 校正。</p>
+<p><strong>操作要点</strong>：工具箱选"NPS"，指定评分列与分组列，CI 用 bootstrap，比较方法 chi2。</p>
+<p><strong>结果关键</strong>：案例总体 NPS=14.0（CI <span class="arithmatex">\(0.7\)</span>--<span class="arithmatex">\(26.7\)</span>，不含 0），华南 59.2 显著优于西部 -18.8。</p>
+<p><strong>注意</strong>：NPS 是个单一口碑指标，不能替代满意度细节；分组差异要做多重比较校正。</p>
+</div>
+<h3 id="psm">价格敏感度分析（PSM）  <code>进阶级</code><a class="headerlink" href="#psm" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：用"太便宜/便宜/贵/太贵"四个价格问题，找出消费者心理上最优定价点和可接受价格区间。</p>
+<p><strong>美赛场景区</strong>：新品定价决策；美赛中涉及产品定价、需求估计的题目。</p>
+<p><strong>核心原理</strong>：Van Westendorp 模型画四条累积曲线：太便宜(P1)、便宜(P2)随价格下降，贵(P3)、太贵(P4)随价格上升。四条曲线交点给出四个关键价：PMC 可接受下限（P1<span class="arithmatex">\(\cap\)</span>P3）、OPP 最优价（P1<span class="arithmatex">\(\cap\)</span>P4）、IDP 无差异点（P2<span class="arithmatex">\(\cap\)</span>P3）、PME 可接受上限（P2<span class="arithmatex">\(\cap\)</span>P4）。</p>
+<p><strong>操作要点</strong>：工具箱选"价格敏感度 PSM"，线性插值，最小有效样本 30，剔除逻辑顺序违规（P1<span class="arithmatex">\(&gt;\)</span>P2<span class="arithmatex">\(&gt;\)</span>P3<span class="arithmatex">\(&gt;\)</span>P4）的答卷。</p>
+<p><strong>结果关键</strong>：案例最优价 OPP <span class="arithmatex">\(\approx 12.4\)</span> 元，可接受区间 <span class="arithmatex">\([9.67, 13.86]\)</span> 元。</p>
+<p><strong>注意</strong>：PSM 是"心理价位"调查，与真实购买行为有差距，正式定价还需结合成本与竞品。</p>
+</div>
+<h3 id="turf">Turf组合模型  <code>进阶级</code><a class="headerlink" href="#turf" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：从一堆候选项（口味、渠道、广告位）里挑出固定数量的组合，使"至少喜欢其中一项"的去重人数最多。</p>
+<p><strong>美赛场景区</strong>：菜单组合、媒体投放组合、产品线规划——在有限名额下最大化覆盖。</p>
+<p><strong>核心原理</strong>：本质是组合优化。对 0/1 喜好数据，枚举（或贪心+邻域搜索）所有 <span class="arithmatex">\(k\)</span> 项组合，算去重触达人数，取最大者。比"直接选单项人气最高的 <span class="arithmatex">\(k\)</span> 个"更优，因为考虑了人群重叠。</p>
+<p><strong>操作要点</strong>：工具箱选"Turf"，目标 reach_frequency，组合大小设 k，候选数小时精确枚举、过大时启发式近似。</p>
+<p><strong>结果关键</strong>：案例选 3 款口味去重触达 120 人（80%），比"单项最高 3 款"基线多 33 人。</p>
+<p><strong>注意</strong>：Turf 优化的是<strong>覆盖广度</strong>，不是每个单项的人气；重叠大的项目组合后增量很小。</p>
+</div>
+<h3 id="bpto">品牌价格抵补模型（BPTO）  <code>进阶级</code><a class="headerlink" href="#bpto" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把消费者对品牌的偏好折算成"愿意多付多少钱"，并测算各品牌提价后的份额流失（价格弹性）。</p>
+<p><strong>美赛场景区</strong>：多品牌/多产品线定价、品牌资产评估。</p>
+<p><strong>核心原理</strong>：用条件 Logit 把选择效用拆成品牌虚拟变量系数 + 价格系数。品牌相对参考品牌的货币溢价 = <span class="arithmatex">\(-\)</span>品牌系数/价格系数；价格弹性 = 提价 10% 后的份额变化率。</p>
+<p><strong>操作要点</strong>：工具箱选"BPTO"，指定品牌、价格、选择、任务、受访者字段，收敛容差 1e-6，加价幅度 10%。</p>
+<p><strong>结果关键</strong>：案例以漫享为参照，云屿品牌溢价 3.42 元显著为正，谷咖需折价 6.64 元；各品牌价格弹性 <span class="arithmatex">\(-2.9\)</span> 至 <span class="arithmatex">\(-3.5\)</span>（富有弹性）。</p>
+<p><strong>注意</strong>：BPTO 回答"品牌值多少钱"，参考品牌应选份额最高者；弹性绝对值 <span class="arithmatex">\(&gt;1\)</span> 说明提价得不偿失。</p>
+</div>
+<h3 id="_14">价格断裂点模型  <code>进阶级</code><a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：让不同消费者组只看一个候选价格，画出价格--需求曲线，找出购买意愿骤降的"断裂台阶"，并定收益最大化价。</p>
+<p><strong>美赛场景区</strong>：定价调研，找出消费者心理价格上限；与 PSM 互补（PSM 问主观感受，本模型看购买意愿突变）。</p>
+<p><strong>核心原理</strong>：把"意愿 <span class="arithmatex">\(\geq 4\)</span> 分"定义为需求率，形成价格--需求曲线；相邻价格档做两比例 Z 检验（BH 校正）+ Chow 断点检验找突变点；再用"价格 <span class="arithmatex">\(\times\)</span> 需求率"算各档收益，取最大者定价。</p>
+<p><strong>操作要点</strong>：工具箱选"价格断裂点"，独立组设计，购买意愿阈值 4 分，最小突变幅度 10 个百分点，BH 校正。</p>
+<p><strong>结果关键</strong>：案例 109<span class="arithmatex">\(\to\)</span>129 元时需求骤降 36 个百分点（校正 <span class="arithmatex">\(p=0.027\)</span>），收益在 109 元达峰，建议定价 109 元。</p>
+<p><strong>注意</strong>：购买意愿是声明意愿，与真实购买有差距；断裂点建议结合成本与竞品复核。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

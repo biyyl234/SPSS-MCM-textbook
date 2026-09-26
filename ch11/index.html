@@ -1,0 +1,2012 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch11/">
+      
+      
+        <link rel="prev" href="../ch10/">
+      
+      
+        <link rel="next" href="../ch12/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第11章 机器学习 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第11章 机器学习
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        决策树 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 随机森林 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#svmsvr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 支持向量机（SVM/SVR） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kknn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        K近邻（KNN） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        朴素贝叶斯 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bpmlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 神经网络（BP/MLP） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gbdt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GBDT梯度提升树 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xgboost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XGBoost 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lightgbm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LightGBM 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catboost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CatBoost 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adaboost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AdaBoost自适应提升 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extratrees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        极端随机树（ExtraTrees） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apriori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关联规则（Apriori） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">机器学习<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>前面章节的统计模型大多是"人先假设一个关系形式（如线性），再让数据去拟合"。机器学习反过来：把大量特征喂给算法，让它<strong>自己学</strong>出特征与结果之间的复杂规律，再拿去预测新样本。它特别擅长非线性关系、特征交互多、样本量大的预测任务。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>机器学习是美赛 C 题（大数据题）和预测类问题的<strong>主力方法</strong>：
+- <strong>分类问题</strong>：会不会流失、是否违约、属于哪类——随机森林、SVM、神经网络、XGBoost
+- <strong>回归问题</strong>：预测租金、销量、价格——随机森林、SVR、神经网络
+- <strong>关联挖掘</strong>：哪些商品常被一起买——Apriori 关联规则
+- 美赛中<strong>随机森林、SVM、神经网络</strong>是三类最常用、评审最认可的方法</p>
+<p><strong>学习路径建议</strong></p>
+<p>先建立"预测模型怎么评价"的共同语言（准确率、精确率、召回率、F1、AUC），再从<strong>决策树</strong>（最可解释）入手理解树模型；然后学<strong>随机森林</strong>（树的集成，稳）、<strong>SVM</strong>（小样本非线性分类利器）、<strong>KNN</strong> 和<strong>朴素贝叶斯</strong>（简单基线）；<strong>神经网络</strong>理解其万能逼近能力但要注意过拟合。进阶的 GBDT/XGBoost/LightGBM/CatBoost/AdaBoost/ExtraTrees 都是树模型集成的变体，理解了随机森林再触类旁通即可。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">决策树  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>决策树就是一棵"如果...就..."的问答树：从根节点开始，按某个特征一问一答向下分叉，最后落到一片叶子上给出分类或预测。它是所有树模型（随机森林、GBDT）的基础，规则完全透明、最容易解释。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中需要<strong>可解释规则</strong>的预测问题（如"满足什么条件订单会延误"）</li>
+<li>给复杂黑箱模型做对照基线</li>
+<li>特征既有数值又有类别、关系非线性时</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象你判断一个订单会不会延误：先问"发货时段是不是高峰？"是就走左支、否走右支；左支再问"骑手历史准时率是否 <span class="arithmatex">\(&lt;80%\)</span>？"……一层层问下去，直到给出结论。</p>
+<ul>
+<li>每次分裂选一个<strong>最能把两类样本分开</strong>的特征和阈值</li>
+<li>分类用<strong>基尼不纯度（Gini）</strong>衡量节点"纯不纯"，分裂后越纯越好</li>
+<li>叶子节点里多数类的类别就是预测结果</li>
+<li><strong>剪枝</strong>（max_depth、min_samples_leaf）防止树长得太细、死记训练数据</li>
+</ul>
+<p>生活类比：决策树就像查字典——每一步二选一把范围缩小，最后定位答案。单棵树容易过拟合（ memorize 噪声），所以实际多用它的集成版（随机森林、GBDT）。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 SPSS 中通过 <strong>分析 → 预测建模 → 构建决策树</strong>（或 Tree 节点）实现</li>
+<li>在 Dabbit AI SPSS 工具箱中选"决策树"，指定目标列（如是否延误）</li>
+<li>任务类型 auto（分类/回归自动判断），分裂准则 gini，splitter=best</li>
+<li>控制过拟合：max_depth 不限制时配合 min_samples_leaf、ccp_alpha 剪枝</li>
+<li>按类别分层切分训练/测试集，预处理（缺失填补、独热编码）只在训练折内拟合，避免数据泄露</li>
+</ol>
+<p><strong>默认参数参考</strong>：criterion=gini，splitter=best，max_depth 不限，min_samples_split=2，随机种子 42。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>混淆矩阵</strong>：行=真实类别、列=预测类别，对角线越集中越好。案例测试集准确率 76.3%，高于多数类基线 55.3%</li>
+<li><strong>精确率/召回率/F1</strong>：见下文统一解释</li>
+<li><strong>特征重要性</strong>：发货时段、骑手准时率、交通等级各贡献约 25%，是主要判断依据</li>
+<li><strong>树结构图</strong>：可直接翻译成"如果...则..."的业务规则</li>
+</ul>
+<p><strong>怎么判断好坏</strong>：测试集准确率显著高于多数类基线、交叉验证各折稳定，就是可用；树太深（如案例 6 层 19 叶）要警惕过拟合。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 需要可解释规则、特征类型混合、关系非线性时。</p>
+<p><strong>什么时候不用？</strong> 追求极致精度时单棵树不够，用随机森林/GBDT；特征量纲敏感问题上不如线性模型直接。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不剪枝让树无限生长，训练集准确率 100% 测试集很差（过拟合）
+- <strong>坑2</strong>：在测试集上做缺失填补/编码，造成数据泄露
+- <strong>坑3</strong>：把特征重要性当因果——它只表示预测贡献大小</p>
+<p><strong>和相似算法的区别</strong>：单棵决策树可解释但不稳；随机森林是很多棵树投票，更稳更准但牺牲解释性。</p>
+</div>
+<h3 id="_4">⭐ 随机森林  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>随机stvo森林就是"一千棵树的民主投票"——训练很多棵决策树，每棵只看部分样本、部分特征，最后让所有树投票决定结果。它是美赛里最常用、最稳、调参最少的机器学习模型。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li><strong>美赛预测任务的首选基线</strong>：分类（流失/违约/患病）或回归（数值预测）都能用</li>
+<li>特征多、关系非线性、有交互时表现稳健</li>
+<li>同时给出特征重要性，帮助识别关键变量</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>生活类比：判案时不是只听一个法官（单棵树），而是请 500 个法官各自<strong>独立</strong>审一部分证据、投一票，少数服从多数。每个法官都可能判错，但集体投票就稳得多。</p>
+<p>为什么"随机"？
+- <strong>样本随机</strong>：每棵树用有放回抽样（bootstrap）得到的不同子样本训练
+- <strong>特征随机</strong>：每次分裂只从随机抽的一部分特征（分类常用 sqrt(p)）里选最优
+- 这两点保证树之间<strong>不一样</strong>，否则大家犯一样的错，集成就没意义</p>
+<p>最后分类按多数票、回归按平均。特征重要性由每棵树分裂时不纯度下降的总和归一化得到。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 SPSS 中通过 <strong>分析 → 预测建模</strong> 或在 Dabbit AI 工具箱选"随机森林"</li>
+<li>指定目标列（如是否流失），排除 ID 列；类别不平衡时设 class_weight=balanced</li>
+<li>分裂准则 gini，max_features=sqrt，n_estimators 通常几百棵</li>
+<li>按类别分层切训练/测试集，训练集内做 K 折交叉验证</li>
+<li>缺失值中位数/众数填补，类别变量独热编码，全程固定随机种子</li>
+</ol>
+<p><strong>默认参数参考</strong>：criterion=gini，max_features=sqrt，class_weight=balanced，分层切分，5 折交叉验证。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>准确率</strong>：案例测试集 0.868，显著高于多数类基线 0.750</li>
+<li><strong>AUC</strong>：0.839，区分能力良好（见 ROC 章节解释）</li>
+<li><strong>宏 F1</strong>：0.792</li>
+<li><strong>特征重要性</strong>：在网时长（0.437）、月均流量、月通话时长、月均消费贡献最大——前 5 个主导</li>
+<li><strong>交叉验证</strong>：5 折准确率 <span class="arithmatex">\(0.813\pm0.056\)</span>，与测试集一致说明稳定不过拟合</li>
+</ul>
+<p><strong>怎么判断</strong>：测试集指标明显高于基线、交叉验证波动小、训练/测试差距不大，就是好模型。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 大多数表格类预测任务的默认首选，"先跑个随机森林看看"。</p>
+<p><strong>什么时候不用？</strong> 需要极强可解释性（用单棵树/逻辑回归）；需要输出精确概率（概率校准偏差，先校准）；特征极稀疏高维文本（用线性模型/神经网络）。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：在训练集上算准确率自夸。必须报独立测试集和交叉验证
+- <strong>坑2</strong>：类别不平衡还不加权，模型偏向多数类。用 class_weight=balanced 或报告平衡准确率
+- <strong>坑3</strong>：把特征重要性当成因果方向
+- <strong>坑4</strong>：泄露字段（如用了未来才知道的信息）进模型，虚高</p>
+<p><strong>和相似算法的区别</strong>：随机森林 bagging（树之间独立并行投票）；GBDT/XGBoost boosting（树之间串行纠错）。两者都是树集成，RF 更稳更省心。</p>
+</div>
+<h3 id="svmsvr">⭐ 支持向量机（SVM/SVR）  <code>基础级</code><a class="headerlink" href="#svmsvr" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>支持向量机寻找一条"最宽的分界线"把两类样本分开——不仅要分开，还要让离边界最近的样本到边界的距离（间隔）尽可能大。它在小样本、高维、非线性问题上特别强，分类版叫 SVM、回归版叫 SVR。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中<strong>样本量适中、特征维度不高</strong>的二分类问题（如客户流失预测）</li>
+<li>数据有非线性边界时，用核函数升级</li>
+<li>作为与随机森林并列的常用分类器对照</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>生活类比：在两拨人之间画一条三八线，你会尽量画在<strong>两拨人中间最空的地方</strong>，让两边都离得越远越好——这样即使来了新人，也不容易站错边。离边界最近的那几个样本点就叫<strong>支持向量</strong>（它们"支撑"了这条边界）。</p>
+<p>关键概念：
+- <strong>软间隔参数 C</strong>：C 越大越不容忍分错样本（可能过拟合），C 越小越宽容（可能欠拟合）
+- <strong>核函数 kernel</strong>：线性核（linear）处理线性可分；RBF 核处理非线性，靠 gamma 控制边界弯曲程度
+- <strong>特征标准化</strong>：SVM 对量纲极敏感，必须先把各特征标准化到均值 0、方差 1，否则量纲大的特征会主导距离</p>
+<p>通过网格搜索 + 交叉验证选最优的 C、gamma、kernel 组合。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 SPSS 中通过 <strong>分析 → 预测建模</strong> 或 Dabbit AI 工具箱选"支持向量机"</li>
+<li>任务类型选分类（SVC），指定目标列（如是否流失）</li>
+<li>先做特征标准化（只在训练折内 fit，避免泄露）</li>
+<li>网格搜索：C 候选（如 0.1, 1, 10）、gamma 候选（如 0.01, 0.1, 1）、核函数 linear 与 rbf</li>
+<li>5 折交叉验证选最优参数，再在独立测试集评估</li>
+</ol>
+<p><strong>默认参数参考</strong>：C 候选 0.1/1/10，gamma 候选 0.01/0.1，核函数 linear+rbf，评分指标 accuracy。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>最优参数</strong>：案例 C=1.0、gamma=0.01、kernel=linear，CV 均分 0.902</li>
+<li><strong>测试集准确率</strong>：78.9%，高于多数类基线 68.4%</li>
+<li><strong>宏平均精确率 0.761、召回率 0.734、F1 0.744</strong>（指标含义见下方统一说明）</li>
+<li><strong>支持向量占比</strong>：案例 35.7%，占比越高说明类别重叠越多、边界越复杂</li>
+<li><strong>混淆矩阵</strong>：真实类 0 中 23 判对、3 误判；真实类 1 中 7 判对、5 漏判</li>
+</ul>
+<p><strong>分类指标统一解释（重要）</strong>：
+- <strong>准确率 Accuracy</strong>：所有样本中预测对的比例。类别不平衡时会骗人
+- <strong>精确率 Precision</strong>：预测为正的样本里真为正的比例（"说是的里面有多少真是"）——控制误报
+- <strong>召回率 Recall（灵敏度）</strong>：真为正的样本里被找出来的比例（"真病人找出来多少"）——控制漏诊
+- <strong>F1</strong>：精确率和召回率的调和平均，两者兼顾时的综合分
+- <strong>AUC</strong>：排序区分能力（见第 10 章 ROC）</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 中小样本、需要非线性边界、特征数适中的分类/回归。</p>
+<p><strong>什么时候不用？</strong> 样本量巨大（SVM 训练慢）；特征类别很多/缺失复杂（树模型更省心）；需要直接输出概率（SVM 概率需额外校准）。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不标准化特征。量纲差异会让 SVM 失效
+- <strong>坑2</strong>：C 和 gamma 不调参，用默认值碰运气。必须网格搜索 + 交叉验证
+- <strong>坑3</strong>：类别不平衡不处理，用 accuracy 评模型</p>
+<p><strong>和相似算法的区别</strong>：SVM 靠间隔最大化+核函数；随机森林靠树集成。小样本非线性 SVM 常更优，大数据/多类型特征 RF/GBDT 更稳。</p>
+</div>
+<h3 id="kknn">K近邻（KNN）  <code>基础级</code><a class="headerlink" href="#kknn" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>KNN 的思想极其朴素：<strong>近朱者赤，近墨者黑</strong>。要判断一个新样本属于哪类，就看它周围最近的 K 个邻居大多数是哪类，它就是哪类。它不需要训练模型，是"惰性学习"的代表。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中作为<strong>简单基线模型</strong>，快速对比其他复杂方法是否真的更优</li>
+<li>特征已经很好地标准化、类别间有清晰局部结构的分类/回归</li>
+<li>教学演示"相似性分类"思想</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>生活类比：你搬到一个新小区，想判断这小区是"高风险"还是"低风险"，不用算什么模型，只要看看离你最近的 K 户邻居大多是什么情况，投票决定。</p>
+<ul>
+<li>计算新样本与<strong>所有训练样本</strong>的距离（欧氏距离）</li>
+<li>取最近的 K 个邻居，分类按多数投票、回归按平均</li>
+<li><strong>K 的选择很关键</strong>：K 太小容易被噪声带偏（过拟合），K 太大边界过度平滑（欠拟合）</li>
+<li><strong>必须标准化特征</strong>：否则"月消费几千元"会压倒"在网时长几十月"这类量纲小的特征</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 Dabbit AI 工具箱选"K 近邻 KNN"，指定目标列与数值特征</li>
+<li>特征标准化（均值 0、方差 1），距离度量 euclidean</li>
+<li>候选 K 设为奇数序列（1,3,5,...,29），用 5 折交叉验证按 accuracy 选最优 K</li>
+<li>案例交叉验证选出 K=9，权重 uniform</li>
+<li>在独立测试集评估并输出逐类精确率/召回率</li>
+</ol>
+<p><strong>默认参数参考</strong>：n_neighbors=5，metric=euclidean，weights=uniform，standardize=True，5 折 CV。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>最优 K</strong>：案例交叉验证 K=9 时均分最高（0.752）</li>
+<li><strong>测试集准确率</strong>：0.822，宏平均 F1 0.826</li>
+<li><strong>逐类精确率/召回率</strong>：高风险类精确率 0.923（判高风险的基本没错）、召回率 0.857</li>
+<li><strong>交叉验证 K 曲线</strong>：K 过小波动大、K 过大得分下降，据此选平衡点</li>
+</ul>
+<p><strong>怎么判断</strong>：测试集准确率显著高于随机基线、各类召回率均衡即可；KNN 不给因果解释，只体现局部相似结构。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 快速基线、特征已标准化、样本量不大。</p>
+<p><strong>什么时候不用？</strong> 样本量大（预测时要和所有样本算距离，慢）；特征量纲差异大又不标准化；高维稀疏数据。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不标准化特征，量纲大的列主导距离
+- <strong>坑2</strong>：K 取偶数导致投票平局；K 太大/太小
+- <strong>坑3</strong>：样本量大时 KNN 预测极慢却还硬用</p>
+<p><strong>和相似算法的区别</strong>：KNN 是"懒惰"的基于实例方法，不训练参数；SVM/随机森林会训练出明确的决策边界。</p>
+</div>
+<h3 id="_5">朴素贝叶斯  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>朴素贝叶斯基于贝叶斯定理，假设"各个特征之间相互独立（朴素）"，通过先验概率和条件概率算出每个类别的后验概率，取最大者为预测类别。它在文本分类（垃圾邮件、情感分析）里又快又好用。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中文本/词频类分类（如评论情感正/中/负）</li>
+<li>高维稀疏特征（如词袋）下的快速基线</li>
+<li>需要输出后验概率时</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>生活类比：你看到一个人"带伞、看天色"，猜他是不是要下雨了——根据以往经验，下雨天的人多带伞（条件概率），再结合下雨本身的概率（先验），算出"带伞的日子下雨"的后验概率。</p>
+<ul>
+<li><strong>贝叶斯定理</strong>：<span class="arithmatex">\(P(类|特征) \propto P(类) \prod P(特征|类)\)</span></li>
+<li>"朴素"在于假设各特征条件独立（现实中往往不独立，但效果居然常常不错）</li>
+<li>多分类时选后验概率最大的类别</li>
+<li>Multinomial 变体适合计数/词频特征</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 SPSS 中通过 <strong>分析 → 分类 → 朴素贝叶斯</strong>（如该模块可用）</li>
+<li>在 Dabbit AI 工具箱选"朴素贝叶斯"，指定目标列（如情感 sentiment）与特征列</li>
+<li>模型类型 multinomial，评价指标 macro_f1，缺失用均值填补</li>
+<li>分层切分训练/测试集，预处理只在训练折内做</li>
+</ol>
+<p><strong>默认参数参考</strong>：model type=multinomial，metric=macro_f1，missing strategy=mean。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>准确率</strong>：案例 84.2%，宏平均 F1 0.838，ROC-AUC 0.977</li>
+<li><strong>逐类精确率/召回率/F1</strong>：负面类精确率 1.0（预测负面的全对）、正面类召回率 0.923</li>
+<li><strong>混淆矩阵</strong>：错误集中在中性与正面之间（这两类特征重叠大）</li>
+<li><strong>特征区分度</strong>：用 F 统计量排序，"退货""好用""失望"等词最能拉开类别</li>
+</ul>
+<p><strong>怎么判断</strong>：AUC 高、混淆矩阵对角线集中即可；注意朴素贝叶斯的后验概率往往不准（因独立假设），但类别排序常常可用。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 高维稀疏文本/计数特征、需要快速概率分类。</p>
+<p><strong>什么时候不用？</strong> 特征间强相关且要精确概率时；特征量纲连续且关系复杂时（用树模型）。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把输出的后验概率当真概率用——独立假设导致概率失真，只适合排序
+- <strong>坑2</strong>：零概率问题（某特征在某类没出现过）——需用平滑参数 alpha
+- <strong>坑3</strong>：特征强相关时还盲目用（独立假设被严重违反）</p>
+<p><strong>和相似算法的区别</strong>：朴素贝叶斯是概率生成式方法；逻辑回归是判别式方法，后者在特征相关时常更准。</p>
+</div>
+<h3 id="bpmlp">⭐ 神经网络（BP/MLP）  <code>基础级</code><a class="headerlink" href="#bpmlp" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>BP 神经网络（多层感知机 MLP）模拟大脑神经元：输入层接收特征，经过一层或多层隐藏层的非线性变换，最后输出预测。它能拟合极其复杂的非线性关系，是深度学习的雏形。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中特征与目标关系高度复杂、样本量较大的预测问题（如房源租金预测）</li>
+<li>作为与树模型对比的"万能拟合器"</li>
+<li>图像、文本等非结构化数据的建模基础</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>生活类比：神经网络像一条流水线，每个工人（神经元）对上一层传来的信号做加权求和再套个非线性激活函数，传给下一层。层层加工后，最后一层给出结论。训练时用<strong>误差反向传播（BP）</strong>：先前向算预测误差，再从后往前逐层调整每个权重，让误差越来越小。</p>
+<ul>
+<li><strong>隐藏层 (30,30)</strong>：两层各 30 个神经元</li>
+<li><strong>激活函数 ReLU</strong>：引入非线性，否则多层叠加等价于线性回归</li>
+<li><strong>正则系数 alpha</strong>：抑制过拟合</li>
+<li><strong>标准化必须做</strong>：神经网络对量纲和初始值敏感</li>
+<li><strong>早停（early stopping）</strong>：验证集不再改善就停，防过拟合</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 SPSS 中通过 <strong>分析 → 神经网络 → 多层感知器</strong> 实现</li>
+<li>在 Dabbit AI 工具箱选"神经网络 BP/MLP"，指定目标列与特征列</li>
+<li>隐藏层结构 (30,30)，激活 relu，求解器 sgd，学习率自适应</li>
+<li>数值特征标准化、类别特征独热编码、缺失中位数/众数填补（均在训练折内）</li>
+<li>70/30 切分训练/测试集，观察损失曲线是否收敛、是否过拟合</li>
+</ol>
+<p><strong>默认参数参考</strong>：hidden layer sizes=(30,30)，activation=relu，solver=sgd，learning rate=adaptive。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>回归指标</strong>：案例测试集 <span class="arithmatex">\(R^2=0.882\)</span>、RMSE=5.14、MAE=3.52，远优于均值基线（<span class="arithmatex">\(R^2\approx0\)</span>）</li>
+<li><strong>训练 vs 测试得分</strong>：训练 0.924、测试 0.882，差距小说明没过拟合</li>
+<li><strong>损失曲线</strong>：走平说明收敛；若测试损失后期回升则过拟合</li>
+<li><strong>排列重要性</strong>：配套评分、距地铁距离、所在区域影响最大</li>
+</ul>
+<p><strong>怎么判断</strong>：测试集 <span class="arithmatex">\(R^2\)</span> 高且与训练集差距小、损失曲线收敛，就是可用的神经网络。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 复杂非线性、样本充足、特征经过预处理的预测问题。</p>
+<p><strong>什么时候不用？</strong> 样本量小（神经网络需要数据喂养）；需要强可解释性；简单线性关系（杀鸡用牛刀）。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不标准化输入，网络难收敛
+- <strong>坑2</strong>：隐藏层太大/训练轮数太多，死记训练噪声（过拟合）。用正则 alpha 和早停
+- <strong>坑3</strong>：把神经网络当万能最优。表格数据上 GBDT/XGBoost 常常又快又好，不必硬上深度学习
+- <strong>坑4</strong>：结果不可复现却不固定随机种子</p>
+<p><strong>和相似算法的区别</strong>：神经网络是万能非线性拟合器但黑箱、需调参；树集成（随机森林/GBDT）在中等规模表格数据上往往更省心。</p>
+</div>
+<h2 id="_6">进阶级算法速览<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="gbdt">GBDT梯度提升树  <code>进阶级</code><a class="headerlink" href="#gbdt" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：串行地逐棵训练树，每棵新树专门去<strong>拟合前面所有树残差</strong>（预测错的部分），一步步纠错。</p>
+<p><strong>美赛场景区</strong>：表格数据分类/回归（如客户流失预测），精度常高于随机森林。</p>
+<p><strong>核心原理</strong>：加法模型，每轮拟合损失函数的负梯度（残差近似），用学习率和子采样控制过拟合；早停防止过拟合。</p>
+<p><strong>操作要点</strong>：工具箱选 GBDT，指定目标列与特征列，分类任务对数损失，调 n_estimators、learning rate、max depth。</p>
+<p><strong>结果关键</strong>：案例测试集准确率 0.80、AUC 0.845，优于多数类基线 0.644；前 5 特征贡献 81%。</p>
+<p><strong>注意</strong>：比随机森林更易过拟合，需配合学习率、树深、早停调参。</p>
+</div>
+<h3 id="xgboost">XGBoost  <code>进阶级</code><a class="headerlink" href="#xgboost" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：GBDT 的工程优化版，加入正则项、二阶导数信息和缺失值原生处理，是 Kaggle 表格数据竞赛的常胜将军。</p>
+<p><strong>美赛场景区</strong>：高精度分类/回归（如信贷违约预测），特征工程到位时精度最高。</p>
+<p><strong>核心原理</strong>：在损失中加入一二阶泰勒展开和正则项（L1/L2），控制模型复杂度；支持早停和缺失值自动分裂。</p>
+<p><strong>操作要点</strong>：工具箱选 XGBoost，学习率 0.1、树深 3、最多 200 轮、早停 30 轮，分类用 logloss。</p>
+<p><strong>结果关键</strong>：案例测试集准确率 0.80、AUC 0.90；信用评分、年龄、负债收入比分裂增益最高。</p>
+<p><strong>注意</strong>：参数多需调；特征重要性是增益而非因果；防泄露用分层三分（训练/验证/测试）。</p>
+</div>
+<h3 id="lightgbm">LightGBM  <code>进阶级</code><a class="headerlink" href="#lightgbm" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：XGBoost 的"快速版"，用直方图算法和 leaf-wise 生长，训练更快、内存更省，尤其适合大数据。</p>
+<p><strong>美赛场景区</strong>：样本量大、特征多的表格预测（如信贷违约）；需要快速迭代调参时。</p>
+<p><strong>核心原理</strong>：按直方图把连续特征离散化加速分裂，按 leaf-wise（优先分裂损失下降最大的叶子）生长，支持类别特征原生处理。</p>
+<p><strong>操作要点</strong>：工具箱选 LightGBM，任务 binary，指定类别特征列，早停定迭代轮数。</p>
+<p><strong>结果关键</strong>：案例测试集 AUC 0.818，早停最佳 103 轮；年收入、历史逾期次数增益最高。</p>
+<p><strong>注意</strong>：leaf-wise 易过拟合小样本，需限制 num_leaves 和 min_child_samples。</p>
+</div>
+<h3 id="catboost">CatBoost  <code>进阶级</code><a class="headerlink" href="#catboost" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：专为<strong>类别特征多</strong>的数据优化的梯度提升树，能原生高质量处理类别变量，少做特征工程。</p>
+<p><strong>美赛场景区</strong>：类别特征丰富的预测（如电信客户流失，套餐类型/办理渠道/区域）。</p>
+<p><strong>核心原理</strong>：用Ordered Target Statistics 编码类别特征，避免目标泄露；同样是 boosting 框架，默认参数就很稳。</p>
+<p><strong>操作要点</strong>：工具箱选 CatBoost，损失 Logloss，深度 6、学习率 0.05、最多 500 轮早停，指定类别特征列。</p>
+<p><strong>结果关键</strong>：案例测试集 AUC 0.856、准确率 0.739（基线 0.522）；合约状态重要性最高。</p>
+<p><strong>注意</strong>：类别特征很多时 CatBoost 比 XGBoost 省心，但小样本上未必占优。</p>
+</div>
+<h3 id="adaboost">AdaBoost自适应提升  <code>进阶级</code><a class="headerlink" href="#adaboost" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：每轮<strong>提高被错分样本的权重</strong>，让下一个弱学习器（通常是很浅的树）重点关注难样本，最后加权组合。</p>
+<p><strong>美赛场景区</strong>：二分类任务的稳健 boosting 基线；样本难度不均时。</p>
+<p><strong>核心原理</strong>：用决策树桩（深度 1）作弱学习器，按样本分类对错动态调整权重，加权投票集成。</p>
+<p><strong>操作要点</strong>：工具箱选 AdaBoost，弱学习器决策树桩，轮数 50、学习率 1.0，分层 K 折交叉验证。</p>
+<p><strong>结果关键</strong>：案例测试集 AUC 0.784、准确率 0.778（基线 0.540）；信用评分、负债收入比重要性最高。</p>
+<p><strong>注意</strong>：对噪声和异常点敏感（会过度关注错分样本）；类别极不平衡时需加权。</p>
+</div>
+<h3 id="extratrees">极端随机树（ExtraTrees）  <code>进阶级</code><a class="headerlink" href="#extratrees" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：比随机森林更"随机"的 bagging 树——分裂点也随机选（不找最优），偏差略高但方差更低、更快。</p>
+<p><strong>美赛场景区</strong>：随机森林的对照集成；特征噪声大时可能更稳。</p>
+<p><strong>核心原理</strong>：与随机森林类似但分裂阈值随机选取，进一步降低方差；同时报告不纯度重要性和置换重要性互相印证。</p>
+<p><strong>操作要点</strong>：工具箱选 ExtraTrees，max_features=sqrt，分层切分训练/测试。</p>
+<p><strong>结果关键</strong>：案例平衡准确率 0.776、AUC 0.841（基线 0.589）；缴费方式重要性最高。</p>
+<p><strong>注意</strong>：当置换重要性明显低于不纯度重要性时，说明该特征冗余或高基数干扰，解读要谨慎。</p>
+</div>
+<h3 id="apriori">关联规则（Apriori）  <code>进阶级</code><a class="headerlink" href="#apriori" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：从大量购物篮/订单里挖出"买了 A 的人很可能也买 B"的搭配规则，用于推荐和套餐设计。</p>
+<p><strong>美赛场景区</strong>：购物篮分析、交叉销售推荐；迁移到"哪些事件/项经常共现"的规律挖掘。</p>
+<p><strong>核心原理</strong>：三步——算频繁项集（支持度）、生成 A<span class="arithmatex">\(\to\)</span>B 规则、按置信度和提升度筛选。
+- <strong>支持度 Support</strong>：A 和 B 同时出现的交易占比（覆盖广不广）
+- <strong>置信度 Confidence</strong>：买了 A 的人里买 B 的比例（条件概率）
+- <strong>提升度 Lift</strong>：<span class="arithmatex">\(P(B|A)/P(B)\)</span>，<span class="arithmatex">\(&gt;1\)</span> 表示 A 对 B 有正向拉动</p>
+<p><strong>操作要点</strong>：工具箱选 Apriori，指定交易 ID 与项列，设 min_support、min_confidence、min_lift，按 lift 排序。</p>
+<p><strong>结果关键</strong>：案例最强规则"鲜榨果汁<span class="arithmatex">\(\to\)</span>田园沙拉"，支持度 4.7%、置信度 70%、提升度 9.55。</p>
+<p><strong>注意</strong>：高支持度不等于强规则（可能只是 B 本身畅销），必须看提升度 <span class="arithmatex">\(&gt;1\)</span> 才算真关联；关联不等于因果。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

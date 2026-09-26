@@ -1,0 +1,2233 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch04/">
+      
+      
+        <link rel="prev" href="../ch03/">
+      
+      
+        <link rel="next" href="../ch05/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第4章 回归分析 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第4章 回归分析
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 线性回归（最小二乘法） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        共线性分析（VIF诊断） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        曲线回归 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分层回归 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        逐步回归 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logistic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 逻辑回归（Logistic） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分位数回归 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deming回归（正交回归） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probit回归 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        非线性回归 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对数线性模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hlm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多层线性模型（HLM/混合效应） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heckman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heckman两阶段模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ransacm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        稳健回归（RANSAC/M估计） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#poisson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Poisson回归 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        偏最小二乘回归（PLS） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tobit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tobit回归 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        岭回归（Ridge） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        负二项回归 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        零膨胀泊松回归（ZIP） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        广义估计方程（GEE） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        广义线性模型（GLM） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zinb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        零膨胀负二项回归（ZINB） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lasso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lasso回归 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">回归分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>回归分析是<strong>建模和预测</strong>的主力工具。它要回答的是：给定一堆自变量（客流、面积、促销天数……），因变量（销售额）怎么变？每个自变量<strong>影响多大、方向是正是负</strong>？能不能用这个方程去<strong>预测</strong>新店的销售额？相关分析只问"动不动一起变"，回归则进一步给出"变多少"的定量方程。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>回归是美赛<strong>出镜率最高</strong>的建模方法。C题几乎必做：用回归找关键影响因素、做预测；A/B题建立变量间的定量关系模型。论文"模型建立""结果分析"部分，回归系数表是核心证据。</p>
+<p><strong>学习路径建议</strong>
+先掌握<strong>线性回归</strong>（一切的基础）和它的体检项<strong>共线性VIF</strong>；再学<strong>曲线回归</strong>（关系不是直线时）、<strong>分层回归</strong>（控制背景后看增量贡献）、<strong>逐步回归</strong>（变量太多时自动筛选）；因变量是<strong>分类</strong>时用<strong>逻辑回归</strong>。最后再根据数据特点认识岭回归、Lasso、Poisson、Logistic族等进阶模型。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">⭐ 线性回归（最小二乘法）  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>线性回归就是<strong>找一条最佳直线（其实是多维平面）</strong>，让它尽量穿过所有数据点，从而用自变量预测因变量。本案例用日均客流量、营业面积、月促销天数、竞争门店数预测月销售额。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>因变量是连续数值（销售额、温度、成绩），想找多个自变量对它的线性影响</li>
+<li>美赛C题建立预测模型、量化各因素边际效应</li>
+<li>论文中"影响因素分析"的核心模型</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象散点图上一堆点，你画一条直线去"贴近"它们。怎么算最佳？让每个点到直线的<strong>纵向距离平方和</strong>最小——这就是"最小二乘法"。</p>
+<p>回归方程长这样：
+$<span class="arithmatex">\(y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k\)</span>$
+- <span class="arithmatex">\(b_0\)</span>是截距（所有自变量为0时的基线值）
+- <span class="arithmatex">\(b_j\)</span>是<span class="arithmatex">\(x_j\)</span>的系数：<span class="arithmatex">\(x_j\)</span>每涨1单位，<span class="arithmatex">\(y\)</span>平均涨<span class="arithmatex">\(b_j\)</span>单位（控制其他变量不变）
+- 本案例：竞争门店数系数<span class="arithmatex">\(-2.025\)</span>，即周边每多一家竞争店，月销售额平均降2.025万元；月促销天数系数<span class="arithmatex">\(+1.149\)</span>，每多促销1天销售额涨1.149万元</p>
+<p><strong><span class="arithmatex">\(R^2\)</span></strong>是拟合优度：本案例0.788，说明四个自变量一起解释了78.8%的销售额波动。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 回归 → 线性</strong></li>
+<li>因变量选<strong>月销售额</strong>，自变量选<strong>日均客流量、营业面积、月促销天数、竞争门店数</strong></li>
+<li>方法选<strong>输入</strong>（Enter，全部强行进）</li>
+<li>点击<strong>统计量</strong>，勾选"估计""置信区间""模型拟合度""共线性诊断""Durbin-Watson"</li>
+<li>点击<strong>绘制</strong>，把\verb|<em>ZRESID|作<span class="arithmatex">\(y\)</span>、\verb|</em>ZPRED|作<span class="arithmatex">\(x\)</span>，画残差图查异方差</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：缺失按删除（drop），含截距，协方差类型自动，VIF阈值10。本案例有效样本147行，<span class="arithmatex">\(R^2=0.788\)</span>。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>模型汇总表</strong>：<span class="arithmatex">\(R^2=0.788\)</span>、调整<span class="arithmatex">\(R^2=0.782\)</span>；Durbin-Watson=1.84（接近2，残差无自相关）</li>
+<li><strong>ANOVA表</strong>：<span class="arithmatex">\(F=131.9\)</span>，<span class="arithmatex">\(p=8.55\times10^{-47}\)</span>，模型整体显著</li>
+<li><strong>系数表</strong>是核心：每个自变量一行</li>
+<li><strong>系数<span class="arithmatex">\(B\)</span></strong>：方向和大小。客流<span class="arithmatex">\(+0.02\)</span>、面积<span class="arithmatex">\(+0.07\)</span>、促销天数<span class="arithmatex">\(+1.15\)</span>、竞争店<span class="arithmatex">\(-2.03\)</span></li>
+<li><strong><span class="arithmatex">\(t\)</span>和<span class="arithmatex">\(p\)</span></strong>：本案例4个变量全部<span class="arithmatex">\(p&lt;0.001\)</span>，都显著</li>
+<li><strong>95%置信区间</strong>：不含0即显著</li>
+<li><strong>诊断前提</strong>：本案例VIF最大仅1.03（无共线性），Breusch-Pagan <span class="arithmatex">\(p=0.983\)</span>（无异方差），残差Shapiro <span class="arithmatex">\(p=0.49\)</span>（正态）——前提全满足，结果可信</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>连续因变量+多个连续/分类自变量，关系近似直线。</p>
+<p><strong>什么时候不用？</strong>
+- 因变量是0/1（是否逾期）：用逻辑回归
+- 因变量是计数（次数）：用Poisson/负二项回归
+- 散点明显弯曲：用曲线回归或加二次项</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不做前提诊断就报系数。残差异方差、自相关、共线性都会让<span class="arithmatex">\(p\)</span>值失真
+- <strong>坑2</strong>：把回归关系当因果。控制了变量也只能说"关联"，不一定是因果
+- <strong>坑3</strong>：用回归方程外推到数据范围之外，结果不可靠</p>
+<p><strong>和相似算法的区别</strong>：它是回归家族的"母版"——后面所有回归都是它在不同因变量/不同数据形态下的变体。</p>
+</div>
+<h3 id="vif">共线性分析（VIF诊断）  <code>基础级</code><a class="headerlink" href="#vif" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>共线性检查就是看<strong>自变量之间是不是太像了</strong>——如果两个自变量几乎在说同一件事，回归就分不清功劳该记给谁，系数会乱跳。本案例在做房价回归前，先查面积类变量是否互相重复。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>多元线性/逻辑回归<strong>建模前</strong>的必做体检</li>
+<li>自变量多且可能相关（如建筑面积/套内面积/使用面积）</li>
+<li>论文中报告VIF以证明模型稳定</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象让两个特别像的人（套内面积和建筑面积）一起解释房价。既然它俩几乎同步变大，回归就搞不清"到底是谁把房价抬上去的"，于是把系数在两者间胡乱分配——标准误被放大、显著性忽高忽低、符号甚至反过来。</p>
+<ul>
+<li><strong>VIF（方差膨胀因子）</strong>：<span class="arithmatex">\(VIF_j=\frac{1}{1-R_j^2}\)</span>，其中<span class="arithmatex">\(R_j^2\)</span>是"用其他所有自变量预测<span class="arithmatex">\(x_j\)</span>"得到的</li>
+<li><span class="arithmatex">\(VIF=1\)</span>：完全不共线；<span class="arithmatex">\(VIF&gt;5\)</span>：要警惕；<span class="arithmatex">\(VIF&gt;10\)</span>：严重共线性，必须处理</li>
+<li>本案例建筑面积<span class="arithmatex">\(VIF=150\)</span>、套内面积<span class="arithmatex">\(VIF=356\)</span>——爆表！因为三者<span class="arithmatex">\(r=1.00\)</span>几乎完全重复</li>
+</ul>
+<p><strong>条件指数</strong><span class="arithmatex">\(&gt;30\)</span>也提示整个自变量系统病态（本案例44.1）。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>线性回归对话框（<strong>分析 → 回归 → 线性</strong>）中放好因变量和全部候选自变量</li>
+<li>点击<strong>统计量</strong>，勾选<strong>共线性诊断</strong></li>
+<li>运行后查看系数表中的"容差"和"VIF"列</li>
+<li>也可在Dabbit AI SPSS工具箱单独跑"共线性分析"，自动逐步剔除</li>
+</ol>
+<p><strong>默认参数参考</strong>：预警阈值<span class="arithmatex">\(VIF=5\)</span>，严重阈值<span class="arithmatex">\(VIF=10\)</span>；处理方式stepwise_remove（逐步剔除最大VIF）；缺失整行删除。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>初始诊断表</strong>：建筑面积VIF=150、套内面积=356、使用面积=252，全是"严重"</li>
+<li><strong>处置</strong>：逐步剔除——先踢套内面积（VIF=356），再踢建筑面积（VIF=104）</li>
+<li><strong>复检</strong>：保留变量最大VIF降到7.92（建筑层数），低于严重阈值10，共线性基本消除</li>
+<li><strong>决策</strong>：三选一即可（使用面积/建筑面积/套内面积），保留业务上最易解释的那个，不要全塞进去</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>只要做含多个自变量的回归，建模前必查。</p>
+<p><strong>什么时候不用？</strong>简单一元回归（只有一个自变量）不存在共线性问题。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：VIF高了就删重要变量。优先删<strong>业务上重复</strong>的，保留解释力强的；或合并成一个综合指标
+- <strong>坑2</strong>：VIF高但<span class="arithmatex">\(R^2\)</span>也高、预测效果好时，对预测用途影响不大，主要影响系数解释</p>
+<p><strong>和相似算法的区别</strong>：共线性是<strong>自变量之间</strong>的问题（VIF查它）；异方差、自相关是<strong>残差</strong>的问题（各自有专门检验），别混。</p>
+</div>
+<h3 id="_4">曲线回归  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>散点图不是直线而是<strong>弯的</strong>怎么办？曲线回归就是在一堆候选曲线（对数、指数、幂函数、多项式）里挑最贴合的那条。本案例：推广预算越高，销售额涨得越慢——明显是边际递减的弯形。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>散点图显示非线性关系（饱和、递减、加速）</li>
+<li>边际效用递减、S形增长、复利增长等典型曲线现象</li>
+<li>美赛中经济/生物/增长类过程建模</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>直线画不平的地方，换条曲线试试。常见几种：
+- <strong>对数曲线</strong><span class="arithmatex">\(y=a+b\ln x\)</span>：增长越来越慢（边际递减）——本案例正是这种
+- <strong>指数曲线</strong><span class="arithmatex">\(y=ab^x\)</span>：按固定比例爆炸式增长
+- <strong>幂函数</strong><span class="arithmatex">\(y=ax^b\)</span>：齐次增长
+- <strong>多项式（二次/三次）</strong>：先升后降或有拐点</p>
+<p><strong>怎么选？</strong>用<strong>AIC</strong>做裁判：同样本上谁的AIC最小且模型简单，选谁。本案例对数曲线调整<span class="arithmatex">\(R^2=0.991\)</span>、<span class="arithmatex">\(AIC=141.5\)</span>，比直线（<span class="arithmatex">\(R^2=0.83\)</span>、<span class="arithmatex">\(AIC=584.7\)</span>）好一大截，方程<span class="arithmatex">\(y=17.83+16.11\ln x\)</span>。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 回归 → 曲线估计</strong></li>
+<li>因变量选<strong>销售额</strong>，自变量选<strong>推广投入</strong></li>
+<li>勾选候选模型：线性、对数、二次、三次、指数、幂（"全部候选"）</li>
+<li>勾选<strong>显示ANOVA表格</strong>和"绘制模型图"</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：模型选择准则AIC，多项式最高3次，残差诊断开启，置信水平95%。注意对数/指数/幂函数要求<span class="arithmatex">\(x&gt;0\)</span>、<span class="arithmatex">\(y&gt;0\)</span>。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>模型比较表</strong>：每种曲线的<span class="arithmatex">\(R^2\)</span>、<span class="arithmatex">\(AIC\)</span>。本案例对数曲线<span class="arithmatex">\(R^2=0.991\)</span>、<span class="arithmatex">\(\Delta AIC=-443\)</span>（相对直线大幅为负），最优</li>
+<li><strong>选定方程</strong>：<span class="arithmatex">\(y=17.83+16.11\ln(x)\)</span>，截距和系数<span class="arithmatex">\(p&lt;0.001\)</span>都显著</li>
+<li><strong>残差诊断</strong>：残差正态<span class="arithmatex">\(p=0.988\)</span>、游程<span class="arithmatex">\(p=0.101\)</span>、异方差<span class="arithmatex">\(\rho=0.052\)</span>——都正常，曲线选得合适</li>
+<li><strong>解释</strong>：<span class="arithmatex">\(x\)</span>均值处边际效应<span class="arithmatex">\(dy/dx\approx1.20\)</span>，即投入越大、新增一块钱带来的销售增量越小</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>散点明显弯曲且能说出具体形态时。</p>
+<p><strong>什么时候不用？</strong>
+- 散点近似直线：别为了高<span class="arithmatex">\(R^2\)</span>硬上高阶多项式，会过拟合
+- 关系是多个自变量共同造成的：单变量曲线回归不够，要做多变量非线性回归</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：为追求<span class="arithmatex">\(R^2\)</span>盲目上三次、四次多项式，曲线在两端剧烈摆动（龙格现象）
+- <strong>坑2</strong>：超出数据范围外推。本案例结论只在<span class="arithmatex">\(x\in[1.2,\ 42.85]\)</span>内成立</p>
+<p><strong>和相似算法的区别</strong>：它是<strong>单自变量</strong>的曲线建模；多变量非线性关系用非线性回归或广义可加模型。</p>
+</div>
+<h3 id="_5">分层回归  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>分层回归就是<strong>按理论顺序分批次</strong>往模型里加自变量，专门看"新加入的这批变量，能在已有基础上<strong>额外多解释多少</strong>"。本案例先放员工背景，再放工作资源，最后放团队氛围，逐层看增量。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>想证明"某组变量在控制了其他变量后仍有独立贡献"</li>
+<li>心理学/组织行为学问卷分析：先控制人口学变量，再看核心变量</li>
+<li>美赛中区分"背景因素"和"核心干预因素"谁更重要</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>普通回归一次把所有变量丢进去，分不清谁是谁的功劳。分层回归像<strong>盖楼</strong>：
+- <strong>第1层（基线）</strong>：先放必须控制的背景变量（年龄、司龄、工作量），<span class="arithmatex">\(R^2=0.414\)</span>
+- <strong>第2层</strong>：加入工作资源（自主性、上级支持、发展机会），<span class="arithmatex">\(R^2\)</span>涨到0.756，<strong>增量</strong><span class="arithmatex">\(\Delta R^2=0.342\)</span>，<span class="arithmatex">\(\Delta F=66.7\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>——工作资源贡献巨大
+- <strong>第3层</strong>：再加入心理安全感，<span class="arithmatex">\(R^2=0.793\)</span>，<span class="arithmatex">\(\Delta R^2=0.038\)</span>，<span class="arithmatex">\(\Delta F=25.9\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>——仍有显著增量</p>
+<p><strong>关键</strong>：分层顺序是<strong>按理论定的</strong>，不是按数据<span class="arithmatex">\(p\)</span>值。控制变量先进、核心变量后进，才能干净地看到核心变量的"净增量"。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li><strong>分析 → 回归 → 线性</strong>，因变量选<strong>敬业度 job_satisfaction</strong></li>
+<li><strong>Block 1 of 1</strong>放第1层变量：年龄age、司龄tenure、工作量workload，点"下一个"</li>
+<li><strong>Block 2 of 2</strong>放第2层：工作自主性、上级支持、职业发展</li>
+<li><strong>Block 3 of 3</strong>放第3层：心理安全感</li>
+<li>点<strong>统计量</strong>勾"R平方变化""共线性诊断""Durbin-Watson"</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：稳健标准误HC3，<span class="arithmatex">\(\alpha=0.05\)</span>，VIF阈值10。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>模型汇总表</strong>：重点看<strong>R平方变化<span class="arithmatex">\(\Delta R^2\)</span></strong>和对应<span class="arithmatex">\(\Delta F\)</span>的<span class="arithmatex">\(p\)</span>值</li>
+<li>第1层<span class="arithmatex">\(R^2=0.414\)</span>（基线模型显著）</li>
+<li>第2层<span class="arithmatex">\(\Delta R^2=0.342\)</span>，<span class="arithmatex">\(\Delta F=66.7\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>——工作资源显著增量</li>
+<li>第3层<span class="arithmatex">\(\Delta R^2=0.038\)</span>，<span class="arithmatex">\(\Delta F=25.9\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>——心理安全感仍有额外贡献</li>
+<li><strong>最终系数表</strong>：用HC3稳健标准误。本案例7个变量全部显著，工作自主性<span class="arithmatex">\(\beta=0.313\)</span>效应最大</li>
+<li><strong>前提诊断</strong>：VIF最大4.31（无共线），Durbin-Watson=1.92（无自相关），残差正态<span class="arithmatex">\(p=0.753\)</span></li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>要回答"在控制了背景变量后，核心变量是否仍有独立解释力"。</p>
+<p><strong>什么时候不用？</strong>只是想找最优预测方程、没有明确理论层级时，用逐步回归更合适。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：分层顺序乱定。必须按"先外生后内生、先控制后核心"的理论逻辑
+- <strong>坑2</strong>：只看最终<span class="arithmatex">\(R^2\)</span>，不看每一层的<span class="arithmatex">\(\Delta R^2\)</span>和<span class="arithmatex">\(\Delta F\)</span>——那就失去了分层的意义</p>
+<p><strong>和相似算法的区别</strong>：它和逐步回归都在选变量，但<strong>方向相反</strong>——逐步是数据驱动自动选，分层是理论驱动手动分层。</p>
+</div>
+<h3 id="_6">逐步回归  <code>基础级</code><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>候选自变量太多（十几个甚至几十个），手动选不过来？逐步回归让计算机<strong>按<span class="arithmatex">\(p\)</span>值自动挑变量</strong>：最有用的先进，没用的踢出去。本案例从12个经营指标里自动挑出5个预测月销售额。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>自变量很多、缺乏明确理论，想自动找出最重要的少数几个</li>
+<li>美赛C题特征筛选、变量降维</li>
+<li>探索性分析：先粗筛出关键变量，再深入建模</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>像<strong>选秀海选</strong>：
+- <strong>向前引入</strong>：一个个试，把<span class="arithmatex">\(p\)</span>最小（最显著）的变量拉进模型
+- <strong>向后剔除</strong>：把模型里变得不显著的踢出去
+- <strong>逐步（both）</strong>：边进边出，每加一个新变量都重新检查老变量要不要留</p>
+<p>本案例用<span class="arithmatex">\(p\)</span>值准则、both方向，从12个候选里最终留下5个：活跃会员数、商圈客流、客单价、促销费用、门店面积，调整<span class="arithmatex">\(R^2=0.838\)</span>，整体<span class="arithmatex">\(F=154.8\)</span>，<span class="arithmatex">\(p=4.3\times10^{-56}\)</span>。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li><strong>分析 → 回归 → 线性</strong>，因变量选<strong>月销售额</strong>，把<strong>全部候选自变量</strong>放入自变量框</li>
+<li>"方法"下拉从"输入"改为<strong>逐步</strong></li>
+<li>点<strong>选项</strong>：进入<span class="arithmatex">\(F\)</span>的概率0.05，剔除<span class="arithmatex">\(F\)</span>的概率0.10</li>
+<li>点<strong>统计量</strong>勾"共线性诊断""模型拟合度"</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：筛选准则pvalue，方向both，入选<span class="arithmatex">\(p&lt;0.05\)</span>、剔除<span class="arithmatex">\(p&gt;0.1\)</span>，最大入选20个。本案例5折交叉验证测试<span class="arithmatex">\(R^2=0.814\)</span>。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>输入/除去的变量表</strong>：一步步显示哪些变量被纳入、哪些被踢。本案例纳入5次、剔除0次</li>
+<li><strong>最终模型系数表</strong>：活跃会员数系数<span class="arithmatex">\(0.563\)</span>（<span class="arithmatex">\(p=3.6\times10^{-50}\)</span>）、商圈客流<span class="arithmatex">\(0.804\)</span>、客单价<span class="arithmatex">\(0.373\)</span>——这三个关联最强</li>
+<li><strong>整体</strong>：<span class="arithmatex">\(R^2=0.843\)</span>、调整<span class="arithmatex">\(R^2=0.838\)</span>、<span class="arithmatex">\(F\)</span>检验<span class="arithmatex">\(p&lt;0.001\)</span></li>
+<li><strong>交叉验证</strong>：测试<span class="arithmatex">\(R^2=0.814\)</span>与训练<span class="arithmatex">\(R^2\)</span>接近，说明模型稳定不过拟合</li>
+<li>入选变量最大VIF=1.06，共线性可控</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>变量多、理论不清，需要自动粗筛。</p>
+<p><strong>什么时候不用？</strong>
+- 有明确理论模型时：用分层/全变量回归，别让数据乱选
+- 样本量小（事件数不足）时：逐步会过拟合</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把逐步选出的变量当"因果结论"。它只是统计相关，且路径依赖——换个样本选出来的变量可能完全不同
+- <strong>坑2</strong>：不做交叉验证。训练<span class="arithmatex">\(R^2\)</span>很高但新数据崩了，就是过拟合</p>
+<p><strong>和相似算法的区别</strong>：逐步回归=自动版变量筛选；共线性VIF是它的<strong>前置安检</strong>；Lasso是它的正则化升级版（见进阶部分）。</p>
+</div>
+<h3 id="logistic">⭐ 逻辑回归（Logistic）  <code>基础级</code><a class="headerlink" href="#logistic" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>当因变量是<strong>是/否</strong>这种二分类（如是否逾期、是否购买、是否患病）时，线性回归就不灵了——逻辑回归应运而生。本案例预测客户未来12个月是否逾期。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>因变量是0/1二分类，想找影响因素并算概率</li>
+<li>信用评分、医疗诊断、营销响应预测</li>
+<li>美赛中"是否发生某事件"的概率建模与分类</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>线性回归输出的是"销售额=多少万"，可能算出负数、也可能算出超出范围的值。但我们想知道的是<strong>"逾期的概率"</strong>，它必须在0到1之间。</p>
+<p>逻辑回归用一个叫<strong>logistic函数（S形曲线）</strong>把任意实数压到0--1之间：
+$<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
+左边是"对数发生比"。
+- 系数<span class="arithmatex">\(b\)</span>解释成<strong>优势比<span class="arithmatex">\(OR=e^b\)</span></strong>：本案例"近12月逾期次数"系数0.685，<span class="arithmatex">\(OR=1.983\)</span>——每多一次历史逾期，未来逾期几率约翻倍
+- <span class="arithmatex">\(OR&gt;1\)</span>风险上升，<span class="arithmatex">\(OR&lt;1\)</span>风险下降</p>
+<p>本案例模型AUC=0.832，区分能力不错。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li><strong>分析 → 回归 → 二元Logistic</strong></li>
+<li>因变量选<strong>是否逾期</strong>（取值0/1，事件类别=1）</li>
+<li>协变量选<strong>年龄、年收入、负债收入比、额度使用率、近12月逾期次数、性别</strong></li>
+<li>分类变量点"分类"，把性别设为哑变量（首类为参照）</li>
+<li>点<strong>选项</strong>勾"Hosmer-Lemeshow""分类图""95%置信区间"</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：事件类别1，参考类别0，<span class="arithmatex">\(\alpha=0.05\)</span>，最大迭代100，普通MLE。本案例事件95例、非事件55例，EPV=15.8（达标）。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>模型整体检验</strong>：似然比<span class="arithmatex">\(\chi^2=51.1\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，模型整体显著；McFadden <span class="arithmatex">\(R^2=0.259\)</span></li>
+<li><strong>Hosmer-Lemeshow</strong>：<span class="arithmatex">\(\chi^2=8.95\)</span>，<span class="arithmatex">\(p=0.346&gt;0.05\)</span>——预测概率和实际吻合，<strong>校准良好</strong></li>
+<li><strong>系数表</strong>看<span class="arithmatex">\(p\)</span>和<span class="arithmatex">\(OR\)</span>：</li>
+<li>显著变量：负债收入比<span class="arithmatex">\(OR=1.035\)</span>、额度使用率<span class="arithmatex">\(OR=1.048\)</span>、近12月逾期次数<span class="arithmatex">\(OR=1.983\)</span></li>
+<li>不显著：年龄、年收入、性别（<span class="arithmatex">\(p&gt;0.05\)</span>）</li>
+<li><strong>AUC=0.832</strong>：接近0.5是瞎猜，接近1是完美区分；0.83属于良好</li>
+<li>Youden最优阈值0.74时灵敏度0.66、特异度0.89</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>因变量是二分类（0/1），要找影响因素或算概率。</p>
+<p><strong>什么时候不用？</strong>
+- 因变量是连续值：用线性回归
+- 因变量是多分类无序：用多项Logistic；有序：用有序Logistic
+- 事件数太少（EPV<span class="arithmatex">\(&lt;10\)</span>）：结果不稳，需精简变量或用精确方法</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把<span class="arithmatex">\(OR\)</span>当概率。<span class="arithmatex">\(OR=2\)</span>是"几率翻倍"，不是"概率翻倍"
+- <strong>坑2</strong>：只看系数<span class="arithmatex">\(p\)</span>不看AUC。<span class="arithmatex">\(p\)</span>显著不代表模型分类能力强</p>
+<p><strong>和相似算法的区别</strong>：线性回归预测连续值，逻辑回归预测<strong>分类概率</strong>；Probit是它的姊妹版（用正态分布而非logistic）。</p>
+</div>
+<h2 id="_7">进阶级算法速览<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">分位数回归  <code>进阶级</code><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：不只看"平均"，而是拟合<strong>条件中位数（及任意分位数）</strong>的回归——看自变量对高分位、低分位人群的不同影响。</p>
+<p><strong>美赛场景区</strong>：收入研究中，教育对高收入者和低收入者的回报是否不同；极端值敏感的政策效应分析。</p>
+<p><strong>核心原理</strong>：普通最小二乘 minimizes 残差平方和，只估条件均值；分位数回归最小化不对称加权绝对残差，可估<span class="arithmatex">\(\tau=0.1/0.5/0.9\)</span>等任意分位。</p>
+<p><strong>操作要点</strong>：在Dabbit AI SPSS工具箱选"分位数回归"，指定因变量、自变量和目标分位数（如0.25、0.5、0.75）。</p>
+<p><strong>结果关键</strong>：比较不同分位点上系数的大小变化——若高分位系数远大于低分位，说明效应在分布高端更强。</p>
+<p><strong>注意</strong>：它对异方差、厚尾数据更稳健，能揭示均值回归看不到的"分布异质性"。</p>
+</div>
+<h3 id="deming">Deming回归（正交回归）  <code>进阶级</code><a class="headerlink" href="#deming" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：自变量和因变量<strong>都有测量误差</strong>时用的回归——普通回归假设<span class="arithmatex">\(x\)</span>完全精确，这在仪器比对时不成立。</p>
+<p><strong>美赛场景区</strong>：两种测量方法/仪器的结果一致性比较；方法学比对实验。</p>
+<p><strong>核心原理</strong>：普通OLS只让<span class="arithmatex">\(y\)</span>方向残差最小，Deming让<strong>垂直于回归线方向</strong>的总误差最小（正交距离），<span class="arithmatex">\(x\)</span>和<span class="arithmatex">\(y\)</span>都被当作有误差。需预先知道两者测量误差方差比。</p>
+<p><strong>操作要点</strong>：工具箱选"Deming回归"，输入两列测量值，设定误差方差比。</p>
+<p><strong>结果关键</strong>：斜率和截距；若斜率接近1、截距接近0，说明两种方法一致性好。</p>
+<p><strong>注意</strong>：它和Passing-Bablok常用于方法比对。当<span class="arithmatex">\(x\)</span>无误差时，退化为普通OLS。</p>
+</div>
+<h3 id="probit">Probit回归  <code>进阶级</code><a class="headerlink" href="#probit" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：和逻辑回归目的一样（二分类因变量），只是把S形曲线从logistic换成<strong>正态累积分布</strong>。</p>
+<p><strong>美赛场景区</strong>：离散选择、阈值模型（如"努力超过某阈值才成功"）；经济学probit模型。</p>
+<p><strong>核心原理</strong>：把<span class="arithmatex">\(p\)</span>通过标准正态的反函数（probit链接）线性化，<span class="arithmatex">\(\Phi^{-1}(p)=b_0+b_1x_1+\cdots\)</span>。系数解释不如OR直观，通常报告边际效应。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 回归 → 有序/Probit</strong>，或在工具箱选"Probit回归"，指定响应频率和观测值。</p>
+<p><strong>结果关键</strong>：系数符号和显著性；效应大小用边际概率（<span class="arithmatex">\(x\)</span>每变1单位，成功概率变多少）。</p>
+<p><strong>注意</strong>：Probit和Logistic结果通常非常接近，选哪个主要看习惯和理论假设；逻辑回归的OR更好解释。</p>
+</div>
+<h3 id="_9">非线性回归  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：当关系是<strong>没法通过变量变换变成直线</strong>的曲线（如Logistic增长、Michaelis-Menten酶动力）时，直接拟合自定义非线性方程。</p>
+<p><strong>美赛场景区</strong>：S形生长曲线、饱和动力学、传染病传播模型（logistic增长）、物理经验公式。</p>
+<p><strong>核心原理</strong>：不做线性化，直接用迭代算法（如Levenberg-Marquardt）最小化残差平方和。需要<strong>人为指定方程形式和初始参数猜测</strong>。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 回归 → 非线性估计</strong>，输入自定义模型表达式和参数初值。</p>
+<p><strong>结果关键</strong>：参数的估计值、标准误、<span class="arithmatex">\(p\)</span>值；收敛是否成功；<span class="arithmatex">\(R^2\)</span>和残差图。</p>
+<p><strong>注意</strong>：初值给得不好容易不收敛或收敛到局部最优——这是它和曲线回归最大的门槛。</p>
+</div>
+<h3 id="_10">对数线性模型  <code>进阶级</code><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：用回归的思路分析<strong>多个分类变量</strong>的列联表——把期望频数取对数后建模，拆解主效应和交互效应。</p>
+<p><strong>美赛场景区</strong>：高维列联表（三个以上分类变量）的结构分析；问卷中多类别变量的关联分解。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(\log(期望频数)\)</span>可分解为各变量主效应+交互项。通过比较嵌套模型的似然比<span class="arithmatex">\(\chi^2\)</span>，判断哪些交互项重要。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 对数线性 → 模型选择</strong>，选分类变量和设计类型。</p>
+<p><strong>结果关键</strong>：模型拟合的似然比<span class="arithmatex">\(\chi^2\)</span>（<span class="arithmatex">\(p&gt;0.05\)</span>说明模型拟合好）；显著的高阶交互项说明变量间复杂关联。</p>
+<p><strong>注意</strong>：它是卡方检验在多维表上的推广。二维表时它就回到卡方独立性检验。</p>
+</div>
+<h3 id="hlm">多层线性模型（HLM/混合效应）  <code>进阶级</code><a class="headerlink" href="#hlm" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：数据天然<strong>嵌套分层</strong>时用它——学生嵌套在班级里、班级嵌套在学校里，不能把它们当独立样本。</p>
+<p><strong>美赛场景区</strong>：分层抽样数据、纵向重复测量、组织内部嵌套结构；组内相关问题。</p>
+<p><strong>核心原理</strong>：把回归系数拆成"固定效应"（大家通用）和"随机效应"（各组围绕它浮动的部分），同时处理层1（个体）和层2（群体）变量。</p>
+<p><strong>操作要点</strong>：在Dabbit AI SPSS工具箱选"多层线性模型"，指定分层结构（如学生<span class="arithmatex">\(\to\)</span>班级）和各层变量。</p>
+<p><strong>结果关键</strong>：组内相关系数ICC（高说明必须用多层模型）；固定效应系数；随机效应方差占比。</p>
+<p><strong>注意</strong>：数据有明显嵌套/聚类时，用普通回归会低估标准误、夸大显著性——这是它和普通回归最大的区别。</p>
+</div>
+<h3 id="heckman">Heckman两阶段模型  <code>进阶级</code><a class="headerlink" href="#heckman" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：解决<strong>样本选择性偏差</strong>——你能观测到的数据本身不是随机样本（如只观测到"参加了工作"的人的工资）。</p>
+<p><strong>美赛场景区</strong>：工资决定模型（只有就业者才有工资）；自选择样本下的效应估计。</p>
+<p><strong>核心原理</strong>：第一阶段用Probit估计"入选概率"，算出逆米尔斯比<span class="arithmatex">\(\lambda\)</span>；第二阶段把<span class="arithmatex">\(\lambda\)</span>作为额外自变量放回回归，校正选择性偏差。</p>
+<p><strong>操作要点</strong>：工具箱选"Heckman两阶段"，指定选择方程（是否入选）和结果方程（被解释的连续变量）。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(\lambda\)</span>的系数显著=存在选择性偏差；校正后核心变量系数与原OLS相比变化多少。</p>
+<p><strong>注意</strong>：它要求有工具变量（只影响是否入选、不直接影响结果变量），否则识别困难。</p>
+</div>
+<h3 id="ransacm">稳健回归（RANSAC/M估计）  <code>进阶级</code><a class="headerlink" href="#ransacm" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：普通最小二乘会被<strong>几个极端点带偏</strong>，稳健回归给异常点"降权"，让直线不被 outliers 绑架。</p>
+<p><strong>美赛场景区</strong>：数据有明显异常值（长尾分布）；需要回归结果抗干扰。</p>
+<p><strong>核心原理</strong>：M估计用更温和的损失函数（如Huber），对大残差不那么敏感；RANSAC反复随机抽小点子集拟合，找"最多点支持"的模型。</p>
+<p><strong>操作要点</strong>：工具箱选"稳健回归（RANSAC/M估计）"，指定因变量和自变量，选择方法。</p>
+<p><strong>结果关键</strong>：与OLS系数对比——若稳健系数和OLS差很多，说明OLS被异常点影响了；同时看被标记为异常的样本。</p>
+<p><strong>注意</strong>：它不是删异常值，而是<strong>降权</strong>。数据干净时，OLS更有效。</p>
+</div>
+<h3 id="poisson">Poisson回归  <code>进阶级</code><a class="headerlink" href="#poisson" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：因变量是<strong>计数数据</strong>（发生次数，如事故数、来电数）时用的回归。</p>
+<p><strong>美赛场景区</strong>：一天内门店客诉次数、单位面积内事件数；计数类因变量的影响因素分析。</p>
+<p><strong>核心原理</strong>：假设因变量服从泊松分布，用对数链接<span class="arithmatex">\(\ln(\mu)=b_0+b_1x_1+\cdots\)</span>。系数解释为"发生率比IRR"（<span class="arithmatex">\(e^b\)</span>）。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 广义线性模型</strong>，计数分布选Poisson；或工具箱选Poisson回归。</p>
+<p><strong>结果关键</strong>：系数/<span class="arithmatex">\(IRR\)</span>的<span class="arithmatex">\(p\)</span>值；重点检查<strong>过度离散</strong>（方差远大于均值）——若过度离散，改用负二项回归。</p>
+<p><strong>注意</strong>：泊松要求<strong>均值=方差</strong>。现实计数数据常过度离散，此时Poisson的标准误会被低估，负二项回归更合适。</p>
+</div>
+<h3 id="pls">偏最小二乘回归（PLS）  <code>进阶级</code><a class="headerlink" href="#pls" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：自变量多、又严重共线、样本还不多时，PLS一边降维一边回归，两全其美。</p>
+<p><strong>美赛场景区</strong>：光谱数据、高维经济指标下的预测；共线性严重且样本少的回归。</p>
+<p><strong>核心原理</strong>：同时对<span class="arithmatex">\(X\)</span>和<span class="arithmatex">\(Y\)</span>提取潜变量（主成分），并保证潜变量间协方差最大——既考虑<span class="arithmatex">\(X\)</span>内部结构，又紧扣<span class="arithmatex">\(Y\)</span>。</p>
+<p><strong>操作要点</strong>：工具箱选"PLS偏最小二乘"，指定因变量和全部自变量，用交叉验证选最佳成分数。</p>
+<p><strong>结果关键</strong>：成分数选择（交叉验证<span class="arithmatex">\(Q^2\)</span>）；回归系数；<span class="arithmatex">\(R^2\)</span>和预测<span class="arithmatex">\(R^2\)</span>。</p>
+<p><strong>注意</strong>：它是<strong>PCA+回归的结合体</strong>。自变量严重共线、样本量<span class="arithmatex">\(&lt;\)</span>变量数时，它比普通回归稳。</p>
+</div>
+<h3 id="tobit">Tobit回归  <code>进阶级</code><a class="headerlink" href="#tobit" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：因变量被<strong>截断/删失</strong>时用——比如一堆人"支出为0"（其实是没花），普通回归会偏。</p>
+<p><strong>美赛场景区</strong>：消费支出（大量0值）、贷款额度、持续时间等有下界且堆积在边界的数据。</p>
+<p><strong>核心原理</strong>：假设存在一个潜变量（真实支出），观测值在0处被"左删失"。用极大似然同时估计回归和删失概率。</p>
+<p><strong>操作要点</strong>：工具箱选"Tobit回归"，指定因变量、删失方向（左删失于0）和自变量。</p>
+<p><strong>结果关键</strong>：系数符号方向；删失比例；与普通OLS对比看校正幅度。</p>
+<p><strong>注意</strong>：因变量在0处堆积很多时才用；若只是大量0但不是删失概念，考虑零膨胀模型。</p>
+</div>
+<h3 id="ridge">岭回归（Ridge）  <code>进阶级</code><a class="headerlink" href="#ridge" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：共线性严重时，给系数估计"加一点惩罚"，牺牲一点点无偏性换稳定——岭回归。</p>
+<p><strong>美赛场景区</strong>：自变量高度相关、VIF爆表，又不想删变量时的回归稳定化。</p>
+<p><strong>核心原理</strong>：在最小二乘目标里加<span class="arithmatex">\(\lambda\sum b_j^2\)</span>惩罚项，把系数往0收缩。<span class="arithmatex">\(\lambda\)</span>越大收缩越强，用交叉验证选。</p>
+<p><strong>操作要点</strong>：工具箱选"岭回归"，指定因变量和自变量，交叉验证选正则化参数<span class="arithmatex">\(\lambda\)</span>。</p>
+<p><strong>结果关键</strong>：岭迹图（各系数随<span class="arithmatex">\(\lambda\)</span>的变化）；交叉验证误差最小的<span class="arithmatex">\(\lambda\)</span>；收缩后更稳定的系数。</p>
+<p><strong>注意</strong>：岭回归<strong>不做变量选择</strong>（系数只会缩小不会变0）。要选变量用Lasso。</p>
+</div>
+<h3 id="_11">负二项回归  <code>进阶级</code><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：计数数据<strong>过度离散</strong>（方差远大于均值）时，它是Poisson回归的修正版。</p>
+<p><strong>美赛场景区</strong>：日就诊人数、事故次数、客户投诉数——这类数据往往方差<span class="arithmatex">\(&gt;\)</span>均值。</p>
+<p><strong>核心原理</strong>：在泊松基础上加一个离散参数，允许方差<span class="arithmatex">\(=\mu+\alpha\mu^2\)</span>。<span class="arithmatex">\(\alpha=0\)</span>就退化为Poisson。</p>
+<p><strong>操作要点</strong>：工具箱选"负二项回归"，指定计数因变量和自变量。</p>
+<p><strong>结果关键</strong>：离散参数<span class="arithmatex">\(\alpha\)</span>显著<span class="arithmatex">\(&gt;0\)</span>=确实过度离散、用负二项对；发生率比IRR及其<span class="arithmatex">\(p\)</span>值。</p>
+<p><strong>注意</strong>：先做Poisson的离差检验，确认过度离散了再上负二项；若0值特别多，改用零膨胀模型。</p>
+</div>
+<h3 id="zip">零膨胀泊松回归（ZIP）  <code>进阶级</code><a class="headerlink" href="#zip" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：计数数据里<strong>0特别多</strong>（既有"本来就不会发生"的 structural zero，又有"可能发生但这次没发生"的）时用它。</p>
+<p><strong>美赛场景区</strong>：一年就医次数（健康人大量0）、消费频次、事故数——0堆积异常。</p>
+<p><strong>核心原理</strong>：混合模型——一部分概率用Logistic决定"是不是0"，剩下的用Poisson决定"发生几次"。</p>
+<p><strong>操作要点</strong>：工具箱选"零膨胀泊松"，指定计数因变量、零膨胀模型的自变量和计数模型自变量。</p>
+<p><strong>结果关键</strong>：Vuong检验判断是否需要零膨胀；两部分各自的系数解读。</p>
+<p><strong>注意</strong>：先做ZIP vs Poisson的Vuong检验；如果不仅0多还过度离散，升级为零膨胀负二项（ZINB）。</p>
+</div>
+<h3 id="gee">广义估计方程（GEE）  <code>进阶级</code><a class="headerlink" href="#gee" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：处理<strong>重复测量/聚类数据</strong>的回归——同一对象被反复测多次，观测不独立时用它。</p>
+<p><strong>美赛场景区</strong>：面板数据、纵向追踪数据、嵌套在群体内的重复观测。</p>
+<p><strong>核心原理</strong>：不指定完整的随机效应分布，只指定"工作相关矩阵"（如可交换、AR-1），用准似然估计边际效应。</p>
+<p><strong>操作要点</strong>：工具箱选"广义估计方程"，指定聚类ID、因变量分布族、链接函数和工作相关结构。</p>
+<p><strong>结果关键</strong>：群体平均边际效应系数；比较不同工作相关结构下结果的稳健性。</p>
+<p><strong>注意</strong>：它和HLM都处理重复测量——GEE估<strong>总体平均效应</strong>，HLM估个体层面的随机效应。</p>
+</div>
+<h3 id="glm">广义线性模型（GLM）  <code>进阶级</code><a class="headerlink" href="#glm" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：一个<strong>总框架</strong>，把线性回归、逻辑回归、Poisson回归统一起来——换个"分布+链接函数"就能适应不同因变量。</p>
+<p><strong>美赛场景区</strong>：因变量既不是连续正态、也不是简单二分类时的统一建模入口。</p>
+<p><strong>核心原理</strong>：三个件——指数族分布（正态/二项/泊松/伽玛）+线性预测<span class="arithmatex">\(\eta=Xb\)</span>+链接函数<span class="arithmatex">\(g(\mu)=\eta\)</span>。选对组合就得到各种专用模型。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 广义线性模型</strong>，在对话框里选分布族和链接函数。</p>
+<p><strong>结果关键</strong>：模型整体似然比检验；各系数<span class="arithmatex">\(p\)</span>值；拟合优度（偏差/自由度）。</p>
+<p><strong>注意</strong>：逻辑回归是"二项分布+logit链接"，Poisson是"泊松+对数链接"——它们都是GLM的特例。</p>
+</div>
+<h3 id="zinb">零膨胀负二项回归（ZINB）  <code>进阶级</code><a class="headerlink" href="#zinb" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：计数数据<strong>既0特别多、又过度离散</strong>时的终极版——ZIP的离散修正。</p>
+<p><strong>美赛场景区</strong>：大量0且方差远大于均值的计数（如慢病就诊次数、极端消费行为）。</p>
+<p><strong>核心原理</strong>：两部分混合——Logistic部分区分"本来不会发生"，负二项部分处理"发生了几次"，同时吸收过度离散。</p>
+<p><strong>操作要点</strong>：工具箱选"零膨胀负二项"，分别指定零膨胀模型和计数模型的自变量。</p>
+<p><strong>结果关键</strong>：Vuong检验支持ZINB优于负二项；两部分系数；离散参数。</p>
+<p><strong>注意</strong>：模型复杂、参数多，需要较大样本。先用ZIP/ZINB/负二项三者比较（AIC最小）再定稿。</p>
+</div>
+<h3 id="lasso">Lasso回归  <code>进阶级</code><a class="headerlink" href="#lasso" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：岭回归的"会选变量"版本——惩罚不仅把系数缩小，还能<strong>直接把不重要变量压到0</strong>，实现自动变量筛选。</p>
+<p><strong>美赛场景区</strong>：自变量极多（基因、词袋、海量指标）的高维建模；需要稀疏模型。</p>
+<p><strong>核心原理</strong>：把惩罚项从<span class="arithmatex">\(\lambda\sum b_j^2\)</span>（岭）换成<span class="arithmatex">\(\lambda\sum|b_j|\)</span>（L1）。L1惩罚的几何形状让部分系数恰好变0。</p>
+<p><strong>操作要点</strong>：工具箱选"Lasso回归"，交叉验证选正则化参数<span class="arithmatex">\(\lambda\)</span>。</p>
+<p><strong>结果关键</strong>：交叉验证误差最小的<span class="arithmatex">\(\lambda\)</span>；非零系数对应的变量即"被选中"的关键变量；系数路径图。</p>
+<p><strong>注意</strong>：它和逐步回归都选变量，但Lasso是<strong>正则化</strong>方法，更稳定、不易过拟合，适合高维数据。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

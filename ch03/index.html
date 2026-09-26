@@ -1,0 +1,2112 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch03/">
+      
+      
+        <link rel="prev" href="../ch02/">
+      
+      
+        <link rel="next" href="../ch04/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第3章 差异比较 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第3章 差异比较
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方差齐性检验 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 卡方检验 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 独立样本T检验 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        单样本T检验 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#t_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配对样本T检验 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 方差分析（单因素/多因素） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kruskal-wallis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kruskal-Wallis检验（多样本秩和） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wilcoxon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配对样本Wilcoxon符号秩检验 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#z" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Z检验（均值/比率） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#friedman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Friedman检验 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manova" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多元方差分析（MANOVA） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mood" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mood中位数检验 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ancova" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        协方差分析（ANCOVA） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        游程检验 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-hoc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        事后多重比较（Post Hoc） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mann-whitney-u" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        独立样本Mann-Whitney U检验 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tost" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        等价性检验（TOST） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wilcoxon_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        单样本Wilcoxon符号秩检验 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">差异比较<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>差异比较回答的是<strong>"两组或多组之间真的有差别，还是只是随机波动？"</strong>比如：新版包装是不是真的卖得更好？A班和B班平均分差那几分是实力差距还是运气？它是所有假设检验的核心——用一个<span class="arithmatex">\(p\)</span>值告诉你"观察到的差异，有多大可能是碰巧"。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>美赛中只要出现"实验组vs对照组""不同地区/方案/人群"的对比，几乎都要做差异检验。C题里比较不同政策效果、不同客群表现；A/B题里验证参数变化前后系统输出是否不同。论文"结果分析""模型验证"部分常出现t检验、方差分析、卡方检验。</p>
+<p><strong>学习路径建议</strong>
+先搞清楚<strong>数据是啥类型</strong>再选方法：连续变量比较两组用<strong>t检验</strong>，比较三组及以上用<strong>方差分析</strong>；分类变量用<strong>卡方检验</strong>；比较前先看<strong>方差齐性</strong>和正态性——不满足就换<strong>非参数检验</strong>（Wilcoxon、Mann-Whitney、Kruskal-Wallis、Friedman）。最后再了解事后多重比较、协方差分析等进阶工具。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">方差齐性检验  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>方差齐性检验就是看<strong>几组数据的"波动幅度"是不是一样大</strong>。本案例比较4条灌装生产线净含量的波动：是不是某条线特别不稳定。它本身是个"体检项"，却决定了你后面能不能用普通t检验和方差分析。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>做独立样本t检验、方差分析之前，必须先过这一关</li>
+<li>质量管理中比较几条生产线/几台设备的稳定性</li>
+<li>美赛中判断各组数据离散程度是否一致，决定后续用哪种检验</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>两个班平均分都是80，一个班分数挤在75--85，另一个班从60到100都有——虽然均值一样，但<strong>稳定性</strong>天差地别。方差齐性检验就是比"挤不挤"。</p>
+<ul>
+<li><strong>原假设</strong>：各组方差相等（波动一致）</li>
+<li><strong>Levene检验</strong>：把每个数据点到本组中位数的距离拿出来，再对这些"距离"做一次方差分析。它对非正态比较稳健，是默认推荐</li>
+<li><strong>Bartlett检验</strong>：要求各组都近似正态，检验更灵敏但扛不住偏态</li>
+</ul>
+<p>本案例4条线标准差分别为1.84、1.88、2.02、6.40——第4条线波动是其他线的3倍多，一眼就不齐。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 描述统计 → 探索</strong></li>
+<li>将因变量（<strong>净含量</strong>）选入<strong>因变量列表</strong>，分组变量（<strong>生产线</strong>）选入<strong>因子列表</strong></li>
+<li>点击右侧<strong>绘制</strong>按钮，勾选<strong>含莱文检验的分布水平图</strong></li>
+<li>点击<strong>继续</strong>，再<strong>确定</strong></li>
+</ol>
+<p><strong>另一种方式</strong>：在独立样本t检验、单因素ANOVA对话框里直接点<strong>选项</strong>，勾选"方差齐性Levene检验"，会自动附带输出。</p>
+<p><strong>默认参数参考</strong>：显著性水平<span class="arithmatex">\(\alpha=0.05\)</span>，方法自动选择（各组正态用Bartlett，否则用Brown-Forsythe/Levene）。本案例各组正态、自动选用Bartlett，统计量91.31。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>输出"方差齐性检验"表，看Levene（或Bartlett）那一行的<strong>显著性</strong>：
+- <span class="arithmatex">\(p&gt;0.05\)</span>：方差齐，可以放心用普通t检验/方差分析
+- <span class="arithmatex">\(p&lt;0.05\)</span>：方差不齐。本案例Bartlett <span class="arithmatex">\(p=1.15\times10^{-19}\ll0.05\)</span>，方差不齐，灌装4线（标准差6.40）明显是"问题线"</p>
+<p><strong>方差不齐怎么办？</strong>
+- 两组比较：用<strong>Welch校正t检验</strong>（SPSS独立样本t检验表里自动给出"不假定等方差"那一行）
+- 多组比较：用<strong>Welch校正方差分析</strong>或<strong>Games-Howell</strong>事后比较
+- 或直接改用非参数方法（Kruskal-Wallis）</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>任何要比较多组均值的参数检验（t检验、ANOVA）之前。</p>
+<p><strong>什么时候不用？</strong>非参数检验（Mann-Whitney、Kruskal-Wallis）不要求方差齐性，可以跳过。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：方差不齐还硬用普通ANOVA，导致<span class="arithmatex">\(p\)</span>值失真
+- <strong>坑2</strong>：样本量悬殊时方差不齐后果更严重（如一组45个、一组30个），更要警惕</p>
+<p><strong>和相似算法的区别</strong>：它和正态性检验是参数检验前的<strong>两道并列安检</strong>——一个查波动齐不齐，一个查分布正不正态，两道都过才能上普通t检验/ANOVA。</p>
+</div>
+<h3 id="_4">⭐ 卡方检验  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>卡方检验用来判断<strong>两个分类变量是否有关系</strong>。本案例看"门店业态（社区店/超市/大卖场）"和"支付方式（现金/移动/银行卡）"是不是相互独立——不同店的人付钱习惯真的不一样吗？</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>两个都是分类变量，想看它们是否相关</li>
+<li>问卷数据：性别与偏好、地区与选择是否有关</li>
+<li>美赛C题中分析离散类别之间的关联结构</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>先做一个<strong>交叉表</strong>：行是门店业态，列是支付方式，格子里是人数。如果两变量无关，那么"各店用移动支付的比例"应该<strong>差不多</strong>。</p>
+<p>卡方统计量<span class="arithmatex">\(\chi^2=\sum\frac{(O-E)^2}{E}\)</span>里：
+- <span class="arithmatex">\(O\)</span>是格子里<strong>实际</strong>人数
+- <span class="arithmatex">\(E\)</span>是"假如无关"时<strong>期望</strong>的人数
+- 实际和期望差得越远，<span class="arithmatex">\(\chi^2\)</span>越大，<span class="arithmatex">\(p\)</span>越小，越说明两变量<strong>不独立</strong></p>
+<p>本案例<span class="arithmatex">\(\chi^2=27.76\)</span>（自由度<span class="arithmatex">\(df=4\)</span>），<span class="arithmatex">\(p&lt;0.001\)</span>，说明业态和支付方式确实有关。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 描述统计 → 交叉表</strong></li>
+<li>行变量选<strong>门店业态</strong>，列变量选<strong>支付方式</strong></li>
+<li>点击<strong>统计量</strong>，勾选<strong>卡方</strong>和<strong>Phi和Cramér's V</strong></li>
+<li>点击<strong>单元格</strong>，勾选<strong>实测</strong>、<strong>期望</strong>、<strong>实测/期望/行</strong>百分比</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：独立性检验，效应量用Cramér's V，不做连续性校正；期望频数不足时自动处理（小表用Fisher精确检验）；事后两两比较用Bonferroni校正。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>卡方检验表</strong>：看Pearson卡方那行的<span class="arithmatex">\(p\)</span>值。本案例<span class="arithmatex">\(\chi^2=27.76\)</span>，<span class="arithmatex">\(df=4\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，两变量显著相关</li>
+<li><strong>Cramér's V</strong>：衡量关联强度，本案例0.304，属<strong>中等效应</strong>（0.1以下弱、0.3中等、0.5以上强）。注意：<span class="arithmatex">\(p\)</span>只说明相关存不存在，效应量才说明关系大不大</li>
+<li><strong>调整后残差</strong>：绝对值<span class="arithmatex">\(\geq 2\)</span>的格子是差异主要来源。本案例大卖场用银行卡特别多（残差+4.08）、用移动支付特别少（残差<span class="arithmatex">\(-4.74\)</span>）</li>
+<li><strong>行百分比</strong>：大卖场52.6%用银行卡，社区店54.5%用移动支付——差异一目了然</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>两个无序分类变量，想知道是否独立。</p>
+<p><strong>什么时候不用？</strong>
+- 期望频数低于5的格子超过20%时，卡方近似不准，要改用Fisher精确检验
+- 同一批人被重复测量（配对设计）时，普通卡方不适用，用McNemar/Cochran's Q</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把<span class="arithmatex">\(p&lt;0.05\)</span>当成"关系很强"。大样本下很弱的关系也显著，必须看Cramér's V
+- <strong>坑2</strong>：相关不等于因果，也不代表方向</p>
+<p><strong>和相似算法的区别</strong>
+- vs <strong>列联分析</strong>：列联分析侧重交叉表描述，这里侧重卡方检验本身
+- vs <strong>相关分析</strong>：相关分析用于连续变量，卡方用于分类变量</p>
+</div>
+<h3 id="t">⭐ 独立样本T检验  <code>基础级</code><a class="headerlink" href="#t" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>独立样本t检验比较<strong>两个互不搭界的群体</strong>的均值是否真有差别。本案例比较白班和夜班拣货员的人均拣货效率，看差那1.8件/小时是真差距还是运气。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>两组独立样本（如实验组/对照组、男生/女生、两个城市）比较均值</li>
+<li>美赛A/B验证题：新方案组和旧方案组的关键指标差异</li>
+<li>论文"组间差异检验"的标配</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>夜班均值19.80，白班21.65，差1.84。但两组人本身就有波动，这点差距会不会只是抽样碰巧？</p>
+<p>t统计量本质是：<strong>均值差 ÷ 抽样误差</strong>。
+- 这个比值越大（<span class="arithmatex">\(|t|\)</span>越大），说明差异相对于随机波动越突出
+- 本案例<span class="arithmatex">\(t=-5.18\)</span>，<span class="arithmatex">\(df=148\)</span>，<span class="arithmatex">\(p&lt;0.0001\)</span>，说明白班确实显著更快</p>
+<p><strong>效应量Cohen's <span class="arithmatex">\(d\)</span></strong>：<span class="arithmatex">\(d=-0.85\)</span>。<span class="arithmatex">\(|d|\approx 0.2\)</span>小效应、0.5中、0.8大。<span class="arithmatex">\(p\)</span>受样本量影响，效应量才告诉你"差距值不值得关心"。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 比较均值 → 独立样本T检验</strong></li>
+<li>检验变量选<strong>拣货效率</strong>，分组变量选<strong>班组</strong></li>
+<li>点击<strong>定义组</strong>，输入组1、组2的取值（如1=夜班，2=白班）</li>
+<li>点击<strong>选项</strong>，置信区间填95%</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：<span class="arithmatex">\(\alpha=0.05\)</span>，双侧检验，效应量Cohen's d，正态性Shapiro，方差齐性Levene，离群值按IQR报告不删除。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>输出两张表：
+- <strong>组统计量表</strong>：两组各<span class="arithmatex">\(n=75\)</span>，夜班均值19.80、白班21.65
+- <strong>独立样本检验表</strong>是核心，分两行：
+- 先看<strong>Levene方差齐性</strong>：本案例<span class="arithmatex">\(p=0.575&gt;0.05\)</span>，方差齐，所以看<strong>第一行"假设方差相等"</strong>
+- 若Levene <span class="arithmatex">\(p&lt;0.05\)</span>，改看第二行"不假设方差相等"（Welch校正）
+- 看<span class="arithmatex">\(t\)</span>那行的<strong>显著性（双侧）</strong>：本案例<span class="arithmatex">\(p&lt;0.0001\)</span>，差异显著
+- <strong>均值差</strong>：<span class="arithmatex">\(-1.84\)</span>（夜班<span class="arithmatex">\(-\)</span>白班），95%置信区间<span class="arithmatex">\([-2.43,\ -1.25]\)</span>不含0，与显著结论一致</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>两个独立组、一个连续因变量，比均值。</p>
+<p><strong>什么时候不用？</strong>
+- 三组及以上比较：用方差分析，别反复做两两t检验（会放大假阳性）
+- 同一组人前后两次测量：用配对样本t检验
+- 数据严重非正态：用Mann-Whitney U检验</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不看Levene就直接读第一行结果。方差不齐时第一行是错的
+- <strong>坑2</strong>：多组两两分别做t检验，<span class="arithmatex">\(p\)</span>值失真——必须做多重比较校正</p>
+<p><strong>和相似算法的区别</strong>
+- vs <strong>配对样本t检验</strong>：独立=两组不同人；配对=同一批人前后两次
+- vs <strong>方差分析</strong>：两组用t检验，三组及以上用ANOVA</p>
+</div>
+<h3 id="t_1">单样本T检验  <code>基础级</code><a class="headerlink" href="#t_1" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>单样本t检验把<strong>一组数据的均值</strong>和<strong>一个已知标准值</strong>比。本案例：瓶身标500mL，当天抽测均值497.3mL，到底是灌装线偏了，还是抽测碰巧？</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>产品实际指标 vs 标称值/国家标准，判断是否达标</li>
+<li>某群体均值是否等于某个理论值（如全国平均水平）</li>
+<li>美赛中验证模型输出是否与设定目标一致</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>抽测150瓶均值497.3mL，比标称500少2.7mL。但抽样总有波动，这2.7mL是"真偏了"还是"运气"？</p>
+<p>t统计量=<span class="arithmatex">\((\bar{x}-\mu_0)/\)</span>标准误，即<strong>样本均值离标准值有多远，用抽样误差做单位来量</strong>。
+- 本案例<span class="arithmatex">\(t=-8.60\)</span>，<span class="arithmatex">\(df=149\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，远小于0.05
+- 95%置信区间<span class="arithmatex">\([496.7,\ 497.9]\)</span>，标准值500<strong>没落在区间里</strong>，再次印证偏了</p>
+<p>Cohen's <span class="arithmatex">\(d=-0.70\)</span>，中等效应——偏差在统计上显著，实际也值得调校。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 比较均值 → 单样本T检验</strong></li>
+<li>检验变量选<strong>净含量 net_content_ml</strong></li>
+<li>在<strong>检验值</strong>框输入标准值<strong>500</strong></li>
+<li>点击<strong>选项</strong>，置信区间95%</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：双侧检验（均值<span class="arithmatex">\(\neq\)</span>标准值），正态性自动检测（Shapiro），离群值先核查不删。本案例<span class="arithmatex">\(n=150\)</span>，样本均值497.3，标准差3.82。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>单样本统计量表</strong>：<span class="arithmatex">\(n=150\)</span>，均值497.3，标准差3.82，标准误0.31</li>
+<li><strong>单样本检验表</strong>：看<strong>检验值=500</strong>那行</li>
+<li><span class="arithmatex">\(t=-8.60\)</span>，<span class="arithmatex">\(df=149\)</span>，双侧<span class="arithmatex">\(p&lt;0.001\)</span>——显著不等于500</li>
+<li><strong>均值差值</strong><span class="arithmatex">\(=-2.68\)</span></li>
+<li>95%置信区间<span class="arithmatex">\([496.7,\ 497.9]\)</span>：因为不含500，所以拒绝"均值=500"</li>
+</ul>
+<p><strong>判断</strong>：<span class="arithmatex">\(p&lt;0.05\)</span>且置信区间不含检验值，就说明样本均值和标准值有真实差距。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>手里一组数据，想跟一个既定标准/目标/历史均值比。</p>
+<p><strong>什么时候不用？</strong>
+- 小样本且严重非正态时，改用单样本Wilcoxon符号秩检验
+- 要比的是两个组（不是一个标准值），用独立样本t检验</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：只看<span class="arithmatex">\(p\)</span>不看效应量。大样本下差0.1mL也<span class="arithmatex">\(p&lt;0.05\)</span>，但实际无所谓
+- <strong>坑2</strong>：忘记填检验值，默认填成0会得到莫名其妙的结果</p>
+<p><strong>和相似算法的区别</strong>：单样本=一组比标准值；独立样本t=两组互相比；配对t=同一组前后比。</p>
+</div>
+<h3 id="t_2">配对样本T检验  <code>基础级</code><a class="headerlink" href="#t_2" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>配对样本t检验比的是<strong>同一批人（或同一对象）前后两次测量</strong>的差值是否不为零。本案例：同一批前台员工培训前70.9分、培训后75.2分，培训到底有没有用？</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>同一组对象"前测--后测"，看干预（培训/用药/新流程）是否有效</li>
+<li>配对设计实验：同一个体左右眼、前后两次测量</li>
+<li>美赛中评估政策/方案实施前后指标变化</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>直接拿后测均值75.2和前测70.9比，混进了"人与人本来就不同"的噪声。配对t的聪明之处是<strong>先给每个人算差值</strong>（后<span class="arithmatex">\(-\)</span>前），再看这堆差值的均值是不是显著不为0。</p>
+<ul>
+<li>本案例差值均值<span class="arithmatex">\(=4.37\)</span>，差值标准差6.81</li>
+<li><span class="arithmatex">\(t=7.87\)</span>，<span class="arithmatex">\(df=149\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，培训确实有效</li>
+<li>95%置信区间<span class="arithmatex">\([3.28,\ 5.47]\)</span>不含0；Cohen's <span class="arithmatex">\(d_z=0.64\)</span>，中等效应</li>
+</ul>
+<p><strong>注意</strong>：要检验的是<strong>差值</strong>是否正态，不是前后两次单独正态。本案例差值Shapiro <span class="arithmatex">\(p=0.985\)</span>，通过。前后测相关0.781——相关越高，配对设计越划算。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>数据整理成一行一对：一列<strong>培训前成绩</strong>，一列<strong>培训后成绩</strong></li>
+<li>点击菜单 <strong>分析 → 比较均值 → 配对样本T检验</strong></li>
+<li>同时选中两列，作为<strong>成对变量</strong>Pair 1</li>
+<li>点击<strong>选项</strong>，置信区间95%</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：双侧检验，效应量Cohen's <span class="arithmatex">\(d_z\)</span>，差值正态性Shapiro；差值非正态且样本小时自动切换Wilcoxon符号秩。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>配对样本统计量</strong>：前测均值70.87，后测75.24</li>
+<li><strong>配对样本相关系数</strong>：<span class="arithmatex">\(r=0.781\)</span>，前后强相关（合理，因为是同一批人）</li>
+<li><strong>配对样本检验</strong>是核心：</li>
+<li>差值均值<span class="arithmatex">\(=4.37\)</span>，<span class="arithmatex">\(t=7.87\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>——后测显著更高</li>
+<li>差值95%置信区间<span class="arithmatex">\([3.28,\ 5.47]\)</span>不含0</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>同一对象前后两次（或配对对象）测量，看差值。</p>
+<p><strong>什么时候不用？</strong>
+- 两组是不同的人、互不配对：用独立样本t检验
+- 差值严重非正态、样本又小：改用配对Wilcoxon符号秩检验</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把配对数据当成独立两组做独立样本t检验，浪费了配对信息、降低检验功效
+- <strong>坑2</strong>：前后测之间隔了太久，混入其他干扰因素（如同一批人还接受了别的培训）</p>
+<p><strong>和相似算法的区别</strong>：它是"控制了个体差异"的t检验——因为每个人都和自己比，自动消除了人本身的底子差异。</p>
+</div>
+<h3 id="_5">⭐ 方差分析（单因素/多因素）  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>方差分析（ANOVA）比的是<strong>三个及以上组</strong>的均值是否全相等，还能看多个因素<strong>各自的影响</strong>以及<strong>因素之间的搭配（交互作用）</strong>。本案例研究商圈类型和促销方案如何影响门店日均营业额。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>三组及以上组间均值比较（如三种促销、三个地区、四种配方）</li>
+<li>想看两个因素各自及搭配效果（如"促销效果是否因商圈而异"）</li>
+<li>美赛C题中多因素对结果的影响分解</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>方差分析名字叫"方差"，比的却是均值——它的思路是：<strong>把总的波动拆成"组间差异"和"组内随机波动"两部分</strong>。</p>
+<ul>
+<li><span class="arithmatex">\(F\)</span>统计量 = 组间差异 ÷ 组内差异</li>
+<li><span class="arithmatex">\(F\)</span>越大（<span class="arithmatex">\(p\)</span>越小），越说明各组均值真不一样，而不是随机波动</li>
+<li>本案例：商圈类型<span class="arithmatex">\(F=83.7\)</span>，促销方案<span class="arithmatex">\(F=27.5\)</span>，两者交互<span class="arithmatex">\(F=10.35\)</span>，都<span class="arithmatex">\(p&lt;0.001\)</span></li>
+</ul>
+<p><strong>交互作用</strong>是关键概念：促销方案的效果<strong>因商圈不同而不同</strong>就叫有交互。比如"满减"在购物中心最赚钱、在社区店一般——这时就不能笼统说"哪种促销最好"，得说"在哪种商圈配哪种促销"。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>单因素ANOVA：<strong>分析 → 比较均值 → 单因素ANOVA</strong>，因变量进"因变量列表"，分组进"因子"；点<strong>事后多重比较</strong>勾Tukey</li>
+<li>多因素/含交互：<strong>分析 → 一般线性模型 → 单变量</strong></li>
+<li>因变量选<strong>日均营业额</strong>，固定因子选<strong>商圈类型</strong>、<strong>促销方案</strong></li>
+<li>点<strong>模型</strong>选"全因子"（自动含主效应和交互项）</li>
+<li>点<strong>事后比较</strong>选商圈、促销，勾<strong>Tukey HSD</strong></li>
+<li>点<strong>选项</strong>勾"描述统计""方差齐性检验""效应量估计"</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：<span class="arithmatex">\(\alpha=0.05\)</span>，II型平方和（非平衡设计稳健），效应量eta<span class="arithmatex">\(^2\)</span>与偏eta<span class="arithmatex">\(^2\)</span>，方差齐性用Levene，非参数灵敏度用Kruskal-Wallis。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>方差齐性Levene</strong>：本案例<span class="arithmatex">\(p=0.202&gt;0.05\)</span>，方差齐，可用普通ANOVA</li>
+<li><strong>主体间效应检验表</strong>是核心：</li>
+<li>商圈类型<span class="arithmatex">\(F=83.7\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，偏<span class="arithmatex">\(\eta^2=0.543\)</span>（商圈解释了54%的营业额变异，影响很大）</li>
+<li>促销方案<span class="arithmatex">\(F=27.5\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，偏<span class="arithmatex">\(\eta^2=0.280\)</span></li>
+<li><strong>交互项</strong><span class="arithmatex">\(F=10.35\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>——存在交互，必须结合单元格均值解读</li>
+<li><strong>事后Tukey HSD</strong>：具体哪两组不同。本案例"写字楼+会员专享"均值13.45最高，显著高于多数组合</li>
+<li><strong>怎么看</strong>：主效应<span class="arithmatex">\(p&lt;0.05\)</span>说明该因素重要；交互<span class="arithmatex">\(p&lt;0.05\)</span>说明不能孤立看主效应，要画交互图看"哪组搭配最好"</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>三组及以上均值比较，或多因素影响分解。</p>
+<p><strong>什么时候不用？</strong>
+- 只有两组：用t检验即可
+- 方差不齐且样本悬殊：用Welch-ANOVA或Kruskal-Wallis
+- 数据严重非正态：改用Kruskal-Wallis（非参数版ANOVA）</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：ANOVA整体显著就完事。必须做事后多重比较，才知道<strong>到底哪两组不同</strong>
+- <strong>坑2</strong>：忽略交互作用。交互显著时直接解释主效应会闹笑话
+- <strong>坑3</strong>：多组反复做两两t检验，人为放大假阳性</p>
+<p><strong>和相似算法的区别</strong>：t检验只能比两组；ANOVA能一次比多组还能拆因素和交互。非正态的"ANOVA替代"是Kruskal-Wallis。</p>
+</div>
+<h2 id="_6">进阶级算法速览<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="kruskal-wallis">Kruskal-Wallis检验（多样本秩和）  <code>进阶级</code><a class="headerlink" href="#kruskal-wallis" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：方差分析的<strong>非参数版</strong>——比较三组及以上独立样本的<strong>分布/中位数</strong>是否不同，不要求正态。</p>
+<p><strong>美赛场景区</strong>：数据偏态严重（如耗时、收入、评分）时多组比较；如不同分拨中心的单件分拣耗时差异。</p>
+<p><strong>核心原理</strong>：把所有数据混在一起排序编秩，比较各组的平均秩是否差很多。<span class="arithmatex">\(H\)</span>统计量近似卡方分布。本案例分组变量为分拨中心、指标为单件分拣耗时秒数；<span class="arithmatex">\(p&lt;0.05\)</span>说明各组耗时分布不全相同。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 独立样本</strong>，选Kruskal-Wallis；效应量用<span class="arithmatex">\(\varepsilon^2\)</span>；显著后用Bonferroni校正做两两比较。</p>
+<p><strong>结果关键</strong>：看Kruskal-Wallis的<span class="arithmatex">\(p\)</span>值；显著后看各组平均秩，秩越高组数值越大。</p>
+<p><strong>注意</strong>：它是"升级版Mann-Whitney"。两组时它就等价于Mann-Whitney U；正态且方差齐时，普通ANOVA更有检验功效。</p>
+</div>
+<h3 id="wilcoxon">配对样本Wilcoxon符号秩检验  <code>进阶级</code><a class="headerlink" href="#wilcoxon" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：配对样本t检验的<strong>非参数版</strong>——同一批人前后两次测量，但差值严重非正态时用它。</p>
+<p><strong>美赛场景区</strong>：前后测差值明显偏态（如治疗前后的康复评分）；小样本+非正态配对数据。</p>
+<p><strong>核心原理</strong>：不算差值本身，而是给差值的绝对值编秩，再按差值正负号分组，比较正负秩和是否平衡。本案例判断干预后指标是否显著变化。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 相关样本</strong>，选Wilcoxon符号秩；双侧检验，效应量<span class="arithmatex">\(r\)</span>。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(p&lt;0.05\)</span>说明前后测量有显著的系统性升降；结合差值中位数判断方向。</p>
+<p><strong>注意</strong>：当配对差值近似正态时，配对t检验更灵敏；它是差值非正态时的稳健替代，不是首选。</p>
+</div>
+<h3 id="z">Z检验（均值/比率）  <code>进阶级</code><a class="headerlink" href="#z" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：大样本下用正态分布做的均值或比率检验——样本量大到<span class="arithmatex">\(n\geq30\)</span>时，t分布近似正态，可用更简单的<span class="arithmatex">\(Z\)</span>检验。</p>
+<p><strong>美赛场景区</strong>：大样本下比较两总体比率（如两城市移动支付使用率）；比例类指标的假设检验。</p>
+<p><strong>核心原理</strong>：大样本时统计量近似标准正态<span class="arithmatex">\(N(0,1)\)</span>，<span class="arithmatex">\(Z=\frac{样本统计量-参数}{标准误}\)</span>。<span class="arithmatex">\(|Z|&gt;1.96\)</span>对应<span class="arithmatex">\(\alpha=0.05\)</span>双侧显著。</p>
+<p><strong>操作要点</strong>：工具箱选"Z检验（均值/比率）"，明确是单样本还是两样本、均值还是比率；<span class="arithmatex">\(\alpha=0.05\)</span>。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(|Z|&gt;1.96\)</span>（双侧0.05）或<span class="arithmatex">\(&gt;2.58\)</span>（0.01）即显著；同时报告置信区间。</p>
+<p><strong>注意</strong>：小样本仍用t检验。Z检验和t检验结论在大样本时几乎一致，区别主要在小样本。</p>
+</div>
+<h3 id="friedman">Friedman检验  <code>进阶级</code><a class="headerlink" href="#friedman" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：随机区组/重复测量设计下的<strong>非参数ANOVA</strong>——同一批对象接受<strong>三个及以上</strong>条件，比较是否有差异。</p>
+<p><strong>美赛场景区</strong>：同一组被试在多种方案/多个时间点下的评分比较；如五位评委对四款产品的排序一致性检验。</p>
+<p><strong>核心原理</strong>：在<strong>每个对象内部</strong>给各条件编秩，再汇总各条件的秩和。本案例为三水平及以上的重复测量设计，<span class="arithmatex">\(p&lt;0.05\)</span>说明各条件分布不全相同。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 相关样本</strong>，选Friedman；显著后做事后两两比较。</p>
+<p><strong>结果关键</strong>：Friedman卡方统计量的<span class="arithmatex">\(p\)</span>值；显著后用Wilcoxon两两比较并Bonferroni校正。</p>
+<p><strong>注意</strong>：它是<strong>配对版Kruskal-Wallis</strong>。两个配对条件时用Wilcoxon符号秩；三个及以上配对条件用Friedman。</p>
+</div>
+<h3 id="manova">多元方差分析（MANOVA）  <code>进阶级</code><a class="headerlink" href="#manova" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：同时考察一个（多个）分组因素对<strong>多个相关因变量</strong>的整体影响。</p>
+<p><strong>美赛场景区</strong>：比较不同组在"销量+满意度+复购率"等多个相关指标上的综合差异；避免多个单变量ANOVA放大假阳性。</p>
+<p><strong>核心原理</strong>：把多个因变量当一个整体向量，用Wilks' Lambda等统计量检验组间质心是否不同。本案例输出Wilks' <span class="arithmatex">\(\Lambda\)</span>、<span class="arithmatex">\(F\)</span>近似和<span class="arithmatex">\(p\)</span>值。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 一般线性模型 → 多变量</strong>，多个因变量同时入框，固定因子放分组变量。</p>
+<p><strong>结果关键</strong>：先看多变量检验表的Wilks' <span class="arithmatex">\(\Lambda\)</span>及其<span class="arithmatex">\(p\)</span>；显著后再回头看各单变量ANOVA表，定位差异来自哪个因变量。</p>
+<p><strong>注意</strong>：要求因变量多元正态、协方差阵齐性（Box's M检验）。它是"一揽子"检验，显著了还得拆到单变量层面解释。</p>
+</div>
+<h3 id="mood">Mood中位数检验  <code>进阶级</code><a class="headerlink" href="#mood" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：最稳健的多组中位数比较——只看每组落在总中位数之上/之下的个数，用卡方判断各组中位数是否相同。</p>
+<p><strong>美赛场景区</strong>：数据有极端值、严重偏态，连Kruskal-Wallis都嫌不稳时的兜底方法。</p>
+<p><strong>核心原理</strong>：求所有数据的共同中位数，数每组有多少个点在它上面/下面，列成列联表做卡方检验。</p>
+<p><strong>操作要点</strong>：工具箱选"Mood中位数检验"，指定分组变量和数值变量；<span class="arithmatex">\(\alpha=0.05\)</span>。</p>
+<p><strong>结果关键</strong>：卡方<span class="arithmatex">\(p&lt;0.05\)</span>说明各组中位数不全相等；它检验的是中位数位置，不是分布形状。</p>
+<p><strong>注意</strong>：检验功效低（浪费了秩信息），是<strong>最保守</strong>的方法——只有数据特别脏时才用，优先Kruskal-Wallis。</p>
+</div>
+<h3 id="ancova">协方差分析（ANCOVA）  <code>进阶级</code><a class="headerlink" href="#ancova" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：方差分析+回归的混血——比较组间均值差异时，<strong>顺手扣掉一个连续干扰变量（协变量）</strong>的影响。</p>
+<p><strong>美赛场景区</strong>：比较各班成绩时扣掉"入学基础分"；比较各方案效果时扣掉"初始水平"。</p>
+<p><strong>核心原理</strong>：先把因变量对协变量做回归，用<strong>校正后</strong>的组均值再做ANOVA。本案例在比较组别差异前，先消除协变量造成的基线不平衡。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 一般线性模型 → 单变量</strong>，固定因子放分组，<strong>协变量</strong>框放干扰变量。</p>
+<p><strong>结果关键</strong>：先看"组别"效应校正后是否仍显著；若校正后差异消失，说明原差异主要来自协变量而非分组本身。</p>
+<p><strong>注意</strong>：前提是<strong>各组与协变量回归斜率平行</strong>（无交互），否则不能直接用。</p>
+</div>
+<h3 id="_7">游程检验  <code>进阶级</code><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：判断一串按顺序排列的数据是不是<strong>随机出现</strong>的——有没有人为规律或趋势。</p>
+<p><strong>美赛场景区</strong>：检验抽样是否随机；检验残差序列是否随机（回归假设）；判断比赛/股票涨跌是否随机游走。</p>
+<p><strong>核心原理</strong>：以中位数（或某阈值）为界把数据分正负，数连续同号的"游程"个数。游程太少=有聚类/趋势，太多=有周期振荡，都说明不随机。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 游程检验</strong>，选检验变量，临界值选"中位数"。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(p&gt;0.05\)</span>说明序列随机；<span class="arithmatex">\(p&lt;0.05\)</span>说明存在系统性模式。</p>
+<p><strong>注意</strong>：它检验的是<strong>随机性</strong>，不是均值差异——别和单样本t检验搞混。</p>
+</div>
+<h3 id="post-hoc">事后多重比较（Post Hoc）  <code>进阶级</code><a class="headerlink" href="#post-hoc" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：ANOVA告诉你"至少两组不同"之后，再<strong>逐对比较</strong>找出到底是哪几对不同，同时控制假阳性。</p>
+<p><strong>美赛场景区</strong>：三四种促销/配方/地区之间两两找差异；是方差分析的"后半程"必备。</p>
+<p><strong>核心原理</strong>：两两比较会累积假阳性（3组就3次比较、假阳性率涨到14%），事后比较用Tukey HSD、Bonferroni等方法给<span class="arithmatex">\(p\)</span>值"打折"，把总体错误率压回0.05。</p>
+<p><strong>操作要点</strong>：单因素ANOVA对话框点<strong>事后多重比较</strong>，方差齐选<strong>Tukey</strong>，不齐选<strong>Games-Howell</strong>。</p>
+<p><strong>结果关键</strong>："多重比较表"中标注*或校正<span class="arithmatex">\(p&lt;0.05\)</span>的组别对，就是真正有差异的对；同列字母法（a/b/c）更直观。</p>
+<p><strong>注意</strong>：<strong>必须在ANOVA整体显著之后再做</strong>。整体不显著却硬做两两比较是"钓鱼"。</p>
+</div>
+<h3 id="mann-whitney-u">独立样本Mann-Whitney U检验  <code>进阶级</code><a class="headerlink" href="#mann-whitney-u" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：独立样本t检验的<strong>非参数版</strong>——两组独立样本，但数据非正态时，比两组分布/位置是否不同。</p>
+<p><strong>美赛场景区</strong>：两组偏态数据（如金额、耗时、严重度评分）的比较；不满足t检验正态前提时。</p>
+<p><strong>核心原理</strong>：把两组数据混在一起编秩，比较两组的秩和。<span class="arithmatex">\(U\)</span>统计量对应的<span class="arithmatex">\(p&lt;0.05\)</span>说明两组分布位置不同。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 独立样本</strong>，选Mann-Whitney U；两组按分组变量定义。</p>
+<p><strong>结果关键</strong>：看Mann-Whitney U（或Z）的渐近显著性；结合两组平均秩判断哪组整体更高。</p>
+<p><strong>注意</strong>：两组独立+非正态时用它；三组及以上用Kruskal-Wallis。数据正态时t检验更灵敏。</p>
+</div>
+<h3 id="tost">等价性检验（TOST）  <code>进阶级</code><a class="headerlink" href="#tost" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：反过来证明"两组<strong>没有实质差别</strong>"——普通t检验不显著只能说"没检出差异"，等价检验才能说"确实差不多"。</p>
+<p><strong>美赛场景区</strong>：证明新方案不比老方案差（等效）；证明两测量方法结果一致；环保/医药的"非劣效"论证。</p>
+<p><strong>核心原理</strong>：预先设定一个"可接受差异边界<span class="arithmatex">\(\pm\Delta\)</span>"，做两次单侧检验（TOST）：只有当均值差的置信区间<strong>整个落在<span class="arithmatex">\([-\Delta,\Delta]\)</span>内</strong>，才判定等价。</p>
+<p><strong>操作要点</strong>：工具箱选"等价性检验"，设定等价界值<span class="arithmatex">\(\Delta\)</span>（结合业务意义，不能随便定）。</p>
+<p><strong>结果关键</strong>：均值差的90%置信区间完全落在等价带内，才结论"等价"；若区间跨出边界，则不能宣称等效。</p>
+<p><strong>注意</strong>：它和普通检验逻辑相反——<strong>显著才算数</strong>。<span class="arithmatex">\(p&lt;0.05\)</span>才说明等价，不是<span class="arithmatex">\(p&gt;0.05\)</span>。</p>
+</div>
+<h3 id="wilcoxon_1">单样本Wilcoxon符号秩检验  <code>进阶级</code><a class="headerlink" href="#wilcoxon_1" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：单样本t检验的<strong>非参数版</strong>——一组数据的中位数是否等于某个标准值，但数据非正态时用。</p>
+<p><strong>美赛场景区</strong>：小样本+偏态数据（如收入、反应时间）检验中位数是否达标/等于目标。</p>
+<p><strong>核心原理</strong>：计算每个观测与标准值之差，给差值绝对值编秩，按正负号分两组比较秩和。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 单样本</strong>，选Wilcoxon符号秩，输入检验值。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(p&lt;0.05\)</span>说明样本中位数与标准值有显著差异；结合正/负秩方向判断偏高还是偏低。</p>
+<p><strong>注意</strong>：它检验的是<strong>中位数/分布位置</strong>，不是均值。数据近似正态时，单样本t检验更有功效。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

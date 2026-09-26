@@ -1,0 +1,1854 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch14/">
+      
+      
+        <link rel="prev" href="../ch13/">
+      
+      
+        <link rel="next" href="../ch15/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第14章 空间计量 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第14章 空间计量
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        空间权重矩阵构造 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ols" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        空间OLS回归 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moran" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ Moran指数（空间自相关） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slmsar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 空间滞后模型（SLM/SAR） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        空间误差模型（SEM） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        空间杜宾模型（SDM） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        空间滞后误差模型（SAC） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        空间面板模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        空间杜宾误差模型（SDEM） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自变量空间滞后模型（SLX） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">空间计量<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>空间计量经济学研究<strong>有地理位置信息的数据</strong>。普通回归假设样本之间互相独立，但现实中"近朱者赤"——相邻地区的房价、污染、经济增长往往相互影响。空间计量就是把这种<strong>空间依赖关系</strong>量化并纳入模型，避免普通回归得出错误结论。</p>
+<p><strong>什么数据需要空间分析？</strong></p>
+<p>只要你的数据有<strong>地理位置信息</strong>（经纬度、区县、城市、邮编），就应该考虑空间分析！典型如：各区县的房价/污染/GDP/创新产出——这些指标天然存在"相邻地区互相影响"。如果忽略空间效应，回归系数和显著性都会失真。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>美赛C题（大数据分析）涉及区域经济、环境监测、城市规划时常用。Moran指数判断"污染是不是连片聚集"，空间回归量化"邻居效应有多大"。注意：<strong>SPSS原生对空间计量支持有限</strong>，主要通过Dabbit AI SPSS工具箱或Python的pysal库实现。</p>
+<p><strong>学习路径建议</strong></p>
+<p>先学<strong>空间权重矩阵构造</strong>（定义谁和谁是邻居）和<strong>Moran指数</strong>（判断有没有空间聚集），再学<strong>空间OLS回归</strong>（基准+空间诊断），然后是<strong>空间滞后模型SAR</strong>（邻居因变量影响本地）。进阶了解SEM、SDM等更复杂的空间模型。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">空间权重矩阵构造  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>空间权重矩阵W是空间分析的<strong>地基</strong>——它定义了"谁和谁是邻居"。没有W，后面所有空间模型都无从谈起。它是一个 <span class="arithmatex">\(n\times n\)</span> 矩阵，<span class="arithmatex">\(W_{ij}\)</span> 表示区域 <span class="arithmatex">\(i\)</span> 和区域 <span class="arithmatex">\(j\)</span> 之间的空间关联强度。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>任何空间分析的<strong>第一步</strong>——先定义邻居关系</li>
+<li>门店网络、城市网络、区域经济分析的前置步骤</li>
+<li>需要判断"距离越近影响越大"还是"共享边界才算邻居"</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象你在画一张城市地图，要定义"相邻"：</p>
+<ul>
+<li><strong>K近邻法（KNN）</strong>：每个点找最近的K个点当邻居（如K=4）——不管实际距离多远，每个点都有4个邻居</li>
+<li><strong>反距离法（IDW）</strong>：距离越近权重越大，权重 <span class="arithmatex">\(=1/d^\alpha\)</span>，远处的点也有微弱影响</li>
+<li><strong>邻接法</strong>：共享边界才算邻居（如两个区县接壤）</li>
+</ul>
+<p>构造后通常做<strong>行标准化</strong>：每行除以行和，使权重变成"邻居的加权平均"。这样 <span class="arithmatex">\(Wy\)</span> 就是"邻居的平均取值"，好解释。</p>
+<p>就像定义社交网络里"好友"的标准——是通讯录里前4个？还是距离1公里内？还是互相关注？不同定义影响后续分析。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>SPSS原生不支持空间权重矩阵，在<strong>Dabbit AI SPSS工具箱</strong>中操作：</p>
+<ol>
+<li>上传含坐标的数据（x坐标列、y坐标列）</li>
+<li>权重类型选"反距离"或"k近邻"</li>
+<li>距离度量选"欧氏距离"（平面坐标）或"haversine"（经纬度）</li>
+<li>近邻数K设为4，距离衰减幂设为1</li>
+<li>标准化方式选"行标准化"</li>
+<li>点击运行，输出连接密度、邻居数、孤立单元数等结构统计</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>连接密度</strong>：非零连接占比，1.0表示所有点都有邻居</li>
+<li><strong>孤立单元数</strong>：=0最好——有孤立单元说明该点没有邻居，空间滞后无法计算</li>
+<li><strong>邻居数分布</strong>：每个点平均几个邻居，是否均匀</li>
+<li><strong>W·y相关</strong>：y与邻居均值的相关系数，正相关说明高值点倾向聚集</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>任何空间分析的前置步骤。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不做行标准化——权重直接是距离倒数，不同区域权重和差异巨大
+- <strong>坑2</strong>：K设太大或太小——K=4是常用起点，可敏感性分析</p>
+<p><strong>注意</strong>：空间权重矩阵的选择会影响结论，论文中应说明选了哪种W并做敏感性检验。</p>
+</div>
+<h3 id="ols">空间OLS回归  <code>基础级</code><a class="headerlink" href="#ols" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>先做普通最小二乘回归（OLS），然后<strong>检验残差有没有空间自相关</strong>。如果有，说明普通回归不可靠，需要改用空间模型。它是空间分析的"基准诊断"步骤。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>任何空间回归分析的<strong>第一步</strong>：先做OLS基准，再诊断</li>
+<li>判断"普通回归的结论可不可信"</li>
+<li>为选择SAR还是SEM提供依据（LM检验）</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>普通回归假设 <span class="arithmatex">\(y = X\beta + \varepsilon\)</span>，且 <span class="arithmatex">\(\varepsilon\)</span> 之间互相独立。但现实中相邻地区的残差往往相关（比如一个政策同时影响相邻几个区县）。</p>
+<p>步骤：
+1. 先跑普通OLS，得到系数和残差
+1. 对残差做<strong>Moran's I检验</strong>：如果残差Moran's I显著，说明残差有空间聚集→OLS假设被破坏
+1. 做<strong>LM检验</strong>：LM-error显著→选SEM；LM-lag显著→选SAR；都显著→看稳健形式</p>
+<p>就像体检：先做基础检查（OLS），再做进阶筛查（空间诊断），决定要不要进一步治疗（空间模型）。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>在<strong>Dabbit AI SPSS工具箱</strong>中操作：</p>
+<ol>
+<li>上传区域数据（因变量、自变量、坐标）</li>
+<li>指定因变量（如地均GDP）和自变量（投资强度、研发强度等）</li>
+<li>权重方法选KNN（k=4），距离度量haversine，行标准化</li>
+<li>稳健标准误选"否"</li>
+<li>运行后先看OLS系数表，再看空间依赖诊断表</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>OLS系数</strong>：如投资强度系数2.09（<span class="arithmatex">\(p&lt;0.001\)</span>），研发强度1.51（<span class="arithmatex">\(p&lt;0.001\)</span>）</li>
+<li><strong><span class="arithmatex">\(R^2=0.63\)</span></strong>：模型解释力</li>
+<li><strong>残差Moran's I=0.31（<span class="arithmatex">\(p&lt;0.001\)</span>）</strong>：残差显著空间自相关→OLS不可靠</li>
+<li><strong>LM检验</strong>：LM-Error显著、稳健LM-Error显著→建议用空间误差模型SEM</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>空间分析的起点，必须先做。</p>
+<p><strong>什么时候不用？</strong>如果残差Moran's I不显著，说明没有空间效应，OLS即可，不需要后续空间模型。</p>
+<p><strong>常见坑</strong>：跳过空间诊断直接做空间模型——应先证明"需要"空间模型。</p>
+</div>
+<h3 id="moran">⭐ Moran指数（空间自相关）  <code>基础级</code><a class="headerlink" href="#moran" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>Moran's I是衡量<strong>空间聚集程度</strong>的核心指标。它回答一个问题：高值区域是不是和高值区域相邻？低值和低值相邻？还是完全随机散布？比如PM2.5是不是连片污染？房价是不是核心区高、外围低？</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li><strong>环境科学</strong>：PM2.5污染是否连片聚集？</li>
+<li><strong>城市经济</strong>：高GDP区县是否空间聚集？</li>
+<li><strong>房地产</strong>：高价小区是否扎堆？</li>
+<li>任何"地理上相近的观测值是否相似"的问题</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>Moran's I的公式本质是<strong>变量值与其空间滞后的相关系数</strong>：</p>
+<div class="arithmatex">\[
+I = \frac{n}{\sum_i\sum_j w_{ij}} \cdot \frac{\sum_i\sum_j w_{ij}(x_i-\bar{x})(x_j-\bar{x})}{\sum_i(x_i-\bar{x})^2}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(I&gt;0\)</span>且显著：<strong>正空间自相关</strong>——高值邻高值、低值邻低值（连片聚集）</li>
+<li><span class="arithmatex">\(I&lt;0\)</span>且显著：<strong>负空间自相关</strong>——高值邻低值（高低交错）</li>
+<li><span class="arithmatex">\(I\approx 0\)</span>：空间随机分布，没有聚集</li>
+</ul>
+<p><strong>Moran散点图</strong>：横轴是变量值（标准化），纵轴是邻居均值。一、三象限=高-高/低-低聚集；二、四象限=高-低/低-高离群。</p>
+<p>就像看地图：如果红色（高值）都连成片、蓝色（低值）都连成片，Moran's I就大；如果红蓝交错，I就接近0。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>SPSS原生不支持Moran指数，在<strong>Dabbit AI SPSS工具箱</strong>中操作：</p>
+<ol>
+<li>上传含坐标的数据</li>
+<li>变量列选要检验的变量（如PM2_5年均浓度）</li>
+<li>权重构建方式选"k近邻"，k=4</li>
+<li>行标准化选"是"</li>
+<li>置换检验次数设为999，显著性水平0.05</li>
+<li>固定随机种子42（可复现）</li>
+<li>点击运行</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>Moran's I=0.84</strong>（期望<span class="arithmatex">\(E[I]=-0.007\)</span>）：远大于期望</li>
+<li><strong>z值=15.2，置换p=0.002 <span class="arithmatex">\(&lt;0.05\)</span></strong>：显著正空间自相关</li>
+<li><strong>象限占比</strong>：高-高38%、低-低54%——大部分是同类聚集</li>
+<li><strong>结论</strong>：PM2.5浓度呈连片聚集分布，不是随机散布</li>
+</ul>
+<p><strong>注意</strong>：全局Moran's I只告诉你"整体有没有聚集"，不能定位<strong>哪里</strong>是热点（那需要局部Moran's I/LISA）。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>数据有地理位置，想判断"是不是空间聚集"时。</p>
+<p><strong>什么时候不用？</strong>
+- 数据没有空间坐标——无法算Moran's I
+- 已经在回归残差上做过Moran检验——那是诊断残差，这里是检验因变量本身</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把Moran's I当相关系数解读——I的取值范围不是[-1,1]，而是近似<span class="arithmatex">\([-1/(n-1), 1]\)</span>
+- <strong>坑2</strong>：全局I显著就说"所有区域都聚集"——全局I只说整体趋势，个别区域可能是离群点</p>
+<p><strong>和空间回归的关系</strong>：Moran's I是"要不要做空间模型"的诊断；空间回归是"做了之后怎么解释效应"。</p>
+</div>
+<h3 id="slmsar">⭐ 空间滞后模型（SLM/SAR）  <code>基础级</code><a class="headerlink" href="#slmsar" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>空间滞后模型（SAR/SLM）在普通回归中加入<strong>邻居因变量</strong> <span class="arithmatex">\(Wy\)</span>——不仅看本地自变量，还看邻居的因变量对本地的影响。比如：一个小区涨价会带动周边小区跟涨。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li><strong>房地产估价</strong>：小区挂牌价受周边小区价格影响</li>
+<li><strong>区域经济</strong>：一个城市的GDP受相邻城市增长带动</li>
+<li><strong>创新扩散</strong>：一个地区的创新产出受邻近地区知识溢出影响</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>普通回归：<span class="arithmatex">\(y = X\beta + \varepsilon\)</span></p>
+<p>空间滞后模型：<span class="arithmatex">\(y = \rho W y + X\beta + \varepsilon\)</span></p>
+<ul>
+<li><span class="arithmatex">\(Wy\)</span>是"邻居因变量的加权平均"</li>
+<li><span class="arithmatex">\(\rho\)</span>（空间滞后系数）：邻居每涨1单位，本地涨<span class="arithmatex">\(\rho\)</span>单位</li>
+<li><span class="arithmatex">\(\rho&gt;0\)</span>显著：存在<strong>正向空间溢出</strong>（邻居好我也好）</li>
+</ul>
+<p>关键：因为<span class="arithmatex">\(Wy\)</span>和<span class="arithmatex">\(y\)</span>互相影响（你影响我、我影响你），形成了<strong>空间反馈循环</strong>，所以不能直接用OLS估计，要用极大似然（ML）。</p>
+<p>效应分解：
+- <strong>直接效应</strong>：本地自变量对本地因变量的影响
+- <strong>间接效应（溢出）</strong>：本地自变量变化通过空间网络传导到邻居
+- <strong>总效应</strong>=直接+间接</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>在<strong>Dabbit AI SPSS工具箱</strong>中操作：</p>
+<ol>
+<li>上传含坐标和变量的数据</li>
+<li>因变量选"avg_price"，自变量选"metro_km, school_score, building_age"</li>
+<li>坐标选lon/lat，权重类型knn近邻，k=4，行标准化</li>
+<li>估计方法选极大似然ML</li>
+<li>点击运行，输出系数表和效应分解表</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong><span class="arithmatex">\(\rho=0.563\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>）</strong>：显著正向空间溢出——邻居均价每涨1000元，本地涨约563元</li>
+<li><strong>LR检验</strong>：<span class="arithmatex">\(\rho=0\)</span>被拒绝→SAR比OLS显著更优</li>
+<li><strong>效应分解</strong>：如距地铁距离的直接效应-0.53、间接效应-0.58、总效应-1.11——间接占比52%！</li>
+<li><strong>间接占比</strong>：超过50%说明空间溢出效应非常强，不能忽略</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>Moran's I显著，且LM-lag检验显著时。</p>
+<p><strong>什么时候不用？</strong>
+- LM-error显著而LM-lag不显著→用SEM
+- Moran's I不显著→用普通OLS即可</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把SAR系数直接当OLS系数解读——SAR中自变量系数只是直接效应，总效应要算间接效应
+- <strong>坑2</strong>：忽略<span class="arithmatex">\(Wy\)</span>的内生性——<span class="arithmatex">\(Wy\)</span>和<span class="arithmatex">\(y\)</span>互为因果，OLS估计有偏，必须用ML或IV</p>
+<p><strong>和SEM的区别</strong>：SAR是<strong>因变量</strong>之间的空间溢出（邻居y影响本地y）；SEM是<strong>误差项</strong>之间的空间相关（未观测因素在相邻地区间传导）。</p>
+</div>
+<h2 id="_4">进阶级算法速览<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="sem">空间误差模型（SEM）  <code>进阶级</code><a class="headerlink" href="#sem" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：空间依赖体现在<strong>误差项</strong>中——未观测的扰动在相邻地区间传导，而非因变量本身有溢出。</p>
+<p><strong>美赛场景区</strong>：房价分析中，相邻片区共享未观测的地段口碑、学区预期等因素，导致残差空间相关。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(y=X\beta+u\)</span>，<span class="arithmatex">\(u=\lambda Wu+\varepsilon\)</span>。<span class="arithmatex">\(\lambda\)</span>是空间误差系数。LM-error显著而LM-lag不显著时选SEM。</p>
+<p><strong>操作要点</strong>：KNN权重k=4，ML估计，行标准化。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(\lambda=0.537\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>）显著，说明误差存在空间扩散；系数与OLS接近但标准误更准。</p>
+<p><strong>注意</strong>：SEM中自变量没有空间溢出项，其效应就是直接效应，不需要分解。</p>
+</div>
+<h3 id="sdm">空间杜宾模型（SDM）  <code>进阶级</code><a class="headerlink" href="#sdm" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：最全面的空间模型——同时包含因变量空间滞后<span class="arithmatex">\(Wy\)</span>和自变量空间滞后<span class="arithmatex">\(WX\)</span>，既看邻居y也看邻居x。</p>
+<p><strong>美赛场景区</strong>：区域创新研究——本地研发投入影响本地创新，邻居研发投入也通过知识溢出影响本地。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(y=\rho Wy+X\beta+WX\theta+\varepsilon\)</span>。可以检验能否退化为SAR（<span class="arithmatex">\(\theta=0\)</span>）或SEM。SDM是最一般化的设定。</p>
+<p><strong>操作要点</strong>：ML估计，wx列选"全部解释变量"，行标准化。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(\rho=0.45\)</span>显著；研发投入直接效应1.12、间接效应0.81——溢出效应很大。LR检验SDM显著优于SAR和SEM。</p>
+<p><strong>注意</strong>：SDM最全面但参数最多，小样本时估计不稳定；大样本首选SDM。</p>
+</div>
+<h3 id="sac">空间滞后误差模型（SAC）  <code>进阶级</code><a class="headerlink" href="#sac" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：同时包含空间滞后<span class="arithmatex">\(\rho Wy\)</span>和空间误差<span class="arithmatex">\(\lambda Wu\)</span>，SAR和SEM的合体。</p>
+<p><strong>美赛场景区</strong>：住宅价格中既有邻居房价的实质溢出（<span class="arithmatex">\(\rho\)</span>），又有未观测区位因素的误差相关（<span class="arithmatex">\(\lambda\)</span>）。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(y=\rho Wy+X\beta+u\)</span>，<span class="arithmatex">\(u=\lambda Wu+\varepsilon\)</span>。两个空间参数都显著说明两种机制都存在。</p>
+<p><strong>操作要点</strong>：ML估计，KNN权重，行标准化。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(\rho=0.479\)</span>和<span class="arithmatex">\(\lambda=0.401\)</span>都显著→两种空间机制同时存在。</p>
+<p><strong>注意</strong>：SAC参数多，对样本量要求高；小样本时<span class="arithmatex">\(\rho\)</span>和<span class="arithmatex">\(\lambda\)</span>可能难以区分。</p>
+</div>
+<h3 id="_5">空间面板模型  <code>进阶级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：空间模型+面板数据（多地区×多年份），同时控制时间不变的地区固定效应和空间溢出。</p>
+<p><strong>美赛场景区</strong>：15个城市10年的经济增长面板，研究数字经济对GDP的拉动及跨城溢出。</p>
+<p><strong>核心原理</strong>：在SAR/SEM/SDM基础上加入个体固定效应（吸收各城市不随时间变的禀赋差异），用组内去均值后做ML估计。</p>
+<p><strong>操作要点</strong>：effects选fixed，model type选sar，KNN权重k=4。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(\rho=0.424\)</span>显著（城市间经济联动）；数字人才直接效应15.5、间接溢出10.6——近40%效应通过邻国外溢。</p>
+<p><strong>注意</strong>：面板数据要有足够时间维度（<span class="arithmatex">\(T&gt;5\)</span>），固定效应吸收了不随时间变的因素。</p>
+</div>
+<h3 id="sdem">空间杜宾误差模型（SDEM）  <code>进阶级</code><a class="headerlink" href="#sdem" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：包含自变量空间滞后<span class="arithmatex">\(WX\)</span>和误差空间相关<span class="arithmatex">\(\lambda\)</span>，但<strong>不包含</strong>因变量空间滞后<span class="arithmatex">\(Wy\)</span>。</p>
+<p><strong>美赛场景区</strong>：创新产出研究——邻居研发投入有溢出（WX），但误差项也有空间关联（<span class="arithmatex">\(\lambda\)</span>）。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(y=X\beta+WX\theta+u\)</span>，<span class="arithmatex">\(u=\lambda Wu+\varepsilon\)</span>。与SDM的区别：SDEM没有<span class="arithmatex">\(Wy\)</span>，所以效应分解简单——<span class="arithmatex">\(\beta\)</span>是直接效应，<span class="arithmatex">\(\theta\)</span>就是间接效应，不需要矩阵求逆。</p>
+<p><strong>操作要点</strong>：KNN权重k=4，ML估计，行标准化。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(\lambda=0.502\)</span>显著（误差空间相关）；研发投入直接效应1.10、间接效应0.78。</p>
+<p><strong>注意</strong>：SDEM比SDM简单（不需要<span class="arithmatex">\((I-\rho W)^{-1}\)</span>），如果LM-lag不显著但LM-ERR显著，SDEM是好选择。</p>
+</div>
+<h3 id="slx">自变量空间滞后模型（SLX）  <code>进阶级</code><a class="headerlink" href="#slx" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：最简单的空间模型——只加邻居自变量<span class="arithmatex">\(WX\)</span>，不加<span class="arithmatex">\(Wy\)</span>也不加误差项，用普通OLS就能估计。</p>
+<p><strong>美赛场景区</strong>：便利店研究——邻居门店的营销投入是否影响本店营业额（客流共享/分流）。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(y=X\beta+WX\theta+\varepsilon\)</span>。<span class="arithmatex">\(\beta\)</span>=本地自变量效应（直接），<span class="arithmatex">\(\theta\)</span>=邻居自变量效应（间接溢出）。因为没有<span class="arithmatex">\(Wy\)</span>内生性，直接OLS即可。</p>
+<p><strong>操作要点</strong>：knn k=4，lag mode=all，稳健标准误，行标准化。</p>
+<p><strong>结果关键</strong>：营销投入直接效应1.56、间接效应1.08——邻居营销也能带动本店（品牌集聚效应）。</p>
+<p><strong>注意</strong>：SLX是入门级空间模型，如果残差Moran's I仍显著，说明还需要加误差项（SDEM）。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2248 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch10/">
+      
+      
+        <link rel="prev" href="../ch09/">
+      
+      
+        <link rel="next" href="../ch11/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第10章 医学统计 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第10章 医学统计
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基线分析 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        单因素与多因素回归 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ ROC曲线（诊断评价） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kaplan-meier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kaplan-Meier生存曲线 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        亚组分析 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ Cox回归（比例风险回归） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        森林图 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bland-altman" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bland-Altman一致性分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        校准曲线 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DCA决策曲线 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#icc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        组内相关系数（ICC） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        限制性立方样条（RCS） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        寿命表分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        条件逻辑回归 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ridit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ridit分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cmh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分层卡方（CMH检验） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orrr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OR值和RR值（效应量指标） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nriidi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NRI和IDI指标 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kappa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kappa一致性检验 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mcnemar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配对卡方（McNemar检验） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重复测量方差分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        竞争风险模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卡方拟合优度检验 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ld50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        剂量反应分析（LD50） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">医学统计<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>医学统计是为"随访数据、诊断评价、预后预测"这类问题发展出的一套专门方法。它处理两类特殊数据：一是<strong>时间到事件数据</strong>（从起点到发生某件事经过多久，且有人中途退出观察），二是<strong>诊断/预测模型的性能评价</strong>（一个打分准不准、能不能用）。这些方法虽然名字带"医学"，但核心思想在美赛里用途极广。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>千万别被"医学"两个字骗了——本章很多方法是<strong>模型评价</strong>和<strong>风险预测</strong>的通用工具：
+- <strong>ROC 曲线 / AUC</strong>：评价任何二分类预测模型（会不会流失、是否违约、是否生病）的区分能力，是美赛建模论文的必报指标
+- <strong>Kaplan-Meier、Cox 回归</strong>：迁移到"客户存续时间、设备寿命、项目完成时间"等带删失的时间数据
+- <strong>校准曲线、DCA、NRI/IDI</strong>：评价概率预测是否可靠、新模型比旧模型好在哪
+- <strong>单因素/多因素回归、亚组分析、基线分析</strong>：任何"找影响因素、分组比较"问题的标准流程</p>
+<p><strong>学习路径建议</strong></p>
+<p>先学<strong>基线分析</strong>和<strong>单因素/多因素回归</strong>这两个找因素的基础工具；再学<strong>ROC 曲线</strong>（评价二分类模型性能的核心）；然后学<strong>Kaplan-Meier 生存曲线</strong>和<strong>Cox 回归</strong>（处理带删失的时间数据）；最后按需要查校准曲线、DCA、竞争风险等进阶模型评价工具。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">基线分析  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>基线分析就是在对比两组（如干预组 vs 对照组）之前，先检查两组在起点上是否"旗鼓相当"。如果两组一开始就不一样，后面观察到的结局差异就说不清是处理的效果还是本来就不同。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中比较两组/多组对象前，<strong>先做基线均衡性检验</strong>，是论文规范性的体现</li>
+<li>任何"实验组 vs 对照组"的研究设计，表格 1 通常就是基线特征表</li>
+<li>定位两组在哪些变量上本来就不均衡，后续需在模型中校正</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>思路很直白：把所有基线变量逐一在两组间做比较。</p>
+<ul>
+<li>连续变量：先看正态性（Shapiro-Wilk）和方差齐性（Levene），正态方差齐用独立样本 t 检验，否则用 Mann-Whitney U 非参数检验；多组用 ANOVA 或 Kruskal-Wallis</li>
+<li>分类变量：用卡方检验，期望频数不足时改用 Fisher 精确检验</li>
+<li>每个变量同时报告效应量（Cohen's d、Cramér's V），不只看 p 值</li>
+</ul>
+<p><span class="arithmatex">\(p&gt;0.05\)</span> 表示该基线变量两组<strong>未发现显著差异</strong>（均衡）；<span class="arithmatex">\(p&lt;0.05\)</span> 表示两组本来就不同，需要警惕混杂。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 Dabbit AI SPSS 工具箱中选择"基线分析"</li>
+<li>指定分组列（如 group），选入连续基线变量（年龄、BMI、血压等）和分类基线变量（性别、吸烟等）</li>
+<li>排除 ID 列；连续变量自动按正态性/方差齐性选 t 或非参数检验</li>
+<li>分类变量期望频数不足时自动用 Fisher 精确检验</li>
+<li>显著性水平 <span class="arithmatex">\(\alpha=0.05\)</span>，输出效应量，p 值校正默认 none</li>
+</ol>
+<p><strong>SPSS 原生对应</strong>：连续变量用 <strong>分析 → 比较均值 → 独立样本 T 检验</strong>，分类变量用 <strong>分析 → 描述统计 → 交叉表</strong>（勾选卡方）。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>输出一张"基线特征表"，每个变量一行：
+- <strong>组内描述</strong>：连续变量报均值<span class="arithmatex">\(\pm\)</span>标准差或中位数（四分位），分类变量报频数（构成比）
+- <strong>检验方法与 p 值</strong>：如案例 triglyceride 用 Mann-Whitney U，<span class="arithmatex">\(p=0.002\)</span> 显著；smoking 卡方 <span class="arithmatex">\(p=0.006\)</span> 显著
+- <strong>效应量</strong>：Cohen's d（连续）或 Cramér's V（分类），衡量差异大小
+- 案例 8 个基线变量中 2 个（甘油三酯、吸烟）显著不均衡，需在后续模型中校正</p>
+<p><strong>注意</strong>：<span class="arithmatex">\(p&gt;0.05\)</span> 只表示"未发现显著差异"，不等于两组完全相等（可能是样本量不够）；报告时要如实说明。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 两组/多组比较研究的第一步，写"Table 1"。</p>
+<p><strong>什么时候不用？</strong> 随机对照试验理论上基线应均衡，但仍建议报告；纯预测建模（不分组）不需要。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：对所有变量都做 t 检验而不看正态性，偏态数据用 t 检验结果不可靠
+- <strong>坑2</strong>：基线有差异却不校正，直接归因于处理效应
+- <strong>坑3</strong>：把"基线均衡"当成研究质量的全部——均衡性差时应改用多因素回归校正</p>
+<p><strong>和相似算法的区别</strong>：基线分析是"描述+均衡性检验"的标准化流程，本身不评价处理效果；处理效果靠后续的组间比较或回归。</p>
+</div>
+<h3 id="_4">单因素与多因素回归  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>这是找影响因素的标准两步法：先<strong>单因素回归</strong>把每个候选变量单独和结局跑一遍，筛掉无关的；再把候选变量一起放进<strong>多因素回归</strong>，在互相控制后看哪些因素<strong>独立</strong>地影响结局。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中"哪些因素影响 Y"类问题的标配分析（如哪些指标影响血糖、哪些特征影响违约）</li>
+<li>医学/健康/经济类问题中识别独立风险因素</li>
+<li>论文中"单因素筛选 <span class="arithmatex">\(\to\)</span> 多因素校正"是最常见的建模叙事</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>打个比方，你想找影响体重的因素。单因素就像一个一个看：只看运动、只看饮食、只看睡眠。但运动多的人往往饮食也规律，单看运动的效果可能混进了饮食的功劳。</p>
+<ul>
+<li><strong>单因素回归</strong>：每个自变量单独对结局回归，得到未调整的粗效应。筛选阈值常用 <span class="arithmatex">\(p&lt;0.10\)</span>（稍宽松，避免漏掉真正重要的变量）</li>
+<li><strong>多因素回归</strong>：把单因素达标的变量同时放入一个模型，每个系数都表示"控制了其他变量后"该因素的独立效应</li>
+<li>结局是连续变量用线性回归（OLS），结局是二分类用 Logistic 回归</li>
+</ul>
+<p>关键输出是调整后的系数与 95% 置信区间，配合 VIF 检查共线性（VIF <span class="arithmatex">\(&lt;10\)</span> 可接受）。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 Dabbit AI SPSS 工具箱中选择"单因素与多因素回归"</li>
+<li>选结局变量（如空腹血糖，连续型），选入全部候选自变量</li>
+<li>单因素筛选 p 阈值默认 0.10，达标的全部纳入多因素模型</li>
+<li>分类变量自动哑变量化；VIF 阈值 10；异方差自动检验后必要时改稳健标准误</li>
+<li>多因素默认"全量保留"入选变量，不做逐步筛选（避免过拟合）</li>
+</ol>
+<p><strong>SPSS 原生对应</strong>：<strong>分析 → 回归 → 线性</strong>（连续结局）或 <strong>二元 Logistic</strong>（二分类结局）。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>单因素表</strong>：逐变量报告粗效应、95%CI、p 值。案例年龄、BMI、吸烟、家族史单因素 <span class="arithmatex">\(p&lt;0.10\)</span>，进入多因素</li>
+<li><strong>多因素表</strong>：校正后效应。案例年龄 <span class="arithmatex">\(\beta=0.015\)</span>（<span class="arithmatex">\(p=0.002\)</span>）、BMI <span class="arithmatex">\(\beta=0.045\)</span>（<span class="arithmatex">\(p=0.003\)</span>）、吸烟整体 <span class="arithmatex">\(p&lt;0.001\)</span> 仍独立显著</li>
+<li><strong><span class="arithmatex">\(R^2\)</span> 与 F 检验</strong>：模型整体解释力，案例 <span class="arithmatex">\(R^2=0.226\)</span>、<span class="arithmatex">\(p&lt;0.001\)</span></li>
+<li><strong>VIF</strong>：最大 2.08，无严重共线性</li>
+<li>对比单因素（圆点）与多因素（方块）效应，看校正后哪些被削弱——那就是被其他变量混淆的</li>
+</ul>
+<p><strong>怎么判断</strong>：多因素模型中 <span class="arithmatex">\(p&lt;0.05\)</span> 且 CI 不跨无效值（线性跨 0、Logistic 跨 1）的变量，是独立影响因素。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 需要识别独立影响因素、构建预测模型时。</p>
+<p><strong>什么时候不用？</strong> 纯预测任务可直接用机器学习方法；变量间有强因果链条时需谨慎解释。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把单因素 <span class="arithmatex">\(p&lt;0.05\)</span> 直接当结论。单因素是未调整的，可能被混杂
+- <strong>坑2</strong>：用逐步回归自动选变量。逐步法结果不稳定、易过拟合，推荐理论驱动纳入
+- <strong>坑3</strong>：不检查共线性（VIF），导致系数符号反常、不稳定
+- <strong>坑4</strong>：观察性数据下把独立相关说成因果</p>
+<p><strong>和相似算法的区别</strong>：单因素/多因素回归是通用工具；Cox 回归专门处理"时间到事件+删失"结局，Logistic 处理二分类结局。</p>
+</div>
+<h3 id="roc">⭐ ROC曲线（诊断评价）  <code>基础级</code><a class="headerlink" href="#roc" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>ROC 曲线是评价二分类模型"分得准不准"的黄金标准。不管你预测的是"会不会生病""会不会流失""会不会违约"，只要结果是"是/否"两类，都能用 ROC 和它的核心指标 AUC 来衡量模型的区分能力。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li><strong>美赛建模论文必报</strong>：任何二分类预测模型（逻辑回归、随机森林、SVM 等）都要报告 AUC</li>
+<li>比较两个预测模型哪个更好（在同一样本上比 AUC）</li>
+<li>为诊断/预测打分选择最佳"及格线"（截断值）</li>
+<li>医学中评价某种检测手段的诊断价值，迁移到美赛就是评价任何分类器</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>二分类预测有四种结果（混淆矩阵）：</p>
+<ul>
+<li><strong>真阳性 TP</strong>：实际是，预测也是（找对了）</li>
+<li><strong>真阴性 TN</strong>：实际否，预测也否（排对了）</li>
+<li><strong>假阳性 FP</strong>：实际否，预测是（误报）</li>
+<li><strong>假阴性 FN</strong>：实际是，预测否（漏报）</li>
+</ul>
+<p>两个核心率：
+- <strong>灵敏度（召回率）</strong> <span class="arithmatex">\(= TP/(TP+FN)\)</span>：真病人中被找出来的比例——不漏诊
+- <strong>特异度</strong> <span class="arithmatex">\(= TN/(TN+FP)\)</span>：真健康人中被正确排除的比例——不误诊</p>
+<p>截断阈值越高，判阳性越严，特异度越高、灵敏度越低。把<strong>所有可能阈值</strong>下的（1<span class="arithmatex">\(-\)</span>特异度，灵敏度）描出来，连成 ROC 曲线。</p>
+<p><strong>AUC（曲线下面积）</strong>就是 ROC 曲线下面的面积，含义是：<strong>随机抽一个阳性样本和一个阴性样本，模型给阳性打分更高的概率</strong>。
+- AUC <span class="arithmatex">\(=0.5\)</span>：跟瞎猜一样
+- <span class="arithmatex">\(0.7\)</span>--<span class="arithmatex">\(0.8\)</span>：可接受
+- <span class="arithmatex">\(0.8\)</span>--<span class="arithmatex">\(0.9\)</span>：良好
+- <span class="arithmatex">\(&gt;0.9\)</span>：优秀</p>
+<p><strong>约登指数</strong> <span class="arithmatex">\(J=\)</span> 灵敏度 <span class="arithmatex">\(+\)</span> 特异度 <span class="arithmatex">\(-1\)</span>，最大时对应的阈值就是兼顾漏诊误诊的最佳截断值。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 SPSS 中点击 <strong>分析 → 分类 → ROC 分析</strong></li>
+<li>将模型预测得分/概率选入<strong>检验变量</strong>，金标准结局选入<strong>状态变量</strong>，指定阳性取值（如 1）</li>
+<li>勾选"输出 ROC 曲线""对角参考线""标准误差和置信区间"</li>
+<li>在 Dabbit AI 工具箱中还能用 Bootstrap 2000 次给 AUC 置信区间，按约登指数自动选最佳截断值</li>
+<li>若要比较两个模型，可同时放入两个得分变量</li>
+</ol>
+<p><strong>默认参数参考</strong>：最佳截断准则=约登指数最大化，Bootstrap 2000 次，随机种子 42。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>AUC 及其 95%CI</strong>：案例 AUC=0.855（CI <span class="arithmatex">\(0.793\)</span>--<span class="arithmatex">\(0.907\)</span>），属"区分度良好"。AUC <span class="arithmatex">\(&gt;0.5\)</span> 且 CI 不跨 0.5 才说明模型有效</li>
+<li><strong>ROC 曲线</strong>：越贴近左上角越好；对角线是随机参考线</li>
+<li><strong>最佳截断值</strong>：按约登指数最大，案例 <span class="arithmatex">\(-0.319\)</span> 对应灵敏度 0.92、特异度 0.64、平衡准确率 0.78</li>
+<li><strong>灵敏度/特异度随阈值变化曲线</strong>：两条线交点附近即最佳工作点</li>
+</ul>
+<p><strong>怎么选阈值</strong>：用于筛查（宁可错杀不可放过）就下调阈值提高灵敏度；用于确诊（避免误诊）就上调阈值提高特异度。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 任何二分类模型的性能评价，论文必备。</p>
+<p><strong>什么时候不用？</strong> 回归任务（连续预测值）用 R<span class="arithmatex">\(^2\)</span>/RMSE；多分类任务需用多分类 AUC。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：只看准确率不看 AUC。类别不平衡时（如 95% 阴性），全猜阴性准确率 95% 但模型毫无用处，AUC 才揭示真相
+- <strong>坑2</strong>：在训练集上算 AUC 自欺欺人。必须在独立测试集/验证集上评价
+- <strong>坑3</strong>：AUC 高就以为概率准。AUC 只衡量排序区分能力，<strong>不代表概率校准</strong>（后者看校准曲线）
+- <strong>坑4</strong>：两个模型 AUC 差很小却宣称谁更好，应看 DeLong 检验差异是否显著</p>
+<p><strong>和相似算法的区别</strong>：ROC/AUC 看<strong>区分度</strong>；校准曲线看<strong>概率是否准确</strong>；DCA 看<strong>临床/决策价值</strong>——三者评价模型的不同侧面。</p>
+</div>
+<h3 id="kaplan-meier">Kaplan-Meier生存曲线  <code>基础级</code><a class="headerlink" href="#kaplan-meier" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>生存曲线处理"从某起点到发生某事件经过了多久"的数据，而且中途有人退出观察（删失）也不怕。它能画出随时间推移"还没发生事件"的比例如何下降，并比较两组的生存过程是否不同。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中凡是带<strong>时间起点 + 事件 + 中途退出</strong>的数据都能用：客户留存时长（何时流失）、设备故障时间、项目完工时间</li>
+<li>比较两组（如两种治疗、两种维护策略）哪个更"耐久"</li>
+<li>估计中位生存时间（一半人发生事件的时间点）</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>"删失"是生存数据的核心难点：随访结束时还没出事件的人，你只知道他"到观察截止还没出事"，不知道他之后什么时候出事。</p>
+<ul>
+<li><strong>Kaplan-Meier 乘积极限法</strong>：只在真正发生事件的时间点才让生存率下降一格，删失只在曲线上画个小竖线标记、不改变曲线高度</li>
+<li>生存率 = 到每个事件时点为止"幸存下来"的累积概率</li>
+<li><strong>中位生存时间</strong>：生存率降到 50% 对应的时间</li>
+</ul>
+<p><strong>Log-Rank 检验</strong>：比较两条生存曲线是否有显著差异。<span class="arithmatex">\(p&lt;0.05\)</span> 说明两组生存过程确实不同（如方案 A 的中位无进展生存 22.1 个月，方案 B 仅 8.8 个月）。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 SPSS 中点击 <strong>分析 → 生存分析 → Kaplan-Meier</strong></li>
+<li>将生存时间选入<strong>时间</strong>，事件状态选入<strong>状态</strong>，定义事件发生值（如 event=1）</li>
+<li>分组变量选入<strong>因子</strong>（如治疗分组）</li>
+<li>点击<strong>保存</strong>可加入生存概率；点击<strong>比较因子</strong>选 Log-Rank 检验</li>
+<li>在 Dabbit AI 工具箱中直接指定时间列、事件列、分组列，自动输出中位生存时间与关键时点生存率</li>
+</ol>
+<p><strong>默认参数参考</strong>：事件=1，自动选取关键随访时点，输出 95% 置信区间（Greenwood 法）。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>各组中位生存期</strong>：案例方案 A 22.1 月（CI 16.2--26.5），方案 B 8.8 月（CI 6.1--13.7）</li>
+<li><strong>Log-Rank 检验</strong>：案例 <span class="arithmatex">\(\chi^2=13.15\)</span>、<span class="arithmatex">\(p=0.0003\)</span>，两组生存曲线差异显著</li>
+<li><strong>关键时点生存率</strong>：如随访 9.45 月时方案 A 生存概率 0.743、方案 B 仅 0.473</li>
+<li><strong>风险集人数表</strong>：曲线后半段风险集人数变少，尾部估计不稳，解读要谨慎</li>
+</ul>
+<p><strong>怎么判断</strong>：曲线分的越开、Log-Rank <span class="arithmatex">\(p&lt;0.05\)</span>，两组差异越明显；中位生存期越长代表越"耐久"。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 带删失的时间到事件数据的组间比较和生存过程描述。</p>
+<p><strong>什么时候不用？</strong> 所有人都观察到了事件、无删失时，普通均值比较即可；想同时控制多个影响因素时应用 Cox 回归。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把删失的人直接当"没发生事件"硬算普通均值，浪费信息且有偏
+- <strong>坑2</strong>：删失与分组有关（如某组中途大量退出）却不报告，会严重偏倚结论
+- <strong>坑3</strong>：曲线尾部风险集只剩几个人还过度解读</p>
+<p><strong>和相似算法的区别</strong>：Kaplan-Meier 只做描述和两组比较（单因素）；Cox 回归能同时纳入多个协变量、量化各因素的风险比。</p>
+</div>
+<h3 id="_5">亚组分析  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>亚组分析问：整体上 A 比 B 好，但这个好处<strong>对所有人都一样吗</strong>？会不会对年轻人效果大、老年人效果小？它按某个变量（年龄、性别、地区）把人群拆开，分别看处理效应，并用交互检验判断效应是否真的随亚组变化。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中分析政策/方案效果的<strong>异质性</strong>——"对谁更有效"</li>
+<li>精细化、分层决策依据（如"对老年人群优先推荐该方案"）</li>
+<li>任何整体处理效应已知后，想知道效应是否因人群而异时</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>核心是<strong>交互项检验</strong>，而不是简单地看每个亚组内部 p 值。</p>
+<ul>
+<li>先在全人群估计总体处理效应</li>
+<li>再按亚组水平分别估计效应及 95%CI</li>
+<li>关键：用"处理 <span class="arithmatex">\(\times\)</span> 亚组"交互项的 Wald/F 检验判断亚组间差异是否显著</li>
+</ul>
+<p><strong>重要原则</strong>：亚组内"不显著"不等于"该亚组无效"——可能只是该亚组样本小、检验功效低。<strong>组间差异必须看交互检验 p 值</strong>，不能拿各亚组单独的 p 值互相比较。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 Dabbit AI SPSS 工具箱中选择"亚组分析"</li>
+<li>选结局变量、处理变量、亚组分组变量（如 age_group）</li>
+<li>结局类型选 continuous（连续），效应量自动选均值差 MD</li>
+<li>交互检验 auto；可选入协变量校正；森林图按自然顺序排列</li>
+</ol>
+<p><strong>SPSS 原生对应</strong>：在回归模型中加入"处理 <span class="arithmatex">\(\times\)</span> 亚组"交互项，看交互项系数显著性。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>总体效应</strong>：案例均值差 0.77（CI 0.58--0.95），整体有效</li>
+<li><strong>交互检验 p 值</strong>：案例 <span class="arithmatex">\(p&lt;0.001\)</span>，效应确实随年龄组变化——这是<strong>最关键</strong>的结果</li>
+<li><strong>各亚组效应</strong>：<span class="arithmatex">\(&lt;55\)</span> 岁 MD=0.27、<span class="arithmatex">\(55\)</span>--<span class="arithmatex">\(64\)</span> 岁 MD=0.89、<span class="arithmatex">\(\geq 65\)</span> 岁 MD=1.22，随年龄增大效果越强</li>
+<li><strong>森林图</strong>：把总体和各亚组效应及 CI 并排，直观比较</li>
+</ul>
+<p><strong>怎么判断</strong>：交互检验 <span class="arithmatex">\(p&lt;0.05\)</span> 才宣称"效应因亚组而异"；否则应报告整体效应、不强行分层。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 政策/方案效果的人群异质性分析。</p>
+<p><strong>什么时候不用？</strong> 没有先验假设、纯粹靠数据挖掘式地试各种亚组会导致假阳性。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把"某亚组 p&gt;0.05"当成"该亚组无效"——功效问题
+- <strong>坑2</strong>：同时试很多亚组变量却不做多重比较校正，假发现率高
+- <strong>坑3</strong>：亚组样本量小还下强结论</p>
+<p><strong>和相似算法的区别</strong>：亚组分析是<strong>描述+检验效应异质性</strong>；调节效应分析（第 9 章）是用连续调节变量建模交互，思想相通。</p>
+</div>
+<h3 id="cox">⭐ Cox回归（比例风险回归）  <code>基础级</code><a class="headerlink" href="#cox" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>Cox 回归是生存分析的"多因素版"。它既能处理带删失的时间数据，又能同时纳入多个影响因素，输出每个因素的<strong>风险比 HR</strong>——告诉我们"这个因素使事件发生风险变成原来的几倍"。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中<strong>风险预测/预后模型</strong>的核心工具：客户流失风险、设备失效风险、项目失败风险</li>
+<li>同时控制多个因素，看哪些因素独立影响"生存时间"</li>
+<li>输出 HR 便于业务解读（"年龄每增加一岁，风险升高 5.5%"）</li>
+<li>医学中是预后研究金标准，迁移到美赛即"多因素时间到事件预测"</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>Cox 模型的形式：风险函数 <span class="arithmatex">\(h(t|X) = h_0(t) \exp(\beta_1 X_1 + \beta_2 X_2 + \dots)\)</span>。</p>
+<ul>
+<li><span class="arithmatex">\(h_0(t)\)</span> 是基准风险曲线（形状不关心，Cox 用偏似然巧妙避开了估计它）</li>
+<li>每个因素的系数 <span class="arithmatex">\(\beta\)</span> 取指数就是<strong>风险比 HR</strong><span class="arithmatex">\(=\exp(\beta)\)</span></li>
+<li>HR <span class="arithmatex">\(&gt;1\)</span>：该因素增加风险；HR <span class="arithmatex">\(&lt;1\)</span>：保护因素；HR <span class="arithmatex">\(=1\)</span>：无影响</li>
+<li>如案例 age HR=1.055，年龄每大 1 岁死亡风险约为原来的 1.055 倍；beta_blocker HR=0.608，用药者风险降到约 0.61 倍（保护）</li>
+</ul>
+<p><strong>比例风险假设</strong>：HR 不随时间变化（各因素效应恒定）。用 Schoenfeld 残差检验，<span class="arithmatex">\(p&gt;0.05\)</span> 表示假设成立；违反时需用分层 Cox 或时依协变量。</p>
+<p><strong>模型区分度</strong>用 C 指数（0.5 随机、<span class="arithmatex">\(&gt;0.7\)</span> 可接受），含义和 AUC 类似。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在 SPSS 中点击 <strong>分析 → 生存分析 → Cox 回归</strong></li>
+<li>将时间变量选入<strong>时间</strong>，事件状态选入<strong>状态</strong>（定义事件值=1），协变量选入<strong>协变量</strong></li>
+<li>分类协变量设置哑变量；方法选"进入"（强制纳入，不做逐步）</li>
+<li>点击<strong>绘图</strong>可输出生存曲线；点击<strong>保存</strong>可加入预测生存概率</li>
+<li>在 Dabbit AI 工具箱中指定时间列 followup_time、事件列 event，基准估计 Breslow，自动做 Schoenfeld 检验</li>
+</ol>
+<p><strong>默认参数参考</strong>：无分层、无权重，基准估计 Breslow，自动检验比例风险假设。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>HR 与 95%CI</strong>：报告每个变量的 HR（CI）和 p 值。案例 lvef HR=0.960（保护）、nyha=IV HR=5.766（高危）、beta_blocker HR=0.608（保护），均 <span class="arithmatex">\(p&lt;0.05\)</span></li>
+<li><strong>Schoenfeld 检验</strong>：案例各变量 <span class="arithmatex">\(p&gt;0.05\)</span>，比例风险假设成立</li>
+<li><strong>C 指数</strong>：案例 0.731，区分能力可接受</li>
+<li><strong>生存曲线</strong>：按典型患者关键因素水平画出预测生存概率随时间变化</li>
+</ul>
+<p><strong>怎么判断</strong>：HR 的 CI 不跨 1 且 <span class="arithmatex">\(p&lt;0.05\)</span> 为独立风险因素；HR <span class="arithmatex">\(&gt;1\)</span> 是危险因子，<span class="arithmatex">\(&lt;1\)</span> 是保护因子。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong> 带删失的时间到事件数据，且要同时控制多个预测因素、量化风险比。</p>
+<p><strong>什么时候不用？</strong> 只描述生存过程不找因素用 Kaplan-Meier；无删失数据用普通回归。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不检验比例风险假设。若某因素 HR 随时间变化却硬套 Cox，结论有偏
+- <strong>坑2</strong>：把 HR 当成绝对风险。HR 是"相对倍数"，基线风险高低也很重要
+- <strong>坑3</strong>：事件数太少（经验 EPV：每变量至少 10 个事件）还硬塞很多变量，模型不稳定
+- <strong>坑4</strong>：观察性数据下把 HR 当因果效应</p>
+<p><strong>和相似算法的区别</strong>：Cox 回归是多因素生存分析；Kaplan-Meier 是单因素描述；竞争风险模型用于存在多种互斥结局时。</p>
+</div>
+<h2 id="_6">进阶级算法速览<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">森林图  <code>进阶级</code><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把多项研究（或多个亚组/变量）的效应量与 95%CI 画在同一张图上，逐个比较并给出合并效应。</p>
+<p><strong>美赛场景区</strong>：Meta 分析汇总多来源数据；多因素回归后把各变量效应量并排展示；亚组分析结果可视化。</p>
+<p><strong>核心原理</strong>：每项研究用方块（大小代表权重）+ 横线（95%CI）表示，底部菱形是合并效应（随机/固定效应模型加权）。<span class="arithmatex">\(I^2 \geq 50%\)</span> 或 Q 检验 <span class="arithmatex">\(p&lt;0.10\)</span> 时用随机效应模型。</p>
+<p><strong>操作要点</strong>：工具箱选"森林图/Meta 分析"，效应量选 MD 或 OR/RR，合并方法 auto，输出异质性 <span class="arithmatex">\(I^2\)</span>。</p>
+<p><strong>结果关键</strong>：案例 150 项研究随机效应合并 MD=0.451（CI 0.406--0.495），<span class="arithmatex">\(I^2=65.7%\)</span> 异质性较高。</p>
+<p><strong>注意</strong>：<span class="arithmatex">\(I^2\)</span> 大说明研究间不一致，需分析异质来源而非只看合并值。</p>
+</div>
+<h3 id="bland-altman">Bland-Altman一致性分析  <code>进阶级</code><a class="headerlink" href="#bland-altman" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：评价两种测量方法（如新仪器 vs 金标准）测同一批样品时是否一致，核心是画"差值 vs 均值"图并给出 95% 一致性界限。</p>
+<p><strong>美赛场景区</strong>：迁移到"两个模型/两套评分系统结果是否一致"；校准新测量工具时。</p>
+<p><strong>核心原理</strong>：逐对算差值 <span class="arithmatex">\(d=A-B\)</span>，平均差 <span class="arithmatex">\(\bar{d}\)</span> 是系统偏倚，95% 一致性界限 <span class="arithmatex">\(= \bar{d} \pm 1.96\,SD\)</span>——约 95% 的差值落在此区间；与临床可接受界限比较判断能否互换。</p>
+<p><strong>操作要点</strong>：工具箱选"Bland-Altman"，自动判断差值正态性，比例偏倚诊断开启，置信水平 95%。</p>
+<p><strong>结果关键</strong>：案例平均差 0.018（CI 跨 0，无系统偏倚），95% 一致性界限 <span class="arithmatex">\(-0.39\)</span>--<span class="arithmatex">\(0.43\)</span>；注意相关高（r=0.997）不等于一致。</p>
+<p><strong>注意</strong>：相关系数高不代表方法一致，必须看差值的一致性界限是否落在可接受范围内。</p>
+</div>
+<h3 id="_8">校准曲线  <code>进阶级</code><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：检验模型给出的预测概率<strong>准不准</strong>——预测说有 30% 概率出事，实际是不是真的约 30% 出事。</p>
+<p><strong>美赛场景区</strong>：评价任何输出概率的分类模型（不只看 AUC，还要看概率是否可信）；美赛中做风险评分模型必备。</p>
+<p><strong>核心原理</strong>：按预测概率分箱，比较每箱平均预测概率与实际事件发生率；理想状态点落在对角线上。校准截距 <span class="arithmatex">\(=0\)</span>、斜率 <span class="arithmatex">\(=1\)</span> 最佳；Brier 分数越小越好。</p>
+<p><strong>操作要点</strong>：工具箱选"校准曲线"，指定概率列与结局列，分箱策略 quantile（按分位等分箱），可做 Bootstrap 置信带。</p>
+<p><strong>结果关键</strong>：案例校准截距 0.33（整体低估风险），Brier=0.195，HL 检验 <span class="arithmatex">\(p=0.34\)</span>；建议先做截距重校准。</p>
+<p><strong>注意</strong>：AUC 高不等于校准好；概率用于决策阈值时校准比区分度更关键。</p>
+</div>
+<h3 id="dca">DCA决策曲线  <code>进阶级</code><a class="headerlink" href="#dca" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：从"净获益"角度比较一个预测模型和"全干预/不干预"两种极端策略，看在哪个阈值区间用模型决策更划算。</p>
+<p><strong>美赛场景区</strong>：评价模型的<strong>实际决策价值</strong>（不只是统计指标，而是按模型行动到底赚不赚）；美赛中评估预警/筛查模型的实用性。</p>
+<p><strong>核心原理</strong>：净获益 $NB(t) = $ 真阳率 <span class="arithmatex">\(-\)</span> 假阳率 <span class="arithmatex">\(\times t/(1-t)\)</span>，<span class="arithmatex">\(t\)</span> 是干预阈值。把各阈值下 NB 画曲线，高于"全干预"和"不干预"两条基准线的区间就是临床获益区间。</p>
+<p><strong>操作要点</strong>：工具箱选"DCA"，填入各模型概率列与结局列，LOESS 平滑，报告阈值区间 auto。</p>
+<p><strong>结果关键</strong>：案例综合模型在阈值 0.09--0.97 区间净获益均高于基准，最优决策点 <span class="arithmatex">\(t^*=0.43\)</span> 时每 100 例净获益 +21.9。</p>
+<p><strong>注意</strong>：DCA 把"误干预代价"和"漏干预代价"用阈值权重折算，阈值设定要结合实际业务。</p>
+</div>
+<h3 id="icc">组内相关系数（ICC）  <code>进阶级</code><a class="headerlink" href="#icc" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：衡量多名评分者/多次测量对同一对象打分的<strong>绝对一致性</strong>，比 Kappa 更适合连续测量值。</p>
+<p><strong>美赛场景区</strong>：多评委打分一致性（如专家评审、传感器重复测量）；评价测量工具可重复性。</p>
+<p><strong>核心原理</strong>：把总方差分解为对象间、评分者间、误差三部分，ICC=对象间方差/总方差。取值 0--1。Koo &amp; Li 分级：<span class="arithmatex">\(&lt;0.5\)</span> 差、<span class="arithmatex">\(0.5\)</span>--<span class="arithmatex">\(0.75\)</span> 中等、<span class="arithmatex">\(0.75\)</span>--<span class="arithmatex">\(0.9\)</span> 良好、<span class="arithmatex">\(&gt;0.9\)</span> 优秀。</p>
+<p><strong>操作要点</strong>：工具箱选"ICC"，模型 two-way random、绝对一致、单次测量，置信水平 95%。</p>
+<p><strong>结果关键</strong>：案例 ICC2=0.844（CI 0.76--0.90），良好；取多人平均后 ICC2k=0.942 达优秀（平均提高信度）。</p>
+<p><strong>注意</strong>：要选对"绝对一致 vs 相对一致""单次 vs 平均"，选错会得到不同数值。</p>
+</div>
+<h3 id="rcs">限制性立方样条（RCS）  <code>进阶级</code><a class="headerlink" href="#rcs" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：不预设线性关系，用灵活的样条曲线刻画暴露与结局之间的<strong>非线性</strong>剂量反应（如睡眠太短太长血压都高的 U 形关系）。</p>
+<p><strong>美赛场景区</strong>：探索变量间非线性关系（避免简单线性假设误导）；找最优点/阈值（如最佳睡眠时长、最佳温度）。</p>
+<p><strong>核心原理</strong>：把连续暴露按分位放几个结点，用一段段三次多项式在结点处光滑拼接。用样条项的 Wald 联合检验判断非线性是否显著（<span class="arithmatex">\(p&lt;0.05\)</span> 即存在非线性）。</p>
+<p><strong>操作要点</strong>：工具箱选"RCS"，指定暴露列与结局列，结点数 quantile 分位（默认 4 个），参考值取 P10。</p>
+<p><strong>结果关键</strong>：案例睡眠时长与收缩压呈 U 形（非线性 <span class="arithmatex">\(p&lt;0.001\)</span>），最低点约 6.5 小时；结点数 3/4/5 结论一致故稳健。</p>
+<p><strong>注意</strong>：结点数不宜过多（3--5 个即可），否则曲线过拟合出假波动。</p>
+</div>
+<h3 id="_9">寿命表分析  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把随访时间切成若干区间，逐段计算死亡率和累积生存率，是生存分析最基础的描述工具。</p>
+<p><strong>美赛场景区</strong>：设备/产品可靠性分析（无故障使用时间）；Kaplan-Meier 的分组汇总版。</p>
+<p><strong>核心原理</strong>：每个区间用"期初人数 <span class="arithmatex">\(-\)</span> 删失数/2"估计有效暴露人数，算区间死亡概率，再连乘得累积生存率；Log-Rank 检验组间差异；在生存率首次低于 50% 处插值得中位生存时间。</p>
+<p><strong>操作要点</strong>：工具箱选"寿命表"，指定时间列、状态列、分组列，比较检验 logrank。</p>
+<p><strong>结果关键</strong>：案例改进工艺组中位无故障使用 54.4 月，原工艺组 21.6 月，Log-Rank <span class="arithmatex">\(p&lt;0.001\)</span>。</p>
+<p><strong>注意</strong>：区间宽度会影响结果，应做宽度敏感性复核（如 <span class="arithmatex">\(\pm\)</span> 一倍宽度）。</p>
+</div>
+<h3 id="_10">条件逻辑回归  <code>进阶级</code><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：用于<strong>匹配病例对照</strong>数据——按年龄、性别等把病例和对照一一配对后，在每对内部比较，自动消去匹配因素的干扰。</p>
+<p><strong>美赛场景区</strong>：匹配设计下的风险因素识别；迁移到"配对样本/分层设计"下的二分类影响因素分析。</p>
+<p><strong>核心原理</strong>：在每个匹配层内构造条件似然，层间恒定因素（如匹配变量年龄）自动被消去、无法估计。输出各因素 OR 及 CI。</p>
+<p><strong>操作要点</strong>：工具箱选"条件逻辑回归"，指定匹配层 ID、结局、协变量，自动剔除层内恒定变量。</p>
+<p><strong>结果关键</strong>：案例 75 个匹配对，孕前 BMI OR=1.23、家族史 OR=3.42、睡眠 OR=0.63（保护），均显著。</p>
+<p><strong>注意</strong>：匹配因素在模型中自动不可估计（被消去），这是正常现象，不是出错。</p>
+</div>
+<h3 id="ridit">Ridit分析  <code>进阶级</code><a class="headerlink" href="#ridit" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：处理有序等级资料（如满意度五级），以参照组为基准把等级折算成得分，比较各组整体等级是偏高还是偏低。</p>
+<p><strong>美赛场景区</strong>：有序评分（满意度、疗效等级）的多组比较；迁移到任何有序分类结局的组间比较。</p>
+<p><strong>核心原理</strong>：用参照组各等级累计比例算 Ridit 得分，使参照组平均恒为 0.5；其他组平均 Ridit <span class="arithmatex">\(&gt;0.5\)</span> 表示等级整体偏高、<span class="arithmatex">\(&lt;0.5\)</span> 偏低，做 z 检验并 Bonferroni 校正。</p>
+<p><strong>操作要点</strong>：工具箱选"Ridit"，指定分组列与等级列，方向"等级越高越好"，参照组取最大组。</p>
+<p><strong>结果关键</strong>：案例线上预约 Ridit=0.70（更满意）、电话预约 0.37（更不满意），均与参照组差异显著。</p>
+<p><strong>注意</strong>：Ridit 只利用等级顺序、不利用间距；样本小的组区间宽、结论不稳。</p>
+</div>
+<h3 id="cmh">分层卡方（CMH检验）  <code>进阶级</code><a class="headerlink" href="#cmh" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：控制一个分层变量（如不同医院/地区）后，再判断暴露与二分类结局是否关联，避免分层因素造成混杂。</p>
+<p><strong>美赛场景区</strong>：多中心/多地区数据合并分析时；控制混杂后的关联性检验。</p>
+<p><strong>核心原理</strong>：每层内算 2<span class="arithmatex">\(\times\)</span>2 表的 OR，用 Mantel-Haenszel 法合并得合并 OR 与合并卡方；Breslow-Day 检验各层 OR 是否一致；比较粗 OR 与调整 OR 判断混杂大小。</p>
+<p><strong>操作要点</strong>：工具箱选"CMH 分层卡方"，指定暴露、结局、分层列。</p>
+<p><strong>结果关键</strong>：案例调整中心后合并 OR=0.33（CI 0.15--0.72），ERAS 组并发症优势更低；粗 OR=0.43，调整后变化 30% 提示存在混杂。</p>
+<p><strong>注意</strong>：Breslow-Day <span class="arithmatex">\(p&lt;0.05\)</span> 说明各层效应不一致，应分层解释而非只报合并值。</p>
+</div>
+<h3 id="orrr">OR值和RR值（效应量指标）  <code>进阶级</code><a class="headerlink" href="#orrr" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：从 2<span class="arithmatex">\(\times\)</span>2 四格表出发，量化两组事件风险的相对差异——OR 是比值比、RR 是相对危险度，并给出风险差 AR。</p>
+<p><strong>美赛场景区</strong>：任何两组率的比较（干预组 vs 对照组事件率）；论文中报告效应大小。</p>
+<p><strong>核心原理</strong>：RR=暴露组事件率/对照组事件率；OR=暴露组事件比值/对照组事件比值。结局罕见时 OR 近似 RR，结局常见时 OR 会夸大关联。</p>
+<p><strong>操作要点</strong>：工具箱选"OR/RR"，指定暴露与结局字段，对照组取值，零格自动修正，主指标选 RR。</p>
+<p><strong>结果关键</strong>：案例干预组事件率 16.7% vs 对照 37.5%，RR=0.444（CI 0.25--0.79），风险差 <span class="arithmatex">\(-20.8\)</span> 个百分点。</p>
+<p><strong>注意</strong>：结局常见时不要用 OR 代替 RR 解读绝对风险；观察性数据只提示关联。</p>
+</div>
+<h3 id="nriidi">NRI和IDI指标  <code>进阶级</code><a class="headerlink" href="#nriidi" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：在旧模型基础上加入新变量后，判断预测是否真的<strong>变好</strong>——即使 AUC 提升很小，NRI/IDI 也能检测出重分类改善。</p>
+<p><strong>美赛场景区</strong>：比较两个嵌套预测模型（旧模型 vs 加了新特征的新模型），量化新增量价值。</p>
+<p><strong>核心原理</strong>：NRI 看事件组风险被正确上调、非事件组被正确下调的比例之和；IDI 看事件组与非事件组平均预测风险分离度的改善。两者都给 Bootstrap CI，不含 0 即显著改善。</p>
+<p><strong>操作要点</strong>：工具箱选"NRI/IDI"，指定结局、旧模型特征、新模型新增特征，模式 both。</p>
+<p><strong>结果关键</strong>：案例加入血清乳酸后连续 NRI=0.768（<span class="arithmatex">\(p&lt;0.001\)</span>）、IDI=0.171（<span class="arithmatex">\(p&lt;0.001\)</span>），AUC 仅提升 0.065 但重分类显著改善。</p>
+<p><strong>注意</strong>：AUC 变化常不敏感，NRI/IDI 是检测增量价值的更灵敏工具。</p>
+</div>
+<h3 id="kappa">Kappa一致性检验  <code>进阶级</code><a class="headerlink" href="#kappa" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：评价两个评分者对同一批对象分类结果的一致性，<strong>扣除了"碰巧一致"</strong>的部分，比单纯算符合率更严格。</p>
+<p><strong>美赛场景区</strong>：两个评委/两种分类器/两次标注结果的一致性；标注质量检验。</p>
+<p><strong>核心原理</strong>：观察一致率减去机遇一致率，再除以 <span class="arithmatex">\(1-\)</span>机遇一致率。Kappa <span class="arithmatex">\(=1\)</span> 完全一致、<span class="arithmatex">\(=0\)</span> 等于瞎猜。Landis-Koch 分级：<span class="arithmatex">\(&lt;0.2\)</span> 极差、<span class="arithmatex">\(0.4\)</span>--<span class="arithmatex">\(0.6\)</span> 中等、<span class="arithmatex">\(0.6\)</span>--<span class="arithmatex">\(0.8\)</span> 良好、<span class="arithmatex">\(&gt;0.8\)</span> 很好。有序等级可用加权 Kappa。</p>
+<p><strong>操作要点</strong>：工具箱选"Kappa"，两列成对评分，权重方案按数据选，判读标准 Altman。</p>
+<p><strong>结果关键</strong>：案例两位医师 CT 分级 Kappa=0.721（CI 0.63--0.81），良好；分歧集中在"可疑恶性"等级。</p>
+<p><strong>注意</strong>：符合率高但 Kappa 低，说明两人都倾向选多数类别（边际分布偏），一致性其实差。</p>
+</div>
+<h3 id="mcnemar">配对卡方（McNemar检验）  <code>进阶级</code><a class="headerlink" href="#mcnemar" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：检验<strong>同一批对象</strong>前后两次二分类结果是否变化（如保养前 vs 保养后设备隐患率），是配对设计下的率比较。</p>
+<p><strong>美赛场景区</strong>：同一组对象干预前后对比；配对样本的两个相关率比较。</p>
+<p><strong>核心原理</strong>：只看不一致的配对——"由阳转阴"对数 <span class="arithmatex">\(b\)</span> 与"由阴转阳"对数 <span class="arithmatex">\(c\)</span> 是否对称。若 <span class="arithmatex">\(b\)</span> 和 <span class="arithmatex">\(c\)</span> 明显不等，说明前后发生了系统改变。一致对不参与检验。</p>
+<p><strong>操作要点</strong>：工具箱选"McNemar"，指定前后两列，<span class="arithmatex">\(b+c \geq 25\)</span> 用渐近卡方，否则精确检验。</p>
+<p><strong>结果关键</strong>：案例 <span class="arithmatex">\(b=38\)</span>（阳性转阴性）、<span class="arithmatex">\(c=13\)</span>（阴性转阳性），率差 <span class="arithmatex">\(-16.7\)</span> 个百分点、<span class="arithmatex">\(p=0.0008\)</span>，保养后隐患率显著下降。</p>
+<p><strong>注意</strong>：McNemar 只看率是否变化，效应大小要另外看率差及其 CI。</p>
+</div>
+<h3 id="_11">重复测量方差分析  <code>进阶级</code><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：同一批对象在多个时间点（如基线、3 月、6 月）被反复测量，比较均值是否随时间变化，且利用"同一个人"的相关提高检验功效。</p>
+<p><strong>美赛场景区</strong>：追踪/面板数据的时间趋势分析；同一批客户/对象多次测量的比较。</p>
+<p><strong>核心原理</strong>：把个体间差异从误差中分离，做时间主效应 F 检验。前提是球形性（Mauchly 检验），不满足时用 Greenhouse-Geisser 校正自由度。显著后做事后两两比较（Bonferroni 校正）。</p>
+<p><strong>操作要点</strong>：工具箱选"重复测量方差分析"，长格式，指定被试、时间、测量值列，球形性校正 GG。</p>
+<p><strong>结果关键</strong>：案例 50 人 3 时点收缩压时间主效应 <span class="arithmatex">\(F=193.4\)</span>、<span class="arithmatex">\(p&lt;0.001\)</span>，两两比较均显著下降。</p>
+<p><strong>注意</strong>：违背球形性时必须看校正后 p 值，不能直接用原始 F 检验。</p>
+</div>
+<h3 id="_12">竞争风险模型  <code>进阶级</code><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：当一个人可能因<strong>多种互斥原因</strong>退出（如腹透患者要么技术失败、要么死亡），把别的原因当删失会高估关注事件发生率，竞争风险模型正确处理这一点。</p>
+<p><strong>美赛场景区</strong>：迁移到"多种互斥结局"的风险分析（如客户可能流失也可能升级套餐）；更真实地估计累积发生率。</p>
+<p><strong>核心原理</strong>：用 Aalen-Johansen 法估计各原因累计发生函数（CIF），用 Fine-Gray 子分布风险回归估计因素对关注事件的影响（SHR）。</p>
+<p><strong>操作要点</strong>：工具箱选"竞争风险"，指定时间、多分类结局、关注事件取值、协变量，Bootstrap 1000 次给 CI。</p>
+<p><strong>结果关键</strong>：案例 12 月时技术失败 CIF=0.191，血清白蛋白 SHR=0.91（保护）；注意不要用"<span class="arithmatex">\(1-\)</span>KM"口径（会高估）。</p>
+<p><strong>注意</strong>：存在竞争事件时，普通 Cox/KM 会有偏，必须用 CIF/Fine-Gray。</p>
+</div>
+<h3 id="_13">卡方拟合优度检验  <code>进阶级</code><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：检验一组分类观测的实际频数分布是否符合某个<strong>理论比例</strong>（如工艺基线规定的 4:3:2:1）。</p>
+<p><strong>美赛场景区</strong>：检验实际分布是否偏离预期标准（如质量缺陷构成、民意分布是否符合预测）。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(\chi^2 = \sum (O-E)^2/E\)</span>，<span class="arithmatex">\(O\)</span> 为观测频数、<span class="arithmatex">\(E\)</span> 为理论期望频数。<span class="arithmatex">\(\chi^2\)</span> 越大、<span class="arithmatex">\(p&lt;0.05\)</span> 表示实际分布显著偏离理论。用贡献 <span class="arithmatex">\((O-E)^2/E\)</span> 定位是哪类偏了。</p>
+<p><strong>操作要点</strong>：工具箱选"卡方拟合优度"，指定类别列与理论比例，期望频数 <span class="arithmatex">\(&lt;5\)</span> 时用蒙特卡罗精确检验。</p>
+<p><strong>结果关键</strong>：案例 <span class="arithmatex">\(\chi^2=11.89\)</span>（df=3）、<span class="arithmatex">\(p=0.008\)</span>，拒绝"符合基线构成"；焊接缺陷贡献最大（偏多）。</p>
+<p><strong>注意</strong>：这是<strong>单样本</strong>的分布检验，与两变量独立性的卡方检验不同。</p>
+</div>
+<h3 id="ld50">剂量反应分析（LD50）  <code>进阶级</code><a class="headerlink" href="#ld50" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：拟合剂量--反应 S 形曲线，反解出使 50% 受试对象出现反应的剂量（LD50），量化毒性/效力强弱。</p>
+<p><strong>美赛场景区</strong>：迁移到"暴露强度--响应率"关系的阈值估计（如价格区间--购买率、污染浓度--患病率）。</p>
+<p><strong>核心原理</strong>：对剂量取对数后拟合 Probit（或 Logistic）广义线性模型，得到 S 形曲线；用 Fieller 法反解反应率 10%/50%/90% 对应的剂量（LD10/LD50/LD90）。失拟检验 <span class="arithmatex">\(p&gt;0.05\)</span> 说明曲线拟合良好。</p>
+<p><strong>操作要点</strong>：工具箱选"剂量反应 LD50"，link 选 probit，剂量 log10 变换，输出 LD10/50/90。</p>
+<p><strong>结果关键</strong>：案例 LD50=252.8（CI 212.5--301.1），LD50 越小毒性越强；失拟 <span class="arithmatex">\(p=0.91\)</span> 拟合良好。</p>
+<p><strong>注意</strong>：剂量范围必须覆盖反应率 0%--100%，否则外推 LD50 不可靠。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

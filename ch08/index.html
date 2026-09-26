@@ -1,0 +1,2237 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch08/">
+      
+      
+        <link rel="prev" href="../ch07/">
+      
+      
+        <link rel="next" href="../ch09/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第8章 综合评价 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第8章 综合评价
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 熵值法 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ahp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 层次分析法（AHP） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRITIC权重法 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模糊综合评价 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topsis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ TOPSIS法 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topsis_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        熵权TOPSIS 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sbm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SBM模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变异系数法（信息量权重法） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模糊层次分析法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RFM客户价值模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vikor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VIKOR法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功效系数法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bwm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最好最差法（BWM） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        障碍度模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delphi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        德尔菲法（Delphi） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        灰色关联分析 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        独立性权系数法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ism" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解释结构模型（ISM） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        耦合协调度模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#malmquist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Malmquist指数 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数据包络分析（DEA） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        综合指数 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dematel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DEMATEL 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rsr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        秩和比法（RSR） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">综合评价<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>综合评价解决的是"把多个指标合成一个总得分来排名"的问题。现实中评价一个对象往往要同时看好几个维度——评价门店要看坪效、毛利率、复购率、损耗率……每个指标量纲不同、方向不一，还可能有的"越大越好"有的"越小越好"。综合评价就是一套系统方法：先<strong>给每个指标定权重</strong>（谁更重要），再<strong>把它们合成一个可比的总分</strong>，最后排出优劣次序。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>综合评价是美赛<strong>最高频</strong>的建模题型之一。凡是题目出现"评价、排名、排序、优选、选最佳方案、确定指标权重"等字样，几乎都用这一章。其中<strong>熵值法、AHP、TOPSIS</strong>是三大核心方法，几乎每场比赛都至少用到一个；DEA用于效率评价，耦合协调度、障碍度模型用于发展质量诊断。</p>
+<p><strong>学习路径建议</strong>
+先掌握<strong>赋权</strong>：客观赋权学<strong>熵值法</strong>（带星标，完全靠数据说话），主观赋权学<strong>AHP层次分析法</strong>（带星标，靠专家成对比较）；再学<strong>CRITIC权重法</strong>。然后学<strong>TOPSIS</strong>（带星标，与理想方案比距离排名）这个最常用的"打分器"，以及它和熵值法结合的<strong>熵权TOPSIS</strong>。<strong>模糊综合评价</strong>用于指标模糊、难以精确量化的场景。进阶部分了解DEA/SBM效率评价、BWM、耦合协调、障碍度、DEMATEL、ISM等专门工具。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">⭐ 熵值法  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>熵值法是一种<strong>完全客观</strong>的定权方法：它不请专家打分，而是让数据自己说话——哪个指标在各评价对象之间差异越大、越能"拉开档次"，就给它越高的权重。最后按权重加权求和得到每个对象的综合得分并排名。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中需要<strong>客观赋权</strong>、避免主观偏好争议的综合评价</li>
+<li>本案例：150家门店在坪效、毛利率、复购率、周转率、损耗率、投诉率六维下的经营质量排名</li>
+<li>有较多样本（几十个以上）、各指标方向不一需要先同向化</li>
+<li>论文中"客观权重确定"环节的标准方法</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>"熵"本来是信息论里衡量<strong>混乱程度</strong>的量。熵值法的反直觉逻辑是：<strong>一个指标在所有对象上取值都差不多，说明它区分不了谁好谁坏，信息量少、权重就低；反之取值越参差，越能拉开差距，权重就高</strong>。</p>
+<ul>
+<li><strong>第一步：方向同向化+归一化</strong>。负向指标（如损耗率、投诉率，越低越好）先按"最大值平移"转成正向，再做min-max归一化到<span class="arithmatex">\([0,1]\)</span>。</li>
+<li><strong>第二步：算信息熵 <span class="arithmatex">\(e_j\)</span></strong>。对第 <span class="arithmatex">\(j\)</span> 个指标，把各对象归一化取值转成比重 <span class="arithmatex">\(p_{ij}\)</span>，算 <span class="arithmatex">\(e_j=-k\sum p_{ij}\ln p_{ij}\)</span>。<span class="arithmatex">\(e_j\)</span> 越接近1，说明取值越均匀。</li>
+<li><strong>第三步：定权</strong>。差异系数 <span class="arithmatex">\(d_j=1-e_j\)</span>，再归一化 <span class="arithmatex">\(w_j=d_j/\sum d_j\)</span> 就是该指标权重。</li>
+<li><strong>第四步：合成得分</strong>。<span class="arithmatex">\(S_i=\sum_j w_j\cdot x'_{ij}\)</span>，把150家门店按 <span class="arithmatex">\(S_i\)</span> 降序排。</li>
+</ul>
+<p>本案例权重：坪效0.284最高（门店间差距最大），其次库存周转率0.234、毛利率0.166；损耗率、投诉率因门店间差异小而权重低。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在Dabbit AI SPSS工具箱中选择"熵值法"</li>
+<li>上传评价数据：对象标识列选"门店编号"，纳入6个指标</li>
+<li>设置参数：</li>
+<li>指标方向：坪效/毛利率/会员复购率/库存周转率为正向；损耗率/顾客投诉率为负向</li>
+<li>方向化方式：最大值平移；缺失处理整行删除</li>
+<li>得分量纲：百分制换算；排序输出降序</li>
+<li>常量指标权重记零并保留</li>
+<li>运行，查看权重表与综合得分排名</li>
+</ol>
+<p><strong>SPSS中实现</strong>：SPSS无原生熵值法菜单，通过 <strong>分析 → 描述统计</strong> 配合变换计算，或用Dabbit AI SPSS工具箱一键完成。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>权重表</strong>：报告列出每个指标的熵值 <span class="arithmatex">\(e_j\)</span>、差异系数 <span class="arithmatex">\(d_j\)</span>、权重 <span class="arithmatex">\(w_j\)</span>。本案例坪效权重0.284最高。</li>
+<li><strong>权重怎么解读</strong>：权重高<span class="arithmatex">\(\neq\)</span>指标业务上最重要，而是"它在样本间最能拉开差距"。这是熵值法的核心特点——客观但可能与直觉重要性不符。</li>
+<li><strong>综合得分排名</strong>：本案例S115得分100分居首，S148得0分垫底，中间连续分布。</li>
+<li><strong>领先原因</strong>：冠军店的优势主要落在权重最高（差异最大）的坪效等指标上。</li>
+</ul>
+<p><strong>判断好坏</strong>：权重之和=1，无指标权重为负；若某指标取值全相同（常量），其权重记0，应考虑剔除。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>需要客观、可复现、不掺杂专家主观的赋权排名；样本量较大。</p>
+<p><strong>什么时候不用？</strong>
+- 样本很少（几个对象）时，"差异"本身不稳定，权重不可靠
+- 业务上某些指标虽差异小但极端重要（如安全性），纯数据赋权会低估它</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：忘记先把负向指标同向化，直接拿"投诉率"算熵，方向就反了。
+- <strong>坑2</strong>：归一化后出现0，导致 <span class="arithmatex">\(\ln 0\)</span> 报错——需加平移量。
+- <strong>坑3</strong>：把"客观权重"当成"正确权重"。它反映区分度，不反映重要性，重要场合应与AHP等主客观方法结合。</p>
+<p><strong>和相似算法的区别</strong>：vs <strong>AHP</strong>——熵值法客观、靠数据，AHP主观、靠专家；vs <strong>变异系数法/CRITIC</strong>——都客观，但熵值法用信息熵，变异系数用标准差/均值，CRITIC兼顾对比强度与指标间冲突性。</p>
+</div>
+<h3 id="ahp">⭐ 层次分析法（AHP）  <code>基础级</code><a class="headerlink" href="#ahp" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>AHP层次分析法是最经典的<strong>主观赋权</strong>方法。当指标间谁更重要难以直接量化时，它让专家只做"两两比较"（A和B哪个更重要、重要几倍），再把这些两两判断整理成一套权重，并检查专家判断是否自相矛盾。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中指标重要性无法从数据直接得出、需要专家经验判断时（选址、方案优选）</li>
+<li>本案例：三家供应商在技术、价格、交付、服务、数据安全五准则下的择优</li>
+<li>多准则决策、需要把定性经验转成定量权重</li>
+<li>论文中"权重确定"环节，常与熵值法组合成主客观组合赋权</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>让你直接给5个指标各打一个权重很难，但问你"技术和价格哪个更重要、重要多少倍"就容易多了。AHP就是把这些两两比较拼成一张判断矩阵，再反推出权重。</p>
+<ul>
+<li><strong>构造判断矩阵</strong>：用Saaty的1--9标度打分。<span class="arithmatex">\(a_{ij}=1\)</span> 表示两指标同等重要，<span class="arithmatex">\(3\)</span> 表示前者稍重要，<span class="arithmatex">\(5\)</span> 明显重要，<span class="arithmatex">\(7\)</span> 强烈重要，<span class="arithmatex">\(9\)</span> 极端重要；反之取倒数。</li>
+<li><strong>求权重</strong>：对判断矩阵求最大特征根 <span class="arithmatex">\(\lambda_{\max}\)</span> 对应的特征向量，归一化即权重。</li>
+<li><strong>一致性检验（关键！）</strong>：算一致性指标 <span class="arithmatex">\(CI=(\lambda_{\max}-n)/(n-1)\)</span>，一致性比率 <span class="arithmatex">\(CR=CI/RI\)</span>（<span class="arithmatex">\(RI\)</span> 是随机一致性指标，随阶数查表）。<strong><span class="arithmatex">\(CR&lt;0.1\)</span> 才算专家判断前后一致、权重可用</strong>；<span class="arithmatex">\(CR\geq0.1\)</span> 要回去改判断。</li>
+</ul>
+<p>本案例准则层：技术能力权重0.317最高，价格0.260次之；综合后供应商A权重0.389最优。判断矩阵 <span class="arithmatex">\(\lambda_{\max}=5.002\)</span>，<span class="arithmatex">\(CR=0.001&lt;0.1\)</span>，一致性很好。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在Dabbit AI SPSS工具箱中选择"层次分析法AHP"</li>
+<li>录入准则层两两判断（如"技术能力 vs 价格竞争力"的1--9标度）</li>
+<li>若为双层结构，再逐准则录入"各方案 vs 该准则"的局部判断</li>
+<li>设置参数：一致性检验阈值CR=0.10；专家判断聚合方式geometric（几何平均）</li>
+<li>运行，查看权重向量、<span class="arithmatex">\(\lambda_{\max}\)</span>、CI、CR一致性检验结果</li>
+</ol>
+<p><strong>SPSS中实现</strong>：SPSS无原生AHP，通过Dabbit AI SPSS工具箱或R/Python扩展实现。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>权重表</strong>：每个准则的权重及排序。本案例技术能力0.317居首。</li>
+<li><strong>一致性比率CR</strong>：本案例 <span class="arithmatex">\(CR=0.001&lt;0.1\)</span>，通过。若 <span class="arithmatex">\(CR\geq0.1\)</span>，说明专家判断自相矛盾（如说A比B重要、B比C重要、C又比A重要），结果不可用。</li>
+<li><strong>综合权重</strong>：方案综合权重 <span class="arithmatex">\(=\sum\)</span>（准则权重 <span class="arithmatex">\(\times\)</span> 方案在该准则下局部权重）。本案例供应商A 0.389 <span class="arithmatex">\(&gt;\)</span> B 0.319 <span class="arithmatex">\(&gt;\)</span> C 0.292。</li>
+<li><strong>敏感性</strong>：可对判断加小扰动看权重是否稳定；若两方案权重差小于0.03，视为排序接近。</li>
+</ul>
+<p><strong>判断好坏</strong>：CR<span class="arithmatex">\(&lt;\)</span>0.1是硬门槛；权重符合业务直觉、方案排序清晰即可采信。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>指标重要性主要靠经验判断、缺乏客观数据时；多方案比选。</p>
+<p><strong>什么时候不用？</strong>
+- 能拿到大量样本数据时，优先用熵值法等客观方法减少主观性
+- 专家之间意见严重分歧时，AHP权重会不稳定</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不做一致性检验就报权重。CR超0.1的判断矩阵是无效的。
+- <strong>坑2</strong>：指标过多（超过9个）时两两比较次数爆炸、一致性难保证。
+- <strong>坑3</strong>：把AHP当客观方法。它本质是主观经验的量化，应说明专家构成。</p>
+<p><strong>和相似算法的区别</strong>：vs <strong>熵值法</strong>——AHP主观、熵值法客观，常组合赋权；vs <strong>模糊层次分析FAHP</strong>——AHP用精确数，FAHP用三角模糊数表达"大致重要"，更贴合专家模糊判断；vs <strong>BWM</strong>——BWM只需比较"最优/最劣"，比较次数更少、一致性更好。</p>
+</div>
+<h3 id="critic">CRITIC权重法  <code>基础级</code><a class="headerlink" href="#critic" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>CRITIC是一种比熵值法考虑更全面的客观赋权法：它不仅看指标自身的对比强度（标准差），还看指标之间的冲突性（相关程度）——既差异大、又与其他指标不重复的指标，权重最高。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>多个指标间可能信息重复，希望定权时兼顾"区分度"和"独立性"</li>
+<li>本案例：150家供应商在报价、质量、交付、服务四维下的客观赋权</li>
+<li>论文中想说明权重既考虑波动又考虑指标冗余</li>
+<li>作为熵值法的改进版对照使用</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>CRITIC考虑两个因素：</p>
+<ul>
+<li><strong>对比强度</strong>：指标标准差越大，对象间差异越大，信息量越大。</li>
+<li><strong>冲突性</strong>：两个指标若高度相关（都在反映同一件事），信息重叠、贡献应打折；与其他指标相关越低，独立性越强、贡献越大。</li>
+<li><strong>信息量 <span class="arithmatex">\(C_j\)</span></strong><span class="arithmatex">\(=\sigma_j\sum_k(1-r_{jk})\)</span>：标准差乘上"与其他指标不相关程度"之和。最后把 <span class="arithmatex">\(C_j\)</span> 归一化得到权重 <span class="arithmatex">\(w_j\)</span>。</li>
+</ul>
+<p>直觉：一个指标又能拉开差距、又不跟别人重复，才是真正"独当一面"的指标。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在Dabbit AI SPSS工具箱中选择"CRITIC权重法"</li>
+<li>上传数据，指定对象标识与各指标列、各指标方向</li>
+<li>设置参数：标准化方式默认min-max；缺失值均值填补</li>
+<li>运行，查看各指标标准差、相关阵、信息量 <span class="arithmatex">\(C_j\)</span> 与最终权重</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>权重表</strong>：列出每个指标的标准差、与其他指标的平均相关、信息量 <span class="arithmatex">\(C_j\)</span>、权重 <span class="arithmatex">\(w_j\)</span>。</li>
+<li><strong>解读</strong>：标准差大且与其他指标相关低的指标权重最高；若某指标与别人高度相关，其权重被压下来。</li>
+<li><strong>后续</strong>：把CRITIC权重代入TOPSIS或加权综合得分即可排名。</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>指标间存在信息重叠、希望客观赋权同时去冗余。</p>
+<p><strong>什么时候不用？</strong>样本量小、相关阵估计不稳时慎用。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不做指标方向同向化，负向指标混入会扭曲结果。
+- <strong>坑2</strong>：混淆CRITIC与熵值法——前者兼顾相关性，后者只看离散度。</p>
+<p><strong>和相似算法的区别</strong>：vs <strong>熵值法</strong>——熵值法只用信息熵（离散度），CRITIC额外惩罚指标间相关；vs <strong>独立性权系数法</strong>——后者从复相关角度压冗余指标，思路相近。</p>
+</div>
+<h3 id="_4">模糊综合评价  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>很多评价是模糊的——"服务好不好"没法用一个精确数字衡量，只能说"很好/较好/一般/较差"。模糊综合评价用<strong>隶属度</strong>把这种"亦此亦彼"的模糊判断量化，再综合成一个评价等级。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>本案例：养老服务质量、满意度等难以精确打分的定性/半定性评价</li>
+<li>指标评语是"优/良/中/差"等模糊等级</li>
+<li>美赛中评价服务、生态、舒适度等带有主观模糊性的对象</li>
+<li>需要给出"该对象综合属于哪一档"的结论</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象让你给"服务水平"打分，你很难说它到底是8.3还是8.7分，但你可以说：<strong>它"隶属"于"优"的程度是0.2、"良"0.5、"中"0.3</strong>——这就是隶属度。</p>
+<ul>
+<li><strong>第一步：定因素集和评语集</strong>。因素集如{可及性、专业性、规范性……}，评语集如{优、良、中、差}。</li>
+<li><strong>第二步：建隶属度矩阵 <span class="arithmatex">\(R\)</span></strong>。对每个因素，专家/数据给出它对各评语的隶属度（一行和为1）。</li>
+<li><strong>第三步：定权重向量 <span class="arithmatex">\(W\)</span></strong>。可用AHP或熵值法得到各因素权重。</li>
+<li><strong>第四步：模糊合成</strong>。<span class="arithmatex">\(B=W\circ R\)</span>（矩阵乘法或模糊算子），得到对象对各评语的综合隶属度。</li>
+<li><strong>第五步：最大隶属度原则</strong>。<span class="arithmatex">\(B\)</span> 中最大值对应的评语，就是综合评价等级。</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在Dabbit AI SPSS工具箱中选择"模糊综合评价"</li>
+<li>录入评价因素、评语等级，以及各因素对各等级的隶属度</li>
+<li>设定因素权重（可对接AHP/熵值法结果）</li>
+<li>运行，查看综合隶属度向量与最终判定等级</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>综合隶属度向量 <span class="arithmatex">\(B\)</span></strong>：如 (0.2, 0.5, 0.2, 0.1)，分别对应优/良/中/差。</li>
+<li><strong>判定等级</strong>：取最大分量对应等级——本例最大0.5在"良"，故综合评为"良"。</li>
+<li><strong>注意</strong>：若最大两个分量很接近（如0.45 vs 0.42），说明对象处于两档之间，不要过度解读。</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>评价标准模糊、定性指标多、需要给出等级判定时。</p>
+<p><strong>什么时候不用？</strong>指标全部精确可测、直接算分更清晰时，不必套模糊。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：隶属度矩阵每一行不归一（和不为1），合成结果失真。
+- <strong>坑2</strong>：最大隶属度过低（如只占0.3）却硬判一档，应说明"接近临界"。</p>
+<p><strong>和相似算法的区别</strong>：vs <strong>AHP</strong>——AHP解决"权重"，模糊综合解决"模糊评价本身"，二者常组合（FAHP是把AHP模糊化）。</p>
+</div>
+<h3 id="topsis">⭐ TOPSIS法  <code>基础级</code><a class="headerlink" href="#topsis" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>TOPSIS（逼近理想解排序法）是综合评价里<strong>最常用的打分器</strong>。它的思路很直观：在所有方案中找一个"完美方案（正理想解，每项都最好）"和一个"最差方案（负理想解，每项都最差）"，然后看每个对象<strong>离谁更近</strong>——离正理想越近、离负理想越远，就越好。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中<strong>排名、优选、方案排序</strong>的头号方法，几乎万能</li>
+<li>本案例：150家门店在六项经营指标下的综合排序</li>
+<li>多指标、多对象，需要一个连续可比的综合得分</li>
+<li>常与熵值法组合成"熵权TOPSIS"，是论文高频组合</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象一场选秀：评委心里有个"全能冠军模板"（每项都是全场最佳）和一个"全能垫底模板"（每项都最差）。每个选手看他<strong>离冠军模板近不近、离垫底模板远不远</strong>。</p>
+<ul>
+<li><strong>第一步：向量归一化+加权</strong>。把各指标归一化，乘上权重（等权或熵权）。</li>
+<li><strong>第二步：确定正负理想解</strong>。正理想解 <span class="arithmatex">\(Z^+\)</span> = 各指标最优值，负理想解 <span class="arithmatex">\(Z^-\)</span> = 各指标最差值（先统一方向，负向指标越小越好）。</li>
+<li><strong>第三步：算距离</strong>。每个对象到正理想解的欧氏距离 <span class="arithmatex">\(D^+\)</span>，到负理想解的距离 <span class="arithmatex">\(D^-\)</span>。</li>
+<li><strong>第四步：算贴近度</strong> <span class="arithmatex">\(C_i=\dfrac{D_i^-}{D_i^+ + D_i^-}\)</span>。<span class="arithmatex">\(C_i\)</span> 越接近1越接近正理想、越好；越接近0越差。</li>
+</ul>
+<p>本案例在加权归一化空间中，对象M0067贴近度1.0000（即它本身就是正理想解）排名第一。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在Dabbit AI SPSS工具箱中选择"TOPSIS法"</li>
+<li>上传数据，指定对象标识列与各指标列</li>
+<li>设置参数：</li>
+<li>指标方向：正向（越大越好）/负向（越小越好，先同向化）</li>
+<li>权重：等权，或接入熵权/CRITIC权重</li>
+<li>归一化方式：向量归一化</li>
+<li>运行，查看正/负理想解、各对象距离 <span class="arithmatex">\(D^+,D^-\)</span> 与贴近度 <span class="arithmatex">\(C\)</span> 排名</li>
+</ol>
+<p><strong>SPSS中实现</strong>：SPSS无原生TOPSIS，通过Dabbit AI SPSS工具箱或R/Python扩展实现。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>正/负理想解</strong>：列出各指标的最优、最差值。</li>
+<li><strong><span class="arithmatex">\(D^+,D^-\)</span></strong>：每个对象到两个理想解的距离。</li>
+<li><strong>贴近度 <span class="arithmatex">\(C\)</span></strong>：核心结果，<span class="arithmatex">\(C\in[0,1]\)</span>，按 <span class="arithmatex">\(C\)</span> 降序排名。本案例M0067的 <span class="arithmatex">\(C=1.0000\)</span>（与正理想重合）居首。</li>
+<li><strong>稳健性</strong>：可做留一敏感性（去掉某指标重排），看名次是否稳定。</li>
+</ul>
+<p><strong>判断好坏</strong>：<span class="arithmatex">\(C\)</span> 是相对值，只在本样本内可比；<span class="arithmatex">\(C=1\)</span> 即该对象在所有指标上都最优。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>多对象多指标的排名优选，是综合评价的"通用底座"。</p>
+<p><strong>什么时候不用？</strong>
+- 指标间存在不可公度、或有缺失严重时，先清洗
+- 需要判断"属于哪一档"而非连续排名时，模糊综合或RSR更合适</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：负向指标不同向化就直接算距离，方向错误。
+- <strong>坑2</strong>：用等权却声称"客观"。等权也是一种主观假设，建议配合熵权。
+- <strong>坑3</strong>：只看贴近度绝对值。<span class="arithmatex">\(C\)</span> 是相对排名工具，不同批次样本的 <span class="arithmatex">\(C\)</span> 不能直接比大小。</p>
+<p><strong>和相似算法的区别</strong>：vs <strong>熵权TOPSIS</strong>——本TOPSIS权重可等权可主观，熵权TOPSIS用熵值法客观定权；vs <strong>VIKOR</strong>——TOPSIS看距离理想解的贴近度，VIKOR是折中排序，引入群体效用与个体遗憾。</p>
+</div>
+<h3 id="topsis_1">熵权TOPSIS  <code>基础级</code><a class="headerlink" href="#topsis_1" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>熵权TOPSIS是<strong>熵值法定权 + TOPSIS排序</strong>的强强组合：先用熵值法从数据客观算出各指标权重，再把这套权重喂给TOPSIS算贴近度排名。它兼顾了客观赋权和距离排序，是美赛综合评价的"黄金组合"。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>美赛中最常被推荐的综合评价"标准答案"之一</li>
+<li>本案例：150家连锁门店在销售额、坪效、复购率、满意度、成本、损耗六维下的运营绩效排名</li>
+<li>既不想主观定权、又想要连续可比的贴近度得分</li>
+<li>论文中权重客观、排序清晰、可做稳健性检验</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>两步走：</p>
+<ul>
+<li><strong>第一步：熵法定权</strong>。对各指标算信息熵 <span class="arithmatex">\(e_j\)</span>、效用值 <span class="arithmatex">\(d_j=1-e_j\)</span>、熵权 <span class="arithmatex">\(w_j=d_j/\sum d\)</span>。某指标对象间差异越大、熵越小、权重越高。本案例商品损耗率权重0.275最高、顾客满意度0.005最低。</li>
+<li><strong>第二步：TOPSIS排序</strong>。把归一化矩阵乘熵权，找正/负理想解，算 <span class="arithmatex">\(D^+,D^-\)</span>，贴近度 <span class="arithmatex">\(C=D^-/(D^++D^-)\)</span>。</li>
+</ul>
+<p>负向指标（运营成本、商品损耗率）先按最大值差法 <span class="arithmatex">\(max-x\)</span> 同向化。本案例M0067贴近度1.0000居首，M0100次之0.810。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>在Dabbit AI SPSS工具箱中选择"熵权TOPSIS"</li>
+<li>上传数据，指定对象标识列（门店编号）</li>
+<li>设置参数：</li>
+<li>方向映射：商品损耗率、运营成本为负向（negative），其余正向</li>
+<li>负向变换：max_minus；归一化：vector向量归一化</li>
+<li>缺失处理：median_impute中位数填补</li>
+<li>敏感性：leave_one_out留一法</li>
+<li>运行，查看熵权表、贴近度排名与留一稳健性</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>熵权表</strong>：本案例商品损耗率0.275、运营成本0.243权重最高（最能区分门店），顾客满意度0.005最低。</li>
+<li><strong>贴近度排名</strong>：M0067为1.0000、M0100为0.8100……按 <span class="arithmatex">\(C\)</span> 降序。</li>
+<li><strong>留一稳健性</strong>：逐一去掉指标重排，若头部名次稳定则结论可信。</li>
+</ul>
+<p><strong>判断好坏</strong>：权重反映区分度（非重要性）；排名对留一指标不敏感即稳健。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>希望权重完全客观、又要连续贴近度排名时的首选。</p>
+<p><strong>什么时候不用？</strong>样本很少、或业务上必须体现某些指标重要性时，纯熵权会失真。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：忽略负向指标同向化，成本/损耗方向算反。
+- <strong>坑2</strong>：把熵权当重要性权重。它只代表区分度，低权重的满意度可能业务上极重要。</p>
+<p><strong>和相似算法的区别</strong>：它是熵值法与TOPSIS的串联；若想权重更贴合业务，可换成AHP权重再代入TOPSIS。</p>
+</div>
+<h2 id="_5">进阶级算法速览<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="sbm">SBM模型  <code>进阶级</code><a class="headerlink" href="#sbm" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：考虑了"松弛变量"和"非期望产出"的DEA效率评价模型，能同时处理少投入、多产出、少排污。</p>
+<p><strong>美赛场景区</strong>：绿色生产效率评价，如制造业企业在投入人力能耗、产出产值的同时排放二氧化碳。</p>
+<p><strong>核心原理</strong>：用Tone的非径向SBM模型，把投入冗余、期望产出不足、非期望产出过多的松弛量直接计入目标函数，经线性规划逐单元求效率。本案例150家企业平均效率0.731，21家有效，冗余主要在碳排放（松弛率26.2%）。</p>
+<p><strong>操作要点</strong>：工具箱选"SBM"，指定投入、期望产出、非期望产出，VRS，非期望产出弱可处置。</p>
+<p><strong>结果关键</strong>：效率得分0--1，越接近1越好；看松弛率定位冗余来源（投入侧还是排放侧）。</p>
+<p><strong>注意</strong>：效率是组内相对值，跨期跨组不可直接比；需线性规划求解，SPSS原生不支持，用R/Python扩展。</p>
+</div>
+<h3 id="_6">变异系数法（信息量权重法）  <code>进阶级</code><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：用"标准差/均值"（变异系数）衡量指标在样本间的相对波动，波动越大权重越高的客观赋权法。</p>
+<p><strong>美赛场景区</strong>：完全不引入主观打分，依据数据自身区分信息为门店经营指标定权。</p>
+<p><strong>核心原理</strong>：逐列算均值与标准差，变异系数<span class="arithmatex">\(=\)</span>标准差/均值，归一化为权重，再对极差归一化数据加权求和。本案例"线上销售占比"权重最高（0.2805），综合得分最高对象M1142（0.7068）。</p>
+<p><strong>操作要点</strong>：工具箱选"变异系数法"，指标列自动识别，负向指标倒数变换，缺失均值填补。</p>
+<p><strong>结果关键</strong>：变异系数大的指标权重高；注意要求指标取值为正才能算CV。</p>
+<p><strong>注意</strong>：与熵值法同为客观赋权，思路相近但CV用离散系数、熵值用信息熵；量纲不同时要先同向化。</p>
+</div>
+<h3 id="_7">模糊层次分析法  <code>进阶级</code><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把AHP中专家的"点估计"判断升级为"三角模糊数(l,m,u)"，表达"大概在这区间"的模糊判断，更贴近真实决策心理。</p>
+<p><strong>美赛场景区</strong>：多准则供应商择优，专家难以用精确数比较、判断带模糊性时。</p>
+<p><strong>核心原理</strong>：成对比较表示为三角模糊数<span class="arithmatex">\((l,m,u)\)</span>，用中值矩阵做一致性检验（CR<span class="arithmatex">\(&lt;\)</span>0.1），再用Buckley几何平均法算模糊权重、去模糊化归一化排序，并做对数扰动敏感性。本案例供应商A综合权重0.389最优，技术能力准则权重0.317。</p>
+<p><strong>操作要点</strong>：工具箱选"模糊层次分析"，去模糊化centroid，权重geometric_mean，CR阈值0.10，专家几何聚合。</p>
+<p><strong>结果关键</strong>：CR<span class="arithmatex">\(&lt;\)</span>0.1通过；报告模糊权重区间与去模糊权重，权重差小于0.03视为排序接近。</p>
+<p><strong>注意</strong>：它是AHP的模糊升级版，适合判断不确定的场景；计算更复杂，需R/Python扩展。</p>
+</div>
+<h3 id="rfm">RFM客户价值模型  <code>进阶级</code><a class="headerlink" href="#rfm" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：用最近消费时间(R)、消费频率(F)、消费金额(M)三个维度给客户打分分层，识别高价值客户。</p>
+<p><strong>美赛场景区</strong>：电商/零售客户分群与差异化营销，如找出贡献大部分营收的核心会员。</p>
+<p><strong>核心原理</strong>：从交易流水按客户聚合出R/F/M，分位数各打1--5分，以每维中位数为界分高低，组合成八类客群（重要价值/发展/保持/挽留等）。本案例重要价值客户占29.8%却贡献68.3%金额。</p>
+<p><strong>操作要点</strong>：工具箱选"RFM"，指定客户编号、消费日期、金额列，参考日期取数据最近日，等权，中位数分界。</p>
+<p><strong>结果关键</strong>：各客群的数量占比、金额占比、价值强度；帕累托曲线看集中度。</p>
+<p><strong>注意</strong>：R越小越好（越近越活跃）、F和M越大越好；权重默认等权，重要业务可调整。</p>
+</div>
+<h3 id="vikor">VIKOR法  <code>进阶级</code><a class="headerlink" href="#vikor" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：一种"折中"排序法，在群体效用最优和个体遗憾最小之间权衡，给出妥协最优解。</p>
+<p><strong>美赛场景区</strong>：多指标供应商/方案选优，指标相互冲突、需要可接受的折中方案时。</p>
+<p><strong>核心原理</strong>：把各方案到理想点的加权距离拆成群体效用<span class="arithmatex">\(S\)</span>和个体遗憾<span class="arithmatex">\(R\)</span>，以折中系数<span class="arithmatex">\(v=0.5\)</span>合成<span class="arithmatex">\(Q\)</span>，再用可接受优势和稳定性两个条件裁决唯一最优。本案例S090的<span class="arithmatex">\(Q=0\)</span>为唯一折中最优。</p>
+<p><strong>操作要点</strong>：工具箱选"VIKOR"，等权或自定义权重，极差归一化，<span class="arithmatex">\(v=0.5\)</span>，方向自动识别。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(Q\)</span>越小越好；需同时通过可接受优势（<span class="arithmatex">\(Q\)</span>差达阈值）与稳定性（<span class="arithmatex">\(S\)</span>或<span class="arithmatex">\(R\)</span>也最优）检验。</p>
+<p><strong>注意</strong>：与TOPSIS同属多属性决策，但VIKOR显式引入"遗憾"和妥协条件，适合冲突型方案选择。</p>
+</div>
+<h3 id="_8">功效系数法  <code>进阶级</code><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把每个指标按"不允许值→满意值"线性映射到60--100分，再加权汇总成百分制综合得分。</p>
+<p><strong>美赛场景区</strong>：门店服务质量、政府绩效等需要百分制打分和分等级（优/良/中/及格）的评价。</p>
+<p><strong>核心原理</strong>：为每个指标定满意值（95分位）和不允许值（5分位），单项功效系数<span class="arithmatex">\(=60+40\times\)</span>(实际-不允许)/(满意-不允许)，越界截断，加权求和。本案例门店056得分98.47（优），门店140为62.94（及格）。</p>
+<p><strong>操作要点</strong>：工具箱选"功效系数法"，指定正向/逆向指标，满意/不允许分位点0.95/0.05，范围60--100，越界截断。</p>
+<p><strong>结果关键</strong>：综合得分+等级+短板指标；平均功效系数低的指标是共性短板。</p>
+<p><strong>注意</strong>：基准值（满意/不允许）设定主观，要说明依据；它输出百分制便于管理沟通。</p>
+</div>
+<h3 id="bwm">最好最差法（BWM）  <code>进阶级</code><a class="headerlink" href="#bwm" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：只需专家指定"最好"和"最差"准则，分别比较它们与其他准则，比较次数比AHP少、一致性更好的主观赋权法。</p>
+<p><strong>美赛场景区</strong>：多专家参与的指标权重确定，如30人评审组确定供应商评价准则权重。</p>
+<p><strong>核心原理</strong>：专家给出最优准则到各准则的BO向量、各准则到最劣准则的OW向量，用最小化最大偏差的线性规划求权重，以<span class="arithmatex">\(CR=\xi^*/CI\)</span>检验一致性。本案例产品质量权重0.421最高，30组判断一致性均值0.0083全部通过。</p>
+<p><strong>操作要点</strong>：工具箱选"BWM"，指定best/worst准则，几何聚合，一致性阈值0.10。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(CR&lt;0.1\)</span>通过；权重和为1；报告专家间分歧幅度。</p>
+<p><strong>注意</strong>：是AHP的改进，比较次数从<span class="arithmatex">\(n(n-1)/2\)</span>降到<span class="arithmatex">\(2n-3\)</span>；仍属主观赋权，需R/Python扩展。</p>
+</div>
+<h3 id="_9">障碍度模型  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：不只算综合得分，更专门诊断"到底是哪些指标在拖后腿、阻碍系统提升"。</p>
+<p><strong>美赛场景区</strong>：县域发展、城市宜居等综合评价的短板诊断，回答"该优先抓哪个指标/子系统"。</p>
+<p><strong>核心原理</strong>：极差标准化后用"1-标准化值"表示偏离最优的差距，障碍度<span class="arithmatex">\(=\)</span>偏离度<span class="arithmatex">\(\times\)</span>权重占全部加权偏离的比例；累计占比首次达60%的指标为主要障碍因子。本案例"乡村旅游收入占比"障碍度最高（17.12%），产业融合子系统合计35.4%。</p>
+<p><strong>操作要点</strong>：工具箱选"障碍度模型"，指定对象列、指标列、准则层归属，权重entropy，缺失均值填补。</p>
+<p><strong>结果关键</strong>：按平均障碍度降序找主要障碍因子；子系统障碍度找短板模块。</p>
+<p><strong>注意</strong>：它与综合得分互补——得分告诉你"谁差"，障碍度告诉你"差在哪、先改哪"。</p>
+</div>
+<h3 id="delphi">德尔菲法（Delphi）  <code>进阶级</code><a class="headerlink" href="#delphi" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：通过多轮匿名征求专家意见、逐轮反馈统计结果，直到意见收敛，从而筛选出高共识的评价条目。</p>
+<p><strong>美赛场景区</strong>：构建评价指标体系之初，筛选哪些指标真正重要、专家意见一致。</p>
+<p><strong>核心原理</strong>：多轮匿名打分（1--5分），每轮算均值、满分频率、变异系数、四分位距，用Kendall协调系数<span class="arithmatex">\(W\)</span>衡量专家整体协调，按均值和变异系数双阈值筛选条目，直至收敛。本案例3轮后<span class="arithmatex">\(W=0.874\)</span>，保留3/5条目。</p>
+<p><strong>操作要点</strong>：工具箱选"德尔菲法"，录入多轮专家评分，均值阈值3.5、CV阈值0.25，Kendall <span class="arithmatex">\(W\)</span>检验。</p>
+<p><strong>结果关键</strong>：末轮<span class="arithmatex">\(W\)</span>接近1且显著、均值位移小说明收敛；保留达标的条目。</p>
+<p><strong>注意</strong>：它是指标<strong>筛选</strong>工具，本身不算综合得分；常作为AHP/模糊综合的前置步骤。</p>
+</div>
+<h3 id="_10">灰色关联分析  <code>进阶级</code><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：以一个参考序列为基准，算各比较序列与它的"形状相似度"，判断哪些因素与结果最同步。</p>
+<p><strong>美赛场景区</strong>：小样本下识别哪些经营因素与销售额走势最贴近、谁是主导驱动。</p>
+<p><strong>核心原理</strong>：先极差标准化，指定参考列（如日销售额），逐点算绝对差和关联系数，加权平均成灰色关联度并排序，分辨系数<span class="arithmatex">\(\rho=0.5\)</span>。本案例日客流量关联度最高（<span class="arithmatex">\(r=0.917\)</span>）。</p>
+<p><strong>操作要点</strong>：工具箱选"灰色关联分析"，指定参考列，分辨系数0.5，等权，极差标准化。</p>
+<p><strong>结果关键</strong>：关联度越大越贴近参考；<span class="arithmatex">\(\rho\)</span>在0.1--0.9变化排序稳定即可靠。</p>
+<p><strong>注意</strong>：它衡量"形状同步"而非因果，适合样本少、信息不完全的小样本系统分析。</p>
+</div>
+<h3 id="_11">独立性权系数法  <code>进阶级</code><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：认为与其他指标重叠（相关）越多的指标冗余越重、权重应越小，按信息独立性客观定权。</p>
+<p><strong>美赛场景区</strong>：指标间高度相关（如客流、销售额、坪效互相牵连）时，给门店评价定一组不重复信息的权重。</p>
+<p><strong>核心原理</strong>：算指标相关阵，以复相关系数衡量该指标被其余指标线性解释的程度，按<span class="arithmatex">\(1/\)</span>复相关归一化得权重。本案例顾客满意度复相关最低（0.766）获最高权重18.6%。</p>
+<p><strong>操作要点</strong>：工具箱选"独立性权系数法"，标准化minmax，pearson相关，复相关口径。</p>
+<p><strong>结果关键</strong>：复相关越低越独立、权重越高；权重反映信息独立性而非业务重要性。</p>
+<p><strong>注意</strong>：与CRITIC思路相近（都惩罚相关），但独立性权直接用复相关，CRITIC用标准差<span class="arithmatex">\(\times\)</span>(1-相关)。</p>
+</div>
+<h3 id="ism">解释结构模型（ISM）  <code>进阶级</code><a class="headerlink" href="#ism" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把一堆相互影响的因素，通过邻接矩阵和可达矩阵，梳理成"表层结果—中层传导—深层根源"的层级结构。</p>
+<p><strong>美赛场景区</strong>：分析影响工程质量/系统性能的众多因素，找出哪些是根源、哪些是表象。</p>
+<p><strong>核心原理</strong>：由专家两两判断建0/1邻接矩阵，加单位阵做布尔传递闭包得可达矩阵，用"可达集<span class="arithmatex">\(\subseteq\)</span>先行集"逐层剥离分层，再做MICMAC驱动-依赖分类。本案例20因素分5层，高层领导重视、制度建设是根源驱动。</p>
+<p><strong>操作要点</strong>：工具箱选"ISM"，录入因素间二元关系，一致率阈值0.5，含MICMAC分类。</p>
+<p><strong>结果关键</strong>：层级图（表层L1到根源L5）；驱动型因素优先治理，依赖型只是结果。</p>
+<p><strong>注意</strong>：它梳理因素<strong>结构关系</strong>，不打分排名；判断矩阵来自专家，需多人共识。</p>
+</div>
+<h3 id="_12">耦合协调度模型  <code>进阶级</code><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：衡量两个（或多个）子系统之间"相互配合、协调发展"的程度，输出协调等级和短板系统。</p>
+<p><strong>美赛场景区</strong>：如城镇化与生态环境、经济与社会两系统的协同发展评估，面板时序数据。</p>
+<p><strong>核心原理</strong>：子系统内用熵权合成综合指数<span class="arithmatex">\(U\)</span>，算耦合度<span class="arithmatex">\(C\)</span>、综合发展指数<span class="arithmatex">\(T\)</span>、耦合协调度<span class="arithmatex">\(D=\sqrt{C\times T}\)</span>，按0.1间隔分十级（失调—协调），按指数差判断滞后系统。本案例<span class="arithmatex">\(D\)</span>均值0.693（中级协调），逐期+0.014。</p>
+<p><strong>操作要点</strong>：工具箱选"耦合协调度"，指定时间/个体列、各子系统指标组、负向指标，功效系数标准化+熵权。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(D\)</span>的协调等级、随时间趋势斜率、哪个子系统滞后。</p>
+<p><strong>注意</strong>：耦合度高不代表发展好（低水平也可耦合），必须结合<span class="arithmatex">\(T\)</span>看<span class="arithmatex">\(D\)</span>；需R/Python扩展。</p>
+</div>
+<h3 id="malmquist">Malmquist指数  <code>进阶级</code><a class="headerlink" href="#malmquist" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：基于DEA前沿，衡量决策单元全要素生产率的跨期变化，并拆成"效率追赶"和"技术进步"两部分。</p>
+<p><strong>美赛场景区</strong>：评价多家门店/企业连续几年生产率是进步还是退步、靠管理追赶还是技术升级。</p>
+<p><strong>核心原理</strong>：用DEA求各期前沿距离函数，按Färe分解算Malmquist指数<span class="arithmatex">\(M=\)</span>技术效率变化<span class="arithmatex">\(\times\)</span>技术进步，再细分纯技术效率与规模效率变化。本案例平均每期提升6.5%，主要靠技术进步（1.089）。</p>
+<p><strong>操作要点</strong>：工具箱选"Malmquist"，指定DMU、时期、投入列、产出列，输入导向，几何平均汇总。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(M&gt;1\)</span>进步、<span class="arithmatex">\(&lt;1\)</span>退步；分解看是EFFCH还是TECHCH主导。</p>
+<p><strong>注意</strong>：需平衡投入产出面板；它是DEA的动态版，静态效率用DEA/SBM。</p>
+</div>
+<h3 id="dea">数据包络分析（DEA）  <code>进阶级</code><a class="headerlink" href="#dea" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：不用预设权重和生产函数，靠线性规划构造"生产前沿"，评价多投入多产出决策单元的相对效率。</p>
+<p><strong>美赛场景区</strong>：门店/银行/医院等单位投入资源转化为产出的效率评价，找标杆和低效改进空间。</p>
+<p><strong>核心原理</strong>：用包络线性规划构造由最有效单元围成的前沿面，测各单元到前沿的径向距离得效率分（0--1），再分解纯技术效率与规模效率。本案例150店中34家前沿有效，平均效率0.888，低效店平均有14.4%投入压缩空间。</p>
+<p><strong>操作要点</strong>：工具箱选"DEA"，指定DMU列、投入列、产出列，投入导向、VRS，样本量<span class="arithmatex">\(\geq 3(m+s)\)</span>。</p>
+<p><strong>结果关键</strong>：效率=1为有效；报告松弛量、规模报酬类型与参照标杆单元。</p>
+<p><strong>注意</strong>：效率是组内相对值，跨期不可直接比；不区分随机噪声（SBM/SFA改进）；需R/Python扩展。</p>
+</div>
+<h3 id="_13">综合指数  <code>进阶级</code><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把多个量纲方向不一的指标同向化、标准化后加权平均成一个0--1的综合指数，简单直接地排名分档。</p>
+<p><strong>美赛场景区</strong>：多区域门店经营绩效的统一打分、五档分档和区域比较。</p>
+<p><strong>核心原理</strong>：标定各指标方向（正向/逆向），统一变换后min-max标准化，按权重加权平均得0--1指数，降序排名并按分位数分五档。本案例ST0056指数0.959最高。</p>
+<p><strong>操作要点</strong>：工具箱选"综合指数"，指定id列、指标列与方向，加权平均，等权，分位数分档，minmax。</p>
+<p><strong>结果关键</strong>：综合指数均值/区间、五档分布、领先与落后对象。</p>
+<p><strong>注意</strong>：这是最朴素的加权综合，权重主观；追求客观可换熵权，追求距离可比可用TOPSIS。</p>
+</div>
+<h3 id="dematel">DEMATEL  <code>进阶级</code><a class="headerlink" href="#dematel" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：从专家两两影响打分中，算每个因素的"影响度、被影响度、中心度、原因度"，区分原因因素和结果因素。</p>
+<p><strong>美赛场景区</strong>：供应链/系统改进中找"牵一发而动全身"的关键源头因素。</p>
+<p><strong>核心原理</strong>：由专家0--4打分建直接影响矩阵，规范化后求综合影响矩阵，中心度<span class="arithmatex">\(M=D+R\)</span>（谁关键）、原因度<span class="arithmatex">\(N=D-R\)</span>（正为原因、负为结果）。本案例信息共享水平中心度最高，是核心原因因素。</p>
+<p><strong>操作要点</strong>：工具箱选"DEMATEL"，0--4级直接打分，最大行和归一化，阈值取矩阵均值。</p>
+<p><strong>结果关键</strong>：中心度排序找关键因素；原因度正负区分原因/结果，优先改原因因素。</p>
+<p><strong>注意</strong>：原因/结果是打分相对属性，不等于经过检验的因果链；与ISM互补——ISM分层级、DEMATEL判因果属性。</p>
+</div>
+<h3 id="rsr">秩和比法（RSR）  <code>进阶级</code><a class="headerlink" href="#rsr" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把各指标先编秩（排名次），再把秩次加权平均成一个0--1的综合秩和比，最后分档。</p>
+<p><strong>美赛场景区</strong>：医院科室、多指标评价的综合排序与相对档位划分，尤其适合指标量纲差异大时。</p>
+<p><strong>核心原理</strong>：高优指标从小到大编秩、低优指标反向，秩次按权重相加并归一得RSR，用概率单位回归检验其近似正态，再按分档概率划档。本案例科室011的RSR=0.989最高，分较差/中/良/优四档。</p>
+<p><strong>操作要点</strong>：工具箱选"秩和比法"，指定对象列、低优列，并列取平均秩，等权，正态性检验开启。</p>
+<p><strong>结果关键</strong>：RSR越大越好；probit回归<span class="arithmatex">\(R^2\)</span>高说明近似正态、分档可信。</p>
+<p><strong>注意</strong>：编秩会损失原始数值信息（只保留顺序）；它简单稳健，适合数据质量一般的综合评价。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

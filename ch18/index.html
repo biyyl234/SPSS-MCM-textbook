@@ -1,0 +1,1679 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch18/">
+      
+      
+        <link rel="prev" href="../ch17/">
+      
+      
+        <link rel="next" href="../appendix_a/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第18章 功效分析 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第18章 功效分析
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 功效分析之均值差 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功效分析之线性回归 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功效分析之相关性 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功效分析之率差 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功效分析之方差 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        功效分析之广义模型 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">功效分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>功效分析回答的是一个<strong>研究设计阶段</strong>的问题：<strong>样本量到底够不够大？</strong>它在你正式收集数据之前就算清楚：要想以足够把握检出某个真实差异，需要招多少样本；反过来，现有样本量下，你有多大把握能发现效应。它不做假设检验，而是告诉你"实验要花多少钱、招多少人才不至于白做"。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>功效分析在美赛中<strong>很少直接作为解题模型</strong>，但它在两个地方很加分：
+- 题目要求你<strong>评估数据收集方案、说明样本量是否充足</strong>时，功效分析是最规范的论据。
+- 论文中论证"我们采集的数据量足以支撑后续检验"时，引用功效分析结果能体现严谨性。
+如果你拿到的是现成大数据集，基本用不到本章；只有涉及"规划抽样规模"时才用。</p>
+<p><strong>学习路径建议</strong></p>
+<p>先学<strong>功效分析之均值差</strong>（明星算法，最经典，讲透"样本量、功效、效应量、显著性水平"四者关系），再了解<strong>功效分析之线性回归</strong>。进阶部分按检验对象区分：<strong>相关性</strong>、<strong>率差</strong>、<strong>方差（多组比较）</strong>、<strong>广义模型</strong>（处理二项/计数结局），原理相通，只是背后的分布不同。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">⭐ 功效分析之均值差  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>功效分析之均值差，就是在做两（或多）组均值比较之前，先算清楚：要检出预设的均值差异，每组需要多少样本，或者现有样本能达到多大的"检出把握"。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>规划对照试验、问卷调查时，确定<strong>需要招募多少样本</strong></li>
+<li>美赛中论证"现有数据量是否足以检出组间差异"</li>
+<li>评估已有预试验数据的功效够不够</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>功效分析绕着四个互相牵制的量转：</p>
+<ul>
+<li><strong>显著性水平<span class="arithmatex">\(\alpha\)</span></strong>：容忍"误报"的概率，通常0.05。</li>
+<li><strong>功效<span class="arithmatex">\(1-\beta\)</span></strong>：真实差异存在时，能成功检出它的概率，通常目标0.8。</li>
+<li><strong>效应量<span class="arithmatex">\(d\)</span>（Cohen's d）</strong>：均值差除以合并标准差，<span class="arithmatex">\(d\approx0.2\)</span>小、<span class="arithmatex">\(0.5\)</span>中、<span class="arithmatex">\(0.8\)</span>大。效应越小，越难检出，需要样本越多。</li>
+<li><strong>样本量<span class="arithmatex">\(n\)</span></strong>：其他三个量定了，就能反解<span class="arithmatex">\(n\)</span>。</li>
+</ul>
+<p>生活类比：功效就像捕鱼。网眼大小（<span class="arithmatex">\(\alpha\)</span>）、鱼到底多大（效应量）决定了要撒多大面积的网（样本量）才能有80%把握捕到这条鱼。鱼越小（效应小），网要撒得越大。</p>
+<p><strong>注意</strong>：功效是"长期检出概率"，不是"这次一定显著"——达到80%功效也意味着仍有20%的可能检不出。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>工具箱选"功效分析之均值差"</li>
+<li>检验类型选<strong>两独立样本</strong>（也支持配对、单样本、单因素方差分析）；检验方向<strong>双侧</strong></li>
+<li>求解目标选<strong>样本量</strong>；<span class="arithmatex">\(\alpha=0.05\)</span>，目标功效<span class="arithmatex">\(0.80\)</span>，两组分配比ratio<span class="arithmatex">\(=1\)</span></li>
+<li>效应量选<strong>数据估计优先</strong>（用预试验数据自动算Cohen's d，没有时手动给值）</li>
+<li>运行后把结果<strong>向上取整</strong>，再用取整规模反算实际功效</li>
+<li>看灵敏度分析：效应量上下浮动25%时样本量怎么变</li>
+</ol>
+<p><strong>默认参数参考</strong>：两独立样本、双侧、<span class="arithmatex">\(\alpha=0.05\)</span>、目标功效0.8、1:1分配，效应量由数据估计。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>以"新旧客服话术对比"案例为例（预试验每组75人）：</p>
+<ul>
+<li><strong>效应量</strong>：<span class="arithmatex">\(d=0.33\)</span>（小到中等效应）。</li>
+<li><strong>核心结论</strong>：在双侧<span class="arithmatex">\(\alpha=0.05\)</span>、目标功效0.8下，每组约需<strong>147例</strong>（两组共294例）才能较有把握检出该均值差。</li>
+<li><strong>现有数据功效</strong>：按预试验每组75例，实际功效仅约0.516，明显低于目标——说明试点规模只够粗估效应量，正式研究要按294例规划。</li>
+<li><strong>灵敏度</strong>：效应量下调25%（<span class="arithmatex">\(d=0.247\)</span>）需260例/组；上调25%（<span class="arithmatex">\(d=0.411\)</span>）只需94例/组。效应量估得越小、要的样本越多。</li>
+</ul>
+<p><strong>怎么看</strong>：报告"达到80%功效每组需<span class="arithmatex">\(n\)</span>例"；若担心试点高估了效应，建议按保守值（下调25%）招募。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>设计两/多组均值比较的研究前，定样本量。</p>
+<p><strong>什么时候不用？</strong>已经收集完数据、做假设检验时不需要功效分析（那是第3章的事）；现成大数据集通常样本量已远超需求。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：把"达到目标功效"理解成"必然显著"。功效是概率，仍有漏检可能。
+- <strong>坑2</strong>：效应量拍脑袋给大了，导致样本量算得偏小、实际检不出。务必用预试验或文献估计效应量，并做灵敏度分析。
+- <strong>坑3</strong>：忽略前提。功效公式近似要求数据近似正态、方差齐，案例中已用Shapiro与Levene检验确认。</p>
+<p><strong>和相似算法的区别</strong>
+- vs <strong>第3章t检验/ANOVA</strong>：t检验是拿到数据后<strong>检验差异是否存在</strong>；功效分析是<strong>之前</strong>算要多少样本。
+- vs <strong>功效分析之方差</strong>：均值差针对两组；方差（ANOVA）功效针对三组及以上。</p>
+</div>
+<h3 id="_4">功效分析之线性回归  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>功效分析之线性回归，回答的是：要想让回归模型（或某个自变量的贡献）在统计上站得住，正式研究需要收集多少条样本。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>规划问卷调研：已知大概的<span class="arithmatex">\(R^2\)</span>，算需要多少份有效问卷</li>
+<li>论证回归分析的样本量是否充足</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>回归功效基于<strong>非中心<span class="arithmatex">\(F\)</span>分布</strong>：</p>
+<ul>
+<li>先用预试验数据拟合OLS，得到<strong>调整<span class="arithmatex">\(R^2\)</span></strong>，换算成效应量 <span class="arithmatex">\(f^2 = R^2/(1-R^2)\)</span>。</li>
+<li>非中心参数 <span class="arithmatex">\(\lambda = n\cdot f^2\)</span>，自由度 <span class="arithmatex">\(v = n-k-1\)</span>（<span class="arithmatex">\(k\)</span>为预测变量数）。</li>
+<li>功效<span class="arithmatex">\(=1-F_{nc}(F_{临界}; u, v, \lambda)\)</span>，再二分反推满足目标功效的最小<span class="arithmatex">\(n\)</span>。</li>
+<li>Cohen基准：<span class="arithmatex">\(f^2\approx0.02\)</span>小、<span class="arithmatex">\(0.15\)</span>中、<span class="arithmatex">\(0.35\)</span>大。</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>工具箱选"功效分析之线性回归"</li>
+<li>指定目标列与预测变量列；效应来源选<strong>data_observed</strong>（用数据估计<span class="arithmatex">\(R^2\)</span>）</li>
+<li>分析模式选<strong>sample_size</strong>（求样本量）；<span class="arithmatex">\(\alpha=0.05\)</span>，目标功效0.80</li>
+<li>运行，查看所需最小样本量与功效曲线</li>
+</ol>
+<p><strong>默认参数参考</strong>：<span class="arithmatex">\(\alpha=0.05\)</span>、目标功效0.8，效应量由观测数据估计（用调整<span class="arithmatex">\(R^2\)</span>，更保守）。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<p>以"顾客复购意愿"案例为例（4个预测变量，预试验150条）：</p>
+<ul>
+<li>观测<span class="arithmatex">\(R^2=0.183\)</span>，调整<span class="arithmatex">\(R^2=0.161\)</span>，换算 <span class="arithmatex">\(f^2=0.191\)</span>（中等效应）。</li>
+<li><strong>核心结论</strong>：<span class="arithmatex">\(\alpha=0.05\)</span>、功效0.8下，正式研究至少需<strong>68条</strong>有效样本，此时功效80.5%。</li>
+<li>现有150条样本对应功效约99.5%，绰绰有余。</li>
+</ul>
+<p><strong>怎么看</strong>：报告"至少需<span class="arithmatex">\(n\)</span>条有效样本"；<span class="arithmatex">\(n\)</span>对<span class="arithmatex">\(\alpha\)</span>和目标功效敏感，收紧要求会明显增加样本量。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>规划回归类调研、论证问卷样本量。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：用未调整的<span class="arithmatex">\(R^2\)</span>算效应量，会高估、样本量算少。应使用调整<span class="arithmatex">\(R^2\)</span>。
+- <strong>坑2</strong>：忽略预测变量个数<span class="arithmatex">\(k\)</span>。变量越多，自由度损失越大，需要样本越多。</p>
+<p><strong>和相似算法的区别</strong>：本算法针对回归模型的整体或某个自变量的检验；均值差功效针对两组均值比较。</p>
+</div>
+<h2 id="_5">进阶级算法速览<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_6">功效分析之相关性  <code>进阶级</code><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：要检验两个连续变量的相关是否显著（<span class="arithmatex">\(H_0:\rho=0\)</span>），需要多少对成对观测，或现有样本能检出多强的相关。</p>
+<p><strong>美赛场景区</strong>：规划需要配对观测的相关分析（如培训学时与满意度），论证样本是否足够检出目标相关。</p>
+<p><strong>核心原理</strong>：检验统计量 <span class="arithmatex">\(t=r\sqrt{(n-2)/(1-r^2)}\)</span>，原假设下服从<span class="arithmatex">\(t(n-2)\)</span>，备择下按非中心参数<span class="arithmatex">\(\delta=\rho\sqrt{n/(1-\rho^2)}\)</span>的非中心<span class="arithmatex">\(t\)</span>分布精确算功效，Fisher z近似交叉验证。</p>
+<p><strong>操作要点</strong>：工具箱选"功效分析之相关性"；选x、y两列；相关类型pearson；求解目标sample_size；双侧检验。</p>
+<p><strong>结果关键</strong>：案例（培训学时vs满意度）观测<span class="arithmatex">\(r=0.357\)</span>，达80%功效至少需约<strong>56对</strong>；现有150对功效约99.6%。三问：现样本功效多大？需多少对？现规模能检出多小的<span class="arithmatex">\(|r|\)</span>？</p>
+<p><strong>注意</strong>：效应量越小、目标功效越高，所需对数越多。</p>
+</div>
+<h3 id="_7">功效分析之率差  <code>进阶级</code><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：两组合格率/发生率比较（二分类结局），在给定两组率的前提下，需要多少样本才能检出这个率差。</p>
+<p><strong>美赛场景区</strong>：规划临床试验、政策达标率对比，如降压治疗后达标率从30%提到50%需要多少患者。</p>
+<p><strong>核心原理</strong>：对两组率<span class="arithmatex">\(p_1,p_2\)</span>做反正弦变换得到效应量Cohen's <span class="arithmatex">\(h\)</span>，按两率<span class="arithmatex">\(z\)</span>检验的解析功效公式求每组样本量；向上取整后回代实际功效，并用蒙特卡洛模拟复核正态近似。</p>
+<p><strong>操作要点</strong>：工具箱选"功效分析之率差"；填对照组率<span class="arithmatex">\(p_1\)</span>、试验组率<span class="arithmatex">\(p_2\)</span>；求解目标样本量；<span class="arithmatex">\(\alpha=0.05\)</span>、双侧、1:1分配。</p>
+<p><strong>结果关键</strong>：案例<span class="arithmatex">\(p_1=0.30\)</span>、<span class="arithmatex">\(p_2=0.50\)</span>，<span class="arithmatex">\(\alpha=0.05\)</span>、功效0.8下共需<strong>186例</strong>（每组93）；蒙特卡洛经验功效0.798与解析0.801吻合。</p>
+<p><strong>注意</strong>：样本量对<span class="arithmatex">\(p_1,p_2\)</span>假设很敏感——率越接近50%、两组差越小，需要的样本越多。务必做<span class="arithmatex">\(p_1\)</span>扰动敏感性分析。</p>
+</div>
+<h3 id="_8">功效分析之方差  <code>进阶级</code><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：单因素方差分析（三组及以上均值比较）前，规划每组需要多少样本才能检出组间差异。</p>
+<p><strong>美赛场景区</strong>：如比较三套策略、三套方案的效果，预试验后规划正式对比实验的样本量。</p>
+<p><strong>核心原理</strong>：四要素互相牵制——效应量<span class="arithmatex">\(f\)</span>（由预试验<span class="arithmatex">\(\eta^2\)</span>估计，<span class="arithmatex">\(f\approx0.1\)</span>小、<span class="arithmatex">\(0.25\)</span>中、<span class="arithmatex">\(0.4\)</span>大）、总样本量<span class="arithmatex">\(N\)</span>、<span class="arithmatex">\(\alpha\)</span>、功效<span class="arithmatex">\(1-\beta\)</span>。基于非中心<span class="arithmatex">\(F\)</span>分布<span class="arithmatex">\(\lambda=N f^2\)</span>，按均衡分配反推每组样本量，取整后重算实际功效。</p>
+<p><strong>操作要点</strong>：工具箱选"功效分析之方差"；填组数<span class="arithmatex">\(k\)</span>；效应来源数据估计；求解目标所需样本量；<span class="arithmatex">\(\alpha\)</span>与目标功效默认0.05/0.8。</p>
+<p><strong>结果关键</strong>：案例（三套拣货策略，<span class="arithmatex">\(k=3\)</span>）预试验得<span class="arithmatex">\(\eta^2=0.083\)</span>、<span class="arithmatex">\(f\approx0.30\)</span>（中效应），需每组<strong>37例、共111例</strong>，取整后功效约0.80。</p>
+<p><strong>注意</strong>：需先做正态性与方差齐性（Levene）检验；若异方差严重，当前结论不适用，应改用Welch方差分析的模拟功效。</p>
+</div>
+<h3 id="_9">功效分析之广义模型  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：当结局不是正态连续变量，而是二分类、计数等更复杂的结局时，用广义线性模型的功效分析来定样本量。是均值差功效的"升级版"。</p>
+<p><strong>美赛场景区</strong>：规划安全性/不良反应对照研究——如联合用药使肝功能异常率从20%升到40%（<span class="arithmatex">\(OR=2\)</span>），需要多少患者。</p>
+<p><strong>核心原理</strong>：先按结局选分布族与链接函数（二项/泊松/负二项）；给定效应量、基线率、<span class="arithmatex">\(\alpha\)</span>、分配比，用Wald检验的渐近功效二分求解总样本量；再固定种子生成数据、拟合对应GLM做蒙特卡洛模拟，在解点和1.25倍样本点核对解析近似是否靠谱。</p>
+<p><strong>操作要点</strong>：工具箱选"功效分析之广义模型"；family选binomial；solve选n；填效应（OR=2）、基线率、<span class="arithmatex">\(\alpha=0.05\)</span>、双侧、功效0.8；指定group与outcome列。</p>
+<p><strong>结果关键</strong>：案例（二项结局、<span class="arithmatex">\(OR=2\)</span>、基线20%）需总样本<strong>352例</strong>（对照176、暴露176）；蒙特卡洛实测功效81.1%，与解析80.1%吻合。</p>
+<p><strong>注意</strong>：这是功效分析里最灵活但也最复杂的一类。结果对<span class="arithmatex">\(\alpha\)</span>、基线率假设敏感；资源有限时可评估放宽<span class="arithmatex">\(\alpha\)</span>或用单侧检验以降样本量。美赛中用到时，重点是把"样本量怎么来的"讲清楚。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1949 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch12/">
+      
+      
+        <link rel="prev" href="../ch11/">
+      
+      
+        <link rel="next" href="../ch13/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第12章 规划求解 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第12章 规划求解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch05/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 遗传算法 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        动态规划（背包资源分配） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 粒子群优化算法 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模拟退火算法 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        割平面法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        牛顿法（拟牛顿法） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        梯度下降法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        差分进化算法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        匈牙利算法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        表上作业法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        蚁群算法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分支定界法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        禁忌搜索算法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内点法 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">规划求解<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>规划求解就是"在一堆限制条件下找最优方案"。比如：预算有限时选哪些研发项目收益最大？货车怎么装货最划算？快递路线怎么排最短？工厂排产怎么利润最高？这类问题统称为<strong>优化问题</strong>——有目标（最大利润/最小成本），有约束（预算/容量/时间），要找出一组决策变量让目标最好。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>规划求解是美赛B题（离散优化/调度分配）和D题（运营管理）的<strong>核心武器</strong>。典型场景：车辆路径规划（TSP）、任务指派、背包选品、生产排产、资源分配。遗传算法、粒子群、模拟退火等智能优化方法在美赛中<strong>极其常用</strong>——当问题复杂到没有解析解时，靠它们在巨大的解空间里"搜"出好方案。</p>
+<p><strong>学习路径建议</strong></p>
+<p>先搞懂<strong>动态规划（背包问题）</strong>和<strong>遗传算法</strong>（组合优化的两大主力），再学<strong>粒子群</strong>和<strong>模拟退火</strong>（连续优化与路径优化的利器）。进阶了解<strong>匈牙利算法</strong>（指派）、<strong>表上作业法</strong>（运输）、<strong>分支定界/割平面</strong>（整数规划精确求解）等经典方法。注意：SPSS原生不支持优化求解，这些算法通过<strong>Dabbit AI SPSS工具箱</strong>或Python/R扩展实现。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">⭐ 遗传算法  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>遗传算法（GA）模拟"物竞天择、适者生存"的自然进化过程：把每一个候选方案编码成"染色体"，让一群方案在迭代中通过选择、交叉、变异不断进化，最终留下最优方案。它是美赛中<strong>最常用的智能优化算法</strong>，尤其适合调度、分配、路径等组合优化问题。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li><strong>背包问题</strong>：预算有限时选哪些项目/物品使总价值最大（如研发项目立项）</li>
+<li><strong>调度与分配</strong>：任务指派、人员排班、生产排产</li>
+<li><strong>路径优化</strong>：旅行商问题（TSP）、车辆路线规划</li>
+<li>美赛B题/D题中当问题规模大、无法用精确方法求解时</li>
+<li>目标函数不可导、约束复杂、传统方法搞不定的问题</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象一个"方案进化岛"：一开始随机撒下一群候选方案（种群），每个方案就是一个"生物个体"，用一串编码表示（比如0/1串表示选或不选某个项目）。</p>
+<ul>
+<li><strong>适应度评价</strong>：每个方案根据目标函数打分——收益高的方案"更健康"</li>
+<li><strong>选择（Selection）</strong>：适应度高的方案更容易"繁殖后代"（锦标赛选择：随机抽几个，留最强的）</li>
+<li><strong>交叉（Crossover）</strong>：两个优秀方案"交配"，各取一段编码拼接成新方案——好的基因组合在一起</li>
+<li><strong>变异（Mutation）</strong>：随机翻转某一位编码，保持种群多样性，防止早熟收敛</li>
+<li><strong>精英保留（Elitism）</strong>：每代最好的几个方案直接进入下一代，不丢失</li>
+</ul>
+<p>如此迭代几百代后，种群会越来越集中到最优解附近。</p>
+<p><strong>关键参数</strong>：种群大小（默认80）、交叉概率（默认0.8）、变异率（默认0.05）、迭代代数（默认100）。0/1背包问题中用repair策略处理超容量个体。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>SPSS原生不支持遗传算法，在<strong>Dabbit AI SPSS工具箱</strong>中操作：</p>
+<ol>
+<li>在工具箱中选择"遗传算法"</li>
+<li>上传数据：价值列选"value"，成本列选"weight"，容量设为预算上限（如3200）</li>
+<li>设置参数：种群大小80，迭代100代，交叉概率0.8，变异率0.05，精英保留数2</li>
+<li>超容量处理选"repair"（按价值密度从低到高剔除超容项目）</li>
+<li>稳健性运行次数设为3（多次随机种子验证稳定性）</li>
+<li>点击运行，输出最优方案与收敛曲线</li>
+</ol>
+<p><strong>参考实现</strong>：也可通过Python的DEAP或scikit-opt库实现，核心是编码方式与适应度函数的设计。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>最优总价值/成本</strong>：如选中28个项目，总价值13756，总成本3194（容量利用率99.8%）</li>
+<li><strong>收敛曲线</strong>：每代最优适应度随代数上升并趋于平稳——曲线变平说明收敛</li>
+<li><strong>稳健性</strong>：多次随机种子运行结果应接近（如最优值在13756--13762之间），极差越小越稳定</li>
+<li><strong>改进幅度</strong>：比随机可行方案基线提升多少（如提升1231.75），说明进化搜索有效</li>
+</ul>
+<p><strong>判断好坏</strong>：遗传算法是<strong>启发式方法</strong>，不保证全局最优。如果多次运行结果差异大（极差占最优值比例高），应增大种群或代数后重跑。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>
+- 组合优化问题规模大（如150个物品的背包、100个节点的TSP），精确方法算不动
+- 目标函数复杂、不可导、有约束</p>
+<p><strong>什么时候不用？</strong>
+- 小规模问题（<span class="arithmatex">\(n&lt;20\)</span>）——直接用动态规划或穷举更靠谱
+- 问题有成熟精确算法（如指派问题用匈牙利算法）——没必要用启发式</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：变异率太小→种群多样性不足，早熟收敛在局部最优；太大→随机游走不收敛
+- <strong>坑2</strong>：不做多次随机种子运行——单次结果可能只是运气好，不代表真最优
+- <strong>坑3</strong>：超容量个体直接丢弃而非修复——会丢失大量可行解，应设计repair策略</p>
+<p><strong>和相似算法的区别</strong>
+- vs <strong>动态规划</strong>：动态规划求<strong>精确全局最优</strong>但只适用于结构化问题（背包、最短路）；遗传算法是<strong>启发式近似</strong>但适用面广
+- vs <strong>粒子群</strong>：遗传算法适合<strong>离散组合优化</strong>（0/1选择、排列）；粒子群适合<strong>连续参数优化</strong></p>
+</div>
+<h3 id="_4">动态规划（背包资源分配）  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>动态规划（DP）是一种"把大问题拆成小问题、记住小问题答案"的精确求解方法。经典应用是<strong>背包问题</strong>：预算有限时选哪些项目使总收益最大。它能<strong>证明全局最优</strong>，不像遗传算法只能给近似解。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li><strong>0-1背包问题</strong>：预算/容量有限，每个项目只能选或不选（如技改项目立项）</li>
+<li>资源分配：有限资金在多个活动间分配使总收益最大</li>
+<li>最短路径、设备更新、库存优化等多阶段决策问题</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象你在整理一个背包旅行，背包容量有限，面前有一堆物品各有重量和价值，怎么选最划算？</p>
+<p>动态规划的思路是<strong>分阶段、记中间结果</strong>：</p>
+<ul>
+<li>设 <span class="arithmatex">\(dp[w]\)</span> 表示"容量为 <span class="arithmatex">\(w\)</span> 时能装的最大价值"</li>
+<li>对每个物品（重量 <span class="arithmatex">\(c\)</span>、价值 <span class="arithmatex">\(v\)</span>），从大到小遍历容量：<span class="arithmatex">\(dp[w] = \max(dp[w], dp[w-c] + v)\)</span></li>
+<li>意思是：要么不装这个物品（<span class="arithmatex">\(dp[w]\)</span>），要么装（腾出 <span class="arithmatex">\(c\)</span> 的容量装它，总价值变成 <span class="arithmatex">\(dp[w-c]+v\)</span>），取大者</li>
+<li>从 <span class="arithmatex">\(w=0\)</span> 递推到容量上限，最后 <span class="arithmatex">\(dp[W]\)</span> 就是最大价值，再回溯找出选了哪些物品</li>
+</ul>
+<p>这就像填表：每加一个物品，就把整张表更新一遍。虽然看起来笨，但<strong>枚举了所有可能组合</strong>，所以一定能找到全局最优。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>SPSS原生不支持动态规划，在<strong>Dabbit AI SPSS工具箱</strong>中操作：</p>
+<ol>
+<li>上传候选项目数据（含成本列和收益列）</li>
+<li>背包类型选"0-1背包"，容量自动提取问题给定值（如2600）</li>
+<li>缺失值处理选"剔除缺失行"，价值并列处理选"按价值密度优先"</li>
+<li>点击运行，输出最优入选方案与容量敏感性曲线</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>最大总收益</strong>：如容量2600内最大收益6404，入选15个项目</li>
+<li><strong>预算利用率</strong>：如100%，说明钱花完了仍有可收益项目；利用率不足100%通常是剩余额度装不下任何项目</li>
+<li><strong>容量敏感性曲线</strong>：展示容量从0到上限每个档位对应的最优收益——额外预算值多少钱一目了然</li>
+<li><strong>vs 贪心对照</strong>：贪心按单位价值密度排序选，通常比DP少赚（如贪心6315 vs DP 6404），差异说明需要全局权衡</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>背包/资源分配类问题，且成本和容量可离散化（整数）。</p>
+<p><strong>什么时候不用？</strong>成本是连续值且很大时（状态空间爆炸），应改用遗传算法等启发式方法。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：成本不取整导致状态空间巨大——DP要求容量映射到整数网格
+- <strong>坑2</strong>：以为贪心（按价值密度排序）就是最优——贪心无法回溯替换，DP能全局权衡</p>
+<p><strong>和遗传算法的区别</strong>：DP是<strong>精确方法</strong>（证明最优），但只适用于结构清晰的问题；遗传算法是<strong>启发式方法</strong>（近似解），适用面更广。</p>
+</div>
+<h3 id="_5">⭐ 粒子群优化算法  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>粒子群优化（PSO）模拟鸟群觅食：一群"粒子"在搜索空间中飞，每个粒子根据自己的历史最佳位置和群体全局最佳位置调整飞行方向，最终聚集到最优解附近。它特别适合<strong>连续参数优化</strong>问题，比如拟合非线性模型的参数。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li><strong>非线性模型参数拟合</strong>：如衰减振动模型 <span class="arithmatex">\(y=a+b\cdot e^{-ct}\sin(dt+e)\)</span> 的参数标定</li>
+<li>工程优化：调整多个连续参数使某个指标最优</li>
+<li>神经网络超参数调优</li>
+<li>美赛中当模型是连续的、目标函数不可导时</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象一群鸽子在广场上找食物。每只鸽子（粒子）：</p>
+<ul>
+<li>知道自己<strong>历史上找到过食物最多的位置</strong>（个体极值 <span class="arithmatex">\(pbest\)</span>）</li>
+<li>知道<strong>整个鸽群找到过食物最多的位置</strong>（全局极值 <span class="arithmatex">\(gbest\)</span>）</li>
+<li>每一步同时被这两个位置"吸引"，调整飞行方向和速度</li>
+</ul>
+<p>速度更新公式：<span class="arithmatex">\(v_{t+1} = w\cdot v_t + c_1\cdot r_1\cdot(pbest-x_t) + c_2\cdot r_2\cdot(gbest-x_t)\)</span></p>
+<ul>
+<li><span class="arithmatex">\(w\)</span>（惯性权重）：保持当前飞行方向的趋势，默认从0.9线性递减到0.4（前期探索、后期精修）</li>
+<li><span class="arithmatex">\(c_1\)</span>（认知系数）：向自己历史最佳靠拢的权重</li>
+<li><span class="arithmatex">\(c_2\)</span>（社会系数）：向群体最佳靠拢的权重</li>
+<li><span class="arithmatex">\(r_1, r_2\)</span>：随机数，增加搜索多样性</li>
+</ul>
+<p>就像鸽子既记得自己以前在哪吃到过好东西，也跟着大部队去它们发现的好地方，最后全群汇聚到食物最丰富的区域。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>SPSS原生不支持粒子群优化，在<strong>Dabbit AI SPSS工具箱</strong>中操作：</p>
+<ol>
+<li>在工具箱中选择"粒子群优化"</li>
+<li>上传数据，指定自变量列和因变量列</li>
+<li>选择模型族（如exp_sine衰减振动模型）</li>
+<li>设置参数：粒子数200，最大迭代500次，惯性权重线性递减0.9→0.4，认知/社会系数默认</li>
+<li>独立运行次数设为10（多次验证稳定性），边界处理选"反射"</li>
+<li>点击运行，输出最优参数与收敛曲线</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>最优参数估计</strong>：如5个参数 <span class="arithmatex">\(a=1.247, b=2.073, c=0.333, d=2.149, e=0.567\)</span></li>
+<li><strong>拟合优度</strong>：<span class="arithmatex">\(R^2=0.9929\)</span>，RMSE=0.0464——越接近1/越小越好</li>
+<li><strong>收敛稳定性</strong>：10次独立运行的最优SSE标准差应极小（如1.09e-07），变异系数小说明结果稳健</li>
+<li><strong>残差图</strong>：残差围绕零线随机分布、无系统性偏差，说明模型合适</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>连续参数的非线性优化问题，目标函数不可导或求导困难。</p>
+<p><strong>什么时候不用？</strong>离散组合优化（如0/1背包、TSP）——PSO虽可改造但不如遗传算法自然。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不做多次独立运行——单次结果可能收敛到局部最优，应至少运行5--10次取最优
+- <strong>坑2</strong>：搜索边界设得不对——最优解贴在边界上说明边界设窄了，应扩大
+- <strong>坑3</strong>：惯性权重固定不衰减——前期不探索会困在局部，后期不收敛会震荡</p>
+<p><strong>和遗传算法的区别</strong>：PSO是<strong>连续优化</strong>的利器（鸟群飞行是连续运动）；GA是<strong>离散组合优化</strong>的主力（编码/交叉/变异天然适合排列和0/1选择）。</p>
+</div>
+<h3 id="_6">模拟退火算法  <code>基础级</code><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>模拟退火（SA）模仿金属退火过程：先高温加热让粒子自由运动（广泛探索），再缓慢降温让粒子逐渐稳定到最低能量状态（收敛到最优）。它的<strong>绝招是能以一定概率接受劣解</strong>，从而跳出局部最优陷阱。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li><strong>旅行商问题（TSP）</strong>：配送路线优化，找最短环游路线</li>
+<li>调度问题、指派问题等组合优化</li>
+<li>当问题有很多局部最优、贪心算法容易困死时</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象你在一个有很多山头和山谷的地形上找最低点，但你不能看地图（不知道全局），只能一步步走。</p>
+<ul>
+<li><strong>高温阶段</strong>：你喝醉了，连走上坡路都不怕（以概率 <span class="arithmatex">\(e^{-\Delta E/T}\)</span> 接受劣解），到处乱窜——这样不会困在第一个遇到的小山谷里</li>
+<li><strong>降温阶段</strong>：你慢慢清醒，越来越不想走上坡路，只接受下降的移动</li>
+<li><strong>终止</strong>：温度很低时，你基本只往下走，最终停在一个很深的谷底</li>
+</ul>
+<p>关键是<strong>Metropolis准则</strong>：新方案比当前好就接受；比当前差，也以概率 <span class="arithmatex">\(e^{-\Delta E/T}\)</span> 接受——温度高时接受概率大（大胆探索），温度低时接受概率小（谨慎收敛）。</p>
+<p><strong>参数</strong>：初始温度自动估算，衰减系数0.94（每轮乘0.94），每温迭代500次，终止温度0.0001，重启3次。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<p>SPSS原生不支持模拟退火，在<strong>Dabbit AI SPSS工具箱</strong>中操作：</p>
+<ol>
+<li>上传站点坐标数据（TSP问题）</li>
+<li>问题类型自动识别为"坐标型TSP（欧氏距离）"</li>
+<li>设置参数：初始温度自动估算，衰减系数0.94，每温迭代500次，重启3次</li>
+<li>随机种子固定为42（可复现）</li>
+<li>点击运行，输出最优回路与收敛曲线</li>
+</ol>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>最优目标值</strong>：如TSP回路总长220.13，比贪心基准252.96改善12.98%</li>
+<li><strong>收敛曲线</strong>：前期快速下降、后期走平——走平说明已收敛</li>
+<li><strong>接受率</strong>：后期接受率低（如7.2%）说明已进入纯改善搜索</li>
+<li><strong>重启稳定性</strong>：多次重启最优值离散度小（如12.25%以内）说明结果可靠</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>组合优化问题，尤其是TSP路径规划，且贪心/局部搜索容易陷入局部最优时。</p>
+<p><strong>什么时候不用？</strong>问题规模极小（直接穷举即可），或有精确多项式算法（如指派用匈牙利）。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：降温太快→没探索够就收敛，困在局部最优；降温太慢→计算时间太长
+- <strong>坑2</strong>：不做多次重启→单次结果受随机初始解影响大</p>
+<p><strong>和遗传算法的区别</strong>：SA是<strong>单点搜索</strong>（一个方案在迭代中改进），GA是<strong>种群搜索</strong>（一群方案同时进化）；SA实现简单，GA并行性好但调参更复杂。</p>
+</div>
+<h2 id="_7">进阶级算法速览<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">割平面法  <code>进阶级</code><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：求解整数线性规划的精确方法——先放松整数要求解线性规划，再逐步添加"切割约束"把非整数解切掉，直到得到整数最优解。</p>
+<p><strong>美赛场景区</strong>：生产排产中产品数量必须为整数（不能生产半个产品）的线性规划问题。</p>
+<p><strong>核心原理</strong>：先解LP松弛（允许小数），如果最优解含小数变量，就构造Gomory割平面（一条新约束）把小数部分切掉，重新求解。逐轮收紧，直到所有变量取整。就像雕刻：一刀一刀切掉多余的部分，最后留下整数最优解。</p>
+<p><strong>操作要点</strong>：工具箱中选择"割平面法"，目标方向max，割平面行选择规则选"最大分数部优先"，最大迭代100次。</p>
+<p><strong>结果关键</strong>：LP松弛最优值逐轮下降并逼近整数最优值（如从45.5降到45），最终找到整数最优解。与独立MILP求解器交叉验证一致即证明最优。</p>
+<p><strong>注意</strong>：割平面法和分支定界法是整数规划两大精确方法；割平面法靠加约束，分支定界靠分分支。</p>
+</div>
+<h3 id="_9">牛顿法（拟牛顿法）  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：用二阶导数（Hessian矩阵）信息加速非线性优化收敛的方法，比一阶梯度下降快得多。</p>
+<p><strong>美赛场景区</strong>：非线性模型参数拟合，如药代动力学指数模型 <span class="arithmatex">\(C(t)=C_0 e^{-k_e t}\)</span> 的参数估计。</p>
+<p><strong>核心原理</strong>：梯度下降只看"往哪个方向走最陡"（一阶梯度），牛顿法还看"地形的曲率"（二阶导数），像一个会开车的人不仅知道上坡方向，还知道弯道有多急，因此能更快逼近最优点。拟牛顿法（BFGS）不直接算Hessian，用梯度差近似，降低计算量。</p>
+<p><strong>操作要点</strong>：工具箱中选"牛顿法"，模型选指数模型，方法选auto（牛顿优先、失稳自动切拟牛顿），初值策略选启发式。</p>
+<p><strong>结果关键</strong>：迭代次数少（如3次就收敛），参数估计值与标准误，RMSE和AIC衡量拟合优度。</p>
+<p><strong>注意</strong>：牛顿法要求目标函数光滑可导；如果Hessian矩阵不正定会失稳，此时自动切换拟牛顿BFGS。</p>
+</div>
+<h3 id="_10">梯度下降法  <code>进阶级</code><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：最基础的数值优化方法——沿着梯度反方向一步步走，直到到达最低点。神经网络训练的基石。</p>
+<p><strong>美赛场景区</strong>：线性回归/逻辑回归的参数求解（虽然有解析解，但梯度下降是理解优化的基础）；大规模机器学习模型训练。</p>
+<p><strong>核心原理</strong>：站在山坡上想走到谷底，每一步都沿着最陡的下坡方向走。学习率控制每步走多大——太大跨过谷底，太小走得慢。加入动量（momentum=0.9）可以像滚球一样加速通过平坦区、抑制震荡。</p>
+<p><strong>操作要点</strong>：工具箱中选"梯度下降法"，学习率0.01，动量0.9，批量全量，特征标准化开启，迭代上限2000次。</p>
+<p><strong>结果关键</strong>：损失函数随迭代下降曲线；最终系数与最小二乘解析解的偏差（应极小，如<span class="arithmatex">\(10^{-4}\)</span>量级）；<span class="arithmatex">\(R^2\)</span>。</p>
+<p><strong>注意</strong>：学习率是最关键参数——需调参；特征必须标准化否则量纲差异导致收敛慢。</p>
+</div>
+<h3 id="_11">差分进化算法  <code>进阶级</code><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：一种基于种群的连续全局优化算法，利用种群中个体间的<strong>差分向量</strong>进行变异，特别适合非线性模型参数估计。</p>
+<p><strong>美赛场景区</strong>：酶促反应米氏方程 <span class="arithmatex">\(v=V\cdot S/(K+S)\)</span> 等非线性模型的全局参数拟合。</p>
+<p><strong>核心原理</strong>：和遗传算法类似但变异方式不同——随机选三个个体 <span class="arithmatex">\(a,b,c\)</span>，新个体 = <span class="arithmatex">\(a + F\cdot(b-c)\)</span>，用两个体的差异方向来变异，自适应调整步长。交叉后与目标个体贪婪比较，更优才保留。</p>
+<p><strong>操作要点</strong>：工具箱中选"差分进化"，策略best1bin，变异因子0.5+1，多次不同种子重启，可选L-BFGS-B局部精化。</p>
+<p><strong>结果关键</strong>：多次重启结果应一致（重启跨度极小）；<span class="arithmatex">\(R^2\)</span>接近1说明拟合好；残差正态性检验通过。</p>
+<p><strong>注意</strong>：DE是全局搜索，比牛顿法慢但不容易陷局部最优；通常DE粗搜+局部精化（L-BFGS-B）效果最好。</p>
+</div>
+<h3 id="_12">匈牙利算法  <code>进阶级</code><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：求解<strong>指派问题</strong>的精确多项式算法（<span class="arithmatex">\(O(n^3)\)</span>）——把 <span class="arithmatex">\(n\)</span> 个任务分配给 <span class="arithmatex">\(n\)</span> 个人，使总成本最小。</p>
+<p><strong>美赛场景区</strong>：快递订单与车辆的最优配对、人员岗位分配、教师排课。</p>
+<p><strong>核心原理</strong>：每行减去该行最小值、每列减去该列最小值（等价变换不改变最优解），然后用最少的线覆盖所有零元素——如果线数等于 <span class="arithmatex">\(n\)</span>，就能在零元素处找到完美指派；否则继续调整。就像在成本矩阵上"划线找零"，零位置就是最优配对。</p>
+<p><strong>操作要点</strong>：工具箱中选"匈牙利算法"，目标minimize，求解器auto。</p>
+<p><strong>结果关键</strong>：总成本（如8对配对总成本72）；贪心基线通常差很多（如123，多70.8%），证明全局最优的价值。</p>
+<p><strong>注意</strong>：要求任务数=人数（平衡指派）；不平衡时先加虚拟行/列。</p>
+</div>
+<h3 id="_13">表上作业法  <code>进阶级</code><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：求解<strong>运输问题</strong>的经典方法——多个仓库向多个门店发货，已知各仓供应量、各店需求量和单位运价，求总运费最低的调运方案。</p>
+<p><strong>美赛场景区</strong>：连锁零售物流配送调度、工厂到仓库的原材料运输规划。</p>
+<p><strong>核心原理</strong>：先用伏格尔法（Vogel）找一个较好的初始方案（每次优先选机会成本最大的路线），再用位势法计算每条空闲路线的检验数——如果存在负检验数说明还能降本，沿闭回路调整运量，直到所有检验数<span class="arithmatex">\(\geq 0\)</span>即为最优。</p>
+<p><strong>操作要点</strong>：工具箱中选"表上作业法"，初始方案伏格尔法，产销不平衡自动加虚拟节点，独立求解器交叉验证。</p>
+<p><strong>结果关键</strong>：最优总运费（如287802元）；初始方案经11轮调整收敛；所有检验数<span class="arithmatex">\(\geq 0\)</span>证明最优。</p>
+<p><strong>注意</strong>：供过于求时加虚拟销地（不真运货），供不应求时加虚拟产地。</p>
+</div>
+<h3 id="_14">蚁群算法  <code>进阶级</code><a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：模拟蚂蚁觅食时释放信息素的正反馈机制，求解<strong>旅行商问题（TSP）</strong>的群智能算法。</p>
+<p><strong>美赛场景区</strong>：150个配送点的最短环游路线规划、网络布线最优路径。</p>
+<p><strong>核心原理</strong>：蚂蚁走路线时留下信息素，短路线上信息素挥发少、累积快，后面的蚂蚁更倾向选信息素浓的路——正反馈让全群逐渐汇聚到最短路线。<span class="arithmatex">\(\alpha\)</span>控制信息素重要性、<span class="arithmatex">\(\beta\)</span>控制距离启发重要性、挥发率防止信息素无限累积。</p>
+<p><strong>操作要点</strong>：工具箱中选"蚁群算法"，蚂蚁数30，迭代100次，<span class="arithmatex">\(\alpha=1, \beta=2\)</span>，挥发率0.5，精英权重0。</p>
+<p><strong>结果关键</strong>：近似最短环游长度（如372.765），比最近邻+2-opt基线改善4.2%；第45代后收敛稳定。</p>
+<p><strong>注意</strong>：ACO是启发式近似，不保证全局最优；节点数越大越有优势。</p>
+</div>
+<h3 id="_15">分支定界法  <code>进阶级</code><a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：求解整数规划的精确方法——把解空间分成树枝（分支），用松弛问题算上界，上界不如当前最优就剪掉该枝（剪枝），避免穷举。</p>
+<p><strong>美赛场景区</strong>：0-1背包问题（货车装货选哪些货品收益最大）的精确求解。</p>
+<p><strong>核心原理</strong>：像查字典——先翻开中间估个上界，如果这半边的上界还不如已经找到的最好方案，就不翻了（剪枝）。按价值密度排序，贪心先找一个好下界，分数背包松弛算上界，上下界收敛到重合即证明最优。</p>
+<p><strong>操作要点</strong>：工具箱中选"分支定界法"，分支策略best_first，容量约束，gap tolerance默认。</p>
+<p><strong>结果关键</strong>：最优总价值（如1265，证明全局最优）；探索节点数（如2057个）；与MILP求解器交叉验证一致。</p>
+<p><strong>注意</strong>：分支定界和割平面法都是整数规划精确方法；分支定界靠分树剪枝，割平面靠加约束。</p>
+</div>
+<h3 id="_16">禁忌搜索算法  <code>进阶级</code><a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：带"记忆"的局部搜索——用禁忌表记录最近走过的路，防止立即回退循环，配合特赦准则允许突破禁忌去找更好解。</p>
+<p><strong>美赛场景区</strong>：TSP路径优化（150个门店巡回补货顺序）。</p>
+<p><strong>核心原理</strong>：普通局部搜索走两步就可能绕圈回来（A→B→A→B）。禁忌搜索把最近走过的"边"记入禁忌表（如禁忌长度15），强制搜索去新方向；但如果某个禁忌方向能得到历史最优解（特赦准则），还是允许走。</p>
+<p><strong>操作要点</strong>：工具箱中选"禁忌搜索"，邻域two_opt，初始解nearest_neighbor，禁忌长度15，最大迭代600，候选数40。</p>
+<p><strong>结果关键</strong>：总成本从98590降到82045（改善16.78%）；最优解在第585次迭代发现；距最小生成树下界差距32.27%。</p>
+<p><strong>注意</strong>：禁忌搜索是局部搜索的增强版，依赖初始解质量；适合TSP等排列优化。</p>
+</div>
+<h3 id="_17">内点法  <code>进阶级</code><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：求解大规模线性规划的现代方法——从可行域<strong>内部</strong>沿中心路径收敛到最优顶点，不像单纯形法沿边界爬行。</p>
+<p><strong>美赛场景区</strong>：大规模生产排产优化（60个产品品类、29项共用资源约束），求最优产量组合和瓶颈资源影子价格。</p>
+<p><strong>核心原理</strong>：单纯形法像沿多边形围墙从一个顶点走到另一个顶点；内点法像从多边形内部直接向最优顶点"钻过去"，变量多时速度快得多。还能算出<strong>影子价格</strong>——每种紧缺资源放宽1单位能多赚多少钱。</p>
+<p><strong>操作要点</strong>：工具箱中选"内点法"（HiGHS-IPM），presolve开启，变量下界默认0。</p>
+<p><strong>结果关键</strong>：最优目标值（如420390）；各紧约束的影子价格（如R01资源影子价格7.233，是瓶颈资源）；约束余量为0的约束即瓶颈。</p>
+<p><strong>注意</strong>：内点法适合大规模LP；整数规划仍需分支定界。影子价格是敏感性分析的关键输出。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

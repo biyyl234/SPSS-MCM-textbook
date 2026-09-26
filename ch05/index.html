@@ -1,0 +1,1828 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://biyyl234.github.io/SPSS-MCM-textbook/ch05/">
+      
+      
+        <link rel="prev" href="../ch04/">
+      
+      
+        <link rel="next" href="../ch06/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>第5章 聚类与降维 - SPSS算法实战：数模美赛快速入门教材</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-header__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPSS算法实战：数模美赛快速入门教材
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第5章 聚类与降维
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../preface/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  前言
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch01/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第1章 描述性统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch02/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第2章 相关分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch03/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第3章 差异比较
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch04/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第4章 回归分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第5章 聚类与降维
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch06/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第6章 时间序列与计量经济
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch07/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第7章 预测模型
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch08/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第8章 综合评价
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch09/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第9章 问卷研究
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch10/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第10章 医学统计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch11/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第11章 机器学习
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch12/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第12章 规划求解
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch13/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第13章 质量控制
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch14/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第14章 空间计量
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch15/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第15章 试验设计
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch16/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第16章 Meta分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch17/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第17章 文本分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ch18/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  第18章 功效分析
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_a/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录A 美赛真题题型与算法速查表
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../appendix_b/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  附录B 优秀论文模型拆解
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPSS算法实战：数模美赛快速入门教材" class="md-nav__button md-logo" aria-label="SPSS算法实战：数模美赛快速入门教材" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SPSS算法实战：数模美赛快速入门教材
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/biyyl234/SPSS-MCM-textbook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 描述性统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 相关分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 差异比较
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 聚类与降维
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基础级算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="基础级算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 聚类分析（K-Means） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二阶聚类（两步聚类） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⭐ 主成分分析（PCA） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        因子分析（探索性） 基础级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        进阶级算法速览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="进阶级算法速览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dbscan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DBSCAN密度聚类 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        冗余分析（RDA） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        判别分析（LDA） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多维尺度分析（MDS） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分层聚类（系统聚类） 进阶级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 时间序列与计量经济
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 预测模型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 综合评价
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 问卷研究
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 医学统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 机器学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 规划求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 质量控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 空间计量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 试验设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 Meta分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 文本分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 功效分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录A 美赛真题题型与算法速查表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix_b/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    附录B 优秀论文模型拆解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">聚类与降维<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">本章导览</p>
+<p><strong>这个分类是干什么的？</strong></p>
+<p>前面的方法都有"标准答案"（因变量、分组标签）。这一章是<strong>无监督学习</strong>——<strong>没有标准答案</strong>。聚类是把"长得像"的对象自动归成一群（会员分群、客户分层）；降维是把"十几个互相纠缠的指标"压缩成"两三个综合指标"（主成分、因子），让数据从啰嗦变简洁。</p>
+<p><strong>美赛什么题型常用？</strong></p>
+<p>C题（大数据题）高频出现：客户分群、城市分类、指标体系构建；A/B题中把高维观测投影到二维做可视化；论文中"综合评价"前常用PCA先把指标浓缩。</p>
+<p><strong>学习路径建议</strong>
+先学<strong>K-Means聚类</strong>（最经典）和<strong>主成分分析PCA</strong>（降维入门）；再认识<strong>二阶聚类</strong>（能同时处理连续+分类变量）和<strong>探索性因子分析</strong>（问卷量表维度提炼）；进阶了解分层聚类、DBSCAN、判别分析LDA、MDS和RDA。</p>
+</div>
+<h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="k-means">⭐ 聚类分析（K-Means）  <code>基础级</code><a class="headerlink" href="#k-means" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>K-Means就是<strong>让计算机自动把样本分成<span class="arithmatex">\(K\)</span>堆</strong>，堆内的人像、堆间的人不像。本案例按会员的消费频次、客单价、活跃天数，把150名会员自动分成3个群体。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>没有标签，想把样本自动分成若干"人群包/客户群"</li>
+<li>美赛C题客户分群、城市/地区画像、行为模式识别</li>
+<li>论文中"分群运营""分层管理"的依据</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>想象在桌面上撒一把珠子，要把它们分成<span class="arithmatex">\(K\)</span>堆。
+1. 先随机选<span class="arithmatex">\(K\)</span>个点当"堆心"
+1. 每个珠子归到离它最近的堆心
+1. 重新计算每堆的中心（均值），移动堆心
+1. 重复直到堆心不再移动</p>
+<p><strong>关键问题：<span class="arithmatex">\(K\)</span>取几？</strong>本案例在<span class="arithmatex">\(k=2\)</span>到10间试，看<strong>轮廓系数</strong>——越接近1说明堆内紧、堆间分。结果<span class="arithmatex">\(k=3\)</span>时轮廓系数0.77最高，故选3类。</p>
+<p>三类画像：簇0（40%）活跃高频但客单低；簇1（22.7%）三项都低（沉默客户）；簇2（37.3%）客单价高但频次低（高价值低频）。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 分类 → K-平均值聚类</strong></li>
+<li>把参与分群的变量（<strong>月消费频次、平均客单价、月活跃天数</strong>）选入<strong>变量</strong></li>
+<li>"聚类数"填3（也可先用工具箱自动选<span class="arithmatex">\(K\)</span>）</li>
+<li>点击<strong>选项</strong>，勾选"初始聚类中心""最终聚类中心""ANOVA表"</li>
+<li>方法选<strong>k-means++</strong>初始化，固定随机种子保证可复现</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：先把变量做<strong>标准化</strong>（消除量纲，否则客单价数值大会主导距离）；<span class="arithmatex">\(n\)</span>_init多跑几次取最优；<span class="arithmatex">\(k=3\)</span>。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>初始/最终聚类中心</strong>：每堆在各变量上的均值，是"画像"核心</li>
+<li><strong>簇数诊断表</strong>：<span class="arithmatex">\(k=3\)</span>时轮廓系数0.77、Calinski-Harabasz=897（比<span class="arithmatex">\(k=2\)</span>的0.63、<span class="arithmatex">\(k=4\)</span>的0.59都高），故定3类</li>
+<li><strong>簇规模</strong>：簇0=60（40%）、簇1=34（22.7%）、簇2=56（37.3%）</li>
+<li><strong>轮廓系数</strong><span class="arithmatex">\(0.77&gt;0.5\)</span>：分群结构清晰；若<span class="arithmatex">\(&lt;0.25\)</span>说明边界模糊、分群失败</li>
+<li>变量贡献eta<span class="arithmatex">\(^2\)</span>：客单价0.93、消费频次0.92、活跃天数0.92——三者都很能区分人群</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>连续变量、想要球形簇、样本量大时。</p>
+<p><strong>什么时候不用？</strong>
+- 不知道<span class="arithmatex">\(K\)</span>且不想猜：用二阶聚类或分层聚类
+- 簇形状不规则（月牙形）或有噪声点：K-Means不行，用DBSCAN
+- 变量量纲差异大：必须先标准化，否则大数值变量主导</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不标准化直接聚类，客单价几百块把频次几次的距离全盖住
+- <strong>坑2</strong>：把簇均值差当"显著差异"。K-Means是描述性分群，不是假设检验</p>
+<p><strong>和相似算法的区别</strong>：K-Means要事先定<span class="arithmatex">\(K\)</span>、是球形簇；二阶聚类自动定<span class="arithmatex">\(K\)</span>还能吃分类变量；DBSCAN能识别噪声和任意形状簇。</p>
+</div>
+<h3 id="_3">二阶聚类（两步聚类）  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>二阶聚类是<strong>全自动</strong>的K-Means升级版——<strong>连续变量和分类变量都能吃</strong>，还能<strong>自动帮你决定分几类</strong>。本案例混合年消费金额（连续）和性别、会员等级（分类）给健身会员分群。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>聚类变量里<strong>既有数值又有分类</strong>（K-Means处理不了分类）</li>
+<li>不想手动试<span class="arithmatex">\(K\)</span>，想让算法自动定最优簇数</li>
+<li>美赛中混合属性的客户/对象分群</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>它分两步，这也是"两步聚类"名字的由来：
+1. <strong>阶段一</strong>：逐个扫描样本，把相近的先攒成小"子簇"（像先把散珠子拢成小堆）
+1. <strong>阶段二</strong>：用对数似然距离把这些小簇逐层合并，自动试<span class="arithmatex">\(k=2\)</span>到10，用<strong>BIC/AIC</strong>和<strong>轮廓系数</strong>选最佳</p>
+<p>本案例试<span class="arithmatex">\(k=2\)</span>--10，轮廓系数在<span class="arithmatex">\(k=4\)</span>处最高0.271，故定4簇。连续变量用欧式距离、分类变量用对数似然距离，所以它能混合两类变量。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 分类 → 两步聚类</strong></li>
+<li>连续变量（<strong>年消费金额、月均到店次数、单次时长、满意度</strong>）放入"连续变量"</li>
+<li>分类变量（<strong>性别、会员等级、到店时段、运动偏好</strong>）放入"分类变量"</li>
+<li>"聚类数"选<strong>自动确定</strong>，范围2--10</li>
+<li>点<strong>输出</strong>勾"聚类质量轮廓图"</li>
+<li>点击<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：选择准则auto（轮廓系数优先），连续变量自动标准化，缺失按阈值处理。本案例<span class="arithmatex">\(n=150\)</span>，4连续+4分类变量。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>自动定簇</strong>：<span class="arithmatex">\(k=4\)</span>时轮廓系数0.271（中等质量），BIC曲线佐证</li>
+<li><strong>簇规模</strong>：簇0=39、簇1=35、簇2=36、簇3=40，较均衡</li>
+<li><strong>连续变量画像</strong>：簇3年消费17063元、到店17.7次——"高价值晚间器械客"；簇1年消费仅1717元、到店2.6次——"低活跃午后团操客"</li>
+<li><strong>分类变量画像</strong>：簇3以铂金会员+晚间+器械为主；簇1以普通会员+午后+团体操课为主</li>
+<li><strong>变量区分度</strong>：8个变量区分度检验<span class="arithmatex">\(p\)</span>都<span class="arithmatex">\(&lt;0.01\)</span>（性别<span class="arithmatex">\(p=0.008\)</span>），说明它们都在有效分群</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>混合连续+分类变量、想要自动定<span class="arithmatex">\(K\)</span>、样本较大。</p>
+<p><strong>什么时候不用？</strong>全是连续变量且形状规则，K-Means更直观；簇形状不规则需要噪声识别，用DBSCAN。</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：轮廓系数0.27其实只是"中等"，不要硬说"分群非常好"——按0.25以下弱、0.5以上强的标准诚实报告
+- <strong>坑2</strong>：把常量列或高缺失列塞进聚类，污染距离计算</p>
+<p><strong>和相似算法的区别</strong>：它=K-Means的自动版+能吃分类变量。K-Means要手定<span class="arithmatex">\(K\)</span>、只吃连续；分层聚类画树状图但不吃混合变量。</p>
+</div>
+<h3 id="pca">⭐ 主成分分析（PCA）  <code>基础级</code><a class="headerlink" href="#pca" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>PCA把<strong>十几个互相关的指标</strong>压缩成<strong>两三个互不相关的综合指标</strong>（主成分），用少量维度代表大部分信息。本案例从9个门店经营指标压缩到3个主成分。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>指标太多且互相纠缠，想降维、去共线性</li>
+<li>综合评价前先浓缩指标；后续聚类/回归前先做特征压缩</li>
+<li>美赛高维数据可视化、指标体系构建</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>9个指标（客流、销售额、客单价、复购率……）很多在说同一件事。PCA的思路像<strong>找最佳观察角度</strong>：
+- 第一主成分PC1：数据"波动最大"的方向，本它解释了47.4%的方差
+- 第二主成分PC2：和PC1垂直、又能解释最多剩余波动（20.6%）
+- 第三PC3：再解释18.5%</p>
+<p>前3个累计解释86.6%——几乎用3个综合指标就装下了原来9个指标的信息。<strong>适用性前提</strong>：先做Bartlett球度检验（本案例<span class="arithmatex">\(\chi^2=1035.7\)</span>，<span class="arithmatex">\(p=5\times10^{-194}\)</span>，适合降维）和KMO（本案例0.811<span class="arithmatex">\(&gt;0.6\)</span>，适合）。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li>点击菜单 <strong>分析 → 降维 → 因子</strong></li>
+<li>把9个数值变量全部选入"变量"框</li>
+<li>点<strong>描述</strong>，勾选<strong>KMO和Bartlett球形检验</strong></li>
+<li>点<strong>抽取</strong>，选"基于特征值<span class="arithmatex">\(&gt;\)</span>1"或固定提取个数</li>
+<li>点<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：先做z-score标准化（等效于基于相关矩阵）；选择模式cumulative（累计贡献率到80%停）；SVD求解器auto。本案例保留3个主成分。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>适用性</strong>：KMO=0.811<span class="arithmatex">\(&gt;0.6\)</span>；Bartlett <span class="arithmatex">\(p&lt;0.001\)</span>——数据适合做PCA</li>
+<li><strong>总方差解释表</strong>：看特征值和累计贡献率</li>
+<li>PC1特征值4.298，解释47.4%</li>
+<li>PC2特征值1.865，累计68.0%</li>
+<li>PC3特征值1.680，累计<strong>86.6%</strong>——保留到此为止</li>
+<li><strong>成分矩阵（载荷）</strong>：看每个主成分主要由哪些变量贡献。PC1主要是会员占比(+0.78)、线上占比(+0.74)、客单价(+0.73)——可命名为"会员价值维度"</li>
+<li><strong>碎石图</strong>：肘部位置就是该停的地方</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>变量多且相关，想压缩成少数综合指标、消除共线性。</p>
+<p><strong>什么时候不用？</strong>
+- 变量间几乎不相关（KMO<span class="arithmatex">\(&lt;0.5\)</span>）：没有可提取的公共结构
+- 需要每个指标都保持可解释性：PCA合成的主成分有时难命名</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不标准化直接做。量纲大的变量会主导主成分
+- <strong>坑2</strong>：强行解释主成分含义。主成分是数学方向，业务命名要结合载荷判断</p>
+<p><strong>和相似算法的区别</strong>：PCA是<strong>无监督</strong>的纯降维；因子分析更进一步找"潜在维度"并做旋转；LDA是有监督的降维（用到类别标签）。</p>
+</div>
+<h3 id="_4">因子分析（探索性）  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">一句话讲清</p>
+<p>问卷问了15道题，但背后其实只有"菜品、服务、环境"3个<strong>看不见的维度</strong>。探索性因子分析就是把这些表面题目归并成背后的潜在维度。</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">美赛适用场景</p>
+<ul>
+<li>问卷量表开发：一堆题项背后有几个维度</li>
+<li>检验问卷结构效度、为算维度总分做准备</li>
+<li>美赛中量表/评价体系的结构提炼</li>
+</ul>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">通俗原理</p>
+<p>顾客给"口味""分量""温度""新鲜度""出品"都打了高分——这5题其实都在测"菜品品质"这个<strong>潜变量</strong>。因子分析把它们归成一簇。</p>
+<ul>
+<li><strong>KMO=0.762</strong><span class="arithmatex">\(&gt;0.6\)</span>，Bartlett <span class="arithmatex">\(\chi^2=564.99\)</span>（<span class="arithmatex">\(df=105\)</span>，<span class="arithmatex">\(p=3.8\times10^{-64}\)</span>）——适合做</li>
+<li>按特征值<span class="arithmatex">\(&gt;\)</span>1提取3个公因子，用<strong>最大方差旋转(varimax)</strong>让载荷结构清晰</li>
+<li>本案例因子1=服务（服务员态度、响应速度等5题），因子2=菜品（口味、新鲜等5题），因子3=环境（整洁、氛围等5题）</li>
+</ul>
+<p>旋转后累计解释方差40.6%。<strong>载荷</strong><span class="arithmatex">\(\geq0.5\)</span>算有效归属。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">SPSS操作步骤</p>
+<ol>
+<li><strong>分析 → 降维 → 因子</strong></li>
+<li>把15个题项全部选入变量框</li>
+<li>点<strong>描述</strong>勾KMO和Bartlett</li>
+<li>点<strong>抽取</strong>：方法选主轴因子法PAF，按特征值<span class="arithmatex">\(&gt;\)</span>1定因子数</li>
+<li>点<strong>旋转</strong>：选<strong>最大方差法varimax</strong></li>
+<li>点<strong>确定</strong></li>
+</ol>
+<p><strong>默认参数参考</strong>：提取方法PAF，旋转varimax，有效载荷阈值0.50，特征值<span class="arithmatex">\(&gt;\)</span>1自动定因子数。本案例<span class="arithmatex">\(n=150\)</span>（题项的10倍）。</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">结果怎么看</p>
+<ul>
+<li><strong>适用性</strong>：KMO=0.762，Bartlett <span class="arithmatex">\(p&lt;0.001\)</span>——通过</li>
+<li><strong>总方差解释</strong>：3个因子旋转后累计解释40.6%</li>
+<li><strong>旋转后载荷矩阵</strong>是核心：每道题在哪个因子上载荷最高就归哪个因子。本案例15题干净地分进3簇，无交叉载荷</li>
+<li><strong>共同度</strong>：每题被公因子解释的比例，偏低（<span class="arithmatex">\(&lt;0.3\)</span>）的题考虑删改</li>
+<li><strong>碎石图</strong>：肘部确认3个因子合理</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">注意事项 &amp; 决策指引</p>
+<p><strong>什么时候用？</strong>问卷/量表题项多，想提炼背后维度。</p>
+<p><strong>什么时候不用？</strong>
+- KMO<span class="arithmatex">\(&lt;0.6\)</span>或Bartlett不显著：题项间没公共结构
+- 只是想压缩维度做回归/聚类：PCA更直接</p>
+<p><strong>常见坑</strong>
+- <strong>坑1</strong>：不旋转就硬读载荷。未旋转的因子含义模糊，旋转后才能干净归类
+- <strong>坑2</strong>：样本量太小。经验要求<span class="arithmatex">\(n\)</span>至少是题项数的5--10倍</p>
+<p><strong>和相似算法的区别</strong>：PCA主成分是变量的线性组合（重在降维）；因子分析假设背后有<strong>潜变量</strong>（重在找结构）。两者常被混用，但理论出发点不同。</p>
+</div>
+<h2 id="_5">进阶级算法速览<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="dbscan">DBSCAN密度聚类  <code>进阶级</code><a class="headerlink" href="#dbscan" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：不靠预设簇数，按<strong>样本密集程度</strong>自动成团，还能把"离群点"标成噪声。</p>
+<p><strong>美赛场景区</strong>：形状不规则的簇、有异常点的地理/轨迹数据（本案例打车订单的出行模式+异常订单识别）。</p>
+<p><strong>核心原理</strong>：若某点周围半径eps内有至少min_samples个点，就把这片稠密区域发展成一个簇；稀疏处的点标记为噪声。本案例eps=0.5、min_samples=5，分出3簇+16个噪声点，非噪声轮廓系数0.795。</p>
+<p><strong>操作要点</strong>：工具箱选"DBSCAN密度聚类"，标准化特征；用k-距离图拐点选eps；欧氏距离。</p>
+<p><strong>结果关键</strong>：簇数自动确定；噪声占比（本案例10.7%）；非噪声样本轮廓系数；各簇特征均值剖面。</p>
+<p><strong>注意</strong>：它不需要预设<span class="arithmatex">\(K\)</span>、能识别任意形状和噪声，但对eps和min_samples敏感，且密度不均时效果打折。</p>
+</div>
+<h3 id="rda">冗余分析（RDA）  <code>进阶级</code><a class="headerlink" href="#rda" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：研究<strong>多个响应变量</strong>如何被<strong>多个解释变量</strong>共同解释的约束排序方法——生态学常用。</p>
+<p><strong>美赛场景区</strong>：环境因子驱动群落结构；多响应变量受多环境变量影响的分析（本案例水质指标如何驱动藻类丰度）。</p>
+<p><strong>核心原理</strong>：先对响应矩阵做多元回归得拟合值，再对拟合值做主成分分解得"约束排序轴"。全局置换检验<span class="arithmatex">\(p=0.001\)</span>，<span class="arithmatex">\(R^2=89.24%\)</span>说明环境变量显著解释了藻类变异。</p>
+<p><strong>操作要点</strong>：工具箱选"冗余分析RDA"，指定响应变量组和解释变量组；分类解释变量自动哑变量化；置换999次。</p>
+<p><strong>结果关键</strong>：全局置换检验<span class="arithmatex">\(p\)</span>；各解释变量单独解释率；排序图箭头方向与长度。</p>
+<p><strong>注意</strong>：它是<strong>有约束</strong>的PCA。若响应沿环境梯度呈单峰分布，应改用典范对应分析CCA。</p>
+</div>
+<h3 id="lda">判别分析（LDA）  <code>进阶级</code><a class="headerlink" href="#lda" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：已知历史分组标签，找一条"最佳分界线"把各组分开，并给新样本归类——有监督的分类+降维。</p>
+<p><strong>美赛场景区</strong>：信用评级、疾病判别、模式识别；用已知类别的指标建立判别规则给新对象分类（本案例企业信用等级判别）。</p>
+<p><strong>核心原理</strong>：找线性判别函数，使<strong>组间差异相对组内差异</strong>最大。本案例5个财务指标建判别函数，留一法准确率80.6%（Kappa=0.708），远高于猜最大类的33.3%基线。</p>
+<p><strong>操作要点</strong>：工具箱选"判别分析LDA"，指定分组列和特征列；Box's M检验协方差齐性；留一法交叉验证。</p>
+<p><strong>结果关键</strong>：Wilks' Lambda（整体判别力）；标准化判别系数（谁最能区分）；混淆矩阵和各类命中率。</p>
+<p><strong>注意</strong>：它和PCA都降维，但<strong>LDA用到类别标签</strong>、目标是"分开组"；PCA无标签、目标是"保留方差"。协方差不齐时用二次判别QDA。</p>
+</div>
+<h3 id="mds">多维尺度分析（MDS）  <code>进阶级</code><a class="headerlink" href="#mds" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：把"谁和谁像、差多远"的抽象关系，画成<strong>一张二维地图</strong>——点越近越相似。</p>
+<p><strong>美赛场景区</strong>：品牌/门店感知图；对象间相似性的可视化；无法直接坐标化但知道两两距离时的定位。</p>
+<p><strong>核心原理</strong>：先算两两距离，再在二维空间摆点，让"图上距离"尽量贴近"原始距离"。本案例150家门店在7个感知维度上，标准化应力0.019（优），前两维解释99%。</p>
+<p><strong>操作要点</strong>：工具箱选"多维尺度MDS"，标准化特征，度量MDS，降维到2维，随机种子42。</p>
+<p><strong>结果关键</strong>：标准化应力<span class="arithmatex">\(&lt;0.05\)</span>为优；Shepard图点贴近对角线；配置图上的点群和孤立点。</p>
+<p><strong>注意</strong>：它只保留<strong>远近关系</strong>，不保留绝对坐标和方向。非度量MDS用于只知道排序相似性的数据。</p>
+</div>
+<h3 id="_6">分层聚类（系统聚类）  <code>进阶级</code><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">进阶算法速览</p>
+<p><strong>一句话</strong>：不预先定簇数，像<strong>族谱</strong>一样把样本一层层两两合并，最后画成一棵树（树状图/谱系图）。</p>
+<p><strong>美赛场景区</strong>：小样本下想看聚类层次结构；变量少、想直观展示"谁和谁先聚在一起"。</p>
+<p><strong>核心原理</strong>：先每个样本自成一簇，用ward连接把最像的两簇反复合并。本案例<span class="arithmatex">\(n=150\)</span>、6指标，ward+欧氏距离，轮廓系数在<span class="arithmatex">\(k=3\)</span>处最高0.683，cophenetic系数0.974。</p>
+<p><strong>操作要点</strong>：<strong>分析 → 分类 → 系统聚类</strong>，选变量、 ward法、欧氏距离、z-score标准化，输出树状图。</p>
+<p><strong>结果关键</strong>：树状图在合适高度横切得簇数；轮廓系数曲线选<span class="arithmatex">\(k\)</span>；各簇规模和均值画像。</p>
+<p><strong>注意</strong>：它<strong>不需要预跑<span class="arithmatex">\(K\)</span></strong>，但样本量大时树状图会非常臃肿，大样本更适合K-Means。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "toc.follow", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
