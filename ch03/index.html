@@ -1562,6 +1562,9 @@
 <li><strong>Levene检验</strong>：把每个数据点到本组中位数的距离拿出来，再对这些"距离"做一次方差分析。它对非正态比较稳健，是默认推荐</li>
 <li><strong>Bartlett检验</strong>：要求各组都近似正态，检验更灵敏但扛不住偏态</li>
 </ul>
+<p>Levene检验的统计量为：
+$<span class="arithmatex">\(W = \frac{(N - k)}{(k - 1)} \cdot \frac{\sum_{j=1}^{k} n_j (\bar{z}_{\cdot j} - \bar{z}_{\cdot \cdot})^2}{\sum_{j=1}^{k}\sum_{i=1}^{n_j}(z_{ij} - \bar{z}_{\cdot j})^2}\)</span>$</p>
+<p>其中<span class="arithmatex">\(z_{ij} = |x_{ij} - \tilde{x}_j|\)</span>为第<span class="arithmatex">\(j\)</span>组第<span class="arithmatex">\(i\)</span>个观测到本组中位数<span class="arithmatex">\(\tilde{x}_j\)</span>的绝对偏差，<span class="arithmatex">\(k\)</span>为组数，<span class="arithmatex">\(n_j\)</span>为第<span class="arithmatex">\(j\)</span>组样本量，<span class="arithmatex">\(N\)</span>为总样本量；<span class="arithmatex">\(W\)</span>近似服从<span class="arithmatex">\(F(k-1, N-k)\)</span>分布。</p>
 <p>本案例4条线标准差分别为1.84、1.88、2.02、6.40——第4条线波动是其他线的3倍多，一眼就不齐。</p>
 </div>
 <div class="admonition tip">
@@ -1614,6 +1617,9 @@
 - <span class="arithmatex">\(O\)</span>是格子里<strong>实际</strong>人数
 - <span class="arithmatex">\(E\)</span>是"假如无关"时<strong>期望</strong>的人数
 - 实际和期望差得越远，<span class="arithmatex">\(\chi^2\)</span>越大，<span class="arithmatex">\(p\)</span>越小，越说明两变量<strong>不独立</strong></p>
+<p>期望频数的计算公式为：
+$<span class="arithmatex">\(E_{ij} = \frac{R_i \times C_j}{N}\)</span>$</p>
+<p>其中<span class="arithmatex">\(R_i\)</span>为第<span class="arithmatex">\(i\)</span>行合计数，<span class="arithmatex">\(C_j\)</span>为第<span class="arithmatex">\(j\)</span>列合计数，<span class="arithmatex">\(N\)</span>为总样本量；自由度<span class="arithmatex">\(df=(r-1)(c-1)\)</span>，<span class="arithmatex">\(r\)</span>、<span class="arithmatex">\(c\)</span>分别为行数和列数。</p>
 <p>本案例<span class="arithmatex">\(\chi^2=27.76\)</span>（自由度<span class="arithmatex">\(df=4\)</span>），<span class="arithmatex">\(p&lt;0.001\)</span>，说明业态和支付方式确实有关。</p>
 </div>
 <div class="admonition tip">
@@ -1666,9 +1672,13 @@
 <p class="admonition-title">通俗原理</p>
 <p>夜班均值19.80，白班21.65，差1.84。但两组人本身就有波动，这点差距会不会只是抽样碰巧？</p>
 <p>t统计量本质是：<strong>均值差 ÷ 抽样误差</strong>。
+$<span class="arithmatex">\(t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{s_p^2\left(\frac{1}{n_1} + \frac{1}{n_2}\right)}}\)</span>$</p>
+<p>其中<span class="arithmatex">\(\bar{x}_1\)</span>、<span class="arithmatex">\(\bar{x}_2\)</span>为两组样本均值，<span class="arithmatex">\(n_1\)</span>、<span class="arithmatex">\(n_2\)</span>为两组样本量，<span class="arithmatex">\(s_p^2\)</span>为合并方差：
+$<span class="arithmatex">\(s_p^2 = \frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}\)</span>$</p>
+<p><span class="arithmatex">\(s_1^2\)</span>、<span class="arithmatex">\(s_2^2\)</span>分别为两组样本方差；<span class="arithmatex">\(t\)</span>服从自由度<span class="arithmatex">\(df = n_1 + n_2 - 2\)</span>的<span class="arithmatex">\(t\)</span>分布。
 - 这个比值越大（<span class="arithmatex">\(|t|\)</span>越大），说明差异相对于随机波动越突出
 - 本案例<span class="arithmatex">\(t=-5.18\)</span>，<span class="arithmatex">\(df=148\)</span>，<span class="arithmatex">\(p&lt;0.0001\)</span>，说明白班确实显著更快</p>
-<p><strong>效应量Cohen's <span class="arithmatex">\(d\)</span></strong>：<span class="arithmatex">\(d=-0.85\)</span>。<span class="arithmatex">\(|d|\approx 0.2\)</span>小效应、0.5中、0.8大。<span class="arithmatex">\(p\)</span>受样本量影响，效应量才告诉你"差距值不值得关心"。</p>
+<p><strong>效应量Cohen's <span class="arithmatex">\(d\)</span></strong>：<span class="arithmatex">\(d = \frac{\bar{x}_1 - \bar{x}_2}{s_p} = -0.85\)</span>。<span class="arithmatex">\(|d|\approx 0.2\)</span>小效应、0.5中、0.8大。<span class="arithmatex">\(p\)</span>受样本量影响，效应量才告诉你"差距值不值得关心"。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1721,10 +1731,12 @@
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
 <p>抽测150瓶均值497.3mL，比标称500少2.7mL。但抽样总有波动，这2.7mL是"真偏了"还是"运气"？</p>
-<p>t统计量=<span class="arithmatex">\((\bar{x}-\mu_0)/\)</span>标准误，即<strong>样本均值离标准值有多远，用抽样误差做单位来量</strong>。
+<p>t统计量即<strong>样本均值离标准值有多远，用抽样误差做单位来量</strong>：
+$<span class="arithmatex">\(t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}}\)</span>$</p>
+<p>其中<span class="arithmatex">\(\bar{x}\)</span>为样本均值，<span class="arithmatex">\(\mu_0\)</span>为待检验的标准值，<span class="arithmatex">\(s\)</span>为样本标准差，<span class="arithmatex">\(n\)</span>为样本量；分母<span class="arithmatex">\(s/\sqrt{n}\)</span>为均值的标准误。<span class="arithmatex">\(t\)</span>服从自由度<span class="arithmatex">\(df = n - 1\)</span>的<span class="arithmatex">\(t\)</span>分布。
 - 本案例<span class="arithmatex">\(t=-8.60\)</span>，<span class="arithmatex">\(df=149\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，远小于0.05
 - 95%置信区间<span class="arithmatex">\([496.7,\ 497.9]\)</span>，标准值500<strong>没落在区间里</strong>，再次印证偏了</p>
-<p>Cohen's <span class="arithmatex">\(d=-0.70\)</span>，中等效应——偏差在统计上显著，实际也值得调校。</p>
+<p>Cohen's <span class="arithmatex">\(d = \frac{\bar{x} - \mu_0}{s} = -0.70\)</span>，中等效应——偏差在统计上显著，实际也值得调校。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1775,11 +1787,12 @@
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
 <p>直接拿后测均值75.2和前测70.9比，混进了"人与人本来就不同"的噪声。配对t的聪明之处是<strong>先给每个人算差值</strong>（后<span class="arithmatex">\(-\)</span>前），再看这堆差值的均值是不是显著不为0。</p>
-<ul>
-<li>本案例差值均值<span class="arithmatex">\(=4.37\)</span>，差值标准差6.81</li>
-<li><span class="arithmatex">\(t=7.87\)</span>，<span class="arithmatex">\(df=149\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，培训确实有效</li>
-<li>95%置信区间<span class="arithmatex">\([3.28,\ 5.47]\)</span>不含0；Cohen's <span class="arithmatex">\(d_z=0.64\)</span>，中等效应</li>
-</ul>
+<p>配对<span class="arithmatex">\(t\)</span>统计量为：
+$<span class="arithmatex">\(t = \frac{\bar{d}}{s_d / \sqrt{n}}\)</span>$</p>
+<p>其中<span class="arithmatex">\(d_i = x_{i,\text{后}} - x_{i,\text{前}}\)</span>为第<span class="arithmatex">\(i\)</span>对观测的差值，<span class="arithmatex">\(\bar{d}\)</span>为差值均值，<span class="arithmatex">\(s_d\)</span>为差值标准差，<span class="arithmatex">\(n\)</span>为配对数；<span class="arithmatex">\(t\)</span>服从自由度<span class="arithmatex">\(df = n - 1\)</span>的<span class="arithmatex">\(t\)</span>分布。
+- 本案例差值均值<span class="arithmatex">\(=4.37\)</span>，差值标准差6.81
+- <span class="arithmatex">\(t=7.87\)</span>，<span class="arithmatex">\(df=149\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，培训确实有效
+- 95%置信区间<span class="arithmatex">\([3.28,\ 5.47]\)</span>不含0；Cohen's <span class="arithmatex">\(d_z = \frac{\bar{d}}{s_d} = 0.64\)</span>，中等效应</p>
 <p><strong>注意</strong>：要检验的是<strong>差值</strong>是否正态，不是前后两次单独正态。本案例差值Shapiro <span class="arithmatex">\(p=0.985\)</span>，通过。前后测相关0.781——相关越高，配对设计越划算。</p>
 </div>
 <div class="admonition tip">
@@ -1830,11 +1843,13 @@
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
 <p>方差分析名字叫"方差"，比的却是均值——它的思路是：<strong>把总的波动拆成"组间差异"和"组内随机波动"两部分</strong>。</p>
-<ul>
-<li><span class="arithmatex">\(F\)</span>统计量 = 组间差异 ÷ 组内差异</li>
-<li><span class="arithmatex">\(F\)</span>越大（<span class="arithmatex">\(p\)</span>越小），越说明各组均值真不一样，而不是随机波动</li>
-<li>本案例：商圈类型<span class="arithmatex">\(F=83.7\)</span>，促销方案<span class="arithmatex">\(F=27.5\)</span>，两者交互<span class="arithmatex">\(F=10.35\)</span>，都<span class="arithmatex">\(p&lt;0.001\)</span></li>
-</ul>
+<p>总平方和分解为：
+$<span class="arithmatex">\(SS_{total} = SS_{between} + SS_{within}\)</span>$</p>
+<p>其中<span class="arithmatex">\(SS_{between} = \sum_{j=1}^{k} n_j(\bar{x}_j - \bar{x})^2\)</span>为组间平方和，<span class="arithmatex">\(SS_{within} = \sum_{j=1}^{k}\sum_{i=1}^{n_j}(x_{ij} - \bar{x}_j)^2\)</span>为组内（误差）平方和，<span class="arithmatex">\(k\)</span>为组数，<span class="arithmatex">\(n_j\)</span>为第<span class="arithmatex">\(j\)</span>组样本量。</p>
+<p><span class="arithmatex">\(F\)</span>统计量为组间均方与组内均方之比：
+$<span class="arithmatex">\(F = \frac{MS_{between}}{MS_{within}} = \frac{SS_{between}/(k-1)}{SS_{within}/(N-k)}\)</span>$</p>
+<p><span class="arithmatex">\(F\)</span>越大（<span class="arithmatex">\(p\)</span>越小），越说明各组均值真不一样，而不是随机波动。
+- 本案例：商圈类型<span class="arithmatex">\(F=83.7\)</span>，促销方案<span class="arithmatex">\(F=27.5\)</span>，两者交互<span class="arithmatex">\(F=10.35\)</span>，都<span class="arithmatex">\(p&lt;0.001\)</span></p>
 <p><strong>交互作用</strong>是关键概念：促销方案的效果<strong>因商圈不同而不同</strong>就叫有交互。比如"满减"在购物中心最赚钱、在社区店一般——这时就不能笼统说"哪种促销最好"，得说"在哪种商圈配哪种促销"。</p>
 </div>
 <div class="admonition tip">
@@ -1881,7 +1896,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：方差分析的<strong>非参数版</strong>——比较三组及以上独立样本的<strong>分布/中位数</strong>是否不同，不要求正态。</p>
 <p><strong>美赛场景区</strong>：数据偏态严重（如耗时、收入、评分）时多组比较；如不同分拨中心的单件分拣耗时差异。</p>
-<p><strong>核心原理</strong>：把所有数据混在一起排序编秩，比较各组的平均秩是否差很多。<span class="arithmatex">\(H\)</span>统计量近似卡方分布。本案例分组变量为分拨中心、指标为单件分拣耗时秒数；<span class="arithmatex">\(p&lt;0.05\)</span>说明各组耗时分布不全相同。</p>
+<p><strong>核心原理</strong>：把所有数据混在一起排序编秩，比较各组的平均秩是否差很多。<span class="arithmatex">\(H\)</span>统计量为：
+$<span class="arithmatex">\(H = \frac{12}{N(N+1)}\sum_{j=1}^{k}\frac{R_j^2}{n_j} - 3(N+1)\)</span>$</p>
+<p>其中<span class="arithmatex">\(R_j\)</span>为第<span class="arithmatex">\(j\)</span>组的秩和，<span class="arithmatex">\(n_j\)</span>为第<span class="arithmatex">\(j\)</span>组样本量，<span class="arithmatex">\(N\)</span>为总样本量，<span class="arithmatex">\(k\)</span>为组数；<span class="arithmatex">\(H\)</span>近似服从自由度<span class="arithmatex">\(k-1\)</span>的卡方分布。本案例分组变量为分拨中心、指标为单件分拣耗时秒数；<span class="arithmatex">\(p&lt;0.05\)</span>说明各组耗时分布不全相同。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 独立样本</strong>，选Kruskal-Wallis；效应量用<span class="arithmatex">\(\varepsilon^2\)</span>；显著后用Bonferroni校正做两两比较。</p>
 <p><strong>结果关键</strong>：看Kruskal-Wallis的<span class="arithmatex">\(p\)</span>值；显著后看各组平均秩，秩越高组数值越大。</p>
 <p><strong>注意</strong>：它是"升级版Mann-Whitney"。两组时它就等价于Mann-Whitney U；正态且方差齐时，普通ANOVA更有检验功效。</p>
@@ -1891,7 +1908,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：配对样本t检验的<strong>非参数版</strong>——同一批人前后两次测量，但差值严重非正态时用它。</p>
 <p><strong>美赛场景区</strong>：前后测差值明显偏态（如治疗前后的康复评分）；小样本+非正态配对数据。</p>
-<p><strong>核心原理</strong>：不算差值本身，而是给差值的绝对值编秩，再按差值正负号分组，比较正负秩和是否平衡。本案例判断干预后指标是否显著变化。</p>
+<p><strong>核心原理</strong>：不算差值本身，而是给差值的绝对值<span class="arithmatex">\(|d_i|\)</span>编秩，再按差值正负号分组，比较正负秩和是否平衡。检验统计量<span class="arithmatex">\(W = \min(W_+, W_-)\)</span>，其中<span class="arithmatex">\(W_+\)</span>为正差值的秩和、<span class="arithmatex">\(W_-\)</span>为负差值的秩和；<span class="arithmatex">\(W\)</span>越小（<span class="arithmatex">\(p\)</span>越小）越拒绝"差值中位数为0"的原假设。本案例判断干预后指标是否显著变化。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 相关样本</strong>，选Wilcoxon符号秩；双侧检验，效应量<span class="arithmatex">\(r\)</span>。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(p&lt;0.05\)</span>说明前后测量有显著的系统性升降；结合差值中位数判断方向。</p>
 <p><strong>注意</strong>：当配对差值近似正态时，配对t检验更灵敏；它是差值非正态时的稳健替代，不是首选。</p>
@@ -1911,7 +1928,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：随机区组/重复测量设计下的<strong>非参数ANOVA</strong>——同一批对象接受<strong>三个及以上</strong>条件，比较是否有差异。</p>
 <p><strong>美赛场景区</strong>：同一组被试在多种方案/多个时间点下的评分比较；如五位评委对四款产品的排序一致性检验。</p>
-<p><strong>核心原理</strong>：在<strong>每个对象内部</strong>给各条件编秩，再汇总各条件的秩和。本案例为三水平及以上的重复测量设计，<span class="arithmatex">\(p&lt;0.05\)</span>说明各条件分布不全相同。</p>
+<p><strong>核心原理</strong>：在<strong>每个对象内部</strong>给各条件编秩，再汇总各条件的秩和。Friedman统计量为：
+$<span class="arithmatex">\(\chi_F^2 = \frac{12}{n k(k+1)}\sum_{j=1}^{k} R_j^2 - 3n(k+1)\)</span>$</p>
+<p>其中<span class="arithmatex">\(n\)</span>为区组（对象）数，<span class="arithmatex">\(k\)</span>为条件（处理）数，<span class="arithmatex">\(R_j\)</span>为第<span class="arithmatex">\(j\)</span>个条件的秩和；<span class="arithmatex">\(\chi_F^2\)</span>近似服从自由度<span class="arithmatex">\(k-1\)</span>的卡方分布。本案例为三水平及以上的重复测量设计，<span class="arithmatex">\(p&lt;0.05\)</span>说明各条件分布不全相同。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 相关样本</strong>，选Friedman；显著后做事后两两比较。</p>
 <p><strong>结果关键</strong>：Friedman卡方统计量的<span class="arithmatex">\(p\)</span>值；显著后用Wilcoxon两两比较并Bonferroni校正。</p>
 <p><strong>注意</strong>：它是<strong>配对版Kruskal-Wallis</strong>。两个配对条件时用Wilcoxon符号秩；三个及以上配对条件用Friedman。</p>
@@ -1921,7 +1940,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：同时考察一个（多个）分组因素对<strong>多个相关因变量</strong>的整体影响。</p>
 <p><strong>美赛场景区</strong>：比较不同组在"销量+满意度+复购率"等多个相关指标上的综合差异；避免多个单变量ANOVA放大假阳性。</p>
-<p><strong>核心原理</strong>：把多个因变量当一个整体向量，用Wilks' Lambda等统计量检验组间质心是否不同。本案例输出Wilks' <span class="arithmatex">\(\Lambda\)</span>、<span class="arithmatex">\(F\)</span>近似和<span class="arithmatex">\(p\)</span>值。</p>
+<p><strong>核心原理</strong>：把多个因变量当一个整体向量，用Wilks' Lambda等统计量检验组间质心是否不同。Wilks' <span class="arithmatex">\(\Lambda = \frac{|W|}{|B + W|}\)</span>，其中<span class="arithmatex">\(W\)</span>为组内误差阵、<span class="arithmatex">\(B\)</span>为组间效应阵；<span class="arithmatex">\(\Lambda\)</span>取值<span class="arithmatex">\([0,1]\)</span>，越接近0说明组间差异越大，通常转换为近似<span class="arithmatex">\(F\)</span>统计量进行检验。本案例输出Wilks' <span class="arithmatex">\(\Lambda\)</span>、<span class="arithmatex">\(F\)</span>近似和<span class="arithmatex">\(p\)</span>值。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 一般线性模型 → 多变量</strong>，多个因变量同时入框，固定因子放分组变量。</p>
 <p><strong>结果关键</strong>：先看多变量检验表的Wilks' <span class="arithmatex">\(\Lambda\)</span>及其<span class="arithmatex">\(p\)</span>；显著后再回头看各单变量ANOVA表，定位差异来自哪个因变量。</p>
 <p><strong>注意</strong>：要求因变量多元正态、协方差阵齐性（Box's M检验）。它是"一揽子"检验，显著了还得拆到单变量层面解释。</p>
@@ -1931,7 +1950,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：最稳健的多组中位数比较——只看每组落在总中位数之上/之下的个数，用卡方判断各组中位数是否相同。</p>
 <p><strong>美赛场景区</strong>：数据有极端值、严重偏态，连Kruskal-Wallis都嫌不稳时的兜底方法。</p>
-<p><strong>核心原理</strong>：求所有数据的共同中位数，数每组有多少个点在它上面/下面，列成列联表做卡方检验。</p>
+<p><strong>核心原理</strong>：求所有数据的共同中位数<span class="arithmatex">\(\tilde{m}\)</span>，数每组有多少个点在它上面/下面，列成<span class="arithmatex">\(k \times 2\)</span>列联表（<span class="arithmatex">\(k\)</span>组 × 上下），对该列联表做卡方检验<span class="arithmatex">\(\chi^2 = \sum\frac{(O-E)^2}{E}\)</span>，其中<span class="arithmatex">\(E_{ij} = \frac{R_i C_j}{N}\)</span>。</p>
 <p><strong>操作要点</strong>：工具箱选"Mood中位数检验"，指定分组变量和数值变量；<span class="arithmatex">\(\alpha=0.05\)</span>。</p>
 <p><strong>结果关键</strong>：卡方<span class="arithmatex">\(p&lt;0.05\)</span>说明各组中位数不全相等；它检验的是中位数位置，不是分布形状。</p>
 <p><strong>注意</strong>：检验功效低（浪费了秩信息），是<strong>最保守</strong>的方法——只有数据特别脏时才用，优先Kruskal-Wallis。</p>
@@ -1941,7 +1960,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：方差分析+回归的混血——比较组间均值差异时，<strong>顺手扣掉一个连续干扰变量（协变量）</strong>的影响。</p>
 <p><strong>美赛场景区</strong>：比较各班成绩时扣掉"入学基础分"；比较各方案效果时扣掉"初始水平"。</p>
-<p><strong>核心原理</strong>：先把因变量对协变量做回归，用<strong>校正后</strong>的组均值再做ANOVA。本案例在比较组别差异前，先消除协变量造成的基线不平衡。</p>
+<p><strong>核心原理</strong>：先把因变量对协变量做回归，用<strong>校正后</strong>的组均值再做ANOVA。校正均值为<span class="arithmatex">\(\bar{y}_j^* = \bar{y}_j - b(\bar{x}_j - \bar{x})\)</span>，其中<span class="arithmatex">\(\bar{y}_j\)</span>、<span class="arithmatex">\(\bar{x}_j\)</span>分别为第<span class="arithmatex">\(j\)</span>组的因变量和协变量均值，<span class="arithmatex">\(b\)</span>为公共回归斜率，<span class="arithmatex">\(\bar{x}\)</span>为总协变量均值。本案例在比较组别差异前，先消除协变量造成的基线不平衡。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 一般线性模型 → 单变量</strong>，固定因子放分组，<strong>协变量</strong>框放干扰变量。</p>
 <p><strong>结果关键</strong>：先看"组别"效应校正后是否仍显著；若校正后差异消失，说明原差异主要来自协变量而非分组本身。</p>
 <p><strong>注意</strong>：前提是<strong>各组与协变量回归斜率平行</strong>（无交互），否则不能直接用。</p>
@@ -1951,7 +1970,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：判断一串按顺序排列的数据是不是<strong>随机出现</strong>的——有没有人为规律或趋势。</p>
 <p><strong>美赛场景区</strong>：检验抽样是否随机；检验残差序列是否随机（回归假设）；判断比赛/股票涨跌是否随机游走。</p>
-<p><strong>核心原理</strong>：以中位数（或某阈值）为界把数据分正负，数连续同号的"游程"个数。游程太少=有聚类/趋势，太多=有周期振荡，都说明不随机。</p>
+<p><strong>核心原理</strong>：以中位数（或某阈值）为界把数据分正负，数连续同号的"游程"个数<span class="arithmatex">\(R\)</span>。在随机假设下，期望游程数为<span class="arithmatex">\(E(R) = \frac{2n_1 n_2}{n_1 + n_2} + 1\)</span>，方差为<span class="arithmatex">\(\text{Var}(R) = \frac{2n_1 n_2(2n_1 n_2 - n_1 - n_2)}{(n_1+n_2)^2(n_1+n_2-1)}\)</span>，其中<span class="arithmatex">\(n_1\)</span>、<span class="arithmatex">\(n_2\)</span>分别为正、负号个数。游程太少=有聚类/趋势，太多=有周期振荡，都说明不随机。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 游程检验</strong>，选检验变量，临界值选"中位数"。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(p&gt;0.05\)</span>说明序列随机；<span class="arithmatex">\(p&lt;0.05\)</span>说明存在系统性模式。</p>
 <p><strong>注意</strong>：它检验的是<strong>随机性</strong>，不是均值差异——别和单样本t检验搞混。</p>
@@ -1961,7 +1980,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：ANOVA告诉你"至少两组不同"之后，再<strong>逐对比较</strong>找出到底是哪几对不同，同时控制假阳性。</p>
 <p><strong>美赛场景区</strong>：三四种促销/配方/地区之间两两找差异；是方差分析的"后半程"必备。</p>
-<p><strong>核心原理</strong>：两两比较会累积假阳性（3组就3次比较、假阳性率涨到14%），事后比较用Tukey HSD、Bonferroni等方法给<span class="arithmatex">\(p\)</span>值"打折"，把总体错误率压回0.05。</p>
+<p><strong>核心原理</strong>：两两比较会累积假阳性（3组就3次比较、假阳性率涨到14%），事后比较用Tukey HSD、Bonferroni等方法给<span class="arithmatex">\(p\)</span>值"打折"，把总体错误率压回0.05。Tukey HSD的临界差值为<span class="arithmatex">\(HSD = q_{\alpha}(k, N-k)\sqrt{\frac{MS_{within}}{n}}\)</span>，其中<span class="arithmatex">\(q_{\alpha}\)</span>为学生化极差分布的临界值，<span class="arithmatex">\(k\)</span>为组数，<span class="arithmatex">\(n\)</span>为每组样本量（均衡设计）；两组均值差的绝对值超过HSD则判定显著。</p>
 <p><strong>操作要点</strong>：单因素ANOVA对话框点<strong>事后多重比较</strong>，方差齐选<strong>Tukey</strong>，不齐选<strong>Games-Howell</strong>。</p>
 <p><strong>结果关键</strong>："多重比较表"中标注*或校正<span class="arithmatex">\(p&lt;0.05\)</span>的组别对，就是真正有差异的对；同列字母法（a/b/c）更直观。</p>
 <p><strong>注意</strong>：<strong>必须在ANOVA整体显著之后再做</strong>。整体不显著却硬做两两比较是"钓鱼"。</p>
@@ -1971,7 +1990,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：独立样本t检验的<strong>非参数版</strong>——两组独立样本，但数据非正态时，比两组分布/位置是否不同。</p>
 <p><strong>美赛场景区</strong>：两组偏态数据（如金额、耗时、严重度评分）的比较；不满足t检验正态前提时。</p>
-<p><strong>核心原理</strong>：把两组数据混在一起编秩，比较两组的秩和。<span class="arithmatex">\(U\)</span>统计量对应的<span class="arithmatex">\(p&lt;0.05\)</span>说明两组分布位置不同。</p>
+<p><strong>核心原理</strong>：把两组数据混在一起编秩，比较两组的秩和。Mann-Whitney U统计量为<span class="arithmatex">\(U_1 = n_1 n_2 + \frac{n_1(n_1+1)}{2} - R_1\)</span>（同理<span class="arithmatex">\(U_2 = n_1 n_2 - U_1\)</span>），其中<span class="arithmatex">\(n_1\)</span>、<span class="arithmatex">\(n_2\)</span>为两组样本量，<span class="arithmatex">\(R_1\)</span>为第1组的秩和；取<span class="arithmatex">\(U = \min(U_1, U_2)\)</span>，大样本下用正态近似<span class="arithmatex">\(Z = \frac{U - n_1 n_2/2}{\sqrt{n_1 n_2(n_1+n_2+1)/12}}\)</span>。<span class="arithmatex">\(p&lt;0.05\)</span>说明两组分布位置不同。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 独立样本</strong>，选Mann-Whitney U；两组按分组变量定义。</p>
 <p><strong>结果关键</strong>：看Mann-Whitney U（或Z）的渐近显著性；结合两组平均秩判断哪组整体更高。</p>
 <p><strong>注意</strong>：两组独立+非正态时用它；三组及以上用Kruskal-Wallis。数据正态时t检验更灵敏。</p>
@@ -1981,7 +2000,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：反过来证明"两组<strong>没有实质差别</strong>"——普通t检验不显著只能说"没检出差异"，等价检验才能说"确实差不多"。</p>
 <p><strong>美赛场景区</strong>：证明新方案不比老方案差（等效）；证明两测量方法结果一致；环保/医药的"非劣效"论证。</p>
-<p><strong>核心原理</strong>：预先设定一个"可接受差异边界<span class="arithmatex">\(\pm\Delta\)</span>"，做两次单侧检验（TOST）：只有当均值差的置信区间<strong>整个落在<span class="arithmatex">\([-\Delta,\Delta]\)</span>内</strong>，才判定等价。</p>
+<p><strong>核心原理</strong>：预先设定一个"可接受差异边界<span class="arithmatex">\(\pm\Delta\)</span>"，做两次单侧检验（TOST）：<span class="arithmatex">\(H_0^{(1)}: \mu_1 - \mu_2 \leq -\Delta\)</span>和<span class="arithmatex">\(H_0^{(2)}: \mu_1 - \mu_2 \geq \Delta\)</span>，只有两次单侧检验都拒绝（即<span class="arithmatex">\(p &lt; 0.05\)</span>），才判定等价。等价判据等价于均值差的<span class="arithmatex">\(100(1-2\alpha)\%\)</span>置信区间<span class="arithmatex">\([\bar{x}_1 - \bar{x}_2 - t_{1-\alpha}\cdot SE,\; \bar{x}_1 - \bar{x}_2 + t_{1-\alpha}\cdot SE]\)</span>整个落在<span class="arithmatex">\([-\Delta, \Delta]\)</span>内。</p>
 <p><strong>操作要点</strong>：工具箱选"等价性检验"，设定等价界值<span class="arithmatex">\(\Delta\)</span>（结合业务意义，不能随便定）。</p>
 <p><strong>结果关键</strong>：均值差的90%置信区间完全落在等价带内，才结论"等价"；若区间跨出边界，则不能宣称等效。</p>
 <p><strong>注意</strong>：它和普通检验逻辑相反——<strong>显著才算数</strong>。<span class="arithmatex">\(p&lt;0.05\)</span>才说明等价，不是<span class="arithmatex">\(p&gt;0.05\)</span>。</p>
@@ -1991,7 +2010,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：单样本t检验的<strong>非参数版</strong>——一组数据的中位数是否等于某个标准值，但数据非正态时用。</p>
 <p><strong>美赛场景区</strong>：小样本+偏态数据（如收入、反应时间）检验中位数是否达标/等于目标。</p>
-<p><strong>核心原理</strong>：计算每个观测与标准值之差，给差值绝对值编秩，按正负号分两组比较秩和。</p>
+<p><strong>核心原理</strong>：计算每个观测与标准值之差<span class="arithmatex">\(d_i = x_i - \mu_0\)</span>，给差值绝对值<span class="arithmatex">\(|d_i|\)</span>编秩，按正负号分两组比较秩和。检验统计量<span class="arithmatex">\(W = \min(W_+, W_-)\)</span>，其中<span class="arithmatex">\(W_+\)</span>为正差值的秩和、<span class="arithmatex">\(W_-\)</span>为负差值的秩和；大样本下<span class="arithmatex">\(Z = \frac{W - n(n+1)/4}{\sqrt{n(n+1)(2n+1)/24}}\)</span>近似标准正态。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 非参数检验 → 单样本</strong>，选Wilcoxon符号秩，输入检验值。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(p&lt;0.05\)</span>说明样本中位数与标准值有显著差异；结合正/负秩方向判断偏高还是偏低。</p>
 <p><strong>注意</strong>：它检验的是<strong>中位数/分布位置</strong>，不是均值。数据近似正态时，单样本t检验更有功效。</p>

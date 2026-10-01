@@ -1431,6 +1431,13 @@
 <li><strong>Spearman秩相关 <span class="arithmatex">\(\rho\)</span></strong>：把数据先排序再算相关，不要求正态，只要关系单调（一起变大或一起变小）就行。</li>
 <li><strong>Kendall tau-b</strong>：专门处理有序分类变量（如评级1、2、3）或结很多的数据。</li>
 </ul>
+<p><strong>三个系数的计算公式：</strong>
+$<span class="arithmatex">\(r = \frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i-\bar{x})^2 \sum_{i=1}^{n}(y_i-\bar{y})^2}}\)</span>$</p>
+<p>Pearson积差相关<span class="arithmatex">\(r\)</span>中，<span class="arithmatex">\(\bar{x}\)</span>和<span class="arithmatex">\(\bar{y}\)</span>分别为两变量的样本均值，<span class="arithmatex">\(n\)</span>为样本量；<span class="arithmatex">\(r\)</span>取值<span class="arithmatex">\([-1,1]\)</span>，衡量线性相关程度。</p>
+<div class="arithmatex">\[r_s = 1 - \frac{6\sum_{i=1}^{n} d_i^2}{n(n^2-1)}\]</div>
+<p>Spearman秩相关<span class="arithmatex">\(r_s\)</span>中，<span class="arithmatex">\(d_i\)</span>为第<span class="arithmatex">\(i\)</span>对观测在两变量中的秩次之差，<span class="arithmatex">\(n\)</span>为样本量；它只利用排序信息，衡量单调相关程度。</p>
+<div class="arithmatex">\[\tau = \frac{C - D}{C + D}\]</div>
+<p>Kendall tau中，<span class="arithmatex">\(C\)</span>为同序对（两变量排序方向一致的观测对数），<span class="arithmatex">\(D\)</span>为异序对（排序方向相反的观测对数）；<span class="arithmatex">\(\tau\)</span>取值<span class="arithmatex">\([-1,1]\)</span>，对有序数据更稳健。</p>
 <p><strong>怎么读这个数</strong>：
 - 符号：正号=同涨同跌，负号=此消彼长
 - 绝对值：0.3以下弱相关，0.3--0.5中等，0.5以上较强，0.8以上极强
@@ -1489,6 +1496,9 @@
 <p class="admonition-title">通俗原理</p>
 <p>直接算客流和销售额的相关是<span class="arithmatex">\(r=0.902\)</span>，但这里面有水分——大门店本来客流多、销售也多，是"面积"在背后同时推着两边。</p>
 <p>偏相关的思路像<strong>做实验时控制变量</strong>：先用营业面积、竞争门店数、促销投入分别去"预测"客流和销售额，把这两部分能被控制变量解释的波动<strong>减掉（取残差）</strong>，再对剩下的残差算相关。本案例控制3个变量后净相关<span class="arithmatex">\(r=0.541\)</span>，比表面的0.902降了一大截，说明原来的强相关里有相当一部分是规模和投入造成的假象，但控制后依然显著。</p>
+<p>控制单个变量<span class="arithmatex">\(z\)</span>时，偏相关系数公式为：
+$<span class="arithmatex">\(r_{xy\cdot z} = \frac{r_{xy} - r_{xz}\, r_{yz}}{\sqrt{(1-r_{xz}^2)(1-r_{yz}^2)}}\)</span>$</p>
+<p>其中<span class="arithmatex">\(r_{xy}\)</span>是<span class="arithmatex">\(x\)</span>与<span class="arithmatex">\(y\)</span>的零阶相关，<span class="arithmatex">\(r_{xz}\)</span>、<span class="arithmatex">\(r_{yz}\)</span>分别是<span class="arithmatex">\(x\)</span>、<span class="arithmatex">\(y\)</span>与控制变量<span class="arithmatex">\(z\)</span>的相关；推广到控制多个变量时，可通过残差化或矩阵求逆实现。</p>
 <p><strong>自由度</strong>会随控制变量个数减少：<span class="arithmatex">\(df=n-2-k\)</span>（<span class="arithmatex">\(k\)</span>为控制变量数），本案例<span class="arithmatex">\(n=135\)</span>、<span class="arithmatex">\(k=3\)</span>，故<span class="arithmatex">\(df=130\)</span>。</p>
 </div>
 <div class="admonition tip">
@@ -1530,7 +1540,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：检验<strong>同一批人</strong>在多个（3个及以上）二分类条件下的"通过率/成功率"是否一致。</p>
 <p><strong>美赛场景区</strong>：同一组受试者在多种方案下的成败率比较（如四种考核模块通过率是否相同）；问卷中同一批人对多个政策的支持率差异。</p>
-<p><strong>核心原理</strong>：普通卡方检验要求样本相互独立，但这里同一个人被重复观测，不独立。Cochran's Q把每一行（每个人）的成功次数汇总，构造<span class="arithmatex">\(Q\)</span>统计量，与自由度<span class="arithmatex">\(k-1\)</span>的卡方分布比较。本案例<span class="arithmatex">\(Q=81.90\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，四个模块通过率（88.7%/64.7%/54.7%/44.0%）差异显著。</p>
+<p><strong>核心原理</strong>：普通卡方检验要求样本相互独立，但这里同一个人被重复观测，不独立。Cochran's Q把每一行（每个人）的成功次数汇总，构造<span class="arithmatex">\(Q\)</span>统计量：
+$<span class="arithmatex">\(Q = \frac{k(k-1)\sum_{j=1}^{k}(T_j - \bar{T})^2}{k\sum_{i=1}^{n}L_i - \sum_{i=1}^{n}L_i^2}\)</span>$</p>
+<p>其中<span class="arithmatex">\(k\)</span>为条件数（列数），<span class="arithmatex">\(T_j\)</span>为第<span class="arithmatex">\(j\)</span>列的成功数（1的个数），<span class="arithmatex">\(\bar{T}\)</span>为各列成功数的均值，<span class="arithmatex">\(L_i\)</span>为第<span class="arithmatex">\(i\)</span>行（第<span class="arithmatex">\(i\)</span>个人）的成功数；<span class="arithmatex">\(Q\)</span>近似服从自由度<span class="arithmatex">\(k-1\)</span>的卡方分布。本案例<span class="arithmatex">\(Q=81.90\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，四个模块通过率（88.7%/64.7%/54.7%/44.0%）差异显著。</p>
 <p><strong>操作要点</strong>：在Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱选择"Cochran's Q检验"，数据按"一人一行、每个条件一列0/1"排列；<span class="arithmatex">\(\alpha=0.05\)</span>，置换次数5000；整体显著后用McNemar做两两比较并用Bonferroni校正。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(p&lt;0.05\)</span>说明各条件成功率不全相等；再看事后两两比较中校正后<span class="arithmatex">\(p\)</span>仍显著的条件对，定位差异来源（本案例"设备操作"显著弱于"理论考核"）。</p>
 <p><strong>注意</strong>：它是<strong>配对版卡方</strong>。两个条件时退化为McNemar检验；三个及以上二分类配对条件才用它。若结果变量是连续的，改用Friedman检验。</p>
@@ -1540,7 +1552,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：研究<strong>两组变量整体之间</strong>是否相关——不是一对一，而是找两组各自的线性组合，使组合之间的相关最大。</p>
 <p><strong>美赛场景区</strong>：一组工艺参数（炉温、保温时间等）和一组质量指标（强度、硬度等）之间的整体联动；一组企业财务指标和一组市场表现指标的关联。</p>
-<p><strong>核心原理</strong>：分别从X组和Y组各造一个"综合得分"（典型变量），让这两个得分的相关<span class="arithmatex">\(\rho\)</span>达到最大；用完一对再在正交方向上找下一对。本案例最强第一对<span class="arithmatex">\(\rho=0.881\)</span>（共享方差77.7%），共2对显著。载荷绝对值<span class="arithmatex">\(\geq 0.3\)</span>的变量是该典型对的主要贡献者。</p>
+<p><strong>核心原理</strong>：分别从X组和Y组各造一个"综合得分"（典型变量）<span class="arithmatex">\(u = a'X\)</span>、<span class="arithmatex">\(v = b'Y\)</span>，让这两个得分的相关<span class="arithmatex">\(\rho = corr(u,v)\)</span>达到最大；用完一对再在正交方向上找下一对。即求解<span class="arithmatex">\(\max_{a,b} \frac{a'\Sigma_{XY}b}{\sqrt{a'\Sigma_{XX}a \cdot b'\Sigma_{YY}b}}\)</span>，其中<span class="arithmatex">\(\Sigma_{XX}\)</span>、<span class="arithmatex">\(\Sigma_{YY}\)</span>分别为X组、Y组的协方差矩阵，<span class="arithmatex">\(\Sigma_{XY}\)</span>为交叉协方差矩阵。本案例最强第一对<span class="arithmatex">\(\rho=0.881\)</span>（共享方差77.7%），共2对显著。载荷绝对值<span class="arithmatex">\(\geq 0.3\)</span>的变量是该典型对的主要贡献者。</p>
 <p><strong>操作要点</strong>：在工具箱选择"典型相关分析"，X组选工艺变量、Y组选质量变量；数据做z-score标准化；载荷解释阈值0.30；按Wilks检验逐对判断哪些典型对显著。</p>
 <p><strong>结果关键</strong>：看典型相关系数<span class="arithmatex">\(\rho\)</span>及其<span class="arithmatex">\(p\)</span>值（本案例第1对<span class="arithmatex">\(p=8.56\times10^{-58}\)</span>），再看载荷方向（同号=同向联动）和冗余度（典型相关高但冗余度低则解释价值有限）。</p>
 <p><strong>注意</strong>：它是Pearson相关在"两组多变量"上的推广。只有两个变量时它就退化成普通相关；样本量要求较高，建议样本数远大于变量总数。</p>
@@ -1560,7 +1572,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：衡量<strong>多个评分者</strong>对<strong>同一批对象</strong>打分的<strong>排序一致性</strong>——大家是不是把同一家门店排在前面。</p>
 <p><strong>美赛场景区</strong>：多位评委/专家对多个方案的评分一致性检验；问卷评分者信度（inter-rater reliability）；综合排名是否可信。</p>
-<p><strong>核心原理</strong>：把每位评分者的打分转成排名，看所有人给同一对象的排名是否一致。<span class="arithmatex">\(W\)</span>介于0到1，越接近1排序越一致。本案例10名稽核员对15家门店，<span class="arithmatex">\(W=0.849\)</span>（<span class="arithmatex">\(p=1.06\times10^{-18}\)</span>），一致性"很强"。</p>
+<p><strong>核心原理</strong>：把每位评分者的打分转成排名，看所有人给同一对象的排名是否一致。Kendall协调系数<span class="arithmatex">\(W\)</span>的计算公式为：
+$<span class="arithmatex">\(W = \frac{12S}{k^2(n^3 - n)}\)</span>$</p>
+<p>其中<span class="arithmatex">\(S = \sum_{j=1}^{n}(R_j - \bar{R})^2\)</span>为各对象平均秩与总平均秩的离差平方和，<span class="arithmatex">\(k\)</span>为评分者人数，<span class="arithmatex">\(n\)</span>为被评对象数；<span class="arithmatex">\(W\)</span>介于0到1，越接近1排序越一致。本案例10名稽核员对15家门店，<span class="arithmatex">\(W=0.849\)</span>（<span class="arithmatex">\(p=1.06\times10^{-18}\)</span>），一致性"很强"。</p>
 <p><strong>操作要点</strong>：工具箱选"Kendall协调系数"，数据按"评分者为行/列、对象为列/行"排列；结（同分）用平均秩处理；<span class="arithmatex">\(p\)</span>值用卡方近似；分数方向ascending（越高越好）。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(W&lt;0.2\)</span>很弱、<span class="arithmatex">\(0.2\)</span>--<span class="arithmatex">\(0.4\)</span>弱、<span class="arithmatex">\(0.4\)</span>--<span class="arithmatex">\(0.6\)</span>中等、<span class="arithmatex">\(0.6\)</span>--<span class="arithmatex">\(0.8\)</span>强、<span class="arithmatex">\(&gt;0.8\)</span>很强；同时输出对象平均秩综合名次和每位评分者的方向一致性（识别打反方向的异常评分者）。</p>
 <p><strong>注意</strong>：<span class="arithmatex">\(W\)</span>只反映<strong>排序</strong>一致性，不管评分者宽严造成的水平差异（有人普遍打高分）。它和Spearman相关的关系：两两Spearman的平均值约为<span class="arithmatex">\((k\cdot W-1)/(k-1)\)</span>。</p>

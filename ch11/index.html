@@ -1512,6 +1512,16 @@
 <li>叶子节点里多数类的类别就是预测结果</li>
 <li><strong>剪枝</strong>（max_depth、min_samples_leaf）防止树长得太细、死记训练数据</li>
 </ul>
+<p>分类树与回归树的分裂准则为：</p>
+<div class="arithmatex">\[
+Gini(D) = 1 - \sum_{k=1}^{K} p_k^2, \qquad
+H(D) = -\sum_{k=1}^{K} p_k\log_2 p_k
+\]</div>
+<div class="arithmatex">\[
+Gain(D,A) = H(D) - \sum_{v}\frac{|D^v|}{|D|}H(D^v), \qquad
+MSE(D) = \frac{1}{|D|}\sum_{i\in D}(y_i - \bar{y})^2
+\]</div>
+<p>其中 <span class="arithmatex">\(p_k\)</span> 为节点 <span class="arithmatex">\(D\)</span> 中第 <span class="arithmatex">\(k\)</span> 类样本占比，<span class="arithmatex">\(K\)</span> 为类别数；<span class="arithmatex">\(Gini\)</span> 为基尼不纯度、<span class="arithmatex">\(H\)</span> 为信息熵，<span class="arithmatex">\(Gain(D,A)\)</span> 为按特征 <span class="arithmatex">\(A\)</span> 分裂后的信息增益（<span class="arithmatex">\(D^v\)</span> 为分裂后的子节点）；回归树改用节点内均方误差 <span class="arithmatex">\(MSE\)</span> 最小者作为分裂准则。</p>
 <p>生活类比：决策树就像查字典——每一步二选一把范围缩小，最后定位答案。单棵树容易过拟合（ memorize 噪声），所以实际多用它的集成版（随机森林、GBDT）。</p>
 </div>
 <div class="admonition tip">
@@ -1566,6 +1576,11 @@
 - <strong>特征随机</strong>：每次分裂只从随机抽的一部分特征（分类常用 sqrt(p)）里选最优
 - 这两点保证树之间<strong>不一样</strong>，否则大家犯一样的错，集成就没意义</p>
 <p>最后分类按多数票、回归按平均。特征重要性由每棵树分裂时不纯度下降的总和归一化得到。</p>
+<div class="arithmatex">\[
+\hat{y}_{class} = \mathrm{mode}\{T_b(x)\}_{b=1}^{B}, \qquad
+\hat{y}_{reg} = \frac{1}{B}\sum_{b=1}^{B} T_b(x)
+\]</div>
+<p>其中 <span class="arithmatex">\(T_b(x)\)</span> 为第 <span class="arithmatex">\(b\)</span> 棵决策树对样本 <span class="arithmatex">\(x\)</span> 的预测，<span class="arithmatex">\(B\)</span> 为树的总数；分类取所有树的多数投票，回归取所有树预测的算术平均。每棵树用 bootstrap 有放回抽样训练，约 36.8% 未被抽中的样本称为袋外样本（OOB），其预测错误率即 OOB 误差，可当作天然的交叉验证。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1620,6 +1635,16 @@
 - <strong>软间隔参数 C</strong>：C 越大越不容忍分错样本（可能过拟合），C 越小越宽容（可能欠拟合）
 - <strong>核函数 kernel</strong>：线性核（linear）处理线性可分；RBF [Radial Basis Function, 径向基函数] 核处理非线性，靠 gamma 控制边界弯曲程度
 - <strong>特征标准化</strong>：SVM 对量纲极敏感，必须先把各特征标准化到均值 0、方差 1，否则量纲大的特征会主导距离</p>
+<p>最大间隔分类的原始优化问题（软间隔）与常用 RBF 核为：</p>
+<div class="arithmatex">\[
+\min_{w,b,\xi}\ \tfrac{1}{2}\|w\|^2 + C\sum_{i=1}^{n}\xi_i
+\quad \text{s.t.}\ y_i(w^\top x_i + b) \geq 1 - \xi_i,\ \ \xi_i \geq 0
+\]</div>
+<div class="arithmatex">\[
+K(x_i,x_j) = \phi(x_i)^\top\phi(x_j), \qquad
+K_{RBF}(x_i,x_j) = \exp\big(-\gamma\|x_i - x_j\|^2\big)
+\]</div>
+<p>其中 <span class="arithmatex">\(w\)</span>、<span class="arithmatex">\(b\)</span> 为分隔超平面参数，<span class="arithmatex">\(\|w\|^2\)</span> 控制间隔宽度，<span class="arithmatex">\(\xi_i\)</span> 为松弛变量以容忍少数分错样本，<span class="arithmatex">\(C\)</span> 为软间隔惩罚系数；<span class="arithmatex">\(K\)</span> 为核函数，把样本隐式映射到高维空间后只需计算内积，RBF 核中 <span class="arithmatex">\(\gamma\)</span> 控制单个支持向量的影响范围。</p>
 <p>通过网格搜索 + 交叉验证选最优的 C、gamma、kernel 组合。</p>
 </div>
 <div class="admonition tip">
@@ -1681,6 +1706,11 @@
 <li><strong>K 的选择很关键</strong>：K 太小容易被噪声带偏（过拟合），K 太大边界过度平滑（欠拟合）</li>
 <li><strong>必须标准化特征</strong>：否则"月消费几千元"会压倒"在网时长几十月"这类量纲小的特征</li>
 </ul>
+<div class="arithmatex">\[
+d(x, x_i) = \sqrt{\sum_{j=1}^{p}(x_j - x_{ij})^2}, \qquad
+\hat{y} = \mathrm{mode}\{y_{(1)},\, y_{(2)},\,\dots,\, y_{(K)}\}
+\]</div>
+<p>其中 <span class="arithmatex">\(x=(x_1,\dots,x_p)\)</span> 为待预测样本，<span class="arithmatex">\(x_i=(x_{i1},\dots,x_{ip})\)</span> 为第 <span class="arithmatex">\(i\)</span> 个训练样本，<span class="arithmatex">\(p\)</span> 为特征维数，<span class="arithmatex">\(d(x,x_i)\)</span> 为欧氏距离；找出距离最近的 <span class="arithmatex">\(K\)</span> 个邻居后，分类按这 <span class="arithmatex">\(K\)</span> 个邻居多数类投票（回归取其均值）。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1735,6 +1765,14 @@
 <li>多分类时选后验概率最大的类别</li>
 <li>Multinomial 变体适合计数/词频特征</li>
 </ul>
+<p>完整公式与连续特征的高斯条件概率为：</p>
+<div class="arithmatex">\[
+P(y|x_1,\dots,x_p) = \frac{P(y)\prod_{j=1}^{p}P(x_j|y)}{P(x_1,\dots,x_p)} \propto P(y)\prod_{j=1}^{p}P(x_j|y)
+\]</div>
+<div class="arithmatex">\[
+P(x_j|y) = \frac{1}{\sqrt{2\pi\sigma_y^2}}\exp\left(-\frac{(x_j - \mu_y)^2}{2\sigma_y^2}\right)
+\]</div>
+<p>其中 <span class="arithmatex">\(P(y)\)</span> 为类别 <span class="arithmatex">\(y\)</span> 的先验概率，<span class="arithmatex">\(P(x_j|y)\)</span> 为该类下第 <span class="arithmatex">\(j\)</span> 个特征的条件概率（"朴素"即假设各特征在给定类后相互独立）；连续特征用高斯分布刻画，<span class="arithmatex">\(\mu_y\)</span>、<span class="arithmatex">\(\sigma_y^2\)</span> 为类别 <span class="arithmatex">\(y\)</span> 下该特征的均值与方差，预测取后验概率最大的类别。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1782,6 +1820,15 @@
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
 <p>生活类比：神经网络像一条流水线，每个工人（神经元）对上一层传来的信号做加权求和再套个非线性激活函数，传给下一层。层层加工后，最后一层给出结论。训练时用<strong>误差反向传播（BP）</strong>：先前向算预测误差，再从后往前逐层调整每个权重，让误差越来越小。</p>
+<p>前向传播、损失函数与反向传播更新规则为：</p>
+<div class="arithmatex">\[
+a^{(l)} = \sigma\!\left(W^{(l)} a^{(l-1)} + b^{(l)}\right)
+\]</div>
+<div class="arithmatex">\[
+L_{CE} = -\sum_{i=1}^{n} y_i\log\hat{y}_i, \qquad
+W^{(l)} \leftarrow W^{(l)} - \eta\,\nabla_{W^{(l)}} L
+\]</div>
+<p>其中 <span class="arithmatex">\(a^{(l)}\)</span> 为第 <span class="arithmatex">\(l\)</span> 层神经元输出，<span class="arithmatex">\(W^{(l)}\)</span>、<span class="arithmatex">\(b^{(l)}\)</span> 为该层权重矩阵与偏置，<span class="arithmatex">\(\sigma\)</span> 为非线性激活函数（如 ReLU）；<span class="arithmatex">\(L\)</span> 为损失（分类用交叉熵、回归用均方误差），<span class="arithmatex">\(\eta\)</span> 为学习率，<span class="arithmatex">\(\nabla_{W^{(l)}}L\)</span> 由反向传播按链式法则逐层算出。</p>
 <ul>
 <li><strong>隐藏层 (30,30)</strong>：两层各 30 个神经元</li>
 <li><strong>激活函数 ReLU</strong>：引入非线性，否则多层叠加等价于线性回归</li>
@@ -1829,6 +1876,11 @@
 <p><strong>一句话</strong>：串行地逐棵训练树，每棵新树专门去<strong>拟合前面所有树残差</strong>（预测错的部分），一步步纠错。</p>
 <p><strong>美赛场景区</strong>：表格数据分类/回归（如客户流失预测），精度常高于随机森林。</p>
 <p><strong>核心原理</strong>：加法模型，每轮拟合损失函数的负梯度（残差近似），用学习率和子采样控制过拟合；早停防止过拟合。</p>
+<div class="arithmatex">\[
+F_m(x) = F_{m-1}(x) + \nu\, h_m(x), \qquad
+h_m(x) \approx -\frac{\partial L\big(y,\, F_{m-1}(x)\big)}{\partial F_{m-1}(x)}
+\]</div>
+<p>其中 <span class="arithmatex">\(F_{m-1}(x)\)</span> 为前 <span class="arithmatex">\(m-1\)</span> 轮树模型的累加预测，<span class="arithmatex">\(h_m(x)\)</span> 为第 <span class="arithmatex">\(m\)</span> 轮新拟合的回归树，<span class="arithmatex">\(\nu\)</span> 为学习率（收缩系数）；新树沿损失函数对当前预测的负梯度方向拟合，逐步纠正前序模型的残差。</p>
 <p><strong>操作要点</strong>：工具箱选 GBDT，指定目标列与特征列，分类任务对数损失，调 n_estimators、learning rate、max depth。</p>
 <p><strong>结果关键</strong>：案例测试集准确率 0.80、AUC 0.845，优于多数类基线 0.644；前 5 特征贡献 81%。</p>
 <p><strong>注意</strong>：比随机森林更易过拟合，需配合学习率、树深、早停调参。</p>
@@ -1839,6 +1891,11 @@
 <p><strong>一句话</strong>：GBDT 的工程优化版，加入正则项、二阶导数信息和缺失值原生处理，是 Kaggle 表格数据竞赛的常胜将军。</p>
 <p><strong>美赛场景区</strong>：高精度分类/回归（如信贷违约预测），特征工程到位时精度最高。</p>
 <p><strong>核心原理</strong>：在损失中加入一二阶泰勒展开和正则项（L1/L2），控制模型复杂度；支持早停和缺失值自动分裂。</p>
+<div class="arithmatex">\[
+Obj = \sum_{i=1}^{n} l\big(y_i,\, \hat{y}_i^{(t-1)} + f_t(x_i)\big) + \sum_{t=1}^{T}\Omega(f_t), \qquad
+\Omega(f) = \gamma T_{leaf} + \tfrac{1}{2}\lambda\|w\|^2
+\]</div>
+<p>其中 <span class="arithmatex">\(l\)</span> 为可微损失函数，<span class="arithmatex">\(\hat{y}_i^{(t-1)}\)</span> 为前 <span class="arithmatex">\(t-1\)</span> 轮模型对第 <span class="arithmatex">\(i\)</span> 个样本的预测，<span class="arithmatex">\(f_t\)</span> 为第 <span class="arithmatex">\(t\)</span> 轮新树；<span class="arithmatex">\(\Omega(f_t)\)</span> 为树复杂度惩罚，<span class="arithmatex">\(T_{leaf}\)</span> 为叶子节点数，<span class="arithmatex">\(w\)</span> 为叶子输出权重，<span class="arithmatex">\(\gamma\)</span>、<span class="arithmatex">\(\lambda\)</span> 分别控制叶子数惩罚与 L2 正则；目标函数对损失做二阶泰勒展开后解析求解最优叶子权重。</p>
 <p><strong>操作要点</strong>：工具箱选 XGBoost，学习率 0.1、树深 3、最多 200 轮、早停 30 轮，分类用 logloss。</p>
 <p><strong>结果关键</strong>：案例测试集准确率 0.80、AUC 0.90；信用评分、年龄、负债收入比分裂增益最高。</p>
 <p><strong>注意</strong>：参数多需调；特征重要性是增益而非因果；防泄露用分层三分（训练/验证/测试）。</p>
@@ -1849,6 +1906,10 @@
 <p><strong>一句话</strong>：XGBoost 的"快速版"，用直方图算法和 leaf-wise 生长，训练更快、内存更省，尤其适合大数据。</p>
 <p><strong>美赛场景区</strong>：样本量大、特征多的表格预测（如信贷违约）；需要快速迭代调参时。</p>
 <p><strong>核心原理</strong>：按直方图把连续特征离散化加速分裂，按 leaf-wise（优先分裂损失下降最大的叶子）生长，支持类别特征原生处理。</p>
+<div class="arithmatex">\[
+\text{Gain}_{split} = \tfrac{1}{2}\left[\frac{G_L^2}{H_L+\lambda} + \frac{G_R^2}{H_R+\lambda} - \frac{(G_L+G_R)^2}{H_L+H_R+\lambda}\right] - \gamma
+\]</div>
+<p>其中 <span class="arithmatex">\(G_L\)</span>、<span class="arithmatex">\(G_R\)</span> 为分裂后左右叶子上一阶梯度之和，<span class="arithmatex">\(H_L\)</span>、<span class="arithmatex">\(H_R\)</span> 为二阶梯度之和，<span class="arithmatex">\(\lambda\)</span>、<span class="arithmatex">\(\gamma\)</span> 为正则系数；LightGBM 先把连续特征分箱成直方图再枚举切分点，每轮选增益最大的叶子继续分裂（leaf-wise 策略），训练复杂度远低于逐层生长。</p>
 <p><strong>操作要点</strong>：工具箱选 LightGBM，任务 binary，指定类别特征列，早停定迭代轮数。</p>
 <p><strong>结果关键</strong>：案例测试集 AUC 0.818，早停最佳 103 轮；年收入、历史逾期次数增益最高。</p>
 <p><strong>注意</strong>：leaf-wise 易过拟合小样本，需限制 num_leaves 和 min_child_samples。</p>
@@ -1859,6 +1920,10 @@
 <p><strong>一句话</strong>：专为<strong>类别特征多</strong>的数据优化的梯度提升树，能原生高质量处理类别变量，少做特征工程。</p>
 <p><strong>美赛场景区</strong>：类别特征丰富的预测（如电信客户流失，套餐类型/办理渠道/区域）。</p>
 <p><strong>核心原理</strong>：用Ordered Target Statistics 编码类别特征，避免目标泄露；同样是 boosting 框架，默认参数就很稳。</p>
+<div class="arithmatex">\[
+\hat{x}^{cat}_{k} = \frac{\sum_{j=1}^{n_k}\mathbb{1}[g_j = g_k]\,y_j + \alpha\,p}{\sum_{j=1}^{n_k}\mathbb{1}[g_j = g_k] + \alpha}
+\]</div>
+<p>其中 <span class="arithmatex">\(g_k\)</span> 为第 <span class="arithmatex">\(k\)</span> 个样本在某类别特征上的取值，<span class="arithmatex">\(y_j\)</span> 为对应目标值，<span class="arithmatex">\(p\)</span> 为先验均值，<span class="arithmatex">\(\alpha\)</span> 为平滑系数；Ordered 编码在估计某样本的类别统计量时<strong>排除该样本自身</strong>，用排序后的历史样本计算，从根源上避免目标泄露。</p>
 <p><strong>操作要点</strong>：工具箱选 CatBoost，损失 Logloss，深度 6、学习率 0.05、最多 500 轮早停，指定类别特征列。</p>
 <p><strong>结果关键</strong>：案例测试集 AUC 0.856、准确率 0.739（基线 0.522）；合约状态重要性最高。</p>
 <p><strong>注意</strong>：类别特征很多时 CatBoost 比 XGBoost 省心，但小样本上未必占优。</p>
@@ -1869,6 +1934,14 @@
 <p><strong>一句话</strong>：每轮<strong>提高被错分样本的权重</strong>，让下一个弱学习器（通常是很浅的树）重点关注难样本，最后加权组合。</p>
 <p><strong>美赛场景区</strong>：二分类任务的稳健 boosting 基线；样本难度不均时。</p>
 <p><strong>核心原理</strong>：用决策树桩（深度 1）作弱学习器，按样本分类对错动态调整权重，加权投票集成。</p>
+<div class="arithmatex">\[
+\epsilon_t = \sum_{i=1}^{n} w_{i,t}\,\mathbb{1}[h_t(x_i) \neq y_i], \qquad
+\alpha_t = \tfrac{1}{2}\ln\frac{1 - \epsilon_t}{\epsilon_t}
+\]</div>
+<div class="arithmatex">\[
+w_{i,t+1} = \frac{w_{i,t}\,\exp(-\alpha_t\, y_i\, h_t(x_i))}{\sum_{i=1}^{n} w_{i,t}\,\exp(-\alpha_t\, y_i\, h_t(x_i))}
+\]</div>
+<p>其中 <span class="arithmatex">\(h_t(x_i)\)</span> 为第 <span class="arithmatex">\(t\)</span> 个弱学习器的预测（<span class="arithmatex">\(\pm 1\)</span>），<span class="arithmatex">\(w_{i,t}\)</span> 为第 <span class="arithmatex">\(i\)</span> 个样本在第 <span class="arithmatex">\(t\)</span> 轮的权重，<span class="arithmatex">\(\epsilon_t\)</span> 为加权错误率；<span class="arithmatex">\(\alpha_t\)</span> 为该弱学习器在最终集成中的权重，被错分样本的权重在本轮指数增大，最终分类器为 <span class="arithmatex">\(\mathrm{sign}\big(\sum_{t}\alpha_t h_t(x)\big)\)</span>。</p>
 <p><strong>操作要点</strong>：工具箱选 AdaBoost，弱学习器决策树桩，轮数 50、学习率 1.0，分层 K 折交叉验证。</p>
 <p><strong>结果关键</strong>：案例测试集 AUC 0.784、准确率 0.778（基线 0.540）；信用评分、负债收入比重要性最高。</p>
 <p><strong>注意</strong>：对噪声和异常点敏感（会过度关注错分样本）；类别极不平衡时需加权。</p>
@@ -1879,6 +1952,11 @@
 <p><strong>一句话</strong>：比随机森林更"随机"的 bagging 树——分裂点也随机选（不找最优），偏差略高但方差更低、更快。</p>
 <p><strong>美赛场景区</strong>：随机森林的对照集成；特征噪声大时可能更稳。</p>
 <p><strong>核心原理</strong>：与随机森林类似但分裂阈值随机选取，进一步降低方差；同时报告不纯度重要性和置换重要性互相印证。</p>
+<div class="arithmatex">\[
+\theta \sim \mathrm{Uniform}\big(\min_{i} x_{ij},\ \max_{i} x_{ij}\big), \qquad
+\hat{y} = \frac{1}{B}\sum_{b=1}^{B} T_b(x)
+\]</div>
+<p>其中 ExtraTrees 在每个节点不再枚举寻找最优分裂点，而是在选中特征 <span class="arithmatex">\(j\)</span> 的取值范围 <span class="arithmatex">\([\min x_{ij}, \max x_{ij}]\)</span> 内<strong>随机</strong>采样分裂阈值 <span class="arithmatex">\(\theta\)</span>；随机性进一步增大单棵树的偏差、降低集成方差，最终预测仍由 <span class="arithmatex">\(B\)</span> 棵树平均（回归）或多数投票（分类）得到。</p>
 <p><strong>操作要点</strong>：工具箱选 ExtraTrees，max_features=sqrt，分层切分训练/测试。</p>
 <p><strong>结果关键</strong>：案例平衡准确率 0.776、AUC 0.841（基线 0.589）；缴费方式重要性最高。</p>
 <p><strong>注意</strong>：当置换重要性明显低于不纯度重要性时，说明该特征冗余或高基数干扰，解读要谨慎。</p>
@@ -1892,6 +1970,12 @@
 - <strong>支持度 Support</strong>：A 和 B 同时出现的交易占比（覆盖广不广）
 - <strong>置信度 Confidence</strong>：买了 A 的人里买 B 的比例（条件概率）
 - <strong>提升度 Lift</strong>：<span class="arithmatex">\(P(B|A)/P(B)\)</span>，<span class="arithmatex">\(&gt;1\)</span> 表示 A 对 B 有正向拉动</p>
+<div class="arithmatex">\[
+supp(A\Rightarrow B) = P(A\cup B), \quad
+conf(A\Rightarrow B) = P(B|A) = \frac{P(A\cap B)}{P(A)}, \quad
+lift(A\Rightarrow B) = \frac{conf(A\Rightarrow B)}{P(B)}
+\]</div>
+<p>其中 <span class="arithmatex">\(P(A\cup B)\)</span> 为同时包含项集 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 的交易占总交易的比例（支持度），<span class="arithmatex">\(P(B|A)\)</span> 为购买 <span class="arithmatex">\(A\)</span> 的交易中也购买 <span class="arithmatex">\(B\)</span> 的条件概率（置信度）；lift 衡量 <span class="arithmatex">\(A\)</span> 对 <span class="arithmatex">\(B\)</span> 购买概率的提升倍数，lift <span class="arithmatex">\(&gt;1\)</span> 才表示存在真实正向关联。</p>
 <p><strong>操作要点</strong>：工具箱选 Apriori，指定交易 ID 与项列，设 min_support、min_confidence、min_lift，按 lift 排序。</p>
 <p><strong>结果关键</strong>：案例最强规则"鲜榨果汁<span class="arithmatex">\(\to\)</span>田园沙拉"，支持度 4.7%、置信度 70%、提升度 9.55。</p>
 <p><strong>注意</strong>：高支持度不等于强规则（可能只是 B 本身畅销），必须看提升度 <span class="arithmatex">\(&gt;1\)</span> 才算真关联；关联不等于因果。</p>

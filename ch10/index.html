@@ -1632,6 +1632,12 @@
 <li>分类变量：用卡方检验，期望频数不足时改用 Fisher 精确检验</li>
 <li>每个变量同时报告效应量（Cohen's d、Cramér's V），不只看 p 值</li>
 </ul>
+<p>两组比较的核心检验统计量为：</p>
+<div class="arithmatex">\[
+t = \frac{\bar{X}_1 - \bar{X}_2}{S_p \sqrt{1/n_1 + 1/n_2}}, \qquad
+\chi^2 = \sum_{i,j}\frac{(O_{ij} - E_{ij})^2}{E_{ij}}
+\]</div>
+<p>其中 <span class="arithmatex">\(\bar{X}_1\)</span>、<span class="arithmatex">\(\bar{X}_2\)</span> 为两组均值，<span class="arithmatex">\(S_p\)</span> 为合并标准差，<span class="arithmatex">\(n_1\)</span>、<span class="arithmatex">\(n_2\)</span> 为两组样本量（连续变量 t 检验）；<span class="arithmatex">\(O_{ij}\)</span> 为列联表观测频数，<span class="arithmatex">\(E_{ij}\)</span> 为期望频数（分类变量卡方检验）。</p>
 <p><span class="arithmatex">\(p&gt;0.05\)</span> 表示该基线变量两组<strong>未发现显著差异</strong>（均衡）；<span class="arithmatex">\(p&lt;0.05\)</span> 表示两组本来就不同，需要警惕混杂。</p>
 </div>
 <div class="admonition tip">
@@ -1685,6 +1691,12 @@
 <li><strong>多因素回归</strong>：把单因素达标的变量同时放入一个模型，每个系数都表示"控制了其他变量后"该因素的独立效应</li>
 <li>结局是连续变量用线性回归（OLS [Ordinary Least Squares, 普通最小二乘法]），结局是二分类用 Logistic 回归</li>
 </ul>
+<p>两类回归的模型形式为：</p>
+<div class="arithmatex">\[
+\hat{Y} = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p + \varepsilon, \qquad
+\log\frac{P(Y=1)}{1-P(Y=1)} = \beta_0 + \beta_1 X_1 + \cdots + \beta_p X_p
+\]</div>
+<p>前者为线性回归（连续结局），后者为 Logistic 回归（二分类结局）；<span class="arithmatex">\(\beta_j\)</span> 为控制其他变量后第 <span class="arithmatex">\(j\)</span> 个自变量的独立效应，配合 95% 置信区间与 p 值判断其是否显著。</p>
 <p>关键输出是调整后的系数与 95% 置信区间，配合 VIF [Variance Inflation Factor, 方差膨胀因子] 检查共线性（VIF <span class="arithmatex">\(&lt;10\)</span> 可接受）。</p>
 </div>
 <div class="admonition tip">
@@ -1747,6 +1759,12 @@
 - <strong>灵敏度（召回率）</strong> <span class="arithmatex">\(= TP/(TP+FN)\)</span>：真病人中被找出来的比例——不漏诊
 - <strong>特异度</strong> <span class="arithmatex">\(= TN/(TN+FP)\)</span>：真健康人中被正确排除的比例——不误诊</p>
 <p>截断阈值越高，判阳性越严，特异度越高、灵敏度越低。把<strong>所有可能阈值</strong>下的（1<span class="arithmatex">\(-\)</span>特异度，灵敏度）描出来，连成 ROC 曲线。</p>
+<p>核心指标的计算公式为：</p>
+<div class="arithmatex">\[
+Se = \frac{TP}{TP+FN}, \quad Sp = \frac{TN}{TN+FP}, \quad
+AUC = \int_{0}^{1} Se\, d(1-Sp), \quad J = Se + Sp - 1
+\]</div>
+<p>其中 <span class="arithmatex">\(Se\)</span> 为灵敏度、<span class="arithmatex">\(Sp\)</span> 为特异度，<span class="arithmatex">\(TP\)</span>、<span class="arithmatex">\(FN\)</span>、<span class="arithmatex">\(TN\)</span>、<span class="arithmatex">\(FP\)</span> 为混淆矩阵四格计数；AUC 为 ROC 曲线下面积，约登指数 <span class="arithmatex">\(J\)</span> 最大时对应的阈值即兼顾漏诊与误诊的最佳截断值。</p>
 <p><strong>AUC（曲线下面积）</strong>就是 ROC 曲线下面的面积，含义是：<strong>随机抽一个阳性样本和一个阴性样本，模型给阳性打分更高的概率</strong>。
 - AUC <span class="arithmatex">\(=0.5\)</span>：跟瞎猜一样
 - <span class="arithmatex">\(0.7\)</span>--<span class="arithmatex">\(0.8\)</span>：可接受
@@ -1807,6 +1825,12 @@
 <li>生存率 = 到每个事件时点为止"幸存下来"的累积概率</li>
 <li><strong>中位生存时间</strong>：生存率降到 50% 对应的时间</li>
 </ul>
+<p>乘积极限估计与 Log-Rank 检验公式为：</p>
+<div class="arithmatex">\[
+\hat{S}(t) = \prod_{t_i \leq t}\left(1 - \frac{d_i}{n_i}\right), \qquad
+\chi^2_{LR} = \frac{(O_1 - E_1)^2}{V_1}
+\]</div>
+<p>其中 <span class="arithmatex">\(n_i\)</span> 为时刻 <span class="arithmatex">\(t_i\)</span> 处的风险集人数，<span class="arithmatex">\(d_i\)</span> 为该时刻发生事件数，<span class="arithmatex">\(\hat{S}(t)\)</span> 为累积生存率；<span class="arithmatex">\(O_1\)</span>、<span class="arithmatex">\(E_1\)</span> 分别为组 1 的实际事件数与期望事件数，<span class="arithmatex">\(V_1\)</span> 为其方差。</p>
 <p><strong>Log-Rank 检验</strong>：比较两条生存曲线是否有显著差异。<span class="arithmatex">\(p&lt;0.05\)</span> 说明两组生存过程确实不同（如方案 A 的中位无进展生存 22.1 个月，方案 B 仅 8.8 个月）。</p>
 </div>
 <div class="admonition tip">
@@ -1861,6 +1885,11 @@
 <li>再按亚组水平分别估计效应及 95%CI</li>
 <li>关键：用"处理 <span class="arithmatex">\(\times\)</span> 亚组"交互项的 Wald/F 检验判断亚组间差异是否显著</li>
 </ul>
+<p>带交互项的回归模型写为：</p>
+<div class="arithmatex">\[
+Y = \beta_0 + \beta_1 T + \sum_{g}\gamma_g G_g + \sum_{g}\delta_g (T \times G_g) + \varepsilon
+\]</div>
+<p>其中 <span class="arithmatex">\(T\)</span> 为处理变量，<span class="arithmatex">\(G_g\)</span> 为第 <span class="arithmatex">\(g\)</span> 个亚组哑变量，交互项系数 <span class="arithmatex">\(\delta_g\)</span> 即该亚组处理效应与参照亚组之差；对全部 <span class="arithmatex">\(\delta_g\)</span> 做 Wald 联合检验，其 p 值即交互检验 p 值。</p>
 <p><strong>重要原则</strong>：亚组内"不显著"不等于"该亚组无效"——可能只是该亚组样本小、检验功效低。<strong>组间差异必须看交互检验 p 值</strong>，不能拿各亚组单独的 p 值互相比较。</p>
 </div>
 <div class="admonition tip">
@@ -1909,7 +1938,11 @@
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
-<p>Cox 模型的形式：风险函数 <span class="arithmatex">\(h(t|X) = h_0(t) \exp(\beta_1 X_1 + \beta_2 X_2 + \dots)\)</span>。</p>
+<p>Cox 模型的形式为：</p>
+<div class="arithmatex">\[
+h(t|X) = h_0(t)\exp(\beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p), \qquad HR_j = \exp(\beta_j)
+\]</div>
+<p>其中 <span class="arithmatex">\(h_0(t)\)</span> 为基准风险函数（形状不关心，Cox 用偏似然巧妙避开了估计它），<span class="arithmatex">\(X_j\)</span> 为第 <span class="arithmatex">\(j\)</span> 个协变量，<span class="arithmatex">\(\beta_j\)</span> 为其回归系数；<span class="arithmatex">\(HR_j\)</span> 即该协变量每增加一单位的风险比，比例风险假设要求 <span class="arithmatex">\(HR_j\)</span> 不随时间 <span class="arithmatex">\(t\)</span> 变化。</p>
 <ul>
 <li><span class="arithmatex">\(h_0(t)\)</span> 是基准风险曲线（形状不关心，Cox 用偏似然巧妙避开了估计它）</li>
 <li>每个因素的系数 <span class="arithmatex">\(\beta\)</span> 取指数就是<strong>风险比 HR</strong><span class="arithmatex">\(=\exp(\beta)\)</span></li>
@@ -1958,6 +1991,11 @@
 <p><strong>一句话</strong>：把多项研究（或多个亚组/变量）的效应量与 95%CI 画在同一张图上，逐个比较并给出合并效应。</p>
 <p><strong>美赛场景区</strong>：Meta 分析汇总多来源数据；多因素回归后把各变量效应量并排展示；亚组分析结果可视化。</p>
 <p><strong>核心原理</strong>：每项研究用方块（大小代表权重）+ 横线（95%CI）表示，底部菱形是合并效应（随机/固定效应模型加权）。<span class="arithmatex">\(I^2 \geq 50%\)</span> 或 Q 检验 <span class="arithmatex">\(p&lt;0.10\)</span> 时用随机效应模型。</p>
+<div class="arithmatex">\[
+Q = \sum_{i=1}^{k} w_i(\hat{\theta}_i - \bar{\theta})^2, \qquad
+I^2 = \frac{\max(Q - (k-1),\ 0)}{Q} \times 100\%
+\]</div>
+<p>其中 <span class="arithmatex">\(\hat{\theta}_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 项研究的效应量，<span class="arithmatex">\(w_i\)</span> 为其权重，<span class="arithmatex">\(\bar{\theta}\)</span> 为合并效应，<span class="arithmatex">\(k\)</span> 为研究数；<span class="arithmatex">\(Q\)</span> 为异质性卡方统计量，<span class="arithmatex">\(I^2\)</span> 为研究间异质性占总变异的比例。</p>
 <p><strong>操作要点</strong>：工具箱选"森林图/Meta 分析"，效应量选 MD 或 OR [Odds Ratio, 比值比]/RR [Relative Risk, 相对风险]，合并方法 auto，输出异质性 <span class="arithmatex">\(I^2\)</span>。</p>
 <p><strong>结果关键</strong>：案例 150 项研究随机效应合并 MD=0.451（CI 0.406--0.495），<span class="arithmatex">\(I^2=65.7%\)</span> 异质性较高。</p>
 <p><strong>注意</strong>：<span class="arithmatex">\(I^2\)</span> 大说明研究间不一致，需分析异质来源而非只看合并值。</p>
@@ -1978,6 +2016,10 @@
 <p><strong>一句话</strong>：检验模型给出的预测概率<strong>准不准</strong>——预测说有 30% 概率出事，实际是不是真的约 30% 出事。</p>
 <p><strong>美赛场景区</strong>：评价任何输出概率的分类模型（不只看 AUC，还要看概率是否可信）；美赛中做风险评分模型必备。</p>
 <p><strong>核心原理</strong>：按预测概率分箱，比较每箱平均预测概率与实际事件发生率；理想状态点落在对角线上。校准截距 <span class="arithmatex">\(=0\)</span>、斜率 <span class="arithmatex">\(=1\)</span> 最佳；Brier 分数越小越好。</p>
+<div class="arithmatex">\[
+Brier = \frac{1}{n}\sum_{i=1}^{n}(\hat{p}_i - y_i)^2
+\]</div>
+<p>其中 <span class="arithmatex">\(\hat{p}_i\)</span> 为模型给出的预测概率，<span class="arithmatex">\(y_i\)</span> 为实际结局（事件取 1、非事件取 0），<span class="arithmatex">\(n\)</span> 为样本量；Brier 分数综合衡量概率预测的偏差与区分度，取值 0--1，越小越好。</p>
 <p><strong>操作要点</strong>：工具箱选"校准曲线"，指定概率列与结局列，分箱策略 quantile（按分位等分箱），可做 Bootstrap 置信带。</p>
 <p><strong>结果关键</strong>：案例校准截距 0.33（整体低估风险），Brier=0.195，HL 检验 <span class="arithmatex">\(p=0.34\)</span>；建议先做截距重校准。</p>
 <p><strong>注意</strong>：AUC 高不等于校准好；概率用于决策阈值时校准比区分度更关键。</p>
@@ -1998,6 +2040,10 @@
 <p><strong>一句话</strong>：衡量多名评分者/多次测量对同一对象打分的<strong>绝对一致性</strong>，比 Kappa 更适合连续测量值。</p>
 <p><strong>美赛场景区</strong>：多评委打分一致性（如专家评审、传感器重复测量）；评价测量工具可重复性。</p>
 <p><strong>核心原理</strong>：把总方差分解为对象间、评分者间、误差三部分，ICC=对象间方差/总方差。取值 0--1。Koo &amp; Li 分级：<span class="arithmatex">\(&lt;0.5\)</span> 差、<span class="arithmatex">\(0.5\)</span>--<span class="arithmatex">\(0.75\)</span> 中等、<span class="arithmatex">\(0.75\)</span>--<span class="arithmatex">\(0.9\)</span> 良好、<span class="arithmatex">\(&gt;0.9\)</span> 优秀。</p>
+<div class="arithmatex">\[
+ICC = \frac{\sigma^2_{subject}}{\sigma^2_{subject} + \sigma^2_{rater} + \sigma^2_{error}}
+\]</div>
+<p>其中 <span class="arithmatex">\(\sigma^2_{subject}\)</span> 为不同对象间的方差（我们真正想测的稳定差异），<span class="arithmatex">\(\sigma^2_{rater}\)</span> 为评分者间系统偏差方差，<span class="arithmatex">\(\sigma^2_{error}\)</span> 为随机测量误差方差；ICC 即对象间方差占总方差的比例。</p>
 <p><strong>操作要点</strong>：工具箱选"ICC"，模型 two-way random、绝对一致、单次测量，置信水平 95%。</p>
 <p><strong>结果关键</strong>：案例 ICC2=0.844（CI 0.76--0.90），良好；取多人平均后 ICC2k=0.942 达优秀（平均提高信度）。</p>
 <p><strong>注意</strong>：要选对"绝对一致 vs 相对一致""单次 vs 平均"，选错会得到不同数值。</p>
@@ -2008,6 +2054,10 @@
 <p><strong>一句话</strong>：不预设线性关系，用灵活的样条曲线刻画暴露与结局之间的<strong>非线性</strong>剂量反应（如睡眠太短太长血压都高的 U 形关系）。</p>
 <p><strong>美赛场景区</strong>：探索变量间非线性关系（避免简单线性假设误导）；找最优点/阈值（如最佳睡眠时长、最佳温度）。</p>
 <p><strong>核心原理</strong>：把连续暴露按分位放几个结点，用一段段三次多项式在结点处光滑拼接。用样条项的 Wald 联合检验判断非线性是否显著（<span class="arithmatex">\(p&lt;0.05\)</span> 即存在非线性）。</p>
+<div class="arithmatex">\[
+f(x) = \beta_0 + \beta_1 x + \sum_{k=1}^{K-2}\beta_k\,(x - t_k)_+^3
+\]</div>
+<p>其中 <span class="arithmatex">\(t_k\)</span> 为第 <span class="arithmatex">\(k\)</span> 个结点位置，<span class="arithmatex">\((u)_+ = \max(u, 0)\)</span> 为截断三次幂基函数，<span class="arithmatex">\(K\)</span> 为结点个数（产生 <span class="arithmatex">\(K-2\)</span> 个样条项）；对样条项系数做 Wald 联合检验，<span class="arithmatex">\(p&lt;0.05\)</span> 即说明暴露--结局间存在非线性关系。</p>
 <p><strong>操作要点</strong>：工具箱选"RCS"，指定暴露列与结局列，结点数 quantile 分位（默认 4 个），参考值取 P10。</p>
 <p><strong>结果关键</strong>：案例睡眠时长与收缩压呈 U 形（非线性 <span class="arithmatex">\(p&lt;0.001\)</span>），最低点约 6.5 小时；结点数 3/4/5 结论一致故稳健。</p>
 <p><strong>注意</strong>：结点数不宜过多（3--5 个即可），否则曲线过拟合出假波动。</p>
@@ -2018,6 +2068,10 @@
 <p><strong>一句话</strong>：把随访时间切成若干区间，逐段计算死亡率和累积生存率，是生存分析最基础的描述工具。</p>
 <p><strong>美赛场景区</strong>：设备/产品可靠性分析（无故障使用时间）；Kaplan-Meier 的分组汇总版。</p>
 <p><strong>核心原理</strong>：每个区间用"期初人数 <span class="arithmatex">\(-\)</span> 删失数/2"估计有效暴露人数，算区间死亡概率，再连乘得累积生存率；Log-Rank 检验组间差异；在生存率首次低于 50% 处插值得中位生存时间。</p>
+<div class="arithmatex">\[
+q_i = \frac{d_i}{n_i - c_i/2}, \qquad \hat{S}(t) = \prod_{i:\,t_i \leq t}(1 - q_i)
+\]</div>
+<p>其中 <span class="arithmatex">\(n_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 个区间期初观察人数，<span class="arithmatex">\(d_i\)</span> 为区间内事件（死亡）数，<span class="arithmatex">\(c_i\)</span> 为区间内删失数，<span class="arithmatex">\(q_i\)</span> 为该区间的事件概率，<span class="arithmatex">\(\hat{S}(t)\)</span> 为各区间生存概率连乘得到的累积生存率。</p>
 <p><strong>操作要点</strong>：工具箱选"寿命表"，指定时间列、状态列、分组列，比较检验 logrank。</p>
 <p><strong>结果关键</strong>：案例改进工艺组中位无故障使用 54.4 月，原工艺组 21.6 月，Log-Rank <span class="arithmatex">\(p&lt;0.001\)</span>。</p>
 <p><strong>注意</strong>：区间宽度会影响结果，应做宽度敏感性复核（如 <span class="arithmatex">\(\pm\)</span> 一倍宽度）。</p>
@@ -2028,6 +2082,10 @@
 <p><strong>一句话</strong>：用于<strong>匹配病例对照</strong>数据——按年龄、性别等把病例和对照一一配对后，在每对内部比较，自动消去匹配因素的干扰。</p>
 <p><strong>美赛场景区</strong>：匹配设计下的风险因素识别；迁移到"配对样本/分层设计"下的二分类影响因素分析。</p>
 <p><strong>核心原理</strong>：在每个匹配层内构造条件似然，层间恒定因素（如匹配变量年龄）自动被消去、无法估计。输出各因素 OR 及 CI。</p>
+<div class="arithmatex">\[
+L(\beta) = \prod_{s=1}^{S}\frac{\exp(\beta^\top x_{s,case})}{\sum_{j\in s}\exp(\beta^\top x_{sj})}
+\]</div>
+<p>其中 <span class="arithmatex">\(s\)</span> 为第 <span class="arithmatex">\(s\)</span> 个匹配层（匹配对），<span class="arithmatex">\(x_{sj}\)</span> 为该层第 <span class="arithmatex">\(j\)</span> 个个体的协变量向量，<span class="arithmatex">\(x_{s,case}\)</span> 为其中病例的协变量；匹配变量在层内恒定，在条件似然中被自动消去，只能估计层内随个体变化的协变量效应。</p>
 <p><strong>操作要点</strong>：工具箱选"条件逻辑回归"，指定匹配层 ID、结局、协变量，自动剔除层内恒定变量。</p>
 <p><strong>结果关键</strong>：案例 75 个匹配对，孕前 BMI OR=1.23、家族史 OR=3.42、睡眠 OR=0.63（保护），均显著。</p>
 <p><strong>注意</strong>：匹配因素在模型中自动不可估计（被消去），这是正常现象，不是出错。</p>
@@ -2038,6 +2096,10 @@
 <p><strong>一句话</strong>：处理有序等级资料（如满意度五级），以参照组为基准把等级折算成得分，比较各组整体等级是偏高还是偏低。</p>
 <p><strong>美赛场景区</strong>：有序评分（满意度、疗效等级）的多组比较；迁移到任何有序分类结局的组间比较。</p>
 <p><strong>核心原理</strong>：用参照组各等级累计比例算 Ridit 得分，使参照组平均恒为 0.5；其他组平均 Ridit <span class="arithmatex">\(&gt;0.5\)</span> 表示等级整体偏高、<span class="arithmatex">\(&lt;0.5\)</span> 偏低，做 z 检验并 Bonferroni 校正。</p>
+<div class="arithmatex">\[
+R_g = \sum_{h&lt;g} p_{h}^{(ref)} + \tfrac{1}{2}p_{g}^{(ref)}
+\]</div>
+<p>其中 <span class="arithmatex">\(p_g^{(ref)}\)</span> 为参照组在第 <span class="arithmatex">\(g\)</span> 个等级上的比例，按等级顺序累积；<span class="arithmatex">\(R_g\)</span> 即第 <span class="arithmatex">\(g\)</span> 个等级的 Ridit 得分，参照组全体平均 Ridit 恒等于 0.5，其他组按各自等级构成加权求平均后与 0.5 比较。</p>
 <p><strong>操作要点</strong>：工具箱选"Ridit"，指定分组列与等级列，方向"等级越高越好"，参照组取最大组。</p>
 <p><strong>结果关键</strong>：案例线上预约 Ridit=0.70（更满意）、电话预约 0.37（更不满意），均与参照组差异显著。</p>
 <p><strong>注意</strong>：Ridit 只利用等级顺序、不利用间距；样本小的组区间宽、结论不稳。</p>
@@ -2048,6 +2110,10 @@
 <p><strong>一句话</strong>：控制一个分层变量（如不同医院/地区）后，再判断暴露与二分类结局是否关联，避免分层因素造成混杂。</p>
 <p><strong>美赛场景区</strong>：多中心/多地区数据合并分析时；控制混杂后的关联性检验。</p>
 <p><strong>核心原理</strong>：每层内算 2<span class="arithmatex">\(\times\)</span>2 表的 OR，用 Mantel-Haenszel 法合并得合并 OR 与合并卡方；Breslow-Day 检验各层 OR 是否一致；比较粗 OR 与调整 OR 判断混杂大小。</p>
+<div class="arithmatex">\[
+OR_{MH} = \frac{\sum_{s=1}^{S} a_s d_s / n_s}{\sum_{s=1}^{S} b_s c_s / n_s}
+\]</div>
+<p>其中第 <span class="arithmatex">\(s\)</span> 层的 2<span class="arithmatex">\(\times\)</span>2 四格表为 <span class="arithmatex">\(\begin{pmatrix}a_s &amp; b_s\\ c_s &amp; d_s\end{pmatrix}\)</span>，<span class="arithmatex">\(n_s\)</span> 为该层总人数；<span class="arithmatex">\(OR_{MH}\)</span> 为控制分层变量后各层优势比的加权合并值。</p>
 <p><strong>操作要点</strong>：工具箱选"CMH 分层卡方"，指定暴露、结局、分层列。</p>
 <p><strong>结果关键</strong>：案例调整中心后合并 OR=0.33（CI 0.15--0.72），ERAS [Enhanced Recovery After Surgery, 加速康复外科] 组并发症优势更低；粗 OR=0.43，调整后变化 30% 提示存在混杂。</p>
 <p><strong>注意</strong>：Breslow-Day <span class="arithmatex">\(p&lt;0.05\)</span> 说明各层效应不一致，应分层解释而非只报合并值。</p>
@@ -2058,6 +2124,12 @@
 <p><strong>一句话</strong>：从 2<span class="arithmatex">\(\times\)</span>2 四格表出发，量化两组事件风险的相对差异——OR 是比值比、RR 是相对危险度，并给出风险差 AR [Autoregressive, 自回归]。</p>
 <p><strong>美赛场景区</strong>：任何两组率的比较（干预组 vs 对照组事件率）；论文中报告效应大小。</p>
 <p><strong>核心原理</strong>：RR=暴露组事件率/对照组事件率；OR=暴露组事件比值/对照组事件比值。结局罕见时 OR 近似 RR，结局常见时 OR 会夸大关联。</p>
+<div class="arithmatex">\[
+RR = \frac{a/(a+b)}{c/(c+d)}, \qquad
+OR = \frac{ad}{bc}, \qquad
+AR = \frac{a}{a+b} - \frac{c}{c+d}
+\]</div>
+<p>其中四格表中 <span class="arithmatex">\(a\)</span>、<span class="arithmatex">\(b\)</span> 分别为暴露组的事件数、非事件数，<span class="arithmatex">\(c\)</span>、<span class="arithmatex">\(d\)</span> 分别为对照组的事件数、非事件数；RR 为相对危险度，OR 为优势比，AR 为绝对风险差。</p>
 <p><strong>操作要点</strong>：工具箱选"OR/RR"，指定暴露与结局字段，对照组取值，零格自动修正，主指标选 RR。</p>
 <p><strong>结果关键</strong>：案例干预组事件率 16.7% vs 对照 37.5%，RR=0.444（CI 0.25--0.79），风险差 <span class="arithmatex">\(-20.8\)</span> 个百分点。</p>
 <p><strong>注意</strong>：结局常见时不要用 OR 代替 RR 解读绝对风险；观察性数据只提示关联。</p>
@@ -2068,6 +2140,13 @@
 <p><strong>一句话</strong>：在旧模型基础上加入新变量后，判断预测是否真的<strong>变好</strong>——即使 AUC 提升很小，NRI/IDI 也能检测出重分类改善。</p>
 <p><strong>美赛场景区</strong>：比较两个嵌套预测模型（旧模型 vs 加了新特征的新模型），量化新增量价值。</p>
 <p><strong>核心原理</strong>：NRI 看事件组风险被正确上调、非事件组被正确下调的比例之和；IDI 看事件组与非事件组平均预测风险分离度的改善。两者都给 Bootstrap CI，不含 0 即显著改善。</p>
+<div class="arithmatex">\[
+NRI = \left(\frac{n_{up,event} - n_{down,event}}{n_{event}}\right) + \left(\frac{n_{down,nonevent} - n_{up,nonevent}}{n_{nonevent}}\right)
+\]</div>
+<div class="arithmatex">\[
+IDI = (\bar{\hat{p}}_{event}^{new} - \bar{\hat{p}}_{event}^{old}) - (\bar{\hat{p}}_{nonevent}^{new} - \bar{\hat{p}}_{nonevent}^{old})
+\]</div>
+<p>其中 <span class="arithmatex">\(n_{up,event}\)</span>、<span class="arithmatex">\(n_{down,event}\)</span> 为事件组中新模型上调、下调风险的人数，<span class="arithmatex">\(n_{up,nonevent}\)</span>、<span class="arithmatex">\(n_{down,nonevent}\)</span> 为非事件组相应人数；<span class="arithmatex">\(\bar{\hat{p}}_{event}^{new}\)</span> 与 <span class="arithmatex">\(\bar{\hat{p}}_{event}^{old}\)</span> 为事件组新、旧模型平均预测概率，IDI 衡量两组间预测概率分离度的平均改善。</p>
 <p><strong>操作要点</strong>：工具箱选"NRI/IDI"，指定结局、旧模型特征、新模型新增特征，模式 both。</p>
 <p><strong>结果关键</strong>：案例加入血清乳酸后连续 NRI=0.768（<span class="arithmatex">\(p&lt;0.001\)</span>）、IDI=0.171（<span class="arithmatex">\(p&lt;0.001\)</span>），AUC 仅提升 0.065 但重分类显著改善。</p>
 <p><strong>注意</strong>：AUC 变化常不敏感，NRI/IDI 是检测增量价值的更灵敏工具。</p>
@@ -2078,6 +2157,10 @@
 <p><strong>一句话</strong>：评价两个评分者对同一批对象分类结果的一致性，<strong>扣除了"碰巧一致"</strong>的部分，比单纯算符合率更严格。</p>
 <p><strong>美赛场景区</strong>：两个评委/两种分类器/两次标注结果的一致性；标注质量检验。</p>
 <p><strong>核心原理</strong>：观察一致率减去机遇一致率，再除以 <span class="arithmatex">\(1-\)</span>机遇一致率。Kappa <span class="arithmatex">\(=1\)</span> 完全一致、<span class="arithmatex">\(=0\)</span> 等于瞎猜。Landis-Koch 分级：<span class="arithmatex">\(&lt;0.2\)</span> 极差、<span class="arithmatex">\(0.4\)</span>--<span class="arithmatex">\(0.6\)</span> 中等、<span class="arithmatex">\(0.6\)</span>--<span class="arithmatex">\(0.8\)</span> 良好、<span class="arithmatex">\(&gt;0.8\)</span> 很好。有序等级可用加权 Kappa。</p>
+<div class="arithmatex">\[
+\kappa = \frac{P_o - P_e}{1 - P_e}
+\]</div>
+<p>其中 <span class="arithmatex">\(P_o\)</span> 为两名评分者的观察一致率（列联表对角线合计占比），<span class="arithmatex">\(P_e = \sum_k p_{\cdot k} p_{k\cdot}\)</span> 为按各自边际分布计算的机遇一致率；<span class="arithmatex">\(\kappa\)</span> 扣除了碰巧一致的部分。</p>
 <p><strong>操作要点</strong>：工具箱选"Kappa"，两列成对评分，权重方案按数据选，判读标准 Altman。</p>
 <p><strong>结果关键</strong>：案例两位医师 CT [Computed Tomography, 电子计算机断层扫描] 分级 Kappa=0.721（CI 0.63--0.81），良好；分歧集中在"可疑恶性"等级。</p>
 <p><strong>注意</strong>：符合率高但 Kappa 低，说明两人都倾向选多数类别（边际分布偏），一致性其实差。</p>
@@ -2088,6 +2171,10 @@
 <p><strong>一句话</strong>：检验<strong>同一批对象</strong>前后两次二分类结果是否变化（如保养前 vs 保养后设备隐患率），是配对设计下的率比较。</p>
 <p><strong>美赛场景区</strong>：同一组对象干预前后对比；配对样本的两个相关率比较。</p>
 <p><strong>核心原理</strong>：只看不一致的配对——"由阳转阴"对数 <span class="arithmatex">\(b\)</span> 与"由阴转阳"对数 <span class="arithmatex">\(c\)</span> 是否对称。若 <span class="arithmatex">\(b\)</span> 和 <span class="arithmatex">\(c\)</span> 明显不等，说明前后发生了系统改变。一致对不参与检验。</p>
+<div class="arithmatex">\[
+\chi^2 = \frac{(b - c)^2}{b + c}
+\]</div>
+<p>其中 <span class="arithmatex">\(b\)</span> 为"前阳后阴"的不一致配对数，<span class="arithmatex">\(c\)</span> 为"前阴后阳"的不一致配对数；一致对（两次结果相同）不参与检验，<span class="arithmatex">\(b\)</span> 与 <span class="arithmatex">\(c\)</span> 差异显著即说明前后率发生了系统变化。</p>
 <p><strong>操作要点</strong>：工具箱选"McNemar"，指定前后两列，<span class="arithmatex">\(b+c \geq 25\)</span> 用渐近卡方，否则精确检验。</p>
 <p><strong>结果关键</strong>：案例 <span class="arithmatex">\(b=38\)</span>（阳性转阴性）、<span class="arithmatex">\(c=13\)</span>（阴性转阳性），率差 <span class="arithmatex">\(-16.7\)</span> 个百分点、<span class="arithmatex">\(p=0.0008\)</span>，保养后隐患率显著下降。</p>
 <p><strong>注意</strong>：McNemar 只看率是否变化，效应大小要另外看率差及其 CI。</p>
@@ -2098,6 +2185,10 @@
 <p><strong>一句话</strong>：同一批对象在多个时间点（如基线、3 月、6 月）被反复测量，比较均值是否随时间变化，且利用"同一个人"的相关提高检验功效。</p>
 <p><strong>美赛场景区</strong>：追踪/面板数据的时间趋势分析；同一批客户/对象多次测量的比较。</p>
 <p><strong>核心原理</strong>：把个体间差异从误差中分离，做时间主效应 F 检验。前提是球形性（Mauchly 检验），不满足时用 Greenhouse-Geisser 校正自由度。显著后做事后两两比较（Bonferroni 校正）。</p>
+<div class="arithmatex">\[
+F_{time} = \frac{MS_{time}}{MS_{error}} = \frac{SS_{time}/(k-1)}{SS_{error}/((k-1)(n-1))}
+\]</div>
+<p>其中 <span class="arithmatex">\(SS_{time}\)</span> 为时间主效应平方和，<span class="arithmatex">\(SS_{error}\)</span> 为时间与个体交互（残差）平方和，<span class="arithmatex">\(k\)</span> 为测量时点个数，<span class="arithmatex">\(n\)</span> 为被试人数；球形性不满足时按 Greenhouse-Geisser 系数 <span class="arithmatex">\(\hat{\varepsilon}\)</span> 校正自由度后再查 F 分布。</p>
 <p><strong>操作要点</strong>：工具箱选"重复测量方差分析"，长格式，指定被试、时间、测量值列，球形性校正 GG。</p>
 <p><strong>结果关键</strong>：案例 50 人 3 时点收缩压时间主效应 <span class="arithmatex">\(F=193.4\)</span>、<span class="arithmatex">\(p&lt;0.001\)</span>，两两比较均显著下降。</p>
 <p><strong>注意</strong>：违背球形性时必须看校正后 p 值，不能直接用原始 F 检验。</p>
@@ -2108,6 +2199,10 @@
 <p><strong>一句话</strong>：当一个人可能因<strong>多种互斥原因</strong>退出（如腹透患者要么技术失败、要么死亡），把别的原因当删失会高估关注事件发生率，竞争风险模型正确处理这一点。</p>
 <p><strong>美赛场景区</strong>：迁移到"多种互斥结局"的风险分析（如客户可能流失也可能升级套餐）；更真实地估计累积发生率。</p>
 <p><strong>核心原理</strong>：用 Aalen-Johansen 法估计各原因累计发生函数（CIF [Cumulative Incidence Function, 累积发生函数]），用 Fine-Gray 子分布风险回归估计因素对关注事件的影响（SHR [Subdistribution Hazard Ratio, 子分布风险比]）。</p>
+<div class="arithmatex">\[
+CIF_k(t) = \sum_{t_i \leq t} \hat{S}(t_i^{-})\,\frac{d_{k,i}}{n_i}
+\]</div>
+<p>其中 <span class="arithmatex">\(\hat{S}(t_i^{-})\)</span> 为到时刻 <span class="arithmatex">\(t_i\)</span> 之前尚未发生任何事件的生存率，<span class="arithmatex">\(d_{k,i}\)</span> 为 <span class="arithmatex">\(t_i\)</span> 时刻因原因 <span class="arithmatex">\(k\)</span> 发生事件的人数，<span class="arithmatex">\(n_i\)</span> 为该时刻风险集人数；<span class="arithmatex">\(CIF_k(t)\)</span> 直接给出原因 <span class="arithmatex">\(k\)</span> 的累积发生率，不会被其他竞争事件高估。</p>
 <p><strong>操作要点</strong>：工具箱选"竞争风险"，指定时间、多分类结局、关注事件取值、协变量，Bootstrap 1000 次给 CI。</p>
 <p><strong>结果关键</strong>：案例 12 月时技术失败 CIF=0.191，血清白蛋白 SHR=0.91（保护）；注意不要用"<span class="arithmatex">\(1-\)</span>KM [Kaplan-Meier,  Kaplan-Meier生存分析]"口径（会高估）。</p>
 <p><strong>注意</strong>：存在竞争事件时，普通 Cox/KM 会有偏，必须用 CIF/Fine-Gray。</p>
@@ -2128,6 +2223,10 @@
 <p><strong>一句话</strong>：拟合剂量--反应 S 形曲线，反解出使 50% 受试对象出现反应的剂量（LD50），量化毒性/效力强弱。</p>
 <p><strong>美赛场景区</strong>：迁移到"暴露强度--响应率"关系的阈值估计（如价格区间--购买率、污染浓度--患病率）。</p>
 <p><strong>核心原理</strong>：对剂量取对数后拟合 Probit（或 Logistic）广义线性模型，得到 S 形曲线；用 Fieller 法反解反应率 10%/50%/90% 对应的剂量（LD10/LD50/LD90）。失拟检验 <span class="arithmatex">\(p&gt;0.05\)</span> 说明曲线拟合良好。</p>
+<div class="arithmatex">\[
+\Phi^{-1}(p) = \alpha + \beta\ln(dose), \qquad LD_{50} = \exp(-\alpha/\beta)
+\]</div>
+<p>其中 <span class="arithmatex">\(\Phi^{-1}\)</span> 为标准正态分布的逆累积分布函数（Probit 联结），<span class="arithmatex">\(p\)</span> 为受试对象出现反应的比例，<span class="arithmatex">\(\alpha\)</span>、<span class="arithmatex">\(\beta\)</span> 为模型参数；反应率 <span class="arithmatex">\(p=0.5\)</span> 对应的剂量即 <span class="arithmatex">\(LD_{50}\)</span>。</p>
 <p><strong>操作要点</strong>：工具箱选"剂量反应 LD50"，link 选 probit，剂量 log10 变换，输出 LD10/50/90。</p>
 <p><strong>结果关键</strong>：案例 LD50=252.8（CI 212.5--301.1），LD50 越小毒性越强；失拟 <span class="arithmatex">\(p=0.91\)</span> 拟合良好。</p>
 <p><strong>注意</strong>：剂量范围必须覆盖反应率 0%--100%，否则外推 LD50 不可靠。</p>

@@ -1450,13 +1450,30 @@
 <p class="admonition-title">通俗原理</p>
 <p>想象你要给一场有很多评委打分的比赛算总分。有的评委很专业（样本量大、打分很稳），有的评委只是随手一看（样本量小、波动大）。合理的做法不是简单平均，而是<strong>让专业评委权重更高</strong>。这就是Meta分析的核心思想。</p>
 <ul>
-<li><strong>效应量MD [Mean Difference, 均值差]（均数差）</strong>：每个研究贡献一个"干预组均值<span class="arithmatex">\(-\)</span>对照组均值"。量纲一致时直接用MD，单位和原始结局一样（米、分）。</li>
-<li><strong>逆方差加权</strong>：权重 <span class="arithmatex">\(w_i = 1/v_i\)</span>，其中<span class="arithmatex">\(v_i\)</span>是该研究效应量的方差。样本越大、标准差越小，方差越小，权重越大。</li>
+<li><strong>效应量MD [Mean Difference, 均值差]（均数差）</strong>：每个研究贡献一个"干预组均值<span class="arithmatex">\(-\)</span>对照组均值"：</li>
+</ul>
+<div class="arithmatex">\[
+MD_i = \bar{x}_{1i} - \bar{x}_{2i}
+\]</div>
+<p>量纲一致时直接用MD，单位和原始结局一样（米、分）。</p>
+<ul>
+<li>
+<p><strong>逆方差加权</strong>：权重 <span class="arithmatex">\(w_i = 1/v_i\)</span>，其中 <span class="arithmatex">\(v_i\)</span> 是该研究效应量的方差。样本越大、标准差越小，方差越小，权重越大。</p>
+</li>
+<li>
+<p><strong>合并效应（固定效应模型）</strong>：</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+\hat{\theta} = \frac{\sum_{i=1}^{k} w_i \hat{\theta}_i}{\sum_{i=1}^{k} w_i}, \quad \text{Var}(\hat{\theta}) = \frac{1}{\sum_{i=1}^{k} w_i}
+\]</div>
+<p>其中 <span class="arithmatex">\(\hat{\theta}_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 项研究的效应量，<span class="arithmatex">\(w_i = 1/v_i\)</span> 为逆方差权重，<span class="arithmatex">\(k\)</span> 为研究数。</p>
+<ul>
 <li><strong>异质性</strong>：各研究结果如果只是围绕同一个真值随机波动，叫"同质"；如果研究之间真的不一样，叫"异质"。用三个指标判断：</li>
-<li>Cochran <span class="arithmatex">\(Q\)</span>检验：<span class="arithmatex">\(Q\)</span>的<span class="arithmatex">\(p&lt;0.10\)</span>提示有异质性；</li>
-<li><span class="arithmatex">\(I^2\)</span>：总变异中有多少百分比来自研究间差异，<span class="arithmatex">\(&lt;25%\)</span>低、<span class="arithmatex">\(50%\)</span>中等、<span class="arithmatex">\(&gt;75%\)</span>高；</li>
-<li><span class="arithmatex">\(\tau^2\)</span>：研究间方差的绝对大小。</li>
-<li><strong>固定效应 vs 随机效应</strong>：异质小（<span class="arithmatex">\(p\geq0.10\)</span>且<span class="arithmatex">\(I^2&lt;50%\)</span>）用固定效应（假设大家都在测同一个真值）；异质大改用随机效应（承认研究间有真差异，额外加上<span class="arithmatex">\(\tau^2\)</span>，区间更宽更稳）。</li>
+<li>Cochran <span class="arithmatex">\(Q\)</span>检验：<span class="arithmatex">\(Q = \sum w_i(\hat{\theta}_i - \hat{\theta})^2\)</span>，<span class="arithmatex">\(Q\)</span> 的 <span class="arithmatex">\(p&lt;0.10\)</span> 提示有异质性；</li>
+<li><span class="arithmatex">\(I^2 = \max\left(0, \frac{Q - (k-1)}{Q}\right) \times 100\%\)</span>：总变异中有多少百分比来自研究间差异，<span class="arithmatex">\(&lt;25\%\)</span> 低、<span class="arithmatex">\(50\%\)</span> 中等、<span class="arithmatex">\(&gt;75\%\)</span> 高；</li>
+<li><span class="arithmatex">\(\tau^2\)</span>：研究间方差的绝对大小（DL法估计 <span class="arithmatex">\(\tau^2 = \frac{Q-(k-1)}{\sum w_i - \sum w_i^2 / \sum w_i}\)</span>）。</li>
+<li><strong>固定效应 vs 随机效应</strong>：异质小（<span class="arithmatex">\(p\geq0.10\)</span> 且 <span class="arithmatex">\(I^2&lt;50\%\)</span>）用固定效应（假设大家都在测同一个真值）；异质大改用随机效应（<span class="arithmatex">\(w_i^* = 1/(v_i + \tau^2)\)</span>，承认研究间有真差异，区间更宽更稳）。</li>
 </ul>
 </div>
 <div class="admonition tip">
@@ -1514,12 +1531,18 @@
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
-<p>相关系数<span class="arithmatex">\(r\)</span>有个毛病：它的分布在接近<span class="arithmatex">\(\pm1\)</span>时很歪，不能直接拿来加权平均。所以要先做一个"扶正"变换。</p>
+<p>相关系数 <span class="arithmatex">\(r\)</span> 有个毛病：它的分布在接近 <span class="arithmatex">\(\pm1\)</span> 时很歪，不能直接拿来加权平均。所以要先做一个"扶正"变换。</p>
 <ul>
-<li><strong>Fisher z变换</strong>：把<span class="arithmatex">\(r\)</span>转成近似正态的 <span class="arithmatex">\(z = \frac{1}{2}\ln\frac{1+r}{1-r}\)</span>。在<span class="arithmatex">\(z\)</span>尺度上做加权合并、算置信区间，最后再反变换回<span class="arithmatex">\(r\)</span>方便解释。</li>
-<li><strong>权重</strong>：每个研究的方差约为 <span class="arithmatex">\(1/(n-3)\)</span>，样本量<span class="arithmatex">\(n\)</span>越大权重越高。</li>
-<li><strong>异质性与模型</strong>：同样用<span class="arithmatex">\(Q\)</span>、<span class="arithmatex">\(I^2\)</span>判断。案例中<span class="arithmatex">\(Q=298.13\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>），<span class="arithmatex">\(I^2=50.0%\)</span>，研究间差异明显，故用随机效应。</li>
-<li><strong>效应强弱解读</strong>：<span class="arithmatex">\(|r|\)</span>约0.1弱、0.3中等、0.5以上强。</li>
+<li><strong>Fisher z变换</strong>：把 <span class="arithmatex">\(r\)</span> 转成近似正态的 <span class="arithmatex">\(z\)</span> 尺度：</li>
+</ul>
+<div class="arithmatex">\[
+z_r = \frac{1}{2} \ln\frac{1+r}{1-r}
+\]</div>
+<p>在 <span class="arithmatex">\(z\)</span> 尺度上做加权合并、算置信区间，最后再反变换回 <span class="arithmatex">\(r\)</span> 方便解释。</p>
+<ul>
+<li><strong>权重</strong>：每个研究的方差约为 <span class="arithmatex">\(v_i = 1/(n_i - 3)\)</span>，权重 <span class="arithmatex">\(w_i = 1/v_i = n_i - 3\)</span>，样本量 <span class="arithmatex">\(n\)</span> 越大权重越高。</li>
+<li><strong>异质性与模型</strong>：同样用 <span class="arithmatex">\(Q\)</span>、<span class="arithmatex">\(I^2\)</span> 判断。案例中 <span class="arithmatex">\(Q=298.13\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>），<span class="arithmatex">\(I^2=50.0\%\)</span>，研究间差异明显，故用随机效应。</li>
+<li><strong>效应强弱解读</strong>：<span class="arithmatex">\(|r|\)</span> 约0.1弱、0.3中等、0.5以上强。</li>
 </ul>
 </div>
 <div class="admonition tip">
@@ -1573,12 +1596,15 @@
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
-<p>二分类结局的效应量不能直接减人数，要用"比值"。</p>
+<p>二分类结局的效应量不能直接减人数，要用"比值"。设试验组事件数为 <span class="arithmatex">\(a\)</span>、非事件数为 <span class="arithmatex">\(b\)</span>，对照组事件数为 <span class="arithmatex">\(c\)</span>、非事件数为 <span class="arithmatex">\(d\)</span>：</p>
+<div class="arithmatex">\[
+OR = \frac{a/b}{c/d} = \frac{ad}{bc}, \quad RR = \frac{a/(a+b)}{c/(c+d)}
+\]</div>
 <ul>
-<li><strong>OR（比值比）</strong>：试验组事件 odds 除以对照组事件 odds。<span class="arithmatex">\(OR&lt;1\)</span>表示试验组事件更少（好事）；<span class="arithmatex">\(OR=1\)</span>表示两组无差别。</li>
-<li><strong>对数尺度合并</strong>：OR是偏态的，要先取<span class="arithmatex">\(\ln(OR)\)</span>再合并，算完置信区间再取指数还原。</li>
-<li><strong>异质性与模型</strong>：<span class="arithmatex">\(Q\)</span>检验<span class="arithmatex">\(p&lt;0.10\)</span>或<span class="arithmatex">\(I^2&gt;50%\)</span>时用随机效应（<span class="arithmatex">\(\tau^2\)</span>用DL估计），否则用固定效应，两个模型结果都会报告。</li>
-<li><strong>亚组分析</strong>：可按地区/人群分组，用<span class="arithmatex">\(Q_b\)</span>检验组间差异。</li>
+<li><strong>OR（比值比）</strong>：试验组事件 odds 除以对照组事件 odds。<span class="arithmatex">\(OR&lt;1\)</span> 表示试验组事件更少（好事）；<span class="arithmatex">\(OR=1\)</span> 表示两组无差别。</li>
+<li><strong>对数尺度合并</strong>：OR是偏态的，要先取 <span class="arithmatex">\(\ln(OR)\)</span> 再合并，算完置信区间再取指数还原。</li>
+<li><strong>异质性与模型</strong>：<span class="arithmatex">\(Q\)</span> 检验 <span class="arithmatex">\(p&lt;0.10\)</span> 或 <span class="arithmatex">\(I^2&gt;50\%\)</span> 时用随机效应（<span class="arithmatex">\(\tau^2\)</span> 用DL估计），否则用固定效应，两个模型结果都会报告。</li>
+<li><strong>亚组分析</strong>：可按地区/人群分组，用 <span class="arithmatex">\(Q_b\)</span> 检验组间差异。</li>
 <li><strong>零事件校正</strong>：某组0事件时OR算不出来，用0.5连续性校正。</li>
 </ul>
 </div>
@@ -1626,7 +1652,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：最通用的Meta合并底座——只要每个研究给了"效应值"和"标准误"两列，不管它是均差、回归系数还是对数OR，都能按 <span class="arithmatex">\(1/SE [Standard Error, 标准误]^2\)</span> 加权合并。</p>
 <p><strong>美赛场景区</strong>：各研究报告的效应形式五花八门（有的给均差、有的给回归系数），但都附带标准误，需要统一合并出总体净效应。</p>
-<p><strong>核心原理</strong>：以标准误平方的倒数 <span class="arithmatex">\(w_i=1/SE_i^2\)</span> 为权重，先算固定效应下的Cochran <span class="arithmatex">\(Q\)</span>，结合<span class="arithmatex">\(I^2\)</span>、<span class="arithmatex">\(\tau^2\)</span>决定固定/随机效应（DL法估计<span class="arithmatex">\(\tau^2\)</span>），再加权合并并做<span class="arithmatex">\(Z\)</span>检验。若输入是对数尺度，取指数还原成OR/HR/RR。</p>
+<p><strong>核心原理</strong>：以标准误平方的倒数为权重进行加权合并：</p>
+<div class="arithmatex">\[
+w_i = \frac{1}{SE_i^2}, \quad \hat{\theta} = \frac{\sum w_i \hat{\theta}_i}{\sum w_i}
+\]</div>
+<p>先算固定效应下的Cochran <span class="arithmatex">\(Q = \sum w_i(\hat{\theta}_i - \hat{\theta})^2\)</span>，结合 <span class="arithmatex">\(I^2\)</span>、<span class="arithmatex">\(\tau^2\)</span> 决定固定/随机效应（DL法估计 <span class="arithmatex">\(\tau^2\)</span>），再加权合并并做 <span class="arithmatex">\(Z\)</span> 检验。若输入是对数尺度，取指数还原成OR/HR/RR。</p>
 <p><strong>操作要点</strong>：工具箱选"一般倒方差Meta分析"；指定效应值列effect、标准误列se、研究标签列study；默认随机效应、双侧检验、95%置信、异质性水准0.10。</p>
 <p><strong>结果关键</strong>：合并效应值及其95%CI、<span class="arithmatex">\(p\)</span>值（CI不含0即显著）；案例中合并值4.20（CI 3.88<span class="arithmatex">\(\sim\)</span>4.52，<span class="arithmatex">\(p&lt;0.001\)</span>），<span class="arithmatex">\(I^2=67.1%\)</span>异质性较高。配合去一法与Egger检验查稳健性与小样本偏倚。</p>
 <p><strong>注意</strong>：这是其他Meta算法的"母版"——平均值、二分类、SMD都是它在特定数据布局下的特化。当你拿不到原始两组数据、只有别人报告的效应估计时，就用它。</p>
@@ -1636,7 +1666,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：只有一组数据（没有对照组）时，把多家单位各自报告的"发生率/阳性率"合并成一个总体率。</p>
 <p><strong>美赛场景区</strong>：评估区域医院感染率、某病总体患病率、某政策整体覆盖率——各单位只报"事件数/总数"，想得到区域平均水平。</p>
-<p><strong>核心原理</strong>：率本身在接近0或100%时不正态，先做Freeman-Tukey双反正弦（或logit）变换，再加权合并，最后回变换到百分比刻度。随机效应先估<span class="arithmatex">\(\tau^2\)</span>再加权，并用<span class="arithmatex">\(Q\)</span>、<span class="arithmatex">\(I^2\)</span>、Egger、留一法评估异质性与偏倚。</p>
+<p><strong>核心原理</strong>：率本身在接近0或100%时不正态，先做Freeman-Tukey双反正弦变换：</p>
+<div class="arithmatex">\[
+\phi(p) = \frac{1}{2}\left(\arcsin\sqrt{\frac{a}{n+1}} + \arcsin\sqrt{\frac{a+1}{n+1}}\right)
+\]</div>
+<p>其中 <span class="arithmatex">\(a\)</span> 为事件数，<span class="arithmatex">\(n\)</span> 为样本量。变换后再加权合并，最后回变换到百分比刻度。随机效应先估 <span class="arithmatex">\(\tau^2\)</span> 再加权，并用 <span class="arithmatex">\(Q\)</span>、<span class="arithmatex">\(I^2\)</span>、Egger、留一法评估异质性与偏倚。</p>
 <p><strong>操作要点</strong>：工具箱选"单个率Meta分析"；每研究录事件数与样本量；变换选freeman_tukey，模型random，<span class="arithmatex">\(\tau^2\)</span>用DL；留一法与Egger自动。</p>
 <p><strong>结果关键</strong>：案例（150家医院）合并感染率3.7%（95%CI 3.4%<span class="arithmatex">\(\sim\)</span>4.0%），预测区间1.1%<span class="arithmatex">\(\sim\)</span>7.9%；<span class="arithmatex">\(I^2=90%\)</span>异质性极高，说明各医院差异很大，合并值只是平均水平。</p>
 <p><strong>注意</strong>：异质性极高时，"一个总率"意义有限，更该做的是找出率为何在医院间差异这么大（按规模/地区分层）。</p>
@@ -1646,7 +1680,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当各研究的连续结局<strong>量表或单位不统一</strong>时，不用原始均差，而用标准化均数差（SMD，Hedges g）把结果放到同一把尺子上再合并。</p>
 <p><strong>美赛场景区</strong>：各研究用不同工具测量同一构念（一个用mmHg、一个用评分），要合并它们的干预效应大小。</p>
-<p><strong>核心原理</strong>：$SMD = <span class="arithmatex">\(两组均差\)</span>/<span class="arithmatex">\(合并标准差，并做小样本校正得Hedges g，这样量纲消失、可跨研究比较。\)</span>|g|<span class="arithmatex">\(约0.2小、0.5中、0.8大。固定与随机效应（DL）各算一遍，用\)</span>Q<span class="arithmatex">\(、\)</span>I<sup>2<span class="arithmatex">\(、\)</span>\tau</sup>2$诊异质，Egger查小样本偏倚。</p>
+<p><strong>核心原理</strong>：当各研究的连续结局量表或单位不统一时，用标准化均数差（SMD）把结果放到同一把尺子上：</p>
+<div class="arithmatex">\[
+SMD = \frac{\bar{x}_1 - \bar{x}_2}{s_{pooled}}, \quad s_{pooled} = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1+n_2-2}}
+\]</div>
+<p>并做小样本校正得Hedges <span class="arithmatex">\(g = J \times SMD\)</span>（<span class="arithmatex">\(J \approx 1 - \frac{3}{4(n_1+n_2) - 9}\)</span>）。这样量纲消失、可跨研究比较。<span class="arithmatex">\(|g|\)</span> 约0.2小、0.5中、0.8大。固定与随机效应（DL）各算一遍，用 <span class="arithmatex">\(Q\)</span>、<span class="arithmatex">\(I^2\)</span>、<span class="arithmatex">\(\tau^2\)</span> 诊异质，Egger查小样本偏倚。</p>
 <p><strong>操作要点</strong>：工具箱选"连续性数据Meta分析"；效应量类型选SMD-Hedges g；随机效应-DL为主并报告固定效应；输出森林图+漏斗图；异质性阈值50%。</p>
 <p><strong>结果关键</strong>：案例（低钠盐对收缩压）随机效应 <span class="arithmatex">\(SMD=-0.458\)</span>（CI <span class="arithmatex">\(-0.498\sim-0.418\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>），属中等效应，干预组血压更低；<span class="arithmatex">\(I^2=67.4%\)</span>异质性偏高。</p>
 <p><strong>注意</strong>：本算法与基础"平均值Meta分析"的唯一区别就是效应量——结局单位一致用MD（可解释为多少米/mmHg），单位/量表不同用SMD（只说效应大小，不说实际单位）。</p>
@@ -1656,7 +1694,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当你手头只有一堆研究的<strong>p值</strong>（连效应量、原始数据都没有），把这些p值合并成一个"整体证据是否显著"的结论。</p>
 <p><strong>美赛场景区</strong>：文献只报告了各检验的p值和方向，想据此判断"综合起来到底有没有效应"。这是信息最匮乏时的无奈之选。</p>
-<p><strong>核心原理</strong>：常用三套方法——Fisher卡方合并（把<span class="arithmatex">\(-2\ln p\)</span>求和，服从卡方）、Stouffer z合并（可加权，还能利用方向）、Tippett最小p合并。配合KS [Kolmogorov-Smirnov, 柯尔莫哥洛夫-斯米尔诺夫检验]诊断p值分布、留一法查是否被单一研究主导。</p>
+<p><strong>核心原理</strong>：常用三套方法——Fisher卡方合并、Stouffer z合并、Tippett最小p合并。Fisher合并法为：</p>
+<div class="arithmatex">\[
+\chi^2_{2k} = -2\sum_{i=1}^{k} \ln(p_i)
+\]</div>
+<p>其中 <span class="arithmatex">\(p_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 项研究的 <span class="arithmatex">\(p\)</span> 值，<span class="arithmatex">\(k\)</span> 为研究数，统计量服从自由度 <span class="arithmatex">\(2k\)</span> 的卡方分布。Stouffer法可加权并利用方向。配合KS [Kolmogorov-Smirnov, 柯尔莫哥洛夫-斯米尔诺夫检验] 诊断 <span class="arithmatex">\(p\)</span> 值分布、留一法查是否被单一研究主导。</p>
 <p><strong>操作要点</strong>：工具箱选"P值合并"；指定p值列、方向列、权重列（可空）；方法选all（同时跑Fisher/Stouffer加权/Tippett）；显著性水准0.05。</p>
 <p><strong>结果关键</strong>：案例（150项研究）Fisher合并<span class="arithmatex">\(p=3.3\times10^{-52}&lt;0.05\)</span>，整体显著偏离无效假设；Stouffer两尾<span class="arithmatex">\(p=8.8\times10^{-89}\)</span>支持正向为主。剔除任一研究结论方向不变。</p>
 <p><strong>注意</strong>：P值合并只能告诉你"整体是否有效应"，<strong>既不估计效应有多大，也不量化异质性</strong>，更不能当结论性的效应量来写。它是最后手段，能用效应量合并就别用它。</p>
@@ -1666,7 +1708,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当别人已经把每项研究的OR（比值比）或HR（风险比）连同95%置信区间算好给你时，直接拿这些"成品效应"做加权合并。</p>
 <p><strong>美赛场景区</strong>：观察性流行病学证据合成，如"睡眠不足 vs 2型糖尿病风险"——各研究报告的是OR及CI，要合并平均关联强度。</p>
-<p><strong>核心原理</strong>：把OR/HR取对数，由CI反推标准误，按逆方差<span class="arithmatex">\(1/SE^2\)</span>加权；用<span class="arithmatex">\(Q\)</span>、<span class="arithmatex">\(I^2\)</span>、<span class="arithmatex">\(\tau^2\)</span>选固定/随机效应（DL）；输出合并OR、预测区间，Egger查发表偏倚，留一法查稳健性。注意观察性研究只能谈关联、不能谈因果。</p>
+<p><strong>核心原理</strong>：把OR/HR取对数，由CI反推标准误，按逆方差加权：</p>
+<div class="arithmatex">\[
+SE_i = \frac{\ln(OR_{upper}) - \ln(OR_{lower})}{2 \times 1.96}, \quad w_i = \frac{1}{SE_i^2}
+\]</div>
+<p>用 <span class="arithmatex">\(Q\)</span>、<span class="arithmatex">\(I^2\)</span>、<span class="arithmatex">\(\tau^2\)</span> 选固定/随机效应（DL）；输出合并OR、预测区间，Egger查发表偏倚，留一法查稳健性。注意观察性研究只能谈关联、不能谈因果。</p>
 <p><strong>操作要点</strong>：工具箱选"OR/HR值Meta分析"；录效应值or、区间上下限ci_low/ci_high、样本量n；模型auto、95%CI、<span class="arithmatex">\(\alpha=0.05\)</span>、异质性水准0.10；开Egger、留一法、预测区间。</p>
 <p><strong>结果关键</strong>：案例（睡眠不足与糖尿病）合并<span class="arithmatex">\(OR=1.24\)</span>（CI 1.19<span class="arithmatex">\(\sim\)</span>1.28，<span class="arithmatex">\(p&lt;0.001\)</span>），睡眠不足者糖尿病风险高约24%；<span class="arithmatex">\(I^2=90.6%\)</span>异质性很高，用随机效应；预测区间0.81<span class="arithmatex">\(\sim\)</span>1.89；Egger <span class="arithmatex">\(p=0.115\)</span>无明显偏倚。</p>
 <p><strong>注意</strong>：合并OR/HR的解读务必标注"观察性证据、关联不等于因果"。<span class="arithmatex">\(I^2\)</span>很高时，结论只是各研究的平均关联，要解释差异来源需做亚组或Meta回归。</p>

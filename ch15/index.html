@@ -1457,7 +1457,12 @@
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
-<p>想象做蛋糕：烤温有高/中/低3档，时间有60/90/120/150/180分钟5档。全析因就是<span class="arithmatex">\(3\times5=15\)</span>种组合<strong>全部做一遍</strong>。</p>
+<p>想象做蛋糕：烤温有高/中/低3档，时间有60/90/120/150/180分钟5档。全析因就是 <span class="arithmatex">\(3\times5=15\)</span> 种组合<strong>全部做一遍</strong>。</p>
+<p>对于 <span class="arithmatex">\(k\)</span> 个二水平因子，处理组合数为 <span class="arithmatex">\(2^k\)</span>。主效应估计公式为：</p>
+<div class="arithmatex">\[
+\text{Main Effect}_A = \bar{y}_{A+} - \bar{y}_{A-}
+\]</div>
+<p>其中 <span class="arithmatex">\(\bar{y}_{A+}\)</span> 为因子 <span class="arithmatex">\(A\)</span> 高水平下所有试验的响应均值，<span class="arithmatex">\(\bar{y}_{A-}\)</span> 为低水平下的响应均值。</p>
 <p>然后用方差分析（ANOVA [Analysis of Variance, 方差分析]）分解响应的变异：
 - <strong>主效应</strong>：温度单独的影响有多大？时间单独的影响有多大？
 - <strong>交互作用</strong>：温度高时延长时间更好，还是温度低时延长时间更好？如果折线图交叉明显，说明有交互</p>
@@ -1506,11 +1511,15 @@
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
-<p>正交表的巧妙之处在于<strong>均衡分散、整齐可比</strong>：</p>
+<p>正交表的巧妙之处在于<strong>均衡分散、整齐可比</strong>，正交表记为 <span class="arithmatex">\(L_n(m^k)\)</span>：</p>
+<div class="arithmatex">\[
+L_n(m^k) \quad\Rightarrow\quad n\text{次试验}, \quad k\text{个因子}, \quad m\text{个水平}
+\]</div>
+<p>例如 <span class="arithmatex">\(L_{25}(5^6)\)</span> 表示25次试验、最多安排6个5水平因子。</p>
 <ul>
 <li>任意两个因素的水平组合<strong>均匀出现</strong>——每个因素的每个水平都和其他因素的每个水平搭配过相同次数</li>
 <li>这样每个因素的效应可以<strong>独立估计</strong>，不受其他因素干扰</li>
-<li>虽然只做了25次（而非<span class="arithmatex">\(5^6=15625\)</span>次），但信息效率很高</li>
+<li>虽然只做了25次（而非 <span class="arithmatex">\(5^6=15625\)</span> 次），但信息效率很高</li>
 </ul>
 <p><strong>分析步骤</strong>：
 1. <strong>极差分析</strong>：算每个因素各水平的响应均值，极差R越大=该因素影响越大
@@ -1566,8 +1575,9 @@
 <p class="admonition-title">通俗原理</p>
 <p>先用正交/PB [Plackett-Burman, Plackett-Burman设计]设计筛选出3--5个关键因素，然后用CCD或BBD设计安排试验点，拟合二次模型：</p>
 <div class="arithmatex">\[
-y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + \varepsilon
+y = \beta_0 + \sum_i \beta_i x_i + \sum_i \beta_{ii} x_i^2 + \sum_{i&lt;j} \beta_{ij} x_i x_j + \varepsilon
 \]</div>
+<p>其中 <span class="arithmatex">\(\beta_0\)</span> 为常数项，<span class="arithmatex">\(\beta_i\)</span> 为线性项系数，<span class="arithmatex">\(\beta_{ii}\)</span> 为二次项系数，<span class="arithmatex">\(\beta_{ij}\)</span> 为交互项系数。最优点满足 <span class="arithmatex">\(\nabla \hat{y} = 0\)</span>（对各偏导数求零）。</p>
 <ul>
 <li><strong>线性项</strong>：因素增大，响应线性增大/减小</li>
 <li><strong>平方项</strong>：存在最优点（开口向下=极大值，开口向上=极小值）</li>
@@ -1620,11 +1630,15 @@ y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + 
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
-<p>CCD由三部分组成：
-- <strong>立方点</strong>：<span class="arithmatex">\(2^k\)</span>个全因子点（各因素高低水平组合）
-- <strong>轴向点</strong>：<span class="arithmatex">\(2k\)</span>个点（一个因素取<span class="arithmatex">\(\pm\alpha\)</span>，其他取0）——用来估计平方项
-- <strong>中心点</strong>：重复多次（估计纯误差和失拟）</p>
-<p><span class="arithmatex">\(\alpha\)</span>选"可旋转"模式时，各方向预测方差相等，是最常用选择。</p>
+<p>CCD由三部分组成，总试验点数为 <span class="arithmatex">\(2^k + 2k + n_0\)</span>：
+- <strong>立方点</strong>：<span class="arithmatex">\(2^k\)</span> 个全因子点（各因素高低水平组合）
+- <strong>轴向点</strong>：<span class="arithmatex">\(2k\)</span> 个点（一个因素取 <span class="arithmatex">\(\pm\alpha\)</span>，其他取0）——用来估计平方项
+- <strong>中心点</strong>：<span class="arithmatex">\(n_0\)</span> 个重复点（估计纯误差和失拟）</p>
+<p>可旋转设计的轴向点距离为：</p>
+<div class="arithmatex">\[
+\alpha = 2^{k/4}
+\]</div>
+<p>其中 <span class="arithmatex">\(k\)</span> 为因子数。<span class="arithmatex">\(\alpha\)</span> 选"可旋转"模式时，各方向预测方差相等，是最常用选择。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1648,7 +1662,11 @@ y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + 
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：中国数学家方开泰、王元提出的试验设计方法——让试验点在因素空间中<strong>均匀散布</strong>，用极少试验覆盖整个多维空间。</p>
 <p><strong>美赛场景区</strong>：化工工艺4因素150水平，试验代价极高，无法做全因子。</p>
-<p><strong>核心原理</strong>：与正交表"整齐可比"不同，均匀设计追求"均匀散布"——每个因素的每个水平只出现一次，点在空间中均匀分布。配合二次回归模型预测最优组合。</p>
+<p><strong>核心原理</strong>：与正交表"整齐可比"不同，均匀设计追求"均匀散布"——每个因素的每个水平只出现一次，点在空间中均匀分布。用中心化 <span class="arithmatex">\(L_2\)</span> 偏差衡量均匀性：</p>
+<div class="arithmatex">\[
+CD_2 = \left[\left(\frac{1}{3}\right)^k + \frac{1}{N^2}\sum_{i=1}^{N}\sum_{j=1}^{N}\prod_{l=1}^{k}\left(\frac{3}{2} - |x_{il} - x_{jl}|\right)\right]^{1/2}
+\]</div>
+<p><span class="arithmatex">\(CD_2\)</span> 越小表示试验点在因素空间中散布越均匀。配合二次回归模型预测最优组合。</p>
 <p><strong>操作要点</strong>：因素数和试验次数匹配均匀表，二次模型=主效应+平方项，优化方向最大化响应。</p>
 <p><strong>结果关键</strong>：CD2（中心化L2偏差）越小越均匀；二次模型<span class="arithmatex">\(R^2=0.996\)</span>预测最优参数。</p>
 <p><strong>注意</strong>：均匀设计点散布均匀但没有重复，无法估计纯误差，需配合建模使用。</p>
@@ -1658,7 +1676,11 @@ y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + 
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：用<span class="arithmatex">\(k\times k\)</span>方阵同时控制两个无关变量（如工位、时段），只关心处理因素（如配方）的差异。</p>
 <p><strong>美赛场景区</strong>：涂装产线5种配方对比，但5个工位和5个时段都有系统差异，需要同时扣除两类干扰。</p>
-<p><strong>核心原理</strong>：每个处理在每行每列恰好出现一次——就像数独，行=工位、列=时段、数字=配方。这样工位和时段的系统偏差被区组吸收，误差更纯净。</p>
+<p><strong>核心原理</strong>：每个处理在每行每列恰好出现一次——就像数独，行=工位、列=时段、数字=配方。<span class="arithmatex">\(n \times n\)</span> 拉丁方要求行区组、列区组、处理因素水平数均为 <span class="arithmatex">\(n\)</span>，即：</p>
+<div class="arithmatex">\[
+\text{Each treatment appears exactly once in each row and each column}
+\]</div>
+<p>这样工位和时段的系统偏差被区组吸收，误差更纯净。</p>
 <p><strong>操作要点</strong>：指定行区组、列区组、处理因素、因变量；Tukey HSD多重比较。</p>
 <p><strong>结果关键</strong>：处理<span class="arithmatex">\(F=113\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>），F3配方最好（均值5.98），F4最差（4.61）。</p>
 <p><strong>注意</strong>：拉丁方要求行、列、处理水平数相等；不能估计行×列交互。</p>
@@ -1668,7 +1690,11 @@ y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + 
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：响应面的另一种设计方案——没有角点，只取边中点和中心点，试验次数比CCD少。</p>
 <p><strong>美赛场景区</strong>：蛋糕配方优化（加水量、打发时间、焙烤温度3因素）。</p>
-<p><strong>核心原理</strong>：BBD的点在边的中点（两因素取端点、第三因素取中心），不做极端角点组合——适合"极端组合不安全/不现实"的场景（如温度太高会烤糊）。</p>
+<p><strong>核心原理</strong>：BBD的点在边的中点（两因素取端点、第三因素取中心），不做极端角点组合——适合"极端组合不安全/不现实"的场景。BBD为3水平设计，对 <span class="arithmatex">\(k\)</span> 个因素试验点数为：</p>
+<div class="arithmatex">\[
+N = 2 \cdot \binom{k}{2} + n_0
+\]</div>
+<p>其中 <span class="arithmatex">\(n_0\)</span> 为中心点重复次数。BBD没有角点，<span class="arithmatex">\(\alpha = \sqrt{2}\)</span> 对应因素端点到中心的距离。</p>
 <p><strong>操作要点</strong>：3因素BBD只需15次试验（加中心点重复），拟合二次响应面。</p>
 <p><strong>结果关键</strong>：比容最优条件（加水43.7%、打发9.8min、温度172℃），预测比容3.81mL/g。</p>
 <p><strong>注意</strong>：BBD不探索角点——如果最优点在角上附近，BBD会漏掉。CCD和BBD根据实际选择。</p>
@@ -1678,7 +1704,11 @@ y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + 
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：全析因的"1/2"或"1/4"——<span class="arithmatex">\(2^{k-p}\)</span>设计，用部分试验筛选主效应，牺牲高阶交互换试验次数。</p>
 <p><strong>美赛场景区</strong>：7个两水平因子全因子需128次太贵，用<span class="arithmatex">\(2^{7-3}=16\)</span>次筛选关键因子。</p>
-<p><strong>核心原理</strong>：分辨率IV [Instrumental Variable, 工具变量]设计——主效应不与二阶交互混叠，但二阶交互之间互相混叠。用Lenth伪标准误判断哪些因子显著。</p>
+<p><strong>核心原理</strong>：全析因的部分实施，<span class="arithmatex">\(2^{k-p}\)</span> 设计用部分试验筛选主效应，牺牲高阶交互换试验次数：</p>
+<div class="arithmatex">\[
+N = 2^{k-p}
+\]</div>
+<p>其中 <span class="arithmatex">\(k\)</span> 为因子数，<span class="arithmatex">\(p\)</span> 为缩减的分数。分辨率IV [Instrumental Variable, 工具变量]设计——主效应不与二阶交互混叠，但二阶交互之间互相混叠。用Lenth伪标准误判断哪些因子显著。</p>
 <p><strong>操作要点</strong>：模型项选main，显著性方法选Lenth，响应列选收率。</p>
 <p><strong>结果关键</strong>：7个因子中3个显著（温度、催化剂量、养晶时间），R<span class="arithmatex">\(^2\)</span>=0.84。</p>
 <p><strong>注意</strong>：部分析因是筛选设计——目的是"找到关键少数"，不是精确寻优。显著因子后续做响应面。</p>
@@ -1688,7 +1718,11 @@ y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + 
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：最经济的因子筛选设计——<span class="arithmatex">\(N\)</span>次试验最多筛<span class="arithmatex">\(N-1\)</span>个两水平因子，专门用来从很多候选因子中快速找出关键的。</p>
 <p><strong>美赛场景区</strong>：8个工艺因子（温度、时间、催化剂量等）想快速找出4个关键的。</p>
-<p><strong>核心原理</strong>：PB设计是分辨率III——主效应可能与二阶交互混叠，但用极少试验就能估计所有主效应。效应<span class="arithmatex">\(=\)</span>高水平均值<span class="arithmatex">\(-\)</span>低水平均值。</p>
+<p><strong>核心原理</strong>：PB设计是分辨率III——主效应可能与二阶交互混叠，但用极少试验就能估计所有主效应。<span class="arithmatex">\(N\)</span> 次试验最多可估计 <span class="arithmatex">\(N-1\)</span> 个主效应：</p>
+<div class="arithmatex">\[
+N \text{ runs} \Rightarrow \text{estimate up to } N-1 \text{ main effects}
+\]</div>
+<p>效应估计为 <span class="arithmatex">\(Effect = \bar{y}_{high} - \bar{y}_{low}\)</span>（高水平均值减低水平均值）。</p>
 <p><strong>操作要点</strong>：因子列选8个两水平因子，响应列选收率，显著性规则auto。</p>
 <p><strong>结果关键</strong>：8个因子中4个显著（温度+3.9、时间-3.6、催化剂量+3.0、保温时间+1.9）。</p>
 <p><strong>注意</strong>：PB是纯筛选设计——找到显著因子后，下一步要做全因子或响应面，不能直接当最终结论。</p>

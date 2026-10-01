@@ -1462,6 +1462,9 @@
 1. 每个珠子归到离它最近的堆心
 1. 重新计算每堆的中心（均值），移动堆心
 1. 重复直到堆心不再移动</p>
+<p>数学上，K-Means最小化簇内平方和目标函数：</p>
+<div class="arithmatex">\[J=\sum_{k=1}^{K}\sum_{x_i\in C_k}\|x_i-\mu_k\|^2\]</div>
+<p>其中 <span class="arithmatex">\(C_k\)</span> 是第 <span class="arithmatex">\(k\)</span> 簇的样本集合，<span class="arithmatex">\(\mu_k=\frac{1}{|C_k|}\sum_{x_i\in C_k}x_i\)</span> 为该簇质心，<span class="arithmatex">\(\|\cdot\|\)</span> 为欧氏距离范数。迭代即在"指派样本到最近质心"与"更新质心 <span class="arithmatex">\(\mu_k\)</span>"两步间交替，直到 <span class="arithmatex">\(J\)</span> 收敛。</p>
 <p><strong>关键问题：<span class="arithmatex">\(K\)</span>取几？</strong>本案例在<span class="arithmatex">\(k=2\)</span>到10间试，看<strong>轮廓系数</strong>——越接近1说明堆内紧、堆间分。结果<span class="arithmatex">\(k=3\)</span>时轮廓系数0.77最高，故选3类。</p>
 <p>三类画像：簇0（40%）活跃高频但客单低；簇1（22.7%）三项都低（沉默客户）；簇2（37.3%）客单价高但频次低（高价值低频）。</p>
 </div>
@@ -1517,6 +1520,9 @@
 <p>它分两步，这也是"两步聚类"名字的由来：
 1. <strong>阶段一</strong>：逐个扫描样本，把相近的先攒成小"子簇"（像先把散珠子拢成小堆）
 1. <strong>阶段二</strong>：用对数似然距离把这些小簇逐层合并，自动试<span class="arithmatex">\(k=2\)</span>到10，用<strong>BIC [Bayesian Information Criterion, 贝叶斯信息准则]/AIC [Akaike Information Criterion, 赤池信息准则]</strong>和<strong>轮廓系数</strong>选最佳</p>
+<p>最优簇数按BIC最小准则自动选定，BIC定义为：</p>
+<div class="arithmatex">\[BIC=-2\ln L_m+k_m\ln n\]</div>
+<p>其中 <span class="arithmatex">\(L_m\)</span> 为模型 <span class="arithmatex">\(m\)</span> 的极大似然值，<span class="arithmatex">\(k_m\)</span> 为参数个数，<span class="arithmatex">\(n\)</span> 为样本量；BIC越小表示模型在拟合与简洁间越优。连续变量间距离用欧氏距离 <span class="arithmatex">\(d(x,y)=\sqrt{\sum_{j}(x_j-y_j)^2}\)</span>，分类变量间用对数似然距离度量概率分布差异。</p>
 <p>本案例试<span class="arithmatex">\(k=2\)</span>--10，轮廓系数在<span class="arithmatex">\(k=4\)</span>处最高0.271，故定4簇。连续变量用欧式距离、分类变量用对数似然距离，所以它能混合两类变量。</p>
 </div>
 <div class="admonition tip">
@@ -1569,6 +1575,9 @@
 - 第一主成分PC1：数据"波动最大"的方向，本它解释了47.4%的方差
 - 第二主成分PC2：和PC1垂直、又能解释最多剩余波动（20.6%）
 - 第三PC3：再解释18.5%</p>
+<p>数学上，PCA在单位长度约束下最大化投影方差：</p>
+<div class="arithmatex">\[\max_{w}\ w^T\Sigma w \quad \text{s.t.}\quad \|w\|=1\]</div>
+<p>其中 <span class="arithmatex">\(\Sigma\)</span> 为变量的协方差矩阵，<span class="arithmatex">\(w\)</span> 为主成分方向。由拉格朗日乘数法得特征方程 <span class="arithmatex">\(\Sigma w=\lambda w\)</span>，特征值 <span class="arithmatex">\(\lambda\)</span> 即该主成分解释的方差。前 <span class="arithmatex">\(k\)</span> 个主成分的累计方差贡献率为 <span class="arithmatex">\(\frac{\sum_{i=1}^{k}\lambda_i}{\sum_{i=1}^{p}\lambda_i}\)</span>，<span class="arithmatex">\(p\)</span> 为原变量个数。</p>
 <p>前3个累计解释86.6%——几乎用3个综合指标就装下了原来9个指标的信息。<strong>适用性前提</strong>：先做Bartlett球度检验（本案例<span class="arithmatex">\(\chi^2=1035.7\)</span>，<span class="arithmatex">\(p=5\times10^{-194}\)</span>，适合降维）和KMO [Kaiser-Meyer-Olkin,  Kaiser-Meyer-Olkin检验]（本案例0.811<span class="arithmatex">\(&gt;0.6\)</span>，适合）。</p>
 </div>
 <div class="admonition tip">
@@ -1621,6 +1630,9 @@
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
 <p>顾客给"口味""分量""温度""新鲜度""出品"都打了高分——这5题其实都在测"菜品品质"这个<strong>潜变量</strong>。因子分析把它们归成一簇。</p>
+<p>正交因子模型写作：</p>
+<div class="arithmatex">\[X=\mu+LF+\varepsilon\]</div>
+<p>其中 <span class="arithmatex">\(X\)</span> 为观测向量，<span class="arithmatex">\(\mu\)</span> 为均值向量，<span class="arithmatex">\(L\)</span> 为因子载荷矩阵（元素 <span class="arithmatex">\(l_{ij}\)</span> 表示第 <span class="arithmatex">\(i\)</span> 个变量在第 <span class="arithmatex">\(j\)</span> 个公因子上的载荷），<span class="arithmatex">\(F\)</span> 为不可观测的公因子向量，<span class="arithmatex">\(\varepsilon\)</span> 为特殊因子（残差）。载荷绝对值越大，说明该题项与该公因子关系越紧密。</p>
 <ul>
 <li><strong>KMO=0.762</strong><span class="arithmatex">\(&gt;0.6\)</span>，Bartlett <span class="arithmatex">\(\chi^2=564.99\)</span>（<span class="arithmatex">\(df=105\)</span>，<span class="arithmatex">\(p=3.8\times10^{-64}\)</span>）——适合做</li>
 <li>按特征值<span class="arithmatex">\(&gt;\)</span>1提取3个公因子，用<strong>最大方差旋转(varimax)</strong>让载荷结构清晰</li>
@@ -1667,7 +1679,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：不靠预设簇数，按<strong>样本密集程度</strong>自动成团，还能把"离群点"标成噪声。</p>
 <p><strong>美赛场景区</strong>：形状不规则的簇、有异常点的地理/轨迹数据（本案例打车订单的出行模式+异常订单识别）。</p>
-<p><strong>核心原理</strong>：若某点周围半径eps内有至少min_samples个点，就把这片稠密区域发展成一个簇；稀疏处的点标记为噪声。本案例eps=0.5、min_samples=5，分出3簇+16个噪声点，非噪声轮廓系数0.795。</p>
+<p><strong>核心原理</strong>：若某点周围半径eps内有至少min_samples个点，就把这片稠密区域发展成一个簇；稀疏处的点标记为噪声。形式化地，若点 <span class="arithmatex">\(p\)</span> 的 <span class="arithmatex">\(\varepsilon\)</span>-邻域 <span class="arithmatex">\(N_\varepsilon(p)=\{q:d(p,q)\leq\varepsilon\}\)</span> 满足 <span class="arithmatex">\(|N_\varepsilon(p)|\geq\text{min\_samples}\)</span>，则 <span class="arithmatex">\(p\)</span> 为核心点；从核心点密度可达的所有点构成一个簇，其余为噪声，距离 <span class="arithmatex">\(d(p,q)\)</span> 常用欧氏距离。本案例eps=0.5、min_samples=5，分出3簇+16个噪声点，非噪声轮廓系数0.795。</p>
 <p><strong>操作要点</strong>：工具箱选"DBSCAN密度聚类"，标准化特征；用k-距离图拐点选eps；欧氏距离。</p>
 <p><strong>结果关键</strong>：簇数自动确定；噪声占比（本案例10.7%）；非噪声样本轮廓系数；各簇特征均值剖面。</p>
 <p><strong>注意</strong>：它不需要预设<span class="arithmatex">\(K\)</span>、能识别任意形状和噪声，但对eps和min_samples敏感，且密度不均时效果打折。</p>
@@ -1677,7 +1689,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：研究<strong>多个响应变量</strong>如何被<strong>多个解释变量</strong>共同解释的约束排序方法——生态学常用。</p>
 <p><strong>美赛场景区</strong>：环境因子驱动群落结构；多响应变量受多环境变量影响的分析（本案例水质指标如何驱动藻类丰度）。</p>
-<p><strong>核心原理</strong>：先对响应矩阵做多元回归得拟合值，再对拟合值做主成分分解得"约束排序轴"。全局置换检验<span class="arithmatex">\(p=0.001\)</span>，<span class="arithmatex">\(R^2=89.24%\)</span>说明环境变量显著解释了藻类变异。</p>
+<p><strong>核心原理</strong>：先对响应矩阵 <span class="arithmatex">\(Y\)</span>（物种）关于解释矩阵 <span class="arithmatex">\(X\)</span>（环境）做多元线性回归 <span class="arithmatex">\(\hat{Y}=XB\)</span>（<span class="arithmatex">\(B\)</span> 为回归系数），再对拟合值 <span class="arithmatex">\(\hat{Y}\)</span> 做主成分分解得"约束排序轴"；第 <span class="arithmatex">\(k\)</span> 个约束轴即 <span class="arithmatex">\(\hat{Y}\)</span> 中解释量最大的线性方向，约束特征值占全部特征值之比为约束解释率。全局置换检验<span class="arithmatex">\(p=0.001\)</span>，<span class="arithmatex">\(R^2=89.24\%\)</span>说明环境变量显著解释了藻类变异。</p>
 <p><strong>操作要点</strong>：工具箱选"冗余分析RDA"，指定响应变量组和解释变量组；分类解释变量自动哑变量化；置换999次。</p>
 <p><strong>结果关键</strong>：全局置换检验<span class="arithmatex">\(p\)</span>；各解释变量单独解释率；排序图箭头方向与长度。</p>
 <p><strong>注意</strong>：它是<strong>有约束</strong>的PCA。若响应沿环境梯度呈单峰分布，应改用典范对应分析CCA [Canonical Correlation Analysis, 典型相关分析]。</p>
@@ -1687,7 +1699,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：已知历史分组标签，找一条"最佳分界线"把各组分开，并给新样本归类——有监督的分类+降维。</p>
 <p><strong>美赛场景区</strong>：信用评级、疾病判别、模式识别；用已知类别的指标建立判别规则给新对象分类（本案例企业信用等级判别）。</p>
-<p><strong>核心原理</strong>：找线性判别函数，使<strong>组间差异相对组内差异</strong>最大。本案例5个财务指标建判别函数，留一法准确率80.6%（Kappa=0.708），远高于猜最大类的33.3%基线。</p>
+<p><strong>核心原理</strong>：找线性投影方向 <span class="arithmatex">\(w\)</span>，使Fisher判别准则最大化——即组间离散相对组内离散之比最大：</p>
+<div class="arithmatex">\[J(w)=\frac{w^T S_B w}{w^T S_W w}\]</div>
+<p>其中 <span class="arithmatex">\(S_B\)</span> 为类间散度矩阵，<span class="arithmatex">\(S_W\)</span> 为类内散度矩阵；<span class="arithmatex">\(J(w)\)</span> 越大说明投影后各类分得越开。本案例5个财务指标建判别函数，留一法准确率80.6%（Kappa=0.708），远高于猜最大类的33.3%基线。</p>
 <p><strong>操作要点</strong>：工具箱选"判别分析LDA"，指定分组列和特征列；Box's M检验协方差齐性；留一法交叉验证。</p>
 <p><strong>结果关键</strong>：Wilks' Lambda（整体判别力）；标准化判别系数（谁最能区分）；混淆矩阵和各类命中率。</p>
 <p><strong>注意</strong>：它和PCA都降维，但<strong>LDA用到类别标签</strong>、目标是"分开组"；PCA无标签、目标是"保留方差"。协方差不齐时用二次判别QDA [Quadratic Discriminant Analysis, 二次判别分析]。</p>
@@ -1697,7 +1711,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把"谁和谁像、差多远"的抽象关系，画成<strong>一张二维地图</strong>——点越近越相似。</p>
 <p><strong>美赛场景区</strong>：品牌/门店感知图；对象间相似性的可视化；无法直接坐标化但知道两两距离时的定位。</p>
-<p><strong>核心原理</strong>：先算两两距离，再在二维空间摆点，让"图上距离"尽量贴近"原始距离"。本案例150家门店在7个感知维度上，标准化应力0.019（优），前两维解释99%。</p>
+<p><strong>核心原理</strong>：先算两两距离 <span class="arithmatex">\(\delta_{ij}\)</span>，再在二维空间摆点 <span class="arithmatex">\(\hat{x}_i\)</span>，使重构距离 <span class="arithmatex">\(\hat{d}_{ij}=\|\hat{x}_i-\hat{x}_j\|\)</span> 尽量贴近原始距离。标准化应力定义为：</p>
+<div class="arithmatex">\[\text{STRESS}=\sqrt{\frac{\sum_{i&lt;j}(\delta_{ij}-\hat{d}_{ij})^2}{\sum_{i&lt;j}\delta_{ij}^2}}\]</div>
+<p>应力越小说明二维重构对原始距离的保持越好。本案例150家门店在7个感知维度上，标准化应力0.019（优），前两维解释99%。</p>
 <p><strong>操作要点</strong>：工具箱选"多维尺度MDS"，标准化特征，度量MDS，降维到2维，随机种子42。</p>
 <p><strong>结果关键</strong>：标准化应力<span class="arithmatex">\(&lt;0.05\)</span>为优；Shepard图点贴近对角线；配置图上的点群和孤立点。</p>
 <p><strong>注意</strong>：它只保留<strong>远近关系</strong>，不保留绝对坐标和方向。非度量MDS用于只知道排序相似性的数据。</p>
@@ -1707,7 +1723,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：不预先定簇数，像<strong>族谱</strong>一样把样本一层层两两合并，最后画成一棵树（树状图/谱系图）。</p>
 <p><strong>美赛场景区</strong>：小样本下想看聚类层次结构；变量少、想直观展示"谁和谁先聚在一起"。</p>
-<p><strong>核心原理</strong>：先每个样本自成一簇，用ward连接把最像的两簇反复合并。本案例<span class="arithmatex">\(n=150\)</span>、6指标，ward+欧氏距离，轮廓系数在<span class="arithmatex">\(k=3\)</span>处最高0.683，cophenetic系数0.974。</p>
+<p><strong>核心原理</strong>：先每个样本自成一簇，用Ward连接把使簇内离差平方和增量最小的两簇反复合并。两簇 <span class="arithmatex">\(A,B\)</span> 合并导致的簇内平方和增量为：</p>
+<div class="arithmatex">\[D_{AB}=\frac{n_A n_B}{n_A+n_B}\|\bar{x}_A-\bar{x}_B\|^2\]</div>
+<p>其中 <span class="arithmatex">\(n_A,n_B\)</span> 为两簇样本数，<span class="arithmatex">\(\bar{x}_A,\bar{x}_B\)</span> 为两簇质心，<span class="arithmatex">\(D_{AB}\)</span> 最小的两簇最先合并。本案例<span class="arithmatex">\(n=150\)</span>、6指标，ward+欧氏距离，轮廓系数在<span class="arithmatex">\(k=3\)</span>处最高0.683，cophenetic系数0.974。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 分类 → 系统聚类</strong>，选变量、 ward法、欧氏距离、z-score标准化，输出树状图。</p>
 <p><strong>结果关键</strong>：树状图在合适高度横切得簇数；轮廓系数曲线选<span class="arithmatex">\(k\)</span>；各簇规模和均值画像。</p>
 <p><strong>注意</strong>：它<strong>不需要预跑<span class="arithmatex">\(K\)</span></strong>，但样本量大时树状图会非常臃肿，大样本更适合K-Means。</p>

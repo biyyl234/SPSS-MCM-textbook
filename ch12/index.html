@@ -1522,6 +1522,11 @@
 <li><strong>变异（Mutation）</strong>：随机翻转某一位编码，保持种群多样性，防止早熟收敛</li>
 <li><strong>精英保留（Elitism）</strong>：每代最好的几个方案直接进入下一代，不丢失</li>
 </ul>
+<p>优化目标与选择概率为：</p>
+<div class="arithmatex">\[
+\max_{x}\ f(x), \qquad p_i = \frac{f_i}{\sum_{j=1}^{N} f_j}
+\]</div>
+<p>其中 <span class="arithmatex">\(f(x)\)</span> 为待最大化的目标函数（即个体适应度），<span class="arithmatex">\(f_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 个个体的适应度值，<span class="arithmatex">\(N\)</span> 为种群规模；<span class="arithmatex">\(p_i\)</span> 为该个体被选中参与繁殖的概率（轮盘赌选择，适应度越高被选中机会越大）。</p>
 <p>如此迭代几百代后，种群会越来越集中到最优解附近。</p>
 <p><strong>关键参数</strong>：种群大小（默认80）、交叉概率（默认0.8）、变异率（默认0.05）、迭代代数（默认100）。0/1背包问题中用repair策略处理超容量个体。</p>
 </div>
@@ -1587,6 +1592,11 @@
 <li>意思是：要么不装这个物品（<span class="arithmatex">\(dp[w]\)</span>），要么装（腾出 <span class="arithmatex">\(c\)</span> 的容量装它，总价值变成 <span class="arithmatex">\(dp[w-c]+v\)</span>），取大者</li>
 <li>从 <span class="arithmatex">\(w=0\)</span> 递推到容量上限，最后 <span class="arithmatex">\(dp[W]\)</span> 就是最大价值，再回溯找出选了哪些物品</li>
 </ul>
+<p>状态转移方程与最优值为：</p>
+<div class="arithmatex">\[
+dp[w] = \max\big(dp[w],\ dp[w-c] + v\big), \qquad V^{*} = dp[W]
+\]</div>
+<p>其中 <span class="arithmatex">\(dp[w]\)</span> 为已处理物品中、容量上限为 <span class="arithmatex">\(w\)</span> 时能达到的最大价值，<span class="arithmatex">\(c\)</span>、<span class="arithmatex">\(v\)</span> 为当前物品的重量与价值，初始状态 <span class="arithmatex">\(dp[0]=0\)</span>；从 <span class="arithmatex">\(w=0\)</span> 递推到背包容量 <span class="arithmatex">\(W\)</span>，<span class="arithmatex">\(dp[W]\)</span> 即全局最优总价值。</p>
 <p>这就像填表：每加一个物品，就把整张表更新一遍。虽然看起来笨，但<strong>枚举了所有可能组合</strong>，所以一定能找到全局最优。</p>
 </div>
 <div class="admonition tip">
@@ -1639,7 +1649,12 @@
 <li>知道<strong>整个鸽群找到过食物最多的位置</strong>（全局极值 <span class="arithmatex">\(gbest\)</span>）</li>
 <li>每一步同时被这两个位置"吸引"，调整飞行方向和速度</li>
 </ul>
-<p>速度更新公式：<span class="arithmatex">\(v_{t+1} = w\cdot v_t + c_1\cdot r_1\cdot(pbest-x_t) + c_2\cdot r_2\cdot(gbest-x_t)\)</span></p>
+<p>速度与位置的更新公式为：</p>
+<div class="arithmatex">\[
+v_{i}^{t+1} = w\,v_{i}^{t} + c_1 r_1\,(pbest_i - x_i^{t}) + c_2 r_2\,(gbest - x_i^{t}), \qquad
+x_i^{t+1} = x_i^{t} + v_i^{t+1}
+\]</div>
+<p>其中 <span class="arithmatex">\(x_i^t\)</span>、<span class="arithmatex">\(v_i^t\)</span> 为第 <span class="arithmatex">\(i\)</span> 个粒子在第 <span class="arithmatex">\(t\)</span> 代的位置与速度，<span class="arithmatex">\(pbest_i\)</span> 为该粒子历史最优位置，<span class="arithmatex">\(gbest\)</span> 为整个种群历史最优位置；<span class="arithmatex">\(w\)</span> 为惯性权重，<span class="arithmatex">\(c_1\)</span>（认知系数）、<span class="arithmatex">\(c_2\)</span>（社会系数）控制向个体/群体最优靠拢的权重，<span class="arithmatex">\(r_1\)</span>、<span class="arithmatex">\(r_2\)</span> 为 <span class="arithmatex">\([0,1]\)</span> 区间均匀随机数。</p>
 <ul>
 <li><span class="arithmatex">\(w\)</span>（惯性权重）：保持当前飞行方向的趋势，默认从0.9线性递减到0.4（前期探索、后期精修）</li>
 <li><span class="arithmatex">\(c_1\)</span>（认知系数）：向自己历史最佳靠拢的权重</li>
@@ -1701,6 +1716,11 @@
 <li><strong>终止</strong>：温度很低时，你基本只往下走，最终停在一个很深的谷底</li>
 </ul>
 <p>关键是<strong>Metropolis准则</strong>：新方案比当前好就接受；比当前差，也以概率 <span class="arithmatex">\(e^{-\Delta E/T}\)</span> 接受——温度高时接受概率大（大胆探索），温度低时接受概率小（谨慎收敛）。</p>
+<div class="arithmatex">\[
+P_{accept}(\Delta E, T) = \min\!\left(1,\ \exp(-\Delta E / T)\right), \qquad
+T_{t+1} = \alpha\, T_t
+\]</div>
+<p>其中 <span class="arithmatex">\(\Delta E = E_{new} - E_{current}\)</span> 为新解与当前解的目标函数差（最小化问题），<span class="arithmatex">\(T\)</span> 为当前温度；新解更优（<span class="arithmatex">\(\Delta E&lt;0\)</span>）时直接接受，更差时以 Metropolis 概率接受劣解，温度按衰减系数 <span class="arithmatex">\(\alpha\)</span> 几何递减。</p>
 <p><strong>参数</strong>：初始温度自动估算，衰减系数0.94（每轮乘0.94），每温迭代500次，终止温度0.0001，重启3次。</p>
 </div>
 <div class="admonition tip">
@@ -1739,6 +1759,10 @@
 <p><strong>一句话</strong>：求解整数线性规划的精确方法——先放松整数要求解线性规划，再逐步添加"切割约束"把非整数解切掉，直到得到整数最优解。</p>
 <p><strong>美赛场景区</strong>：生产排产中产品数量必须为整数（不能生产半个产品）的线性规划问题。</p>
 <p><strong>核心原理</strong>：先解LP [Linear Programming, 线性规划]松弛（允许小数），如果最优解含小数变量，就构造Gomory割平面（一条新约束）把小数部分切掉，重新求解。逐轮收紧，直到所有变量取整。就像雕刻：一刀一刀切掉多余的部分，最后留下整数最优解。</p>
+<div class="arithmatex">\[
+\sum_{j}\big(a_{rj} - \lfloor a_{rj}\rfloor\big) x_j \geq b_r - \lfloor b_r\rfloor
+\]</div>
+<p>其中在 LP 松弛最优对应的单纯形表上取一行 <span class="arithmatex">\(r\)</span>，其右端 <span class="arithmatex">\(b_r\)</span> 非整数（记分数部分 <span class="arithmatex">\(f_r = b_r - \lfloor b_r\rfloor\)</span>），<span class="arithmatex">\(a_{rj}\)</span> 为该行系数；该 Gomory 割平面把当前非整数最优解所在的一块区域整体切掉，逐轮添加后直到所有基变量取整。</p>
 <p><strong>操作要点</strong>：工具箱中选择"割平面法"，目标方向max，割平面行选择规则选"最大分数部优先"，最大迭代100次。</p>
 <p><strong>结果关键</strong>：LP松弛最优值逐轮下降并逼近整数最优值（如从45.5降到45），最终找到整数最优解。与独立MILP [Mixed Integer Linear Programming, 混合整数线性规划]求解器交叉验证一致即证明最优。</p>
 <p><strong>注意</strong>：割平面法和分支定界法是整数规划两大精确方法；割平面法靠加约束，分支定界靠分分支。</p>
@@ -1749,6 +1773,10 @@
 <p><strong>一句话</strong>：用二阶导数（Hessian矩阵）信息加速非线性优化收敛的方法，比一阶梯度下降快得多。</p>
 <p><strong>美赛场景区</strong>：非线性模型参数拟合，如药代动力学指数模型 <span class="arithmatex">\(C(t)=C_0 e^{-k_e t}\)</span> 的参数估计。</p>
 <p><strong>核心原理</strong>：梯度下降只看"往哪个方向走最陡"（一阶梯度），牛顿法还看"地形的曲率"（二阶导数），像一个会开车的人不仅知道上坡方向，还知道弯道有多急，因此能更快逼近最优点。拟牛顿法（BFGS [Broyden-Fletcher-Goldfarb-Shanno, 拟牛顿优化算法]）不直接算Hessian，用梯度差近似，降低计算量。</p>
+<div class="arithmatex">\[
+x_{t+1} = x_t - H^{-1}(x_t)\,\nabla f(x_t)
+\]</div>
+<p>其中 <span class="arithmatex">\(\nabla f(x_t)\)</span> 为目标函数在 <span class="arithmatex">\(x_t\)</span> 处的一阶梯度，<span class="arithmatex">\(H(x_t) = \nabla^2 f(x_t)\)</span> 为 Hessian 矩阵（二阶导数）；牛顿法用二次模型局部逼近目标，收敛速度远快于一阶梯度下降；拟牛顿法（BFGS）用相邻两步梯度差迭代近似 <span class="arithmatex">\(H^{-1}\)</span>，避免直接矩阵求逆。</p>
 <p><strong>操作要点</strong>：工具箱中选"牛顿法"，模型选指数模型，方法选auto（牛顿优先、失稳自动切拟牛顿），初值策略选启发式。</p>
 <p><strong>结果关键</strong>：迭代次数少（如3次就收敛），参数估计值与标准误，RMSE和AIC [Akaike Information Criterion, 赤池信息准则]衡量拟合优度。</p>
 <p><strong>注意</strong>：牛顿法要求目标函数光滑可导；如果Hessian矩阵不正定会失稳，此时自动切换拟牛顿BFGS。</p>
@@ -1759,6 +1787,10 @@
 <p><strong>一句话</strong>：最基础的数值优化方法——沿着梯度反方向一步步走，直到到达最低点。神经网络训练的基石。</p>
 <p><strong>美赛场景区</strong>：线性回归/逻辑回归的参数求解（虽然有解析解，但梯度下降是理解优化的基础）；大规模机器学习模型训练。</p>
 <p><strong>核心原理</strong>：站在山坡上想走到谷底，每一步都沿着最陡的下坡方向走。学习率控制每步走多大——太大跨过谷底，太小走得慢。加入动量（momentum=0.9）可以像滚球一样加速通过平坦区、抑制震荡。</p>
+<div class="arithmatex">\[
+x_{t+1} = x_t - \eta\,\nabla f(x_t)
+\]</div>
+<p>其中 <span class="arithmatex">\(\nabla f(x_t)\)</span> 为目标函数在当前点 <span class="arithmatex">\(x_t\)</span> 处的梯度向量，<span class="arithmatex">\(\eta\)</span> 为学习率（每步步长）；每步沿梯度反方向下降一小步，反复迭代直到 <span class="arithmatex">\(\|\nabla f(x_t)\|\)</span> 接近零（收敛到极小值）。</p>
 <p><strong>操作要点</strong>：工具箱中选"梯度下降法"，学习率0.01，动量0.9，批量全量，特征标准化开启，迭代上限2000次。</p>
 <p><strong>结果关键</strong>：损失函数随迭代下降曲线；最终系数与最小二乘解析解的偏差（应极小，如<span class="arithmatex">\(10^{-4}\)</span>量级）；<span class="arithmatex">\(R^2\)</span>。</p>
 <p><strong>注意</strong>：学习率是最关键参数——需调参；特征必须标准化否则量纲差异导致收敛慢。</p>
@@ -1769,6 +1801,10 @@
 <p><strong>一句话</strong>：一种基于种群的连续全局优化算法，利用种群中个体间的<strong>差分向量</strong>进行变异，特别适合非线性模型参数估计。</p>
 <p><strong>美赛场景区</strong>：酶促反应米氏方程 <span class="arithmatex">\(v=V\cdot S/(K+S)\)</span> 等非线性模型的全局参数拟合。</p>
 <p><strong>核心原理</strong>：和遗传算法类似但变异方式不同——随机选三个个体 <span class="arithmatex">\(a,b,c\)</span>，新个体 = <span class="arithmatex">\(a + F\cdot(b-c)\)</span>，用两个体的差异方向来变异，自适应调整步长。交叉后与目标个体贪婪比较，更优才保留。</p>
+<div class="arithmatex">\[
+v_i = x_{r1} + F\cdot(x_{r2} - x_{r3})
+\]</div>
+<p>其中 <span class="arithmatex">\(x_{r1}\)</span>、<span class="arithmatex">\(x_{r2}\)</span>、<span class="arithmatex">\(x_{r3}\)</span> 为从当前种群中随机选出的三个互不相同的个体，<span class="arithmatex">\(F\)</span> 为缩放因子（通常取 0.5--1）；差分向量 <span class="arithmatex">\((x_{r2}-x_{r3})\)</span> 的大小与方向自适应当前种群分布，试验个体 <span class="arithmatex">\(v_i\)</span> 与其目标个体按贪婪准则比较，目标更优者才保留进入下一代。</p>
 <p><strong>操作要点</strong>：工具箱中选"差分进化"，策略best1bin，变异因子0.5+1，多次不同种子重启，可选L-BFGS-B局部精化。</p>
 <p><strong>结果关键</strong>：多次重启结果应一致（重启跨度极小）；<span class="arithmatex">\(R^2\)</span>接近1说明拟合好；残差正态性检验通过。</p>
 <p><strong>注意</strong>：DE [Differential Evolution, 差分进化]是全局搜索，比牛顿法慢但不容易陷局部最优；通常DE粗搜+局部精化（L-BFGS-B）效果最好。</p>
@@ -1779,6 +1815,11 @@
 <p><strong>一句话</strong>：求解<strong>指派问题</strong>的精确多项式算法（<span class="arithmatex">\(O(n^3)\)</span>）——把 <span class="arithmatex">\(n\)</span> 个任务分配给 <span class="arithmatex">\(n\)</span> 个人，使总成本最小。</p>
 <p><strong>美赛场景区</strong>：快递订单与车辆的最优配对、人员岗位分配、教师排课。</p>
 <p><strong>核心原理</strong>：每行减去该行最小值、每列减去该列最小值（等价变换不改变最优解），然后用最少的线覆盖所有零元素——如果线数等于 <span class="arithmatex">\(n\)</span>，就能在零元素处找到完美指派；否则继续调整。就像在成本矩阵上"划线找零"，零位置就是最优配对。</p>
+<div class="arithmatex">\[
+\min \sum_{i=1}^{n}\sum_{j=1}^{n} c_{ij} x_{ij}
+\quad \text{s.t.}\ \sum_{j} x_{ij} = 1,\ \sum_{i} x_{ij} = 1,\ x_{ij}\in\{0,1\}
+\]</div>
+<p>其中 <span class="arithmatex">\(c_{ij}\)</span> 为把任务 <span class="arithmatex">\(j\)</span> 指派给人员 <span class="arithmatex">\(i\)</span> 的成本，<span class="arithmatex">\(x_{ij}=1\)</span> 表示该指派被选中；约束要求每个人恰领一项任务、每项任务恰由一人完成。匈牙利算法通过行列归约与"最少线覆盖零元"在 <span class="arithmatex">\(O(n^3)\)</span> 内求得最优指派。</p>
 <p><strong>操作要点</strong>：工具箱中选"匈牙利算法"，目标minimize，求解器auto。</p>
 <p><strong>结果关键</strong>：总成本（如8对配对总成本72）；贪心基线通常差很多（如123，多70.8%），证明全局最优的价值。</p>
 <p><strong>注意</strong>：要求任务数=人数（平衡指派）；不平衡时先加虚拟行/列。</p>
@@ -1789,6 +1830,11 @@
 <p><strong>一句话</strong>：求解<strong>运输问题</strong>的经典方法——多个仓库向多个门店发货，已知各仓供应量、各店需求量和单位运价，求总运费最低的调运方案。</p>
 <p><strong>美赛场景区</strong>：连锁零售物流配送调度、工厂到仓库的原材料运输规划。</p>
 <p><strong>核心原理</strong>：先用伏格尔法（Vogel）找一个较好的初始方案（每次优先选机会成本最大的路线），再用位势法计算每条空闲路线的检验数——如果存在负检验数说明还能降本，沿闭回路调整运量，直到所有检验数<span class="arithmatex">\(\geq 0\)</span>即为最优。</p>
+<div class="arithmatex">\[
+\min \sum_{i=1}^{m}\sum_{j=1}^{n} c_{ij} x_{ij}
+\quad \text{s.t.}\ \sum_{j} x_{ij} = a_i,\ \sum_{i} x_{ij} = b_j,\ x_{ij} \geq 0
+\]</div>
+<p>其中 <span class="arithmatex">\(a_i\)</span> 为产地 <span class="arithmatex">\(i\)</span> 的供应量，<span class="arithmatex">\(b_j\)</span> 为销地 <span class="arithmatex">\(j\)</span> 的需求量，<span class="arithmatex">\(c_{ij}\)</span> 为从产地 <span class="arithmatex">\(i\)</span> 到销地 <span class="arithmatex">\(j\)</span> 的单位运价，<span class="arithmatex">\(x_{ij}\)</span> 为该路线调运量；非基变量检验数 <span class="arithmatex">\(\sigma_{ij} = c_{ij} - (u_i + v_j)\)</span>，当所有 <span class="arithmatex">\(\sigma_{ij} \geq 0\)</span> 时当前调运方案即为最优。</p>
 <p><strong>操作要点</strong>：工具箱中选"表上作业法"，初始方案伏格尔法，产销不平衡自动加虚拟节点，独立求解器交叉验证。</p>
 <p><strong>结果关键</strong>：最优总运费（如287802元）；初始方案经11轮调整收敛；所有检验数<span class="arithmatex">\(\geq 0\)</span>证明最优。</p>
 <p><strong>注意</strong>：供过于求时加虚拟销地（不真运货），供不应求时加虚拟产地。</p>
@@ -1799,6 +1845,11 @@
 <p><strong>一句话</strong>：模拟蚂蚁觅食时释放信息素的正反馈机制，求解<strong>旅行商问题（TSP）</strong>的群智能算法。</p>
 <p><strong>美赛场景区</strong>：150个配送点的最短环游路线规划、网络布线最优路径。</p>
 <p><strong>核心原理</strong>：蚂蚁走路线时留下信息素，短路线上信息素挥发少、累积快，后面的蚂蚁更倾向选信息素浓的路——正反馈让全群逐渐汇聚到最短路线。<span class="arithmatex">\(\alpha\)</span>控制信息素重要性、<span class="arithmatex">\(\beta\)</span>控制距离启发重要性、挥发率防止信息素无限累积。</p>
+<div class="arithmatex">\[
+P_{ij}^{k}(t) = \frac{[\tau_{ij}(t)]^\alpha [\eta_{ij}]^\beta}{\sum_{l\in allowed_k} [\tau_{il}(t)]^\alpha [\eta_{il}]^\beta}, \qquad
+\tau_{ij} \leftarrow (1-\rho)\tau_{ij} + \sum_{k=1}^{m}\Delta\tau_{ij}^{k}
+\]</div>
+<p>其中 <span class="arithmatex">\(\tau_{ij}\)</span> 为边 <span class="arithmatex">\((i,j)\)</span> 上的信息素浓度，<span class="arithmatex">\(\eta_{ij}=1/d_{ij}\)</span> 为距离启发信息，<span class="arithmatex">\(allowed_k\)</span> 为第 <span class="arithmatex">\(k\)</span> 只蚂蚁下一步允许访问的城市集合；<span class="arithmatex">\(\alpha\)</span>、<span class="arithmatex">\(\beta\)</span> 分别控制信息素与启发信息的相对权重，<span class="arithmatex">\(\rho\)</span> 为信息素挥发率，每代所有蚂蚁走完后按路线长短沉积信息素 <span class="arithmatex">\(\Delta\tau_{ij}^k\)</span>。</p>
 <p><strong>操作要点</strong>：工具箱中选"蚁群算法"，蚂蚁数30，迭代100次，<span class="arithmatex">\(\alpha=1, \beta=2\)</span>，挥发率0.5，精英权重0。</p>
 <p><strong>结果关键</strong>：近似最短环游长度（如372.765），比最近邻+2-opt基线改善4.2%；第45代后收敛稳定。</p>
 <p><strong>注意</strong>：ACO [Ant Colony Optimization, 蚁群优化]是启发式近似，不保证全局最优；节点数越大越有优势。</p>
@@ -1809,6 +1860,10 @@
 <p><strong>一句话</strong>：求解整数规划的精确方法——把解空间分成树枝（分支），用松弛问题算上界，上界不如当前最优就剪掉该枝（剪枝），避免穷举。</p>
 <p><strong>美赛场景区</strong>：0-1背包问题（货车装货选哪些货品收益最大）的精确求解。</p>
 <p><strong>核心原理</strong>：像查字典——先翻开中间估个上界，如果这半边的上界还不如已经找到的最好方案，就不翻了（剪枝）。按价值密度排序，贪心先找一个好下界，分数背包松弛算上界，上下界收敛到重合即证明最优。</p>
+<div class="arithmatex">\[
+z_{LB} \leq z^{*} \leq z_{UB}
+\]</div>
+<p>其中 <span class="arithmatex">\(z^{*}\)</span> 为整数规划的最优目标值；<span class="arithmatex">\(z_{LB}\)</span> 由当前已找到的整数可行解给出（下界），<span class="arithmatex">\(z_{UB}\)</span> 由放松整数约束后的 LP 松弛（分数解）给出（上界）。若某分支松弛上界 <span class="arithmatex">\(z_{UB}^{branch} \leq z_{LB}\)</span>，说明该分支不可能改进当前最优，直接剪枝；上下界间隙 gap <span class="arithmatex">\(\to 0\)</span> 时即证明整数最优。</p>
 <p><strong>操作要点</strong>：工具箱中选"分支定界法"，分支策略best_first，容量约束，gap tolerance默认。</p>
 <p><strong>结果关键</strong>：最优总价值（如1265，证明全局最优）；探索节点数（如2057个）；与MILP求解器交叉验证一致。</p>
 <p><strong>注意</strong>：分支定界和割平面法都是整数规划精确方法；分支定界靠分树剪枝，割平面靠加约束。</p>
@@ -1819,6 +1874,10 @@
 <p><strong>一句话</strong>：带"记忆"的局部搜索——用禁忌表记录最近走过的路，防止立即回退循环，配合特赦准则允许突破禁忌去找更好解。</p>
 <p><strong>美赛场景区</strong>：TSP路径优化（150个门店巡回补货顺序）。</p>
 <p><strong>核心原理</strong>：普通局部搜索走两步就可能绕圈回来（A→B→A→B）。禁忌搜索把最近走过的"边"记入禁忌表（如禁忌长度15），强制搜索去新方向；但如果某个禁忌方向能得到历史最优解（特赦准则），还是允许走。</p>
+<div class="arithmatex">\[
+x_{next} = \arg\min_{x'\in N(x)\setminus T}\ f(x')
+\]</div>
+<p>其中 <span class="arithmatex">\(N(x)\)</span> 为当前解 <span class="arithmatex">\(x\)</span> 的邻域（如 TSP 的 2-opt 交换集合），<span class="arithmatex">\(T\)</span> 为禁忌表（最近若干步走过的移动被暂时禁止，禁忌长度 tenure 通常取 10--20）；若某禁忌移动能得到历史全局最优解，按特赦准则（aspiration criterion）仍允许选择。</p>
 <p><strong>操作要点</strong>：工具箱中选"禁忌搜索"，邻域two_opt，初始解nearest_neighbor，禁忌长度15，最大迭代600，候选数40。</p>
 <p><strong>结果关键</strong>：总成本从98590降到82045（改善16.78%）；最优解在第585次迭代发现；距最小生成树下界差距32.27%。</p>
 <p><strong>注意</strong>：禁忌搜索是局部搜索的增强版，依赖初始解质量；适合TSP等排列优化。</p>
@@ -1829,6 +1888,10 @@
 <p><strong>一句话</strong>：求解大规模线性规划的现代方法——从可行域<strong>内部</strong>沿中心路径收敛到最优顶点，不像单纯形法沿边界爬行。</p>
 <p><strong>美赛场景区</strong>：大规模生产排产优化（60个产品品类、29项共用资源约束），求最优产量组合和瓶颈资源影子价格。</p>
 <p><strong>核心原理</strong>：单纯形法像沿多边形围墙从一个顶点走到另一个顶点；内点法像从多边形内部直接向最优顶点"钻过去"，变量多时速度快得多。还能算出<strong>影子价格</strong>——每种紧缺资源放宽1单位能多赚多少钱。</p>
+<div class="arithmatex">\[
+\min\ c^\top x \quad \text{s.t.}\ Ax = b,\ x \geq 0
+\]</div>
+<p>其中 <span class="arithmatex">\(c\)</span> 为目标系数向量，<span class="arithmatex">\(A\)</span> 为约束矩阵，<span class="arithmatex">\(b\)</span> 为右端资源向量，<span class="arithmatex">\(x\)</span> 为决策变量；内点法从可行域内部沿中心路径（central path）逐步逼近最优顶点，大规模变量时远快于沿边界爬行的单纯形法；紧约束对应的对偶变量取值即该资源的影子价格。</p>
 <p><strong>操作要点</strong>：工具箱中选"内点法"（HiGHS-IPM [Interior Point Method, 内点法]），presolve开启，变量下界默认0。</p>
 <p><strong>结果关键</strong>：最优目标值（如420390）；各紧约束的影子价格（如R01资源影子价格7.233，是瓶颈资源）；约束余量为0的约束即瓶颈。</p>
 <p><strong>注意</strong>：内点法适合大规模LP；整数规划仍需分支定界。影子价格是敏感性分析的关键输出。</p>

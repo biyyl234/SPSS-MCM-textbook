@@ -1609,6 +1609,12 @@
 <p><strong>两个核心指标：</strong>
 - <strong>决断值 CR [Composite Reliability, 组合信度]（Critical Ratio）</strong>：就是高分组与低分组在该题上得分差的独立样本 t 值。CR <span class="arithmatex">\(\geq 3.0\)</span> 且 <span class="arithmatex">\(p&lt;0.05\)</span> 表示该题区分力足够
 - <strong>题总相关 r</strong>：该题得分与"剔除本题后总分"的相关。<span class="arithmatex">\(r \geq 0.3\)</span> 且 <span class="arithmatex">\(p&lt;0.05\)</span> 表示该题和整个量表方向一致</p>
+<p>两个指标的计算公式为：</p>
+<div class="arithmatex">\[
+CR = \frac{\bar{X}_H - \bar{X}_L}{S_p \sqrt{1/n_H + 1/n_L}}, \qquad
+r_{item-total} = \frac{\sum_{i=1}^{n}(X_{ij}-\bar{X}_j)(X_{i,-j}-\bar{X}_{-j})}{\sqrt{\sum_{i}(X_{ij}-\bar{X}_j)^2 \sum_{i}(X_{i,-j}-\bar{X}_{-j})^2}}
+\]</div>
+<p>其中 <span class="arithmatex">\(\bar{X}_H\)</span>、<span class="arithmatex">\(\bar{X}_L\)</span> 为高分组、低分组在该题上的平均分，<span class="arithmatex">\(S_p\)</span> 为两组合并标准差，<span class="arithmatex">\(n_H\)</span>、<span class="arithmatex">\(n_L\)</span> 为两组人数；<span class="arithmatex">\(X_{ij}\)</span> 为第 <span class="arithmatex">\(i\)</span> 人在第 <span class="arithmatex">\(j\)</span> 题上的得分，<span class="arithmatex">\(X_{i,-j}\)</span> 为剔除该题后的总分。</p>
 <p>两个指标都达标就保留；都不达标建议删除；介于中间建议修改后保留。</p>
 </div>
 <div class="admonition tip">
@@ -1663,6 +1669,12 @@
 <li><span class="arithmatex">\(\alpha\)</span> 的大小取决于<strong>题项间平均相关</strong>和<strong>题项数量</strong></li>
 <li><span class="arithmatex">\(\alpha\)</span> 越接近 1，说明题项越是在同测一个构念</li>
 </ul>
+<p>Cronbach's <span class="arithmatex">\(\alpha\)</span> 与折半信度（Spearman-Brown 校正）的计算公式为：</p>
+<div class="arithmatex">\[
+\alpha = \frac{k}{k-1}\left(1 - \frac{\sum_{i=1}^{k}\sigma_i^2}{\sigma_{total}^2}\right), \qquad
+r_{xx'} = \frac{2 r_{half}}{1 + r_{half}}
+\]</div>
+<p>其中 <span class="arithmatex">\(k\)</span> 为量表题项数，<span class="arithmatex">\(\sigma_i^2\)</span> 为第 <span class="arithmatex">\(i\)</span> 题的方差，<span class="arithmatex">\(\sigma_{total}^2\)</span> 为量表总分方差；<span class="arithmatex">\(r_{half}\)</span> 为两半题得分的 Pearson 相关，<span class="arithmatex">\(r_{xx'}\)</span> 为校正后的折半信度系数。</p>
 <p><strong>判断标准（很重要，必须背）：</strong>
 - <span class="arithmatex">\(\alpha \geq 0.9\)</span>：优秀
 - <span class="arithmatex">\(0.8 \leq \alpha &lt; 0.9\)</span>：良好
@@ -1728,6 +1740,13 @@
 <p><strong>两个前提检验（必须先通过才能做因子分析）：</strong>
 - <strong>KMO [Kaiser-Meyer-Olkin,  Kaiser-Meyer-Olkin检验] 检验</strong>：取值 0--1。<span class="arithmatex">\(&gt;0.9\)</span> 极好，<span class="arithmatex">\(0.8\)</span>--<span class="arithmatex">\(0.9\)</span> 很好，<span class="arithmatex">\(0.7\)</span> 以上尚可，<span class="arithmatex">\(&lt;0.5\)</span> 不宜做因子分析
 - <strong>Bartlett 球形检验</strong>：<span class="arithmatex">\(p&lt;0.05\)</span> 表示题项间存在相关，适合提取因子</p>
+<p>其计算公式为：</p>
+<div class="arithmatex">\[
+KMO = \frac{\sum\sum_{i&lt;j} r_{ij}^2}{\sum\sum_{i&lt;j} r_{ij}^2 + \sum\sum_{i&lt;j} p_{ij}^2}, \qquad
+\chi^2 = -\left[n - \frac{2p+11}{6}\right]\ln|R|
+\]</div>
+<p>其中 <span class="arithmatex">\(r_{ij}\)</span> 为题项 <span class="arithmatex">\(i,j\)</span> 间的简单相关系数，<span class="arithmatex">\(p_{ij}\)</span> 为控制其他题项后的偏相关系数；<span class="arithmatex">\(n\)</span> 为样本量，<span class="arithmatex">\(p\)</span> 为题项数，<span class="arithmatex">\(|R|\)</span> 为题项相关系数矩阵的行列式。</p>
+<p>因子分析的线性模型为 <span class="arithmatex">\(X = \mu + LF + \varepsilon\)</span>，其中 <span class="arithmatex">\(X\)</span> 为题项得分向量，<span class="arithmatex">\(\mu\)</span> 为均值向量，<span class="arithmatex">\(L\)</span> 为因子载荷矩阵，<span class="arithmatex">\(F\)</span> 为公共因子向量，<span class="arithmatex">\(\varepsilon\)</span> 为特殊因子（误差）。</p>
 <p><strong>关键指标：</strong>
 - <strong>因子载荷</strong>：题项与所属因子的相关，<span class="arithmatex">\(\geq 0.5\)</span> 可接受，<span class="arithmatex">\(\geq 0.7\)</span> 很好
 - <strong>累计方差解释率</strong>：提取的因子加起来能解释多少题项总变异，<span class="arithmatex">\(&gt;50%\)</span> 可接受
@@ -1790,6 +1809,15 @@
 <li><strong>直接效应 c'</strong>：去掉 M 的传导后，X 还剩多少直接影响 Y</li>
 <li>关系：<span class="arithmatex">\(c = c' + a \times b\)</span></li>
 </ul>
+<p>对应的三条回归方程为：</p>
+<div class="arithmatex">\[
+Y = cX + e_1, \qquad M = aX + e_2, \qquad Y = c'X + bM + e_3
+\]</div>
+<p>间接效应 <span class="arithmatex">\(ab\)</span> 的传统 Sobel 检验统计量为：</p>
+<div class="arithmatex">\[
+z = \frac{ab}{\sqrt{b^2 s_a^2 + a^2 s_b^2}}
+\]</div>
+<p>其中 <span class="arithmatex">\(a\)</span>、<span class="arithmatex">\(b\)</span> 为两条路径的回归系数，<span class="arithmatex">\(s_a\)</span>、<span class="arithmatex">\(s_b\)</span> 为其标准误，<span class="arithmatex">\(e_1,e_2,e_3\)</span> 为各方程残差；<span class="arithmatex">\(z\)</span> 近似服从标准正态分布。</p>
 <p><strong>平行中介</strong>：有多个中介并列（如满意度 M1、工作投入 M2 同时传导），各算各的 <span class="arithmatex">\(a_i \times b_i\)</span>。<strong>链式中介</strong>：M1 先影响 M2、M2 再影响 Y，形成链条。</p>
 <p><strong>显著性怎么判断</strong>：传统 Sobel 检验功效低，现在主流用 <strong>Bootstrap</strong>——有放回抽样 5000 次，每次重估间接效应，得到 95% 置信区间。<strong>区间不含 0 就说明间接效应显著</strong>。</p>
 <p>若直接效应 <span class="arithmatex">\(c'\)</span> 显著、间接效应也显著 = 部分中介；若 <span class="arithmatex">\(c'\)</span> 不显著只有间接效应 = 完全中介。</p>
@@ -1856,6 +1884,11 @@
 </li>
 <li><span class="arithmatex">\(b_3 &lt; 0\)</span>：M 越高，X 对 Y 的作用<strong>越弱</strong>（削弱型调节）</li>
 </ul>
+<p>调节效应的回归方程写为：</p>
+<div class="arithmatex">\[
+Y = \beta_0 + \beta_1 X + \beta_2 W + \beta_3 (X \times W) + \varepsilon
+\]</div>
+<p>其中 <span class="arithmatex">\(X\)</span> 为自变量，<span class="arithmatex">\(W\)</span> 为调节变量，<span class="arithmatex">\(X \times W\)</span> 为两者经中心化后构造的交互项；交互项系数 <span class="arithmatex">\(\beta_3\)</span> 就是调节效应，其符号与显著性决定调节方向与是否成立。</p>
 <p>交互项显著后，再做<strong>简单斜率检验</strong>：把 M 分成"低（均值 <span class="arithmatex">\(-1\)</span> 个标准差）、中、高（均值 <span class="arithmatex">\(+1\)</span> 个标准差）"三组，分别看每组中 X 对 Y 的斜率，画成两条交互线，直观展示调节方向。</p>
 </div>
 <div class="admonition tip">
@@ -1911,6 +1944,16 @@
 <li><strong>结构模型（内圈）</strong>：潜变量之间画箭头表示假设的因果路径（如组织支持感 <span class="arithmatex">\(\to\)</span> 工作投入 <span class="arithmatex">\(\to\)</span> 离职意向）</li>
 </ul>
 <p>模型用<strong>极大似然估计</strong>反复调整，直到模型隐含的协方差矩阵尽可能接近真实数据的协方差矩阵。</p>
+<p>SEM 由测量模型与结构模型两部分组成：</p>
+<div class="arithmatex">\[
+x = \Lambda_x \xi + \delta, \quad y = \Lambda_y \eta + \varepsilon, \qquad
+\eta = B\eta + \Gamma\xi + \zeta
+\]</div>
+<p>其中 <span class="arithmatex">\(x\)</span>、<span class="arithmatex">\(y\)</span> 为观测指标向量，<span class="arithmatex">\(\xi\)</span>、<span class="arithmatex">\(\eta\)</span> 分别为外生、内生潜变量，<span class="arithmatex">\(\Lambda_x\)</span>、<span class="arithmatex">\(\Lambda_y\)</span> 为因子载荷矩阵，<span class="arithmatex">\(\delta\)</span>、<span class="arithmatex">\(\varepsilon\)</span> 为测量误差，<span class="arithmatex">\(B\)</span>、<span class="arithmatex">\(\Gamma\)</span> 为潜变量间路径系数矩阵，<span class="arithmatex">\(\zeta\)</span> 为结构方程残差。常用近似误差均方根为：</p>
+<div class="arithmatex">\[
+RMSEA = \sqrt{\frac{\chi^2/df - 1}{n - 1}}
+\]</div>
+<p>其中 <span class="arithmatex">\(\chi^2\)</span> 为模型卡方，<span class="arithmatex">\(df\)</span> 为自由度，<span class="arithmatex">\(n\)</span> 为样本量。</p>
 <p><strong>拟合优度指标（必须背的判断标准）：</strong>
 - <span class="arithmatex">\(\chi^2/df\)</span>（卡方自由度比）：<span class="arithmatex">\(\leq 3\)</span> 良好，越小越好
 - CFI [Comparative Fit Index, 比较拟合指数]、TLI [Tucker-Lewis Index, 塔克-刘易斯指数]（比较拟合指数）：<span class="arithmatex">\(\geq 0.90\)</span> 可接受，<span class="arithmatex">\(\geq 0.95\)</span> 良好
@@ -1959,6 +2002,10 @@
 <p><strong>一句话</strong>：邀请领域专家逐条判断"题项是否测到了想测的内容"，用 I-CVI [Content Validity Index, 内容效度指数]/S-CVI 量化条目内容代表性。</p>
 <p><strong>美赛场景区</strong>：自编量表正式使用前，由专家评议题项覆盖面；美赛中设计问卷时可借鉴专家评分思路。</p>
 <p><strong>核心原理</strong>：专家按 1--4 级评题项相关性，评分 <span class="arithmatex">\(\geq 3\)</span> 算"相关"。条目级 I-CVI = 评相关的专家数/专家总数；<span class="arithmatex">\(\geq 6\)</span> 名专家时 I-CVI <span class="arithmatex">\(\geq 0.78\)</span> 达标，<span class="arithmatex">\(3\)</span>--<span class="arithmatex">\(5\)</span> 名时要求 <span class="arithmatex">\(=1.00\)</span>。量表级 S-CVI/Ave <span class="arithmatex">\(\geq 0.90\)</span>、S-CVI/UA [Usage Attitude, 使用态度] <span class="arithmatex">\(\geq 0.80\)</span>。</p>
+<div class="arithmatex">\[
+I\text{-}CVI_j = \frac{n_{c,j}}{n_e}, \qquad S\text{-}CVI/Ave = \frac{1}{k}\sum_{j=1}^{k} I\text{-}CVI_j
+\]</div>
+<p>其中 <span class="arithmatex">\(n_{c,j}\)</span> 为给第 <span class="arithmatex">\(j\)</span> 题评"相关"（3--4 分）的专家数，<span class="arithmatex">\(n_e\)</span> 为参评专家总数，<span class="arithmatex">\(k\)</span> 为条目总数。</p>
 <p><strong>操作要点</strong>：工具箱选"内容效度"，评分尺度 1--4，缺失策略 exclude，6 名专家对 25 条条目评分。</p>
 <p><strong>结果关键</strong>：逐题 I-CVI 对照阈值，未达标条目（如案例 Q5、Q17）需修订；S-CVI/Ave 与 S-CVI/UA 判断整体。</p>
 <p><strong>注意</strong>：内容效度是"专家共识"层面的效度，与后续统计导向的结构效度（EFA/CFA）互补，不能互相替代。</p>
@@ -1969,6 +2016,10 @@
 <p><strong>一句话</strong>：同一批人、同一时间、自评方式收集的问卷，可能因"共同方法"让变量间相关被人为夸大，Harman 单因子检验筛查这一风险。</p>
 <p><strong>美赛场景区</strong>：问卷全部来自同源自评数据、要做相关/回归分析前的必做筛查。</p>
 <p><strong>核心原理</strong>：对全部题项做无旋转主成分分析，若第一个公因子解释的方差 <span class="arithmatex">\(&lt;50%\)</span>，说明数据没被单一共同因子主导，共同方法偏差不严重。</p>
+<div class="arithmatex">\[
+PV_1 = \frac{\lambda_1}{\sum_{j=1}^{p}\lambda_j} \times 100\%
+\]</div>
+<p>其中 <span class="arithmatex">\(\lambda_1\)</span> 为未旋转主成分分析中第一个公因子的特征值，<span class="arithmatex">\(\lambda_j\)</span> 为第 <span class="arithmatex">\(j\)</span> 个主成分特征值，<span class="arithmatex">\(p\)</span> 为题项数，<span class="arithmatex">\(PV_1\)</span> 即首因子方差解释率。</p>
 <p><strong>操作要点</strong>：工具箱选"Harman 单因子检验"，特征值 <span class="arithmatex">\(&gt;1\)</span> 提取，首因子方差阈值 50%，先看 KMO/Bartlett 是否适合。</p>
 <p><strong>结果关键</strong>：案例首因子解释率 39.0% <span class="arithmatex">\(&lt;50%\)</span>，判定低风险；若首因子 <span class="arithmatex">\(&gt;50%\)</span> 则存在严重共同方法偏差。</p>
 <p><strong>注意</strong>：Harman 只是<strong>粗略筛查</strong>，灵敏度低——没超标不等于没有偏差；严格验证需用标记变量或潜在方法因子法。</p>
@@ -1979,6 +2030,11 @@
 <p><strong>一句话</strong>：与 EFA"让数据找结构"相反，CFA 是"拿预设的因子结构去验证数据支不支持"，是正式量表验证的标准方法。</p>
 <p><strong>美赛场景区</strong>：使用成熟量表或已有理论维度时，用 CFA 验证测量结构；常作为 SEM 的第一步。</p>
 <p><strong>核心原理</strong>：用极大似然估计题项在预设因子上的载荷，用 <span class="arithmatex">\(\chi^2/df\)</span>、CFI、TLI、RMSEA、SRMR 判断模型是否复现数据相关结构；再用 CR <span class="arithmatex">\(\geq 0.7\)</span>、AVE <span class="arithmatex">\(\geq 0.5\)</span>、Fornell-Larcker 准则（<span class="arithmatex">\(\sqrt{AVE}&gt;\)</span> 因子相关）检验聚合效度与区分效度。</p>
+<div class="arithmatex">\[
+CR = \frac{(\sum_{i=1}^{m}\lambda_i)^2}{(\sum_{i=1}^{m}\lambda_i)^2 + \sum_{i=1}^{m}\theta_{ii}}, \qquad
+AVE = \frac{\sum_{i=1}^{m}\lambda_i^2}{\sum_{i=1}^{m}\lambda_i^2 + \sum_{i=1}^{m}\theta_{ii}}
+\]</div>
+<p>其中 <span class="arithmatex">\(\lambda_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 个指标在该因子上的标准化载荷，<span class="arithmatex">\(\theta_{ii}\)</span> 为其测量误差方差，<span class="arithmatex">\(m\)</span> 为该因子下指标数；区分效度要求 <span class="arithmatex">\(\sqrt{AVE}\)</span> 大于该因子与其他任何因子的相关系数。</p>
 <p><strong>操作要点</strong>：工具箱选"验证性因子分析"，写明"因子：题项列表"，缺失 listwise，标准档位判定。</p>
 <p><strong>结果关键</strong>：案例 <span class="arithmatex">\(\chi^2/df=0.78\)</span>、CFI=1.000、RMSEA=0.000，全部载荷显著且 <span class="arithmatex">\(&gt;0.5\)</span>，三维结构获数据支持。</p>
 <p><strong>注意</strong>：CFA 检验的是"预设结构与数据吻合度"，预设错了再完美的拟合也无意义；样本建议 <span class="arithmatex">\(n \geq 200\)</span>。</p>
@@ -1989,6 +2045,10 @@
 <p><strong>一句话</strong>：用可观测变量（不带潜变量测量模型）画有向路径图，估计各条直接、间接、总效应。</p>
 <p><strong>美赛场景区</strong>：研究多变量间传导链条（如产品品质 <span class="arithmatex">\(\to\)</span> 感知价值 <span class="arithmatex">\(\to\)</span> 满意度 <span class="arithmatex">\(\to\)</span> 复购意愿）时。</p>
 <p><strong>核心原理</strong>：对每个内生变量做一次回归，按路径追踪法则把影响分解为直接效应、间接效应（路径系数乘积之和）与总效应；间接效应显著性用 Bootstrap 区间检验；整体用 <span class="arithmatex">\(\chi^2\)</span>、CFI、RMSEA、SRMR 评价。</p>
+<div class="arithmatex">\[
+TE_{X\to Y} = DE_{X\to Y} + \sum_{k}\prod_{(u\to v)\in path_k} p_{uv}
+\]</div>
+<p>其中 <span class="arithmatex">\(DE_{X\to Y}\)</span> 为 <span class="arithmatex">\(X\)</span> 到 <span class="arithmatex">\(Y\)</span> 的直接路径系数，第二项沿每条中介路径把相邻路径系数 <span class="arithmatex">\(p_{uv}\)</span> 连乘后求和，即间接效应，<span class="arithmatex">\(TE\)</span> 为总效应。</p>
 <p><strong>操作要点</strong>：工具箱选"路径分析"，画定有向无环路径图，标准化系数输出，Bootstrap 2000 次，百分位区间。</p>
 <p><strong>结果关键</strong>：案例价格感知<span class="arithmatex">\(\to\)</span>复购意愿总效应 0.404，其中直接 0.247、间接 0.157（CI <span class="arithmatex">\([0.094,0.228]\)</span> 不含 0）；CFI=0.997、RMSEA=0.050。</p>
 <p><strong>注意</strong>：路径分析是 SEM 的特例（只用观测变量）；间接效应必须看 Bootstrap 区间是否跨 0，不能只看点估计。</p>
@@ -1999,6 +2059,10 @@
 <p><strong>一句话</strong>：中介效应的传导强度本身又被另一个变量 W 调节——"X 经 M 影响 Y"的间接效应，在 W 高低时不一样。</p>
 <p><strong>美赛场景区</strong>：研究更精细的"在哪类人群身上，传导机制更有效"，如高心理资本员工的组织支持转化效率更高。</p>
 <p><strong>核心原理</strong>：先检验无条件中介（<span class="arithmatex">\(a \times b\)</span> 的 Bootstrap 区间），再在被调节路径（如第一阶段 X<span class="arithmatex">\(\to\)</span>M）加入 W 交互项，算<strong>调节中介指数 <span class="arithmatex">\(\omega\)</span></strong>；<span class="arithmatex">\(\omega\)</span> 的 CI 不含 0 即成立，并报告 W 低/中/高三个水平上的条件间接效应。</p>
+<div class="arithmatex">\[
+\omega = a_{3} \times b, \qquad IE_{W} = (a_1 + a_3 W)\, b
+\]</div>
+<p>其中 <span class="arithmatex">\(a_1\)</span> 为主效应路径系数，<span class="arithmatex">\(a_3\)</span> 为被调节路径上 <span class="arithmatex">\(X \times W\)</span> 的交互项系数，<span class="arithmatex">\(b\)</span> 为 <span class="arithmatex">\(M \to Y\)</span> 的路径系数；<span class="arithmatex">\(\omega\)</span> 即调节中介指数，<span class="arithmatex">\(IE_W\)</span> 为调节变量取 <span class="arithmatex">\(W\)</span> 时的条件间接效应。</p>
 <p><strong>操作要点</strong>：工具箱选"有调节的中介"，指定 X/M/Y/W 及被调节路径（第一阶段），均值中心化，Bootstrap 5000 次，探针水平均值 <span class="arithmatex">\(\pm 1\)</span>SD。</p>
 <p><strong>结果关键</strong>：案例 <span class="arithmatex">\(\omega=0.169\)</span>（CI <span class="arithmatex">\([0.094,0.262]\)</span> 不含 0）；低心理资本时间接效应 0.199、高时 0.538，即随 W 升高而增强。</p>
 <p><strong>注意</strong>：观察性数据只能说统计关系，不构成因果；需先有理论依据再指定被调节路径，不能数据挖掘式乱试。</p>
@@ -2019,6 +2083,10 @@
 <p><strong>一句话</strong>：把两个分类变量的交叉表投影到二维图上，直观展示"哪类人偏好哪类东西"，相似的类别会在图上聚在一起。</p>
 <p><strong>美赛场景区</strong>：分析"会员等级 <span class="arithmatex">\(\times\)</span> 商品偏好""地区 <span class="arithmatex">\(\times\)</span> 品牌选择"等双类别关联，比交叉表更直观。</p>
 <p><strong>核心原理</strong>：对列联表做奇异值分解，把行列类别投影到低维空间，总惯量等于 <span class="arithmatex">\(\chi^2/n\)</span>。同一象限的行列类别关联更强。第一维解释率常过半，前两维累计解释率可达 80% 以上。</p>
+<div class="arithmatex">\[
+\chi^2 = n\sum_{i,j}\frac{(p_{ij} - p_{i\cdot}p_{\cdot j})^2}{p_{i\cdot}p_{\cdot j}}, \qquad Inertia = \chi^2 / n
+\]</div>
+<p>其中 <span class="arithmatex">\(p_{ij}\)</span> 为归一化列联表中第 <span class="arithmatex">\((i,j)\)</span> 格的概率，<span class="arithmatex">\(p_{i\cdot}\)</span>、<span class="arithmatex">\(p_{\cdot j}\)</span> 分别为行、列边缘概率，<span class="arithmatex">\(n\)</span> 为样本量；总惯量（Inertia）即行列类别间关联强度，经奇异值分解后取前两维特征值占比即为各维解释率。</p>
 <p><strong>操作要点</strong>：SPSS 中 <strong>分析 → 降维 → 对应分析</strong>，指定行变量与列变量，坐标类型选 principal，维度数 auto。</p>
 <p><strong>结果关键</strong>：案例 <span class="arithmatex">\(\chi^2=67.5\)</span>、<span class="arithmatex">\(p&lt;0.001\)</span>，第一维解释 59.2%；铂金会员与美妆个护同侧、普通会员与生鲜果蔬同侧。</p>
 <p><strong>注意</strong>：对应分析只展示关联结构，不做因果；期望频数小于 5 的格子过多时结论不稳。</p>
@@ -2029,6 +2097,10 @@
 <p><strong>一句话</strong>：专门处理问卷<strong>多选题</strong>——统计每个选项的普及率，并按分组看不同群体的多选偏好差异。</p>
 <p><strong>美赛场景区</strong>：问卷中"您经常参与哪些项目（可多选）"这类数据的分析，普通频数分析处理不了。</p>
 <p><strong>核心原理</strong>：把多选答案转成"每选项一列 0/1"，算<strong>响应率</strong>（该选项占总选择次数）与<strong>普及率</strong>（多少比例人选了它，可超 100%）；再对每个选项做"组别 <span class="arithmatex">\(\times\)</span> 是否选中"的卡方检验，并用 FDR [False Discovery Rate, 错误发现率] 校正多重比较。</p>
+<div class="arithmatex">\[
+Resp_j = \frac{m_j}{\sum_{k} m_k}, \qquad Prev_j = \frac{n_j}{N}
+\]</div>
+<p>其中 <span class="arithmatex">\(m_j\)</span> 为选第 <span class="arithmatex">\(j\)</span> 个选项的人次，分母为全部选项被选总人次（响应率）；<span class="arithmatex">\(n_j\)</span> 为选第 <span class="arithmatex">\(j\)</span> 项的人数，<span class="arithmatex">\(N\)</span> 为受访总人数（普及率，因一人可多选故可超过 100%）。</p>
 <p><strong>操作要点</strong>：SPSS 中 <strong>分析 → 多重响应</strong>定义变量集，再做交叉表；工具箱中直接选响应变量与分组变量。</p>
 <p><strong>结果关键</strong>：案例跑步机有氧普及率 48% 最高；经校正后瑜伽普拉提、游泳等选项组间差异显著，Cramér's V 衡量强度。</p>
 <p><strong>注意</strong>：各选项普及率之和可超过 100%（因为一人可多选），不要当成普通百分比解读。</p>
@@ -2039,6 +2111,10 @@
 <p><strong>一句话</strong>：把产品功能分成五类——必备型、期望型、魅力型、无差异型、反向型，告诉你哪些功能是"必须有"、哪些是"惊喜点"。</p>
 <p><strong>美赛场景区</strong>：产品/服务功能优先级排序，资源有限时决定先做什么；美赛中涉及用户需求分类、功能规划的题目。</p>
 <p><strong>核心原理</strong>：对每个功能问两道题——"如果有这个功能你感觉如何""如果没有你感觉如何"，按标准 KANO 分类表映射类别。Better=(魅力+期望)/有效数（增加带来的满意提升），Worse=-(期望+必备)/有效数（缺失带来的不满）。</p>
+<div class="arithmatex">\[
+Better = \frac{A + O}{A + O + M + I}, \qquad Worse = -\frac{O + M}{A + O + M + I}
+\]</div>
+<p>其中 <span class="arithmatex">\(A\)</span>（魅力型）、<span class="arithmatex">\(O\)</span>（期望型）、<span class="arithmatex">\(M\)</span>（必备型）、<span class="arithmatex">\(I\)</span>（无差异型）为按 KANO 分类表判为该类别的有效样本数；Better 越大表示新增功能越能提升满意，<span class="arithmatex">\(|Worse|\)</span> 越大表示缺失功能越易引发不满。</p>
 <p><strong>操作要点</strong>：工具箱选"KANO 模型"，正向反向题同向编码，象限分界用整体均值，平票顺序"必备<span class="arithmatex">\(&gt;\)</span>期望<span class="arithmatex">\(&gt;\)</span>魅力<span class="arithmatex">\(&gt;\)</span>无差异<span class="arithmatex">\(&gt;\)</span>反向"。</p>
 <p><strong>结果关键</strong>：案例"余额变动实时提醒"是必备属性（<span class="arithmatex">\(|Worse|=0.667\)</span>，缺失就不满），"开屏广告"是反向属性（提供反而反感）。</p>
 <p><strong>注意</strong>：优先保障高 <span class="arithmatex">\(|Worse|\)</span> 的必备功能，再投入高 Better 的魅力功能；反向功能应移除。</p>
@@ -2059,6 +2135,10 @@
 <p><strong>一句话</strong>：把产品拆成品牌、价格、配置等属性水平，让受访者在多个完整产品方案中做选择，反推每个属性水平的效用和重要性。</p>
 <p><strong>美赛场景区</strong>：新品概念测试、属性配置与定价决策；美赛中涉及产品/服务设计权衡的题目。</p>
 <p><strong>核心原理</strong>：用条件 Logit（多项 Logit）估计各属性水平效用，被选概率经指数归一化；属性相对重要性 = 该属性水平效用极差 / 所有属性极差之和。McFadden <span class="arithmatex">\(R^2\)</span> 衡量模型拟合。</p>
+<div class="arithmatex">\[
+P(i) = \frac{\exp(V_i)}{\sum_{j\in C}\exp(V_j)}, \qquad Imp_k = \frac{\max_{l} V_{kl} - \min_{l} V_{kl}}{\sum_{r=1}^{R}\left(\max_{l} V_{rl} - \min_{l} V_{rl}\right)}
+\]</div>
+<p>其中 <span class="arithmatex">\(V_i = \sum \beta x_i\)</span> 为方案 <span class="arithmatex">\(i\)</span> 的系统效用，<span class="arithmatex">\(C\)</span> 为一次任务中的可选方案集；<span class="arithmatex">\(V_{kl}\)</span> 为属性 <span class="arithmatex">\(k\)</span> 第 <span class="arithmatex">\(l\)</span> 个水平的效用，<span class="arithmatex">\(Imp_k\)</span> 为该属性相对重要性（其水平效用极差占全部属性极差之和的比例）。</p>
 <p><strong>操作要点</strong>：工具箱选"联合分析/CBC"，编码方式 effect，优化器 BFGS [Broyden-Fletcher-Goldfarb-Shanno, 拟牛顿优化算法]，价格可作线性项，输出相对重要性排序。</p>
 <p><strong>结果关键</strong>：案例品牌相对重要性 32.8% 最高，价格每涨 1000 元效用降 1.23；McFadden <span class="arithmatex">\(R^2=0.295\)</span>。</p>
 <p><strong>注意</strong>：样本量通常需要每个属性组合有足够重复；某水平不显著时不能宣称有真实偏好差异。</p>
@@ -2079,6 +2159,13 @@
 <p><strong>一句话</strong>：用"太便宜/便宜/贵/太贵"四个价格问题，找出消费者心理上最优定价点和可接受价格区间。</p>
 <p><strong>美赛场景区</strong>：新品定价决策；美赛中涉及产品定价、需求估计的题目。</p>
 <p><strong>核心原理</strong>：Van Westendorp 模型画四条累积曲线：太便宜(P1)、便宜(P2)随价格下降，贵(P3)、太贵(P4)随价格上升。四条曲线交点给出四个关键价：PMC [Product-Moment Correlation, 积差相关] 可接受下限（P1<span class="arithmatex">\(\cap\)</span>P3）、OPP [Opportunity, 机会] 最优价（P1<span class="arithmatex">\(\cap\)</span>P4）、IDP [Independent Double Programming, 独立双项目编程] 无差异点（P2<span class="arithmatex">\(\cap\)</span>P3）、PME [Partial Method of Equating, 部分等值法] 可接受上限（P2<span class="arithmatex">\(\cap\)</span>P4）。</p>
+<div class="arithmatex">\[
+\begin{aligned}
+PMC: &amp;\ F_1(p) = F_3(p), \quad OPP:\ F_1(p) = F_4(p)\\
+IDP: &amp;\ F_2(p) = F_3(p), \quad PME:\ F_2(p) = F_4(p)
+\end{aligned}
+\]</div>
+<p>其中 <span class="arithmatex">\(F_1\)</span>（"太便宜"）、<span class="arithmatex">\(F_2\)</span>（"便宜"）为随价格上升累积的顾客比例曲线，<span class="arithmatex">\(F_3\)</span>（"贵"）、<span class="arithmatex">\(F_4\)</span>（"太贵"）为对应累积曲线；四条曲线两两交点即四个关键定价点。</p>
 <p><strong>操作要点</strong>：工具箱选"价格敏感度 PSM"，线性插值，最小有效样本 30，剔除逻辑顺序违规（P1<span class="arithmatex">\(&gt;\)</span>P2<span class="arithmatex">\(&gt;\)</span>P3<span class="arithmatex">\(&gt;\)</span>P4）的答卷。</p>
 <p><strong>结果关键</strong>：案例最优价 OPP <span class="arithmatex">\(\approx 12.4\)</span> 元，可接受区间 <span class="arithmatex">\([9.67, 13.86]\)</span> 元。</p>
 <p><strong>注意</strong>：PSM 是"心理价位"调查，与真实购买行为有差距，正式定价还需结合成本与竞品。</p>
@@ -2089,6 +2176,10 @@
 <p><strong>一句话</strong>：从一堆候选项（口味、渠道、广告位）里挑出固定数量的组合，使"至少喜欢其中一项"的去重人数最多。</p>
 <p><strong>美赛场景区</strong>：菜单组合、媒体投放组合、产品线规划——在有限名额下最大化覆盖。</p>
 <p><strong>核心原理</strong>：本质是组合优化。对 0/1 喜好数据，枚举（或贪心+邻域搜索）所有 <span class="arithmatex">\(k\)</span> 项组合，算去重触达人数，取最大者。比"直接选单项人气最高的 <span class="arithmatex">\(k\)</span> 个"更优，因为考虑了人群重叠。</p>
+<div class="arithmatex">\[
+\max_{S:\,|S|=k}\ Reach(S), \qquad Reach(S) = \frac{1}{N}\left|\bigcup_{j\in S}\{i: y_{ij}=1\}\right|
+\]</div>
+<p>其中 <span class="arithmatex">\(S\)</span> 为选中的候选项集合（大小为 <span class="arithmatex">\(k\)</span>），<span class="arithmatex">\(y_{ij}=1\)</span> 表示第 <span class="arithmatex">\(i\)</span> 个受访者喜欢第 <span class="arithmatex">\(j\)</span> 项，<span class="arithmatex">\(N\)</span> 为受访者总数；目标是在 <span class="arithmatex">\(k\)</span> 个名额下使至少喜欢其中一项的去重人数 <span class="arithmatex">\(Reach(S)\)</span> 最大。</p>
 <p><strong>操作要点</strong>：工具箱选"Turf"，目标 reach_frequency，组合大小设 k，候选数小时精确枚举、过大时启发式近似。</p>
 <p><strong>结果关键</strong>：案例选 3 款口味去重触达 120 人（80%），比"单项最高 3 款"基线多 33 人。</p>
 <p><strong>注意</strong>：Turf 优化的是<strong>覆盖广度</strong>，不是每个单项的人气；重叠大的项目组合后增量很小。</p>
@@ -2099,6 +2190,10 @@
 <p><strong>一句话</strong>：把消费者对品牌的偏好折算成"愿意多付多少钱"，并测算各品牌提价后的份额流失（价格弹性）。</p>
 <p><strong>美赛场景区</strong>：多品牌/多产品线定价、品牌资产评估。</p>
 <p><strong>核心原理</strong>：用条件 Logit 把选择效用拆成品牌虚拟变量系数 + 价格系数。品牌相对参考品牌的货币溢价 = <span class="arithmatex">\(-\)</span>品牌系数/价格系数；价格弹性 = 提价 10% 后的份额变化率。</p>
+<div class="arithmatex">\[
+\Delta V_{b} = -\frac{\beta_{b}}{\beta_{price}}, \qquad E_{p} = \frac{\Delta Share / Share}{\Delta p / p}
+\]</div>
+<p>其中 <span class="arithmatex">\(\beta_b\)</span> 为品牌 <span class="arithmatex">\(b\)</span> 虚拟变量的系数，<span class="arithmatex">\(\beta_{price}\)</span> 为价格系数（预期为负），<span class="arithmatex">\(\Delta V_b\)</span> 即该品牌相对参考品牌的货币溢价；<span class="arithmatex">\(E_p\)</span> 为价格弹性，衡量提价 <span class="arithmatex">\(1\%\)</span> 引起市场份额变化的百分比。</p>
 <p><strong>操作要点</strong>：工具箱选"BPTO"，指定品牌、价格、选择、任务、受访者字段，收敛容差 1e-6，加价幅度 10%。</p>
 <p><strong>结果关键</strong>：案例以漫享为参照，云屿品牌溢价 3.42 元显著为正，谷咖需折价 6.64 元；各品牌价格弹性 <span class="arithmatex">\(-2.9\)</span> 至 <span class="arithmatex">\(-3.5\)</span>（富有弹性）。</p>
 <p><strong>注意</strong>：BPTO 回答"品牌值多少钱"，参考品牌应选份额最高者；弹性绝对值 <span class="arithmatex">\(&gt;1\)</span> 说明提价得不偿失。</p>
@@ -2109,6 +2204,10 @@
 <p><strong>一句话</strong>：让不同消费者组只看一个候选价格，画出价格--需求曲线，找出购买意愿骤降的"断裂台阶"，并定收益最大化价。</p>
 <p><strong>美赛场景区</strong>：定价调研，找出消费者心理价格上限；与 PSM 互补（PSM 问主观感受，本模型看购买意愿突变）。</p>
 <p><strong>核心原理</strong>：把"意愿 <span class="arithmatex">\(\geq 4\)</span> 分"定义为需求率，形成价格--需求曲线；相邻价格档做两比例 Z 检验（BH [Benjamini-Hochberg, 本雅明尼-霍赫贝格方法] 校正）+ Chow 断点检验找突变点；再用"价格 <span class="arithmatex">\(\times\)</span> 需求率"算各档收益，取最大者定价。</p>
+<div class="arithmatex">\[
+D(p) = \frac{1}{n}\sum_{i=1}^{n}\mathbb{1}[score_i(p) \geq 4], \qquad Rev(p) = p \times D(p)
+\]</div>
+<p>其中 <span class="arithmatex">\(D(p)\)</span> 为价格 <span class="arithmatex">\(p\)</span> 下的需求率（购买意愿评分 <span class="arithmatex">\(\geq 4\)</span> 的受试比例），<span class="arithmatex">\(score_i(p)\)</span> 为第 <span class="arithmatex">\(i\)</span> 人在价格 <span class="arithmatex">\(p\)</span> 下的购买意愿，<span class="arithmatex">\(Rev(p)\)</span> 为单位市场的预期收益；取 <span class="arithmatex">\(Rev(p)\)</span> 最大的价格作为建议定价。</p>
 <p><strong>操作要点</strong>：工具箱选"价格断裂点"，独立组设计，购买意愿阈值 4 分，最小突变幅度 10 个百分点，BH 校正。</p>
 <p><strong>结果关键</strong>：案例 109<span class="arithmatex">\(\to\)</span>129 元时需求骤降 36 个百分点（校正 <span class="arithmatex">\(p=0.027\)</span>），收益在 109 元达峰，建议定价 109 元。</p>
 <p><strong>注意</strong>：购买意愿是声明意愿，与真实购买有差距；断裂点建议结合成本与竞品复核。</p>

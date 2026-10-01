@@ -1431,9 +1431,17 @@
 <ul>
 <li><strong>显著性水平<span class="arithmatex">\(\alpha\)</span></strong>：容忍"误报"的概率，通常0.05。</li>
 <li><strong>功效<span class="arithmatex">\(1-\beta\)</span></strong>：真实差异存在时，能成功检出它的概率，通常目标0.8。</li>
-<li><strong>效应量<span class="arithmatex">\(d\)</span>（Cohen's d）</strong>：均值差除以合并标准差，<span class="arithmatex">\(d\approx0.2\)</span>小、<span class="arithmatex">\(0.5\)</span>中、<span class="arithmatex">\(0.8\)</span>大。效应越小，越难检出，需要样本越多。</li>
-<li><strong>样本量<span class="arithmatex">\(n\)</span></strong>：其他三个量定了，就能反解<span class="arithmatex">\(n\)</span>。</li>
+<li><strong>效应量<span class="arithmatex">\(d\)</span>（Cohen's d）</strong>：均值差除以合并标准差：</li>
 </ul>
+<div class="arithmatex">\[
+d = \frac{|\mu_1 - \mu_2|}{\sigma_{pooled}}
+\]</div>
+<p><span class="arithmatex">\(d\approx0.2\)</span>小、<span class="arithmatex">\(0.5\)</span>中、<span class="arithmatex">\(0.8\)</span>大。效应越小，越难检出，需要样本越多。
+- <strong>样本量<span class="arithmatex">\(n\)</span></strong>：其他三个量定了，就能反解<span class="arithmatex">\(n\)</span>。两独立样本双侧检验的近似样本量公式为：</p>
+<div class="arithmatex">\[
+n = \frac{2(z_{1-\alpha/2} + z_{1-\beta})^2}{d^2}
+\]</div>
+<p>其中 <span class="arithmatex">\(z_{1-\alpha/2}\)</span> 为标准正态分布上 <span class="arithmatex">\(\alpha/2\)</span> 分位数，<span class="arithmatex">\(z_{1-\beta}\)</span> 为功效对应的分位数。</p>
 <p>生活类比：功效就像捕鱼。网眼大小（<span class="arithmatex">\(\alpha\)</span>）、鱼到底多大（效应量）决定了要撒多大面积的网（样本量）才能有80%把握捕到这条鱼。鱼越小（效应小），网要撒得越大。</p>
 <p><strong>注意</strong>：功效是"长期检出概率"，不是"这次一定显著"——达到80%功效也意味着仍有20%的可能检不出。</p>
 </div>
@@ -1488,9 +1496,14 @@
 <p class="admonition-title">通俗原理</p>
 <p>回归功效基于<strong>非中心<span class="arithmatex">\(F\)</span>分布</strong>：</p>
 <ul>
-<li>先用预试验数据拟合OLS [Ordinary Least Squares, 普通最小二乘法]，得到<strong>调整<span class="arithmatex">\(R^2\)</span></strong>，换算成效应量 <span class="arithmatex">\(f^2 = R^2/(1-R^2)\)</span>。</li>
-<li>非中心参数 <span class="arithmatex">\(\lambda = n\cdot f^2\)</span>，自由度 <span class="arithmatex">\(v = n-k-1\)</span>（<span class="arithmatex">\(k\)</span>为预测变量数）。</li>
-<li>功效<span class="arithmatex">\(=1-F_{nc}(F_{临界}; u, v, \lambda)\)</span>，再二分反推满足目标功效的最小<span class="arithmatex">\(n\)</span>。</li>
+<li>先用预试验数据拟合OLS [Ordinary Least Squares, 普通最小二乘法]，得到<strong>调整<span class="arithmatex">\(R^2\)</span></strong>，换算成效应量：</li>
+</ul>
+<div class="arithmatex">\[
+f^2 = \frac{R^2}{1 - R^2}
+\]</div>
+<ul>
+<li>非中心参数 <span class="arithmatex">\(\lambda = n \cdot f^2\)</span>，自由度 <span class="arithmatex">\(v = n - k - 1\)</span>（<span class="arithmatex">\(k\)</span>为预测变量数）。</li>
+<li>功效 <span class="arithmatex">\(= 1 - F_{nc}(F_{crit}; u, v, \lambda)\)</span>，再二分反推满足目标功效的最小 <span class="arithmatex">\(n\)</span>。</li>
 <li>Cohen基准：<span class="arithmatex">\(f^2\approx0.02\)</span>小、<span class="arithmatex">\(0.15\)</span>中、<span class="arithmatex">\(0.35\)</span>大。</li>
 </ul>
 </div>
@@ -1528,7 +1541,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：要检验两个连续变量的相关是否显著（<span class="arithmatex">\(H_0:\rho=0\)</span>），需要多少对成对观测，或现有样本能检出多强的相关。</p>
 <p><strong>美赛场景区</strong>：规划需要配对观测的相关分析（如培训学时与满意度），论证样本是否足够检出目标相关。</p>
-<p><strong>核心原理</strong>：检验统计量 <span class="arithmatex">\(t=r\sqrt{(n-2)/(1-r^2)}\)</span>，原假设下服从<span class="arithmatex">\(t(n-2)\)</span>，备择下按非中心参数<span class="arithmatex">\(\delta=\rho\sqrt{n/(1-\rho^2)}\)</span>的非中心<span class="arithmatex">\(t\)</span>分布精确算功效，Fisher z近似交叉验证。</p>
+<p><strong>核心原理</strong>：检验统计量与Fisher z变换为：</p>
+<div class="arithmatex">\[
+t = r\sqrt{\frac{n-2}{1-r^2}}, \quad z_r = \frac{1}{2}\ln\frac{1+r}{1-r}
+\]</div>
+<p>原假设下服从 <span class="arithmatex">\(t(n-2)\)</span>，备择下按非中心参数 <span class="arithmatex">\(\delta = \rho\sqrt{n/(1-\rho^2)}\)</span> 的非中心 <span class="arithmatex">\(t\)</span> 分布精确算功效。近似样本量公式为 <span class="arithmatex">\(n = \frac{(z_{1-\alpha/2} + z_{1-\beta})^2}{z_r^2} + 3\)</span>。</p>
 <p><strong>操作要点</strong>：工具箱选"功效分析之相关性"；选x、y两列；相关类型pearson；求解目标sample_size；双侧检验。</p>
 <p><strong>结果关键</strong>：案例（培训学时vs满意度）观测<span class="arithmatex">\(r=0.357\)</span>，达80%功效至少需约<strong>56对</strong>；现有150对功效约99.6%。三问：现样本功效多大？需多少对？现规模能检出多小的<span class="arithmatex">\(|r|\)</span>？</p>
 <p><strong>注意</strong>：效应量越小、目标功效越高，所需对数越多。</p>
@@ -1538,7 +1555,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：两组合格率/发生率比较（二分类结局），在给定两组率的前提下，需要多少样本才能检出这个率差。</p>
 <p><strong>美赛场景区</strong>：规划临床试验、政策达标率对比，如降压治疗后达标率从30%提到50%需要多少患者。</p>
-<p><strong>核心原理</strong>：对两组率<span class="arithmatex">\(p_1,p_2\)</span>做反正弦变换得到效应量Cohen's <span class="arithmatex">\(h\)</span>，按两率<span class="arithmatex">\(z\)</span>检验的解析功效公式求每组样本量；向上取整后回代实际功效，并用蒙特卡洛模拟复核正态近似。</p>
+<p><strong>核心原理</strong>：对两组率 <span class="arithmatex">\(p_1, p_2\)</span> 做反正弦变换得到效应量Cohen's <span class="arithmatex">\(h\)</span>：</p>
+<div class="arithmatex">\[
+h = 2\arcsin\sqrt{p_1} - 2\arcsin\sqrt{p_2}
+\]</div>
+<p>按两率 <span class="arithmatex">\(z\)</span> 检验的解析功效公式求每组样本量；向上取整后回代实际功效，并用蒙特卡洛模拟复核正态近似。</p>
 <p><strong>操作要点</strong>：工具箱选"功效分析之率差"；填对照组率<span class="arithmatex">\(p_1\)</span>、试验组率<span class="arithmatex">\(p_2\)</span>；求解目标样本量；<span class="arithmatex">\(\alpha=0.05\)</span>、双侧、1:1分配。</p>
 <p><strong>结果关键</strong>：案例<span class="arithmatex">\(p_1=0.30\)</span>、<span class="arithmatex">\(p_2=0.50\)</span>，<span class="arithmatex">\(\alpha=0.05\)</span>、功效0.8下共需<strong>186例</strong>（每组93）；蒙特卡洛经验功效0.798与解析0.801吻合。</p>
 <p><strong>注意</strong>：样本量对<span class="arithmatex">\(p_1,p_2\)</span>假设很敏感——率越接近50%、两组差越小，需要的样本越多。务必做<span class="arithmatex">\(p_1\)</span>扰动敏感性分析。</p>
@@ -1548,7 +1569,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：单因素方差分析（三组及以上均值比较）前，规划每组需要多少样本才能检出组间差异。</p>
 <p><strong>美赛场景区</strong>：如比较三套策略、三套方案的效果，预试验后规划正式对比实验的样本量。</p>
-<p><strong>核心原理</strong>：四要素互相牵制——效应量<span class="arithmatex">\(f\)</span>（由预试验<span class="arithmatex">\(\eta^2\)</span>估计，<span class="arithmatex">\(f\approx0.1\)</span>小、<span class="arithmatex">\(0.25\)</span>中、<span class="arithmatex">\(0.4\)</span>大）、总样本量<span class="arithmatex">\(N\)</span>、<span class="arithmatex">\(\alpha\)</span>、功效<span class="arithmatex">\(1-\beta\)</span>。基于非中心<span class="arithmatex">\(F\)</span>分布<span class="arithmatex">\(\lambda=N f^2\)</span>，按均衡分配反推每组样本量，取整后重算实际功效。</p>
+<p><strong>核心原理</strong>：四要素互相牵制——效应量 <span class="arithmatex">\(f\)</span>（由预试验 <span class="arithmatex">\(\eta^2\)</span> 估计）、总样本量 <span class="arithmatex">\(N\)</span>、<span class="arithmatex">\(\alpha\)</span>、功效 <span class="arithmatex">\(1-\beta\)</span>。效应量定义为：</p>
+<div class="arithmatex">\[
+f = \sqrt{\frac{\sum_{i=1}^{k} (\mu_i - \bar{\mu})^2 / k}{\sigma^2}}, \quad \lambda = N f^2
+\]</div>
+<p>其中 <span class="arithmatex">\(k\)</span> 为组数，<span class="arithmatex">\(\mu_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 组均值，<span class="arithmatex">\(\sigma^2\)</span> 为组内方差，<span class="arithmatex">\(\lambda\)</span> 为非中心参数。<span class="arithmatex">\(f\approx0.1\)</span> 小、<span class="arithmatex">\(0.25\)</span> 中、<span class="arithmatex">\(0.4\)</span> 大。基于非中心 <span class="arithmatex">\(F\)</span> 分布按均衡分配反推每组样本量，取整后重算实际功效。</p>
 <p><strong>操作要点</strong>：工具箱选"功效分析之方差"；填组数<span class="arithmatex">\(k\)</span>；效应来源数据估计；求解目标所需样本量；<span class="arithmatex">\(\alpha\)</span>与目标功效默认0.05/0.8。</p>
 <p><strong>结果关键</strong>：案例（三套拣货策略，<span class="arithmatex">\(k=3\)</span>）预试验得<span class="arithmatex">\(\eta^2=0.083\)</span>、<span class="arithmatex">\(f\approx0.30\)</span>（中效应），需每组<strong>37例、共111例</strong>，取整后功效约0.80。</p>
 <p><strong>注意</strong>：需先做正态性与方差齐性（Levene）检验；若异方差严重，当前结论不适用，应改用Welch方差分析的模拟功效。</p>
@@ -1558,7 +1583,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当结局不是正态连续变量，而是二分类、计数等更复杂的结局时，用广义线性模型的功效分析来定样本量。是均值差功效的"升级版"。</p>
 <p><strong>美赛场景区</strong>：规划安全性/不良反应对照研究——如联合用药使肝功能异常率从20%升到40%（<span class="arithmatex">\(OR [Odds Ratio, 比值比]=2\)</span>），需要多少患者。</p>
-<p><strong>核心原理</strong>：先按结局选分布族与链接函数（二项/泊松/负二项）；给定效应量、基线率、<span class="arithmatex">\(\alpha\)</span>、分配比，用Wald检验的渐近功效二分求解总样本量；再固定种子生成数据、拟合对应GLM [Generalized Linear Model, 广义线性模型]做蒙特卡洛模拟，在解点和1.25倍样本点核对解析近似是否靠谱。</p>
+<p><strong>核心原理</strong>：先按结局选分布族与链接函数（二项/泊松/负二项）；给定效应量、基线率、<span class="arithmatex">\(\alpha\)</span>、分配比，用Wald检验的渐近功效二分求解总样本量。Wald检验统计量为：</p>
+<div class="arithmatex">\[
+z = \frac{\hat{\beta}}{SE(\hat{\beta})} \sim N(0, 1) \quad \text{under } H_0
+\]</div>
+<p>再固定种子生成数据、拟合对应GLM [Generalized Linear Model, 广义线性模型]做蒙特卡洛模拟，在解点和1.25倍样本点核对解析近似是否靠谱。</p>
 <p><strong>操作要点</strong>：工具箱选"功效分析之广义模型"；family选binomial；solve选n；填效应（OR=2）、基线率、<span class="arithmatex">\(\alpha=0.05\)</span>、双侧、功效0.8；指定group与outcome列。</p>
 <p><strong>结果关键</strong>：案例（二项结局、<span class="arithmatex">\(OR=2\)</span>、基线20%）需总样本<strong>352例</strong>（对照176、暴露176）；蒙特卡洛实测功效81.1%，与解析80.1%吻合。</p>
 <p><strong>注意</strong>：这是功效分析里最灵活但也最复杂的一类。结果对<span class="arithmatex">\(\alpha\)</span>、基线率假设敏感；资源有限时可评估放宽<span class="arithmatex">\(\alpha\)</span>或用单侧检验以降样本量。美赛中用到时，重点是把"样本量怎么来的"讲清楚。</p>

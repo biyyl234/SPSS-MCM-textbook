@@ -1624,10 +1624,20 @@
 <p class="admonition-title">通俗原理</p>
 <p>想象散点图上一堆点，你画一条直线去"贴近"它们。怎么算最佳？让每个点到直线的<strong>纵向距离平方和</strong>最小——这就是"最小二乘法"。</p>
 <p>回归方程长这样：
-$<span class="arithmatex">\(y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k\)</span>$
-- <span class="arithmatex">\(b_0\)</span>是截距（所有自变量为0时的基线值）
-- <span class="arithmatex">\(b_j\)</span>是<span class="arithmatex">\(x_j\)</span>的系数：<span class="arithmatex">\(x_j\)</span>每涨1单位，<span class="arithmatex">\(y\)</span>平均涨<span class="arithmatex">\(b_j\)</span>单位（控制其他变量不变）
+$<span class="arithmatex">\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_k x_k + \varepsilon\)</span>$
+- <span class="arithmatex">\(\beta_0\)</span>是截距（所有自变量为0时的基线值）
+- <span class="arithmatex">\(\beta_j\)</span>是<span class="arithmatex">\(x_j\)</span>的系数：<span class="arithmatex">\(x_j\)</span>每涨1单位，<span class="arithmatex">\(y\)</span>平均涨<span class="arithmatex">\(\beta_j\)</span>单位（控制其他变量不变）
+- <span class="arithmatex">\(\varepsilon\)</span>为随机误差项，假设服从正态分布<span class="arithmatex">\(N(0, \sigma^2)\)</span>
 - 本案例：竞争门店数系数<span class="arithmatex">\(-2.025\)</span>，即周边每多一家竞争店，月销售额平均降2.025万元；月促销天数系数<span class="arithmatex">\(+1.149\)</span>，每多促销1天销售额涨1.149万元</p>
+<p>最小二乘估计的矩阵解为：
+$<span class="arithmatex">\(\hat{\beta} = (X'X)^{-1}X'y\)</span>$</p>
+<p>其中<span class="arithmatex">\(X\)</span>为<span class="arithmatex">\(n \times (k+1)\)</span>的设计矩阵（含截距列），<span class="arithmatex">\(y\)</span>为因变量向量，<span class="arithmatex">\(\hat{\beta}\)</span>为系数估计向量。</p>
+<p>拟合优度<span class="arithmatex">\(R^2\)</span>为：
+$<span class="arithmatex">\(R^2 = 1 - \frac{SS_{res}}{SS_{tot}} = 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}\)</span>$</p>
+<p>调整<span class="arithmatex">\(R^2\)</span>考虑自变量个数：<span class="arithmatex">\(R^2_{adj} = 1 - (1-R^2)\frac{n-1}{n-k-1}\)</span>。</p>
+<p>模型整体<span class="arithmatex">\(F\)</span>检验为：
+$<span class="arithmatex">\(F = \frac{MSR}{MSE} = \frac{R^2 / k}{(1-R^2) / (n - k - 1)}\)</span>$</p>
+<p>单个系数的<span class="arithmatex">\(t\)</span>检验为：<span class="arithmatex">\(t_j = \frac{\hat{\beta}_j}{SE(\hat{\beta}_j)}\)</span>，<span class="arithmatex">\(SE(\hat{\beta}_j)\)</span>为系数标准误，服从自由度<span class="arithmatex">\(n-k-1\)</span>的<span class="arithmatex">\(t\)</span>分布。</p>
 <p><strong><span class="arithmatex">\(R^2\)</span></strong>是拟合优度：本案例0.788，说明四个自变量一起解释了78.8%的销售额波动。</p>
 </div>
 <div class="admonition tip">
@@ -1790,6 +1800,9 @@ $<span class="arithmatex">\(y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k\)</sp
 - <strong>第1层（基线）</strong>：先放必须控制的背景变量（年龄、司龄、工作量），<span class="arithmatex">\(R^2=0.414\)</span>
 - <strong>第2层</strong>：加入工作资源（自主性、上级支持、发展机会），<span class="arithmatex">\(R^2\)</span>涨到0.756，<strong>增量</strong><span class="arithmatex">\(\Delta R^2=0.342\)</span>，<span class="arithmatex">\(\Delta F=66.7\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>——工作资源贡献巨大
 - <strong>第3层</strong>：再加入心理安全感，<span class="arithmatex">\(R^2=0.793\)</span>，<span class="arithmatex">\(\Delta R^2=0.038\)</span>，<span class="arithmatex">\(\Delta F=25.9\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>——仍有显著增量</p>
+<p>每加入一层新变量，<span class="arithmatex">\(R^2\)</span>的增量为<span class="arithmatex">\(\Delta R^2 = R^2_{\text{新}} - R^2_{\text{旧}}\)</span>，对应的<span class="arithmatex">\(F\)</span>变化量为：
+$<span class="arithmatex">\(\Delta F = \frac{\Delta R^2 / q}{(1 - R^2_{\text{新}}) / (n - k_{\text{新}} - 1)}\)</span>$</p>
+<p>其中<span class="arithmatex">\(q\)</span>为新加入变量个数，<span class="arithmatex">\(k_{\text{新}}\)</span>为新模型自变量总数，<span class="arithmatex">\(n\)</span>为样本量；<span class="arithmatex">\(\Delta F\)</span>服从<span class="arithmatex">\(F(q, n-k_{\text{新}}-1)\)</span>分布，用于检验新加入变量组是否有显著增量贡献。</p>
 <p><strong>关键</strong>：分层顺序是<strong>按理论定的</strong>，不是按数据<span class="arithmatex">\(p\)</span>值。控制变量先进、核心变量后进，才能干净地看到核心变量的"净增量"。</p>
 </div>
 <div class="admonition tip">
@@ -1843,6 +1856,7 @@ $<span class="arithmatex">\(y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k\)</sp
 - <strong>向前引入</strong>：一个个试，把<span class="arithmatex">\(p\)</span>最小（最显著）的变量拉进模型
 - <strong>向后剔除</strong>：把模型里变得不显著的踢出去
 - <strong>逐步（both）</strong>：边进边出，每加一个新变量都重新检查老变量要不要留</p>
+<p>变量引入/剔除的依据是偏<span class="arithmatex">\(F\)</span>统计量：<span class="arithmatex">\(F_{\text{进入}} = \frac{(SSE_{\text{旧}} - SSE_{\text{新}})/1}{SSE_{\text{新}}/(n-k_{\text{新}}-1)}\)</span>，若<span class="arithmatex">\(F_{\text{进入}} &gt; F_{\text{in}}\)</span>（对应<span class="arithmatex">\(p&lt;0.05\)</span>）则引入；<span class="arithmatex">\(F_{\text{剔除}} = \frac{(SSE_{\text{新}} - SSE_{\text{旧}})/1}{SSE_{\text{旧}}/(n-k_{\text{旧}}-1)}\)</span>，若<span class="arithmatex">\(F_{\text{剔除}} &lt; F_{\text{out}}\)</span>（对应<span class="arithmatex">\(p&gt;0.10\)</span>）则剔除。</p>
 <p>本案例用<span class="arithmatex">\(p\)</span>值准则、both方向，从12个候选里最终留下5个：活跃会员数、商圈客流、客单价、促销费用、门店面积，调整<span class="arithmatex">\(R^2=0.838\)</span>，整体<span class="arithmatex">\(F=154.8\)</span>，<span class="arithmatex">\(p=4.3\times10^{-56}\)</span>。</p>
 </div>
 <div class="admonition tip">
@@ -1894,9 +1908,11 @@ $<span class="arithmatex">\(y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k\)</sp
 <p class="admonition-title">通俗原理</p>
 <p>线性回归输出的是"销售额=多少万"，可能算出负数、也可能算出超出范围的值。但我们想知道的是<strong>"逾期的概率"</strong>，它必须在0到1之间。</p>
 <p>逻辑回归用一个叫<strong>logistic函数（S形曲线）</strong>把任意实数压到0--1之间：
-$<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
-左边是"对数发生比"。
-- 系数<span class="arithmatex">\(b\)</span>解释成<strong>优势比<span class="arithmatex">\(OR [Odds Ratio, 比值比]=e^b\)</span></strong>：本案例"近12月逾期次数"系数0.685，<span class="arithmatex">\(OR=1.983\)</span>——每多一次历史逾期，未来逾期几率约翻倍
+$<span class="arithmatex">\(\ln\frac{p}{1-p}=\beta_0+\beta_1x_1+\cdots+\beta_kx_k\)</span>$
+左边是"对数发生比"（logit变换）。反解出概率为：
+$<span class="arithmatex">\(p = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \cdots + \beta_k x_k)}}\)</span>$</p>
+<p>其中<span class="arithmatex">\(p\)</span>为事件发生的概率，取值<span class="arithmatex">\((0,1)\)</span>。
+- 系数<span class="arithmatex">\(\beta_j\)</span>解释成<strong>优势比<span class="arithmatex">\(OR [Odds Ratio, 比值比]=e^{\beta_j}\)</span></strong>：本案例"近12月逾期次数"系数0.685，<span class="arithmatex">\(OR=e^{0.685}=1.983\)</span>——每多一次历史逾期，未来逾期几率约翻倍
 - <span class="arithmatex">\(OR&gt;1\)</span>风险上升，<span class="arithmatex">\(OR&lt;1\)</span>风险下降</p>
 <p>本案例模型AUC [Area Under the Curve, 曲线下面积]=0.832，区分能力不错。</p>
 </div>
@@ -1942,7 +1958,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：不只看"平均"，而是拟合<strong>条件中位数（及任意分位数）</strong>的回归——看自变量对高分位、低分位人群的不同影响。</p>
 <p><strong>美赛场景区</strong>：收入研究中，教育对高收入者和低收入者的回报是否不同；极端值敏感的政策效应分析。</p>
-<p><strong>核心原理</strong>：普通最小二乘 minimizes 残差平方和，只估条件均值；分位数回归最小化不对称加权绝对残差，可估<span class="arithmatex">\(\tau=0.1/0.5/0.9\)</span>等任意分位。</p>
+<p><strong>核心原理</strong>：普通最小二乘 minimizes 残差平方和，只估条件均值；分位数回归最小化不对称加权绝对残差（检验损失函数）：<span class="arithmatex">\(\hat{\beta}^{(\tau)} = \arg\min_{\beta} \sum_{i=1}^{n} \rho_{\tau}(y_i - x_i'\beta)\)</span>，其中<span class="arithmatex">\(\rho_{\tau}(u) = u(\tau - \mathbb{1}(u&lt;0))\)</span>为非对称损失函数，<span class="arithmatex">\(\tau \in (0,1)\)</span>为目标分位数；可估<span class="arithmatex">\(\tau=0.1/0.5/0.9\)</span>等任意分位。</p>
 <p><strong>操作要点</strong>：在Dabbit AI SPSS工具箱选"分位数回归"，指定因变量、自变量和目标分位数（如0.25、0.5、0.75）。</p>
 <p><strong>结果关键</strong>：比较不同分位点上系数的大小变化——若高分位系数远大于低分位，说明效应在分布高端更强。</p>
 <p><strong>注意</strong>：它对异方差、厚尾数据更稳健，能揭示均值回归看不到的"分布异质性"。</p>
@@ -1952,7 +1968,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：自变量和因变量<strong>都有测量误差</strong>时用的回归——普通回归假设<span class="arithmatex">\(x\)</span>完全精确，这在仪器比对时不成立。</p>
 <p><strong>美赛场景区</strong>：两种测量方法/仪器的结果一致性比较；方法学比对实验。</p>
-<p><strong>核心原理</strong>：普通OLS [Ordinary Least Squares, 普通最小二乘法]只让<span class="arithmatex">\(y\)</span>方向残差最小，Deming让<strong>垂直于回归线方向</strong>的总误差最小（正交距离），<span class="arithmatex">\(x\)</span>和<span class="arithmatex">\(y\)</span>都被当作有误差。需预先知道两者测量误差方差比。</p>
+<p><strong>核心原理</strong>：普通OLS [Ordinary Least Squares, 普通最小二乘法]只让<span class="arithmatex">\(y\)</span>方向残差最小，Deming让<strong>垂直于回归线方向</strong>的总误差最小（正交距离），即最小化<span class="arithmatex">\(\sum_{i=1}^{n} \left[\frac{(x_i - \hat{x}_i)^2}{\sigma_x^2} + \frac{(y_i - \hat{y}_i)^2}{\sigma_y^2}\right]\)</span>，其中<span class="arithmatex">\(\sigma_x^2\)</span>、<span class="arithmatex">\(\sigma_y^2\)</span>分别为<span class="arithmatex">\(x\)</span>和<span class="arithmatex">\(y\)</span>的测量误差方差，<span class="arithmatex">\(\hat{x}_i\)</span>、<span class="arithmatex">\(\hat{y}_i\)</span>为回归线上的点；<span class="arithmatex">\(x\)</span>和<span class="arithmatex">\(y\)</span>都被当作有误差。需预先知道两者测量误差方差比<span class="arithmatex">\(\delta = \sigma_y^2 / \sigma_x^2\)</span>。</p>
 <p><strong>操作要点</strong>：工具箱选"Deming回归"，输入两列测量值，设定误差方差比。</p>
 <p><strong>结果关键</strong>：斜率和截距；若斜率接近1、截距接近0，说明两种方法一致性好。</p>
 <p><strong>注意</strong>：它和Passing-Bablok常用于方法比对。当<span class="arithmatex">\(x\)</span>无误差时，退化为普通OLS。</p>
@@ -1972,7 +1988,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当关系是<strong>没法通过变量变换变成直线</strong>的曲线（如Logistic增长、Michaelis-Menten酶动力）时，直接拟合自定义非线性方程。</p>
 <p><strong>美赛场景区</strong>：S形生长曲线、饱和动力学、传染病传播模型（logistic增长）、物理经验公式。</p>
-<p><strong>核心原理</strong>：不做线性化，直接用迭代算法（如Levenberg-Marquardt）最小化残差平方和。需要<strong>人为指定方程形式和初始参数猜测</strong>。</p>
+<p><strong>核心原理</strong>：不做线性化，直接用迭代算法（如Levenberg-Marquardt）最小化残差平方和<span class="arithmatex">\(SSE(\theta) = \sum_{i=1}^{n}[y_i - f(x_i; \theta)]^2\)</span>，其中<span class="arithmatex">\(f(\cdot)\)</span>为用户指定的非线性函数形式，<span class="arithmatex">\(\theta\)</span>为待估参数向量。需要<strong>人为指定方程形式和初始参数猜测</strong>。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 回归 → 非线性估计</strong>，输入自定义模型表达式和参数初值。</p>
 <p><strong>结果关键</strong>：参数的估计值、标准误、<span class="arithmatex">\(p\)</span>值；收敛是否成功；<span class="arithmatex">\(R^2\)</span>和残差图。</p>
 <p><strong>注意</strong>：初值给得不好容易不收敛或收敛到局部最优——这是它和曲线回归最大的门槛。</p>
@@ -1982,7 +1998,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：用回归的思路分析<strong>多个分类变量</strong>的列联表——把期望频数取对数后建模，拆解主效应和交互效应。</p>
 <p><strong>美赛场景区</strong>：高维列联表（三个以上分类变量）的结构分析；问卷中多类别变量的关联分解。</p>
-<p><strong>核心原理</strong>：<span class="arithmatex">\(\log(期望频数)\)</span>可分解为各变量主效应+交互项。通过比较嵌套模型的似然比<span class="arithmatex">\(\chi^2\)</span>，判断哪些交互项重要。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(\log(\text{期望频数} m_{ijk})\)</span>可分解为各变量主效应+交互项：<span class="arithmatex">\(\log m_{ijk} = \lambda + \lambda_i^A + \lambda_j^B + \lambda_k^C + \lambda_{ij}^{AB} + \lambda_{ik}^{AC} + \lambda_{jk}^{BC} + \lambda_{ijk}^{ABC}\)</span>。通过比较嵌套模型的似然比<span class="arithmatex">\(\chi^2 = -2\ln\frac{L_{\text{简化}}}{L_{\text{完整}}}\)</span>，判断哪些交互项重要。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 对数线性 → 模型选择</strong>，选分类变量和设计类型。</p>
 <p><strong>结果关键</strong>：模型拟合的似然比<span class="arithmatex">\(\chi^2\)</span>（<span class="arithmatex">\(p&gt;0.05\)</span>说明模型拟合好）；显著的高阶交互项说明变量间复杂关联。</p>
 <p><strong>注意</strong>：它是卡方检验在多维表上的推广。二维表时它就回到卡方独立性检验。</p>
@@ -1992,7 +2008,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：数据天然<strong>嵌套分层</strong>时用它——学生嵌套在班级里、班级嵌套在学校里，不能把它们当独立样本。</p>
 <p><strong>美赛场景区</strong>：分层抽样数据、纵向重复测量、组织内部嵌套结构；组内相关问题。</p>
-<p><strong>核心原理</strong>：把回归系数拆成"固定效应"（大家通用）和"随机效应"（各组围绕它浮动的部分），同时处理层1（个体）和层2（群体）变量。</p>
+<p><strong>核心原理</strong>：把回归系数拆成"固定效应"（大家通用）和"随机效应"（各组围绕它浮动的部分），即<span class="arithmatex">\(y_{ij} = \beta_0 + \beta_1 x_{ij} + u_{0j} + u_{1j} x_{ij} + \varepsilon_{ij}\)</span>，其中<span class="arithmatex">\(u_{0j}\)</span>、<span class="arithmatex">\(u_{1j}\)</span>为第<span class="arithmatex">\(j\)</span>组的随机截距和随机斜率（假设服从多元正态分布），<span class="arithmatex">\(\varepsilon_{ij}\)</span>为层1残差；同时处理层1（个体）和层2（群体）变量。</p>
 <p><strong>操作要点</strong>：在Dabbit AI SPSS工具箱选"多层线性模型"，指定分层结构（如学生<span class="arithmatex">\(\to\)</span>班级）和各层变量。</p>
 <p><strong>结果关键</strong>：组内相关系数ICC [Intraclass Correlation Coefficient, 组内相关系数]（高说明必须用多层模型）；固定效应系数；随机效应方差占比。</p>
 <p><strong>注意</strong>：数据有明显嵌套/聚类时，用普通回归会低估标准误、夸大显著性——这是它和普通回归最大的区别。</p>
@@ -2002,7 +2018,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：解决<strong>样本选择性偏差</strong>——你能观测到的数据本身不是随机样本（如只观测到"参加了工作"的人的工资）。</p>
 <p><strong>美赛场景区</strong>：工资决定模型（只有就业者才有工资）；自选择样本下的效应估计。</p>
-<p><strong>核心原理</strong>：第一阶段用Probit估计"入选概率"，算出逆米尔斯比<span class="arithmatex">\(\lambda\)</span>；第二阶段把<span class="arithmatex">\(\lambda\)</span>作为额外自变量放回回归，校正选择性偏差。</p>
+<p><strong>核心原理</strong>：第一阶段用Probit估计"入选概率"<span class="arithmatex">\(P(z_i'\gamma) = \Phi(z_i'\gamma)\)</span>，算出逆米尔斯比<span class="arithmatex">\(\lambda_i = \frac{\phi(z_i'\gamma)}{\Phi(z_i'\gamma)}\)</span>（入选者）或<span class="arithmatex">\(\lambda_i = \frac{-\phi(z_i'\gamma)}{1-\Phi(z_i'\gamma)}\)</span>（未入选者），其中<span class="arithmatex">\(\phi(\cdot)\)</span>和<span class="arithmatex">\(\Phi(\cdot)\)</span>分别为标准正态密度和累积分布函数；第二阶段把<span class="arithmatex">\(\lambda_i\)</span>作为额外自变量放回回归<span class="arithmatex">\(y_i = x_i'\beta + \sigma\lambda_i + \varepsilon_i\)</span>，校正选择性偏差。</p>
 <p><strong>操作要点</strong>：工具箱选"Heckman两阶段"，指定选择方程（是否入选）和结果方程（被解释的连续变量）。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(\lambda\)</span>的系数显著=存在选择性偏差；校正后核心变量系数与原OLS相比变化多少。</p>
 <p><strong>注意</strong>：它要求有工具变量（只影响是否入选、不直接影响结果变量），否则识别困难。</p>
@@ -2012,7 +2028,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：普通最小二乘会被<strong>几个极端点带偏</strong>，稳健回归给异常点"降权"，让直线不被 outliers 绑架。</p>
 <p><strong>美赛场景区</strong>：数据有明显异常值（长尾分布）；需要回归结果抗干扰。</p>
-<p><strong>核心原理</strong>：M估计用更温和的损失函数（如Huber），对大残差不那么敏感；RANSAC反复随机抽小点子集拟合，找"最多点支持"的模型。</p>
+<p><strong>核心原理</strong>：M估计用更温和的损失函数（如Huber损失<span class="arithmatex">\(\rho_H(u) = \begin{cases} \frac{1}{2}u^2 &amp; |u| \leq c \\ c|u| - \frac{1}{2}c^2 &amp; |u| &gt; c \end{cases}\)</span>，<span class="arithmatex">\(c\)</span>通常取1.345），对大残差不那么敏感（从平方增长降为线性增长）；RANSAC反复随机抽小点子集拟合，找"最多点支持"的模型。</p>
 <p><strong>操作要点</strong>：工具箱选"稳健回归（RANSAC/M估计）"，指定因变量和自变量，选择方法。</p>
 <p><strong>结果关键</strong>：与OLS系数对比——若稳健系数和OLS差很多，说明OLS被异常点影响了；同时看被标记为异常的样本。</p>
 <p><strong>注意</strong>：它不是删异常值，而是<strong>降权</strong>。数据干净时，OLS更有效。</p>
@@ -2032,7 +2048,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：自变量多、又严重共线、样本还不多时，PLS一边降维一边回归，两全其美。</p>
 <p><strong>美赛场景区</strong>：光谱数据、高维经济指标下的预测；共线性严重且样本少的回归。</p>
-<p><strong>核心原理</strong>：同时对<span class="arithmatex">\(X\)</span>和<span class="arithmatex">\(Y\)</span>提取潜变量（主成分），并保证潜变量间协方差最大——既考虑<span class="arithmatex">\(X\)</span>内部结构，又紧扣<span class="arithmatex">\(Y\)</span>。</p>
+<p><strong>核心原理</strong>：同时对<span class="arithmatex">\(X\)</span>和<span class="arithmatex">\(Y\)</span>提取潜变量（成分）<span class="arithmatex">\(t = Xw\)</span>、<span class="arithmatex">\(u = Yq\)</span>，并保证潜变量间协方差最大，即求解<span class="arithmatex">\(\max_{w,q} \text{Cov}(Xw, Yq)\)</span>且满足<span class="arithmatex">\(w'w=1\)</span>、<span class="arithmatex">\(q'q=1\)</span>——既考虑<span class="arithmatex">\(X\)</span>内部结构，又紧扣<span class="arithmatex">\(Y\)</span>。每提取一个成分后对残差矩阵再重复提取，直至交叉验证确定最佳成分数。</p>
 <p><strong>操作要点</strong>：工具箱选"PLS偏最小二乘"，指定因变量和全部自变量，用交叉验证选最佳成分数。</p>
 <p><strong>结果关键</strong>：成分数选择（交叉验证<span class="arithmatex">\(Q^2\)</span>）；回归系数；<span class="arithmatex">\(R^2\)</span>和预测<span class="arithmatex">\(R^2\)</span>。</p>
 <p><strong>注意</strong>：它是<strong>PCA [Principal Component Analysis, 主成分分析]+回归的结合体</strong>。自变量严重共线、样本量<span class="arithmatex">\(&lt;\)</span>变量数时，它比普通回归稳。</p>
@@ -2042,7 +2058,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：因变量被<strong>截断/删失</strong>时用——比如一堆人"支出为0"（其实是没花），普通回归会偏。</p>
 <p><strong>美赛场景区</strong>：消费支出（大量0值）、贷款额度、持续时间等有下界且堆积在边界的数据。</p>
-<p><strong>核心原理</strong>：假设存在一个潜变量（真实支出），观测值在0处被"左删失"。用极大似然同时估计回归和删失概率。</p>
+<p><strong>核心原理</strong>：假设存在一个潜变量<span class="arithmatex">\(y_i^* = x_i'\beta + \varepsilon_i\)</span>，<span class="arithmatex">\(\varepsilon_i \sim N(0, \sigma^2)\)</span>，观测值在0处被"左删失"：<span class="arithmatex">\(y_i = \max(0, y_i^*)\)</span>。即当<span class="arithmatex">\(y_i^* \leq 0\)</span>时观测到<span class="arithmatex">\(y_i = 0\)</span>，否则观测到真实正值。用极大似然同时估计回归系数<span class="arithmatex">\(\beta\)</span>和删失概率。</p>
 <p><strong>操作要点</strong>：工具箱选"Tobit回归"，指定因变量、删失方向（左删失于0）和自变量。</p>
 <p><strong>结果关键</strong>：系数符号方向；删失比例；与普通OLS对比看校正幅度。</p>
 <p><strong>注意</strong>：因变量在0处堆积很多时才用；若只是大量0但不是删失概念，考虑零膨胀模型。</p>
@@ -2072,7 +2088,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：计数数据里<strong>0特别多</strong>（既有"本来就不会发生"的 structural zero，又有"可能发生但这次没发生"的）时用它。</p>
 <p><strong>美赛场景区</strong>：一年就医次数（健康人大量0）、消费频次、事故数——0堆积异常。</p>
-<p><strong>核心原理</strong>：混合模型——一部分概率用Logistic决定"是不是0"，剩下的用Poisson决定"发生几次"。</p>
+<p><strong>核心原理</strong>：混合模型——一部分概率用Logistic决定"是不是结构性零"：<span class="arithmatex">\(P(\text{structural zero}) = \frac{e^{z_i'\gamma}}{1+e^{z_i'\gamma}}\)</span>，剩下的<span class="arithmatex">\(1-\pi_i\)</span>部分用Poisson决定"发生几次"：<span class="arithmatex">\(P(Y_i = k | \text{count}) = \frac{e^{-\mu_i}\mu_i^k}{k!}\)</span>，其中<span class="arithmatex">\(\ln \mu_i = x_i'\beta\)</span>。因此<span class="arithmatex">\(P(Y_i=0) = \pi_i + (1-\pi_i)e^{-\mu_i}\)</span>，<span class="arithmatex">\(P(Y_i=k) = (1-\pi_i)\frac{e^{-\mu_i}\mu_i^k}{k!}\)</span>（<span class="arithmatex">\(k \geq 1\)</span>）。</p>
 <p><strong>操作要点</strong>：工具箱选"零膨胀泊松"，指定计数因变量、零膨胀模型的自变量和计数模型自变量。</p>
 <p><strong>结果关键</strong>：Vuong检验判断是否需要零膨胀；两部分各自的系数解读。</p>
 <p><strong>注意</strong>：先做ZIP vs Poisson的Vuong检验；如果不仅0多还过度离散，升级为零膨胀负二项（ZINB [Zero-Inflated Negative Binomial, 零膨胀负二项回归]）。</p>
@@ -2082,7 +2098,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：处理<strong>重复测量/聚类数据</strong>的回归——同一对象被反复测多次，观测不独立时用它。</p>
 <p><strong>美赛场景区</strong>：面板数据、纵向追踪数据、嵌套在群体内的重复观测。</p>
-<p><strong>核心原理</strong>：不指定完整的随机效应分布，只指定"工作相关矩阵"（如可交换、AR [Autoregressive, 自回归]-1），用准似然估计边际效应。</p>
+<p><strong>核心原理</strong>：不指定完整的随机效应分布，只指定"工作相关矩阵"<span class="arithmatex">\(R_i(\alpha)\)</span>（如可交换、AR [Autoregressive, 自回归]-1），通过求解估计方程<span class="arithmatex">\(\sum_{i=1}^{n} D_i' V_i^{-1}(y_i - \mu_i) = 0\)</span>得到系数估计，其中<span class="arithmatex">\(D_i = \partial \mu_i / \partial \beta\)</span>为均值对系数的导数阵，<span class="arithmatex">\(V_i = A_i^{1/2} R_i(\alpha) A_i^{1/2}\)</span>为工作协方差阵（<span class="arithmatex">\(A_i\)</span>为边缘方差对角阵）。用准似然估计边际效应。</p>
 <p><strong>操作要点</strong>：工具箱选"广义估计方程"，指定聚类ID、因变量分布族、链接函数和工作相关结构。</p>
 <p><strong>结果关键</strong>：群体平均边际效应系数；比较不同工作相关结构下结果的稳健性。</p>
 <p><strong>注意</strong>：它和HLM都处理重复测量——GEE估<strong>总体平均效应</strong>，HLM估个体层面的随机效应。</p>
@@ -2102,7 +2118,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：计数数据<strong>既0特别多、又过度离散</strong>时的终极版——ZIP的离散修正。</p>
 <p><strong>美赛场景区</strong>：大量0且方差远大于均值的计数（如慢病就诊次数、极端消费行为）。</p>
-<p><strong>核心原理</strong>：两部分混合——Logistic部分区分"本来不会发生"，负二项部分处理"发生了几次"，同时吸收过度离散。</p>
+<p><strong>核心原理</strong>：两部分混合——Logistic部分区分"本来不会发生"：<span class="arithmatex">\(\pi_i = \frac{e^{z_i'\gamma}}{1+e^{z_i'\gamma}}\)</span>，负二项部分处理"发生了几次"：<span class="arithmatex">\(P(Y_i = k | \text{count}) = \frac{\Gamma(k + \alpha^{-1})}{\Gamma(\alpha^{-1})\Gamma(k+1)} \left(\frac{\alpha^{-1}}{\alpha^{-1} + \mu_i}\right)^{\alpha^{-1}} \left(\frac{\mu_i}{\alpha^{-1} + \mu_i}\right)^k\)</span>，其中<span class="arithmatex">\(\ln \mu_i = x_i'\beta\)</span>，<span class="arithmatex">\(\alpha\)</span>为离散参数；同时吸收过度离散。</p>
 <p><strong>操作要点</strong>：工具箱选"零膨胀负二项"，分别指定零膨胀模型和计数模型的自变量。</p>
 <p><strong>结果关键</strong>：Vuong检验支持ZINB优于负二项；两部分系数；离散参数。</p>
 <p><strong>注意</strong>：模型复杂、参数多，需要较大样本。先用ZIP/ZINB/负二项三者比较（AIC最小）再定稿。</p>

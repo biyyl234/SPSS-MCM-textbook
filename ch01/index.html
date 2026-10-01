@@ -1466,10 +1466,11 @@
 <li><strong>分位数</strong>：前25%的人考了多少分？（四分位数）——这告诉你数据的分段情况</li>
 </ul>
 <p><strong>关键公式：</strong>
-- 均值：<span class="arithmatex">\(\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i\)</span>，就是所有数加起来除以个数
-- 标准差：<span class="arithmatex">\(s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2}\)</span>，衡量数据偏离均值的平均程度，越大说明数据越分散
-- 偏度（Skewness）：大于0表示右偏（长尾在右），小于0表示左偏，接近0表示对称
-- 峰度（Kurtosis）：大于3表示尖峰（数据集中在中间），小于3表示平峰</p>
+- 均值：<span class="arithmatex">\(\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i\)</span>，即所有观测值之和除以样本量<span class="arithmatex">\(n\)</span>，反映数据的算术平均水平
+- 方差：<span class="arithmatex">\(s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2\)</span>，衡量数据围绕均值的离散程度，分母<span class="arithmatex">\((n-1)\)</span>为自由度（样本方差无偏估计）
+- 标准差：<span class="arithmatex">\(s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2}\)</span>，是方差的平方根，与原始数据同量纲，越大说明数据越分散
+- 偏度：<span class="arithmatex">\(Skew = \frac{n}{(n-1)(n-2)}\sum_{i=1}^{n}\left(\frac{x_i-\bar{x}}{s}\right)^3\)</span>，大于0表示右偏（长尾在右），小于0表示左偏，接近0表示对称
+- 峰度：<span class="arithmatex">\(Kurt = \frac{n(n+1)}{(n-1)(n-2)(n-3)}\sum_{i=1}^{n}\left(\frac{x_i-\bar{x}}{s}\right)^4 - \frac{3(n-1)^2}{(n-2)(n-3)}\)</span>，SPSS输出的是超额峰度（已减3），大于0表示尖峰（数据集中在中间），小于0表示平峰</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
@@ -1536,6 +1537,11 @@
 <p><strong>两种常用检验：</strong>
 - <strong>Shapiro-Wilk检验</strong>：适合小样本（<span class="arithmatex">\(n \leq 5000\)</span>），检验功效更高
 - <strong>Kolmogorov-Smirnov检验（K-S检验）</strong>：适合大样本，对尾部差异更敏感</p>
+<p><strong>检验统计量：</strong>
+$<span class="arithmatex">\(W = \frac{\left(\sum_{i=1}^{n} a_i x_{(i)}\right)^2}{\sum_{i=1}^{n}(x_i-\bar{x})^2}\)</span>$</p>
+<p>Shapiro-Wilk统计量<span class="arithmatex">\(W\)</span>中，<span class="arithmatex">\(x_{(i)}\)</span>是排序后的第<span class="arithmatex">\(i\)</span>个观测值，<span class="arithmatex">\(a_i\)</span>是标准正态次序统计量的期望系数，<span class="arithmatex">\(W\)</span>越接近1说明数据越接近正态分布。</p>
+<div class="arithmatex">\[D = \max_{x}\left|F_n(x) - F_0(x)\right|\]</div>
+<p>K-S统计量<span class="arithmatex">\(D\)</span>中，<span class="arithmatex">\(F_n(x)\)</span>是经验累积分布函数，<span class="arithmatex">\(F_0(x)\)</span>是理论正态累积分布函数，<span class="arithmatex">\(D\)</span>衡量两者的最大垂直距离，<span class="arithmatex">\(D\)</span>越大越拒绝正态假设。</p>
 <p><strong>核心概念——p值</strong>：p值 <span class="arithmatex">\(&gt; 0.05\)</span> 表示"不能拒绝正态假设"，即认为数据正态；p值 <span class="arithmatex">\(\leq 0.05\)</span> 表示数据显著偏离正态。</p>
 <p><strong>辅助判断</strong>：除了检验，还要看<strong>偏度</strong>和<strong>峰度</strong>，以及<strong>Q-Q图</strong>（数据点是否大致在一条直线上）。三者结合判断最可靠。</p>
 </div>
@@ -1598,6 +1604,9 @@
 <p>频数分析的核心就是两个数：
 - <strong>频数（Frequency）</strong>：每个类别出现的次数
 - <strong>百分比（Percent）</strong>：每个类别占总数的比例</p>
+<p>数学上，第<span class="arithmatex">\(i\)</span>个类别的相对频率为：
+$<span class="arithmatex">\(f_i = \frac{n_i}{N}\)</span>$</p>
+<p>其中<span class="arithmatex">\(n_i\)</span>是该类别的观测频数，<span class="arithmatex">\(N\)</span>是总样本量。累计频率为前<span class="arithmatex">\(k\)</span>个类别频率之和：<span class="arithmatex">\(F_k = \sum_{i=1}^{k} f_i\)</span>，比如"前两个类别合计占75%"。</p>
 <p>还可以计算<strong>累计百分比</strong>，比如"前两个类别合计占75%"，帮助你快速了解主要类别。</p>
 <p>如果有分组变量（如不同性别的满意度分布），还可以做<strong>分组结构对比</strong>，看不同群体的选择是否有差异。</p>
 </div>
@@ -1647,6 +1656,11 @@
 1. <strong>结构层</strong>：有多少行、多少列？每列是什么类型（数值/分类/时间/标识）？
 1. <strong>质量层</strong>：缺失值有多少？有没有重复行？有没有常量列（所有值都一样）？有没有异常值？
 1. <strong>分布层</strong>：数值变量的均值、中位数、标准差；分类变量的各类别占比</p>
+<p><strong>关键诊断公式：</strong>
+$<span class="arithmatex">\(\text{缺失率}_j = \frac{\text{该列缺失值个数}}{\text{总行数}}\)</span>$</p>
+<p>缺失率超过阈值（如20%）的变量需要重点关注。异常值用IQR法判定：</p>
+<div class="arithmatex">\[\text{IQR} = Q_3 - Q_1, \quad \text{异常值边界} = Q_1 - 1.5\times IQR \;\text{或}\; Q_3 + 1.5\times IQR\]</div>
+<p>其中<span class="arithmatex">\(Q_1\)</span>是第25百分位数，<span class="arithmatex">\(Q_3\)</span>是第75百分位数，超出上下边界的值标记为异常。</p>
 <p>它会综合这些信息给出一个<strong>数据质量评分</strong>（0-100分），并标出最严重的问题，帮你决定清洗优先级。</p>
 </div>
 <div class="admonition tip">
@@ -1692,8 +1706,8 @@
 1. <strong>数据层</strong>：检查文件数量、记录数、变量数，核对多表合并关系
 1. <strong>字段层</strong>：逐列检查缺失率、类型解析、取值集中度、异常值</p>
 <p>异常值检测有两种常用方法：
-- <strong>IQR法</strong>：超过<span class="arithmatex">\(Q_3+1.5\times IQR\)</span>或低于<span class="arithmatex">\(Q_1-1.5\times IQR\)</span>的值（默认1.5倍）
-- <strong>Z分数法</strong>：Z分数绝对值超过阈值（通常为3）的值</p>
+- <strong>IQR法</strong>：超过<span class="arithmatex">\(Q_3+1.5\times IQR\)</span>或低于<span class="arithmatex">\(Q_1-1.5\times IQR\)</span>的值（默认1.5倍），其中<span class="arithmatex">\(IQR = Q_3 - Q_1\)</span>是四分位数间距
+- <strong>Z分数法</strong>：<span class="arithmatex">\(z = \frac{x - \mu}{\sigma}\)</span>，Z分数绝对值超过阈值（通常为3）的值标记为异常，其中<span class="arithmatex">\(\mu\)</span>为均值、<span class="arithmatex">\(\sigma\)</span>为标准差</p>
 <p>最终合成0-100的质量评分，划分优/良/中/差四个等级。</p>
 </div>
 <div class="admonition tip">
@@ -1738,6 +1752,9 @@
 <p>列联分析的核心是<strong>交叉表</strong>：行是一个变量的类别，列是另一个变量的类别，每个格子里是同时满足两个条件的样本数。</p>
 <p>然后用<strong>卡方独立性检验</strong>判断：如果两个变量无关，那么每个格子的"期望频数"应该是多少？实际频数和期望频数的差异越大，说明两个变量越可能相关。</p>
 <p><strong>卡方统计量</strong>：<span class="arithmatex">\(\chi^2 = \sum\frac{(O-E)^2}{E}\)</span>，其中O是观测频数，E是期望频数。<span class="arithmatex">\(\chi^2\)</span>越大，p值越小，越可能相关。</p>
+<p>期望频数<span class="arithmatex">\(E\)</span>的计算：
+$<span class="arithmatex">\(E_{ij} = \frac{R_i \times C_j}{N}\)</span>$</p>
+<p>其中<span class="arithmatex">\(R_i\)</span>是第<span class="arithmatex">\(i\)</span>行的合计数，<span class="arithmatex">\(C_j\)</span>是第<span class="arithmatex">\(j\)</span>列的合计数，<span class="arithmatex">\(N\)</span>是总样本量。Phi系数（适用于2×2列联表）为：<span class="arithmatex">\(\phi = \sqrt{\chi^2 / N}\)</span>。</p>
 <p><strong>效应量</strong>：Cramér's V衡量关联强度，0-1之间，越大关联越强（一般0.1以下弱，0.3中等，0.5以上强）。</p>
 </div>
 <div class="admonition tip">
@@ -1774,7 +1791,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：判断一个连续变量最符合哪种概率分布（正态、对数正态、指数、伽玛、威布尔等）。</p>
 <p><strong>美赛场景区</strong>：可靠性分析中判断设备寿命服从什么分布；金融数据中判断收益率分布。</p>
-<p><strong>核心原理</strong>：对多种候选分布分别做极大似然估计，用AIC [Akaike Information Criterion, 赤池信息准则]（赤池信息准则）比较拟合优度，AIC最小的分布最优。再用Anderson-Darling检验确认拟合效果。</p>
+<p><strong>核心原理</strong>：对多种候选分布分别做极大似然估计，用AIC [Akaike Information Criterion, 赤池信息准则]（赤池信息准则）比较拟合优度，AIC最小的分布最优。AIC的计算公式为<span class="arithmatex">\(AIC = 2k - 2\ln L\)</span>，其中<span class="arithmatex">\(k\)</span>是模型参数个数，<span class="arithmatex">\(L\)</span>是极大似然函数值；AIC同时惩罚参数过多和拟合不足。再用Anderson-Darling检验确认拟合效果。</p>
 <p><strong>操作要点</strong>：工具箱中选择"个体分布标识"，选分析变量，候选分布集选"常用六种"，显著性水平0.05。</p>
 <p><strong>结果关键</strong>：看AIC值最小的分布，以及Anderson-Darling检验的p值（<span class="arithmatex">\(&gt;0.05\)</span>表示拟合可接受）。</p>
 <p><strong>注意</strong>：这是比正态性检验更一般的方法——正态性检验只判断"是不是正态"，个体分布标识会在6种常见分布中帮你找最合适的。</p>
@@ -1784,7 +1801,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：判断计数数据（如每小时来电数、每天事故数）是否服从泊松分布。</p>
 <p><strong>美赛场景区</strong>：排队论问题中判断到达过程是否为泊松过程；运营优化中分析事件发生规律。</p>
-<p><strong>核心原理</strong>：泊松分布的核心特征是<strong>均值=方差</strong>。先用离差检验比较方差与均值，再用卡方拟合优度检验比较观测频数与泊松期望频数。</p>
+<p><strong>核心原理</strong>：泊松分布的核心特征是<strong>均值=方差</strong>。泊松分布的概率质量函数为<span class="arithmatex">\(P(X=k) = \frac{e^{-\lambda}\lambda^k}{k!}\)</span>，其中<span class="arithmatex">\(\lambda\)</span>为单位时间/空间内的平均发生次数，其均值和方差均为<span class="arithmatex">\(\lambda\)</span>。先用离差检验<span class="arithmatex">\(D = \frac{\text{样本方差}}{\text{样本均值}}\)</span>比较方差与均值（<span class="arithmatex">\(D\)</span>接近1则符合泊松），再用卡方拟合优度检验比较观测频数与泊松期望频数。</p>
 <p><strong>操作要点</strong>：选择"泊松分布检验"，检验方法选"离差检验+卡方拟合优度"，显著性水平0.05。</p>
 <p><strong>结果关键</strong>：离差统计量接近1且p值<span class="arithmatex">\(&gt;0.05\)</span>，卡方检验p值<span class="arithmatex">\(&gt;0.05\)</span>，则服从泊松分布。</p>
 <p><strong>注意</strong>：如果方差远大于均值（过度离散），应考虑负二项分布；如果方差远小于均值，考虑零膨胀模型。</p>
@@ -1794,7 +1811,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：按一个或多个分类变量分组，对数值指标计算汇总统计量（均值、总和、中位数等）。</p>
 <p><strong>美赛场景区</strong>：按地区/年份汇总经济指标；按实验组别计算因变量的均值和标准差。</p>
-<p><strong>核心原理</strong>：就是SQL [Structured Query Language, 结构化查询语言]中的GROUP BY操作——先按分组变量拆分数据，再对每组计算统计量。</p>
+<p><strong>核心原理</strong>：就是SQL [Structured Query Language, 结构化查询语言]中的GROUP BY操作——先按分组变量拆分数据，再对每组计算统计量。第<span class="arithmatex">\(g\)</span>组的均值为<span class="arithmatex">\(\bar{x}_g = \frac{1}{n_g}\sum_{i \in g} x_i\)</span>，其中<span class="arithmatex">\(n_g\)</span>为该组样本量；类似地可计算每组中位数、总和、标准差等。</p>
 <p><strong>操作要点</strong>：SPSS中通过 <strong>数据 → 分类汇总</strong> 或 <strong>分析 → 比较均值 → 均值</strong> 实现。选择分组变量和汇总指标，可选合计行和分组占比。</p>
 <p><strong>结果关键</strong>：输出分组汇总表，可直接用于论文中的描述性统计表。</p>
 <p><strong>注意</strong>：分类汇总只做描述，不做组间差异检验。要判断组间差异需用t检验或方差分析（第3章）。</p>

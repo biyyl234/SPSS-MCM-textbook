@@ -1453,8 +1453,12 @@
 <ul>
 <li><strong>分词</strong>：把"这个手机拍照很清晰"切成["这个","手机","拍照","很","清晰"]。中文没有空格，要用词典做最大匹配切分；英文按空格切、统一小写。</li>
 <li><strong>过滤停用词</strong>："的、了、很、the、a"这种到处都是、却没有信息量的词叫停用词，先删掉，否则榜单会被它们霸占。</li>
-<li><strong>计数与相对频率</strong>：统计每个词出现次数，并算<strong>相对频率</strong>（该词频次<span class="arithmatex">\(/\)</span>总词元数），以及<strong>累计覆盖率</strong>（前<span class="arithmatex">\(N\)</span>个高频词占了总词次的百分之多少）。</li>
+<li><strong>计数与相对频率</strong>：统计每个词出现次数，并算<strong>相对频率</strong>：</li>
 </ul>
+<div class="arithmatex">\[
+TF(t, d) = \frac{\text{count of term } t \text{ in document } d}{\text{total number of terms in document } d}
+\]</div>
+<p>以及<strong>累计覆盖率</strong>（前 <span class="arithmatex">\(N\)</span> 个高频词占了总词次的百分之多少）。</p>
 <p>生活类比：累计覆盖率就像盘点仓库——如果前10个词就覆盖了17%的内容，说明话题比较集中；如果要几百个词才覆盖一半，说明内容很分散。</p>
 <p><strong>分组比较注意</strong>：两组文本条数不同，不能直接比绝对次数，要比<strong>相对频率</strong>（组内占比），否则人多的那组什么词都"更多"。</p>
 </div>
@@ -1512,9 +1516,13 @@
 <p>词云图背后没有新算法，就是<strong>词频统计的图形化</strong>：</p>
 <ul>
 <li>先做分词、去停用词、计数（和词频统计完全一样的预处理）；</li>
-<li>按词频排序，词频越高字号越大、位置越居中；</li>
-<li>可自定义停用词（把"无意义但高频"的词手动加进黑名单）、设置最大词数与画布尺寸。</li>
+<li>按词频排序，字号与词频成正比：</li>
 </ul>
+<div class="arithmatex">\[
+\text{FontSize}(t) = \text{baseSize} + \alpha \cdot \frac{TF(t) - TF_{min}}{TF_{max} - TF_{min}}
+\]</div>
+<p>其中 <span class="arithmatex">\(TF(t)\)</span> 为词 <span class="arithmatex">\(t\)</span> 的词频，<span class="arithmatex">\(\alpha\)</span> 为字号缩放系数，词频越高字号越大、位置越居中。
+- 可自定义停用词（把"无意义但高频"的词手动加进黑名单）、设置最大词数与画布尺寸。</p>
 <p>生活类比：词云就像海报——字号大小就是声音大小，谁嗓门大谁就被放在中间。它帮你<strong>快速抓重点</strong>，但别指望从图上读出精确数字。</p>
 </div>
 <div class="admonition tip">
@@ -1566,7 +1574,13 @@
 <p>情感分析本质是一个<strong>有监督二分类问题</strong>：先有人工标注好的一批文本（正面/负面），机器学着自己判断。</p>
 <ul>
 <li><strong>文本向量化（TF-IDF）</strong>：把每段文字变成一串数字。中文不用分词，用<strong>字符级n-gram</strong>（char_wb）——相邻两三个字切成特征，比如"太差"、"好吃"，避免了中文分词的麻烦。</li>
-<li><strong>分类器</strong>：用<strong>逻辑回归</strong>（logistic），简单可解释。类别不均衡时开<strong>class weight=balanced</strong>自动加权。</li>
+<li><strong>分类器</strong>：用<strong>逻辑回归</strong>（logistic），简单可解释。类别不均衡时开<strong>class weight=balanced</strong>自动加权。逻辑回归的预测概率为：</li>
+</ul>
+<div class="arithmatex">\[
+P(+|x) = \sigma(w^T x + b) = \frac{1}{1 + e^{-(w^T x + b)}}
+\]</div>
+<p>其中 <span class="arithmatex">\(x\)</span> 为文本的TF-IDF特征向量，<span class="arithmatex">\(w\)</span> 为权重向量（系数），<span class="arithmatex">\(b\)</span> 为截距，<span class="arithmatex">\(\sigma(\cdot)\)</span> 为sigmoid函数。</p>
+<ul>
 <li><strong>为什么可解释</strong>：逻辑回归的系数告诉你哪些词是"正面信号"（系数大正）、哪些是"负面信号"（系数大负）。</li>
 <li><strong>怎么评估</strong>：把数据切成训练集/测试集（test size=0.2），训练集上做5折交叉验证估稳定性，测试集上看准确率、宏平均F1、AUC [Area Under the Curve, 曲线下面积]。</li>
 </ul>
@@ -1630,6 +1644,14 @@
 <li><strong>主题--词骰子</strong>：每个主题又是一堆词的概率分布。"价格主题"里最可能出现price、total、final；"物流主题"里最可能出现shipping、delivery、pack。</li>
 <li><strong>核心思想</strong>：反复<strong>共同出现</strong>的词会被归到同一个主题。算法就是来回调整这两个骰子，让"每个主题的词"和"每篇文档的主题混合"都最自洽。</li>
 </ul>
+<p>LDA的生成模型为：</p>
+<div class="arithmatex">\[
+\theta_d \sim \text{Dirichlet}(\alpha), \quad \phi_k \sim \text{Dirichlet}(\beta)
+\]</div>
+<div class="arithmatex">\[
+P(w|d) = \sum_{k=1}^{K} P(w|z=k) \cdot P(z=k|d) = \sum_{k=1}^{K} \phi_{kw} \cdot \theta_{dk}
+\]</div>
+<p>其中 <span class="arithmatex">\(\theta_d\)</span> 为文档 <span class="arithmatex">\(d\)</span> 的主题分布（服从Dirichlet先验 <span class="arithmatex">\(\alpha\)</span>），<span class="arithmatex">\(\phi_k\)</span> 为主题 <span class="arithmatex">\(k\)</span> 的词分布（服从Dirichlet先验 <span class="arithmatex">\(\beta\)</span>），<span class="arithmatex">\(K\)</span> 为主题数。</p>
 <p><strong>怎么定主题数<span class="arithmatex">\(K\)</span></strong>：不是拍脑袋。用<strong>困惑度（perplexity）</strong>扫描多个<span class="arithmatex">\(K\)</span>，选困惑度下降变平缓的位置，再结合<strong>主题可解释性</strong>人工判断——主题词读起来像不像一个有意义的话题。</p>
 <p>生活类比：LDA就像给一堆博客自动打标签。它不会预先告诉你标签是什么，而是自己发现"总被一起提到的词构成一类"，再让你给这些类起名字。</p>
 </div>
@@ -1677,7 +1699,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把"经常出现在同一篇文献里的关键词"连成一张网络图，看哪些词是研究热点核心、哪些词对总被搭配使用、整个领域分成几个主题簇。</p>
 <p><strong>美赛场景区</strong>：分析某领域文献/政策文件的关键词共现，识别研究热点结构与主题聚类，适合做领域综述、技术情报分析。</p>
-<p><strong>核心原理</strong>：以关键词为节点、两词在同一篇中共现的次数为连边权重，构建无向加权网络；计算度中心性（连边最多的核心词）、中介中心性（连接不同主题的"桥"），再做社区发现自动分成若干主题簇。</p>
+<p><strong>核心原理</strong>：以关键词为节点、两词在同一篇中共现的次数为连边权重，构建无向加权网络。共现矩阵定义为：</p>
+<div class="arithmatex">\[
+C_{ij} = \text{number of documents containing both term } i \text{ and term } j
+\]</div>
+<p>节点 <span class="arithmatex">\(i\)</span> 的度中心性为 <span class="arithmatex">\(DC_i = \sum_j C_{ij}\)</span>。再做社区发现自动分成若干主题簇。</p>
 <p><strong>操作要点</strong>：工具箱选"社会网络关系图（共词矩阵）"；指定关键词列；布局spring；权重用共现次数；中心性度量度中心性；开启社区检测。用分隔符[ ,;，；、/|
 s]+拆分多关键词。</p>
 <p><strong>结果关键</strong>：案例（150篇智能制造文献）30个高频词节点、230条连边、5个社区、网络密度0.529；"智能制造"是核心节点，"智能制造--数字化转型"共现最强（21篇同现）。节点越大越居中越核心，连边越粗共现越强。</p>
@@ -1688,7 +1714,11 @@ s]+拆分多关键词。</p>
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：在词频基础上加权——一个词在本文档出现越多、但在整个语料中出现越少，权重越高，从而揪出真正"代表这一类"的特色词。</p>
 <p><strong>美赛场景区</strong>：美赛C题分好组（如配送/质量/售后）后，找出每组<strong>独有</strong>的代表关键词，而不是各组都提到的通用词。</p>
-<p><strong>核心原理</strong>：TF（词频）<span class="arithmatex">\(=\)</span>词在本文档出现次数；IDF（逆文档频率）<span class="arithmatex">\(=\log\frac{文档总数}{含该词的文档数}\)</span>。TF-IDF<span class="arithmatex">\(=TF\times IDF\)</span>。像"的、是"处处都有，IDF接近0，权重被压下去；只在某组反复出现的词，IDF高、权重突出。常用l2归一化。</p>
+<p><strong>核心原理</strong>：TF-IDF由词频和逆文档频率相乘构成：</p>
+<div class="arithmatex">\[
+TFIDF(t, d) = TF(t, d) \times IDF(t), \quad IDF(t) = \log\frac{N}{DF(t) + 1}
+\]</div>
+<p>其中 <span class="arithmatex">\(TF(t,d)\)</span> 为词 <span class="arithmatex">\(t\)</span> 在文档 <span class="arithmatex">\(d\)</span> 中的词频，<span class="arithmatex">\(N\)</span> 为文档总数，<span class="arithmatex">\(DF(t)\)</span> 为包含词 <span class="arithmatex">\(t\)</span> 的文档数。像"的、是"处处都有，IDF接近0，权重被压下去；只在某组反复出现的词，IDF高、权重突出。常用l2归一化。</p>
 <p><strong>操作要点</strong>：工具箱选"TF-IDF分析"；norm选l2；ngram range(1,1)；设min_df/max_df过滤；按分组质心提取各组代表词。</p>
 <p><strong>结果关键</strong>：案例中商品质量组突出"手感、紧密"，售后服务组突出"售后、客服、问题"，配送服务组突出"快递、配送、包装"——三组关注点被关键词清晰区分。</p>
 <p><strong>注意</strong>：TF-IDF是文本向量化的标准武器，也是情感分析、文本聚类、LDA之前的常用特征步骤。它找的是"区分性"，不是"重要性"。</p>
@@ -1698,7 +1728,11 @@ s]+拆分多关键词。</p>
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：不预设任何类别标签，把"诉求相似"的文本自动归成几堆，适合客服留言这种口语化、长短不一、没人预先分类的数据。</p>
 <p><strong>美赛场景区</strong>：C题中对售后留言、投诉文本做自动分诊，归纳出几类典型问题及占比，供人工复核。</p>
-<p><strong>核心原理</strong>：先用TF-IDF字符n-gram把文本转成数值矩阵，再跑K-Means；从<span class="arithmatex">\(k=2\)</span>到上限逐个试，以<strong>轮廓系数</strong>最高（同分取小<span class="arithmatex">\(k\)</span>）选簇数；最后用每簇质心的高权重词命名主题，用轮廓系数、CH指数、簇内余弦相似度评估质量。</p>
+<p><strong>核心原理</strong>：先用TF-IDF字符n-gram把文本转成数值矩阵，再跑K-Means。K-Means以余弦相似度（或欧氏距离）为相似度度量：</p>
+<div class="arithmatex">\[
+\cos(x_i, x_j) = \frac{x_i \cdot x_j}{\|x_i\| \|x_j\|}
+\]</div>
+<p>从 <span class="arithmatex">\(k=2\)</span> 到上限逐个试，以<strong>轮廓系数</strong> <span class="arithmatex">\(s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}\)</span> 最高（同分取小 <span class="arithmatex">\(k\)</span>）选簇数；最后用每簇质心的高权重词命名主题，用轮廓系数、CH指数、簇内余弦相似度评估质量。</p>
 <p><strong>操作要点</strong>：工具箱选"文本聚类分析"；指定文本列；vectorizer选tfidf，分析器char_wb，ngram 2+1；k设auto让其自动选；固定随机种子。</p>
 <p><strong>结果关键</strong>：案例（生鲜售后留言）聚成4簇，轮廓系数0.107（文本聚类普遍偏低，0.1左右即基本可分）。用每簇高频词人工概括主题（如"配送压坏""售后回复"等）。</p>
 <p><strong>注意</strong>：文本聚类轮廓系数天然偏低，别拿数值变量聚类的高标准来要求。聚类后<strong>必须人工读每簇代表词来命名</strong>，机器只负责分堆，主题含义要人来解释。</p>
@@ -1708,7 +1742,11 @@ s]+拆分多关键词。</p>
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：不依赖任何词典，直接从海量文本里自动找出"大家新造出来、词典里还没有"的词，比如"半固态电池""零重力座椅"。</p>
 <p><strong>美赛场景区</strong>：分析新兴领域（新能源、AI、网络热词）时，业务词库更新跟不上，用它自动挖掘候选新词补充词表。</p>
-<p><strong>核心原理</strong>：三重证据筛选——(1)<strong>凝固度（PMI [Pointwise Mutual Information, 点互信息]互信息）</strong>：字之间结合得紧不紧，切一刀算最小PMI；(2)<strong>自由度（左右熵）</strong>：这个词能不能出现在不同语境（左右邻居越多样越能独立成词）；(3)<strong>词频</strong>。三者都过阈值才入选，按综合得分排序。</p>
+<p><strong>核心原理</strong>：三重证据筛选——(1)<strong>凝固度（PMI [Pointwise Mutual Information, 点互信息]互信息）</strong>：字之间结合得紧不紧：</p>
+<div class="arithmatex">\[
+PMI(x, y) = \log\frac{P(x, y)}{P(x)P(y)}
+\]</div>
+<p>PMI越大说明两字结合越紧密。(2)<strong>自由度（左右熵）</strong>：这个词能不能出现在不同语境（左右邻居越多样越能独立成词）；(3)<strong>词频</strong>。三者都过阈值才入选，按综合得分排序。</p>
 <p><strong>操作要点</strong>：工具箱选"新词发现"；候选字串长度2<span class="arithmatex">\(\sim\)</span>6；设最小词频、最小PMI、最小左右熵；去重、去纯数字、去非中文。</p>
 <p><strong>结果关键</strong>：案例（车主评论）挖出36个候选新词，头部如"半固态电池、零重力座椅、能量回收、城市领航、哨兵模式"，复用强度与成词证据最充分，可交人工确认后入词库。</p>
 <p><strong>注意</strong>：这是辅助工具，输出只是<strong>候选清单</strong>，必须人工复核再入库，机器可能把高频搭配误判成词。它解决的是"分词词典太旧"的问题。</p>

@@ -1520,6 +1520,11 @@
 <li>叠加累计百分比折线：从第一个柱子开始累加</li>
 <li>在累计80%处画一条线——线左边的就是"A类关键原因"</li>
 </ul>
+<p>累计频率的计算公式为：</p>
+<div class="arithmatex">\[
+F_i = \sum_{j=1}^{i} f_j
+\]</div>
+<p>其中 <span class="arithmatex">\(f_j\)</span> 为第 <span class="arithmatex">\(j\)</span> 类原因的损失金额（或发生次数），<span class="arithmatex">\(F_i\)</span> 为前 <span class="arithmatex">\(i\)</span> 类原因的累计值；累计百分比为 <span class="arithmatex">\(F_i / \sum_j f_j \times 100\%\)</span>。80/20法则即累计百分比首次达到约80%所对应的类别数远少于总类别数。</p>
 <p>这就像医生看病：不是所有症状都要治，先看哪个病最严重、最花钱，集中力量先治它。</p>
 <p><strong>ABC [Activity-Based Costing, 作业成本法]分级</strong>：累计0--80%为A类（关键少数，优先改进），80--95%为B类（次要），95--100%为C类（一般）。</p>
 </div>
@@ -1574,7 +1579,16 @@
 <li><strong>Xbar图（均值图）</strong>：每组算一个均值，打点在图上。如果均值突然偏移，说明过程中心漂移了（如刀具磨损、原料换批）</li>
 <li><strong>R图（极差图）</strong>：每组内最大值减最小值，反映组内波动。如果R变大，说明过程波动加剧了（如设备松动）</li>
 </ul>
-<p>控制限不是规格限，而是根据<strong>过程自身波动</strong>算出来的：中心线CL [Center Line, 中心线]=均值均值，UCL [Upper Control Limit, 上控制限]=<span class="arithmatex">\(\bar{\bar{X}}+A_2\bar{R}\)</span>，LCL [Lower Control Limit, 下控制限]=<span class="arithmatex">\(\bar{\bar{X}}-A_2\bar{R}\)</span>。点在限内随机散布=受控；有点超限或连续同侧=失控信号。</p>
+<p>控制限不是规格限，而是根据<strong>过程自身波动</strong>算出来的：</p>
+<p>Xbar图中心线与控制限为：</p>
+<div class="arithmatex">\[
+CL = \bar{\bar{X}}, \quad UCL = \bar{\bar{X}} + A_2 \bar{R}, \quad LCL = \bar{\bar{X}} - A_2 \bar{R}
+\]</div>
+<p>R图中心线与控制限为：</p>
+<div class="arithmatex">\[
+CL = \bar{R}, \quad UCL = D_4 \bar{R}, \quad LCL = D_3 \bar{R}
+\]</div>
+<p>其中 <span class="arithmatex">\(\bar{\bar{X}}\)</span> 为所有子组均值的总平均，<span class="arithmatex">\(\bar{R}\)</span> 为所有子组极差的平均，<span class="arithmatex">\(A_2, D_3, D_4\)</span> 为随子组大小 <span class="arithmatex">\(n\)</span> 查表得到的控制图常数。点在限内随机散布=受控；有点超限或连续同侧=失控信号。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1626,10 +1640,14 @@
 <p class="admonition-title">通俗原理</p>
 <p>既然每组只有一个值，怎么估计波动？用<strong>相邻两个值的差</strong>（移动极差MR）：</p>
 <ul>
-<li><strong>I图（Individual）</strong>：把每个测量值直接打点，中心线=均值，控制限<span class="arithmatex">\(\bar{x}\pm E_2\bar{MR}\)</span></li>
+<li><strong>I图（Individual）</strong>：把每个测量值直接打点，中心线=均值</li>
 <li><strong>MR图（Moving Range）</strong>：<span class="arithmatex">\(MR_i = |x_i - x_{i-1}|\)</span>，相邻两点差值。MR图监控短期波动是否突然变大</li>
 </ul>
-<p><span class="arithmatex">\(E_2\)</span>是常数（span=2时约2.66）。就像虽然不知道"组内方差"，但用"今天和昨天的差别"来估计日常波动幅度。</p>
+<p>I图控制限为：</p>
+<div class="arithmatex">\[
+CL = \bar{X}, \quad UCL = \bar{X} + 2.66\,\overline{MR}, \quad LCL = \bar{X} - 2.66\,\overline{MR}
+\]</div>
+<p>其中 <span class="arithmatex">\(\overline{MR} = \frac{1}{n-1}\sum_{i=2}^{n} |x_i - x_{i-1}|\)</span> 为平均移动极差，常数2.66对应移动极差跨度为2时的 <span class="arithmatex">\(E_2\)</span> 值。就像虽然不知道"组内方差"，但用"今天和昨天的差别"来估计日常波动幅度。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1673,10 +1691,18 @@
 <p class="admonition-title">通俗原理</p>
 <p>想象一条传送带不断产出瓶子，有的装多了有的装少了。规格要求490--510g，目标500g。</p>
 <ul>
-<li><strong>Cp（过程潜力）</strong>：规格宽度 <span class="arithmatex">\(\div\)</span> 过程波动宽度 = <span class="arithmatex">\((USL-LSL)/(6\sigma_w)\)</span>。只看"波动够不够小"，不管中心对不对</li>
-<li><strong>Cpk（过程能力）</strong>：min(<span class="arithmatex">\(CPU [Capability Upper Limit, 上限过程能力], CPL [Capability Lower Limit, 下限过程能力]\)</span>)，其中 <span class="arithmatex">\(CPU=(USL-\mu)/(3\sigma_w)\)</span>，<span class="arithmatex">\(CPL=(\mu-LSL)/(3\sigma_w)\)</span>。同时考虑波动大小<strong>和</strong>中心是否对齐</li>
-<li><strong>Pp/Ppk</strong>：用长期总标准差<span class="arithmatex">\(\sigma_o\)</span>计算，反映实际表现（含组间漂移）</li>
+<li><strong>Cp（过程潜力）</strong>：规格宽度除以过程波动宽度。只看"波动够不够小"，不管中心对不对</li>
+<li><strong>Cpk（过程能力）</strong>：同时考虑波动大小<strong>和</strong>中心是否对齐</li>
+<li><strong>Pp/Ppk</strong>：用长期总标准差计算，反映实际表现（含组间漂移）</li>
 </ul>
+<p>过程能力指数的核心公式为：</p>
+<div class="arithmatex">\[
+C_p = \frac{USL - LSL}{6\sigma_{within}}, \quad C_{pk} = \min\left(\frac{USL - \mu}{3\sigma_{within}},\ \frac{\mu - LSL}{3\sigma_{within}}\right)
+\]</div>
+<div class="arithmatex">\[
+P_p = \frac{USL - LSL}{6\sigma_{overall}}, \quad P_{pk} = \min\left(\frac{USL - \mu}{3\sigma_{overall}},\ \frac{\mu - LSL}{3\sigma_{overall}}\right)
+\]</div>
+<p>其中 <span class="arithmatex">\(USL, LSL\)</span> 为规格上下限，<span class="arithmatex">\(\mu\)</span> 为过程均值，<span class="arithmatex">\(\sigma_{within}\)</span> 为组内短期标准差（由控制图估计），<span class="arithmatex">\(\sigma_{overall}\)</span> 为整体长期标准差。</p>
 <p><strong>判断标准</strong>：
 - <span class="arithmatex">\(Cpk \geq 1.33\)</span>：能力充分，放心生产
 - <span class="arithmatex">\(1.0 \leq Cpk &lt; 1.33\)</span>：能力尚可，需监控
@@ -1723,7 +1749,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：已知标准均值和标准差时用的单值-移动极差控制图，适合单件小批量生产。</p>
 <p><strong>美赛场景区</strong>：精密阀芯逐件加工的外径监控，无法按子组凑数据。</p>
-<p><strong>核心原理</strong>：与I-MR类似，但中心线直接用给定的标准值mu0而非样本均值，<span class="arithmatex">\(\sigma\)</span>也用已知标准值。MR图监控相邻件波动。</p>
+<p><strong>核心原理</strong>：与I-MR类似，但中心线直接用给定的标准值 <span class="arithmatex">\(\mu_0\)</span> 而非样本均值，<span class="arithmatex">\(\sigma\)</span> 也用已知标准值 <span class="arithmatex">\(\sigma_0\)</span>。MR图监控相邻件波动。X图控制限为：</p>
+<div class="arithmatex">\[
+CL = \mu_0, \quad UCL = \mu_0 + 3\sigma_0, \quad LCL = \mu_0 - 3\sigma_0
+\]</div>
+<p>MR图控制限为 <span class="arithmatex">\(CL = 1.128\,\sigma_0\)</span>，<span class="arithmatex">\(UCL = 3.267\,\sigma_0\)</span>。其中 <span class="arithmatex">\(\sigma_0\)</span> 为已知的过程标准差。</p>
 <p><strong>操作要点</strong>：指定mu和sigma，MR步长2，Nelson规则1（单点超限即判异）。</p>
 <p><strong>结果关键</strong>：X图超限2点、MR图超限2点→过程存在特殊原因需调查。</p>
 <p><strong>注意</strong>：Z-MR与I-MR的区别在于中心线用标准值还是样本估计值。</p>
@@ -1733,7 +1763,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：判断设备寿命服从什么分布（威布尔/指数/对数正态），估计平均寿命和B10可靠寿命。</p>
 <p><strong>美赛场景区</strong>：水泵、电容器等设备的预防性更换周期决策；可靠性工程。</p>
-<p><strong>核心原理</strong>：对威布尔、指数、正态、对数正态四种分布分别做极大似然估计，用AIC [Akaike Information Criterion, 赤池信息准则]选最优。威布尔形状参数<span class="arithmatex">\(\beta&gt;1\)</span>=磨损失效，<span class="arithmatex">\(\beta\approx1\)</span>=随机失效，<span class="arithmatex">\(\beta&lt;1\)</span>=早期失效。B10寿命=90%产品仍未失效的时间。</p>
+<p><strong>核心原理</strong>：对威布尔、指数、正态、对数正态四种分布分别做极大似然估计，用AIC [Akaike Information Criterion, 赤池信息准则]选最优。以指数分布为例，可靠度函数与失效率为：</p>
+<div class="arithmatex">\[
+R(t) = e^{-\lambda t}, \quad \lambda(t) = \frac{f(t)}{R(t)} = \lambda, \quad MTBF = \frac{1}{\lambda}
+\]</div>
+<p>其中 <span class="arithmatex">\(R(t)\)</span> 为 <span class="arithmatex">\(t\)</span> 时刻仍正常工作的概率，<span class="arithmatex">\(f(t)\)</span> 为失效密度函数，<span class="arithmatex">\(\lambda\)</span> 为常数失效率。威布尔形状参数 <span class="arithmatex">\(\beta&gt;1\)</span>=磨损失效，<span class="arithmatex">\(\beta\approx1\)</span>=随机失效，<span class="arithmatex">\(\beta&lt;1\)</span>=早期失效。B10寿命=90%产品仍未失效的时间。</p>
 <p><strong>操作要点</strong>：候选分布auto自动选择，删失事件值设1，Bootstrap重复999次，评估分位数0.50。</p>
 <p><strong>结果关键</strong>：最优分布威布尔，<span class="arithmatex">\(\beta=2.59\)</span>（磨损期），B10=4721小时，MTTF [Mean Time To Failure, 平均失效时间]=10005小时。</p>
 <p><strong>注意</strong>：数据含右删失（还没坏的设备）时不能直接算均值，必须用生存分析方法。</p>
@@ -1743,7 +1777,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：监控<strong>不等样本量</strong>下的单位缺陷率——每批抽检数量不同，但要看每单位缺陷数是否稳定。</p>
 <p><strong>美赛场景区</strong>：汽车漆面缺陷监控（每天抽检台数不同）。</p>
-<p><strong>核心原理</strong>：缺陷数服从泊松分布，<span class="arithmatex">\(u_i=c_i/n_i\)</span>为第i批单位缺陷数。控制限随<span class="arithmatex">\(n_i\)</span>变化（<span class="arithmatex">\(UCL=\bar{u}+3\sqrt{\bar{u}/n_i}\)</span>），所以是阶梯状的。</p>
+<p><strong>核心原理</strong>：缺陷数服从泊松分布，<span class="arithmatex">\(u_i = c_i/n_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 批单位缺陷数。控制限随 <span class="arithmatex">\(n_i\)</span> 变化，所以是阶梯状的：</p>
+<div class="arithmatex">\[
+CL = \bar{u}, \quad UCL = \bar{u} + 3\sqrt{\bar{u}/n_i}, \quad LCL = \bar{u} - 3\sqrt{\bar{u}/n_i}
+\]</div>
+<p>其中 <span class="arithmatex">\(\bar{u} = \sum c_i / \sum n_i\)</span> 为平均单位缺陷数，<span class="arithmatex">\(n_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 批检验单位数，<span class="arithmatex">\(c_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 批缺陷总数。</p>
 <p><strong>操作要点</strong>：缺陷数列、检验单位数列、分组列指定；3<span class="arithmatex">\(\sigma\)</span>控制限；过离散时启用Laney修正。</p>
 <p><strong>结果关键</strong>：中心线<span class="arithmatex">\(\bar{u}\)</span>=0.66（剔除失控后），7个子组失控，过程未受控。</p>
 <p><strong>注意</strong>：U图用于等单位数不固定的计数数据；样本量固定时用C图。</p>
@@ -1753,7 +1791,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：评估多名检验员对同一样本的判定是否一致（如零件合格/返修/报废的目视检验）。</p>
 <p><strong>美赛场景区</strong>：质量检验系统的可靠性评估，判断检验员之间、检验员与标准之间是否一致。</p>
-<p><strong>核心原理</strong>：用一致率和Kappa系数衡量。Kappa扣除了"碰巧一致"的部分：<span class="arithmatex">\(Kappa=(P_o-P_e)/(1-P_e)\)</span>。<span class="arithmatex">\(Kappa&gt;0.75\)</span>良好，<span class="arithmatex">\(0.4\)</span>--<span class="arithmatex">\(0.75\)</span>中等，<span class="arithmatex">\(&lt;0.4\)</span>差。</p>
+<p><strong>核心原理</strong>：用一致率和Kappa系数衡量。Kappa扣除了"碰巧一致"的部分：</p>
+<div class="arithmatex">\[
+\kappa = \frac{P_o - P_e}{1 - P_e}
+\]</div>
+<p>其中 <span class="arithmatex">\(P_o\)</span> 为观测一致率（评价人实际一致的样本比例），<span class="arithmatex">\(P_e\)</span> 为期望偶然一致率（由边际概率乘积计算）。<span class="arithmatex">\(\kappa&gt;0.75\)</span> 良好，<span class="arithmatex">\(0.4\)</span>--<span class="arithmatex">\(0.75\)</span> 中等，<span class="arithmatex">\(&lt;0.4\)</span> 差。</p>
 <p><strong>操作要点</strong>：指定样本列、评价人列、判定列、标准列；Bootstrap 1000次算置信区间。</p>
 <p><strong>结果关键</strong>：总体一致率90%，Kappa=0.74（良好）；评价人丙一致率仅76%需培训。</p>
 <p><strong>注意</strong>：Kappa为0说明一致率和随机猜差不多；Kappa=1说明完全一致。</p>
@@ -1763,7 +1805,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：监控<strong>固定检查单元</strong>上的缺陷总数——每块电路板的焊接缺陷数是否稳定。</p>
 <p><strong>美赛场景区</strong>：SMT [Surface Mount Technology, 表面贴装技术]贴片车间AOI [Automated Optical Inspection, 自动光学检测]检测的缺陷数监控。</p>
-<p><strong>核心原理</strong>：缺陷数服从泊松分布，中心线<span class="arithmatex">\(\bar{c}\)</span>，控制限<span class="arithmatex">\(\bar{c}\pm3\sqrt{\bar{c}}\)</span>。样本量固定时用C图，不固定用U图。</p>
+<p><strong>核心原理</strong>：缺陷数服从泊松分布，样本量固定时用C图，不固定用U图。C图控制限为：</p>
+<div class="arithmatex">\[
+CL = \bar{c}, \quad UCL = \bar{c} + 3\sqrt{\bar{c}}, \quad LCL = \bar{c} - 3\sqrt{\bar{c}}
+\]</div>
+<p>其中 <span class="arithmatex">\(\bar{c} = \frac{1}{m}\sum_{i=1}^{m} c_i\)</span> 为 <span class="arithmatex">\(m\)</span> 个检查单元的平均缺陷数。</p>
 <p><strong>操作要点</strong>：指定缺陷数列，3<span class="arithmatex">\(\sigma\)</span>控制限，游程检验判随机性。</p>
 <p><strong>结果关键</strong>：中心线<span class="arithmatex">\(\bar{c}=4.35\)</span>，UCL=10.6，第118块板缺陷15个超限→失控。</p>
 <p><strong>注意</strong>：C图和U图的区别——C图要求每个检查单元大小相同。</p>
@@ -1773,7 +1819,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：在高温/高压等加速条件下做寿命试验，外推正常使用条件下的产品寿命。</p>
 <p><strong>美赛场景区</strong>：电容器、LED [Light Emitting Diode, 发光二极管]等长寿命产品的可靠性评估——常温下要几十年才坏，等不起。</p>
-<p><strong>核心原理</strong>：用威布尔分布描述寿命，用阿伦尼斯模型描述温度对寿命的加速效应（温度越高寿命越短）。在几个高温水平做试验，拟合模型后外推到常温。</p>
+<p><strong>核心原理</strong>：用威布尔分布描述寿命，用阿伦尼斯模型描述温度对寿命的加速效应（温度越高寿命越短）。阿伦尼斯加速模型为：</p>
+<div class="arithmatex">\[
+L(T) = A \cdot e^{E_a / (k_B T)}
+\]</div>
+<p>其中 <span class="arithmatex">\(L(T)\)</span> 为温度 <span class="arithmatex">\(T\)</span>（绝对温度，K）下的特征寿命，<span class="arithmatex">\(E_a\)</span> 为激活能，<span class="arithmatex">\(k_B\)</span> 为玻尔兹曼常数，<span class="arithmatex">\(A\)</span> 为常数。在几个高温水平做试验，拟合模型后外推到常温。</p>
 <p><strong>操作要点</strong>：分布weibull，加速模型arrhenius，应力单位℃，目标B10寿命。</p>
 <p><strong>结果关键</strong>：40℃下B10寿命约28560小时；125℃比40℃加速349倍。</p>
 <p><strong>注意</strong>：外推距离越远越不可靠——正常温度离试验温度越远，置信区间越宽。</p>
@@ -1783,7 +1833,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：评估测量系统本身准不准——同一人反复测同一零件的波动（重复性）和不同人测同一件的差异（再现性）。</p>
 <p><strong>美赛场景区</strong>：新购量具投入使用前的验证；六西格玛DMAIC [Define, Measure, Analyze, Improve, Control, 定义、测量、分析、改进、控制]的Measure阶段。</p>
-<p><strong>核心原理</strong>：总波动=零件间真实差异+测量系统波动（GRR [Gauge Repeatability and Reproducibility, 量具重复性与再现性]）。用ANOVA [Analysis of Variance, 方差分析]分解方差，%GRR&lt;10%优秀，10--30%有条件接受，&gt;30%不可用。ndc（可区分类别数）<span class="arithmatex">\(\geq\)</span>5才算合格。</p>
+<p><strong>核心原理</strong>：总波动=零件间真实差异+测量系统波动（GRR [Gauge Repeatability and Reproducibility, 量具重复性与再现性]）。用ANOVA [Analysis of Variance, 方差分析]分解方差，核心指标为：</p>
+<div class="arithmatex">\[
+\%GRR = \frac{\sigma_{GRR}}{\sigma_{total}} \times 100\%, \quad ndc = \frac{1.41 \times PV}{GRR}
+\]</div>
+<p>其中 <span class="arithmatex">\(\sigma_{GRR} = \sqrt{\sigma_{repeatability}^2 + \sigma_{reproducibility}^2}\)</span> 为测量系统波动标准差，<span class="arithmatex">\(\sigma_{total}\)</span> 为总波动标准差，<span class="arithmatex">\(PV\)</span> 为零件间波动，<span class="arithmatex">\(ndc\)</span> 为可区分类别数。<span class="arithmatex">\(\%GRR&lt;10\%\)</span> 优秀，10--30%有条件接受，<span class="arithmatex">\(&gt;30\%\)</span> 不可用；<span class="arithmatex">\(ndc \geq 5\)</span> 才算合格。</p>
 <p><strong>操作要点</strong>：3个检验员、10个零件、每人每件测5次；完整交叉ANOVA；研究变差倍数6。</p>
 <p><strong>结果关键</strong>：%GRR=14.32%（有条件接受），ndc=9（可区分），零件间占97.95%。</p>
 <p><strong>注意</strong>：如果零件间差异太小（抽样范围窄），%GRR会被放大失真，应扩大抽样范围。</p>
@@ -1793,7 +1847,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：检查量具读数是否整体偏高/偏低（偏倚），以及偏差是否随量程变化（线性）。</p>
 <p><strong>美赛场景区</strong>：推拉力计、卡尺等量具的校准验证。</p>
-<p><strong>核心原理</strong>：在量程内选多个标准件，重复测量。每个水平做t检验看平均偏倚是否为0；再对偏倚vs参考值做线性回归，看斜率是否显著。%线性<span class="arithmatex">\(&lt;\)</span>10%良好。</p>
+<p><strong>核心原理</strong>：在量程内选多个标准件，重复测量。每个水平做t检验看平均偏倚是否为0；再对偏倚vs参考值做线性回归，看斜率是否显著。偏倚与线性的定义为：</p>
+<div class="arithmatex">\[
+Bias_i = \bar{x}_i - x_{i,ref}, \quad \%Linearity = \frac{|Slope| \times Process\,Variation}{Process\,Variation} \times 100\%
+\]</div>
+<p>其中 <span class="arithmatex">\(Bias_i\)</span> 为第 <span class="arithmatex">\(i\)</span> 个标准件的平均偏倚（测量均值减参考值），<span class="arithmatex">\(Slope\)</span> 为偏倚对参考值回归的斜率。%线性 <span class="arithmatex">\(&lt;10\%\)</span> 良好。</p>
 <p><strong>操作要点</strong>：参考值列、测量值列指定；每水平重复多次；<span class="arithmatex">\(\alpha=0.05\)</span>。</p>
 <p><strong>结果关键</strong>：偏倚随参考值线性上升（%线性≈11.2%），有条件接受，建议校准。</p>
 <p><strong>注意</strong>：偏倚是常数偏移（截距），线性是偏差随量程变化（斜率）。</p>
@@ -1803,7 +1861,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：Xbar-R的升级版——用子组标准差S代替极差R估计波动，子组较大（<span class="arithmatex">\(n&gt;10\)</span>）时更准确。</p>
 <p><strong>美赛场景区</strong>：饮料灌装净含量监控，子组大小3--7不等。</p>
-<p><strong>核心原理</strong>：与Xbar-R类似，但用<span class="arithmatex">\(c_4\)</span>常数从子组标准差估计<span class="arithmatex">\(\sigma\)</span>，控制限随子组大小逐组计算。</p>
+<p><strong>核心原理</strong>：与Xbar-R类似，但用 <span class="arithmatex">\(c_4\)</span> 常数从子组标准差估计 <span class="arithmatex">\(\sigma\)</span>，控制限随子组大小逐组计算。Xbar-S控制限为：</p>
+<div class="arithmatex">\[
+CL = \bar{\bar{X}}, \quad UCL = \bar{\bar{X}} + A_3 \bar{S}, \quad LCL = \bar{\bar{X}} - A_3 \bar{S}
+\]</div>
+<p>S图控制限为 <span class="arithmatex">\(UCL = B_4 \bar{S}\)</span>，<span class="arithmatex">\(LCL = B_3 \bar{S}\)</span>。其中 <span class="arithmatex">\(\bar{S}\)</span> 为各子组标准差的平均，<span class="arithmatex">\(A_3, B_3, B_4\)</span> 为随子组大小 <span class="arithmatex">\(n\)</span> 查表得到的控制图常数，<span class="arithmatex">\(\hat{\sigma} = \bar{S}/c_4\)</span>。</p>
 <p><strong>操作要点</strong>：子组容量3--7，合并估计<span class="arithmatex">\(\sigma\)</span>，判异规则=超限+连续7点同侧。</p>
 <p><strong>结果关键</strong>：Xbar图失控（2个超限+9个游程），S图受控→均值偏移问题。</p>
 <p><strong>注意</strong>：子组小（<span class="arithmatex">\(n&lt;10\)</span>）用R图即可，子组大用S图更精确。</p>
@@ -1813,7 +1875,11 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：估计"未来95%的产品测量值落在什么范围内"——比均值<span class="arithmatex">\(\pm\)</span>标准差更严格的区间。</p>
 <p><strong>美赛场景区</strong>：注塑件孔径和翘曲量的正常波动范围估计。</p>
-<p><strong>核心原理</strong>：置信区间估计的是"均值在哪"，公差区间估计的是"<strong>未来个体值</strong>覆盖范围"。正态时用<span class="arithmatex">\(\bar{x}\pm k\cdot s\)</span>（k比z大），非正态时用顺序统计量的非参数法。</p>
+<p><strong>核心原理</strong>：置信区间估计的是"均值在哪"，公差区间估计的是"<strong>未来个体值</strong>覆盖范围"。正态时公差区间为：</p>
+<div class="arithmatex">\[
+\bar{x} \pm k \cdot s
+\]</div>
+<p>其中 <span class="arithmatex">\(\bar{x}\)</span> 为样本均值，<span class="arithmatex">\(s\)</span> 为样本标准差，<span class="arithmatex">\(k\)</span> 为公差区间因子（比 <span class="arithmatex">\(z\)</span> 大，同时考虑均值估计和个体波动的不确定性），覆盖比例通常取95%、置信水平95%。非正态时用顺序统计量的非参数法。</p>
 <p><strong>操作要点</strong>：覆盖比例95%，置信水平95%，双侧；正态性auto判断。</p>
 <p><strong>结果关键</strong>：孔径正态法区间[9.94, 10.09]mm；翘曲量非正态区间[0.018, 0.364]mm。</p>
 <p><strong>注意</strong>：公差区间比预测区间更宽——它要覆盖"未来大量个体"而非"单个预测"。</p>

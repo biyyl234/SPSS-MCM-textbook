@@ -1670,6 +1670,7 @@
 <p>想象你要画一条直线穿过一堆散点，让所有点到直线的<strong>垂直距离平方之和最小</strong>——这就是OLS。</p>
 <ul>
 <li>模型写作 <span class="arithmatex">\(y=\beta_0+\beta_1 x_1+\beta_2 x_2+\cdots+\varepsilon\)</span>，其中 <span class="arithmatex">\(y\)</span> 是因变量（月均销售额），<span class="arithmatex">\(x_1\)</span> 是核心解释变量（数字化营销投入），<span class="arithmatex">\(x_2,\ldots\)</span> 是控制变量（门店面积、营业年限、商圈客流、是否核心商圈），<span class="arithmatex">\(\varepsilon\)</span> 是误差。</li>
+<li>OLS通过最小化残差平方和估计系数：<span class="arithmatex">\(\min_{\beta}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2=\min_{\beta}\sum_{i=1}^{n}e_i^2\)</span>，其中 <span class="arithmatex">\(e_i=y_i-\hat{y}_i\)</span> 为残差，<span class="arithmatex">\(\hat{y}_i=\hat{\beta}_0+\hat{\beta}_1x_{i1}+\cdots\)</span> 为拟合值。</li>
 <li><strong>核心看 <span class="arithmatex">\(\beta_1\)</span></strong>：本案例为3.357，意思是在控制其他变量后，数字化营销投入每增加1个单位，月均销售额平均增加3.357个单位。</li>
 <li><strong>为什么要加控制变量</strong>：如果只看营销投入和销售额，可能是"面积大的门店既投得多又卖得多"。加入面积等控制变量后，才能把这种混杂因素剥离，看到营销投入的"净效应"。</li>
 </ul>
@@ -1728,6 +1729,11 @@
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
 <p>想象一个醉汉走路：他每一步的方向完全随机，走着走着就漂走了，没有回到出发点的趋势——这就是带单位根的<strong>不平稳序列</strong>，比如"醉汉漫步"。而一个挂在弹簧下的重物，无论怎么扰动都会回到平衡位置——这是<strong>平稳序列</strong>。</p>
+<ul>
+<li><strong>ADF回归式</strong>：在含常数（可选趋势）下检验</li>
+</ul>
+<div class="arithmatex">\[\Delta y_t=\alpha+\beta t+\gamma y_{t-1}+\sum_{i=1}^{p}\delta_i\Delta y_{t-i}+\varepsilon_t\]</div>
+<p>其中 <span class="arithmatex">\(\Delta y_t=y_t-y_{t-1}\)</span> 为一阶差分，<span class="arithmatex">\(p\)</span> 为滞后差分项阶数。检验原假设 <span class="arithmatex">\(H_0:\gamma=0\)</span>（即存在单位根、序列不平稳）；若 <span class="arithmatex">\(\hat{\gamma}\)</span> 显著为负且统计量小于临界值则拒绝 <span class="arithmatex">\(H_0\)</span>，序列平稳。</p>
 <ul>
 <li><strong>原假设 <span class="arithmatex">\(H_0\)</span></strong>：序列存在单位根（不平稳）。我们希望拒绝它。</li>
 <li><strong>判断逻辑</strong>：把ADF统计量和临界值比较，或直接看 <span class="arithmatex">\(p\)</span> 值。<span class="arithmatex">\(p&lt;0.05\)</span> 拒绝原假设，即序列平稳；<span class="arithmatex">\(p\geq0.05\)</span> 不能拒绝，即不平稳。</li>
@@ -1791,6 +1797,9 @@
 <li><strong>第二个差</strong>：对照组同期后减前——它只反映"随时间自然增长"。</li>
 <li><strong>双重差分</strong>：把第一个差减去第二个差，自然趋势被抵消，剩下的就是政策的净效应（平均处理效应ATT [Average Treatment effect on the Treated, 处理组平均处理效应]）。</li>
 </ul>
+<p>DID估计方程写作：</p>
+<div class="arithmatex">\[Y_{it}=\beta_0+\beta_1 Treat_i+\beta_2 Post_t+\beta_3(Treat_i\times Post_t)+\varepsilon_{it}\]</div>
+<p>其中 <span class="arithmatex">\(Treat_i=1\)</span> 为处理组、<span class="arithmatex">\(Post_t=1\)</span> 为政策后时期；核心系数 <span class="arithmatex">\(\beta_3\)</span> 即政策的因果效应（ATT），它度量了剔除共同时间趋势后处理组的额外变化。</p>
 <p><strong>核心前提——平行趋势</strong>：政策实施前，处理组和对照组的结果走势必须大致平行。本案例用事件研究联合F检验验证这一点；前提成立，结论才可信。估计用双向固定效应回归，标准误在个体层面聚类。本案例政策使处理组销售额平均提高162.827（<span class="arithmatex">\(p&lt;0.001\)</span>）。</p>
 </div>
 <div class="admonition tip">
@@ -1851,6 +1860,9 @@
 <li><strong>个体固定效应（FE [Fixed Effects, 固定效应]）</strong>：给每家门店一个"截距项"，吸收掉所有不随时间变的个体特征（区位、铺面）。这样比较的是"同一家门店自身变化"。</li>
 <li><strong>随机效应（RE [Random Effects, 随机效应]）</strong>：把个体差异当作随机扰动，更省参数但要求个体与解释变量不相关。</li>
 </ul>
+<p>面板模型一般形式写作：</p>
+<div class="arithmatex">\[y_{it}=\alpha+\beta X_{it}+\mu_i+\lambda_t+\varepsilon_{it}\]</div>
+<p>其中 <span class="arithmatex">\(i\)</span> 为个体、<span class="arithmatex">\(t\)</span> 为时期，<span class="arithmatex">\(\mu_i\)</span> 为个体固定效应（吸收不随时间变的个体特征），<span class="arithmatex">\(\lambda_t\)</span> 为时间固定效应（吸收共同年度冲击），<span class="arithmatex">\(\varepsilon_{it}\)</span> 为随机扰动；<span class="arithmatex">\(\beta\)</span> 即为各经营投入对销售额的净效应。</p>
 <p><strong>怎么选</strong>：用F检验、BP [Breusch-Pagan, 布罗施-帕甘检验]-LM [Lagrange Multiplier, 拉格朗日乘子检验]检验和Hausman检验按 <span class="arithmatex">\(\alpha=0.05\)</span> 自动判定。本案例检验结果支持<strong>个体固定效应</strong>。结果：客流强度每+1单位，年销售额平均+4.769（<span class="arithmatex">\(p&lt;0.001\)</span>）；员工人数+1单位，+25.866；促销投入+1单位，+3.224（<span class="arithmatex">\(p=0.019\)</span>）。</p>
 </div>
 <div class="admonition tip">
@@ -1905,6 +1917,11 @@
 <ul>
 <li><strong>ACF（自相关函数）</strong>：直接算 <span class="arithmatex">\(y_t\)</span> 与 <span class="arithmatex">\(y_{t-k}\)</span> 的相关系数。它把"中间各期的间接影响"也算进去了。</li>
 <li><strong>PACF（偏自相关函数）</strong>：在剔除了中间各期影响后，单独看 <span class="arithmatex">\(y_t\)</span> 与 <span class="arithmatex">\(y_{t-k}\)</span> 的直接相关——像"控制其他变量后的净相关"。</li>
+</ul>
+<p>滞后 <span class="arithmatex">\(k\)</span> 阶的自相关系数定义为：</p>
+<div class="arithmatex">\[\rho_k=\frac{\gamma_k}{\gamma_0},\qquad \gamma_k=\frac{1}{T}\sum_{t=1}^{T-k}(y_t-\bar{y})(y_{t+k}-\bar{y})\]</div>
+<p>其中 <span class="arithmatex">\(\gamma_k\)</span> 为滞后 <span class="arithmatex">\(k\)</span> 阶自协方差，<span class="arithmatex">\(\gamma_0=\text{Var}(y_t)\)</span> 为方差，<span class="arithmatex">\(\bar{y}\)</span> 为样本均值，<span class="arithmatex">\(T\)</span> 为序列长度；<span class="arithmatex">\(\rho_k\in[-1,1]\)</span>，绝对值越大相关性越强。PACF 则是在给定中间滞后 <span class="arithmatex">\(y_{t-1},\ldots,y_{t-k+1}\)</span> 条件下 <span class="arithmatex">\(y_t\)</span> 与 <span class="arithmatex">\(y_{t-k}\)</span> 的条件相关系数。</p>
+<ul>
 <li><strong>看形状定阶</strong>：PACF在 <span class="arithmatex">\(p\)</span> 阶后<strong>截断</strong>（立刻落入置信带）、ACF<strong>拖尾</strong>，提示用AR(<span class="arithmatex">\(p\)</span>)；反之ACF截断、PACF拖尾提示用MA(<span class="arithmatex">\(q\)</span>)；两者都拖尾则用ARMA。</li>
 </ul>
 <p>本案例150个日销售额序列：ACF拖尾、PACF在2阶后截断，且ADF判定 <span class="arithmatex">\(d=0\)</span>，故建议以 <strong>AR(2)</strong>（即ARIMA(2,0,0)）为候选。超出蓝色置信带的柱子才算显著相关。</p>
@@ -1964,6 +1981,7 @@
 <li><strong>非受限模型</strong>：再加上A的历史一起预测B。</li>
 <li><strong>F检验比较</strong>：如果加入A的历史后预测误差显著下降（<span class="arithmatex">\(\Delta R^2\)</span> 显著增大），就说A是B的格兰杰原因。</li>
 </ul>
+<p>形式上比较两个嵌套模型：受限模型 <span class="arithmatex">\(y_t=\alpha_0+\sum_{i=1}^{p}\alpha_i y_{t-i}+u_t\)</span>（只用 <span class="arithmatex">\(y\)</span> 自身历史）；非受限模型再加入 <span class="arithmatex">\(x\)</span> 的滞后 <span class="arithmatex">\(y_t=\alpha_0+\sum_{i=1}^{p}\alpha_i y_{t-i}+\sum_{i=1}^{p}\beta_i x_{t-i}+u_t\)</span>。用 <span class="arithmatex">\(F=\frac{(RSS_R-RSS_U)/p}{RSS_U/(T-2p-1)}\)</span> 检验联合原假设 <span class="arithmatex">\(H_0:\beta_1=\cdots=\beta_p=0\)</span>（即 <span class="arithmatex">\(x\)</span> 不是 <span class="arithmatex">\(y\)</span> 的格兰杰原因），<span class="arithmatex">\(F\)</span> 显著则拒绝。</p>
 <p>本案例：加入广告点击量(ads_clicks)的历史后，对成交额(sales_amount)的预测显著改善（<span class="arithmatex">\(p=3.3\times10^{-25}\)</span>），即<strong>点击量是成交额的格兰杰原因</strong>——可据点击数据提前安排营销与备货。同时反向检验（成交额→点击量），并控制行业景气指数避免误判。注意：必须先ADF确认序列平稳，滞后阶数按AIC选择。</p>
 </div>
 <div class="admonition tip">
@@ -2005,7 +2023,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：检验核心解释变量的效应是否因群体（如不同区域）而异，回答"该不该一刀切推广"。</p>
 <p><strong>美赛场景区</strong>：政策/措施在不同地区、人群、门店间效果是否一致，指导差异化投放。</p>
-<p><strong>核心原理</strong>：先分组子样本回归看各组系数，再用"组哑元 <span class="arithmatex">\(\times\)</span> 核心解释变量"交互项做Wald F检验，判断组间系数差异是否整体显著，辅以Chow检验交叉验证。本案例交互项Wald <span class="arithmatex">\(F=9.402\)</span>（<span class="arithmatex">\(p=10^{-5}\)</span>），"华东"组效应最大（<span class="arithmatex">\(\beta=4.290\)</span>）。</p>
+<p><strong>核心原理</strong>：先分组子样本回归看各组系数，再加入"组哑元 <span class="arithmatex">\(\times\)</span> 核心解释变量"交互项</p>
+<div class="arithmatex">\[y=\beta_0+\beta_1 x+\sum_{g}\delta_g D_g+\sum_{g}\theta_g(D_g\times x)+\varepsilon\]</div>
+<p>用Wald <span class="arithmatex">\(F\)</span> 检验联合原假设 <span class="arithmatex">\(H_0:\theta_g=0\)</span>（各组系数无差异），拒绝即存在显著组间异质性，辅以Chow检验交叉验证。本案例交互项Wald <span class="arithmatex">\(F=9.402\)</span>（<span class="arithmatex">\(p=10^{-5}\)</span>），"华东"组效应最大（<span class="arithmatex">\(\beta=4.290\)</span>）。</p>
 <p><strong>操作要点</strong>：工具箱选"异质性检验"，指定结果变量、核心解释变量、分组变量，标准误HC1，参考组自动。</p>
 <p><strong>结果关键</strong>：交互项联合F检验 <span class="arithmatex">\(p&lt;0.05\)</span> 即存在显著组间异质性；再看哪组系数最大。</p>
 <p><strong>注意</strong>：组内样本不能太小（否则系数不稳）；异质性检验显著后要进一步分组回归定位差异来源。</p>
@@ -2015,7 +2035,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：解决"处理组和对照组本来就不可比"的问题——给每个处理对象找一个各方面特征几乎一样的对照对象，再比较结果。</p>
 <p><strong>美赛场景区</strong>：评估培训、干预等非随机政策对工资/绩效的效果，消除自选择偏差。</p>
-<p><strong>核心原理</strong>：先用Logit模型估计每个对象接受处理的倾向得分，再按得分做最近邻匹配，用标准化均值差（SMD [Standardized Mean Difference, 标准化均值差]）检验匹配后协变量是否平衡，最后在平衡样本上估计ATT。本案例匹配后最大<span class="arithmatex">\(|SMD|=0.071\)</span>（已平衡），ATT=742.7（95%CI [Confidence Interval, 置信区间] [463,1110]，<span class="arithmatex">\(p&lt;0.001\)</span>）。</p>
+<p><strong>核心原理</strong>：先用Logit模型估计每个对象接受处理的倾向得分</p>
+<div class="arithmatex">\[e(x)=P(D=1|X=x)=\Lambda(\beta_0+\beta_1 x_1+\cdots)=\frac{1}{1+e^{-(\beta_0+\beta_1 x_1+\cdots)}}\]</div>
+<p>其中 <span class="arithmatex">\(\Lambda(\cdot)\)</span> 为logistic函数、<span class="arithmatex">\(D\in\{0,1\}\)</span> 为处理虚拟变量。再按得分做最近邻匹配，用标准化均值差 <span class="arithmatex">\(SMD=(\bar{x}_{treat}-\bar{x}_{control})/s_{pooled}\)</span> 检验匹配后协变量是否平衡，最后在平衡样本上估计ATT。本案例匹配后最大<span class="arithmatex">\(|SMD|=0.071\)</span>（已平衡），ATT=742.7（95%CI [Confidence Interval, 置信区间] [463,1110]，<span class="arithmatex">\(p&lt;0.001\)</span>）。</p>
 <p><strong>操作要点</strong>：工具箱选"PSM"，指定处理列、结果列、协变量，方法最近邻匹配，estimand=ATT，bootstrap给置信区间。</p>
 <p><strong>结果关键</strong>：匹配后所有协变量<span class="arithmatex">\(|SMD|&lt;0.1\)</span>才算平衡；ATT显著为正。</p>
 <p><strong>注意</strong>：PSM只能平衡"可观测"特征，无法纠正不可观测混杂；若选不到共同支撑域内的对照，匹配失效。SPSS原生不支持，通过R/Python扩展实现。</p>
@@ -2025,7 +2047,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把总体收入差异分解成"组内差异、组间净差距、组间分布交叠"三部分，回答差异到底来自哪。</p>
 <p><strong>美赛场景区</strong>：区域协调发展评估中，衡量居民收入差异并定位主导来源。</p>
-<p><strong>核心原理</strong>：先算总体基尼系数，再沿三条路径分解——各组内部差异、各组均值水平差（组间净贡献）、组间分布交叠（超变密度），三者之和等于总体基尼。本案例总体基尼0.2051，组间净差距贡献率最高（71.06%），差异主要体现为各组平均水平分层。</p>
+<p><strong>核心原理</strong>：先算总体基尼系数</p>
+<div class="arithmatex">\[G=\frac{1}{2n^2\bar{y}}\sum_{i=1}^{n}\sum_{j=1}^{n}|y_i-y_j|\]</div>
+<p>再沿三条路径分解为 <span class="arithmatex">\(G=G_w+G_{nb}+G_t\)</span>——其中 <span class="arithmatex">\(G_w\)</span> 为组内差异、<span class="arithmatex">\(G_{nb}\)</span> 为组间净差距（均值水平差）、<span class="arithmatex">\(G_t\)</span> 为组间分布交叠（超变密度），三者之和等于总体基尼，各项除以 <span class="arithmatex">\(G\)</span> 得贡献率。本案例总体基尼0.2051，组间净差距贡献率最高（71.06%），差异主要体现为各组平均水平分层。</p>
 <p><strong>操作要点</strong>：工具箱选"Dagum基尼系数"，指定分组列、数值列，组均值降序排列，Bootstrap 200次给95%置信区间。</p>
 <p><strong>结果关键</strong>：看三类贡献率谁最大——组间净差距主导说明是"分层"，组内主导说明是"组内分化"。</p>
 <p><strong>注意</strong>：需要足够的组内样本量；它是普通基尼系数的升级，能告诉你差异的结构来源。</p>
@@ -2035,7 +2059,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：在面板模型里加入"上一期结果"作为解释变量，捕捉经济行为的惯性，并解决由此带来的内生性。</p>
 <p><strong>美赛场景区</strong>：销售额等指标存在跨期延续时，估计滞后效应与解释变量的短期净效应。</p>
-<p><strong>核心原理</strong>：滞后因变量与个体固定效应相关，OLS/固定效应都有偏。采用一阶差分GMM：先差分消去个体效应，再用滞后两期及更早的水平值作内部工具变量。本案例滞后因变量系数0.544（强惯性），traffic、promo短期效应均显著；AR(2)与Hansen过度识别检验支持工具设定。</p>
+<p><strong>核心原理</strong>：动态面板模型写作 <span class="arithmatex">\(y_{it}=\alpha y_{i,t-1}+\beta X_{it}+\mu_i+\varepsilon_{it}\)</span>，滞后因变量 <span class="arithmatex">\(y_{i,t-1}\)</span> 与个体效应 <span class="arithmatex">\(\mu_i\)</span> 相关致OLS/FE有偏。采用一阶差分GMM：先差分 <span class="arithmatex">\(\Delta y_{it}=\alpha\Delta y_{i,t-1}+\beta\Delta X_{it}+\Delta\varepsilon_{it}\)</span> 消去 <span class="arithmatex">\(\mu_i\)</span>，再以矩条件 <span class="arithmatex">\(E[y_{i,t-s}\Delta\varepsilon_{it}]=0\)</span>（<span class="arithmatex">\(s\geq2\)</span>，即滞后两期及更早的水平值）作内部工具变量。本案例滞后因变量系数0.544（强惯性），traffic、promo短期效应均显著；AR(2)与Hansen过度识别检验支持工具设定。</p>
 <p><strong>操作要点</strong>：工具箱选"动态面板"，指定个体列、时间列、因变量、解释变量，估计方法two-step，缺失值strict。</p>
 <p><strong>结果关键</strong>：AR(2)检验<span class="arithmatex">\(p&gt;0.05\)</span>（无二阶序列相关）、Hansen J检验<span class="arithmatex">\(p&gt;0.1\)</span>（工具外生）才可采信。</p>
 <p><strong>注意</strong>：这是高级计量方法，SPSS原生不支持，需通过R扩展（panelvar/pdm）或Dabbit AI工具箱实现；工具不能过多（工具数应少于个体数）。</p>
@@ -2045,7 +2069,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把实际产出与"理论最优产出前沿"的差距拆成"运气等随机波动"和"真实技术无效率"两部分，测算每个主体的效率。</p>
 <p><strong>美赛场景区</strong>：评估企业/合作社/医院的生产效率，识别低效主体作为帮扶对象。</p>
-<p><strong>核心原理</strong>：把误差写成随机噪声 <span class="arithmatex">\(v\)</span>（正态）减技术无效率 <span class="arithmatex">\(u\)</span>（半正态、非负），用极大似然估计前沿函数与两方差；<span class="arithmatex">\(\gamma\)</span> 衡量无效率占总误差的比重，LR [Likelihood Ratio, 似然比]检验无效率是否显著。本案例平均技术效率约0.899，<span class="arithmatex">\(\gamma=0.855\)</span>，无效率显著。</p>
+<p><strong>核心原理</strong>：随机前沿生产函数写作 <span class="arithmatex">\(y_{it}=f(x_{it};\beta)+v_{it}-u_{it}\)</span>，其中误差项拆为随机噪声 <span class="arithmatex">\(v_{it}\sim N(0,\sigma_v^2)\)</span>（对称正态）与技术无效率 <span class="arithmatex">\(u_{it}\geq0\)</span>（半正态/截断正态，非负）；技术效率 <span class="arithmatex">\(TE_{it}=\exp(-u_{it})\)</span>，<span class="arithmatex">\(TE\in(0,1]\)</span>。参数 <span class="arithmatex">\(\gamma=\sigma_u^2/(\sigma_u^2+\sigma_v^2)\)</span> 衡量无效率占总误差方差的比重，用极大似然估计并以LR [Likelihood Ratio, 似然比]检验无效率是否显著。本案例平均技术效率约0.899，<span class="arithmatex">\(\gamma=0.855\)</span>，无效率显著。</p>
 <p><strong>操作要点</strong>：工具箱选"随机前沿分析"，指定产出、投入、主体编号、年份，函数形式log-log，优化器L-BFGS [Broyden-Fletcher-Goldfarb-Shanno, 拟牛顿优化算法]-B多起点。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(\gamma\)</span> 接近1说明差距主要来自真实效率损失；报告各主体技术效率并排序找低效者。</p>
 <p><strong>注意</strong>：需面板或截面数据且投入产出方向一致；与DEA [Data Envelopment Analysis, 数据包络分析]的区别是SFA区分了随机噪声、对异常值稳健。</p>
@@ -2055,7 +2079,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当解释变量对结果的影响跨过某个"临界值"后发生结构性突变时，用门槛回归自动找到这个临界值并分段回归。</p>
 <p><strong>美赛场景区</strong>：如客流量超过某阈值后，营销投入的销售拉动效应才显著增强。</p>
-<p><strong>核心原理</strong>：以门槛变量的实测值为候选网格逐点拟合分区模型，用残差平方和最小定位门槛值；再用自助法supF检验判断"无门槛/一个门槛/多个门槛"。本案例客流量门槛49.73（自助<span class="arithmatex">\(p=0.003\)</span>），跨过它后促销系数由0.28跃升到1.89。</p>
+<p><strong>核心原理</strong>：单门槛模型写作</p>
+<div class="arithmatex">\[y_{it}=\beta_1'x_{it}\,I(q_{it}\leq\gamma)+\beta_2'x_{it}\,I(q_{it}&gt;\gamma)+\varepsilon_{it}\]</div>
+<p>其中 <span class="arithmatex">\(q_{it}\)</span> 为门槛变量、<span class="arithmatex">\(\gamma\)</span> 为待估门槛值、<span class="arithmatex">\(I(\cdot)\)</span> 为示性函数（条件成立取1否则0）。以门槛变量实测值为候选网格逐点拟合，最小化残差平方和 <span class="arithmatex">\(\hat{\gamma}=\arg\min_{\gamma}SSR(\gamma)\)</span> 定位门槛值；再用自助法supF检验判断"无门槛/一个门槛/多个门槛"。本案例客流量门槛49.73（自助<span class="arithmatex">\(p=0.003\)</span>），跨过它后促销系数由0.28跃升到1.89。</p>
 <p><strong>操作要点</strong>：工具箱选"门槛回归"，指定结果变量、门槛变量、协变量，自助法300次，残差重抽。</p>
 <p><strong>结果关键</strong>：门槛自助<span class="arithmatex">\(p&lt;0.05\)</span>确认存在门槛；报告门槛值置信区间与两侧系数差异。</p>
 <p><strong>注意</strong>：门槛两侧都要有足够样本；本质是分段线性，适合"阈值效应"类问题，SPSS原生不支持，需R/Python扩展。</p>
@@ -2065,7 +2091,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：从信息熵角度量化组间/组内差异，并能把总差异分解为组间贡献和组内贡献。</p>
 <p><strong>美赛场景区</strong>：评估各城区个体经营收入的均衡性，判断帮扶应侧重低水平城区还是城区内分化。</p>
-<p><strong>核心原理</strong>：泰尔T指数GE(1)，越大越不平等；存在分组时分解为组间差异与组内差异并算贡献率。本案例总泰尔指数0.2066（95%CI [0.166,0.248]），组间贡献59.8%、组内40.2%。</p>
+<p><strong>核心原理</strong>：泰尔T指数（GE(1)）定义为</p>
+<div class="arithmatex">\[T=\frac{1}{n}\sum_{i=1}^{n}\frac{y_i}{\bar{y}}\ln\frac{y_i}{\bar{y}}\]</div>
+<p>其中 <span class="arithmatex">\(y_i\)</span> 为个体收入、<span class="arithmatex">\(\bar{y}\)</span> 为均值，<span class="arithmatex">\(T\geq0\)</span>，越大越不平等。存在分组时可分解为 <span class="arithmatex">\(T=T_{between}+T_{within}\)</span>（组间差异+组内差异），各项占 <span class="arithmatex">\(T\)</span> 之比为贡献率。本案例总泰尔指数0.2066（95%CI [0.166,0.248]），组间贡献59.8%、组内40.2%。</p>
 <p><strong>操作要点</strong>：工具箱选"泰尔指数"，指定分组列、指标列，默认GE(1)，剔除非正值，自助1000次给置信区间。</p>
 <p><strong>结果关键</strong>：看组间/组内贡献率谁大——组间大说明是"区域水平差距"，组内大说明是"区域内分化"。</p>
 <p><strong>注意</strong>：指标必须为正；它与基尼系数同属不平等度量，但泰尔的可分解性更好。</p>
@@ -2075,7 +2103,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：一种不要求数据正态、对异常值稳健的非参数趋势检验，判断序列是否显著上升/下降，并估计趋势斜率。</p>
 <p><strong>美赛场景区</strong>：水文水质、气象、环境监测序列的长期趋势诊断，如各断面COD [Coefficient of Determination, 决定系数]是否显著下降。</p>
-<p><strong>核心原理</strong>：计算秩序列的Mann-Kendall统计量S与p值判断趋势显著性，再用Sen斜率估计趋势幅度；序列有自相关或周期时用方差修正/TFPW [Trend-Free Pre-Whitening, 无趋势预白化]预白化。本案例3条断面序列中2条检出显著下降趋势。</p>
+<p><strong>核心原理</strong>：M-K统计量定义为 <span class="arithmatex">\(S=\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}\text{sgn}(x_j-x_i)\)</span>，其中 <span class="arithmatex">\(\text{sgn}(\cdot)\)</span> 为符号函数（<span class="arithmatex">\(x_j&gt;x_i\)</span> 取+1，相等取0，否则取-1）；在无趋势原假设下 <span class="arithmatex">\(S\)</span> 近似正态，据此算 <span class="arithmatex">\(p\)</span> 值判断趋势显著性。趋势幅度用Sen斜率 <span class="arithmatex">\(\hat{\beta}=\text{median}\left(\frac{x_j-x_i}{j-i}\right),\ \forall j&gt;i\)</span> 估计；序列有自相关或周期时用方差修正/TFPW [Trend-Free Pre-Whitening, 无趋势预白化]预白化。本案例3条断面序列中2条检出显著下降趋势。</p>
 <p><strong>操作要点</strong>：工具箱选"Mann-Kendall趋势检验"，分组列站点、双侧检验<span class="arithmatex">\(\alpha=0.05\)</span>，自相关自动诊断、连续性修正。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(p&lt;0.05\)</span> 且Sen斜率为负/正对应下降/上升趋势；报告斜率及其95%置信区间。</p>
 <p><strong>注意</strong>：适用于偏态、有异常值的环境时间序列；它只判断单调趋势，不拟合具体曲线。</p>
@@ -2085,7 +2113,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把时间信号从"时域"变换到"频域"，看能量集中在哪些频率、主周期是多少。</p>
 <p><strong>美赛场景区</strong>：设备振动故障诊断、周期信号识别，判断能量是否集中在转子工频及其倍频。</p>
-<p><strong>核心原理</strong>：用Welch平均法估计功率谱密度（hann窗），以背景中位功率为基准检测显著谱峰，峰值频率换算成周期（周期=1/频率）。本案例约8Hz主频占主导（主周期约0.125秒），该频段功率占总功率81.5%。</p>
+<p><strong>核心原理</strong>：用Welch平均法估计功率谱密度 <span class="arithmatex">\(P(f)=\frac{1}{K}\sum_{k=1}^{K}|X_k(f)|^2\)</span>（分段加hann窗再平均），以背景中位功率为基准检测显著谱峰；峰值频率 <span class="arithmatex">\(f_0\)</span> 换算成周期 <span class="arithmatex">\(T_0=1/f_0\)</span>，某频段功率占总功率之比为能量占比。本案例约8Hz主频占主导（主周期约0.125秒），该频段功率占总功率81.5%。</p>
 <p><strong>操作要点</strong>：工具箱选"频谱分析"，指定时间列与信号列，Welch法，窗hann，重叠50%，峰突出度阈值3倍背景。</p>
 <p><strong>结果关键</strong>：主峰频率与周期、各峰能量占比；主峰能量占比越高周期性越强。</p>
 <p><strong>注意</strong>：要求等间隔采样；它回答"周期成分多强"，与ACF/PACF的时域视角互补。</p>
@@ -2095,7 +2123,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当同一批对象同时有多个相关的结果方程时，把它们联合估计，利用方程间的误差相关提高效率。</p>
 <p><strong>美赛场景区</strong>：同时估计促销对销售额、促销对成交笔数两个方程，且两误差可能同期相关。</p>
-<p><strong>核心原理</strong>：先逐方程OLS得残差，估计跨方程误差协方差矩阵，再用可行广义最小二乘（FGLS [Feasible Generalized Least Squares, 可行广义最小二乘法]）堆叠联合求解；用Breusch-Pagan LM检验跨方程误差是否相关，相关才有联合估计的必要。本案例促销支出对销售额系数0.706（<span class="arithmatex">\(p&lt;0.001\)</span>）。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(M\)</span> 个方程堆叠写作 <span class="arithmatex">\(\mathbf{y}=\mathbf{X}\boldsymbol{\beta}+\mathbf{u}\)</span>，且跨方程误差同期相关 <span class="arithmatex">\(E[u_{im}u_{in}]=\sigma_{mn}\)</span>。先逐方程OLS得残差 <span class="arithmatex">\(\hat{u}_{im}\)</span>，估计跨方程误差协方差阵 <span class="arithmatex">\(\hat{\Sigma}\)</span>，再用可行广义最小二乘 <span class="arithmatex">\(\hat{\beta}_{SUR}=(\mathbf{X}'(\hat{\Sigma}^{-1}\otimes I)\mathbf{X})^{-1}\mathbf{X}'(\hat{\Sigma}^{-1}\otimes I)\mathbf{y}\)</span> 堆叠联合求解（FGLS [Feasible Generalized Least Squares, 可行广义最小二乘法]）；用Breusch-Pagan LM检验跨方程误差是否相关，相关才有联合估计的必要。本案例促销支出对销售额系数0.706（<span class="arithmatex">\(p&lt;0.001\)</span>）。</p>
 <p><strong>操作要点</strong>：工具箱选"似不相关回归"，逐方程设定因变量与自变量，FGLS两步，VIF阈值10。</p>
 <p><strong>结果关键</strong>：BP-LM检验<span class="arithmatex">\(p&lt;0.05\)</span>说明跨方程误差相关、SUR有效；报告各方程系数。</p>
 <p><strong>注意</strong>：若跨方程误差不相关，SUR与逐方程OLS几乎无差别；SPSS无原生菜单，需R扩展。</p>
@@ -2105,7 +2133,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：在确认两序列协整后，量化短期偏离长期均衡后会以多快速度被"拉回"。</p>
 <p><strong>美赛场景区</strong>：如集装箱吞吐量与外贸规模的长期均衡关系、短期回调速度。</p>
-<p><strong>核心原理</strong>：先确认变量同为I(1)且协整，再以长期回归残差的滞后项作误差修正项，连同解释变量差分项一起回归；误差修正系数为负，表示偏离后向均衡回调。本案例短期偏离每期回调约31%，约2.23期回调一半。</p>
+<p><strong>核心原理</strong>：先确认变量同为I(1)且协整，再把长期回归残差 <span class="arithmatex">\(\hat{e}_{t-1}=y_{t-1}-\hat{\beta}_0-\hat{\beta}_1 x_{t-1}\)</span> 滞后作误差修正项，ECM方程写作：</p>
+<div class="arithmatex">\[\Delta y_t=\alpha+\lambda\,\hat{e}_{t-1}+\sum_i\gamma_i\Delta x_{t-i}+\varepsilon_t\]</div>
+<p>其中误差修正系数 <span class="arithmatex">\(\lambda&lt;0\)</span> 表示短期偏离长期均衡后被拉回，<span class="arithmatex">\(|\lambda|\)</span> 越大回调越快（半衰期约 <span class="arithmatex">\(\ln 2/|\lambda|\)</span> 期）。本案例短期偏离每期回调约31%，约2.23期回调一半。</p>
 <p><strong>操作要点</strong>：工具箱选"误差修正模型"，指定x、y、时间列，最大滞后1阶，AIC选阶，含截距。</p>
 <p><strong>结果关键</strong>：误差修正项系数显著为负即机制成立；其大小决定回调速度与半衰期。</p>
 <p><strong>注意</strong>：必须先通过协整检验，否则ECM无意义；它把长期均衡和短期动态统一在一个模型里。</p>
@@ -2115,7 +2145,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：在保留有用特征频率成分的同时，滤掉高频噪声和特定工频干扰，得到干净波形。</p>
 <p><strong>美赛场景区</strong>：轴承振动在线监测中保留轴转频特征、抑制电子噪声和50Hz工频干扰。</p>
-<p><strong>核心原理</strong>：先做频谱诊断确定主频与噪声频带，再选Butterworth低通/带通滤波器并定截止频率，采用零相位处理避免相位偏移，用保形相关系数、信噪比增益等指标验证。本案例Butterworth低通（order=4，截止30Hz）保形相关0.970，信噪比从11.6dB提升到21.0dB。</p>
+<p><strong>核心原理</strong>：先做频谱诊断确定主频与噪声频带，再选Butterworth滤波器，其幅值平方响应为 <span class="arithmatex">\(|H(\omega)|^2=\frac{1}{1+(\omega/\omega_c)^{2n}}\)</span>，其中 <span class="arithmatex">\(n\)</span> 为阶数、<span class="arithmatex">\(\omega_c\)</span> 为截止频率；阶数越高过渡带越陡。采用零相位（向前向后两次滤波）处理避免相位偏移，用保形相关系数、信噪比增益 <span class="arithmatex">\(SNR_{dB}=10\log_{10}(P_{signal}/P_{noise})\)</span> 等指标验证。本案例Butterworth低通（order=4，截止30Hz）保形相关0.970，信噪比从11.6dB提升到21.0dB。</p>
 <p><strong>操作要点</strong>：工具箱选"信号滤波"，指定时间列与信号列，方法butter_lowpass，必要时设截止频率。</p>
 <p><strong>结果关键</strong>：保形相关高、上频带抑制充分、信噪比增益大；滤后波形用于趋势判断。</p>
 <p><strong>注意</strong>：截止频率要根据频谱诊断设定，误删有用频带会丢信息；滤波应零相位处理。</p>
@@ -2125,7 +2155,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：衡量收入/资源不平等程度的经典指标，0为完全平等、1为极端不平等，0.4是国际警戒线。</p>
 <p><strong>美赛场景区</strong>：居民家庭收入分配年度监测，判断总体不平等水平及与警戒线的关系。</p>
-<p><strong>核心原理</strong>：把家庭收入升序排列，以人口份额对收入份额作累积画出洛伦兹曲线，基尼系数=洛伦兹曲线与绝对平均线之间面积的两倍；用Bootstrap给置信区间。本案例基尼0.468（95%CI [0.40,0.52]），已越过0.4警戒线。</p>
+<p><strong>核心原理</strong>：把家庭收入升序排列，以人口份额对收入份额作累积画出洛伦兹曲线 <span class="arithmatex">\(L(p)\)</span>，基尼系数为洛伦兹曲线与绝对平均线 <span class="arithmatex">\(y=p\)</span> 之间面积的两倍：</p>
+<div class="arithmatex">\[G=2\int_0^1[p-L(p)]\,dp=\frac{1}{2n^2\bar{y}}\sum_{i=1}^{n}\sum_{j=1}^{n}|y_i-y_j|\]</div>
+<p>其中 <span class="arithmatex">\(\bar{y}\)</span> 为均值；<span class="arithmatex">\(G\in[0,1]\)</span>，0为完全平等、1为极端不平等。用Bootstrap给置信区间。本案例基尼0.468（95%CI [0.40,0.52]），已越过0.4警戒线。</p>
 <p><strong>操作要点</strong>：工具箱选"基尼系数"，指定数值字段income、权重字段weight，直接公式法，自举1000次，10组区间。</p>
 <p><strong>结果关键</strong>：与0.4警戒线比较；可分组算组内基尼定位差异来源。</p>
 <p><strong>注意</strong>：它只给总体不平等一个数，不告诉你差异结构；要分解结构用Dagum基尼或泰尔指数。</p>
@@ -2135,7 +2167,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：按某分类（如东中西部）分别回归，比较自变量对因变量的影响在各组间是否有结构性差异。</p>
 <p><strong>美赛场景区</strong>：评估营销投入对营业额的影响是否因区域而异，决定是否差异化投放。</p>
-<p><strong>核心原理</strong>：先分组建OLS，再用Chow检验对整体组间差异做F检验、用"组 <span class="arithmatex">\(\times\)</span> 自变量"交互项联合Wald检验定位差异来源；异方差时用稳健标准误。本案例Chow检验<span class="arithmatex">\(p&lt;10^{-63}\)</span>，最突出差异为"西部<span class="arithmatex">\(\times\)</span>营销投入"（系数差-1.79）。</p>
+<p><strong>核心原理</strong>：先分组建OLS，再用Chow检验对整体组间差异做F检验 <span class="arithmatex">\(F=\frac{(SSR_p-SSR_1-SSR_2)/k}{(SSR_1+SSR_2)/(n_1+n_2-2k)}\)</span>，其中 <span class="arithmatex">\(SSR_p\)</span> 为混合回归残差平方和、<span class="arithmatex">\(SSR_1,SSR_2\)</span> 为两组各自残差平方和、<span class="arithmatex">\(k\)</span> 为参数个数；<span class="arithmatex">\(F\)</span> 显著即两组结构有差异。再用"组 <span class="arithmatex">\(\times\)</span> 自变量"交互项联合Wald检验定位差异来源；异方差时用稳健标准误。本案例Chow检验<span class="arithmatex">\(p&lt;10^{-63}\)</span>，最突出差异为"西部<span class="arithmatex">\(\times\)</span>营销投入"（系数差-1.79）。</p>
 <p><strong>操作要点</strong>：工具箱选"分组回归"，指定因变量、自变量、分组变量，参考组按取值第一组，组间差异用Chow+交互Wald。</p>
 <p><strong>结果关键</strong>：Chow/交互Wald检验<span class="arithmatex">\(p&lt;0.05\)</span>即组间结构差异显著；报告各组系数对照。</p>
 <p><strong>注意</strong>：与异质性检验思路一致，但分组回归更侧重"逐组建模+整体结构差异检验"；每组样本要够。</p>
@@ -2145,7 +2177,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：判断多个各自不平稳（随机游走）的序列，是否存在一个长期稳定的均衡关系把它们"绑在一起"。</p>
 <p><strong>美赛场景区</strong>：如港口集装箱吞吐量与腹地外贸额是否长期联动、短期背离后能否回归均衡。</p>
-<p><strong>核心原理</strong>：先确认各序列同阶单整（通常都I(1)），再用Engle-Granger检验两两配对（看长期回归残差是否平稳）或Johansen迹检验确定协整个数。本案例两序列存在协整，短期偏离会向均衡回归。</p>
+<p><strong>核心原理</strong>：先确认各序列同阶单整（通常都I(1)），Engle-Granger两步法：第一步做长期均衡回归 <span class="arithmatex">\(y_t=\beta_0+\beta_1 x_t+e_t\)</span>，第二步对残差 <span class="arithmatex">\(\hat{e}_t\)</span> 做ADF单位根检验——若 <span class="arithmatex">\(\hat{e}_t\)</span> 平稳（<span class="arithmatex">\(p&lt;0.05\)</span>）则两序列协整，即存在长期均衡关系；多变量时用Johansen迹检验确定协整个数。本案例两序列存在协整，短期偏离会向均衡回归。</p>
 <p><strong>操作要点</strong>：工具箱选"协整检验"，指定x、y列，方法eg（Engle-Granger），autolag=aic，trend=c，迹检验。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(p&lt;0.05\)</span> 或迹统计量大于临界值即存在协整；之后可接ECM估计回调速度。</p>
 <p><strong>注意</strong>：前提是各序列同阶单整；不协整的I(1)序列直接回归就是伪回归。</p>
@@ -2155,7 +2187,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把多个相互影响的时间序列放在一起，用彼此的滞后项联立建模，刻画它们的动态联动和冲击传导。</p>
 <p><strong>美赛场景区</strong>：如促销投入、客流、销售三者如何相互传导，一次投放多久后达到峰值、贡献多大。</p>
-<p><strong>核心原理</strong>：先ADF确认平稳（不平稳则差分），按AIC选滞后阶，估计VAR方程组并检验稳定性（特征根在单位圆内）与残差白噪声；再做格兰杰因果、脉冲响应、方差分解。本案例促销投入对客流有显著领先影响（<span class="arithmatex">\(p\approx6\times10^{-8}\)</span>），冲击约第3期达峰值18.43，对客流贡献约40%。</p>
+<p><strong>核心原理</strong>：VAR(p)把各变量写成自身与其他变量滞后项的联立方程组：</p>
+<div class="arithmatex">\[\mathbf{y}_t=\mathbf{c}+\sum_{i=1}^{p}\mathbf{\Phi}_i\mathbf{y}_{t-i}+\boldsymbol{\varepsilon}_t\]</div>
+<p>其中 <span class="arithmatex">\(\mathbf{y}_t=(y_{1t},\ldots,y_{Kt})'\)</span> 为 <span class="arithmatex">\(K\)</span> 维向量，<span class="arithmatex">\(\mathbf{\Phi}_i\)</span> 为系数矩阵，<span class="arithmatex">\(\boldsymbol{\varepsilon}_t\)</span> 为同期相关的新生扰动。先ADF确认平稳（不平稳则差分），按AIC选滞后阶，估计后检验稳定性（特征根在单位圆内）与残差白噪声；再做格兰杰因果、脉冲响应、方差分解。本案例促销投入对客流有显著领先影响（<span class="arithmatex">\(p\approx6\times10^{-8}\)</span>），冲击约第3期达峰值18.43，对客流贡献约40%。</p>
 <p><strong>操作要点</strong>：工具箱选"VAR"，指定多个变量列、时间列，ic=aic，trend=c，设脉冲响应与方差分解期数。</p>
 <p><strong>结果关键</strong>：稳定性与残差白噪声通过；脉冲响应图看传导路径，方差分解看贡献占比。</p>
 <p><strong>注意</strong>：变量不宜过多、样本要长；它是"方程组"而非单一因果，结果用于刻画动态关系。</p>
@@ -2165,7 +2199,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当解释变量"内生"（与误差相关）导致OLS有偏时，找一个只通过该解释变量影响结果的"工具变量"，分两步把因果效应干净地识别出来。</p>
 <p><strong>美赛场景区</strong>：如广告投放因"市场好的地方既多投又多卖"而内生，用广告点击成本作工具识别真实广告效应。</p>
-<p><strong>核心原理</strong>：第一阶段用工具变量预测内生变量，第二阶段用预测值回归因变量；用弱工具F检验（<span class="arithmatex">\(F\geq10\)</span>）、Wu-Hausman内生性检验、Sargan过度识别检验把关。本案例广告投放系数2.569，第一阶段F=29.67（无弱工具），工具外生性通过，内生性显著。</p>
+<p><strong>核心原理</strong>：两阶段最小二乘分步估计——第一阶段用工具变量 <span class="arithmatex">\(Z\)</span> 预测内生变量 <span class="arithmatex">\(\hat{x}=\hat{\Pi}Z\)</span>；第二阶段用第一阶段预测值 <span class="arithmatex">\(\hat{x}\)</span> 替换内生变量回归因变量 <span class="arithmatex">\(y=\beta_0+\beta_1\hat{x}+\beta_2 W+v\)</span>。要求工具满足相关性（与内生变量相关）与外生性（与扰动不相关 <span class="arithmatex">\(E[Z'\varepsilon]=0\)</span>）。用弱工具F检验（<span class="arithmatex">\(F\geq10\)</span>）、Wu-Hausman内生性检验、Sargan过度识别检验把关。本案例广告投放系数2.569，第一阶段F=29.67（无弱工具），工具外生性通过，内生性显著。</p>
 <p><strong>操作要点</strong>：工具箱选"两阶段最小二乘"，指定因变量、内生变量、工具变量、控制变量，稳健标准误，输出OLS对照。</p>
 <p><strong>结果关键</strong>：第一阶段<span class="arithmatex">\(F\geq10\)</span>、Sargan <span class="arithmatex">\(p&gt;0.05\)</span>、Hausman确认内生；以2SLS系数为准并与OLS比偏差方向。</p>
 <p><strong>注意</strong>：找工具变量是难点——必须满足"相关性+外生性（排他）"；SPSS原生不支持，通过R扩展实现。</p>
@@ -2175,7 +2209,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当处理对象在不同时点分批上线政策时（交错处理），用它估计平均处理效应，并校正传统双向固定效应可能的偏误。</p>
 <p><strong>美赛场景区</strong>：如2018、2020两批门店先后上线智能补货系统，部分门店始终不参与作对照。</p>
-<p><strong>核心原理</strong>：整理个体—时间面板，用事件研究检验平行趋势，再用双向固定效应估ATT，并补充Sun-Abraham队列加权估计作稳健性，全程个体聚类标准误。本案例政策使结果平均提高3.572（<span class="arithmatex">\(p&lt;0.001\)</span>，95%CI [2.87,4.27]）。</p>
+<p><strong>核心原理</strong>：交错处理下用双向固定效应估计 <span class="arithmatex">\(Y_{it}=\alpha+\beta\,D_{it}+\mu_i+\lambda_t+\varepsilon_{it}\)</span>，其中 <span class="arithmatex">\(D_{it}=1\)</span> 表示个体 <span class="arithmatex">\(i\)</span> 在时期 <span class="arithmatex">\(t\)</span> 已处理，<span class="arithmatex">\(\mu_i,\lambda_t\)</span> 为个体与时间固定效应，<span class="arithmatex">\(\beta\)</span> 即ATT；用事件研究 <span class="arithmatex">\(Y_{it}=\alpha+\sum_{k\neq-1}\beta_k D_{it}^k+\mu_i+\lambda_t+\varepsilon_{it}\)</span> 检验平行趋势（政策前各期 <span class="arithmatex">\(\beta_k\)</span> 应不显著），并补充Sun-Abraham队列加权估计作稳健性，全程个体聚类标准误。本案例政策使结果平均提高3.572（<span class="arithmatex">\(p&lt;0.001\)</span>，95%CI [2.87,4.27]）。</p>
 <p><strong>操作要点</strong>：工具箱选"多期DID"，指定个体列、时间列、处理列、处理时点列，事件窗口[-4,+1]，个体聚类。</p>
 <p><strong>结果关键</strong>：政策前事件研究系数不显著（平行趋势）；ATT显著；Sun-Abraham结果与TWFE [Two-Way Fixed Effects, 双向固定效应]一致。</p>
 <p><strong>注意</strong>：交错处理下传统TWFE可能因"坏对照"有偏，务必做事件研究与稳健性对照；高级计量，需R扩展实现。</p>
@@ -2185,7 +2219,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把结果变量的总波动按各因素（运营模式、面积档位、商圈类型等）分解，看谁解释了大部分差异。</p>
 <p><strong>美赛场景区</strong>：弄清门店间销售额差异主要由哪个经营因素造成，决定优先抓哪个环节。</p>
-<p><strong>核心原理</strong>：用方差分析把总平方和序贯拆成各因素与误差，各来源占比之和为100%，再用F检验判断因素显著。本案例"商圈类型"贡献最大（54.92%，显著）。</p>
+<p><strong>核心原理</strong>：单因素方差分析把总平方和分解为 <span class="arithmatex">\(SS_{total}=SS_{between}+SS_{within}\)</span>，其中 <span class="arithmatex">\(SS_{total}=\sum_{ij}(y_{ij}-\bar{y})^2\)</span>、<span class="arithmatex">\(SS_{between}=\sum_j n_j(\bar{y}_j-\bar{y})^2\)</span>；多因素序贯（Type I）按纳入顺序依次扣除。各来源 <span class="arithmatex">\(SS\)</span> 占 <span class="arithmatex">\(SS_{total}\)</span> 之比为贡献率，并用 <span class="arithmatex">\(F=\frac{SS_{factor}/df_1}{SS_{error}/df_2}\)</span> 检验因素显著。本案例"商圈类型"贡献最大（54.92%，显著）。</p>
 <p><strong>操作要点</strong>：工具箱选"方差分解"，指定因变量与多个因素变量，不纳入交互项，<span class="arithmatex">\(\alpha=0.05\)</span>。</p>
 <p><strong>结果关键</strong>：按贡献率排序找主控因素；注意顺序（序贯分解）会影响各因素占比。</p>
 <p><strong>注意</strong>：它是描述+检验"谁解释波动"，不直接给因果；因素水平数和样本量要够。</p>
@@ -2195,7 +2229,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当政策资格由某"评分是否跨过一个明确临界值"决定时，比较断点两侧紧邻对象的结果，识别政策的局部因果效应。</p>
 <p><strong>美赛场景区</strong>：如技改评估达60分即获专项资助，比较60分上下企业次年人均产出差异。</p>
-<p><strong>核心原理</strong>：利用分配变量在断点处的确定性规则构造拟随机分组，用局部线性加权回归估计结果在断点处的跳跃；做密度连续性检验（有无操纵）、协变量平衡、安慰剂断点和带宽敏感性。本案例h=17.19下效应6.214（95%CI [3.85,8.58]，<span class="arithmatex">\(p=0.000\)</span>）。</p>
+<p><strong>核心原理</strong>：以断点 <span class="arithmatex">\(c\)</span> 为中心做局部线性回归：</p>
+<div class="arithmatex">\[Y=\alpha+\beta D+\gamma(X-c)+D\,\delta(X-c)+\varepsilon\]</div>
+<p>其中 <span class="arithmatex">\(D=I(X\geq c)\)</span> 为处理虚拟变量、<span class="arithmatex">\(X\)</span> 为分配变量；断点两侧各有局部斜率 <span class="arithmatex">\(\gamma\)</span> 与 <span class="arithmatex">\(\gamma+\delta\)</span>，断点处结果跳跃即 <span class="arithmatex">\(\beta\)</span>（局部处理效应）。用三角核加权、带宽 <span class="arithmatex">\(h\)</span> 控制邻域，做密度连续性检验（有无操纵）、协变量平衡、安慰剂断点和带宽敏感性。本案例h=17.19下效应6.214（95%CI [3.85,8.58]，<span class="arithmatex">\(p=0.000\)</span>）。</p>
 <p><strong>操作要点</strong>：工具箱选"断点回归"，指定结果变量、分配变量、断点、处理变量，核triangular，带宽法cv。</p>
 <p><strong>结果关键</strong>：断点处跳跃显著、密度连续（无操纵）、不同带宽结论稳定。</p>
 <p><strong>注意</strong>：结论只在断点附近局部有效；精确断点（断点处处理完全切换）用sharp RDD，否则模糊RDD；需R扩展实现。</p>
@@ -2205,7 +2241,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：对持续上升/波动的时间序列逐期相减，判断要几阶差分才平稳，并量化逐期增减。</p>
 <p><strong>美赛场景区</strong>：如月度销售额持续攀升，判断差分阶数并刻画逐期变动，为预测和库存做准备。</p>
-<p><strong>核心原理</strong>：以ADF为主、KPSS为辅，从d=0逐阶检验，不平稳就差分一次直到平稳或达上限；再对差分序列做Ljung-Box白噪声检验。本案例sales需1阶差分后平稳（<span class="arithmatex">\(p&lt;0.0001\)</span>），差分后每期平均变动约3.15。</p>
+<p><strong>核心原理</strong>：一阶差分定义为 <span class="arithmatex">\(\nabla y_t=y_t-y_{t-1}\)</span>，<span class="arithmatex">\(d\)</span> 阶差分即 <span class="arithmatex">\(\nabla^d y_t=\nabla(\nabla^{d-1}y_t)\)</span>。以ADF为主、KPSS为辅，从 <span class="arithmatex">\(d=0\)</span> 逐阶检验，不平稳就差分一次直到平稳或达上限；再对差分序列做Ljung-Box白噪声检验。本案例sales需1阶差分后平稳（<span class="arithmatex">\(p&lt;0.0001\)</span>），差分后每期平均变动约3.15。</p>
 <p><strong>操作要点</strong>：工具箱选"差分分析"，指定时间列、值列，普通差分，阶数auto，ADF为主KPSS辅助。</p>
 <p><strong>结果关键</strong>：报告使序列平稳所需差分阶数d，以及差分后均值变动幅度。</p>
 <p><strong>注意</strong>：差分是ADF/ARIMA的前置步骤；差分丢失水平信息后不再直接代表原值，外推需累减还原。</p>
@@ -2215,7 +2251,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当内生解释变量有多个工具变量（过度识别）时，用广义矩估计得到比2SLS更渐近有效的系数。</p>
 <p><strong>美赛场景区</strong>：如广告投放内生，用媒介成本指数、竞品广告密度等多个排他工具估计广告对销售的真实边际贡献。</p>
-<p><strong>核心原理</strong>：写成线性矩条件，两步GMM——第一步用普通工具权重（等价2SLS）得初值与残差，第二步用残差构造最优权重矩阵重估；工具数多于内生变量时用Hansen J检验外生性。本案例广告投放每+1单位带来销售+1.746，门店数+1单位、售价+1单位均显著。</p>
+<p><strong>核心原理</strong>：线性GMM的总体矩条件为 <span class="arithmatex">\(E[Z_i'\varepsilon_i(\beta)]=0\)</span>，即工具变量与扰动正交；样本矩 <span class="arithmatex">\(\bar{g}(\beta)=\frac{1}{n}\sum_i Z_i'(y_i-X_i'\beta)\)</span>。两步GMM：第一步用单位权重（等价2SLS）得初值与残差，第二步用残差构造最优权重矩阵 <span class="arithmatex">\(\hat{W}=[\frac{1}{n}\sum_i Z_iZ_i'\hat{\varepsilon}_i^2]^{-1}\)</span> 重估 <span class="arithmatex">\(\hat{\beta}=\arg\min_{\beta}\bar{g}(\beta)'\hat{W}\bar{g}(\beta)\)</span>；工具数多于内生变量（过度识别）时用Hansen <span class="arithmatex">\(J\)</span> 检验外生性。本案例广告投放每+1单位带来销售+1.746，门店数+1单位、售价+1单位均显著。</p>
 <p><strong>操作要点</strong>：工具箱选"GMM估计"，指定被解释变量、内生解释变量、外生解释变量、工具变量，权重矩阵two_step。</p>
 <p><strong>结果关键</strong>：一阶段F达弱工具阈值、Hansen J <span class="arithmatex">\(p&gt;0.1\)</span>（工具外生）、系数显著。</p>
 <p><strong>注意</strong>：GMM是2SLS在过度识别下的推广；工具要外生且相关，否则Hansen J会拒绝；需R/Python扩展实现。</p>
