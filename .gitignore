@@ -47,4 +47,5 @@ dedupe*.py
 check*.py
 
 # Image cache directory
-case_images/
+case_images/docs/add_abbreviations.py
+docs_backup/
