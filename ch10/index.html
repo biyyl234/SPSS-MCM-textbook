@@ -978,10 +978,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#icc" class="md-nav__link">
+  <a href="#icc-intraclass-correlation-coefficient" class="md-nav__link">
     <span class="md-ellipsis">
       
-        组内相关系数（ICC） 进阶级
+        组内相关系数（ICC [Intraclass Correlation Coefficient, 组内相关系数]） 进阶级
       
     </span>
   </a>
@@ -989,10 +989,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rcs" class="md-nav__link">
+  <a href="#rcs-restricted-cubic-spline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        限制性立方样条（RCS） 进阶级
+        限制性立方样条（RCS [Restricted Cubic Spline, 限制性立方样条]） 进阶级
       
     </span>
   </a>
@@ -1033,10 +1033,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cmh" class="md-nav__link">
+  <a href="#cmh-cochran-mantel-haenszel-" class="md-nav__link">
     <span class="md-ellipsis">
       
-        分层卡方（CMH检验） 进阶级
+        分层卡方（CMH [Cochran-Mantel-Haenszel, 科克伦-曼特尔-亨塞尔检验]检验） 进阶级
       
     </span>
   </a>
@@ -1603,9 +1603,9 @@
 <p>医学统计是为"随访数据、诊断评价、预后预测"这类问题发展出的一套专门方法。它处理两类特殊数据：一是<strong>时间到事件数据</strong>（从起点到发生某件事经过多久，且有人中途退出观察），二是<strong>诊断/预测模型的性能评价</strong>（一个打分准不准、能不能用）。这些方法虽然名字带"医学"，但核心思想在美赛里用途极广。</p>
 <p><strong>美赛什么题型常用？</strong></p>
 <p>千万别被"医学"两个字骗了——本章很多方法是<strong>模型评价</strong>和<strong>风险预测</strong>的通用工具：
-- <strong>ROC 曲线 / AUC</strong>：评价任何二分类预测模型（会不会流失、是否违约、是否生病）的区分能力，是美赛建模论文的必报指标
+- <strong>ROC [Receiver Operating Characteristic, 受试者工作特征曲线] 曲线 / AUC [Area Under the Curve, 曲线下面积]</strong>：评价任何二分类预测模型（会不会流失、是否违约、是否生病）的区分能力，是美赛建模论文的必报指标
 - <strong>Kaplan-Meier、Cox 回归</strong>：迁移到"客户存续时间、设备寿命、项目完成时间"等带删失的时间数据
-- <strong>校准曲线、DCA、NRI/IDI</strong>：评价概率预测是否可靠、新模型比旧模型好在哪
+- <strong>校准曲线、DCA [Decision Curve Analysis, 决策曲线分析]、NRI [Net Reclassification Improvement, 净重新分类指数]/IDI [Integrated Discrimination Improvement, 综合判别改善指数]</strong>：评价概率预测是否可靠、新模型比旧模型好在哪
 - <strong>单因素/多因素回归、亚组分析、基线分析</strong>：任何"找影响因素、分组比较"问题的标准流程</p>
 <p><strong>学习路径建议</strong></p>
 <p>先学<strong>基线分析</strong>和<strong>单因素/多因素回归</strong>这两个找因素的基础工具；再学<strong>ROC 曲线</strong>（评价二分类模型性能的核心）；然后学<strong>Kaplan-Meier 生存曲线</strong>和<strong>Cox 回归</strong>（处理带删失的时间数据）；最后按需要查校准曲线、DCA、竞争风险等进阶模型评价工具。</p>
@@ -1628,17 +1628,17 @@
 <p class="admonition-title">通俗原理</p>
 <p>思路很直白：把所有基线变量逐一在两组间做比较。</p>
 <ul>
-<li>连续变量：先看正态性（Shapiro-Wilk）和方差齐性（Levene），正态方差齐用独立样本 t 检验，否则用 Mann-Whitney U 非参数检验；多组用 ANOVA 或 Kruskal-Wallis</li>
+<li>连续变量：先看正态性（Shapiro-Wilk）和方差齐性（Levene），正态方差齐用独立样本 t 检验，否则用 Mann-Whitney U 非参数检验；多组用 ANOVA [Analysis of Variance, 方差分析] 或 Kruskal-Wallis</li>
 <li>分类变量：用卡方检验，期望频数不足时改用 Fisher 精确检验</li>
 <li>每个变量同时报告效应量（Cohen's d、Cramér's V），不只看 p 值</li>
 </ul>
 <p><span class="arithmatex">\(p&gt;0.05\)</span> 表示该基线变量两组<strong>未发现显著差异</strong>（均衡）；<span class="arithmatex">\(p&lt;0.05\)</span> 表示两组本来就不同，需要警惕混杂。</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
-<li>在 Dabbit AI SPSS 工具箱中选择"基线分析"</li>
-<li>指定分组列（如 group），选入连续基线变量（年龄、BMI、血压等）和分类基线变量（性别、吸烟等）</li>
+<li>在 Dabbit AI [Artificial Intelligence, 人工智能] SPSS 工具箱中选择"基线分析"</li>
+<li>指定分组列（如 group），选入连续基线变量（年龄、BMI [Body Mass Index, 身体质量指数]、血压等）和分类基线变量（性别、吸烟等）</li>
 <li>排除 ID 列；连续变量自动按正态性/方差齐性选 t 或非参数检验</li>
 <li>分类变量期望频数不足时自动用 Fisher 精确检验</li>
 <li>显著性水平 <span class="arithmatex">\(\alpha=0.05\)</span>，输出效应量，p 值校正默认 none</li>
@@ -1683,9 +1683,9 @@
 <ul>
 <li><strong>单因素回归</strong>：每个自变量单独对结局回归，得到未调整的粗效应。筛选阈值常用 <span class="arithmatex">\(p&lt;0.10\)</span>（稍宽松，避免漏掉真正重要的变量）</li>
 <li><strong>多因素回归</strong>：把单因素达标的变量同时放入一个模型，每个系数都表示"控制了其他变量后"该因素的独立效应</li>
-<li>结局是连续变量用线性回归（OLS），结局是二分类用 Logistic 回归</li>
+<li>结局是连续变量用线性回归（OLS [Ordinary Least Squares, 普通最小二乘法]），结局是二分类用 Logistic 回归</li>
 </ul>
-<p>关键输出是调整后的系数与 95% 置信区间，配合 VIF 检查共线性（VIF <span class="arithmatex">\(&lt;10\)</span> 可接受）。</p>
+<p>关键输出是调整后的系数与 95% 置信区间，配合 VIF [Variance Inflation Factor, 方差膨胀因子] 检查共线性（VIF <span class="arithmatex">\(&lt;10\)</span> 可接受）。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1701,7 +1701,7 @@
 <div class="admonition success">
 <p class="admonition-title">结果怎么看</p>
 <ul>
-<li><strong>单因素表</strong>：逐变量报告粗效应、95%CI、p 值。案例年龄、BMI、吸烟、家族史单因素 <span class="arithmatex">\(p&lt;0.10\)</span>，进入多因素</li>
+<li><strong>单因素表</strong>：逐变量报告粗效应、95%CI [Confidence Interval, 置信区间]、p 值。案例年龄、BMI、吸烟、家族史单因素 <span class="arithmatex">\(p&lt;0.10\)</span>，进入多因素</li>
 <li><strong>多因素表</strong>：校正后效应。案例年龄 <span class="arithmatex">\(\beta=0.015\)</span>（<span class="arithmatex">\(p=0.002\)</span>）、BMI <span class="arithmatex">\(\beta=0.045\)</span>（<span class="arithmatex">\(p=0.003\)</span>）、吸烟整体 <span class="arithmatex">\(p&lt;0.001\)</span> 仍独立显著</li>
 <li><strong><span class="arithmatex">\(R^2\)</span> 与 F 检验</strong>：模型整体解释力，案例 <span class="arithmatex">\(R^2=0.226\)</span>、<span class="arithmatex">\(p&lt;0.001\)</span></li>
 <li><strong>VIF</strong>：最大 2.08，无严重共线性</li>
@@ -1728,7 +1728,7 @@
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
 <ul>
-<li><strong>美赛建模论文必报</strong>：任何二分类预测模型（逻辑回归、随机森林、SVM 等）都要报告 AUC</li>
+<li><strong>美赛建模论文必报</strong>：任何二分类预测模型（逻辑回归、随机森林、SVM [Support Vector Machine, 支持向量机] 等）都要报告 AUC</li>
 <li>比较两个预测模型哪个更好（在同一样本上比 AUC）</li>
 <li>为诊断/预测打分选择最佳"及格线"（截断值）</li>
 <li>医学中评价某种检测手段的诊断价值，迁移到美赛就是评价任何分类器</li>
@@ -1738,10 +1738,10 @@
 <p class="admonition-title">通俗原理</p>
 <p>二分类预测有四种结果（混淆矩阵）：</p>
 <ul>
-<li><strong>真阳性 TP</strong>：实际是，预测也是（找对了）</li>
-<li><strong>真阴性 TN</strong>：实际否，预测也否（排对了）</li>
-<li><strong>假阳性 FP</strong>：实际否，预测是（误报）</li>
-<li><strong>假阴性 FN</strong>：实际是，预测否（漏报）</li>
+<li><strong>真阳性 TP [True Positive, 真阳性]</strong>：实际是，预测也是（找对了）</li>
+<li><strong>真阴性 TN [True Negative, 真阴性]</strong>：实际否，预测也否（排对了）</li>
+<li><strong>假阳性 FP [False Positive, 假阳性]</strong>：实际否，预测是（误报）</li>
+<li><strong>假阴性 FN [False Negative, 假阴性]</strong>：实际是，预测否（漏报）</li>
 </ul>
 <p>两个核心率：
 - <strong>灵敏度（召回率）</strong> <span class="arithmatex">\(= TP/(TP+FN)\)</span>：真病人中被找出来的比例——不漏诊
@@ -1778,7 +1778,7 @@
 <div class="admonition warning">
 <p class="admonition-title">注意事项 &amp; 决策指引</p>
 <p><strong>什么时候用？</strong> 任何二分类模型的性能评价，论文必备。</p>
-<p><strong>什么时候不用？</strong> 回归任务（连续预测值）用 R<span class="arithmatex">\(^2\)</span>/RMSE；多分类任务需用多分类 AUC。</p>
+<p><strong>什么时候不用？</strong> 回归任务（连续预测值）用 R<span class="arithmatex">\(^2\)</span>/RMSE [Root Mean Square Error, 均方根误差]；多分类任务需用多分类 AUC。</p>
 <p><strong>常见坑</strong>
 - <strong>坑1</strong>：只看准确率不看 AUC。类别不平衡时（如 95% 阴性），全猜阴性准确率 95% 但模型毫无用处，AUC 才揭示真相
 - <strong>坑2</strong>：在训练集上算 AUC 自欺欺人。必须在独立测试集/验证集上评价
@@ -1868,7 +1868,7 @@
 <ol>
 <li>在 Dabbit AI SPSS 工具箱中选择"亚组分析"</li>
 <li>选结局变量、处理变量、亚组分组变量（如 age_group）</li>
-<li>结局类型选 continuous（连续），效应量自动选均值差 MD</li>
+<li>结局类型选 continuous（连续），效应量自动选均值差 MD [Mean Difference, 均值差]</li>
 <li>交互检验 auto；可选入协变量校正；森林图按自然顺序排列</li>
 </ol>
 <p><strong>SPSS 原生对应</strong>：在回归模型中加入"处理 <span class="arithmatex">\(\times\)</span> 亚组"交互项，看交互项系数显著性。</p>
@@ -1896,7 +1896,7 @@
 <h3 id="cox">⭐ Cox回归（比例风险回归）  <code>基础级</code><a class="headerlink" href="#cox" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>Cox 回归是生存分析的"多因素版"。它既能处理带删失的时间数据，又能同时纳入多个影响因素，输出每个因素的<strong>风险比 HR</strong>——告诉我们"这个因素使事件发生风险变成原来的几倍"。</p>
+<p>Cox 回归是生存分析的"多因素版"。它既能处理带删失的时间数据，又能同时纳入多个影响因素，输出每个因素的<strong>风险比 HR [Hazard Ratio, 风险比]</strong>——告诉我们"这个因素使事件发生风险变成原来的几倍"。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
@@ -1933,7 +1933,7 @@
 <div class="admonition success">
 <p class="admonition-title">结果怎么看</p>
 <ul>
-<li><strong>HR 与 95%CI</strong>：报告每个变量的 HR（CI）和 p 值。案例 lvef HR=0.960（保护）、nyha=IV HR=5.766（高危）、beta_blocker HR=0.608（保护），均 <span class="arithmatex">\(p&lt;0.05\)</span></li>
+<li><strong>HR 与 95%CI</strong>：报告每个变量的 HR（CI）和 p 值。案例 lvef HR=0.960（保护）、nyha=IV [Instrumental Variable, 工具变量] HR=5.766（高危）、beta_blocker HR=0.608（保护），均 <span class="arithmatex">\(p&lt;0.05\)</span></li>
 <li><strong>Schoenfeld 检验</strong>：案例各变量 <span class="arithmatex">\(p&gt;0.05\)</span>，比例风险假设成立</li>
 <li><strong>C 指数</strong>：案例 0.731，区分能力可接受</li>
 <li><strong>生存曲线</strong>：按典型患者关键因素水平画出预测生存概率随时间变化</li>
@@ -1947,7 +1947,7 @@
 <p><strong>常见坑</strong>
 - <strong>坑1</strong>：不检验比例风险假设。若某因素 HR 随时间变化却硬套 Cox，结论有偏
 - <strong>坑2</strong>：把 HR 当成绝对风险。HR 是"相对倍数"，基线风险高低也很重要
-- <strong>坑3</strong>：事件数太少（经验 EPV：每变量至少 10 个事件）还硬塞很多变量，模型不稳定
+- <strong>坑3</strong>：事件数太少（经验 EPV [Events Per Variable, 每变量事件数]：每变量至少 10 个事件）还硬塞很多变量，模型不稳定
 - <strong>坑4</strong>：观察性数据下把 HR 当因果效应</p>
 <p><strong>和相似算法的区别</strong>：Cox 回归是多因素生存分析；Kaplan-Meier 是单因素描述；竞争风险模型用于存在多种互斥结局时。</p>
 </div>
@@ -1958,7 +1958,7 @@
 <p><strong>一句话</strong>：把多项研究（或多个亚组/变量）的效应量与 95%CI 画在同一张图上，逐个比较并给出合并效应。</p>
 <p><strong>美赛场景区</strong>：Meta 分析汇总多来源数据；多因素回归后把各变量效应量并排展示；亚组分析结果可视化。</p>
 <p><strong>核心原理</strong>：每项研究用方块（大小代表权重）+ 横线（95%CI）表示，底部菱形是合并效应（随机/固定效应模型加权）。<span class="arithmatex">\(I^2 \geq 50%\)</span> 或 Q 检验 <span class="arithmatex">\(p&lt;0.10\)</span> 时用随机效应模型。</p>
-<p><strong>操作要点</strong>：工具箱选"森林图/Meta 分析"，效应量选 MD 或 OR/RR，合并方法 auto，输出异质性 <span class="arithmatex">\(I^2\)</span>。</p>
+<p><strong>操作要点</strong>：工具箱选"森林图/Meta 分析"，效应量选 MD 或 OR [Odds Ratio, 比值比]/RR [Relative Risk, 相对风险]，合并方法 auto，输出异质性 <span class="arithmatex">\(I^2\)</span>。</p>
 <p><strong>结果关键</strong>：案例 150 项研究随机效应合并 MD=0.451（CI 0.406--0.495），<span class="arithmatex">\(I^2=65.7%\)</span> 异质性较高。</p>
 <p><strong>注意</strong>：<span class="arithmatex">\(I^2\)</span> 大说明研究间不一致，需分析异质来源而非只看合并值。</p>
 </div>
@@ -1967,7 +1967,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：评价两种测量方法（如新仪器 vs 金标准）测同一批样品时是否一致，核心是画"差值 vs 均值"图并给出 95% 一致性界限。</p>
 <p><strong>美赛场景区</strong>：迁移到"两个模型/两套评分系统结果是否一致"；校准新测量工具时。</p>
-<p><strong>核心原理</strong>：逐对算差值 <span class="arithmatex">\(d=A-B\)</span>，平均差 <span class="arithmatex">\(\bar{d}\)</span> 是系统偏倚，95% 一致性界限 <span class="arithmatex">\(= \bar{d} \pm 1.96\,SD\)</span>——约 95% 的差值落在此区间；与临床可接受界限比较判断能否互换。</p>
+<p><strong>核心原理</strong>：逐对算差值 <span class="arithmatex">\(d=A-B\)</span>，平均差 <span class="arithmatex">\(\bar{d}\)</span> 是系统偏倚，95% 一致性界限 <span class="arithmatex">\(= \bar{d} \pm 1.96\,SD [Standard Deviation, 标准差]\)</span>——约 95% 的差值落在此区间；与临床可接受界限比较判断能否互换。</p>
 <p><strong>操作要点</strong>：工具箱选"Bland-Altman"，自动判断差值正态性，比例偏倚诊断开启，置信水平 95%。</p>
 <p><strong>结果关键</strong>：案例平均差 0.018（CI 跨 0，无系统偏倚），95% 一致性界限 <span class="arithmatex">\(-0.39\)</span>--<span class="arithmatex">\(0.43\)</span>；注意相关高（r=0.997）不等于一致。</p>
 <p><strong>注意</strong>：相关系数高不代表方法一致，必须看差值的一致性界限是否落在可接受范围内。</p>
@@ -1987,12 +1987,12 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：从"净获益"角度比较一个预测模型和"全干预/不干预"两种极端策略，看在哪个阈值区间用模型决策更划算。</p>
 <p><strong>美赛场景区</strong>：评价模型的<strong>实际决策价值</strong>（不只是统计指标，而是按模型行动到底赚不赚）；美赛中评估预警/筛查模型的实用性。</p>
-<p><strong>核心原理</strong>：净获益 $NB(t) = $ 真阳率 <span class="arithmatex">\(-\)</span> 假阳率 <span class="arithmatex">\(\times t/(1-t)\)</span>，<span class="arithmatex">\(t\)</span> 是干预阈值。把各阈值下 NB 画曲线，高于"全干预"和"不干预"两条基准线的区间就是临床获益区间。</p>
-<p><strong>操作要点</strong>：工具箱选"DCA"，填入各模型概率列与结局列，LOESS 平滑，报告阈值区间 auto。</p>
+<p><strong>核心原理</strong>：净获益 $NB <a href="t">Negative Binomial, 负二项</a> = $ 真阳率 <span class="arithmatex">\(-\)</span> 假阳率 <span class="arithmatex">\(\times t/(1-t)\)</span>，<span class="arithmatex">\(t\)</span> 是干预阈值。把各阈值下 NB 画曲线，高于"全干预"和"不干预"两条基准线的区间就是临床获益区间。</p>
+<p><strong>操作要点</strong>：工具箱选"DCA"，填入各模型概率列与结局列，LOESS [Locally Estimated Scatterplot Smoothing, 局部估计散点平滑] 平滑，报告阈值区间 auto。</p>
 <p><strong>结果关键</strong>：案例综合模型在阈值 0.09--0.97 区间净获益均高于基准，最优决策点 <span class="arithmatex">\(t^*=0.43\)</span> 时每 100 例净获益 +21.9。</p>
 <p><strong>注意</strong>：DCA 把"误干预代价"和"漏干预代价"用阈值权重折算，阈值设定要结合实际业务。</p>
 </div>
-<h3 id="icc">组内相关系数（ICC）  <code>进阶级</code><a class="headerlink" href="#icc" title="Permanent link">&para;</a></h3>
+<h3 id="icc-intraclass-correlation-coefficient">组内相关系数（ICC [Intraclass Correlation Coefficient, 组内相关系数]）  <code>进阶级</code><a class="headerlink" href="#icc-intraclass-correlation-coefficient" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：衡量多名评分者/多次测量对同一对象打分的<strong>绝对一致性</strong>，比 Kappa 更适合连续测量值。</p>
@@ -2002,7 +2002,7 @@
 <p><strong>结果关键</strong>：案例 ICC2=0.844（CI 0.76--0.90），良好；取多人平均后 ICC2k=0.942 达优秀（平均提高信度）。</p>
 <p><strong>注意</strong>：要选对"绝对一致 vs 相对一致""单次 vs 平均"，选错会得到不同数值。</p>
 </div>
-<h3 id="rcs">限制性立方样条（RCS）  <code>进阶级</code><a class="headerlink" href="#rcs" title="Permanent link">&para;</a></h3>
+<h3 id="rcs-restricted-cubic-spline">限制性立方样条（RCS [Restricted Cubic Spline, 限制性立方样条]）  <code>进阶级</code><a class="headerlink" href="#rcs-restricted-cubic-spline" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：不预设线性关系，用灵活的样条曲线刻画暴露与结局之间的<strong>非线性</strong>剂量反应（如睡眠太短太长血压都高的 U 形关系）。</p>
@@ -2042,20 +2042,20 @@
 <p><strong>结果关键</strong>：案例线上预约 Ridit=0.70（更满意）、电话预约 0.37（更不满意），均与参照组差异显著。</p>
 <p><strong>注意</strong>：Ridit 只利用等级顺序、不利用间距；样本小的组区间宽、结论不稳。</p>
 </div>
-<h3 id="cmh">分层卡方（CMH检验）  <code>进阶级</code><a class="headerlink" href="#cmh" title="Permanent link">&para;</a></h3>
+<h3 id="cmh-cochran-mantel-haenszel-">分层卡方（CMH [Cochran-Mantel-Haenszel, 科克伦-曼特尔-亨塞尔检验]检验）  <code>进阶级</code><a class="headerlink" href="#cmh-cochran-mantel-haenszel-" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：控制一个分层变量（如不同医院/地区）后，再判断暴露与二分类结局是否关联，避免分层因素造成混杂。</p>
 <p><strong>美赛场景区</strong>：多中心/多地区数据合并分析时；控制混杂后的关联性检验。</p>
 <p><strong>核心原理</strong>：每层内算 2<span class="arithmatex">\(\times\)</span>2 表的 OR，用 Mantel-Haenszel 法合并得合并 OR 与合并卡方；Breslow-Day 检验各层 OR 是否一致；比较粗 OR 与调整 OR 判断混杂大小。</p>
 <p><strong>操作要点</strong>：工具箱选"CMH 分层卡方"，指定暴露、结局、分层列。</p>
-<p><strong>结果关键</strong>：案例调整中心后合并 OR=0.33（CI 0.15--0.72），ERAS 组并发症优势更低；粗 OR=0.43，调整后变化 30% 提示存在混杂。</p>
+<p><strong>结果关键</strong>：案例调整中心后合并 OR=0.33（CI 0.15--0.72），ERAS [Enhanced Recovery After Surgery, 加速康复外科] 组并发症优势更低；粗 OR=0.43，调整后变化 30% 提示存在混杂。</p>
 <p><strong>注意</strong>：Breslow-Day <span class="arithmatex">\(p&lt;0.05\)</span> 说明各层效应不一致，应分层解释而非只报合并值。</p>
 </div>
 <h3 id="orrr">OR值和RR值（效应量指标）  <code>进阶级</code><a class="headerlink" href="#orrr" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
-<p><strong>一句话</strong>：从 2<span class="arithmatex">\(\times\)</span>2 四格表出发，量化两组事件风险的相对差异——OR 是比值比、RR 是相对危险度，并给出风险差 AR。</p>
+<p><strong>一句话</strong>：从 2<span class="arithmatex">\(\times\)</span>2 四格表出发，量化两组事件风险的相对差异——OR 是比值比、RR 是相对危险度，并给出风险差 AR [Autoregressive, 自回归]。</p>
 <p><strong>美赛场景区</strong>：任何两组率的比较（干预组 vs 对照组事件率）；论文中报告效应大小。</p>
 <p><strong>核心原理</strong>：RR=暴露组事件率/对照组事件率；OR=暴露组事件比值/对照组事件比值。结局罕见时 OR 近似 RR，结局常见时 OR 会夸大关联。</p>
 <p><strong>操作要点</strong>：工具箱选"OR/RR"，指定暴露与结局字段，对照组取值，零格自动修正，主指标选 RR。</p>
@@ -2079,7 +2079,7 @@
 <p><strong>美赛场景区</strong>：两个评委/两种分类器/两次标注结果的一致性；标注质量检验。</p>
 <p><strong>核心原理</strong>：观察一致率减去机遇一致率，再除以 <span class="arithmatex">\(1-\)</span>机遇一致率。Kappa <span class="arithmatex">\(=1\)</span> 完全一致、<span class="arithmatex">\(=0\)</span> 等于瞎猜。Landis-Koch 分级：<span class="arithmatex">\(&lt;0.2\)</span> 极差、<span class="arithmatex">\(0.4\)</span>--<span class="arithmatex">\(0.6\)</span> 中等、<span class="arithmatex">\(0.6\)</span>--<span class="arithmatex">\(0.8\)</span> 良好、<span class="arithmatex">\(&gt;0.8\)</span> 很好。有序等级可用加权 Kappa。</p>
 <p><strong>操作要点</strong>：工具箱选"Kappa"，两列成对评分，权重方案按数据选，判读标准 Altman。</p>
-<p><strong>结果关键</strong>：案例两位医师 CT 分级 Kappa=0.721（CI 0.63--0.81），良好；分歧集中在"可疑恶性"等级。</p>
+<p><strong>结果关键</strong>：案例两位医师 CT [Computed Tomography, 电子计算机断层扫描] 分级 Kappa=0.721（CI 0.63--0.81），良好；分歧集中在"可疑恶性"等级。</p>
 <p><strong>注意</strong>：符合率高但 Kappa 低，说明两人都倾向选多数类别（边际分布偏），一致性其实差。</p>
 </div>
 <h3 id="mcnemar">配对卡方（McNemar检验）  <code>进阶级</code><a class="headerlink" href="#mcnemar" title="Permanent link">&para;</a></h3>
@@ -2107,9 +2107,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当一个人可能因<strong>多种互斥原因</strong>退出（如腹透患者要么技术失败、要么死亡），把别的原因当删失会高估关注事件发生率，竞争风险模型正确处理这一点。</p>
 <p><strong>美赛场景区</strong>：迁移到"多种互斥结局"的风险分析（如客户可能流失也可能升级套餐）；更真实地估计累积发生率。</p>
-<p><strong>核心原理</strong>：用 Aalen-Johansen 法估计各原因累计发生函数（CIF），用 Fine-Gray 子分布风险回归估计因素对关注事件的影响（SHR）。</p>
+<p><strong>核心原理</strong>：用 Aalen-Johansen 法估计各原因累计发生函数（CIF [Cumulative Incidence Function, 累积发生函数]），用 Fine-Gray 子分布风险回归估计因素对关注事件的影响（SHR [Subdistribution Hazard Ratio, 子分布风险比]）。</p>
 <p><strong>操作要点</strong>：工具箱选"竞争风险"，指定时间、多分类结局、关注事件取值、协变量，Bootstrap 1000 次给 CI。</p>
-<p><strong>结果关键</strong>：案例 12 月时技术失败 CIF=0.191，血清白蛋白 SHR=0.91（保护）；注意不要用"<span class="arithmatex">\(1-\)</span>KM"口径（会高估）。</p>
+<p><strong>结果关键</strong>：案例 12 月时技术失败 CIF=0.191，血清白蛋白 SHR=0.91（保护）；注意不要用"<span class="arithmatex">\(1-\)</span>KM [Kaplan-Meier,  Kaplan-Meier生存分析]"口径（会高估）。</p>
 <p><strong>注意</strong>：存在竞争事件时，普通 Cox/KM 会有偏，必须用 CIF/Fine-Gray。</p>
 </div>
 <h3 id="_13">卡方拟合优度检验  <code>进阶级</code><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>

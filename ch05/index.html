@@ -1437,9 +1437,9 @@
 <p><strong>这个分类是干什么的？</strong></p>
 <p>前面的方法都有"标准答案"（因变量、分组标签）。这一章是<strong>无监督学习</strong>——<strong>没有标准答案</strong>。聚类是把"长得像"的对象自动归成一群（会员分群、客户分层）；降维是把"十几个互相纠缠的指标"压缩成"两三个综合指标"（主成分、因子），让数据从啰嗦变简洁。</p>
 <p><strong>美赛什么题型常用？</strong></p>
-<p>C题（大数据题）高频出现：客户分群、城市分类、指标体系构建；A/B题中把高维观测投影到二维做可视化；论文中"综合评价"前常用PCA先把指标浓缩。</p>
+<p>C题（大数据题）高频出现：客户分群、城市分类、指标体系构建；A/B题中把高维观测投影到二维做可视化；论文中"综合评价"前常用PCA [Principal Component Analysis, 主成分分析]先把指标浓缩。</p>
 <p><strong>学习路径建议</strong>
-先学<strong>K-Means聚类</strong>（最经典）和<strong>主成分分析PCA</strong>（降维入门）；再认识<strong>二阶聚类</strong>（能同时处理连续+分类变量）和<strong>探索性因子分析</strong>（问卷量表维度提炼）；进阶了解分层聚类、DBSCAN、判别分析LDA、MDS和RDA。</p>
+先学<strong>K-Means聚类</strong>（最经典）和<strong>主成分分析PCA</strong>（降维入门）；再认识<strong>二阶聚类</strong>（能同时处理连续+分类变量）和<strong>探索性因子分析</strong>（问卷量表维度提炼）；进阶了解分层聚类、DBSCAN [Density-Based Spatial Clustering of Applications with Noise, 基于密度的噪声应用空间聚类]、判别分析LDA [Linear Discriminant Analysis, 线性判别分析]、MDS [Multidimensional Scaling, 多维标度分析]和RDA [Redundancy Analysis, 冗余分析]。</p>
 </div>
 <h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="k-means">⭐ 聚类分析（K-Means）  <code>基础级</code><a class="headerlink" href="#k-means" title="Permanent link">&para;</a></h3>
@@ -1466,12 +1466,12 @@
 <p>三类画像：簇0（40%）活跃高频但客单低；簇1（22.7%）三项都低（沉默客户）；簇2（37.3%）客单价高但频次低（高价值低频）。</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
 <li>点击菜单 <strong>分析 → 分类 → K-平均值聚类</strong></li>
 <li>把参与分群的变量（<strong>月消费频次、平均客单价、月活跃天数</strong>）选入<strong>变量</strong></li>
 <li>"聚类数"填3（也可先用工具箱自动选<span class="arithmatex">\(K\)</span>）</li>
-<li>点击<strong>选项</strong>，勾选"初始聚类中心""最终聚类中心""ANOVA表"</li>
+<li>点击<strong>选项</strong>，勾选"初始聚类中心""最终聚类中心""ANOVA [Analysis of Variance, 方差分析]表"</li>
 <li>方法选<strong>k-means++</strong>初始化，固定随机种子保证可复现</li>
 <li>点击<strong>确定</strong></li>
 </ol>
@@ -1516,7 +1516,7 @@
 <p class="admonition-title">通俗原理</p>
 <p>它分两步，这也是"两步聚类"名字的由来：
 1. <strong>阶段一</strong>：逐个扫描样本，把相近的先攒成小"子簇"（像先把散珠子拢成小堆）
-1. <strong>阶段二</strong>：用对数似然距离把这些小簇逐层合并，自动试<span class="arithmatex">\(k=2\)</span>到10，用<strong>BIC/AIC</strong>和<strong>轮廓系数</strong>选最佳</p>
+1. <strong>阶段二</strong>：用对数似然距离把这些小簇逐层合并，自动试<span class="arithmatex">\(k=2\)</span>到10，用<strong>BIC [Bayesian Information Criterion, 贝叶斯信息准则]/AIC [Akaike Information Criterion, 赤池信息准则]</strong>和<strong>轮廓系数</strong>选最佳</p>
 <p>本案例试<span class="arithmatex">\(k=2\)</span>--10，轮廓系数在<span class="arithmatex">\(k=4\)</span>处最高0.271，故定4簇。连续变量用欧式距离、分类变量用对数似然距离，所以它能混合两类变量。</p>
 </div>
 <div class="admonition tip">
@@ -1569,7 +1569,7 @@
 - 第一主成分PC1：数据"波动最大"的方向，本它解释了47.4%的方差
 - 第二主成分PC2：和PC1垂直、又能解释最多剩余波动（20.6%）
 - 第三PC3：再解释18.5%</p>
-<p>前3个累计解释86.6%——几乎用3个综合指标就装下了原来9个指标的信息。<strong>适用性前提</strong>：先做Bartlett球度检验（本案例<span class="arithmatex">\(\chi^2=1035.7\)</span>，<span class="arithmatex">\(p=5\times10^{-194}\)</span>，适合降维）和KMO（本案例0.811<span class="arithmatex">\(&gt;0.6\)</span>，适合）。</p>
+<p>前3个累计解释86.6%——几乎用3个综合指标就装下了原来9个指标的信息。<strong>适用性前提</strong>：先做Bartlett球度检验（本案例<span class="arithmatex">\(\chi^2=1035.7\)</span>，<span class="arithmatex">\(p=5\times10^{-194}\)</span>，适合降维）和KMO [Kaiser-Meyer-Olkin,  Kaiser-Meyer-Olkin检验]（本案例0.811<span class="arithmatex">\(&gt;0.6\)</span>，适合）。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1580,7 +1580,7 @@
 <li>点<strong>抽取</strong>，选"基于特征值<span class="arithmatex">\(&gt;\)</span>1"或固定提取个数</li>
 <li>点<strong>确定</strong></li>
 </ol>
-<p><strong>默认参数参考</strong>：先做z-score标准化（等效于基于相关矩阵）；选择模式cumulative（累计贡献率到80%停）；SVD求解器auto。本案例保留3个主成分。</p>
+<p><strong>默认参数参考</strong>：先做z-score标准化（等效于基于相关矩阵）；选择模式cumulative（累计贡献率到80%停）；SVD [Singular Value Decomposition, 奇异值分解]求解器auto。本案例保留3个主成分。</p>
 </div>
 <div class="admonition success">
 <p class="admonition-title">结果怎么看</p>
@@ -1634,7 +1634,7 @@
 <li><strong>分析 → 降维 → 因子</strong></li>
 <li>把15个题项全部选入变量框</li>
 <li>点<strong>描述</strong>勾KMO和Bartlett</li>
-<li>点<strong>抽取</strong>：方法选主轴因子法PAF，按特征值<span class="arithmatex">\(&gt;\)</span>1定因子数</li>
+<li>点<strong>抽取</strong>：方法选主轴因子法PAF [Principal Axis Factoring, 主轴因子法]，按特征值<span class="arithmatex">\(&gt;\)</span>1定因子数</li>
 <li>点<strong>旋转</strong>：选<strong>最大方差法varimax</strong></li>
 <li>点<strong>确定</strong></li>
 </ol>
@@ -1680,7 +1680,7 @@
 <p><strong>核心原理</strong>：先对响应矩阵做多元回归得拟合值，再对拟合值做主成分分解得"约束排序轴"。全局置换检验<span class="arithmatex">\(p=0.001\)</span>，<span class="arithmatex">\(R^2=89.24%\)</span>说明环境变量显著解释了藻类变异。</p>
 <p><strong>操作要点</strong>：工具箱选"冗余分析RDA"，指定响应变量组和解释变量组；分类解释变量自动哑变量化；置换999次。</p>
 <p><strong>结果关键</strong>：全局置换检验<span class="arithmatex">\(p\)</span>；各解释变量单独解释率；排序图箭头方向与长度。</p>
-<p><strong>注意</strong>：它是<strong>有约束</strong>的PCA。若响应沿环境梯度呈单峰分布，应改用典范对应分析CCA。</p>
+<p><strong>注意</strong>：它是<strong>有约束</strong>的PCA。若响应沿环境梯度呈单峰分布，应改用典范对应分析CCA [Canonical Correlation Analysis, 典型相关分析]。</p>
 </div>
 <h3 id="lda">判别分析（LDA）  <code>进阶级</code><a class="headerlink" href="#lda" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
@@ -1690,7 +1690,7 @@
 <p><strong>核心原理</strong>：找线性判别函数，使<strong>组间差异相对组内差异</strong>最大。本案例5个财务指标建判别函数，留一法准确率80.6%（Kappa=0.708），远高于猜最大类的33.3%基线。</p>
 <p><strong>操作要点</strong>：工具箱选"判别分析LDA"，指定分组列和特征列；Box's M检验协方差齐性；留一法交叉验证。</p>
 <p><strong>结果关键</strong>：Wilks' Lambda（整体判别力）；标准化判别系数（谁最能区分）；混淆矩阵和各类命中率。</p>
-<p><strong>注意</strong>：它和PCA都降维，但<strong>LDA用到类别标签</strong>、目标是"分开组"；PCA无标签、目标是"保留方差"。协方差不齐时用二次判别QDA。</p>
+<p><strong>注意</strong>：它和PCA都降维，但<strong>LDA用到类别标签</strong>、目标是"分开组"；PCA无标签、目标是"保留方差"。协方差不齐时用二次判别QDA [Quadratic Discriminant Analysis, 二次判别分析]。</p>
 </div>
 <h3 id="mds">多维尺度分析（MDS）  <code>进阶级</code><a class="headerlink" href="#mds" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">

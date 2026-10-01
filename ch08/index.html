@@ -842,10 +842,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rfm" class="md-nav__link">
+  <a href="#rfm-recency-frequency-monetary" class="md-nav__link">
     <span class="md-ellipsis">
       
-        RFM客户价值模型 进阶级
+        RFM [Recency, Frequency, Monetary, 最近消费、消费频率、消费金额模型]客户价值模型 进阶级
       
     </span>
   </a>
@@ -1602,9 +1602,9 @@
 <p><strong>这个分类是干什么的？</strong></p>
 <p>综合评价解决的是"把多个指标合成一个总得分来排名"的问题。现实中评价一个对象往往要同时看好几个维度——评价门店要看坪效、毛利率、复购率、损耗率……每个指标量纲不同、方向不一，还可能有的"越大越好"有的"越小越好"。综合评价就是一套系统方法：先<strong>给每个指标定权重</strong>（谁更重要），再<strong>把它们合成一个可比的总分</strong>，最后排出优劣次序。</p>
 <p><strong>美赛什么题型常用？</strong></p>
-<p>综合评价是美赛<strong>最高频</strong>的建模题型之一。凡是题目出现"评价、排名、排序、优选、选最佳方案、确定指标权重"等字样，几乎都用这一章。其中<strong>熵值法、AHP、TOPSIS</strong>是三大核心方法，几乎每场比赛都至少用到一个；DEA用于效率评价，耦合协调度、障碍度模型用于发展质量诊断。</p>
+<p>综合评价是美赛<strong>最高频</strong>的建模题型之一。凡是题目出现"评价、排名、排序、优选、选最佳方案、确定指标权重"等字样，几乎都用这一章。其中<strong>熵值法、AHP [Analytic Hierarchy Process, 层次分析法]、TOPSIS [Technique for Order Preference by Similarity to an Ideal Solution, 逼近理想解排序法]</strong>是三大核心方法，几乎每场比赛都至少用到一个；DEA [Data Envelopment Analysis, 数据包络分析]用于效率评价，耦合协调度、障碍度模型用于发展质量诊断。</p>
 <p><strong>学习路径建议</strong>
-先掌握<strong>赋权</strong>：客观赋权学<strong>熵值法</strong>（带星标，完全靠数据说话），主观赋权学<strong>AHP层次分析法</strong>（带星标，靠专家成对比较）；再学<strong>CRITIC权重法</strong>。然后学<strong>TOPSIS</strong>（带星标，与理想方案比距离排名）这个最常用的"打分器"，以及它和熵值法结合的<strong>熵权TOPSIS</strong>。<strong>模糊综合评价</strong>用于指标模糊、难以精确量化的场景。进阶部分了解DEA/SBM效率评价、BWM、耦合协调、障碍度、DEMATEL、ISM等专门工具。</p>
+先掌握<strong>赋权</strong>：客观赋权学<strong>熵值法</strong>（带星标，完全靠数据说话），主观赋权学<strong>AHP层次分析法</strong>（带星标，靠专家成对比较）；再学<strong>CRITIC [Criteria Importance Through Intercriteria Correlation, 基于指标相关性的权重确定法]权重法</strong>。然后学<strong>TOPSIS</strong>（带星标，与理想方案比距离排名）这个最常用的"打分器"，以及它和熵值法结合的<strong>熵权TOPSIS</strong>。<strong>模糊综合评价</strong>用于指标模糊、难以精确量化的场景。进阶部分了解DEA/SBM [Slack-Based Measure, 基于松弛变量的测度模型]效率评价、BWM [Best-Worst Method, 最优最劣方法]、耦合协调、障碍度、DEMATEL [Decision Making Trial and Evaluation Laboratory, 决策试验与评价实验室法]、ISM [Interpretive Structural Modeling, 解释结构模型]等专门工具。</p>
 </div>
 <h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">⭐ 熵值法  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -1633,9 +1633,9 @@
 <p>本案例权重：坪效0.284最高（门店间差距最大），其次库存周转率0.234、毛利率0.166；损耗率、投诉率因门店间差异小而权重低。</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
-<li>在Dabbit AI SPSS工具箱中选择"熵值法"</li>
+<li>在Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱中选择"熵值法"</li>
 <li>上传评价数据：对象标识列选"门店编号"，纳入6个指标</li>
 <li>设置参数：</li>
 <li>指标方向：坪效/毛利率/会员复购率/库存周转率为正向；损耗率/顾客投诉率为负向</li>
@@ -1688,7 +1688,7 @@
 <ul>
 <li><strong>构造判断矩阵</strong>：用Saaty的1--9标度打分。<span class="arithmatex">\(a_{ij}=1\)</span> 表示两指标同等重要，<span class="arithmatex">\(3\)</span> 表示前者稍重要，<span class="arithmatex">\(5\)</span> 明显重要，<span class="arithmatex">\(7\)</span> 强烈重要，<span class="arithmatex">\(9\)</span> 极端重要；反之取倒数。</li>
 <li><strong>求权重</strong>：对判断矩阵求最大特征根 <span class="arithmatex">\(\lambda_{\max}\)</span> 对应的特征向量，归一化即权重。</li>
-<li><strong>一致性检验（关键！）</strong>：算一致性指标 <span class="arithmatex">\(CI=(\lambda_{\max}-n)/(n-1)\)</span>，一致性比率 <span class="arithmatex">\(CR=CI/RI\)</span>（<span class="arithmatex">\(RI\)</span> 是随机一致性指标，随阶数查表）。<strong><span class="arithmatex">\(CR&lt;0.1\)</span> 才算专家判断前后一致、权重可用</strong>；<span class="arithmatex">\(CR\geq0.1\)</span> 要回去改判断。</li>
+<li><strong>一致性检验（关键！）</strong>：算一致性指标 <span class="arithmatex">\(CI [Confidence Interval, 置信区间]=(\lambda_{\max}-n)/(n-1)\)</span>，一致性比率 <span class="arithmatex">\(CR [Composite Reliability, 组合信度]=CI/RI [Random Index, 随机一致性指标]\)</span>（<span class="arithmatex">\(RI\)</span> 是随机一致性指标，随阶数查表）。<strong><span class="arithmatex">\(CR&lt;0.1\)</span> 才算专家判断前后一致、权重可用</strong>；<span class="arithmatex">\(CR\geq0.1\)</span> 要回去改判断。</li>
 </ul>
 <p>本案例准则层：技术能力权重0.317最高，价格0.260次之；综合后供应商A权重0.389最优。判断矩阵 <span class="arithmatex">\(\lambda_{\max}=5.002\)</span>，<span class="arithmatex">\(CR=0.001&lt;0.1\)</span>，一致性很好。</p>
 </div>
@@ -1723,7 +1723,7 @@
 - <strong>坑1</strong>：不做一致性检验就报权重。CR超0.1的判断矩阵是无效的。
 - <strong>坑2</strong>：指标过多（超过9个）时两两比较次数爆炸、一致性难保证。
 - <strong>坑3</strong>：把AHP当客观方法。它本质是主观经验的量化，应说明专家构成。</p>
-<p><strong>和相似算法的区别</strong>：vs <strong>熵值法</strong>——AHP主观、熵值法客观，常组合赋权；vs <strong>模糊层次分析FAHP</strong>——AHP用精确数，FAHP用三角模糊数表达"大致重要"，更贴合专家模糊判断；vs <strong>BWM</strong>——BWM只需比较"最优/最劣"，比较次数更少、一致性更好。</p>
+<p><strong>和相似算法的区别</strong>：vs <strong>熵值法</strong>——AHP主观、熵值法客观，常组合赋权；vs <strong>模糊层次分析FAHP [Fuzzy Analytic Hierarchy Process, 模糊层次分析法]</strong>——AHP用精确数，FAHP用三角模糊数表达"大致重要"，更贴合专家模糊判断；vs <strong>BWM</strong>——BWM只需比较"最优/最劣"，比较次数更少、一致性更好。</p>
 </div>
 <h3 id="critic">CRITIC权重法  <code>基础级</code><a class="headerlink" href="#critic" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
@@ -1879,12 +1879,12 @@
 <p><strong>什么时候用？</strong>多对象多指标的排名优选，是综合评价的"通用底座"。</p>
 <p><strong>什么时候不用？</strong>
 - 指标间存在不可公度、或有缺失严重时，先清洗
-- 需要判断"属于哪一档"而非连续排名时，模糊综合或RSR更合适</p>
+- 需要判断"属于哪一档"而非连续排名时，模糊综合或RSR [Rank Sum Ratio, 秩和比法]更合适</p>
 <p><strong>常见坑</strong>
 - <strong>坑1</strong>：负向指标不同向化就直接算距离，方向错误。
 - <strong>坑2</strong>：用等权却声称"客观"。等权也是一种主观假设，建议配合熵权。
 - <strong>坑3</strong>：只看贴近度绝对值。<span class="arithmatex">\(C\)</span> 是相对排名工具，不同批次样本的 <span class="arithmatex">\(C\)</span> 不能直接比大小。</p>
-<p><strong>和相似算法的区别</strong>：vs <strong>熵权TOPSIS</strong>——本TOPSIS权重可等权可主观，熵权TOPSIS用熵值法客观定权；vs <strong>VIKOR</strong>——TOPSIS看距离理想解的贴近度，VIKOR是折中排序，引入群体效用与个体遗憾。</p>
+<p><strong>和相似算法的区别</strong>：vs <strong>熵权TOPSIS</strong>——本TOPSIS权重可等权可主观，熵权TOPSIS用熵值法客观定权；vs <strong>VIKOR [VlseKriterijumska Optimizacija I Kompromisno Resenje, 多准则妥协解排序法]</strong>——TOPSIS看距离理想解的贴近度，VIKOR是折中排序，引入群体效用与个体遗憾。</p>
 </div>
 <h3 id="topsis_1">熵权TOPSIS  <code>基础级</code><a class="headerlink" href="#topsis_1" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
@@ -1947,7 +1947,7 @@
 <p><strong>一句话</strong>：考虑了"松弛变量"和"非期望产出"的DEA效率评价模型，能同时处理少投入、多产出、少排污。</p>
 <p><strong>美赛场景区</strong>：绿色生产效率评价，如制造业企业在投入人力能耗、产出产值的同时排放二氧化碳。</p>
 <p><strong>核心原理</strong>：用Tone的非径向SBM模型，把投入冗余、期望产出不足、非期望产出过多的松弛量直接计入目标函数，经线性规划逐单元求效率。本案例150家企业平均效率0.731，21家有效，冗余主要在碳排放（松弛率26.2%）。</p>
-<p><strong>操作要点</strong>：工具箱选"SBM"，指定投入、期望产出、非期望产出，VRS，非期望产出弱可处置。</p>
+<p><strong>操作要点</strong>：工具箱选"SBM"，指定投入、期望产出、非期望产出，VRS [Variable Returns to Scale, 可变规模报酬]，非期望产出弱可处置。</p>
 <p><strong>结果关键</strong>：效率得分0--1，越接近1越好；看松弛率定位冗余来源（投入侧还是排放侧）。</p>
 <p><strong>注意</strong>：效率是组内相对值，跨期跨组不可直接比；需线性规划求解，SPSS原生不支持，用R/Python扩展。</p>
 </div>
@@ -1958,7 +1958,7 @@
 <p><strong>美赛场景区</strong>：完全不引入主观打分，依据数据自身区分信息为门店经营指标定权。</p>
 <p><strong>核心原理</strong>：逐列算均值与标准差，变异系数<span class="arithmatex">\(=\)</span>标准差/均值，归一化为权重，再对极差归一化数据加权求和。本案例"线上销售占比"权重最高（0.2805），综合得分最高对象M1142（0.7068）。</p>
 <p><strong>操作要点</strong>：工具箱选"变异系数法"，指标列自动识别，负向指标倒数变换，缺失均值填补。</p>
-<p><strong>结果关键</strong>：变异系数大的指标权重高；注意要求指标取值为正才能算CV。</p>
+<p><strong>结果关键</strong>：变异系数大的指标权重高；注意要求指标取值为正才能算CV [Coefficient of Variation, 变异系数]。</p>
 <p><strong>注意</strong>：与熵值法同为客观赋权，思路相近但CV用离散系数、熵值用信息熵；量纲不同时要先同向化。</p>
 </div>
 <h3 id="_7">模糊层次分析法  <code>进阶级</code><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
@@ -1971,7 +1971,7 @@
 <p><strong>结果关键</strong>：CR<span class="arithmatex">\(&lt;\)</span>0.1通过；报告模糊权重区间与去模糊权重，权重差小于0.03视为排序接近。</p>
 <p><strong>注意</strong>：它是AHP的模糊升级版，适合判断不确定的场景；计算更复杂，需R/Python扩展。</p>
 </div>
-<h3 id="rfm">RFM客户价值模型  <code>进阶级</code><a class="headerlink" href="#rfm" title="Permanent link">&para;</a></h3>
+<h3 id="rfm-recency-frequency-monetary">RFM [Recency, Frequency, Monetary, 最近消费、消费频率、消费金额模型]客户价值模型  <code>进阶级</code><a class="headerlink" href="#rfm-recency-frequency-monetary" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：用最近消费时间(R)、消费频率(F)、消费金额(M)三个维度给客户打分分层，识别高价值客户。</p>
@@ -2006,7 +2006,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：只需专家指定"最好"和"最差"准则，分别比较它们与其他准则，比较次数比AHP少、一致性更好的主观赋权法。</p>
 <p><strong>美赛场景区</strong>：多专家参与的指标权重确定，如30人评审组确定供应商评价准则权重。</p>
-<p><strong>核心原理</strong>：专家给出最优准则到各准则的BO向量、各准则到最劣准则的OW向量，用最小化最大偏差的线性规划求权重，以<span class="arithmatex">\(CR=\xi^*/CI\)</span>检验一致性。本案例产品质量权重0.421最高，30组判断一致性均值0.0083全部通过。</p>
+<p><strong>核心原理</strong>：专家给出最优准则到各准则的BO [Bayesian Optimization, 贝叶斯优化]向量、各准则到最劣准则的OW [Ordered Weighted, 有序加权]向量，用最小化最大偏差的线性规划求权重，以<span class="arithmatex">\(CR=\xi^*/CI\)</span>检验一致性。本案例产品质量权重0.421最高，30组判断一致性均值0.0083全部通过。</p>
 <p><strong>操作要点</strong>：工具箱选"BWM"，指定best/worst准则，几何聚合，一致性阈值0.10。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(CR&lt;0.1\)</span>通过；权重和为1；报告专家间分歧幅度。</p>
 <p><strong>注意</strong>：是AHP的改进，比较次数从<span class="arithmatex">\(n(n-1)/2\)</span>降到<span class="arithmatex">\(2n-3\)</span>；仍属主观赋权，需R/Python扩展。</p>
@@ -2056,7 +2056,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把一堆相互影响的因素，通过邻接矩阵和可达矩阵，梳理成"表层结果—中层传导—深层根源"的层级结构。</p>
 <p><strong>美赛场景区</strong>：分析影响工程质量/系统性能的众多因素，找出哪些是根源、哪些是表象。</p>
-<p><strong>核心原理</strong>：由专家两两判断建0/1邻接矩阵，加单位阵做布尔传递闭包得可达矩阵，用"可达集<span class="arithmatex">\(\subseteq\)</span>先行集"逐层剥离分层，再做MICMAC驱动-依赖分类。本案例20因素分5层，高层领导重视、制度建设是根源驱动。</p>
+<p><strong>核心原理</strong>：由专家两两判断建0/1邻接矩阵，加单位阵做布尔传递闭包得可达矩阵，用"可达集<span class="arithmatex">\(\subseteq\)</span>先行集"逐层剥离分层，再做MICMAC [Matrice d'Impacts Croisés Multiplication Appliquée à un Classement, 交叉影响矩阵相乘法]驱动-依赖分类。本案例20因素分5层，高层领导重视、制度建设是根源驱动。</p>
 <p><strong>操作要点</strong>：工具箱选"ISM"，录入因素间二元关系，一致率阈值0.5，含MICMAC分类。</p>
 <p><strong>结果关键</strong>：层级图（表层L1到根源L5）；驱动型因素优先治理，依赖型只是结果。</p>
 <p><strong>注意</strong>：它梳理因素<strong>结构关系</strong>，不打分排名；判断矩阵来自专家，需多人共识。</p>
@@ -2077,8 +2077,8 @@
 <p><strong>一句话</strong>：基于DEA前沿，衡量决策单元全要素生产率的跨期变化，并拆成"效率追赶"和"技术进步"两部分。</p>
 <p><strong>美赛场景区</strong>：评价多家门店/企业连续几年生产率是进步还是退步、靠管理追赶还是技术升级。</p>
 <p><strong>核心原理</strong>：用DEA求各期前沿距离函数，按Färe分解算Malmquist指数<span class="arithmatex">\(M=\)</span>技术效率变化<span class="arithmatex">\(\times\)</span>技术进步，再细分纯技术效率与规模效率变化。本案例平均每期提升6.5%，主要靠技术进步（1.089）。</p>
-<p><strong>操作要点</strong>：工具箱选"Malmquist"，指定DMU、时期、投入列、产出列，输入导向，几何平均汇总。</p>
-<p><strong>结果关键</strong>：<span class="arithmatex">\(M&gt;1\)</span>进步、<span class="arithmatex">\(&lt;1\)</span>退步；分解看是EFFCH还是TECHCH主导。</p>
+<p><strong>操作要点</strong>：工具箱选"Malmquist"，指定DMU [Decision Making Unit, 决策单元]、时期、投入列、产出列，输入导向，几何平均汇总。</p>
+<p><strong>结果关键</strong>：<span class="arithmatex">\(M&gt;1\)</span>进步、<span class="arithmatex">\(&lt;1\)</span>退步；分解看是EFFCH [Efficiency Change, 效率变化]还是TECHCH [Technical Change, 技术变化]主导。</p>
 <p><strong>注意</strong>：需平衡投入产出面板；它是DEA的动态版，静态效率用DEA/SBM。</p>
 </div>
 <h3 id="dea">数据包络分析（DEA）  <code>进阶级</code><a class="headerlink" href="#dea" title="Permanent link">&para;</a></h3>
@@ -2089,7 +2089,7 @@
 <p><strong>核心原理</strong>：用包络线性规划构造由最有效单元围成的前沿面，测各单元到前沿的径向距离得效率分（0--1），再分解纯技术效率与规模效率。本案例150店中34家前沿有效，平均效率0.888，低效店平均有14.4%投入压缩空间。</p>
 <p><strong>操作要点</strong>：工具箱选"DEA"，指定DMU列、投入列、产出列，投入导向、VRS，样本量<span class="arithmatex">\(\geq 3(m+s)\)</span>。</p>
 <p><strong>结果关键</strong>：效率=1为有效；报告松弛量、规模报酬类型与参照标杆单元。</p>
-<p><strong>注意</strong>：效率是组内相对值，跨期不可直接比；不区分随机噪声（SBM/SFA改进）；需R/Python扩展。</p>
+<p><strong>注意</strong>：效率是组内相对值，跨期不可直接比；不区分随机噪声（SBM/SFA [Stochastic Frontier Analysis, 随机前沿分析]改进）；需R/Python扩展。</p>
 </div>
 <h3 id="_13">综合指数  <code>进阶级</code><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">

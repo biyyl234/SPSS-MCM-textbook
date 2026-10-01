@@ -1427,11 +1427,11 @@
 <p>现实世界里超过80%的数据是"文字"——顾客评论、政策文件、新闻报道、问卷开放题、社交媒体留言。文本分析就是教你<strong>把这些非结构化的文字变成能统计、能画图、能建模的数字</strong>。它不要求你读完全部几千条评论，而是自动告诉你：大家最常说什么词？情绪是正面还是负面？这些文字能归纳成哪几个话题？</p>
 <p><strong>美赛什么题型常用？</strong></p>
 <p>文本分析在美赛中是<strong>C题（大数据/数据挖掘）</strong>和<strong>E/F题（环境/政策）</strong>的常客：
-- C题经常给你一份CSV，里面一列是评论文本、政策文本或新闻标题，要求你做情感倾向、主题挖掘、热点识别。
-- E/F题要分析政策文件、公众意见时，词频、LDA主题模型能帮你快速归纳各方关注点。
+- C题经常给你一份CSV [Comma-Separated Values, 逗号分隔值文件]，里面一列是评论文本、政策文本或新闻标题，要求你做情感倾向、主题挖掘、热点识别。
+- E/F题要分析政策文件、公众意见时，词频、LDA [Latent Dirichlet Allocation, 隐含狄利克雷分配]主题模型能帮你快速归纳各方关注点。
 - 拿到一堆文字却"不知道里面在讲什么"时，从本章入手。</p>
 <p><strong>学习路径建议</strong></p>
-<p>按"从简单到复杂、从描述到建模"的顺序学：先<strong>词频统计</strong>（数一数词）和<strong>词云图</strong>（把词频画出来）——这是一切文本分析的地基；再学<strong>文本情感分析</strong>（判断正负情绪，是有监督学习）和<strong>LDA主题分析</strong>（自动归纳话题，是无监督学习）这两个明星算法。进阶部分的<strong>TF-IDF</strong>是"给词加权"的核心武器，<strong>文本聚类</strong>把相似文本自动分组，<strong>共词网络</strong>看词与词的关系，<strong>新词发现</strong>则用来挖词典里没有的新说法。</p>
+<p>按"从简单到复杂、从描述到建模"的顺序学：先<strong>词频统计</strong>（数一数词）和<strong>词云图</strong>（把词频画出来）——这是一切文本分析的地基；再学<strong>文本情感分析</strong>（判断正负情绪，是有监督学习）和<strong>LDA主题分析</strong>（自动归纳话题，是无监督学习）这两个明星算法。进阶部分的<strong>TF [Term Frequency, 词频]-IDF [Inverse Document Frequency, 逆文档频率] [Term Frequency-Inverse Document Frequency, 词频-逆文档频率]</strong>是"给词加权"的核心武器，<strong>文本聚类</strong>把相似文本自动分组，<strong>共词网络</strong>看词与词的关系，<strong>新词发现</strong>则用来挖词典里没有的新说法。</p>
 </div>
 <h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">词频统计  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -1459,9 +1459,9 @@
 <p><strong>分组比较注意</strong>：两组文本条数不同，不能直接比绝对次数，要比<strong>相对频率</strong>（组内占比），否则人多的那组什么词都"更多"。</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
-<li>在Dabbit AI SPSS工具箱中选择"词频统计"（SPSS原生无中文分词，需工具箱或Python扩展）</li>
+<li>在Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱中选择"词频统计"（SPSS原生无中文分词，需工具箱或Python扩展）</li>
 <li>上传含文本列的数据，指定<strong>文本字段</strong>；如有分组列（如咨询类别），选入<strong>分组字段</strong></li>
 <li>停用词范围选<strong>chinese_and_english</strong>（中英停用词都过滤）</li>
 <li>分词模式选auto；设置最短词长（通常<span class="arithmatex">\(\geq2\)</span>），是否去数字</li>
@@ -1568,7 +1568,7 @@
 <li><strong>文本向量化（TF-IDF）</strong>：把每段文字变成一串数字。中文不用分词，用<strong>字符级n-gram</strong>（char_wb）——相邻两三个字切成特征，比如"太差"、"好吃"，避免了中文分词的麻烦。</li>
 <li><strong>分类器</strong>：用<strong>逻辑回归</strong>（logistic），简单可解释。类别不均衡时开<strong>class weight=balanced</strong>自动加权。</li>
 <li><strong>为什么可解释</strong>：逻辑回归的系数告诉你哪些词是"正面信号"（系数大正）、哪些是"负面信号"（系数大负）。</li>
-<li><strong>怎么评估</strong>：把数据切成训练集/测试集（test size=0.2），训练集上做5折交叉验证估稳定性，测试集上看准确率、宏平均F1、AUC。</li>
+<li><strong>怎么评估</strong>：把数据切成训练集/测试集（test size=0.2），训练集上做5折交叉验证估稳定性，测试集上看准确率、宏平均F1、AUC [Area Under the Curve, 曲线下面积]。</li>
 </ul>
 <p>生活类比：就像老师批改作文——先拿标准答案（标注数据）教学生（训练模型），再让学生做一套没见过的卷子（测试集），看他和标准答案对得上多少。</p>
 </div>
@@ -1582,7 +1582,7 @@
 <li>测试集比例test size=0.2，交叉验证5折，随机种子42（保证可复现）</li>
 <li>运行，查看效果指标与高区分度关键词</li>
 </ol>
-<p><strong>默认参数参考</strong>：char_wb字符n-gram，逻辑回归，类别加权，5折CV，测试集20%，最大特征5000。</p>
+<p><strong>默认参数参考</strong>：char_wb字符n-gram，逻辑回归，类别加权，5折CV [Coefficient of Variation, 变异系数]，测试集20%，最大特征5000。</p>
 </div>
 <div class="admonition success">
 <p class="admonition-title">结果怎么看</p>
@@ -1708,7 +1708,7 @@ s]+拆分多关键词。</p>
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：不依赖任何词典，直接从海量文本里自动找出"大家新造出来、词典里还没有"的词，比如"半固态电池""零重力座椅"。</p>
 <p><strong>美赛场景区</strong>：分析新兴领域（新能源、AI、网络热词）时，业务词库更新跟不上，用它自动挖掘候选新词补充词表。</p>
-<p><strong>核心原理</strong>：三重证据筛选——(1)<strong>凝固度（PMI互信息）</strong>：字之间结合得紧不紧，切一刀算最小PMI；(2)<strong>自由度（左右熵）</strong>：这个词能不能出现在不同语境（左右邻居越多样越能独立成词）；(3)<strong>词频</strong>。三者都过阈值才入选，按综合得分排序。</p>
+<p><strong>核心原理</strong>：三重证据筛选——(1)<strong>凝固度（PMI [Pointwise Mutual Information, 点互信息]互信息）</strong>：字之间结合得紧不紧，切一刀算最小PMI；(2)<strong>自由度（左右熵）</strong>：这个词能不能出现在不同语境（左右邻居越多样越能独立成词）；(3)<strong>词频</strong>。三者都过阈值才入选，按综合得分排序。</p>
 <p><strong>操作要点</strong>：工具箱选"新词发现"；候选字串长度2<span class="arithmatex">\(\sim\)</span>6；设最小词频、最小PMI、最小左右熵；去重、去纯数字、去非中文。</p>
 <p><strong>结果关键</strong>：案例（车主评论）挖出36个候选新词，头部如"半固态电池、零重力座椅、能量回收、城市领航、哨兵模式"，复用强度与成词证据最充分，可交人工确认后入词库。</p>
 <p><strong>注意</strong>：这是辅助工具，输出只是<strong>候选清单</strong>，必须人工复核再入库，机器可能把高频搭配误判成词。它解决的是"分词词典太旧"的问题。</p>

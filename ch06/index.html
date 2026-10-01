@@ -797,10 +797,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sfa" class="md-nav__link">
+  <a href="#sfa-stochastic-frontier-analysis" class="md-nav__link">
     <span class="md-ellipsis">
       
-        随机前沿分析（SFA） 进阶级
+        随机前沿分析（SFA [Stochastic Frontier Analysis, 随机前沿分析]） 进阶级
       
     </span>
   </a>
@@ -852,10 +852,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sur" class="md-nav__link">
+  <a href="#sur-seemingly-unrelated-regression" class="md-nav__link">
     <span class="md-ellipsis">
       
-        似不相关回归（SUR） 进阶级
+        似不相关回归（SUR [Seemingly Unrelated Regression, 似不相关回归]） 进阶级
       
     </span>
   </a>
@@ -863,10 +863,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ecm" class="md-nav__link">
+  <a href="#ecm-error-correction-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        误差修正模型（ECM） 进阶级
+        误差修正模型（ECM [Error Correction Model, 误差修正模型]） 进阶级
       
     </span>
   </a>
@@ -929,10 +929,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tsls2sls" class="md-nav__link">
+  <a href="#tsls-two-stage-least-squares-2sls" class="md-nav__link">
     <span class="md-ellipsis">
       
-        两阶段最小二乘（TSLS/2SLS） 进阶级
+        两阶段最小二乘（TSLS [Two-Stage Least Squares, 两阶段最小二乘法]/2SLS） 进阶级
       
     </span>
   </a>
@@ -1646,15 +1646,15 @@
 <p><strong>这个分类是干什么的？</strong></p>
 <p>这一章分两块。<strong>时间序列</strong>部分处理"按时间排好队"的数据（如月度销售额、日客流），关心序列平不平稳、有没有自相关、变量之间谁领先谁；<strong>计量经济</strong>部分则更雄心勃勃——它要回答"<strong>因果</strong>"问题：上了这个系统、投了这笔钱，到底带来了多少真实效果？它通过基准回归、面板模型、双重差分、工具变量等方法，努力从数据里把因果关系和"相关关系"区分开。</p>
 <p><strong>美赛什么题型常用？</strong></p>
-<p>计量方法在美赛中越来越受重视：B题、C题常要求评估一项政策/措施的效果（DID、PSM、RDD、工具变量都是得分利器）；时间序列方法（ADF、格兰杰、VAR、协整）则用于分析随时间演化的变量关系，是论文"建模严谨性"的体现。凡是题目问"<span class="arithmatex">\(X\)</span> 对 <span class="arithmatex">\(Y\)</span> 有没有影响、影响多大、是不是因果"，基本都落在这一章。</p>
+<p>计量方法在美赛中越来越受重视：B题、C题常要求评估一项政策/措施的效果（DID [Difference-in-Differences, 双重差分法]、PSM [Propensity Score Matching, 倾向得分匹配]、RDD [Regression Discontinuity Design, 断点回归设计]、工具变量都是得分利器）；时间序列方法（ADF [Augmented Dickey-Fuller, 增广迪基-富勒检验]、格兰杰、VAR [Vector Autoregression, 向量自回归模型]、协整）则用于分析随时间演化的变量关系，是论文"建模严谨性"的体现。凡是题目问"<span class="arithmatex">\(X\)</span> 对 <span class="arithmatex">\(Y\)</span> 有没有影响、影响多大、是不是因果"，基本都落在这一章。</p>
 <p><strong>学习路径建议</strong></p>
-<p>先打地基：<strong>基准回归</strong>（带星标，一切计量的起点）和<strong>ADF单位根检验</strong>（时间序列的入场券）。然后学<strong>面板模型</strong>（带星标，处理多年多主体数据）和<strong>双重差分DID</strong>（带星标，政策评估王牌）。再补<strong>ACF/PACF</strong>和<strong>格兰杰因果检验</strong>这两个时间序列诊断工具。进阶部分则是DID、PSM、工具变量、RDD、VAR等"因果识别工具箱"——注意其中不少方法SPSS原生支持有限，需要通过Dabbit AI SPSS工具箱或SPSS的R/Python扩展实现。</p>
+<p>先打地基：<strong>基准回归</strong>（带星标，一切计量的起点）和<strong>ADF单位根检验</strong>（时间序列的入场券）。然后学<strong>面板模型</strong>（带星标，处理多年多主体数据）和<strong>双重差分DID</strong>（带星标，政策评估王牌）。再补<strong>ACF [Autocorrelation Function, 自相关函数]/PACF [Partial Autocorrelation Function, 偏自相关函数]</strong>和<strong>格兰杰因果检验</strong>这两个时间序列诊断工具。进阶部分则是DID、PSM、工具变量、RDD、VAR等"因果识别工具箱"——注意其中不少方法SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]原生支持有限，需要通过Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱或SPSS的R/Python扩展实现。</p>
 </div>
 <h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">⭐ 基准回归  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>基准回归就是用普通最小二乘法（OLS）拟合一条"最佳拟合直线"，量化核心解释变量对因变量的平均影响，并通过一系列诊断检验保证这个系数是可信的。它是几乎所有计量分析的第一步。</p>
+<p>基准回归就是用普通最小二乘法（OLS [Ordinary Least Squares, 普通最小二乘法]）拟合一条"最佳拟合直线"，量化核心解释变量对因变量的平均影响，并通过一系列诊断检验保证这个系数是可信的。它是几乎所有计量分析的第一步。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
@@ -1673,7 +1673,7 @@
 <li><strong>核心看 <span class="arithmatex">\(\beta_1\)</span></strong>：本案例为3.357，意思是在控制其他变量后，数字化营销投入每增加1个单位，月均销售额平均增加3.357个单位。</li>
 <li><strong>为什么要加控制变量</strong>：如果只看营销投入和销售额，可能是"面积大的门店既投得多又卖得多"。加入面积等控制变量后，才能把这种混杂因素剥离，看到营销投入的"净效应"。</li>
 </ul>
-<p><strong>诊断三板斧</strong>：VIF检验多重共线性（<span class="arithmatex">\(VIF&gt;10\)</span> 危险）、Breusch-Pagan检验异方差、RESET检验模型设定是否正确。本案例采用HC1稳健标准误应对异方差。</p>
+<p><strong>诊断三板斧</strong>：VIF [Variance Inflation Factor, 方差膨胀因子]检验多重共线性（<span class="arithmatex">\(VIF&gt;10\)</span> 危险）、Breusch-Pagan检验异方差、RESET [Regression Equation Specification Error Test, 回归方程设定误差检验]检验模型设定是否正确。本案例采用HC1稳健标准误应对异方差。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1707,9 +1707,9 @@
 - 因变量是0/1二分类时，应用逻辑回归（见第4章）</p>
 <p><strong>常见坑</strong>
 - <strong>坑1</strong>：把"显著"当"重要"。<span class="arithmatex">\(p&lt;0.05\)</span> 只说明效应不为零，不代表效应大；还要看系数大小和 <span class="arithmatex">\(R^2\)</span>。
-- <strong>坑2</strong>：忽略异方差，用普通标准误导致 <span class="arithmatex">\(p\)</span> 值不可信。异方差存在时务必用HC稳健标准误。
+- <strong>坑2</strong>：忽略异方差，用普通标准误导致 <span class="arithmatex">\(p\)</span> 值不可信。异方差存在时务必用HC [Heteroskedasticity-Consistent, 异方差稳健]稳健标准误。
 - <strong>坑3</strong>：不做共线性诊断，变量高度相关时系数符号甚至会反常。</p>
-<p><strong>和相似算法的区别</strong>：vs <strong>面板模型</strong>——基准回归是横截面混合OLS，面板模型能控制个体固定效应；vs <strong>PSM/IV</strong>——基准回归只给"条件相关"，后两者追求更干净的因果解释。</p>
+<p><strong>和相似算法的区别</strong>：vs <strong>面板模型</strong>——基准回归是横截面混合OLS，面板模型能控制个体固定效应；vs <strong>PSM/IV [Instrumental Variable, 工具变量]</strong>——基准回归只给"条件相关"，后两者追求更干净的因果解释。</p>
 </div>
 <h3 id="adf">ADF单位根检验  <code>基础级</code><a class="headerlink" href="#adf" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
@@ -1742,9 +1742,9 @@
 <li>上传含时间列与数值列的月度序列（本案例销售额sales_amount、营销费用）</li>
 <li>设置参数：</li>
 <li>回归形式：默认含常数项（regression='c'）</li>
-<li>滞后阶数：AIC自动选择（autolag='AIC'）</li>
+<li>滞后阶数：AIC [Akaike Information Criterion, 赤池信息准则]自动选择（autolag='AIC'）</li>
 <li>是否检验一阶差分：是</li>
-<li>显著性水平0.05；缺失值线性插值；KPSS交叉验证可选</li>
+<li>显著性水平0.05；缺失值线性插值；KPSS [Kwiatkowski-Phillips-Schmidt-Shin, KPSS平稳性检验]交叉验证可选</li>
 <li>运行，依次查看水平序列与一阶差分序列的ADF结果</li>
 </ol>
 <p><strong>SPSS中对应操作</strong>：SPSS无原生ADF菜单，通过 <strong>分析 → 时间序列</strong> 或R/Python扩展（statsmodels的adfuller）实现。</p>
@@ -1789,7 +1789,7 @@
 <ul>
 <li><strong>第一个差</strong>：处理组试点后减试点前——但这里面混了"随时间自然增长"。</li>
 <li><strong>第二个差</strong>：对照组同期后减前——它只反映"随时间自然增长"。</li>
-<li><strong>双重差分</strong>：把第一个差减去第二个差，自然趋势被抵消，剩下的就是政策的净效应（平均处理效应ATT）。</li>
+<li><strong>双重差分</strong>：把第一个差减去第二个差，自然趋势被抵消，剩下的就是政策的净效应（平均处理效应ATT [Average Treatment effect on the Treated, 处理组平均处理效应]）。</li>
 </ul>
 <p><strong>核心前提——平行趋势</strong>：政策实施前，处理组和对照组的结果走势必须大致平行。本案例用事件研究联合F检验验证这一点；前提成立，结论才可信。估计用双向固定效应回归，标准误在个体层面聚类。本案例政策使处理组销售额平均提高162.827（<span class="arithmatex">\(p&lt;0.001\)</span>）。</p>
 </div>
@@ -1848,10 +1848,10 @@
 <p>你有一张"门店 <span class="arithmatex">\(\times\)</span> 年份"的大表。问题在于：每家门店天生不同（有的在旺角），每年又有共同行情（某年整体生意好做）。面板模型就是把这两部分固定住：</p>
 <ul>
 <li><strong>混合OLS</strong>：把所有数据堆一起回归，假装门店之间没区别——最简单但最粗糙。</li>
-<li><strong>个体固定效应（FE）</strong>：给每家门店一个"截距项"，吸收掉所有不随时间变的个体特征（区位、铺面）。这样比较的是"同一家门店自身变化"。</li>
-<li><strong>随机效应（RE）</strong>：把个体差异当作随机扰动，更省参数但要求个体与解释变量不相关。</li>
+<li><strong>个体固定效应（FE [Fixed Effects, 固定效应]）</strong>：给每家门店一个"截距项"，吸收掉所有不随时间变的个体特征（区位、铺面）。这样比较的是"同一家门店自身变化"。</li>
+<li><strong>随机效应（RE [Random Effects, 随机效应]）</strong>：把个体差异当作随机扰动，更省参数但要求个体与解释变量不相关。</li>
 </ul>
-<p><strong>怎么选</strong>：用F检验、BP-LM检验和Hausman检验按 <span class="arithmatex">\(\alpha=0.05\)</span> 自动判定。本案例检验结果支持<strong>个体固定效应</strong>。结果：客流强度每+1单位，年销售额平均+4.769（<span class="arithmatex">\(p&lt;0.001\)</span>）；员工人数+1单位，+25.866；促销投入+1单位，+3.224（<span class="arithmatex">\(p=0.019\)</span>）。</p>
+<p><strong>怎么选</strong>：用F检验、BP [Breusch-Pagan, 布罗施-帕甘检验]-LM [Lagrange Multiplier, 拉格朗日乘子检验]检验和Hausman检验按 <span class="arithmatex">\(\alpha=0.05\)</span> 自动判定。本案例检验结果支持<strong>个体固定效应</strong>。结果：客流强度每+1单位，年销售额平均+4.769（<span class="arithmatex">\(p&lt;0.001\)</span>）；员工人数+1单位，+25.866；促销投入+1单位，+3.224（<span class="arithmatex">\(p=0.019\)</span>）。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1883,17 +1883,17 @@
 <p><strong>常见坑</strong>
 - <strong>坑1</strong>：跳过Hausman检验随便选固定/随机效应。选错会导致系数不一致。
 - <strong>坑2</strong>：忽略异方差和序列相关，普通标准误偏小，过度自信。应使用聚类稳健标准误。</p>
-<p><strong>和相似算法的区别</strong>：vs <strong>动态面板模型</strong>——本面板不含滞后因变量；若上一年销售本身影响今年，需用动态面板（GMM）。vs <strong>基准回归</strong>——面板控制了个体/时间固定效应，比混合OLS干净。</p>
+<p><strong>和相似算法的区别</strong>：vs <strong>动态面板模型</strong>——本面板不含滞后因变量；若上一年销售本身影响今年，需用动态面板（GMM [Generalized Method of Moments, 广义矩估计]）。vs <strong>基准回归</strong>——面板控制了个体/时间固定效应，比混合OLS干净。</p>
 </div>
 <h3 id="acfpacf">自相关/偏自相关分析（ACF/PACF）  <code>基础级</code><a class="headerlink" href="#acfpacf" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>ACF/PACF图是时间序列的"身份证"——它们画出当前值与过去各期值的相关程度，帮你判断这条序列内部有没有惯性、该用几阶的AR或MA模型来描述它。</p>
+<p>ACF/PACF图是时间序列的"身份证"——它们画出当前值与过去各期值的相关程度，帮你判断这条序列内部有没有惯性、该用几阶的AR [Autoregressive, 自回归]或MA [Moving Average, 移动平均]模型来描述它。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
 <ul>
-<li>建立ARIMA/ARMA模型前的<strong>定阶依据</strong>（决定 <span class="arithmatex">\(p,q\)</span>）</li>
+<li>建立ARIMA [Autoregressive Integrated Moving Average, 差分整合移动平均自回归模型]/ARMA [Autoregressive Moving Average, 自回归移动平均模型]模型前的<strong>定阶依据</strong>（决定 <span class="arithmatex">\(p,q\)</span>）</li>
 <li>本案例：门店日销售额相邻日期为何连续同涨同跌，该用AR几阶</li>
 <li>判断序列是否为白噪声（完全随机）</li>
 <li>论文中说明模型阶数选择过程的必备图</li>
@@ -1935,7 +1935,7 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">注意事项 &amp; 决策指引</p>
-<p><strong>什么时候用？</strong>ARIMA/SARIMA建模前的定阶，以及判断序列自相关结构。</p>
+<p><strong>什么时候用？</strong>ARIMA/SARIMA [Seasonal Autoregressive Integrated Moving Average, 季节性差分自回归移动平均模型]建模前的定阶，以及判断序列自相关结构。</p>
 <p><strong>什么时候不用？</strong>横截面数据、或只关心因果而不做时间预测时。</p>
 <p><strong>常见坑</strong>
 - <strong>坑1</strong>：对不平稳序列直接看ACF。不平稳序列ACF会缓慢衰减、假装拖尾，必须先差分再看图。
@@ -2015,7 +2015,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：解决"处理组和对照组本来就不可比"的问题——给每个处理对象找一个各方面特征几乎一样的对照对象，再比较结果。</p>
 <p><strong>美赛场景区</strong>：评估培训、干预等非随机政策对工资/绩效的效果，消除自选择偏差。</p>
-<p><strong>核心原理</strong>：先用Logit模型估计每个对象接受处理的倾向得分，再按得分做最近邻匹配，用标准化均值差（SMD）检验匹配后协变量是否平衡，最后在平衡样本上估计ATT。本案例匹配后最大<span class="arithmatex">\(|SMD|=0.071\)</span>（已平衡），ATT=742.7（95%CI [463,1110]，<span class="arithmatex">\(p&lt;0.001\)</span>）。</p>
+<p><strong>核心原理</strong>：先用Logit模型估计每个对象接受处理的倾向得分，再按得分做最近邻匹配，用标准化均值差（SMD [Standardized Mean Difference, 标准化均值差]）检验匹配后协变量是否平衡，最后在平衡样本上估计ATT。本案例匹配后最大<span class="arithmatex">\(|SMD|=0.071\)</span>（已平衡），ATT=742.7（95%CI [Confidence Interval, 置信区间] [463,1110]，<span class="arithmatex">\(p&lt;0.001\)</span>）。</p>
 <p><strong>操作要点</strong>：工具箱选"PSM"，指定处理列、结果列、协变量，方法最近邻匹配，estimand=ATT，bootstrap给置信区间。</p>
 <p><strong>结果关键</strong>：匹配后所有协变量<span class="arithmatex">\(|SMD|&lt;0.1\)</span>才算平衡；ATT显著为正。</p>
 <p><strong>注意</strong>：PSM只能平衡"可观测"特征，无法纠正不可观测混杂；若选不到共同支撑域内的对照，匹配失效。SPSS原生不支持，通过R/Python扩展实现。</p>
@@ -2040,15 +2040,15 @@
 <p><strong>结果关键</strong>：AR(2)检验<span class="arithmatex">\(p&gt;0.05\)</span>（无二阶序列相关）、Hansen J检验<span class="arithmatex">\(p&gt;0.1\)</span>（工具外生）才可采信。</p>
 <p><strong>注意</strong>：这是高级计量方法，SPSS原生不支持，需通过R扩展（panelvar/pdm）或Dabbit AI工具箱实现；工具不能过多（工具数应少于个体数）。</p>
 </div>
-<h3 id="sfa">随机前沿分析（SFA）  <code>进阶级</code><a class="headerlink" href="#sfa" title="Permanent link">&para;</a></h3>
+<h3 id="sfa-stochastic-frontier-analysis">随机前沿分析（SFA [Stochastic Frontier Analysis, 随机前沿分析]）  <code>进阶级</code><a class="headerlink" href="#sfa-stochastic-frontier-analysis" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把实际产出与"理论最优产出前沿"的差距拆成"运气等随机波动"和"真实技术无效率"两部分，测算每个主体的效率。</p>
 <p><strong>美赛场景区</strong>：评估企业/合作社/医院的生产效率，识别低效主体作为帮扶对象。</p>
-<p><strong>核心原理</strong>：把误差写成随机噪声 <span class="arithmatex">\(v\)</span>（正态）减技术无效率 <span class="arithmatex">\(u\)</span>（半正态、非负），用极大似然估计前沿函数与两方差；<span class="arithmatex">\(\gamma\)</span> 衡量无效率占总误差的比重，LR检验无效率是否显著。本案例平均技术效率约0.899，<span class="arithmatex">\(\gamma=0.855\)</span>，无效率显著。</p>
-<p><strong>操作要点</strong>：工具箱选"随机前沿分析"，指定产出、投入、主体编号、年份，函数形式log-log，优化器L-BFGS-B多起点。</p>
+<p><strong>核心原理</strong>：把误差写成随机噪声 <span class="arithmatex">\(v\)</span>（正态）减技术无效率 <span class="arithmatex">\(u\)</span>（半正态、非负），用极大似然估计前沿函数与两方差；<span class="arithmatex">\(\gamma\)</span> 衡量无效率占总误差的比重，LR [Likelihood Ratio, 似然比]检验无效率是否显著。本案例平均技术效率约0.899，<span class="arithmatex">\(\gamma=0.855\)</span>，无效率显著。</p>
+<p><strong>操作要点</strong>：工具箱选"随机前沿分析"，指定产出、投入、主体编号、年份，函数形式log-log，优化器L-BFGS [Broyden-Fletcher-Goldfarb-Shanno, 拟牛顿优化算法]-B多起点。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(\gamma\)</span> 接近1说明差距主要来自真实效率损失；报告各主体技术效率并排序找低效者。</p>
-<p><strong>注意</strong>：需面板或截面数据且投入产出方向一致；与DEA的区别是SFA区分了随机噪声、对异常值稳健。</p>
+<p><strong>注意</strong>：需面板或截面数据且投入产出方向一致；与DEA [Data Envelopment Analysis, 数据包络分析]的区别是SFA区分了随机噪声、对异常值稳健。</p>
 </div>
 <h3 id="_9">门槛回归  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
@@ -2074,8 +2074,8 @@
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：一种不要求数据正态、对异常值稳健的非参数趋势检验，判断序列是否显著上升/下降，并估计趋势斜率。</p>
-<p><strong>美赛场景区</strong>：水文水质、气象、环境监测序列的长期趋势诊断，如各断面COD是否显著下降。</p>
-<p><strong>核心原理</strong>：计算秩序列的Mann-Kendall统计量S与p值判断趋势显著性，再用Sen斜率估计趋势幅度；序列有自相关或周期时用方差修正/TFPW预白化。本案例3条断面序列中2条检出显著下降趋势。</p>
+<p><strong>美赛场景区</strong>：水文水质、气象、环境监测序列的长期趋势诊断，如各断面COD [Coefficient of Determination, 决定系数]是否显著下降。</p>
+<p><strong>核心原理</strong>：计算秩序列的Mann-Kendall统计量S与p值判断趋势显著性，再用Sen斜率估计趋势幅度；序列有自相关或周期时用方差修正/TFPW [Trend-Free Pre-Whitening, 无趋势预白化]预白化。本案例3条断面序列中2条检出显著下降趋势。</p>
 <p><strong>操作要点</strong>：工具箱选"Mann-Kendall趋势检验"，分组列站点、双侧检验<span class="arithmatex">\(\alpha=0.05\)</span>，自相关自动诊断、连续性修正。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(p&lt;0.05\)</span> 且Sen斜率为负/正对应下降/上升趋势；报告斜率及其95%置信区间。</p>
 <p><strong>注意</strong>：适用于偏态、有异常值的环境时间序列；它只判断单调趋势，不拟合具体曲线。</p>
@@ -2090,17 +2090,17 @@
 <p><strong>结果关键</strong>：主峰频率与周期、各峰能量占比；主峰能量占比越高周期性越强。</p>
 <p><strong>注意</strong>：要求等间隔采样；它回答"周期成分多强"，与ACF/PACF的时域视角互补。</p>
 </div>
-<h3 id="sur">似不相关回归（SUR）  <code>进阶级</code><a class="headerlink" href="#sur" title="Permanent link">&para;</a></h3>
+<h3 id="sur-seemingly-unrelated-regression">似不相关回归（SUR [Seemingly Unrelated Regression, 似不相关回归]）  <code>进阶级</code><a class="headerlink" href="#sur-seemingly-unrelated-regression" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当同一批对象同时有多个相关的结果方程时，把它们联合估计，利用方程间的误差相关提高效率。</p>
 <p><strong>美赛场景区</strong>：同时估计促销对销售额、促销对成交笔数两个方程，且两误差可能同期相关。</p>
-<p><strong>核心原理</strong>：先逐方程OLS得残差，估计跨方程误差协方差矩阵，再用可行广义最小二乘（FGLS）堆叠联合求解；用Breusch-Pagan LM检验跨方程误差是否相关，相关才有联合估计的必要。本案例促销支出对销售额系数0.706（<span class="arithmatex">\(p&lt;0.001\)</span>）。</p>
+<p><strong>核心原理</strong>：先逐方程OLS得残差，估计跨方程误差协方差矩阵，再用可行广义最小二乘（FGLS [Feasible Generalized Least Squares, 可行广义最小二乘法]）堆叠联合求解；用Breusch-Pagan LM检验跨方程误差是否相关，相关才有联合估计的必要。本案例促销支出对销售额系数0.706（<span class="arithmatex">\(p&lt;0.001\)</span>）。</p>
 <p><strong>操作要点</strong>：工具箱选"似不相关回归"，逐方程设定因变量与自变量，FGLS两步，VIF阈值10。</p>
 <p><strong>结果关键</strong>：BP-LM检验<span class="arithmatex">\(p&lt;0.05\)</span>说明跨方程误差相关、SUR有效；报告各方程系数。</p>
 <p><strong>注意</strong>：若跨方程误差不相关，SUR与逐方程OLS几乎无差别；SPSS无原生菜单，需R扩展。</p>
 </div>
-<h3 id="ecm">误差修正模型（ECM）  <code>进阶级</code><a class="headerlink" href="#ecm" title="Permanent link">&para;</a></h3>
+<h3 id="ecm-error-correction-model">误差修正模型（ECM [Error Correction Model, 误差修正模型]）  <code>进阶级</code><a class="headerlink" href="#ecm-error-correction-model" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：在确认两序列协整后，量化短期偏离长期均衡后会以多快速度被"拉回"。</p>
@@ -2160,7 +2160,7 @@
 <p><strong>结果关键</strong>：稳定性与残差白噪声通过；脉冲响应图看传导路径，方差分解看贡献占比。</p>
 <p><strong>注意</strong>：变量不宜过多、样本要长；它是"方程组"而非单一因果，结果用于刻画动态关系。</p>
 </div>
-<h3 id="tsls2sls">两阶段最小二乘（TSLS/2SLS）  <code>进阶级</code><a class="headerlink" href="#tsls2sls" title="Permanent link">&para;</a></h3>
+<h3 id="tsls-two-stage-least-squares-2sls">两阶段最小二乘（TSLS [Two-Stage Least Squares, 两阶段最小二乘法]/2SLS）  <code>进阶级</code><a class="headerlink" href="#tsls-two-stage-least-squares-2sls" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当解释变量"内生"（与误差相关）导致OLS有偏时，找一个只通过该解释变量影响结果的"工具变量"，分两步把因果效应干净地识别出来。</p>
@@ -2177,7 +2177,7 @@
 <p><strong>美赛场景区</strong>：如2018、2020两批门店先后上线智能补货系统，部分门店始终不参与作对照。</p>
 <p><strong>核心原理</strong>：整理个体—时间面板，用事件研究检验平行趋势，再用双向固定效应估ATT，并补充Sun-Abraham队列加权估计作稳健性，全程个体聚类标准误。本案例政策使结果平均提高3.572（<span class="arithmatex">\(p&lt;0.001\)</span>，95%CI [2.87,4.27]）。</p>
 <p><strong>操作要点</strong>：工具箱选"多期DID"，指定个体列、时间列、处理列、处理时点列，事件窗口[-4,+1]，个体聚类。</p>
-<p><strong>结果关键</strong>：政策前事件研究系数不显著（平行趋势）；ATT显著；Sun-Abraham结果与TWFE一致。</p>
+<p><strong>结果关键</strong>：政策前事件研究系数不显著（平行趋势）；ATT显著；Sun-Abraham结果与TWFE [Two-Way Fixed Effects, 双向固定效应]一致。</p>
 <p><strong>注意</strong>：交错处理下传统TWFE可能因"坏对照"有偏，务必做事件研究与稳健性对照；高级计量，需R扩展实现。</p>
 </div>
 <h3 id="_16">方差分解  <code>进阶级</code><a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>

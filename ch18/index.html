@@ -1438,7 +1438,7 @@
 <p><strong>注意</strong>：功效是"长期检出概率"，不是"这次一定显著"——达到80%功效也意味着仍有20%的可能检不出。</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
 <li>工具箱选"功效分析之均值差"</li>
 <li>检验类型选<strong>两独立样本</strong>（也支持配对、单样本、单因素方差分析）；检验方向<strong>双侧</strong></li>
@@ -1469,7 +1469,7 @@
 - <strong>坑2</strong>：效应量拍脑袋给大了，导致样本量算得偏小、实际检不出。务必用预试验或文献估计效应量，并做灵敏度分析。
 - <strong>坑3</strong>：忽略前提。功效公式近似要求数据近似正态、方差齐，案例中已用Shapiro与Levene检验确认。</p>
 <p><strong>和相似算法的区别</strong>
-- vs <strong>第3章t检验/ANOVA</strong>：t检验是拿到数据后<strong>检验差异是否存在</strong>；功效分析是<strong>之前</strong>算要多少样本。
+- vs <strong>第3章t检验/ANOVA [Analysis of Variance, 方差分析]</strong>：t检验是拿到数据后<strong>检验差异是否存在</strong>；功效分析是<strong>之前</strong>算要多少样本。
 - vs <strong>功效分析之方差</strong>：均值差针对两组；方差（ANOVA）功效针对三组及以上。</p>
 </div>
 <h3 id="_4">📐 功效分析之线性回归  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
@@ -1488,7 +1488,7 @@
 <p class="admonition-title">通俗原理</p>
 <p>回归功效基于<strong>非中心<span class="arithmatex">\(F\)</span>分布</strong>：</p>
 <ul>
-<li>先用预试验数据拟合OLS，得到<strong>调整<span class="arithmatex">\(R^2\)</span></strong>，换算成效应量 <span class="arithmatex">\(f^2 = R^2/(1-R^2)\)</span>。</li>
+<li>先用预试验数据拟合OLS [Ordinary Least Squares, 普通最小二乘法]，得到<strong>调整<span class="arithmatex">\(R^2\)</span></strong>，换算成效应量 <span class="arithmatex">\(f^2 = R^2/(1-R^2)\)</span>。</li>
 <li>非中心参数 <span class="arithmatex">\(\lambda = n\cdot f^2\)</span>，自由度 <span class="arithmatex">\(v = n-k-1\)</span>（<span class="arithmatex">\(k\)</span>为预测变量数）。</li>
 <li>功效<span class="arithmatex">\(=1-F_{nc}(F_{临界}; u, v, \lambda)\)</span>，再二分反推满足目标功效的最小<span class="arithmatex">\(n\)</span>。</li>
 <li>Cohen基准：<span class="arithmatex">\(f^2\approx0.02\)</span>小、<span class="arithmatex">\(0.15\)</span>中、<span class="arithmatex">\(0.35\)</span>大。</li>
@@ -1557,8 +1557,8 @@
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当结局不是正态连续变量，而是二分类、计数等更复杂的结局时，用广义线性模型的功效分析来定样本量。是均值差功效的"升级版"。</p>
-<p><strong>美赛场景区</strong>：规划安全性/不良反应对照研究——如联合用药使肝功能异常率从20%升到40%（<span class="arithmatex">\(OR=2\)</span>），需要多少患者。</p>
-<p><strong>核心原理</strong>：先按结局选分布族与链接函数（二项/泊松/负二项）；给定效应量、基线率、<span class="arithmatex">\(\alpha\)</span>、分配比，用Wald检验的渐近功效二分求解总样本量；再固定种子生成数据、拟合对应GLM做蒙特卡洛模拟，在解点和1.25倍样本点核对解析近似是否靠谱。</p>
+<p><strong>美赛场景区</strong>：规划安全性/不良反应对照研究——如联合用药使肝功能异常率从20%升到40%（<span class="arithmatex">\(OR [Odds Ratio, 比值比]=2\)</span>），需要多少患者。</p>
+<p><strong>核心原理</strong>：先按结局选分布族与链接函数（二项/泊松/负二项）；给定效应量、基线率、<span class="arithmatex">\(\alpha\)</span>、分配比，用Wald检验的渐近功效二分求解总样本量；再固定种子生成数据、拟合对应GLM [Generalized Linear Model, 广义线性模型]做蒙特卡洛模拟，在解点和1.25倍样本点核对解析近似是否靠谱。</p>
 <p><strong>操作要点</strong>：工具箱选"功效分析之广义模型"；family选binomial；solve选n；填效应（OR=2）、基线率、<span class="arithmatex">\(\alpha=0.05\)</span>、双侧、功效0.8；指定group与outcome列。</p>
 <p><strong>结果关键</strong>：案例（二项结局、<span class="arithmatex">\(OR=2\)</span>、基线20%）需总样本<strong>352例</strong>（对照176、暴露176）；蒙特卡洛实测功效81.1%，与解析80.1%吻合。</p>
 <p><strong>注意</strong>：这是功效分析里最灵活但也最复杂的一类。结果对<span class="arithmatex">\(\alpha\)</span>、基线率假设敏感；资源有限时可评估放宽<span class="arithmatex">\(\alpha\)</span>或用单侧检验以降样本量。美赛中用到时，重点是把"样本量怎么来的"讲清楚。</p>

@@ -1430,7 +1430,7 @@
 - <strong>文献综述与证据合成</strong>：E题（环境科学）、F题（政策）中，题目往往要求你"综合已有研究/报告的估计值"，比如把各地不同研究报告的某政策减排效果、某疾病发生率合并成一个区域总体估计。
 - <strong>多来源数据合并</strong>：当你手里有多份独立统计（如各城市的相关系数、各试点的发生率），需要汇总出一个带置信区间的总体数字时，Meta分析就是最规范的做法。</p>
 <p><strong>学习路径建议</strong></p>
-<p>先吃透<strong>平均值Meta分析</strong>和<strong>二分类数据Meta分析</strong>两个明星算法——它们覆盖了"连续结局"和"事件结局"两种最常见的数据形态，异质性判断、固定/随机效应模型选择、森林图这些核心概念都在这两个算法里讲透。再了解<strong>相关系数Meta分析</strong>。进阶部分的<strong>一般倒方差法</strong>是"万能底座"（只要别人给的是效应值加标准误就能合并），<strong>单个率Meta分析</strong>、<strong>连续性数据Meta分析（SMD）</strong>、<strong>OR/HR值Meta分析</strong>是它的特化版本，<strong>P值合并</strong>则用于"只有p值、没有效应量"的尴尬情形。</p>
+<p>先吃透<strong>平均值Meta分析</strong>和<strong>二分类数据Meta分析</strong>两个明星算法——它们覆盖了"连续结局"和"事件结局"两种最常见的数据形态，异质性判断、固定/随机效应模型选择、森林图这些核心概念都在这两个算法里讲透。再了解<strong>相关系数Meta分析</strong>。进阶部分的<strong>一般倒方差法</strong>是"万能底座"（只要别人给的是效应值加标准误就能合并），<strong>单个率Meta分析</strong>、<strong>连续性数据Meta分析（SMD [Standardized Mean Difference, 标准化均值差]）</strong>、<strong>OR [Odds Ratio, 比值比]/HR [Hazard Ratio, 风险比]值Meta分析</strong>是它的特化版本，<strong>P值合并</strong>则用于"只有p值、没有效应量"的尴尬情形。</p>
 </div>
 <h2 id="_1">基础级算法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="meta_1">⭐ 平均值Meta分析  <code>基础级</code><a class="headerlink" href="#meta_1" title="Permanent link">&para;</a></h3>
@@ -1450,7 +1450,7 @@
 <p class="admonition-title">通俗原理</p>
 <p>想象你要给一场有很多评委打分的比赛算总分。有的评委很专业（样本量大、打分很稳），有的评委只是随手一看（样本量小、波动大）。合理的做法不是简单平均，而是<strong>让专业评委权重更高</strong>。这就是Meta分析的核心思想。</p>
 <ul>
-<li><strong>效应量MD（均数差）</strong>：每个研究贡献一个"干预组均值<span class="arithmatex">\(-\)</span>对照组均值"。量纲一致时直接用MD，单位和原始结局一样（米、分）。</li>
+<li><strong>效应量MD [Mean Difference, 均值差]（均数差）</strong>：每个研究贡献一个"干预组均值<span class="arithmatex">\(-\)</span>对照组均值"。量纲一致时直接用MD，单位和原始结局一样（米、分）。</li>
 <li><strong>逆方差加权</strong>：权重 <span class="arithmatex">\(w_i = 1/v_i\)</span>，其中<span class="arithmatex">\(v_i\)</span>是该研究效应量的方差。样本越大、标准差越小，方差越小，权重越大。</li>
 <li><strong>异质性</strong>：各研究结果如果只是围绕同一个真值随机波动，叫"同质"；如果研究之间真的不一样，叫"异质"。用三个指标判断：</li>
 <li>Cochran <span class="arithmatex">\(Q\)</span>检验：<span class="arithmatex">\(Q\)</span>的<span class="arithmatex">\(p&lt;0.10\)</span>提示有异质性；</li>
@@ -1460,13 +1460,13 @@
 </ul>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
-<li>在Dabbit AI SPSS工具箱中选择"平均值Meta分析"（SPSS原生无此模块，需借助工具箱或R扩展）</li>
+<li>在Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱中选择"平均值Meta分析"（SPSS原生无此模块，需借助工具箱或R扩展）</li>
 <li>数据按"宽表两臂"布局：每个研究一行，录入两组各自的<strong>样本量<span class="arithmatex">\(n\)</span>、均值、标准差</strong></li>
 <li>设置参数：显著性水准<span class="arithmatex">\(\alpha=0.05\)</span>；效应量选<strong>MD（均数差）</strong>，仅结局量纲一致时用</li>
 <li>合并模型选<strong>auto</strong>：由<span class="arithmatex">\(Q\)</span>检验<span class="arithmatex">\(p\)</span>值与<span class="arithmatex">\(I^2\)</span>自动决定固定/随机效应</li>
-<li><span class="arithmatex">\(\tau^2\)</span>估计选<strong>DL（DerSimonian-Laird矩法）</strong>；结局方向设为<strong>high_is_better</strong>（数值越大越优）</li>
+<li><span class="arithmatex">\(\tau^2\)</span>估计选<strong>DL [Deep Learning, 深度学习]（DerSimonian-Laird矩法）</strong>；结局方向设为<strong>high_is_better</strong>（数值越大越优）</li>
 <li>勾选输出森林图、漏斗图、留一法敏感性分析、Egger发表偏倚检验</li>
 <li>点击运行，查看合并结果与异质性诊断</li>
 </ol>
@@ -1477,7 +1477,7 @@
 <p>以某运动康复案例为例（150项研究，结局为6分钟步行距离，单位米）：</p>
 <ul>
 <li><strong>异质性表</strong>：<span class="arithmatex">\(Q=241.48\)</span>（<span class="arithmatex">\(df=149\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>），<span class="arithmatex">\(I^2=38.3%\)</span>，<span class="arithmatex">\(\tau^2=62.83\)</span>。因<span class="arithmatex">\(Q\)</span>检验<span class="arithmatex">\(p&lt;0.10\)</span>，自动选用<strong>随机效应模型</strong>。</li>
-<li><strong>合并效应（核心）</strong>：随机效应合并<span class="arithmatex">\(MD=31.55\)</span>，<span class="arithmatex">\(95%CI=(29.39,\ 33.70)\)</span>，<span class="arithmatex">\(Z=28.65\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>。<strong>置信区间不含0</strong>，说明干预显著提升了步行距离。</li>
+<li><strong>合并效应（核心）</strong>：随机效应合并<span class="arithmatex">\(MD=31.55\)</span>，<span class="arithmatex">\(95%CI [Confidence Interval, 置信区间]=(29.39,\ 33.70)\)</span>，<span class="arithmatex">\(Z=28.65\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>。<strong>置信区间不含0</strong>，说明干预显著提升了步行距离。</li>
 <li><strong>预测区间</strong>：<span class="arithmatex">\(15.73\sim47.36\)</span>，表示再做一项同类研究，其真实效应大概率落在此范围，比置信区间宽，体现了研究间差异。</li>
 <li><strong>森林图</strong>：每个研究是一个方块（大小=权重）加横线（=置信区间），底部菱形是合并效应。菱形不跨过0线即显著。</li>
 <li><strong>敏感性分析</strong>：逐篇剔除后合并值围绕31.55波动，方向不反转，说明结果稳健。</li>
@@ -1561,7 +1561,7 @@
 <h3 id="meta_3">⭐ 二分类数据Meta分析  <code>基础级</code><a class="headerlink" href="#meta_3" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>二分类数据Meta分析，合并的是"事件/没事件"这种结局。比如每个研究都报了"试验组多少人发生了静脉血栓、对照组多少人发生"，Meta分析把它们合并成一个总的风险比（OR或RR），回答干预到底把风险降了多少。</p>
+<p>二分类数据Meta分析，合并的是"事件/没事件"这种结局。比如每个研究都报了"试验组多少人发生了静脉血栓、对照组多少人发生"，Meta分析把它们合并成一个总的风险比（OR或RR [Relative Risk, 相对风险]），回答干预到底把风险降了多少。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
@@ -1597,7 +1597,7 @@
 </div>
 <div class="admonition success">
 <p class="admonition-title">结果怎么看</p>
-<p>以"新型口服抗凝药预防术后VTE"案例为例（150项研究，多地区医疗中心）：</p>
+<p>以"新型口服抗凝药预防术后VTE [Venous Thromboembolism, 静脉血栓栓塞症]"案例为例（150项研究，多地区医疗中心）：</p>
 <ul>
 <li><strong>合并效应（核心）</strong>：随机效应 <span class="arithmatex">\(OR=0.614\)</span>，<span class="arithmatex">\(95%CI=(0.575,\ 0.656)\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>。意思是<strong>试验组事件风险约为对照组的0.61倍</strong>，即风险下降约39%，显著有效。固定效应<span class="arithmatex">\(OR=0.631\)</span>作对照。</li>
 <li><strong>异质性</strong>：<span class="arithmatex">\(Q=272.96\)</span>（<span class="arithmatex">\(p&lt;0.001\)</span>），<span class="arithmatex">\(I^2=45.4%\)</span>，<span class="arithmatex">\(\tau^2=0.0749\)</span>。按自动规则（<span class="arithmatex">\(p&lt;0.10\)</span>）选随机效应。</li>
@@ -1624,7 +1624,7 @@
 <h3 id="meta_4">一般倒方差Meta分析  <code>进阶级</code><a class="headerlink" href="#meta_4" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
-<p><strong>一句话</strong>：最通用的Meta合并底座——只要每个研究给了"效应值"和"标准误"两列，不管它是均差、回归系数还是对数OR，都能按 <span class="arithmatex">\(1/SE^2\)</span> 加权合并。</p>
+<p><strong>一句话</strong>：最通用的Meta合并底座——只要每个研究给了"效应值"和"标准误"两列，不管它是均差、回归系数还是对数OR，都能按 <span class="arithmatex">\(1/SE [Standard Error, 标准误]^2\)</span> 加权合并。</p>
 <p><strong>美赛场景区</strong>：各研究报告的效应形式五花八门（有的给均差、有的给回归系数），但都附带标准误，需要统一合并出总体净效应。</p>
 <p><strong>核心原理</strong>：以标准误平方的倒数 <span class="arithmatex">\(w_i=1/SE_i^2\)</span> 为权重，先算固定效应下的Cochran <span class="arithmatex">\(Q\)</span>，结合<span class="arithmatex">\(I^2\)</span>、<span class="arithmatex">\(\tau^2\)</span>决定固定/随机效应（DL法估计<span class="arithmatex">\(\tau^2\)</span>），再加权合并并做<span class="arithmatex">\(Z\)</span>检验。若输入是对数尺度，取指数还原成OR/HR/RR。</p>
 <p><strong>操作要点</strong>：工具箱选"一般倒方差Meta分析"；指定效应值列effect、标准误列se、研究标签列study；默认随机效应、双侧检验、95%置信、异质性水准0.10。</p>
@@ -1656,7 +1656,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当你手头只有一堆研究的<strong>p值</strong>（连效应量、原始数据都没有），把这些p值合并成一个"整体证据是否显著"的结论。</p>
 <p><strong>美赛场景区</strong>：文献只报告了各检验的p值和方向，想据此判断"综合起来到底有没有效应"。这是信息最匮乏时的无奈之选。</p>
-<p><strong>核心原理</strong>：常用三套方法——Fisher卡方合并（把<span class="arithmatex">\(-2\ln p\)</span>求和，服从卡方）、Stouffer z合并（可加权，还能利用方向）、Tippett最小p合并。配合KS诊断p值分布、留一法查是否被单一研究主导。</p>
+<p><strong>核心原理</strong>：常用三套方法——Fisher卡方合并（把<span class="arithmatex">\(-2\ln p\)</span>求和，服从卡方）、Stouffer z合并（可加权，还能利用方向）、Tippett最小p合并。配合KS [Kolmogorov-Smirnov, 柯尔莫哥洛夫-斯米尔诺夫检验]诊断p值分布、留一法查是否被单一研究主导。</p>
 <p><strong>操作要点</strong>：工具箱选"P值合并"；指定p值列、方向列、权重列（可空）；方法选all（同时跑Fisher/Stouffer加权/Tippett）；显著性水准0.05。</p>
 <p><strong>结果关键</strong>：案例（150项研究）Fisher合并<span class="arithmatex">\(p=3.3\times10^{-52}&lt;0.05\)</span>，整体显著偏离无效假设；Stouffer两尾<span class="arithmatex">\(p=8.8\times10^{-89}\)</span>支持正向为主。剔除任一研究结论方向不变。</p>
 <p><strong>注意</strong>：P值合并只能告诉你"整体是否有效应"，<strong>既不估计效应有多大，也不量化异质性</strong>，更不能当结论性的效应量来写。它是最后手段，能用效应量合并就别用它。</p>

@@ -1406,7 +1406,7 @@
 <p><strong>美赛什么题型常用？</strong></p>
 <p>预测是美赛的高频任务：C题（数据驱动题）几乎每年都要对销量、客流、需求做短期预测；A题连续型问题里也常需要先预测人口、负荷、污染物浓度再做优化。只要题目出现"forecast、predict、estimate future demand、未来趋势"等字样，基本就落到这一章。常见产出包括未来6--12个月的点预测、预测区间和精度评估。</p>
 <p><strong>学习路径建议</strong></p>
-<p>先学<strong>灰色预测GM(1,1)</strong>和<strong>指数平滑</strong>——它们原理直观、对数据量要求低，小样本、趋势型序列很好用；再啃<strong>ARIMA</strong>（带星标，是时间序列预测的"主力模型"）。进阶部分了解<strong>SARIMA</strong>（处理明显季节周期）、<strong>GARCH</strong>（专门预测波动率而非水平值）和<strong>马尔可夫预测</strong>（预测状态而非数值）。选型时记住一句话：<strong>先看数据有没有趋势、有没有季节、样本够不够多，再决定用哪个模型。</strong></p>
+<p>先学<strong>灰色预测GM <a href="1,1">Grey Model, 灰色模型</a></strong>和<strong>指数平滑</strong>——它们原理直观、对数据量要求低，小样本、趋势型序列很好用；再啃<strong>ARIMA [Autoregressive Integrated Moving Average, 差分整合移动平均自回归模型]</strong>（带星标，是时间序列预测的"主力模型"）。进阶部分了解<strong>SARIMA [Seasonal Autoregressive Integrated Moving Average, 季节性差分自回归移动平均模型]</strong>（处理明显季节周期）、<strong>GARCH [Generalized Autoregressive Conditional Heteroskedasticity, 广义自回归条件异方差]</strong>（专门预测波动率而非水平值）和<strong>马尔可夫预测</strong>（预测状态而非数值）。选型时记住一句话：<strong>先看数据有没有趋势、有没有季节、样本够不够多，再决定用哪个模型。</strong></p>
 </div>
 <h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="gm11">灰色预测GM(1,1)  <code>基础级</code><a class="headerlink" href="#gm11" title="Permanent link">&para;</a></h3>
@@ -1427,16 +1427,16 @@
 <p class="admonition-title">通俗原理</p>
 <p>想象你手里只有几个零散的点，但它们大体在往一个方向走。灰色预测的巧思是：<strong>不去直接预测那些抖动的原始数，而是先把它们"累加"成一条平滑上升的曲线</strong>。</p>
 <ul>
-<li><strong>第一步：累加生成（AGO）</strong>。把原始序列 <span class="arithmatex">\(x^{(0)}(1),x^{(0)}(2),\ldots\)</span> 逐项累加，得到 <span class="arithmatex">\(x^{(1)}(k)=\sum_{i=1}^{k}x^{(0)}(i)\)</span>。累加会把随机波动"抹平"，让新序列接近一条光滑的指数曲线——就像把起伏的海浪累加后变成缓慢抬升的海平面。</li>
+<li><strong>第一步：累加生成（AGO [Accumulating Generation Operator, 累加生成算子]）</strong>。把原始序列 <span class="arithmatex">\(x^{(0)}(1),x^{(0)}(2),\ldots\)</span> 逐项累加，得到 <span class="arithmatex">\(x^{(1)}(k)=\sum_{i=1}^{k}x^{(0)}(i)\)</span>。累加会把随机波动"抹平"，让新序列接近一条光滑的指数曲线——就像把起伏的海浪累加后变成缓慢抬升的海平面。</li>
 <li><strong>第二步：建一阶微分方程</strong>。假设累加后的曲线服从 <span class="arithmatex">\(\frac{dx^{(1)}}{dt}+a x^{(1)}=b\)</span>，其中 <span class="arithmatex">\(a\)</span> 叫发展系数（决定增长速度），<span class="arithmatex">\(b\)</span> 叫灰作用量（内生驱动项），用最小二乘把 <span class="arithmatex">\(a,b\)</span> 估出来。</li>
 <li><strong>第三步：还原预测</strong>。解出微分方程的时间响应式得到 <span class="arithmatex">\(x^{(1)}\)</span> 的预测，再通过相邻两项相减（累减）还原回原始序列尺度的预测值。</li>
 </ul>
 <p><strong>精度怎么看</strong>：用平均相对误差、后验差比值 <span class="arithmatex">\(C\)</span> 和小误差概率 <span class="arithmatex">\(p\)</span> 评定精度等级（一级最好，二级合格，三级勉强，四级不合格）。<span class="arithmatex">\(C\)</span> 越小、<span class="arithmatex">\(p\)</span> 越接近1越好。</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
-<li>在Dabbit AI SPSS工具箱中选择"灰色预测GM(1,1)"</li>
+<li>在Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱中选择"灰色预测GM(1,1)"</li>
 <li>上传等间隔的单变量序列（本案例为某生鲜渠道连续150期周订单量）</li>
 <li>设置参数：</li>
 <li>预测期数 n forecast：5（外推未来5周）</li>
@@ -1491,7 +1491,7 @@
 <li><strong>Holt线性趋势（二次）</strong>：在水平之外再加一个趋势分量 <span class="arithmatex">\(\beta\)</span>，适合有上升/下降趋势但没有季节的序列。</li>
 <li><strong>Holt-Winters三次</strong>：再加季节分量 <span class="arithmatex">\(\gamma\)</span>，同时刻画趋势和年度季节周期，分加法季节（季节波动幅度恒定）和乘法季节（幅度随水平放大）。</li>
 </ul>
-<p>三个参数 <span class="arithmatex">\(\alpha,\beta,\gamma\)</span> 都由计算机在历史数据上自动优化（最小化预留段预测误差RMSE），你不用手调。本案例序列有明显趋势和年度季节波动，因此自动选中<strong>三次Holt-Winters加法季节</strong>，得到 <span class="arithmatex">\(\alpha=0.100,\beta=0.021,\gamma=0.570\)</span>。</p>
+<p>三个参数 <span class="arithmatex">\(\alpha,\beta,\gamma\)</span> 都由计算机在历史数据上自动优化（最小化预留段预测误差RMSE [Root Mean Square Error, 均方根误差]），你不用手调。本案例序列有明显趋势和年度季节波动，因此自动选中<strong>三次Holt-Winters加法季节</strong>，得到 <span class="arithmatex">\(\alpha=0.100,\beta=0.021,\gamma=0.570\)</span>。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1516,7 +1516,7 @@
 <li><strong>95%预测区间</strong>：下一期约为 [3989.5, 4176.5]。区间越往后越宽，反映不确定性随预测期数增大。</li>
 <li><strong>残差诊断</strong>：若残差自相关检验通过（接近白噪声），说明模型已把可预测的规律都捕捉到了。</li>
 </ul>
-<p><strong>判断好坏</strong>：比较预留段上的RMSE/MAE，残差无明显自相关即为合格。预测区间覆盖住真实值比例约95%即说明区间合理。</p>
+<p><strong>判断好坏</strong>：比较预留段上的RMSE/MAE [Mean Absolute Error, 平均绝对误差]，残差无明显自相关即为合格。预测区间覆盖住真实值比例约95%即说明区间合理。</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">注意事项 &amp; 决策指引</p>
@@ -1527,12 +1527,12 @@
 <p><strong>常见坑</strong>
 - <strong>坑1</strong>：对有强趋势的序列用简单指数平滑，结果永远追不上实际值。
 - <strong>坑2</strong>：忽略季节周期。月度数据一定要让模型自动识别季节（<span class="arithmatex">\(m=12\)</span>），否则节假日、大促造成的波峰会被误判为噪声。</p>
-<p><strong>和相似算法的区别</strong>：vs <strong>ARIMA</strong>——指数平滑"上手快、自动选模型"，但理论框架不如ARIMA完整；ARIMA通过ACF/PACF定阶、更灵活，适合对精度要求更高的场景。两者在很多时候预测精度接近，可对比后择优。</p>
+<p><strong>和相似算法的区别</strong>：vs <strong>ARIMA</strong>——指数平滑"上手快、自动选模型"，但理论框架不如ARIMA完整；ARIMA通过ACF [Autocorrelation Function, 自相关函数]/PACF [Partial Autocorrelation Function, 偏自相关函数]定阶、更灵活，适合对精度要求更高的场景。两者在很多时候预测精度接近，可对比后择优。</p>
 </div>
 <h3 id="arima">⭐ ARIMA模型  <code>基础级</code><a class="headerlink" href="#arima" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>ARIMA是时间序列预测里最经典、最强大的"主力模型"。它把序列拆成三部分：差分让序列平稳（I）、用历史值回归现在（AR）、用历史误差修正现在（MA），三者组合起来捕捉序列的惯性，从而做出有统计依据的预测。</p>
+<p>ARIMA是时间序列预测里最经典、最强大的"主力模型"。它把序列拆成三部分：差分让序列平稳（I）、用历史值回归现在（AR [Autoregressive, 自回归]）、用历史误差修正现在（MA [Moving Average, 移动平均]），三者组合起来捕捉序列的惯性，从而做出有统计依据的预测。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
@@ -1551,7 +1551,7 @@
 <li><strong><span class="arithmatex">\(p\)</span>（自回归阶数，AR）</strong>：用<strong>自身过去 <span class="arithmatex">\(p\)</span> 期</strong>的值预测现在，即 <span class="arithmatex">\(y_t\)</span> 受 <span class="arithmatex">\(y_{t-1},\ldots,y_{t-p}\)</span> 影响。PACF图在 <span class="arithmatex">\(p\)</span> 阶后截断提示 <span class="arithmatex">\(p\)</span>。</li>
 <li><strong><span class="arithmatex">\(q\)</span>（移动平均阶数，MA）</strong>：用<strong>过去 <span class="arithmatex">\(q\)</span> 期的预测误差</strong>修正现在，即 <span class="arithmatex">\(y_t\)</span> 受 <span class="arithmatex">\(\varepsilon_{t-1},\ldots,\varepsilon_{t-q}\)</span> 影响。ACF图在 <span class="arithmatex">\(q\)</span> 阶后截断提示 <span class="arithmatex">\(q\)</span>。</li>
 </ul>
-<p><strong>定阶直觉</strong>：先靠ACF/PACF图给出候选，再用AIC信息准则在 <span class="arithmatex">\((p,q)\)</span> 网格里选最小者——AIC同时奖励拟合好、惩罚参数多，防止过拟合。本案例自动定阶得到 <span class="arithmatex">\(ARIMA(0,1,1)\)</span>，即一个"一阶差分+一阶移动平均"的简洁模型。</p>
+<p><strong>定阶直觉</strong>：先靠ACF/PACF图给出候选，再用AIC [Akaike Information Criterion, 赤池信息准则]信息准则在 <span class="arithmatex">\((p,q)\)</span> 网格里选最小者——AIC同时奖励拟合好、惩罚参数多，防止过拟合。本案例自动定阶得到 <span class="arithmatex">\(ARIMA(0,1,1)\)</span>，即一个"一阶差分+一阶移动平均"的简洁模型。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1572,7 +1572,7 @@
 <ul>
 <li><strong>最终阶数</strong>：本案例为 ARIMA(0,1,1)。若工具箱给出多个候选，选AIC最小且残差白噪声的。</li>
 <li><strong>预测值与区间</strong>：未来6期预测从6876.16变化到6999.92，95%置信区间由 [6794.75, 6957.57] 逐步放宽到 [6709.97, 7289.87]——越远越不确定。</li>
-<li><strong>回测误差</strong>：留尾滚动12步的 RMSE=45.67、MAE=34.09、MAPE=0.50%。MAPE小于5%即为精度良好。</li>
+<li><strong>回测误差</strong>：留尾滚动12步的 RMSE=45.67、MAE=34.09、MAPE [Mean Absolute Percentage Error, 平均绝对百分比误差]=0.50%。MAPE小于5%即为精度良好。</li>
 <li><strong>残差白噪声检验</strong>：Ljung-Box检验 <span class="arithmatex">\(p=0.9857&gt;0.05\)</span>，说明残差已是随机噪声，模型已无遗漏结构。</li>
 </ul>
 <p><strong>判断好坏</strong>：残差必须通过白噪声检验（否则说明还有规律没被模型抓住）；MAPE越小越好；预测区间应基本覆盖真实值。</p>
@@ -1585,7 +1585,7 @@
 - 数据点太少（少于20）时定阶不稳，改用灰色预测或指数平滑
 - 序列非平稳又无法差分平稳时，考虑协整/向量误差修正（见第6章）</p>
 <p><strong>常见坑</strong>
-- <strong>坑1</strong>：对非平稳序列直接建ARIMA。必须先做ADF检验，差分平稳后再定 <span class="arithmatex">\(p,q\)</span>，否则是伪模型。
+- <strong>坑1</strong>：对非平稳序列直接建ARIMA。必须先做ADF [Augmented Dickey-Fuller, 增广迪基-富勒检验]检验，差分平稳后再定 <span class="arithmatex">\(p,q\)</span>，否则是伪模型。
 - <strong>坑2</strong>：只看AIC选了复杂高阶模型却不做残差白噪声检验。过拟合的模型在样本内很好、样本外很差。
 - <strong>坑3</strong>：外推太多期。ARIMA是短期模型，一般预测3--6期，期数一多区间宽到失去意义。</p>
 <p><strong>和相似算法的区别</strong>：vs <strong>指数平滑</strong>——ARIMA有严格统计框架、可做假设检验，指数平滑更"开箱即用"；vs <strong>SARIMA</strong>——后者多了季节项 <span class="arithmatex">\((P,D,Q)_m\)</span>，处理月度/季度周期数据。</p>
@@ -1596,7 +1596,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：GARCH不预测序列的"数值水平"，而是专门预测它的<strong>波动率（波动剧烈程度）</strong>，刻画"大波动后面跟着大波动"的聚集现象。</p>
 <p><strong>美赛场景区</strong>：金融风控中预测股票/收益率的未来波动、计算VaR风险价值；可靠性与信号分析中估计噪声强度。</p>
-<p><strong>核心原理</strong>：先检验收益率是否存在ARCH效应（波动聚集），再用 <span class="arithmatex">\(GARCH(p,q)\)</span> 同时估计均值方程和条件方差方程；波动持续性用 <span class="arithmatex">\(\alpha+\beta\)</span> 衡量，接近1表示波动会长期延续。本案例 <span class="arithmatex">\(\alpha+\beta=0.9723\)</span>，下一期波动率约0.7218。</p>
+<p><strong>核心原理</strong>：先检验收益率是否存在ARCH [Autoregressive Conditional Heteroskedasticity, 自回归条件异方差]效应（波动聚集），再用 <span class="arithmatex">\(GARCH(p,q)\)</span> 同时估计均值方程和条件方差方程；波动持续性用 <span class="arithmatex">\(\alpha+\beta\)</span> 衡量，接近1表示波动会长期延续。本案例 <span class="arithmatex">\(\alpha+\beta=0.9723\)</span>，下一期波动率约0.7218。</p>
 <p><strong>操作要点</strong>：工具箱选"GARCH"，指定收益率列与日期列，分布默认normal，均值模型常数，置信水平95%/99%，自动或手动指定 <span class="arithmatex">\(p,q\)</span>。</p>
 <p><strong>结果关键</strong>：ARCH检验 <span class="arithmatex">\(p&lt;0.05\)</span> 确认波动聚集显著；<span class="arithmatex">\(\alpha,\beta\)</span> 系数显著；标准化残差无残余ARCH效应；输出未来多期波动率与VaR分位数。</p>
 <p><strong>注意</strong>：GARCH只适用于围绕某均值上下波动的收益率类序列，不要拿去预测销售额水平；SPSS原生支持有限，建议通过SPSS的R扩展（arch包）或Dabbit AI工具箱实现。</p>

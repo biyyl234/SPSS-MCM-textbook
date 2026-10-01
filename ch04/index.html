@@ -752,10 +752,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#hlm" class="md-nav__link">
+  <a href="#hlm-hierarchical-linear-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        多层线性模型（HLM/混合效应） 进阶级
+        多层线性模型（HLM [Hierarchical Linear Model, 分层线性模型]/混合效应） 进阶级
       
     </span>
   </a>
@@ -774,10 +774,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ransacm" class="md-nav__link">
+  <a href="#ransac-random-sample-consensus-m" class="md-nav__link">
     <span class="md-ellipsis">
       
-        稳健回归（RANSAC/M估计） 进阶级
+        稳健回归（RANSAC [Random Sample Consensus, 随机抽样一致性]/M估计） 进阶级
       
     </span>
   </a>
@@ -796,10 +796,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pls" class="md-nav__link">
+  <a href="#pls-partial-least-squares" class="md-nav__link">
     <span class="md-ellipsis">
       
-        偏最小二乘回归（PLS） 进阶级
+        偏最小二乘回归（PLS [Partial Least Squares, 偏最小二乘法]） 进阶级
       
     </span>
   </a>
@@ -840,10 +840,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#zip" class="md-nav__link">
+  <a href="#zip-zero-inflated-poisson" class="md-nav__link">
     <span class="md-ellipsis">
       
-        零膨胀泊松回归（ZIP） 进阶级
+        零膨胀泊松回归（ZIP [Zero-Inflated Poisson, 零膨胀泊松回归]） 进阶级
       
     </span>
   </a>
@@ -851,10 +851,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#gee" class="md-nav__link">
+  <a href="#gee-generalized-estimating-equations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        广义估计方程（GEE） 进阶级
+        广义估计方程（GEE [Generalized Estimating Equations, 广义估计方程]） 进阶级
       
     </span>
   </a>
@@ -862,10 +862,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#glm" class="md-nav__link">
+  <a href="#glm-generalized-linear-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        广义线性模型（GLM） 进阶级
+        广义线性模型（GLM [Generalized Linear Model, 广义线性模型]） 进阶级
       
     </span>
   </a>
@@ -1604,7 +1604,7 @@
 <p><strong>美赛什么题型常用？</strong></p>
 <p>回归是美赛<strong>出镜率最高</strong>的建模方法。C题几乎必做：用回归找关键影响因素、做预测；A/B题建立变量间的定量关系模型。论文"模型建立""结果分析"部分，回归系数表是核心证据。</p>
 <p><strong>学习路径建议</strong>
-先掌握<strong>线性回归</strong>（一切的基础）和它的体检项<strong>共线性VIF</strong>；再学<strong>曲线回归</strong>（关系不是直线时）、<strong>分层回归</strong>（控制背景后看增量贡献）、<strong>逐步回归</strong>（变量太多时自动筛选）；因变量是<strong>分类</strong>时用<strong>逻辑回归</strong>。最后再根据数据特点认识岭回归、Lasso、Poisson、Logistic族等进阶模型。</p>
+先掌握<strong>线性回归</strong>（一切的基础）和它的体检项<strong>共线性VIF [Variance Inflation Factor, 方差膨胀因子]</strong>；再学<strong>曲线回归</strong>（关系不是直线时）、<strong>分层回归</strong>（控制背景后看增量贡献）、<strong>逐步回归</strong>（变量太多时自动筛选）；因变量是<strong>分类</strong>时用<strong>逻辑回归</strong>。最后再根据数据特点认识岭回归、Lasso、Poisson、Logistic族等进阶模型。</p>
 </div>
 <h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">⭐ 线性回归（最小二乘法）  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -1631,13 +1631,13 @@ $<span class="arithmatex">\(y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k\)</sp
 <p><strong><span class="arithmatex">\(R^2\)</span></strong>是拟合优度：本案例0.788，说明四个自变量一起解释了78.8%的销售额波动。</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
 <li>点击菜单 <strong>分析 → 回归 → 线性</strong></li>
 <li>因变量选<strong>月销售额</strong>，自变量选<strong>日均客流量、营业面积、月促销天数、竞争门店数</strong></li>
 <li>方法选<strong>输入</strong>（Enter，全部强行进）</li>
 <li>点击<strong>统计量</strong>，勾选"估计""置信区间""模型拟合度""共线性诊断""Durbin-Watson"</li>
-<li>点击<strong>绘制</strong>，把\verb|<em>ZRESID|作<span class="arithmatex">\(y\)</span>、\verb|</em>ZPRED|作<span class="arithmatex">\(x\)</span>，画残差图查异方差</li>
+<li>点击<strong>绘制</strong>，把\verb|<em>ZRESID [Z-score of Residuals, 残差标准化得分]|作<span class="arithmatex">\(y\)</span>、\verb|</em>ZPRED [Z-score of Predicted Values, 预测值标准化残差]|作<span class="arithmatex">\(x\)</span>，画残差图查异方差</li>
 <li>点击<strong>确定</strong></li>
 </ol>
 <p><strong>默认参数参考</strong>：缺失按删除（drop），含截距，协方差类型自动，VIF阈值10。本案例有效样本147行，<span class="arithmatex">\(R^2=0.788\)</span>。</p>
@@ -1646,7 +1646,7 @@ $<span class="arithmatex">\(y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k\)</sp
 <p class="admonition-title">结果怎么看</p>
 <ul>
 <li><strong>模型汇总表</strong>：<span class="arithmatex">\(R^2=0.788\)</span>、调整<span class="arithmatex">\(R^2=0.782\)</span>；Durbin-Watson=1.84（接近2，残差无自相关）</li>
-<li><strong>ANOVA表</strong>：<span class="arithmatex">\(F=131.9\)</span>，<span class="arithmatex">\(p=8.55\times10^{-47}\)</span>，模型整体显著</li>
+<li><strong>ANOVA [Analysis of Variance, 方差分析]表</strong>：<span class="arithmatex">\(F=131.9\)</span>，<span class="arithmatex">\(p=8.55\times10^{-47}\)</span>，模型整体显著</li>
 <li><strong>系数表</strong>是核心：每个自变量一行</li>
 <li><strong>系数<span class="arithmatex">\(B\)</span></strong>：方向和大小。客流<span class="arithmatex">\(+0.02\)</span>、面积<span class="arithmatex">\(+0.07\)</span>、促销天数<span class="arithmatex">\(+1.15\)</span>、竞争店<span class="arithmatex">\(-2.03\)</span></li>
 <li><strong><span class="arithmatex">\(t\)</span>和<span class="arithmatex">\(p\)</span></strong>：本案例4个变量全部<span class="arithmatex">\(p&lt;0.001\)</span>，都显著</li>
@@ -1696,7 +1696,7 @@ $<span class="arithmatex">\(y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k\)</sp
 <li>线性回归对话框（<strong>分析 → 回归 → 线性</strong>）中放好因变量和全部候选自变量</li>
 <li>点击<strong>统计量</strong>，勾选<strong>共线性诊断</strong></li>
 <li>运行后查看系数表中的"容差"和"VIF"列</li>
-<li>也可在Dabbit AI SPSS工具箱单独跑"共线性分析"，自动逐步剔除</li>
+<li>也可在Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱单独跑"共线性分析"，自动逐步剔除</li>
 </ol>
 <p><strong>默认参数参考</strong>：预警阈值<span class="arithmatex">\(VIF=5\)</span>，严重阈值<span class="arithmatex">\(VIF=10\)</span>；处理方式stepwise_remove（逐步剔除最大VIF）；缺失整行删除。</p>
 </div>
@@ -1738,7 +1738,7 @@ $<span class="arithmatex">\(y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k\)</sp
 - <strong>指数曲线</strong><span class="arithmatex">\(y=ab^x\)</span>：按固定比例爆炸式增长
 - <strong>幂函数</strong><span class="arithmatex">\(y=ax^b\)</span>：齐次增长
 - <strong>多项式（二次/三次）</strong>：先升后降或有拐点</p>
-<p><strong>怎么选？</strong>用<strong>AIC</strong>做裁判：同样本上谁的AIC最小且模型简单，选谁。本案例对数曲线调整<span class="arithmatex">\(R^2=0.991\)</span>、<span class="arithmatex">\(AIC=141.5\)</span>，比直线（<span class="arithmatex">\(R^2=0.83\)</span>、<span class="arithmatex">\(AIC=584.7\)</span>）好一大截，方程<span class="arithmatex">\(y=17.83+16.11\ln x\)</span>。</p>
+<p><strong>怎么选？</strong>用<strong>AIC [Akaike Information Criterion, 赤池信息准则]</strong>做裁判：同样本上谁的AIC最小且模型简单，选谁。本案例对数曲线调整<span class="arithmatex">\(R^2=0.991\)</span>、<span class="arithmatex">\(AIC=141.5\)</span>，比直线（<span class="arithmatex">\(R^2=0.83\)</span>、<span class="arithmatex">\(AIC=584.7\)</span>）好一大截，方程<span class="arithmatex">\(y=17.83+16.11\ln x\)</span>。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1896,9 +1896,9 @@ $<span class="arithmatex">\(y = b_0 + b_1 x_1 + b_2 x_2 + \cdots + b_k x_k\)</sp
 <p>逻辑回归用一个叫<strong>logistic函数（S形曲线）</strong>把任意实数压到0--1之间：
 $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 左边是"对数发生比"。
-- 系数<span class="arithmatex">\(b\)</span>解释成<strong>优势比<span class="arithmatex">\(OR=e^b\)</span></strong>：本案例"近12月逾期次数"系数0.685，<span class="arithmatex">\(OR=1.983\)</span>——每多一次历史逾期，未来逾期几率约翻倍
+- 系数<span class="arithmatex">\(b\)</span>解释成<strong>优势比<span class="arithmatex">\(OR [Odds Ratio, 比值比]=e^b\)</span></strong>：本案例"近12月逾期次数"系数0.685，<span class="arithmatex">\(OR=1.983\)</span>——每多一次历史逾期，未来逾期几率约翻倍
 - <span class="arithmatex">\(OR&gt;1\)</span>风险上升，<span class="arithmatex">\(OR&lt;1\)</span>风险下降</p>
-<p>本案例模型AUC=0.832，区分能力不错。</p>
+<p>本案例模型AUC [Area Under the Curve, 曲线下面积]=0.832，区分能力不错。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1910,7 +1910,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <li>点<strong>选项</strong>勾"Hosmer-Lemeshow""分类图""95%置信区间"</li>
 <li>点击<strong>确定</strong></li>
 </ol>
-<p><strong>默认参数参考</strong>：事件类别1，参考类别0，<span class="arithmatex">\(\alpha=0.05\)</span>，最大迭代100，普通MLE。本案例事件95例、非事件55例，EPV=15.8（达标）。</p>
+<p><strong>默认参数参考</strong>：事件类别1，参考类别0，<span class="arithmatex">\(\alpha=0.05\)</span>，最大迭代100，普通MLE [Maximum Likelihood Estimation, 最大似然估计]。本案例事件95例、非事件55例，EPV [Events Per Variable, 每变量事件数]=15.8（达标）。</p>
 </div>
 <div class="admonition success">
 <p class="admonition-title">结果怎么看</p>
@@ -1952,7 +1952,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：自变量和因变量<strong>都有测量误差</strong>时用的回归——普通回归假设<span class="arithmatex">\(x\)</span>完全精确，这在仪器比对时不成立。</p>
 <p><strong>美赛场景区</strong>：两种测量方法/仪器的结果一致性比较；方法学比对实验。</p>
-<p><strong>核心原理</strong>：普通OLS只让<span class="arithmatex">\(y\)</span>方向残差最小，Deming让<strong>垂直于回归线方向</strong>的总误差最小（正交距离），<span class="arithmatex">\(x\)</span>和<span class="arithmatex">\(y\)</span>都被当作有误差。需预先知道两者测量误差方差比。</p>
+<p><strong>核心原理</strong>：普通OLS [Ordinary Least Squares, 普通最小二乘法]只让<span class="arithmatex">\(y\)</span>方向残差最小，Deming让<strong>垂直于回归线方向</strong>的总误差最小（正交距离），<span class="arithmatex">\(x\)</span>和<span class="arithmatex">\(y\)</span>都被当作有误差。需预先知道两者测量误差方差比。</p>
 <p><strong>操作要点</strong>：工具箱选"Deming回归"，输入两列测量值，设定误差方差比。</p>
 <p><strong>结果关键</strong>：斜率和截距；若斜率接近1、截距接近0，说明两种方法一致性好。</p>
 <p><strong>注意</strong>：它和Passing-Bablok常用于方法比对。当<span class="arithmatex">\(x\)</span>无误差时，退化为普通OLS。</p>
@@ -1987,14 +1987,14 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p><strong>结果关键</strong>：模型拟合的似然比<span class="arithmatex">\(\chi^2\)</span>（<span class="arithmatex">\(p&gt;0.05\)</span>说明模型拟合好）；显著的高阶交互项说明变量间复杂关联。</p>
 <p><strong>注意</strong>：它是卡方检验在多维表上的推广。二维表时它就回到卡方独立性检验。</p>
 </div>
-<h3 id="hlm">多层线性模型（HLM/混合效应）  <code>进阶级</code><a class="headerlink" href="#hlm" title="Permanent link">&para;</a></h3>
+<h3 id="hlm-hierarchical-linear-model">多层线性模型（HLM [Hierarchical Linear Model, 分层线性模型]/混合效应）  <code>进阶级</code><a class="headerlink" href="#hlm-hierarchical-linear-model" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：数据天然<strong>嵌套分层</strong>时用它——学生嵌套在班级里、班级嵌套在学校里，不能把它们当独立样本。</p>
 <p><strong>美赛场景区</strong>：分层抽样数据、纵向重复测量、组织内部嵌套结构；组内相关问题。</p>
 <p><strong>核心原理</strong>：把回归系数拆成"固定效应"（大家通用）和"随机效应"（各组围绕它浮动的部分），同时处理层1（个体）和层2（群体）变量。</p>
 <p><strong>操作要点</strong>：在Dabbit AI SPSS工具箱选"多层线性模型"，指定分层结构（如学生<span class="arithmatex">\(\to\)</span>班级）和各层变量。</p>
-<p><strong>结果关键</strong>：组内相关系数ICC（高说明必须用多层模型）；固定效应系数；随机效应方差占比。</p>
+<p><strong>结果关键</strong>：组内相关系数ICC [Intraclass Correlation Coefficient, 组内相关系数]（高说明必须用多层模型）；固定效应系数；随机效应方差占比。</p>
 <p><strong>注意</strong>：数据有明显嵌套/聚类时，用普通回归会低估标准误、夸大显著性——这是它和普通回归最大的区别。</p>
 </div>
 <h3 id="heckman">Heckman两阶段模型  <code>进阶级</code><a class="headerlink" href="#heckman" title="Permanent link">&para;</a></h3>
@@ -2007,7 +2007,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p><strong>结果关键</strong>：<span class="arithmatex">\(\lambda\)</span>的系数显著=存在选择性偏差；校正后核心变量系数与原OLS相比变化多少。</p>
 <p><strong>注意</strong>：它要求有工具变量（只影响是否入选、不直接影响结果变量），否则识别困难。</p>
 </div>
-<h3 id="ransacm">稳健回归（RANSAC/M估计）  <code>进阶级</code><a class="headerlink" href="#ransacm" title="Permanent link">&para;</a></h3>
+<h3 id="ransac-random-sample-consensus-m">稳健回归（RANSAC [Random Sample Consensus, 随机抽样一致性]/M估计）  <code>进阶级</code><a class="headerlink" href="#ransac-random-sample-consensus-m" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：普通最小二乘会被<strong>几个极端点带偏</strong>，稳健回归给异常点"降权"，让直线不被 outliers 绑架。</p>
@@ -2022,12 +2022,12 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：因变量是<strong>计数数据</strong>（发生次数，如事故数、来电数）时用的回归。</p>
 <p><strong>美赛场景区</strong>：一天内门店客诉次数、单位面积内事件数；计数类因变量的影响因素分析。</p>
-<p><strong>核心原理</strong>：假设因变量服从泊松分布，用对数链接<span class="arithmatex">\(\ln(\mu)=b_0+b_1x_1+\cdots\)</span>。系数解释为"发生率比IRR"（<span class="arithmatex">\(e^b\)</span>）。</p>
+<p><strong>核心原理</strong>：假设因变量服从泊松分布，用对数链接<span class="arithmatex">\(\ln(\mu)=b_0+b_1x_1+\cdots\)</span>。系数解释为"发生率比IRR [Incidence Rate Ratio, 发生率比]"（<span class="arithmatex">\(e^b\)</span>）。</p>
 <p><strong>操作要点</strong>：<strong>分析 → 广义线性模型</strong>，计数分布选Poisson；或工具箱选Poisson回归。</p>
 <p><strong>结果关键</strong>：系数/<span class="arithmatex">\(IRR\)</span>的<span class="arithmatex">\(p\)</span>值；重点检查<strong>过度离散</strong>（方差远大于均值）——若过度离散，改用负二项回归。</p>
 <p><strong>注意</strong>：泊松要求<strong>均值=方差</strong>。现实计数数据常过度离散，此时Poisson的标准误会被低估，负二项回归更合适。</p>
 </div>
-<h3 id="pls">偏最小二乘回归（PLS）  <code>进阶级</code><a class="headerlink" href="#pls" title="Permanent link">&para;</a></h3>
+<h3 id="pls-partial-least-squares">偏最小二乘回归（PLS [Partial Least Squares, 偏最小二乘法]）  <code>进阶级</code><a class="headerlink" href="#pls-partial-least-squares" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：自变量多、又严重共线、样本还不多时，PLS一边降维一边回归，两全其美。</p>
@@ -2035,7 +2035,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p><strong>核心原理</strong>：同时对<span class="arithmatex">\(X\)</span>和<span class="arithmatex">\(Y\)</span>提取潜变量（主成分），并保证潜变量间协方差最大——既考虑<span class="arithmatex">\(X\)</span>内部结构，又紧扣<span class="arithmatex">\(Y\)</span>。</p>
 <p><strong>操作要点</strong>：工具箱选"PLS偏最小二乘"，指定因变量和全部自变量，用交叉验证选最佳成分数。</p>
 <p><strong>结果关键</strong>：成分数选择（交叉验证<span class="arithmatex">\(Q^2\)</span>）；回归系数；<span class="arithmatex">\(R^2\)</span>和预测<span class="arithmatex">\(R^2\)</span>。</p>
-<p><strong>注意</strong>：它是<strong>PCA+回归的结合体</strong>。自变量严重共线、样本量<span class="arithmatex">\(&lt;\)</span>变量数时，它比普通回归稳。</p>
+<p><strong>注意</strong>：它是<strong>PCA [Principal Component Analysis, 主成分分析]+回归的结合体</strong>。自变量严重共线、样本量<span class="arithmatex">\(&lt;\)</span>变量数时，它比普通回归稳。</p>
 </div>
 <h3 id="tobit">Tobit回归  <code>进阶级</code><a class="headerlink" href="#tobit" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
@@ -2067,7 +2067,7 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p><strong>结果关键</strong>：离散参数<span class="arithmatex">\(\alpha\)</span>显著<span class="arithmatex">\(&gt;0\)</span>=确实过度离散、用负二项对；发生率比IRR及其<span class="arithmatex">\(p\)</span>值。</p>
 <p><strong>注意</strong>：先做Poisson的离差检验，确认过度离散了再上负二项；若0值特别多，改用零膨胀模型。</p>
 </div>
-<h3 id="zip">零膨胀泊松回归（ZIP）  <code>进阶级</code><a class="headerlink" href="#zip" title="Permanent link">&para;</a></h3>
+<h3 id="zip-zero-inflated-poisson">零膨胀泊松回归（ZIP [Zero-Inflated Poisson, 零膨胀泊松回归]）  <code>进阶级</code><a class="headerlink" href="#zip-zero-inflated-poisson" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：计数数据里<strong>0特别多</strong>（既有"本来就不会发生"的 structural zero，又有"可能发生但这次没发生"的）时用它。</p>
@@ -2075,19 +2075,19 @@ $<span class="arithmatex">\(\ln\frac{p}{1-p}=b_0+b_1x_1+\cdots+b_kx_k\)</span>$
 <p><strong>核心原理</strong>：混合模型——一部分概率用Logistic决定"是不是0"，剩下的用Poisson决定"发生几次"。</p>
 <p><strong>操作要点</strong>：工具箱选"零膨胀泊松"，指定计数因变量、零膨胀模型的自变量和计数模型自变量。</p>
 <p><strong>结果关键</strong>：Vuong检验判断是否需要零膨胀；两部分各自的系数解读。</p>
-<p><strong>注意</strong>：先做ZIP vs Poisson的Vuong检验；如果不仅0多还过度离散，升级为零膨胀负二项（ZINB）。</p>
+<p><strong>注意</strong>：先做ZIP vs Poisson的Vuong检验；如果不仅0多还过度离散，升级为零膨胀负二项（ZINB [Zero-Inflated Negative Binomial, 零膨胀负二项回归]）。</p>
 </div>
-<h3 id="gee">广义估计方程（GEE）  <code>进阶级</code><a class="headerlink" href="#gee" title="Permanent link">&para;</a></h3>
+<h3 id="gee-generalized-estimating-equations">广义估计方程（GEE [Generalized Estimating Equations, 广义估计方程]）  <code>进阶级</code><a class="headerlink" href="#gee-generalized-estimating-equations" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：处理<strong>重复测量/聚类数据</strong>的回归——同一对象被反复测多次，观测不独立时用它。</p>
 <p><strong>美赛场景区</strong>：面板数据、纵向追踪数据、嵌套在群体内的重复观测。</p>
-<p><strong>核心原理</strong>：不指定完整的随机效应分布，只指定"工作相关矩阵"（如可交换、AR-1），用准似然估计边际效应。</p>
+<p><strong>核心原理</strong>：不指定完整的随机效应分布，只指定"工作相关矩阵"（如可交换、AR [Autoregressive, 自回归]-1），用准似然估计边际效应。</p>
 <p><strong>操作要点</strong>：工具箱选"广义估计方程"，指定聚类ID、因变量分布族、链接函数和工作相关结构。</p>
 <p><strong>结果关键</strong>：群体平均边际效应系数；比较不同工作相关结构下结果的稳健性。</p>
 <p><strong>注意</strong>：它和HLM都处理重复测量——GEE估<strong>总体平均效应</strong>，HLM估个体层面的随机效应。</p>
 </div>
-<h3 id="glm">广义线性模型（GLM）  <code>进阶级</code><a class="headerlink" href="#glm" title="Permanent link">&para;</a></h3>
+<h3 id="glm-generalized-linear-model">广义线性模型（GLM [Generalized Linear Model, 广义线性模型]）  <code>进阶级</code><a class="headerlink" href="#glm-generalized-linear-model" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：一个<strong>总框架</strong>，把线性回归、逻辑回归、Poisson回归统一起来——换个"分布+链接函数"就能适应不同因变量。</p>

@@ -1435,11 +1435,11 @@
 <div class="admonition info">
 <p class="admonition-title">本章导览</p>
 <p><strong>这个分类是干什么的？</strong></p>
-<p>试验设计（DOE）解决一个问题：<strong>怎么用最少的试验次数，找到最优工艺参数组合</strong>。比如化工生产中，温度、时间、催化剂用量都影响收率——怎么安排试验才能既省钱又高效地找到最佳配方？试验设计用统计方法科学安排试验点，系统地分析各因素的主效应、交互作用，最后预测最优条件。</p>
+<p>试验设计（DOE [Design of Experiments, 试验设计]）解决一个问题：<strong>怎么用最少的试验次数，找到最优工艺参数组合</strong>。比如化工生产中，温度、时间、催化剂用量都影响收率——怎么安排试验才能既省钱又高效地找到最佳配方？试验设计用统计方法科学安排试验点，系统地分析各因素的主效应、交互作用，最后预测最优条件。</p>
 <p><strong>美赛什么题型常用？</strong></p>
-<p>美赛实验/化工/材料类题目中非常实用——只要题目涉及"调参数找最优"（反应温度、时间、配比），就用试验设计。正交设计用少量试验筛选因素，响应面分析精确找最优点。SPSS通过"分析 → 试验设计"菜单可完成部分操作。</p>
+<p>美赛实验/化工/材料类题目中非常实用——只要题目涉及"调参数找最优"（反应温度、时间、配比），就用试验设计。正交设计用少量试验筛选因素，响应面分析精确找最优点。SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]通过"分析 → 试验设计"菜单可完成部分操作。</p>
 <p><strong>学习路径建议</strong></p>
-<p>先学<strong>全析因设计</strong>（理解因素与交互作用的基础），再学<strong>正交实验设计</strong>（用少量试验做多因素筛选，美赛高频），然后学<strong>响应面分析</strong>（精确寻优）。CCD和BBD是响应面的两种常用设计方案。部分析因和Plackett-Burman用于早期因子筛选。</p>
+<p>先学<strong>全析因设计</strong>（理解因素与交互作用的基础），再学<strong>正交实验设计</strong>（用少量试验做多因素筛选，美赛高频），然后学<strong>响应面分析</strong>（精确寻优）。CCD [Central Composite Design, 中心复合设计]和BBD [Box-Behnken Design, Box-Behnken设计]是响应面的两种常用设计方案。部分析因和Plackett-Burman用于早期因子筛选。</p>
 </div>
 <h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">全析因设计  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -1458,7 +1458,7 @@
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
 <p>想象做蛋糕：烤温有高/中/低3档，时间有60/90/120/150/180分钟5档。全析因就是<span class="arithmatex">\(3\times5=15\)</span>种组合<strong>全部做一遍</strong>。</p>
-<p>然后用方差分析（ANOVA）分解响应的变异：
+<p>然后用方差分析（ANOVA [Analysis of Variance, 方差分析]）分解响应的变异：
 - <strong>主效应</strong>：温度单独的影响有多大？时间单独的影响有多大？
 - <strong>交互作用</strong>：温度高时延长时间更好，还是温度低时延长时间更好？如果折线图交叉明显，说明有交互</p>
 <p>关键洞察：当交互显著时，不能单独看"温度越高越好"——因为温度的效果取决于时间水平。</p>
@@ -1469,7 +1469,7 @@
 <li>SPSS菜单：<strong>分析 → 试验设计 → 析因</strong></li>
 <li>响应变量选"抗折强度"，因素选"烧成温度"和"保温时间"</li>
 <li>模型选全模型（主效应+所有交互）</li>
-<li>多重比较选Tukey HSD</li>
+<li>多重比较选Tukey HSD [Honestly Significant Difference, 真实显著差异]</li>
 <li>ANOVA类型选III型</li>
 <li>点击确定</li>
 </ol>
@@ -1520,7 +1520,7 @@
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
-<p>在<strong>Dabbit AI SPSS工具箱</strong>中操作（SPSS也可通过"分析 → 试验设计 → 正交设计"实现）：</p>
+<p>在<strong>Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱</strong>中操作（SPSS也可通过"分析 → 试验设计 → 正交设计"实现）：</p>
 <ol>
 <li>上传试验数据，因素列自动识别，响应列自动识别</li>
 <li>信噪比类型选"望大特性"（拉伸强度越大越好）</li>
@@ -1552,7 +1552,7 @@
 <h3 id="_5">⭐ 响应面分析  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>响应面分析（RSM）在正交/筛选找到关键因素后，用<strong>二次多项式</strong>拟合"因素→响应"的曲面，然后在曲面上找最优点。它不仅知道"哪个因素重要"，还能精确算出"最佳参数是多少"。</p>
+<p>响应面分析（RSM [Response Surface Methodology, 响应面方法]）在正交/筛选找到关键因素后，用<strong>二次多项式</strong>拟合"因素→响应"的曲面，然后在曲面上找最优点。它不仅知道"哪个因素重要"，还能精确算出"最佳参数是多少"。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
@@ -1564,7 +1564,7 @@
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">通俗原理</p>
-<p>先用正交/PB设计筛选出3--5个关键因素，然后用CCD或BBD设计安排试验点，拟合二次模型：</p>
+<p>先用正交/PB [Plackett-Burman, Plackett-Burman设计]设计筛选出3--5个关键因素，然后用CCD或BBD设计安排试验点，拟合二次模型：</p>
 <div class="arithmatex">\[
 y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + \varepsilon
 \]</div>
@@ -1678,7 +1678,7 @@ y = \beta_0 + \sum\beta_i x_i + \sum\beta_{ii} x_i^2 + \sum\beta_{ij} x_i x_j + 
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：全析因的"1/2"或"1/4"——<span class="arithmatex">\(2^{k-p}\)</span>设计，用部分试验筛选主效应，牺牲高阶交互换试验次数。</p>
 <p><strong>美赛场景区</strong>：7个两水平因子全因子需128次太贵，用<span class="arithmatex">\(2^{7-3}=16\)</span>次筛选关键因子。</p>
-<p><strong>核心原理</strong>：分辨率IV设计——主效应不与二阶交互混叠，但二阶交互之间互相混叠。用Lenth伪标准误判断哪些因子显著。</p>
+<p><strong>核心原理</strong>：分辨率IV [Instrumental Variable, 工具变量]设计——主效应不与二阶交互混叠，但二阶交互之间互相混叠。用Lenth伪标准误判断哪些因子显著。</p>
 <p><strong>操作要点</strong>：模型项选main，显著性方法选Lenth，响应列选收率。</p>
 <p><strong>结果关键</strong>：7个因子中3个显著（温度、催化剂量、养晶时间），R<span class="arithmatex">\(^2\)</span>=0.84。</p>
 <p><strong>注意</strong>：部分析因是筛选设计——目的是"找到关键少数"，不是精确寻优。显著因子后续做响应面。</p>

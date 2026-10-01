@@ -1492,15 +1492,15 @@
 <p><strong>这个分类是干什么的？</strong></p>
 <p>规划求解就是"在一堆限制条件下找最优方案"。比如：预算有限时选哪些研发项目收益最大？货车怎么装货最划算？快递路线怎么排最短？工厂排产怎么利润最高？这类问题统称为<strong>优化问题</strong>——有目标（最大利润/最小成本），有约束（预算/容量/时间），要找出一组决策变量让目标最好。</p>
 <p><strong>美赛什么题型常用？</strong></p>
-<p>规划求解是美赛B题（离散优化/调度分配）和D题（运营管理）的<strong>核心武器</strong>。典型场景：车辆路径规划（TSP）、任务指派、背包选品、生产排产、资源分配。遗传算法、粒子群、模拟退火等智能优化方法在美赛中<strong>极其常用</strong>——当问题复杂到没有解析解时，靠它们在巨大的解空间里"搜"出好方案。</p>
+<p>规划求解是美赛B题（离散优化/调度分配）和D题（运营管理）的<strong>核心武器</strong>。典型场景：车辆路径规划（TSP [Traveling Salesman Problem, 旅行商问题]）、任务指派、背包选品、生产排产、资源分配。遗传算法、粒子群、模拟退火等智能优化方法在美赛中<strong>极其常用</strong>——当问题复杂到没有解析解时，靠它们在巨大的解空间里"搜"出好方案。</p>
 <p><strong>学习路径建议</strong></p>
-<p>先搞懂<strong>动态规划（背包问题）</strong>和<strong>遗传算法</strong>（组合优化的两大主力），再学<strong>粒子群</strong>和<strong>模拟退火</strong>（连续优化与路径优化的利器）。进阶了解<strong>匈牙利算法</strong>（指派）、<strong>表上作业法</strong>（运输）、<strong>分支定界/割平面</strong>（整数规划精确求解）等经典方法。注意：SPSS原生不支持优化求解，这些算法通过<strong>Dabbit AI SPSS工具箱</strong>或Python/R扩展实现。</p>
+<p>先搞懂<strong>动态规划（背包问题）</strong>和<strong>遗传算法</strong>（组合优化的两大主力），再学<strong>粒子群</strong>和<strong>模拟退火</strong>（连续优化与路径优化的利器）。进阶了解<strong>匈牙利算法</strong>（指派）、<strong>表上作业法</strong>（运输）、<strong>分支定界/割平面</strong>（整数规划精确求解）等经典方法。注意：SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]原生不支持优化求解，这些算法通过<strong>Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱</strong>或Python/R扩展实现。</p>
 </div>
 <h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">⭐ 遗传算法  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>遗传算法（GA）模拟"物竞天择、适者生存"的自然进化过程：把每一个候选方案编码成"染色体"，让一群方案在迭代中通过选择、交叉、变异不断进化，最终留下最优方案。它是美赛中<strong>最常用的智能优化算法</strong>，尤其适合调度、分配、路径等组合优化问题。</p>
+<p>遗传算法（GA [Genetic Algorithm, 遗传算法]）模拟"物竞天择、适者生存"的自然进化过程：把每一个候选方案编码成"染色体"，让一群方案在迭代中通过选择、交叉、变异不断进化，最终留下最优方案。它是美赛中<strong>最常用的智能优化算法</strong>，尤其适合调度、分配、路径等组合优化问题。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
@@ -1536,7 +1536,7 @@
 <li>稳健性运行次数设为3（多次随机种子验证稳定性）</li>
 <li>点击运行，输出最优方案与收敛曲线</li>
 </ol>
-<p><strong>参考实现</strong>：也可通过Python的DEAP或scikit-opt库实现，核心是编码方式与适应度函数的设计。</p>
+<p><strong>参考实现</strong>：也可通过Python的DEAP [Distributed Evolutionary Algorithms in Python, Python分布式进化算法库]或scikit-opt库实现，核心是编码方式与适应度函数的设计。</p>
 </div>
 <div class="admonition success">
 <p class="admonition-title">结果怎么看</p>
@@ -1567,7 +1567,7 @@
 <h3 id="_4">动态规划（背包资源分配）  <code>基础级</code><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>动态规划（DP）是一种"把大问题拆成小问题、记住小问题答案"的精确求解方法。经典应用是<strong>背包问题</strong>：预算有限时选哪些项目使总收益最大。它能<strong>证明全局最优</strong>，不像遗传算法只能给近似解。</p>
+<p>动态规划（DP [Dynamic Programming, 动态规划]）是一种"把大问题拆成小问题、记住小问题答案"的精确求解方法。经典应用是<strong>背包问题</strong>：预算有限时选哪些项目使总收益最大。它能<strong>证明全局最优</strong>，不像遗传算法只能给近似解。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
@@ -1620,7 +1620,7 @@
 <h3 id="_5">⭐ 粒子群优化算法  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>粒子群优化（PSO）模拟鸟群觅食：一群"粒子"在搜索空间中飞，每个粒子根据自己的历史最佳位置和群体全局最佳位置调整飞行方向，最终聚集到最优解附近。它特别适合<strong>连续参数优化</strong>问题，比如拟合非线性模型的参数。</p>
+<p>粒子群优化（PSO [Particle Swarm Optimization, 粒子群优化]）模拟鸟群觅食：一群"粒子"在搜索空间中飞，每个粒子根据自己的历史最佳位置和群体全局最佳位置调整飞行方向，最终聚集到最优解附近。它特别适合<strong>连续参数优化</strong>问题，比如拟合非线性模型的参数。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
@@ -1664,8 +1664,8 @@
 <p class="admonition-title">结果怎么看</p>
 <ul>
 <li><strong>最优参数估计</strong>：如5个参数 <span class="arithmatex">\(a=1.247, b=2.073, c=0.333, d=2.149, e=0.567\)</span></li>
-<li><strong>拟合优度</strong>：<span class="arithmatex">\(R^2=0.9929\)</span>，RMSE=0.0464——越接近1/越小越好</li>
-<li><strong>收敛稳定性</strong>：10次独立运行的最优SSE标准差应极小（如1.09e-07），变异系数小说明结果稳健</li>
+<li><strong>拟合优度</strong>：<span class="arithmatex">\(R^2=0.9929\)</span>，RMSE [Root Mean Square Error, 均方根误差]=0.0464——越接近1/越小越好</li>
+<li><strong>收敛稳定性</strong>：10次独立运行的最优SSE [Sum of Squared Errors, 误差平方和]标准差应极小（如1.09e-07），变异系数小说明结果稳健</li>
 <li><strong>残差图</strong>：残差围绕零线随机分布、无系统性偏差，说明模型合适</li>
 </ul>
 </div>
@@ -1682,7 +1682,7 @@
 <h3 id="_6">模拟退火算法  <code>基础级</code><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>模拟退火（SA）模仿金属退火过程：先高温加热让粒子自由运动（广泛探索），再缓慢降温让粒子逐渐稳定到最低能量状态（收敛到最优）。它的<strong>绝招是能以一定概率接受劣解</strong>，从而跳出局部最优陷阱。</p>
+<p>模拟退火（SA [Simulated Annealing, 模拟退火]）模仿金属退火过程：先高温加热让粒子自由运动（广泛探索），再缓慢降温让粒子逐渐稳定到最低能量状态（收敛到最优）。它的<strong>绝招是能以一定概率接受劣解</strong>，从而跳出局部最优陷阱。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
@@ -1738,9 +1738,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：求解整数线性规划的精确方法——先放松整数要求解线性规划，再逐步添加"切割约束"把非整数解切掉，直到得到整数最优解。</p>
 <p><strong>美赛场景区</strong>：生产排产中产品数量必须为整数（不能生产半个产品）的线性规划问题。</p>
-<p><strong>核心原理</strong>：先解LP松弛（允许小数），如果最优解含小数变量，就构造Gomory割平面（一条新约束）把小数部分切掉，重新求解。逐轮收紧，直到所有变量取整。就像雕刻：一刀一刀切掉多余的部分，最后留下整数最优解。</p>
+<p><strong>核心原理</strong>：先解LP [Linear Programming, 线性规划]松弛（允许小数），如果最优解含小数变量，就构造Gomory割平面（一条新约束）把小数部分切掉，重新求解。逐轮收紧，直到所有变量取整。就像雕刻：一刀一刀切掉多余的部分，最后留下整数最优解。</p>
 <p><strong>操作要点</strong>：工具箱中选择"割平面法"，目标方向max，割平面行选择规则选"最大分数部优先"，最大迭代100次。</p>
-<p><strong>结果关键</strong>：LP松弛最优值逐轮下降并逼近整数最优值（如从45.5降到45），最终找到整数最优解。与独立MILP求解器交叉验证一致即证明最优。</p>
+<p><strong>结果关键</strong>：LP松弛最优值逐轮下降并逼近整数最优值（如从45.5降到45），最终找到整数最优解。与独立MILP [Mixed Integer Linear Programming, 混合整数线性规划]求解器交叉验证一致即证明最优。</p>
 <p><strong>注意</strong>：割平面法和分支定界法是整数规划两大精确方法；割平面法靠加约束，分支定界靠分分支。</p>
 </div>
 <h3 id="_9">牛顿法（拟牛顿法）  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
@@ -1748,9 +1748,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：用二阶导数（Hessian矩阵）信息加速非线性优化收敛的方法，比一阶梯度下降快得多。</p>
 <p><strong>美赛场景区</strong>：非线性模型参数拟合，如药代动力学指数模型 <span class="arithmatex">\(C(t)=C_0 e^{-k_e t}\)</span> 的参数估计。</p>
-<p><strong>核心原理</strong>：梯度下降只看"往哪个方向走最陡"（一阶梯度），牛顿法还看"地形的曲率"（二阶导数），像一个会开车的人不仅知道上坡方向，还知道弯道有多急，因此能更快逼近最优点。拟牛顿法（BFGS）不直接算Hessian，用梯度差近似，降低计算量。</p>
+<p><strong>核心原理</strong>：梯度下降只看"往哪个方向走最陡"（一阶梯度），牛顿法还看"地形的曲率"（二阶导数），像一个会开车的人不仅知道上坡方向，还知道弯道有多急，因此能更快逼近最优点。拟牛顿法（BFGS [Broyden-Fletcher-Goldfarb-Shanno, 拟牛顿优化算法]）不直接算Hessian，用梯度差近似，降低计算量。</p>
 <p><strong>操作要点</strong>：工具箱中选"牛顿法"，模型选指数模型，方法选auto（牛顿优先、失稳自动切拟牛顿），初值策略选启发式。</p>
-<p><strong>结果关键</strong>：迭代次数少（如3次就收敛），参数估计值与标准误，RMSE和AIC衡量拟合优度。</p>
+<p><strong>结果关键</strong>：迭代次数少（如3次就收敛），参数估计值与标准误，RMSE和AIC [Akaike Information Criterion, 赤池信息准则]衡量拟合优度。</p>
 <p><strong>注意</strong>：牛顿法要求目标函数光滑可导；如果Hessian矩阵不正定会失稳，此时自动切换拟牛顿BFGS。</p>
 </div>
 <h3 id="_10">梯度下降法  <code>进阶级</code><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
@@ -1771,7 +1771,7 @@
 <p><strong>核心原理</strong>：和遗传算法类似但变异方式不同——随机选三个个体 <span class="arithmatex">\(a,b,c\)</span>，新个体 = <span class="arithmatex">\(a + F\cdot(b-c)\)</span>，用两个体的差异方向来变异，自适应调整步长。交叉后与目标个体贪婪比较，更优才保留。</p>
 <p><strong>操作要点</strong>：工具箱中选"差分进化"，策略best1bin，变异因子0.5+1，多次不同种子重启，可选L-BFGS-B局部精化。</p>
 <p><strong>结果关键</strong>：多次重启结果应一致（重启跨度极小）；<span class="arithmatex">\(R^2\)</span>接近1说明拟合好；残差正态性检验通过。</p>
-<p><strong>注意</strong>：DE是全局搜索，比牛顿法慢但不容易陷局部最优；通常DE粗搜+局部精化（L-BFGS-B）效果最好。</p>
+<p><strong>注意</strong>：DE [Differential Evolution, 差分进化]是全局搜索，比牛顿法慢但不容易陷局部最优；通常DE粗搜+局部精化（L-BFGS-B）效果最好。</p>
 </div>
 <h3 id="_12">匈牙利算法  <code>进阶级</code><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
@@ -1801,7 +1801,7 @@
 <p><strong>核心原理</strong>：蚂蚁走路线时留下信息素，短路线上信息素挥发少、累积快，后面的蚂蚁更倾向选信息素浓的路——正反馈让全群逐渐汇聚到最短路线。<span class="arithmatex">\(\alpha\)</span>控制信息素重要性、<span class="arithmatex">\(\beta\)</span>控制距离启发重要性、挥发率防止信息素无限累积。</p>
 <p><strong>操作要点</strong>：工具箱中选"蚁群算法"，蚂蚁数30，迭代100次，<span class="arithmatex">\(\alpha=1, \beta=2\)</span>，挥发率0.5，精英权重0。</p>
 <p><strong>结果关键</strong>：近似最短环游长度（如372.765），比最近邻+2-opt基线改善4.2%；第45代后收敛稳定。</p>
-<p><strong>注意</strong>：ACO是启发式近似，不保证全局最优；节点数越大越有优势。</p>
+<p><strong>注意</strong>：ACO [Ant Colony Optimization, 蚁群优化]是启发式近似，不保证全局最优；节点数越大越有优势。</p>
 </div>
 <h3 id="_15">分支定界法  <code>进阶级</code><a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
@@ -1829,7 +1829,7 @@
 <p><strong>一句话</strong>：求解大规模线性规划的现代方法——从可行域<strong>内部</strong>沿中心路径收敛到最优顶点，不像单纯形法沿边界爬行。</p>
 <p><strong>美赛场景区</strong>：大规模生产排产优化（60个产品品类、29项共用资源约束），求最优产量组合和瓶颈资源影子价格。</p>
 <p><strong>核心原理</strong>：单纯形法像沿多边形围墙从一个顶点走到另一个顶点；内点法像从多边形内部直接向最优顶点"钻过去"，变量多时速度快得多。还能算出<strong>影子价格</strong>——每种紧缺资源放宽1单位能多赚多少钱。</p>
-<p><strong>操作要点</strong>：工具箱中选"内点法"（HiGHS-IPM），presolve开启，变量下界默认0。</p>
+<p><strong>操作要点</strong>：工具箱中选"内点法"（HiGHS-IPM [Interior Point Method, 内点法]），presolve开启，变量下界默认0。</p>
 <p><strong>结果关键</strong>：最优目标值（如420390）；各紧约束的影子价格（如R01资源影子价格7.233，是瓶颈资源）；约束余量为0的约束即瓶颈。</p>
 <p><strong>注意</strong>：内点法适合大规模LP；整数规划仍需分支定界。影子价格是敏感性分析的关键输出。</p>
 </div>

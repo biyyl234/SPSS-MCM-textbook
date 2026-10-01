@@ -1437,7 +1437,7 @@
 - <span class="arithmatex">\(p\)</span>值：<span class="arithmatex">\(p&lt;0.05\)</span>说明这个相关不太可能是抽样巧合</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
 <li>点击菜单 <strong>分析 → 相关 → 双变量</strong></li>
 <li>将两个变量（本案例为<strong>日均客流量</strong>、<strong>当月销售总额</strong>）选入<strong>变量</strong>框</li>
@@ -1509,7 +1509,7 @@
 - <strong>零阶相关（未控制）</strong>：<span class="arithmatex">\(r=0.902\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>——表面看极强
 - <strong>偏相关（控制3个变量后）</strong>：<span class="arithmatex">\(r=0.541\)</span>，<span class="arithmatex">\(df=130\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，95%置信区间<span class="arithmatex">\([0.408,\ 0.652]\)</span>
 - 解读：相关系数从0.902降到0.541，下降0.361，说明原关系约三分之一是被控制变量解释掉的；但控制后仍显著为正，说明客流对销售的带动是<strong>稳健存在</strong>的</p>
-<p><strong>辅助检查</strong>：报告还给出控制变量间VIF（均约1.0，远小于10，不存在新的共线性问题）和残差正态性（Shapiro <span class="arithmatex">\(p=0.464\)</span>和<span class="arithmatex">\(0.360\)</span>），这些都说明结果可靠。</p>
+<p><strong>辅助检查</strong>：报告还给出控制变量间VIF [Variance Inflation Factor, 方差膨胀因子]（均约1.0，远小于10，不存在新的共线性问题）和残差正态性（Shapiro <span class="arithmatex">\(p=0.464\)</span>和<span class="arithmatex">\(0.360\)</span>），这些都说明结果可靠。</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">注意事项 &amp; 决策指引</p>
@@ -1531,7 +1531,7 @@
 <p><strong>一句话</strong>：检验<strong>同一批人</strong>在多个（3个及以上）二分类条件下的"通过率/成功率"是否一致。</p>
 <p><strong>美赛场景区</strong>：同一组受试者在多种方案下的成败率比较（如四种考核模块通过率是否相同）；问卷中同一批人对多个政策的支持率差异。</p>
 <p><strong>核心原理</strong>：普通卡方检验要求样本相互独立，但这里同一个人被重复观测，不独立。Cochran's Q把每一行（每个人）的成功次数汇总，构造<span class="arithmatex">\(Q\)</span>统计量，与自由度<span class="arithmatex">\(k-1\)</span>的卡方分布比较。本案例<span class="arithmatex">\(Q=81.90\)</span>，<span class="arithmatex">\(p&lt;0.001\)</span>，四个模块通过率（88.7%/64.7%/54.7%/44.0%）差异显著。</p>
-<p><strong>操作要点</strong>：在Dabbit AI SPSS工具箱选择"Cochran's Q检验"，数据按"一人一行、每个条件一列0/1"排列；<span class="arithmatex">\(\alpha=0.05\)</span>，置换次数5000；整体显著后用McNemar做两两比较并用Bonferroni校正。</p>
+<p><strong>操作要点</strong>：在Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱选择"Cochran's Q检验"，数据按"一人一行、每个条件一列0/1"排列；<span class="arithmatex">\(\alpha=0.05\)</span>，置换次数5000；整体显著后用McNemar做两两比较并用Bonferroni校正。</p>
 <p><strong>结果关键</strong>：<span class="arithmatex">\(p&lt;0.05\)</span>说明各条件成功率不全相等；再看事后两两比较中校正后<span class="arithmatex">\(p\)</span>仍显著的条件对，定位差异来源（本案例"设备操作"显著弱于"理论考核"）。</p>
 <p><strong>注意</strong>：它是<strong>配对版卡方</strong>。两个条件时退化为McNemar检验；三个及以上二分类配对条件才用它。若结果变量是连续的，改用Friedman检验。</p>
 </div>
@@ -1551,7 +1551,7 @@
 <p><strong>一句话</strong>：分析<strong>两条时间序列</strong>之间的<strong>滞后相关</strong>——A序列变动后，过几天B序列才跟着动，以及滞后几天时相关最强。</p>
 <p><strong>美赛场景区</strong>：广告投放量与后续销量的滞后关系；政策出台与经济指标变化的时间差；判断哪个序列是"领先指标"。</p>
 <p><strong>核心原理</strong>：计算<span class="arithmatex">\(r(k)=corr(X_t,\ Y_{t+k})\)</span>在不同滞后阶数<span class="arithmatex">\(k\)</span>下的值。本案例广告曝光量与下单笔数同期相关<span class="arithmatex">\(r(0)=0.079\)</span>几乎为0，但滞后<span class="arithmatex">\(k=3\)</span>天处<span class="arithmatex">\(r=0.724\)</span>（<span class="arithmatex">\(p=1.72\times10^{-18}\)</span>）最强——即曝光领先下单约3天。</p>
-<p><strong>操作要点</strong>：工具箱选"互相关性分析"，指定X序列（曝光量）和Y序列（下单笔数）；最大滞后阶数max_lag=10；先做ADF平稳性检验，非平稳则差分或预白化；<span class="arithmatex">\(\alpha=0.05\)</span>。</p>
+<p><strong>操作要点</strong>：工具箱选"互相关性分析"，指定X序列（曝光量）和Y序列（下单笔数）；最大滞后阶数max_lag=10；先做ADF [Augmented Dickey-Fuller, 增广迪基-富勒检验]平稳性检验，非平稳则差分或预白化；<span class="arithmatex">\(\alpha=0.05\)</span>。</p>
 <p><strong>结果关键</strong>：互相关函数图中超出蓝色显著带的红点是可靠滞后；最强峰所在的<span class="arithmatex">\(k^*\)</span>就是领先期数。<span class="arithmatex">\(k&gt;0\)</span>表示X领先Y，<span class="arithmatex">\(k&lt;0\)</span>表示Y领先X。</p>
 <p><strong>注意</strong>：它只描述统计上的先后联动，<strong>不等于因果</strong>；要证明因果方向需再做Granger检验。两序列不平稳时直接算互相关会得到假相关。</p>
 </div>

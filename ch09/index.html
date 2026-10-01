@@ -1016,10 +1016,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cbc" class="md-nav__link">
+  <a href="#cbc-choice-based-conjoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        联合分析（含CBC） 进阶级
+        联合分析（含CBC [Choice-Based Conjoint, 基于选择的联合分析]） 进阶级
       
     </span>
   </a>
@@ -1060,10 +1060,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bpto" class="md-nav__link">
+  <a href="#bpto-brand-price-trade-off" class="md-nav__link">
     <span class="md-ellipsis">
       
-        品牌价格抵补模型（BPTO） 进阶级
+        品牌价格抵补模型（BPTO [Brand Price Trade-Off, 品牌价格权衡]） 进阶级
       
     </span>
   </a>
@@ -1580,9 +1580,9 @@
 <p><strong>这个分类是干什么的？</strong></p>
 <p>问卷研究是通过发放量表、收集被试主观评分来测量"态度、满意度、意愿"这类看不见摸不着的构念（construct）的一整套方法。它要回答两个核心问题：你的问卷<strong>靠不靠谱</strong>（信度）、测的是不是你想测的东西（效度）？以及问卷数据之间的<strong>关系结构</strong>是怎样的（谁影响谁、有没有中介和调节）。从发问卷前的项目分析、到回收后的信效度检验、再到用结构方程模型验证理论模型，是一条完整的链条。</p>
 <p><strong>美赛什么题型常用？</strong></p>
-<p>美赛中凡是涉及"人"的主观评价的题目几乎都要用到本章方法：C 题（大数据题）里若带用户评分、满意度、调查数据；B 题中需要做公众偏好、政策接受度分析；以及任何需要设计问卷或解释问卷数据的赛题。尤其<strong>信度分析、效度分析、结构方程模型（SEM）</strong>是问卷类论文的"标配三件套"，评审看到问卷数据却没有报告信效度会直接质疑结论的可靠性。</p>
+<p>美赛中凡是涉及"人"的主观评价的题目几乎都要用到本章方法：C 题（大数据题）里若带用户评分、满意度、调查数据；B 题中需要做公众偏好、政策接受度分析；以及任何需要设计问卷或解释问卷数据的赛题。尤其<strong>信度分析、效度分析、结构方程模型（SEM [Structural Equation Model, 结构方程模型]）</strong>是问卷类论文的"标配三件套"，评审看到问卷数据却没有报告信效度会直接质疑结论的可靠性。</p>
 <p><strong>学习路径建议</strong></p>
-<p>按真实做问卷的顺序学：先学<strong>项目分析（区分度）</strong>筛掉烂题，再学<strong>信度分析</strong>确认题项内部一致、<strong>效度分析</strong>（探索性因子分析）确认结构合理；然后学<strong>中介效应</strong>和<strong>调节效应</strong>看懂变量间的作用机制；最后用<strong>结构方程模型（SEM）</strong>把测量和关系统一在一个模型里验证理论假设。其余如 KANO、PSM、联合分析、NPS 等是面向特定商业问题的进阶工具，遇到对应题型再查即可。</p>
+<p>按真实做问卷的顺序学：先学<strong>项目分析（区分度）</strong>筛掉烂题，再学<strong>信度分析</strong>确认题项内部一致、<strong>效度分析</strong>（探索性因子分析）确认结构合理；然后学<strong>中介效应</strong>和<strong>调节效应</strong>看懂变量间的作用机制；最后用<strong>结构方程模型（SEM）</strong>把测量和关系统一在一个模型里验证理论假设。其余如 KANO [Kano Model, 狩野模型]、PSM [Propensity Score Matching, 倾向得分匹配]、联合分析、NPS [Net Promoter Score, 净推荐值] 等是面向特定商业问题的进阶工具，遇到对应题型再查即可。</p>
 </div>
 <h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">项目分析（区分度分析）  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -1607,15 +1607,15 @@
 <li>如果一道题好学生和差学生得分差不多，说明这道题<strong>没有区分度</strong>，谁答都一样，是废题</li>
 </ul>
 <p><strong>两个核心指标：</strong>
-- <strong>决断值 CR（Critical Ratio）</strong>：就是高分组与低分组在该题上得分差的独立样本 t 值。CR <span class="arithmatex">\(\geq 3.0\)</span> 且 <span class="arithmatex">\(p&lt;0.05\)</span> 表示该题区分力足够
+- <strong>决断值 CR [Composite Reliability, 组合信度]（Critical Ratio）</strong>：就是高分组与低分组在该题上得分差的独立样本 t 值。CR <span class="arithmatex">\(\geq 3.0\)</span> 且 <span class="arithmatex">\(p&lt;0.05\)</span> 表示该题区分力足够
 - <strong>题总相关 r</strong>：该题得分与"剔除本题后总分"的相关。<span class="arithmatex">\(r \geq 0.3\)</span> 且 <span class="arithmatex">\(p&lt;0.05\)</span> 表示该题和整个量表方向一致</p>
 <p>两个指标都达标就保留；都不达标建议删除；介于中间建议修改后保留。</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
 <li>先处理反向计分题（如本题 1=非常同意、5=非常不同意，需在分析前反转成统一方向）</li>
-<li>在 Dabbit AI SPSS 工具箱中选择"项目分析（区分度分析）"</li>
+<li>在 Dabbit AI [Artificial Intelligence, 人工智能] SPSS 工具箱中选择"项目分析（区分度分析）"</li>
 <li>选择题项所在列，指定计分类型为 likert，填写反向题编号（如 q6、q11、q16）</li>
 <li>高/低分组比例默认各 27%，CR 阈值默认 3.0，题总相关阈值默认 0.3</li>
 <li>若已有现成总分列可指定，否则由工具自动把所有题项求和构造总分</li>
@@ -1669,7 +1669,7 @@
 - <span class="arithmatex">\(0.7 \leq \alpha &lt; 0.8\)</span>：可接受（探索性研究可放宽到 0.6）
 - <span class="arithmatex">\(\alpha &lt; 0.6\)</span>：不佳，需要修订量表</p>
 <p>除 <span class="arithmatex">\(\alpha\)</span> 外，还会算<strong>折半信度</strong>（把题项劈成两半看两半是否一致）和<strong>组合信度 CR</strong>（结构方程框架下的信度指标）。</p>
-<p>另一个关键诊断是<strong>"删除该题项后的 <span class="arithmatex">\(\alpha\)</span>"</strong>：如果删掉某题后整表 <span class="arithmatex">\(\alpha\)</span> 反而上升很多（<span class="arithmatex">\(\Delta\alpha \geq 0.02\)</span>），说明这道题在拖后腿；同时看<strong>修正题总相关</strong>（CITC），低于 0.3 说明该题与其他题关联太弱。</p>
+<p>另一个关键诊断是<strong>"删除该题项后的 <span class="arithmatex">\(\alpha\)</span>"</strong>：如果删掉某题后整表 <span class="arithmatex">\(\alpha\)</span> 反而上升很多（<span class="arithmatex">\(\Delta\alpha \geq 0.02\)</span>），说明这道题在拖后腿；同时看<strong>修正题总相关</strong>（CITC [Corrected Item-Total Correlation, 校正项总计相关性]），低于 0.3 说明该题与其他题关联太弱。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
@@ -1707,7 +1707,7 @@
 <h3 id="_5">⭐ 效度分析  <code>基础级</code><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">一句话讲清</p>
-<p>效度分析回答：你的量表<strong>测准了没有</strong>？你设计量表时以为它在测"工作投入"，数据是否真的支持这一点？效度分析（这里指结构效度，用探索性因子分析 EFA 实现）就是拿数据来验证你预设的维度结构。</p>
+<p>效度分析回答：你的量表<strong>测准了没有</strong>？你设计量表时以为它在测"工作投入"，数据是否真的支持这一点？效度分析（这里指结构效度，用探索性因子分析 EFA [Exploratory Factor Analysis, 探索性因子分析] 实现）就是拿数据来验证你预设的维度结构。</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">美赛适用场景</p>
@@ -1726,7 +1726,7 @@
 <li>如果某道题在两个因子上载荷都差不多（交叉载荷），说明这道题归属不清</li>
 </ul>
 <p><strong>两个前提检验（必须先通过才能做因子分析）：</strong>
-- <strong>KMO 检验</strong>：取值 0--1。<span class="arithmatex">\(&gt;0.9\)</span> 极好，<span class="arithmatex">\(0.8\)</span>--<span class="arithmatex">\(0.9\)</span> 很好，<span class="arithmatex">\(0.7\)</span> 以上尚可，<span class="arithmatex">\(&lt;0.5\)</span> 不宜做因子分析
+- <strong>KMO [Kaiser-Meyer-Olkin,  Kaiser-Meyer-Olkin检验] 检验</strong>：取值 0--1。<span class="arithmatex">\(&gt;0.9\)</span> 极好，<span class="arithmatex">\(0.8\)</span>--<span class="arithmatex">\(0.9\)</span> 很好，<span class="arithmatex">\(0.7\)</span> 以上尚可，<span class="arithmatex">\(&lt;0.5\)</span> 不宜做因子分析
 - <strong>Bartlett 球形检验</strong>：<span class="arithmatex">\(p&lt;0.05\)</span> 表示题项间存在相关，适合提取因子</p>
 <p><strong>关键指标：</strong>
 - <strong>因子载荷</strong>：题项与所属因子的相关，<span class="arithmatex">\(\geq 0.5\)</span> 可接受，<span class="arithmatex">\(\geq 0.7\)</span> 很好
@@ -1759,7 +1759,7 @@
 <div class="admonition warning">
 <p class="admonition-title">注意事项 &amp; 决策指引</p>
 <p><strong>什么时候用？</strong> 预试问卷结构效度检验；新量表开发。</p>
-<p><strong>什么时候不用？</strong> 已有成熟量表且样本为验证性用途时，应用<strong>验证性因子分析（CFA）</strong>而非 EFA。</p>
+<p><strong>什么时候不用？</strong> 已有成熟量表且样本为验证性用途时，应用<strong>验证性因子分析（CFA [Confirmatory Factor Analysis, 验证性因子分析]）</strong>而非 EFA。</p>
 <p><strong>常见坑</strong>
 - <strong>坑1</strong>：KMO 或 Bartlett 不通过就强行做因子分析，结果无意义
 - <strong>坑2</strong>：因子数靠"特征值 <span class="arithmatex">\(&gt;1\)</span>"硬定，不结合碎石图和平行分析，常常多提或少提因子
@@ -1811,7 +1811,7 @@
 <ul>
 <li><strong>总效应 c</strong>：如案例 <span class="arithmatex">\(0.602\)</span>、<span class="arithmatex">\(p&lt;0.001\)</span>，X 总体上显著影响 Y</li>
 <li><strong>直接效应 c'</strong>：如 <span class="arithmatex">\(0.160\)</span>、<span class="arithmatex">\(p=0.069\)</span>（不显著），说明去掉中介后 X 不再直接影响 Y</li>
-<li><strong>各条间接效应</strong>：X<span class="arithmatex">\(\to\)</span>M1<span class="arithmatex">\(\to\)</span>Y = <span class="arithmatex">\(0.342\)</span>（95%CI <span class="arithmatex">\(0.206\)</span>--<span class="arithmatex">\(0.494\)</span>，不含 0，显著）；X<span class="arithmatex">\(\to\)</span>M2<span class="arithmatex">\(\to\)</span>Y = <span class="arithmatex">\(0.099\)</span>（CI <span class="arithmatex">\(0.023\)</span>--<span class="arithmatex">\(0.185\)</span>，显著）</li>
+<li><strong>各条间接效应</strong>：X<span class="arithmatex">\(\to\)</span>M1<span class="arithmatex">\(\to\)</span>Y = <span class="arithmatex">\(0.342\)</span>（95%CI [Confidence Interval, 置信区间] <span class="arithmatex">\(0.206\)</span>--<span class="arithmatex">\(0.494\)</span>，不含 0，显著）；X<span class="arithmatex">\(\to\)</span>M2<span class="arithmatex">\(\to\)</span>Y = <span class="arithmatex">\(0.099\)</span>（CI <span class="arithmatex">\(0.023\)</span>--<span class="arithmatex">\(0.185\)</span>，显著）</li>
 <li><strong>总间接效应</strong>：<span class="arithmatex">\(0.441\)</span>，占总效应约 73%，即大部分影响是通过中介传导的</li>
 <li>每条间接效应的 CI<strong>不跨 0</strong> 即显著</li>
 </ul>
@@ -1823,7 +1823,7 @@
 <p><strong>什么时候不用？</strong> 只是想预测 Y 或看 X 是否影响 Y 时，普通回归即可，不必硬加中介。</p>
 <p><strong>常见坑</strong>
 - <strong>坑1</strong>：用横截面问卷数据说"因果中介"。中介分析只能说"统计上的传导路径"，不能证明因果关系
-- <strong>坑2</strong>：中介变量和自变量高度共线却不报告。平行中介需检查 VIF
+- <strong>坑2</strong>：中介变量和自变量高度共线却不报告。平行中介需检查 VIF [Variance Inflation Factor, 方差膨胀因子]
 - <strong>坑3</strong>：只看间接效应点估计，不看 Bootstrap 置信区间是否跨 0</p>
 <p><strong>和相似算法的区别</strong>：中介效应看"X 通过 M 影响 Y"的<strong>中间通道</strong>；调节效应看"M 改变 X 对 Y 的影响<strong>强度</strong>"，一个是"传话筒"、一个是"放大器"。</p>
 </div>
@@ -1868,7 +1868,7 @@
 <li>比较含交互项模型（模型2）与不含交互项模型（模型1）的 <span class="arithmatex">\(\Delta R^2\)</span></li>
 </ol>
 <p><strong>SPSS 原生对应</strong>：通过 <strong>分析 → 回归 → 线性</strong>，手动将 X、M 中心化后相乘生成交互项，再放入回归；简单斜率需用手动语法或 PROCESS 插件。</p>
-<p><strong>默认参数参考</strong>：均值中心化，普通标准误，简单斜率按均值 <span class="arithmatex">\(\pm 1\)</span>SD 分组。</p>
+<p><strong>默认参数参考</strong>：均值中心化，普通标准误，简单斜率按均值 <span class="arithmatex">\(\pm 1\)</span>SD [Standard Deviation, 标准差] 分组。</p>
 </div>
 <div class="admonition success">
 <p class="admonition-title">结果怎么看</p>
@@ -1913,17 +1913,17 @@
 <p>模型用<strong>极大似然估计</strong>反复调整，直到模型隐含的协方差矩阵尽可能接近真实数据的协方差矩阵。</p>
 <p><strong>拟合优度指标（必须背的判断标准）：</strong>
 - <span class="arithmatex">\(\chi^2/df\)</span>（卡方自由度比）：<span class="arithmatex">\(\leq 3\)</span> 良好，越小越好
-- CFI、TLI（比较拟合指数）：<span class="arithmatex">\(\geq 0.90\)</span> 可接受，<span class="arithmatex">\(\geq 0.95\)</span> 良好
-- RMSEA（近似误差均方根）：<span class="arithmatex">\(\leq 0.08\)</span> 可接受，<span class="arithmatex">\(\leq 0.05\)</span> 良好
-- SRMR（标准化残差均方根）：<span class="arithmatex">\(\leq 0.08\)</span> 良好</p>
-<p><strong>测量质量指标</strong>：标准化载荷 <span class="arithmatex">\(\geq 0.5\)</span>，组合信度 CR <span class="arithmatex">\(\geq 0.7\)</span>，平均方差抽取 AVE <span class="arithmatex">\(\geq 0.5\)</span>，且 <span class="arithmatex">\(\sqrt{AVE}\)</span> 大于该因子与其他因子的相关（区分效度）。</p>
+- CFI [Comparative Fit Index, 比较拟合指数]、TLI [Tucker-Lewis Index, 塔克-刘易斯指数]（比较拟合指数）：<span class="arithmatex">\(\geq 0.90\)</span> 可接受，<span class="arithmatex">\(\geq 0.95\)</span> 良好
+- RMSEA [Root Mean Square Error of Approximation, 近似误差均方根]（近似误差均方根）：<span class="arithmatex">\(\leq 0.08\)</span> 可接受，<span class="arithmatex">\(\leq 0.05\)</span> 良好
+- SRMR [Standardized Root Mean Square Residual, 标准化残差均方根]（标准化残差均方根）：<span class="arithmatex">\(\leq 0.08\)</span> 良好</p>
+<p><strong>测量质量指标</strong>：标准化载荷 <span class="arithmatex">\(\geq 0.5\)</span>，组合信度 CR <span class="arithmatex">\(\geq 0.7\)</span>，平均方差抽取 AVE [Average Variance Extracted, 平均方差提取量] <span class="arithmatex">\(\geq 0.5\)</span>，且 <span class="arithmatex">\(\sqrt{AVE}\)</span> 大于该因子与其他因子的相关（区分效度）。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
 <ol>
-<li>SEM 在 SPSS 中需借助 AMOS 模块（画图）或在 Dabbit AI SPSS 工具箱中用代码指定模型</li>
+<li>SEM 在 SPSS 中需借助 AMOS [Analysis of Moment Structures, 矩结构分析] 模块（画图）或在 Dabbit AI SPSS 工具箱中用代码指定模型</li>
 <li>在工具箱中填写模型设定：测量部分写明"潜变量：题项列表"，结构部分写明"因变量 <span class="arithmatex">\(\sim\)</span> 自变量"</li>
-<li>估计方法选<strong>极大似然（ML）</strong>，适合连续指标</li>
+<li>估计方法选<strong>极大似然（ML [Maximum Likelihood, 最大似然估计]）</strong>，适合连续指标</li>
 <li>缺失值处理默认成列删除（listwise），最大迭代 600</li>
 <li>拟合标准选"常规"（<span class="arithmatex">\(\chi^2/df \leq 3\)</span>、CFI <span class="arithmatex">\(\geq 0.90\)</span>、RMSEA <span class="arithmatex">\(\leq 0.08\)</span>、SRMR <span class="arithmatex">\(\leq 0.08\)</span>）</li>
 <li>因子载荷阈值 0.5，信度阈值 0.7，最小样本量建议 200</li>
@@ -1956,9 +1956,9 @@
 <h3 id="_9">内容效度  <code>进阶级</code><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
-<p><strong>一句话</strong>：邀请领域专家逐条判断"题项是否测到了想测的内容"，用 I-CVI/S-CVI 量化条目内容代表性。</p>
+<p><strong>一句话</strong>：邀请领域专家逐条判断"题项是否测到了想测的内容"，用 I-CVI [Content Validity Index, 内容效度指数]/S-CVI 量化条目内容代表性。</p>
 <p><strong>美赛场景区</strong>：自编量表正式使用前，由专家评议题项覆盖面；美赛中设计问卷时可借鉴专家评分思路。</p>
-<p><strong>核心原理</strong>：专家按 1--4 级评题项相关性，评分 <span class="arithmatex">\(\geq 3\)</span> 算"相关"。条目级 I-CVI = 评相关的专家数/专家总数；<span class="arithmatex">\(\geq 6\)</span> 名专家时 I-CVI <span class="arithmatex">\(\geq 0.78\)</span> 达标，<span class="arithmatex">\(3\)</span>--<span class="arithmatex">\(5\)</span> 名时要求 <span class="arithmatex">\(=1.00\)</span>。量表级 S-CVI/Ave <span class="arithmatex">\(\geq 0.90\)</span>、S-CVI/UA <span class="arithmatex">\(\geq 0.80\)</span>。</p>
+<p><strong>核心原理</strong>：专家按 1--4 级评题项相关性，评分 <span class="arithmatex">\(\geq 3\)</span> 算"相关"。条目级 I-CVI = 评相关的专家数/专家总数；<span class="arithmatex">\(\geq 6\)</span> 名专家时 I-CVI <span class="arithmatex">\(\geq 0.78\)</span> 达标，<span class="arithmatex">\(3\)</span>--<span class="arithmatex">\(5\)</span> 名时要求 <span class="arithmatex">\(=1.00\)</span>。量表级 S-CVI/Ave <span class="arithmatex">\(\geq 0.90\)</span>、S-CVI/UA [Usage Attitude, 使用态度] <span class="arithmatex">\(\geq 0.80\)</span>。</p>
 <p><strong>操作要点</strong>：工具箱选"内容效度"，评分尺度 1--4，缺失策略 exclude，6 名专家对 25 条条目评分。</p>
 <p><strong>结果关键</strong>：逐题 I-CVI 对照阈值，未达标条目（如案例 Q5、Q17）需修订；S-CVI/Ave 与 S-CVI/UA 判断整体。</p>
 <p><strong>注意</strong>：内容效度是"专家共识"层面的效度，与后续统计导向的结构效度（EFA/CFA）互补，不能互相替代。</p>
@@ -2008,10 +2008,10 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：当同一组（如同一家门店）有多名评分者对同一对象打分时，检验组内评分是否足够一致、能否聚合为组级得分。</p>
 <p><strong>美赛场景区</strong>：多评委/多观察员打分数据（如门店服务评分、专家打分）聚合成团队/组织层面指标前。</p>
-<p><strong>核心原理</strong>：<span class="arithmatex">\(rwg = 1 - S^2 / \sigma^2_{EU}\)</span>，其中 <span class="arithmatex">\(S^2\)</span> 是组内实际评分方差，<span class="arithmatex">\(\sigma^2_{EU}\)</span> 是"完全随机打分"的期望方差（均匀分布下为 <span class="arithmatex">\((A^2-1)/12\)</span>）。<span class="arithmatex">\(rwg\)</span> 越接近 1 表示评分越一致；<span class="arithmatex">\(\geq 0.70\)</span> 可聚合，负值表示分歧比随机还大。</p>
+<p><strong>核心原理</strong>：<span class="arithmatex">\(rwg = 1 - S^2 / \sigma^2_{EU [Expected Utility, 期望效用]}\)</span>，其中 <span class="arithmatex">\(S^2\)</span> 是组内实际评分方差，<span class="arithmatex">\(\sigma^2_{EU}\)</span> 是"完全随机打分"的期望方差（均匀分布下为 <span class="arithmatex">\((A^2-1)/12\)</span>）。<span class="arithmatex">\(rwg\)</span> 越接近 1 表示评分越一致；<span class="arithmatex">\(\geq 0.70\)</span> 可聚合，负值表示分歧比随机还大。</p>
 <p><strong>操作要点</strong>：工具箱选"组内评分者信度 rwg"，指定分组字段、题项列，量表 1--5 档，阈值 0.70，每组至少 3 人。</p>
 <p><strong>结果关键</strong>：案例 20 组 rwg(j) 均值 0.83、达标率 90%，支持聚合；门店 A19 为负值（-0.81），存在极端分歧不宜聚合。</p>
-<p><strong>注意</strong>：rwg 回答"组内一致性"，与 ICC（组间信度）互补；负值组要回头核查评分标准或数据。</p>
+<p><strong>注意</strong>：rwg 回答"组内一致性"，与 ICC [Intraclass Correlation Coefficient, 组内相关系数]（组间信度）互补；负值组要回头核查评分标准或数据。</p>
 </div>
 <h3 id="_12">对应分析  <code>进阶级</code><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
@@ -2028,7 +2028,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：专门处理问卷<strong>多选题</strong>——统计每个选项的普及率，并按分组看不同群体的多选偏好差异。</p>
 <p><strong>美赛场景区</strong>：问卷中"您经常参与哪些项目（可多选）"这类数据的分析，普通频数分析处理不了。</p>
-<p><strong>核心原理</strong>：把多选答案转成"每选项一列 0/1"，算<strong>响应率</strong>（该选项占总选择次数）与<strong>普及率</strong>（多少比例人选了它，可超 100%）；再对每个选项做"组别 <span class="arithmatex">\(\times\)</span> 是否选中"的卡方检验，并用 FDR 校正多重比较。</p>
+<p><strong>核心原理</strong>：把多选答案转成"每选项一列 0/1"，算<strong>响应率</strong>（该选项占总选择次数）与<strong>普及率</strong>（多少比例人选了它，可超 100%）；再对每个选项做"组别 <span class="arithmatex">\(\times\)</span> 是否选中"的卡方检验，并用 FDR [False Discovery Rate, 错误发现率] 校正多重比较。</p>
 <p><strong>操作要点</strong>：SPSS 中 <strong>分析 → 多重响应</strong>定义变量集，再做交叉表；工具箱中直接选响应变量与分组变量。</p>
 <p><strong>结果关键</strong>：案例跑步机有氧普及率 48% 最高；经校正后瑜伽普拉提、游泳等选项组间差异显著，Cramér's V 衡量强度。</p>
 <p><strong>注意</strong>：各选项普及率之和可超过 100%（因为一人可多选），不要当成普通百分比解读。</p>
@@ -2053,13 +2053,13 @@
 <p><strong>结果关键</strong>：案例处理器性能偏好份额 51.2% 居首，键盘手感 1.1% 最易被牺牲；<span class="arithmatex">\(\rho^2=0.296\)</span>、任务命中率 62.7%。</p>
 <p><strong>注意</strong>：MaxDiff 比直接打分更能拉开属性差距，但问卷设计要求属性组合呈正交，否则效用不可识别。</p>
 </div>
-<h3 id="cbc">联合分析（含CBC）  <code>进阶级</code><a class="headerlink" href="#cbc" title="Permanent link">&para;</a></h3>
+<h3 id="cbc-choice-based-conjoint">联合分析（含CBC [Choice-Based Conjoint, 基于选择的联合分析]）  <code>进阶级</code><a class="headerlink" href="#cbc-choice-based-conjoint" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把产品拆成品牌、价格、配置等属性水平，让受访者在多个完整产品方案中做选择，反推每个属性水平的效用和重要性。</p>
 <p><strong>美赛场景区</strong>：新品概念测试、属性配置与定价决策；美赛中涉及产品/服务设计权衡的题目。</p>
 <p><strong>核心原理</strong>：用条件 Logit（多项 Logit）估计各属性水平效用，被选概率经指数归一化；属性相对重要性 = 该属性水平效用极差 / 所有属性极差之和。McFadden <span class="arithmatex">\(R^2\)</span> 衡量模型拟合。</p>
-<p><strong>操作要点</strong>：工具箱选"联合分析/CBC"，编码方式 effect，优化器 BFGS，价格可作线性项，输出相对重要性排序。</p>
+<p><strong>操作要点</strong>：工具箱选"联合分析/CBC"，编码方式 effect，优化器 BFGS [Broyden-Fletcher-Goldfarb-Shanno, 拟牛顿优化算法]，价格可作线性项，输出相对重要性排序。</p>
 <p><strong>结果关键</strong>：案例品牌相对重要性 32.8% 最高，价格每涨 1000 元效用降 1.23；McFadden <span class="arithmatex">\(R^2=0.295\)</span>。</p>
 <p><strong>注意</strong>：样本量通常需要每个属性组合有足够重复；某水平不显著时不能宣称有真实偏好差异。</p>
 </div>
@@ -2078,7 +2078,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：用"太便宜/便宜/贵/太贵"四个价格问题，找出消费者心理上最优定价点和可接受价格区间。</p>
 <p><strong>美赛场景区</strong>：新品定价决策；美赛中涉及产品定价、需求估计的题目。</p>
-<p><strong>核心原理</strong>：Van Westendorp 模型画四条累积曲线：太便宜(P1)、便宜(P2)随价格下降，贵(P3)、太贵(P4)随价格上升。四条曲线交点给出四个关键价：PMC 可接受下限（P1<span class="arithmatex">\(\cap\)</span>P3）、OPP 最优价（P1<span class="arithmatex">\(\cap\)</span>P4）、IDP 无差异点（P2<span class="arithmatex">\(\cap\)</span>P3）、PME 可接受上限（P2<span class="arithmatex">\(\cap\)</span>P4）。</p>
+<p><strong>核心原理</strong>：Van Westendorp 模型画四条累积曲线：太便宜(P1)、便宜(P2)随价格下降，贵(P3)、太贵(P4)随价格上升。四条曲线交点给出四个关键价：PMC [Product-Moment Correlation, 积差相关] 可接受下限（P1<span class="arithmatex">\(\cap\)</span>P3）、OPP [Opportunity, 机会] 最优价（P1<span class="arithmatex">\(\cap\)</span>P4）、IDP [Independent Double Programming, 独立双项目编程] 无差异点（P2<span class="arithmatex">\(\cap\)</span>P3）、PME [Partial Method of Equating, 部分等值法] 可接受上限（P2<span class="arithmatex">\(\cap\)</span>P4）。</p>
 <p><strong>操作要点</strong>：工具箱选"价格敏感度 PSM"，线性插值，最小有效样本 30，剔除逻辑顺序违规（P1<span class="arithmatex">\(&gt;\)</span>P2<span class="arithmatex">\(&gt;\)</span>P3<span class="arithmatex">\(&gt;\)</span>P4）的答卷。</p>
 <p><strong>结果关键</strong>：案例最优价 OPP <span class="arithmatex">\(\approx 12.4\)</span> 元，可接受区间 <span class="arithmatex">\([9.67, 13.86]\)</span> 元。</p>
 <p><strong>注意</strong>：PSM 是"心理价位"调查，与真实购买行为有差距，正式定价还需结合成本与竞品。</p>
@@ -2093,7 +2093,7 @@
 <p><strong>结果关键</strong>：案例选 3 款口味去重触达 120 人（80%），比"单项最高 3 款"基线多 33 人。</p>
 <p><strong>注意</strong>：Turf 优化的是<strong>覆盖广度</strong>，不是每个单项的人气；重叠大的项目组合后增量很小。</p>
 </div>
-<h3 id="bpto">品牌价格抵补模型（BPTO）  <code>进阶级</code><a class="headerlink" href="#bpto" title="Permanent link">&para;</a></h3>
+<h3 id="bpto-brand-price-trade-off">品牌价格抵补模型（BPTO [Brand Price Trade-Off, 品牌价格权衡]）  <code>进阶级</code><a class="headerlink" href="#bpto-brand-price-trade-off" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：把消费者对品牌的偏好折算成"愿意多付多少钱"，并测算各品牌提价后的份额流失（价格弹性）。</p>
@@ -2108,7 +2108,7 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：让不同消费者组只看一个候选价格，画出价格--需求曲线，找出购买意愿骤降的"断裂台阶"，并定收益最大化价。</p>
 <p><strong>美赛场景区</strong>：定价调研，找出消费者心理价格上限；与 PSM 互补（PSM 问主观感受，本模型看购买意愿突变）。</p>
-<p><strong>核心原理</strong>：把"意愿 <span class="arithmatex">\(\geq 4\)</span> 分"定义为需求率，形成价格--需求曲线；相邻价格档做两比例 Z 检验（BH 校正）+ Chow 断点检验找突变点；再用"价格 <span class="arithmatex">\(\times\)</span> 需求率"算各档收益，取最大者定价。</p>
+<p><strong>核心原理</strong>：把"意愿 <span class="arithmatex">\(\geq 4\)</span> 分"定义为需求率，形成价格--需求曲线；相邻价格档做两比例 Z 检验（BH [Benjamini-Hochberg, 本雅明尼-霍赫贝格方法] 校正）+ Chow 断点检验找突变点；再用"价格 <span class="arithmatex">\(\times\)</span> 需求率"算各档收益，取最大者定价。</p>
 <p><strong>操作要点</strong>：工具箱选"价格断裂点"，独立组设计，购买意愿阈值 4 分，最小突变幅度 10 个百分点，BH 校正。</p>
 <p><strong>结果关键</strong>：案例 109<span class="arithmatex">\(\to\)</span>129 元时需求骤降 36 个百分点（校正 <span class="arithmatex">\(p=0.027\)</span>），收益在 109 元达峰，建议定价 109 元。</p>
 <p><strong>注意</strong>：购买意愿是声明意愿，与真实购买有差距；断裂点建议结合成本与竞品复核。</p>

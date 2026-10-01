@@ -1128,10 +1128,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#alt" class="md-nav__link">
+  <a href="#alt-accelerated-life-testing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        加速寿命试验（ALT） 进阶级
+        加速寿命试验（ALT [Accelerated Life Testing, 加速寿命试验]） 进阶级
       
     </span>
   </a>
@@ -1490,11 +1490,11 @@
 <div class="admonition info">
 <p class="admonition-title">本章导览</p>
 <p><strong>这个分类是干什么的？</strong></p>
-<p>质量控制（QC）用统计方法监控生产/服务过程是否<strong>稳定受控</strong>，以及产品质量是否<strong>满足规格要求</strong>。核心工具是控制图（判断过程是否有异常波动）和过程能力指数（判断波动是否在可接受范围内）。它回答两个问题：过程稳不稳？产品合不合格？</p>
+<p>质量控制（QC [Quality Control, 质量控制]）用统计方法监控生产/服务过程是否<strong>稳定受控</strong>，以及产品质量是否<strong>满足规格要求</strong>。核心工具是控制图（判断过程是否有异常波动）和过程能力指数（判断波动是否在可接受范围内）。它回答两个问题：过程稳不稳？产品合不合格？</p>
 <p><strong>美赛什么题型常用？</strong></p>
 <p>美赛工业/制造类题目（如生产流程优化、产品质量改进、供应链可靠性）中非常实用。控制图和过程能力分析是六西格玛管理的核心方法。可靠性分析（寿命分布、加速试验）在设备维护、产品寿命预测类题目中也会用到。</p>
 <p><strong>学习路径建议</strong></p>
-<p>先学<strong>帕累托图</strong>（抓关键少数问题）和<strong>Xbar-R控制图</strong>（最常用的计量型控制图），再学<strong>过程能力分析</strong>（判断过程能不能满足规格）。I-MR控制图用于单值数据，然后了解属性控制图（C图、U图）和测量系统分析（量具R&amp;R）。SPSS可通过"分析 → 控制图"菜单操作部分功能。</p>
+<p>先学<strong>帕累托图</strong>（抓关键少数问题）和<strong>Xbar-R控制图</strong>（最常用的计量型控制图），再学<strong>过程能力分析</strong>（判断过程能不能满足规格）。I-MR [Moving Range, 移动极差]控制图用于单值数据，然后了解属性控制图（C图、U图）和测量系统分析（量具R&amp;R）。SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]可通过"分析 → 控制图"菜单操作部分功能。</p>
 </div>
 <h2 id="_2">基础级算法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">⭐ 帕累托图  <code>基础级</code><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -1521,12 +1521,12 @@
 <li>在累计80%处画一条线——线左边的就是"A类关键原因"</li>
 </ul>
 <p>这就像医生看病：不是所有症状都要治，先看哪个病最严重、最花钱，集中力量先治它。</p>
-<p><strong>ABC分级</strong>：累计0--80%为A类（关键少数，优先改进），80--95%为B类（次要），95--100%为C类（一般）。</p>
+<p><strong>ABC [Activity-Based Costing, 作业成本法]分级</strong>：累计0--80%为A类（关键少数，优先改进），80--95%为B类（次要），95--100%为C类（一般）。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
 <ol>
-<li>在Dabbit AI SPSS工具箱中选择"帕累托图"</li>
+<li>在Dabbit AI [Artificial Intelligence, 人工智能] SPSS工具箱中选择"帕累托图"</li>
 <li>上传数据：类别字段选"客诉原因"，数值字段选"损失金额（元）"</li>
 <li>汇总方式选"求和"，累计判定线设为0.80</li>
 <li>勾选"ABC分级"，阈值80/95</li>
@@ -1574,14 +1574,14 @@
 <li><strong>Xbar图（均值图）</strong>：每组算一个均值，打点在图上。如果均值突然偏移，说明过程中心漂移了（如刀具磨损、原料换批）</li>
 <li><strong>R图（极差图）</strong>：每组内最大值减最小值，反映组内波动。如果R变大，说明过程波动加剧了（如设备松动）</li>
 </ul>
-<p>控制限不是规格限，而是根据<strong>过程自身波动</strong>算出来的：中心线CL=均值均值，UCL=<span class="arithmatex">\(\bar{\bar{X}}+A_2\bar{R}\)</span>，LCL=<span class="arithmatex">\(\bar{\bar{X}}-A_2\bar{R}\)</span>。点在限内随机散布=受控；有点超限或连续同侧=失控信号。</p>
+<p>控制限不是规格限，而是根据<strong>过程自身波动</strong>算出来的：中心线CL [Center Line, 中心线]=均值均值，UCL [Upper Control Limit, 上控制限]=<span class="arithmatex">\(\bar{\bar{X}}+A_2\bar{R}\)</span>，LCL [Lower Control Limit, 下控制限]=<span class="arithmatex">\(\bar{\bar{X}}-A_2\bar{R}\)</span>。点在限内随机散布=受控；有点超限或连续同侧=失控信号。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">SPSS操作步骤</p>
 <ol>
 <li>SPSS菜单：<strong>分析 → 质量控制 → 控制图</strong></li>
 <li>选择"Xbar-R"图，观测值字段选"外径测量值"，子组标识选"批次号"</li>
-<li>规格上下限分别填入（如USL=50.20，LSL=49.80）</li>
+<li>规格上下限分别填入（如USL [Upper Specification Limit, 上规格限]=50.20，LSL [Lower Specification Limit, 下规格限]=49.80）</li>
 <li><span class="arithmatex">\(\sigma\)</span>估计方法选"极差法"</li>
 <li>判异规则：单点超限、连续9点同侧、连续6点趋势</li>
 <li>试运行阶段勾选"剔除特殊原因点后重算"</li>
@@ -1674,7 +1674,7 @@
 <p>想象一条传送带不断产出瓶子，有的装多了有的装少了。规格要求490--510g，目标500g。</p>
 <ul>
 <li><strong>Cp（过程潜力）</strong>：规格宽度 <span class="arithmatex">\(\div\)</span> 过程波动宽度 = <span class="arithmatex">\((USL-LSL)/(6\sigma_w)\)</span>。只看"波动够不够小"，不管中心对不对</li>
-<li><strong>Cpk（过程能力）</strong>：min(<span class="arithmatex">\(CPU, CPL\)</span>)，其中 <span class="arithmatex">\(CPU=(USL-\mu)/(3\sigma_w)\)</span>，<span class="arithmatex">\(CPL=(\mu-LSL)/(3\sigma_w)\)</span>。同时考虑波动大小<strong>和</strong>中心是否对齐</li>
+<li><strong>Cpk（过程能力）</strong>：min(<span class="arithmatex">\(CPU [Capability Upper Limit, 上限过程能力], CPL [Capability Lower Limit, 下限过程能力]\)</span>)，其中 <span class="arithmatex">\(CPU=(USL-\mu)/(3\sigma_w)\)</span>，<span class="arithmatex">\(CPL=(\mu-LSL)/(3\sigma_w)\)</span>。同时考虑波动大小<strong>和</strong>中心是否对齐</li>
 <li><strong>Pp/Ppk</strong>：用长期总标准差<span class="arithmatex">\(\sigma_o\)</span>计算，反映实际表现（含组间漂移）</li>
 </ul>
 <p><strong>判断标准</strong>：
@@ -1733,9 +1733,9 @@
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：判断设备寿命服从什么分布（威布尔/指数/对数正态），估计平均寿命和B10可靠寿命。</p>
 <p><strong>美赛场景区</strong>：水泵、电容器等设备的预防性更换周期决策；可靠性工程。</p>
-<p><strong>核心原理</strong>：对威布尔、指数、正态、对数正态四种分布分别做极大似然估计，用AIC选最优。威布尔形状参数<span class="arithmatex">\(\beta&gt;1\)</span>=磨损失效，<span class="arithmatex">\(\beta\approx1\)</span>=随机失效，<span class="arithmatex">\(\beta&lt;1\)</span>=早期失效。B10寿命=90%产品仍未失效的时间。</p>
+<p><strong>核心原理</strong>：对威布尔、指数、正态、对数正态四种分布分别做极大似然估计，用AIC [Akaike Information Criterion, 赤池信息准则]选最优。威布尔形状参数<span class="arithmatex">\(\beta&gt;1\)</span>=磨损失效，<span class="arithmatex">\(\beta\approx1\)</span>=随机失效，<span class="arithmatex">\(\beta&lt;1\)</span>=早期失效。B10寿命=90%产品仍未失效的时间。</p>
 <p><strong>操作要点</strong>：候选分布auto自动选择，删失事件值设1，Bootstrap重复999次，评估分位数0.50。</p>
-<p><strong>结果关键</strong>：最优分布威布尔，<span class="arithmatex">\(\beta=2.59\)</span>（磨损期），B10=4721小时，MTTF=10005小时。</p>
+<p><strong>结果关键</strong>：最优分布威布尔，<span class="arithmatex">\(\beta=2.59\)</span>（磨损期），B10=4721小时，MTTF [Mean Time To Failure, 平均失效时间]=10005小时。</p>
 <p><strong>注意</strong>：数据含右删失（还没坏的设备）时不能直接算均值，必须用生存分析方法。</p>
 </div>
 <h3 id="u">U控制图（单位缺陷数图）  <code>进阶级</code><a class="headerlink" href="#u" title="Permanent link">&para;</a></h3>
@@ -1762,17 +1762,17 @@
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：监控<strong>固定检查单元</strong>上的缺陷总数——每块电路板的焊接缺陷数是否稳定。</p>
-<p><strong>美赛场景区</strong>：SMT贴片车间AOI检测的缺陷数监控。</p>
+<p><strong>美赛场景区</strong>：SMT [Surface Mount Technology, 表面贴装技术]贴片车间AOI [Automated Optical Inspection, 自动光学检测]检测的缺陷数监控。</p>
 <p><strong>核心原理</strong>：缺陷数服从泊松分布，中心线<span class="arithmatex">\(\bar{c}\)</span>，控制限<span class="arithmatex">\(\bar{c}\pm3\sqrt{\bar{c}}\)</span>。样本量固定时用C图，不固定用U图。</p>
 <p><strong>操作要点</strong>：指定缺陷数列，3<span class="arithmatex">\(\sigma\)</span>控制限，游程检验判随机性。</p>
 <p><strong>结果关键</strong>：中心线<span class="arithmatex">\(\bar{c}=4.35\)</span>，UCL=10.6，第118块板缺陷15个超限→失控。</p>
 <p><strong>注意</strong>：C图和U图的区别——C图要求每个检查单元大小相同。</p>
 </div>
-<h3 id="alt">加速寿命试验（ALT）  <code>进阶级</code><a class="headerlink" href="#alt" title="Permanent link">&para;</a></h3>
+<h3 id="alt-accelerated-life-testing">加速寿命试验（ALT [Accelerated Life Testing, 加速寿命试验]）  <code>进阶级</code><a class="headerlink" href="#alt-accelerated-life-testing" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：在高温/高压等加速条件下做寿命试验，外推正常使用条件下的产品寿命。</p>
-<p><strong>美赛场景区</strong>：电容器、LED等长寿命产品的可靠性评估——常温下要几十年才坏，等不起。</p>
+<p><strong>美赛场景区</strong>：电容器、LED [Light Emitting Diode, 发光二极管]等长寿命产品的可靠性评估——常温下要几十年才坏，等不起。</p>
 <p><strong>核心原理</strong>：用威布尔分布描述寿命，用阿伦尼斯模型描述温度对寿命的加速效应（温度越高寿命越短）。在几个高温水平做试验，拟合模型后外推到常温。</p>
 <p><strong>操作要点</strong>：分布weibull，加速模型arrhenius，应力单位℃，目标B10寿命。</p>
 <p><strong>结果关键</strong>：40℃下B10寿命约28560小时；125℃比40℃加速349倍。</p>
@@ -1782,8 +1782,8 @@
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：评估测量系统本身准不准——同一人反复测同一零件的波动（重复性）和不同人测同一件的差异（再现性）。</p>
-<p><strong>美赛场景区</strong>：新购量具投入使用前的验证；六西格玛DMAIC的Measure阶段。</p>
-<p><strong>核心原理</strong>：总波动=零件间真实差异+测量系统波动（GRR）。用ANOVA分解方差，%GRR&lt;10%优秀，10--30%有条件接受，&gt;30%不可用。ndc（可区分类别数）<span class="arithmatex">\(\geq\)</span>5才算合格。</p>
+<p><strong>美赛场景区</strong>：新购量具投入使用前的验证；六西格玛DMAIC [Define, Measure, Analyze, Improve, Control, 定义、测量、分析、改进、控制]的Measure阶段。</p>
+<p><strong>核心原理</strong>：总波动=零件间真实差异+测量系统波动（GRR [Gauge Repeatability and Reproducibility, 量具重复性与再现性]）。用ANOVA [Analysis of Variance, 方差分析]分解方差，%GRR&lt;10%优秀，10--30%有条件接受，&gt;30%不可用。ndc（可区分类别数）<span class="arithmatex">\(\geq\)</span>5才算合格。</p>
 <p><strong>操作要点</strong>：3个检验员、10个零件、每人每件测5次；完整交叉ANOVA；研究变差倍数6。</p>
 <p><strong>结果关键</strong>：%GRR=14.32%（有条件接受），ndc=9（可区分），零件间占97.95%。</p>
 <p><strong>注意</strong>：如果零件间差异太小（抽样范围窄），%GRR会被放大失真，应扩大抽样范围。</p>

@@ -640,10 +640,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#manova" class="md-nav__link">
+  <a href="#manova-multivariate-analysis-of-variance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        多元方差分析（MANOVA） 进阶级
+        多元方差分析（MANOVA [Multivariate Analysis of Variance, 多元方差分析]） 进阶级
       
     </span>
   </a>
@@ -662,10 +662,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ancova" class="md-nav__link">
+  <a href="#ancova-analysis-of-covariance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        协方差分析（ANCOVA） 进阶级
+        协方差分析（ANCOVA [Analysis of Covariance, 协方差分析]） 进阶级
       
     </span>
   </a>
@@ -706,10 +706,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tost" class="md-nav__link">
+  <a href="#tost-two-one-sided-tests" class="md-nav__link">
     <span class="md-ellipsis">
       
-        等价性检验（TOST） 进阶级
+        等价性检验（TOST [Two One-Sided Tests, 双单侧检验]） 进阶级
       
     </span>
   </a>
@@ -1565,14 +1565,14 @@
 <p>本案例4条线标准差分别为1.84、1.88、2.02、6.40——第4条线波动是其他线的3倍多，一眼就不齐。</p>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">SPSS操作步骤</p>
+<p class="admonition-title">SPSS [Statistical Package for the Social Sciences, 统计产品与服务解决方案]操作步骤</p>
 <ol>
 <li>点击菜单 <strong>分析 → 描述统计 → 探索</strong></li>
 <li>将因变量（<strong>净含量</strong>）选入<strong>因变量列表</strong>，分组变量（<strong>生产线</strong>）选入<strong>因子列表</strong></li>
 <li>点击右侧<strong>绘制</strong>按钮，勾选<strong>含莱文检验的分布水平图</strong></li>
 <li>点击<strong>继续</strong>，再<strong>确定</strong></li>
 </ol>
-<p><strong>另一种方式</strong>：在独立样本t检验、单因素ANOVA对话框里直接点<strong>选项</strong>，勾选"方差齐性Levene检验"，会自动附带输出。</p>
+<p><strong>另一种方式</strong>：在独立样本t检验、单因素ANOVA [Analysis of Variance, 方差分析]对话框里直接点<strong>选项</strong>，勾选"方差齐性Levene检验"，会自动附带输出。</p>
 <p><strong>默认参数参考</strong>：显著性水平<span class="arithmatex">\(\alpha=0.05\)</span>，方法自动选择（各组正态用Bartlett，否则用Brown-Forsythe/Levene）。本案例各组正态、自动选用Bartlett，统计量91.31。</p>
 </div>
 <div class="admonition success">
@@ -1679,7 +1679,7 @@
 <li>点击<strong>选项</strong>，置信区间填95%</li>
 <li>点击<strong>确定</strong></li>
 </ol>
-<p><strong>默认参数参考</strong>：<span class="arithmatex">\(\alpha=0.05\)</span>，双侧检验，效应量Cohen's d，正态性Shapiro，方差齐性Levene，离群值按IQR报告不删除。</p>
+<p><strong>默认参数参考</strong>：<span class="arithmatex">\(\alpha=0.05\)</span>，双侧检验，效应量Cohen's d，正态性Shapiro，方差齐性Levene，离群值按IQR [Interquartile Range, 四分位距]报告不删除。</p>
 </div>
 <div class="admonition success">
 <p class="admonition-title">结果怎么看</p>
@@ -1844,11 +1844,11 @@
 <li>多因素/含交互：<strong>分析 → 一般线性模型 → 单变量</strong></li>
 <li>因变量选<strong>日均营业额</strong>，固定因子选<strong>商圈类型</strong>、<strong>促销方案</strong></li>
 <li>点<strong>模型</strong>选"全因子"（自动含主效应和交互项）</li>
-<li>点<strong>事后比较</strong>选商圈、促销，勾<strong>Tukey HSD</strong></li>
+<li>点<strong>事后比较</strong>选商圈、促销，勾<strong>Tukey HSD [Honestly Significant Difference, 真实显著差异]</strong></li>
 <li>点<strong>选项</strong>勾"描述统计""方差齐性检验""效应量估计"</li>
 <li>点击<strong>确定</strong></li>
 </ol>
-<p><strong>默认参数参考</strong>：<span class="arithmatex">\(\alpha=0.05\)</span>，II型平方和（非平衡设计稳健），效应量eta<span class="arithmatex">\(^2\)</span>与偏eta<span class="arithmatex">\(^2\)</span>，方差齐性用Levene，非参数灵敏度用Kruskal-Wallis。</p>
+<p><strong>默认参数参考</strong>：<span class="arithmatex">\(\alpha=0.05\)</span>，II [Interaction Index, 交互指数]型平方和（非平衡设计稳健），效应量eta<span class="arithmatex">\(^2\)</span>与偏eta<span class="arithmatex">\(^2\)</span>，方差齐性用Levene，非参数灵敏度用Kruskal-Wallis。</p>
 </div>
 <div class="admonition success">
 <p class="admonition-title">结果怎么看</p>
@@ -1916,7 +1916,7 @@
 <p><strong>结果关键</strong>：Friedman卡方统计量的<span class="arithmatex">\(p\)</span>值；显著后用Wilcoxon两两比较并Bonferroni校正。</p>
 <p><strong>注意</strong>：它是<strong>配对版Kruskal-Wallis</strong>。两个配对条件时用Wilcoxon符号秩；三个及以上配对条件用Friedman。</p>
 </div>
-<h3 id="manova">多元方差分析（MANOVA）  <code>进阶级</code><a class="headerlink" href="#manova" title="Permanent link">&para;</a></h3>
+<h3 id="manova-multivariate-analysis-of-variance">多元方差分析（MANOVA [Multivariate Analysis of Variance, 多元方差分析]）  <code>进阶级</code><a class="headerlink" href="#manova-multivariate-analysis-of-variance" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：同时考察一个（多个）分组因素对<strong>多个相关因变量</strong>的整体影响。</p>
@@ -1936,7 +1936,7 @@
 <p><strong>结果关键</strong>：卡方<span class="arithmatex">\(p&lt;0.05\)</span>说明各组中位数不全相等；它检验的是中位数位置，不是分布形状。</p>
 <p><strong>注意</strong>：检验功效低（浪费了秩信息），是<strong>最保守</strong>的方法——只有数据特别脏时才用，优先Kruskal-Wallis。</p>
 </div>
-<h3 id="ancova">协方差分析（ANCOVA）  <code>进阶级</code><a class="headerlink" href="#ancova" title="Permanent link">&para;</a></h3>
+<h3 id="ancova-analysis-of-covariance">协方差分析（ANCOVA [Analysis of Covariance, 协方差分析]）  <code>进阶级</code><a class="headerlink" href="#ancova-analysis-of-covariance" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：方差分析+回归的混血——比较组间均值差异时，<strong>顺手扣掉一个连续干扰变量（协变量）</strong>的影响。</p>
@@ -1976,7 +1976,7 @@
 <p><strong>结果关键</strong>：看Mann-Whitney U（或Z）的渐近显著性；结合两组平均秩判断哪组整体更高。</p>
 <p><strong>注意</strong>：两组独立+非正态时用它；三组及以上用Kruskal-Wallis。数据正态时t检验更灵敏。</p>
 </div>
-<h3 id="tost">等价性检验（TOST）  <code>进阶级</code><a class="headerlink" href="#tost" title="Permanent link">&para;</a></h3>
+<h3 id="tost-two-one-sided-tests">等价性检验（TOST [Two One-Sided Tests, 双单侧检验]）  <code>进阶级</code><a class="headerlink" href="#tost-two-one-sided-tests" title="Permanent link">&para;</a></h3>
 <div class="admonition abstract">
 <p class="admonition-title">进阶算法速览</p>
 <p><strong>一句话</strong>：反过来证明"两组<strong>没有实质差别</strong>"——普通t检验不显著只能说"没检出差异"，等价检验才能说"确实差不多"。</p>
