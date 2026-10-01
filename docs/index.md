@@ -115,7 +115,7 @@
 <div class="card-icon">📋</div>
 <div class="card-title">第9章 问卷研究</div>
 <div class="card-count">22个算法</div>
-<div class="card-desc">信度、效度、中介、调节、SEM [Spatial Error Model, 空间误差模型]</div>
+<div class="card-desc">信度、效度、中介、调节、SEM [Structural Equation Model, 结构方程模型]</div>
 </a>
 
 <a class="category-card" href="ch10/">
