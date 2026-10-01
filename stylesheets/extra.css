@@ -287,3 +287,31 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ---------- MathJax 公式样式 ---------- */
+mjx-container[jax="CHTML"] {
+    font-size: 1.15em !important;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+    font-size: 1.25em !important;
+    margin: 1.2em 0 !important;
+    padding: 0.6em 0 !important;
+}
+
+/* 行内公式稍微大一点 */
+.arithmatex {
+    font-size: 1.05em;
+}
+
+/* 块级公式容器 */
+.arithmatex:not(span) {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.4em 0;
+}
+
+/* 深色模式下公式颜色 */
+[data-md-color-scheme="slate"] mjx-container {
+    color: #eeffff;
+}
